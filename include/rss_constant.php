@@ -13,18 +13,16 @@
 // 2007-06-01 K.OHWADA
 //=========================================================
 
-define('HAPPY_LINUX_RSS_SEL_RSS',   'rss');
-define('HAPPY_LINUX_RSS_SEL_RDF',   'rdf');
-define('HAPPY_LINUX_RSS_SEL_ATOM',  'atom');
+define('HAPPY_LINUX_RSS_SEL_RSS', 'rss');
+define('HAPPY_LINUX_RSS_SEL_RDF', 'rdf');
+define('HAPPY_LINUX_RSS_SEL_ATOM', 'atom');
 define('HAPPY_LINUX_RSS_SEL_OTHER', 'other');
 
-define('HAPPY_LINUX_RSS_MODE_NON',  0);
-define('HAPPY_LINUX_RSS_MODE_RDF',  1);
-define('HAPPY_LINUX_RSS_MODE_RSS',  2);
+define('HAPPY_LINUX_RSS_MODE_NON', 0);
+define('HAPPY_LINUX_RSS_MODE_RDF', 1);
+define('HAPPY_LINUX_RSS_MODE_RSS', 2);
 define('HAPPY_LINUX_RSS_MODE_ATOM', 3);
 define('HAPPY_LINUX_RSS_MODE_AUTO', 4);
 
 define('HAPPY_LINUX_RSS_CACHE_ID_GUEST', 'guest');
-define('HAPPY_LINUX_RSS_CACHE_ID_USER',  'user');
-
-?>
+define('HAPPY_LINUX_RSS_CACHE_ID_USER', 'user');

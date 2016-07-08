@@ -27,9 +27,7 @@ define('_HAPPY_LINUX_FORM_VISIT', 'Visit');
 define('_HAPPY_LINUX_FORM_ITEM', 'Item');
 
 // 2007-05-12
-define('_HAPPY_LINUX_FORM_INIT_NOT','Not initialize Config table');
-define('_HAPPY_LINUX_FORM_INIT_EXEC','Initialize Config table');
-define('_HAPPY_LINUX_FORM_VERSION_NOT','Not Version %s');
-define('_HAPPY_LINUX_FORM_UPGRADE_EXEC','Upgrade Config table');
-
-?>
+define('_HAPPY_LINUX_FORM_INIT_NOT', 'Not initialize Config table');
+define('_HAPPY_LINUX_FORM_INIT_EXEC', 'Initialize Config table');
+define('_HAPPY_LINUX_FORM_VERSION_NOT', 'Not Version %s');
+define('_HAPPY_LINUX_FORM_UPGRADE_EXEC', 'Upgrade Config table');

@@ -13,5 +13,4 @@
 // This is for dummy in Russian.
 // special use for Japanese
 //---------------------------------------------------------
-
-?>
+;

@@ -13,13 +13,11 @@
 //=========================================================
 
 // search
-define('_HAPPY_LINUX_SEARCH_GOOGLE','Google Suche');
-define('_HAPPY_LINUX_SEARCH_NOT_SELECT','Keine Auswahl');
-define('_HAPPY_LINUX_SEARCH_WITH_SUBCAT','Mit Unterkategorien');
+define('_HAPPY_LINUX_SEARCH_GOOGLE', 'Google Suche');
+define('_HAPPY_LINUX_SEARCH_NOT_SELECT', 'Keine Auswahl');
+define('_HAPPY_LINUX_SEARCH_WITH_SUBCAT', 'Mit Unterkategorien');
 
 // for Japanese
-define('_HAPPY_LINUX_SEARCH_CANDICATE','Suchkandidat');
-define('_HAPPY_LINUX_ZENKAKU','Zenkaku');
-define('_HAPPY_LINUX_HANKAKU','Hanhaku');
-
-?>
+define('_HAPPY_LINUX_SEARCH_CANDICATE', 'Suchkandidat');
+define('_HAPPY_LINUX_ZENKAKU', 'Zenkaku');
+define('_HAPPY_LINUX_HANKAKU', 'Hanhaku');

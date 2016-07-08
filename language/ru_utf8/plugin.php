@@ -18,5 +18,3 @@ define('_HAPPY_LINUX_PLUGIN_DESC', 'Разделяйте каждый <b>|</b>, 
 define('_HAPPY_LINUX_PLUGIN_TEST', 'Тест для плагинов');
 define('_HAPPY_LINUX_PLUGIN_TESTDATA', 'Тестируемые данные');
 define('_HAPPY_LINUX_PLUGIN_TESTDATA_DESC', 'Введите форму ассоциативного массива');
-
-?>

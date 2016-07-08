@@ -8,8 +8,6 @@
 
 function &happy_linux_get_lang_name_ja()
 {
-	$arr = array('japanese', 'japaneseutf', 'ja_utf8');
-	return $arr;
+    $arr = array('japanese', 'japaneseutf', 'ja_utf8');
+    return $arr;
 }
-
-?>

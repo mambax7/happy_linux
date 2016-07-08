@@ -16,5 +16,3 @@ define('_HAPPY_LINUX_PLUGIN_DESC', '複数のプラグインを指定する場�
 define('_HAPPY_LINUX_PLUGIN_TEST', 'プラグインのテスト');
 define('_HAPPY_LINUX_PLUGIN_TESTDATA', 'テストデータ');
 define('_HAPPY_LINUX_PLUGIN_TESTDATA_DESC', '連想配列の形式で記述する');
-
-?>

@@ -10,9 +10,7 @@
 //=========================================================
 
 // page_frame
-define('_HAPPY_LINUX_THERE_ARE','ํๆฬฯ <b>%s</b> ำฬแ ');
-define('_HAPPY_LINUX_NO_RECORD','แว สๆฬฯ ำฬแวส');
+define('_HAPPY_LINUX_THERE_ARE', 'ํๆฬฯ <b>%s</b> ำฬแ ');
+define('_HAPPY_LINUX_NO_RECORD', 'แว สๆฬฯ ำฬแวส');
 define('_HAPPY_LINUX_ID_ASC', 'สัสํศ สีวฺฯํ');
-define('_HAPPY_LINUX_ID_DESC','สัสํศ สไวาแํ');
-
-?>
+define('_HAPPY_LINUX_ID_DESC', 'สัสํศ สไวาแํ');

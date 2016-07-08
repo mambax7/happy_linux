@@ -17,44 +17,40 @@
 //=========================================================
 class Database
 {
-	private static $_singleton = null;
+    private static $_singleton = null;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-function Database()
-{
-	// dummy
+    //---------------------------------------------------------
+    // constructor
+    //---------------------------------------------------------
+    public function __construct()
+    {
+        // dummy
+    }
+
+    public static function getInstance()
+    {
+        if (Database::$_singleton == null) {
+            $singleton = new mysql_database();
+            if (!$singleton->connect()) {
+                echo "<font color='red'>Unable to connect to database.</font><br />\n";
+                die();
+            }
+            Database::$_singleton = $singleton;
+        }
+        return Database::$_singleton;
+    }
+
+    //---------------------------------------------------------
+    // function
+    //---------------------------------------------------------
+    public function prefix($tablename = '')
+    {
+        if ($tablename != '') {
+            return XOOPS_DB_PREFIX . '_' . $tablename;
+        } else {
+            return XOOPS_DB_PREFIX;
+        }
+    }
+
+    //---------------------------------------------------------
 }
-
-public static function &getInstance()
-{
-	if (Database::$_singleton == null)
-	{
-		$singleton = new mysql_database();
-		if ( !$singleton->connect() ) 
-		{
-			echo "<font color='red'>Unable to connect to database.</font><br />\n";
-			die();
-		}
-		Database::$_singleton = $singleton;
-	}
-	return Database::$_singleton;
-}
-
-//---------------------------------------------------------
-// function
-//---------------------------------------------------------
-public function prefix($tablename='')
-{
-	if ( $tablename != '' ) {
-		return XOOPS_DB_PREFIX .'_'. $tablename;
-	} else {
-		return XOOPS_DB_PREFIX;
-	}
-}
-
-//---------------------------------------------------------
-}
-
-?>

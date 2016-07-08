@@ -8,8 +8,6 @@
 // UTF-8
 //=========================================================
 
-define('HAPPY_LINUX_MB_LANGUAGE',   'ja');
-define('HAPPY_LINUX_MB_ENCODING',   'UTF-8');
+define('HAPPY_LINUX_MB_LANGUAGE', 'ja');
+define('HAPPY_LINUX_MB_ENCODING', 'UTF-8');
 define('HAPPY_LINUX_MYSQL_CHARSET', 'utf8');
-
-?>

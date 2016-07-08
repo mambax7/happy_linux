@@ -13,12 +13,10 @@ define('_HAPPY_LINUX_MAIL_NO_TO_EMAIL', '⁄‰Ê«‰ «·»—Ìœ ·„ ÌÕœœ');
 define('_HAPPY_LINUX_MAIL_WEBMASTER', '«·„œÌ—');
 define('_HAPPY_LINUX_MAIL_SUBJECT_FROM', '„⁄·Ê„«  „‰ %s');
 define('_HAPPY_LINUX_MAIL_HELLO', '„—Õ»« %s');
-define('_HAPPY_LINUX_MAIL_SUBMIT',  '√—”· —”«·…');
-define('_HAPPY_LINUX_MAIL_SUBMIT_NEXT','√—”· «· «·Ì %s »—Ìœ');
+define('_HAPPY_LINUX_MAIL_SUBMIT', '√—”· —”«·…');
+define('_HAPPY_LINUX_MAIL_SUBMIT_NEXT', '√—”· «· «·Ì %s »—Ìœ');
 
 // for future
 define('_HAPPY_LINUX_MAIL_TITLE', '√—”· —”«·…');
-define('_HAPPY_LINUX_MAIL_THERE_ARE','ÌÊÃœ <b>%s</b> »—Ìœ');
+define('_HAPPY_LINUX_MAIL_THERE_ARE', 'ÌÊÃœ <b>%s</b> »—Ìœ');
 define('_HAPPY_LINUX_MAIL_SEND_NUM', '√—”· „‰ %s ≈·Ï %s  ‘Œ’');
-
-?>

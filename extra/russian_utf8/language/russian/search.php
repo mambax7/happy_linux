@@ -16,13 +16,11 @@
 // Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
 
 // search
-define('_HAPPY_LINUX_SEARCH_GOOGLE','Поиск Google');
-define('_HAPPY_LINUX_SEARCH_NOT_SELECT','Не выбран');
-define('_HAPPY_LINUX_SEARCH_WITH_SUBCAT','С подкатегорией');
+define('_HAPPY_LINUX_SEARCH_GOOGLE', 'Поиск Google');
+define('_HAPPY_LINUX_SEARCH_NOT_SELECT', 'Не выбран');
+define('_HAPPY_LINUX_SEARCH_WITH_SUBCAT', 'С подкатегорией');
 
 // for Japanese
-define('_HAPPY_LINUX_SEARCH_CANDICATE','Кандидат для поиска');
-define('_HAPPY_LINUX_ZENKAKU','Zenkaku');
-define('_HAPPY_LINUX_HANKAKU','Hanhaku');
-
-?>
+define('_HAPPY_LINUX_SEARCH_CANDICATE', 'Кандидат для поиска');
+define('_HAPPY_LINUX_ZENKAKU', 'Zenkaku');
+define('_HAPPY_LINUX_HANKAKU', 'Hanhaku');

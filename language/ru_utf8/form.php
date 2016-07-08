@@ -30,9 +30,7 @@ define('_HAPPY_LINUX_FORM_VISIT', 'Посетить');
 define('_HAPPY_LINUX_FORM_ITEM', 'Пункт');
 
 // 2007-05-12
-define('_HAPPY_LINUX_FORM_INIT_NOT','Не инициализирована таблица конфигурации');
-define('_HAPPY_LINUX_FORM_INIT_EXEC','Инициализация таблицы конфигурации');
-define('_HAPPY_LINUX_FORM_VERSION_NOT','Не версия %s');
-define('_HAPPY_LINUX_FORM_UPGRADE_EXEC','Обновление таблицы конфигурации');
-
-?>
+define('_HAPPY_LINUX_FORM_INIT_NOT', 'Не инициализирована таблица конфигурации');
+define('_HAPPY_LINUX_FORM_INIT_EXEC', 'Инициализация таблицы конфигурации');
+define('_HAPPY_LINUX_FORM_VERSION_NOT', 'Не версия %s');
+define('_HAPPY_LINUX_FORM_UPGRADE_EXEC', 'Обновление таблицы конфигурации');

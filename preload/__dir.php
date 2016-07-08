@@ -11,9 +11,8 @@
 // rename this file to "dir.php" when use
 //---------------------------------------------------------
 // not specify, and use 'modules/happy_linux/cache/' as default
-	define('HAPPY_LINUX_DIR_TMP', '');
+define('HAPPY_LINUX_DIR_TMP', '');
 
 // specify '/var/tmp'
-//	define('HAPPY_LINUX_DIR_TMP', '/var/tmp');
-
-?>
+//  define('HAPPY_LINUX_DIR_TMP', '/var/tmp');
+;

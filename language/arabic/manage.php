@@ -10,16 +10,14 @@
 //=========================================================
 
 // manage
-define('_HAPPY_LINUX_ADD_RECORD','√÷› ”Ã·');
-define('_HAPPY_LINUX_MOD_RECORD',' ⁄œÌ· ”Ã·');
-define('_HAPPY_LINUX_DEL_RECORD','Õ–› ”Ã·');
-define('_HAPPY_LINUX_ADD_RECORD_SUCCEEED','√÷Ì› »‰Ã«Õ !');
-define('_HAPPY_LINUX_MOD_RECORD_SUCCEEED','⁄œ· »‰Ã«Õ !');
-define('_HAPPY_LINUX_DEL_RECORD_SUCCEEED','Õ–› »‰Ã«Õ !');
-define('_HAPPY_LINUX_ADD_RECORD_FAILD','›‘· ›Ì «·≈÷«›…');
-define('_HAPPY_LINUX_MOD_RECORD_FAILD','›‘· ›Ì «· ⁄œÌ·');
-define('_HAPPY_LINUX_DEL_RECORD_FAILD','›‘· ›Ì «·Õ–›');
-define('_HAPPY_LINUX_ERR_FILL',   'Œÿ√ : œŒÊ· %s');
-define('_HAPPY_LINUX_ERR_ILLEGAL','Œÿ√ : €Ì— ﬁ«‰Ê‰Ì %s');
-
-?>
+define('_HAPPY_LINUX_ADD_RECORD', '√÷› ”Ã·');
+define('_HAPPY_LINUX_MOD_RECORD', ' ⁄œÌ· ”Ã·');
+define('_HAPPY_LINUX_DEL_RECORD', 'Õ–› ”Ã·');
+define('_HAPPY_LINUX_ADD_RECORD_SUCCEEED', '√÷Ì› »‰Ã«Õ !');
+define('_HAPPY_LINUX_MOD_RECORD_SUCCEEED', '⁄œ· »‰Ã«Õ !');
+define('_HAPPY_LINUX_DEL_RECORD_SUCCEEED', 'Õ–› »‰Ã«Õ !');
+define('_HAPPY_LINUX_ADD_RECORD_FAILD', '›‘· ›Ì «·≈÷«›…');
+define('_HAPPY_LINUX_MOD_RECORD_FAILD', '›‘· ›Ì «· ⁄œÌ·');
+define('_HAPPY_LINUX_DEL_RECORD_FAILD', '›‘· ›Ì «·Õ–›');
+define('_HAPPY_LINUX_ERR_FILL', 'Œÿ√ : œŒÊ· %s');
+define('_HAPPY_LINUX_ERR_ILLEGAL', 'Œÿ√ : €Ì— ﬁ«‰Ê‰Ì %s');

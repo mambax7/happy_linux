@@ -27,9 +27,7 @@ define('_HAPPY_LINUX_FORM_VISIT', '«–Â»');
 define('_HAPPY_LINUX_FORM_ITEM', '«·„Ê÷Ê⁄');
 
 // 2007-05-12
-define('_HAPPY_LINUX_FORM_INIT_NOT','Not initialize Config table');
-define('_HAPPY_LINUX_FORM_INIT_EXEC','Initialize Config table');
-define('_HAPPY_LINUX_FORM_VERSION_NOT','Not Version %s');
-define('_HAPPY_LINUX_FORM_UPGRADE_EXEC',' ÿÊÌ— «·ÃœÊ«·');
-
-?>
+define('_HAPPY_LINUX_FORM_INIT_NOT', 'Not initialize Config table');
+define('_HAPPY_LINUX_FORM_INIT_EXEC', 'Initialize Config table');
+define('_HAPPY_LINUX_FORM_VERSION_NOT', 'Not Version %s');
+define('_HAPPY_LINUX_FORM_UPGRADE_EXEC', ' ÿÊÌ— «·ÃœÊ«·');

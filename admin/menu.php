@@ -7,6 +7,4 @@
 //================================================================
 
 $adminmenu[1]['title'] = _MI_HAPPY_LINUX_ADMENU1;
-$adminmenu[1]['link']  = "admin/index.php";
-
-?>
+$adminmenu[1]['link']  = 'admin/index.php';

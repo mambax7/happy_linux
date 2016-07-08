@@ -11,17 +11,14 @@ $HAPPY_LINUX_DEV_PERMIT = false;
 
 include '../../../mainfile.php';
 include_once 'dev_functions.php';
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/strings.php';
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/error.php';
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/object.php';
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/object_handler.php';
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/config_base_handler.php';
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/strings.php';
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/error.php';
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/object.php';
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/object_handler.php';
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/config_base_handler.php';
 
-if ( !$HAPPY_LINUX_DEV_PERMIT )
-{
-	dev_header();
-	echo '<h1 style="color: #ff0000;">not permit</h1>'."\n";
-	dev_footer();
+if (!$HAPPY_LINUX_DEV_PERMIT) {
+    dev_header();
+    echo '<h1 style="color: #ff0000;">not permit</h1>' . "\n";
+    dev_footer();
 }
-
-?>

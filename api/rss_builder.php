@@ -12,20 +12,18 @@
 //---------------------------------------------------------
 // system
 //---------------------------------------------------------
-include_once XOOPS_ROOT_PATH.'/class/template.php';
+include_once XOOPS_ROOT_PATH . '/class/template.php';
 
 //---------------------------------------------------------
 // happy_linux
 //---------------------------------------------------------
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/include/rss_constant.php';
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/include/multibyte.php';
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/system.php';
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/strings.php';
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/date.php';
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/image_size.php';
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/convert_encoding.php';
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/rss_default.php';
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/build_cache.php';
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/build_rss.php';
-
-?>
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/include/rss_constant.php';
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/include/multibyte.php';
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/system.php';
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/strings.php';
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/date.php';
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/image_size.php';
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/convert_encoding.php';
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/rss_default.php';
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/build_cache.php';
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/build_rss.php';

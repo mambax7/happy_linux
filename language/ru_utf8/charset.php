@@ -20,5 +20,4 @@
 // define('HAPPY_LINUX_MB_LANGUAGE',   'ru');
 // define('HAPPY_LINUX_MB_ENCODING',   'utf8');
 // define('HAPPY_LINUX_MYSQL_CHARSET', 'utf8_unicode_ci');
-
-?>
+;

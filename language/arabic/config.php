@@ -12,42 +12,40 @@
 // bin command
 define('_HAPPY_LINUX_CONF_COMMAND_MANAGE', '≈œ«—… «·«Ê„—');
 define('_HAPPY_LINUX_CONF_CREATE_CONFIG', '≈‰‘«¡ „·› Config');
-define('_HAPPY_LINUX_CONF_TEST_BIN','Test execute of bin command');
+define('_HAPPY_LINUX_CONF_TEST_BIN', 'Test execute of bin command');
 define('_HAPPY_LINUX_CONF_BIN', ' —ﬂÌ» √„—');
 define('_HAPPY_LINUX_CONF_BIN_DESC', 'Ì” ⁄„· ·’‰œÊﬁ «·«Ê«„—');
-define('_HAPPY_LINUX_CONF_BIN_PASS','«·—ﬁ„ «·”—Ì');
-define('_HAPPY_LINUX_CONF_BIN_MAILTO','⁄‰Ê«‰ «·»—Ìœ ·«—”«·…');
-define('_HAPPY_LINUX_CONF_BIN_SEND','«—”· »—Ìœ');
-define('_HAPPY_LINUX_CONF_BIN_SEND_NON',     '·„ Ì „ «·«—”«·');
+define('_HAPPY_LINUX_CONF_BIN_PASS', '«·—ﬁ„ «·”—Ì');
+define('_HAPPY_LINUX_CONF_BIN_MAILTO', '⁄‰Ê«‰ «·»—Ìœ ·«—”«·…');
+define('_HAPPY_LINUX_CONF_BIN_SEND', '«—”· »—Ìœ');
+define('_HAPPY_LINUX_CONF_BIN_SEND_NON', '·„ Ì „ «·«—”«·');
 define('_HAPPY_LINUX_CONF_BIN_SEND_EXECUTE', '«—”· ⁄‰œ  ‰›Ì–');
-define('_HAPPY_LINUX_CONF_BIN_SEND_ALWAYS',  'œ«∆„« «—”·');
+define('_HAPPY_LINUX_CONF_BIN_SEND_ALWAYS', 'œ«∆„« «—”·');
 
 // rss
 define('_HAPPY_LINUX_CONF_RSS_MANAGE', '≈œ«—… RDF/RSS/ATOM');
 define('_HAPPY_LINUX_CONF_RSS_MANAGE_DESC', '≈‰‘«¡ Ê⁄—÷ RDF/RSS/ATOM');
 define('_HAPPY_LINUX_CONF_SHOW_RDF', '⁄—÷ RDF');
 define('_HAPPY_LINUX_CONF_SHOW_RSS', '⁄—÷ RSS');
-define('_HAPPY_LINUX_CONF_SHOW_ATOM','⁄—÷ ATOM');
+define('_HAPPY_LINUX_CONF_SHOW_ATOM', '⁄—÷ ATOM');
 define('_HAPPY_LINUX_CONF_DEBUG_RDF', '⁄—÷ debug RDF');
 define('_HAPPY_LINUX_CONF_DEBUG_RSS', '⁄—÷ debug RSS');
-define('_HAPPY_LINUX_CONF_DEBUG_ATOM','⁄—÷ debug ATOM');
+define('_HAPPY_LINUX_CONF_DEBUG_ATOM', '⁄—÷ debug ATOM');
 
 // template
-define('_HAPPY_LINUX_CONF_TPL_COMPILED_CLEAR','„”Õ «·ﬂ«‘ ··ﬁÊ«·»');
-define('_HAPPY_LINUX_CONF_TPL_COMPILED_CLEAR_DIR','ÌÃ» √‰ Ì‰›¯–, ⁄‰œ  €Ì— „·› ›Ì „”«— «·ﬁÊ«·» %s ');
-define('_HAPPY_LINUX_CONF_RSS_CACHE_CLEAR','„”Õ «·ﬂ«‘ ·‹ RSS');
-define('_HAPPY_LINUX_CONF_RSS_CACHE_CLEAR_DESC','in anoymous user, cache RSS for one hour');
-define('_HAPPY_LINUX_CONF_RSS_CACHE_CLEAR_TIME','in anoymous user, cache RSS for %s hour');
-define('_HAPPY_LINUX_CONF_RSS_CACHE_TIME','Êﬁ  «·ﬂ«‘ (»«·À«‰Ì…)');
+define('_HAPPY_LINUX_CONF_TPL_COMPILED_CLEAR', '„”Õ «·ﬂ«‘ ··ﬁÊ«·»');
+define('_HAPPY_LINUX_CONF_TPL_COMPILED_CLEAR_DIR', 'ÌÃ» √‰ Ì‰›¯–, ⁄‰œ  €Ì— „·› ›Ì „”«— «·ﬁÊ«·» %s ');
+define('_HAPPY_LINUX_CONF_RSS_CACHE_CLEAR', '„”Õ «·ﬂ«‘ ·‹ RSS');
+define('_HAPPY_LINUX_CONF_RSS_CACHE_CLEAR_DESC', 'in anoymous user, cache RSS for one hour');
+define('_HAPPY_LINUX_CONF_RSS_CACHE_CLEAR_TIME', 'in anoymous user, cache RSS for %s hour');
+define('_HAPPY_LINUX_CONF_RSS_CACHE_TIME', 'Êﬁ  «·ﬂ«‘ (»«·À«‰Ì…)');
 
-define('_HAPPY_LINUX_CONF_NOT_WRITABLE','Â–« «·„”«— ·« Ìﬁ»· «·ﬂ «»…');
+define('_HAPPY_LINUX_CONF_NOT_WRITABLE', 'Â–« «·„”«— ·« Ìﬁ»· «·ﬂ «»…');
 
 // 2007-11-24
 // table manage
-define('_HAPPY_LINUX_CONF_TABLE_MANAGE','≈œ«—… ﬁ«⁄œ… «·»Ì«‰« ');
-define('_HAPPY_LINUX_CONF_TABLE_CHECK','›Õ’ %s ÃœÊ·');
-define('_HAPPY_LINUX_CONF_TABLE_REINSTALL',' ‰’Õ »≈⁄œ…  À»Ì  «–« ÕœÀ… „‘ﬂ·…');
-define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW',' ÃœÌœ ŒÌ«—«  «·ÃœÊ·');
-define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC','Execute if detected error. <br />The present values are repealed. <br />Set values after execution. ');
-
-?>
+define('_HAPPY_LINUX_CONF_TABLE_MANAGE', '≈œ«—… ﬁ«⁄œ… «·»Ì«‰« ');
+define('_HAPPY_LINUX_CONF_TABLE_CHECK', '›Õ’ %s ÃœÊ·');
+define('_HAPPY_LINUX_CONF_TABLE_REINSTALL', ' ‰’Õ »≈⁄œ…  À»Ì  «–« ÕœÀ… „‘ﬂ·…');
+define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW', ' ÃœÌœ ŒÌ«—«  «·ÃœÊ·');
+define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Execute if detected error. <br />The present values are repealed. <br />Set values after execution. ');

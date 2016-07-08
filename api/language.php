@@ -39,21 +39,21 @@
 //---------------------------------------------------------
 // function happy_linux_include_lang
 //---------------------------------------------------------
-function happy_linux_include_lang( $file )
+function happy_linux_include_lang($file)
 {
-	global $xoopsConfig;
-	$LANGUAGE = $xoopsConfig['language'];
-	$DIR_LANG = XOOPS_ROOT_PATH.'/modules/happy_linux/language';
+    global $xoopsConfig;
+    $LANGUAGE = $xoopsConfig['language'];
+    $DIR_LANG = XOOPS_ROOT_PATH . '/modules/happy_linux/language';
 
-	if ( file_exists( $DIR_LANG.'/'.$LANGUAGE.'/'.$file ) ) {
-		include_once $DIR_LANG.'/'.$LANGUAGE.'/'.$file;
-	} else {
-		include_once $DIR_LANG.'/english/'.$file;
-	}
+    if (file_exists($DIR_LANG . '/' . $LANGUAGE . '/' . $file)) {
+        include_once $DIR_LANG . '/' . $LANGUAGE . '/' . $file;
+    } else {
+        include_once $DIR_LANG . '/english/' . $file;
+    }
 }
 
 //---------------------------------------------------------
-// execute 
+// execute
 //---------------------------------------------------------
 
 happy_linux_include_lang('global.php');
@@ -71,6 +71,4 @@ happy_linux_include_lang('xoops_block_check.php');
 happy_linux_include_lang('plugin.php');
 
 // compatible
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/language/compatible.php';
-
-?>
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/language/compatible.php';

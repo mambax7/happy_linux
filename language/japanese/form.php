@@ -28,9 +28,7 @@ define('_HAPPY_LINUX_FORM_VISIT', '訪問');
 define('_HAPPY_LINUX_FORM_ITEM', '項目');
 
 // 2007-05-12
-define('_HAPPY_LINUX_FORM_INIT_NOT',  '設定テーブルが初期化されていない');
+define('_HAPPY_LINUX_FORM_INIT_NOT', '設定テーブルが初期化されていない');
 define('_HAPPY_LINUX_FORM_INIT_EXEC', '設定テーブルを初期化する');
-define('_HAPPY_LINUX_FORM_VERSION_NOT',  'バージョン %s ではない');
+define('_HAPPY_LINUX_FORM_VERSION_NOT', 'バージョン %s ではない');
 define('_HAPPY_LINUX_FORM_UPGRADE_EXEC', '設定テーブルをアップグレードする');
-
-?>

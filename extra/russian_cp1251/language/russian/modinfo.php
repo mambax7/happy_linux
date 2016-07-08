@@ -16,10 +16,8 @@
 // Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
 
 // The name of this module
-define('_MI_HAPPY_LINUX_NAME','Структура Happy Linux');
-define('_MI_HAPPY_LINUX_DESC','Коллекции библиотек для работы модулей Happy Linux');
+define('_MI_HAPPY_LINUX_NAME', 'Структура Happy Linux');
+define('_MI_HAPPY_LINUX_DESC', 'Коллекции библиотек для работы модулей Happy Linux');
 
 // admin menu
-define('_MI_HAPPY_LINUX_ADMENU1','Серверная среда');
-
-?>
+define('_MI_HAPPY_LINUX_ADMENU1', 'Серверная среда');

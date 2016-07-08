@@ -11,8 +11,6 @@
 // for Japanese EUC-JP
 //---------------------------------------------------------
 
-define('HAPPY_LINUX_MB_LANGUAGE',   'ja');
-define('HAPPY_LINUX_MB_ENCODING',   'EUC-JP');
+define('HAPPY_LINUX_MB_LANGUAGE', 'ja');
+define('HAPPY_LINUX_MB_ENCODING', 'EUC-JP');
 define('HAPPY_LINUX_MYSQL_CHARSET', 'ujis');
-
-?>

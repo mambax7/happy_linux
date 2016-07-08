@@ -10,7 +10,5 @@
 //=========================================================
 
 // The name of this module
-define('_MI_HAPPY_LINUX_NAME','Happy Linux Framework');
-define('_MI_HAPPY_LINUX_DESC','Die Bibliotheks Kollektion für Module von Happy Linux');
-
-?>
+define('_MI_HAPPY_LINUX_NAME', 'Happy Linux Framework');
+define('_MI_HAPPY_LINUX_DESC', 'Die Bibliotheks Kollektion für Module von Happy Linux');

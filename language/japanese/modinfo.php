@@ -14,10 +14,8 @@
 //=========================================================
 
 // The name of this module
-define('_MI_HAPPY_LINUX_NAME','Happy Linux Framework');
-define('_MI_HAPPY_LINUX_DESC','Happy Linux で配布しているモジュール用のライブラリ集です');
+define('_MI_HAPPY_LINUX_NAME', 'Happy Linux Framework');
+define('_MI_HAPPY_LINUX_DESC', 'Happy Linux で配布しているモジュール用のライブラリ集です');
 
 // admin menu
-define('_MI_HAPPY_LINUX_ADMENU1','サーバー環境');
-
-?>
+define('_MI_HAPPY_LINUX_ADMENU1', 'サーバー環境');

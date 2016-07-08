@@ -11,7 +11,6 @@
 // this is new file
 // porting form weblinks_language_convert.php
 
-
 //=========================================================
 // Happy Linux Framework Module
 // 2006-09-10 K.OHWADA
@@ -24,23 +23,21 @@
 class happy_linux_language_local extends happy_linux_language_base
 {
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-function happy_linux_language_local()
-{
-	$this->happy_linux_language_base();
-}
+    //---------------------------------------------------------
+    // constructor
+    //---------------------------------------------------------
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
-//---------------------------------------------------------
-// country code
-//---------------------------------------------------------
-function get_country_code()
-{
-    return 'ir';	// iran
-}
+    //---------------------------------------------------------
+    // country code
+    //---------------------------------------------------------
+    public function get_country_code()
+    {
+        return 'ir';    // iran
+    }
 
-// --- class end ---
+    // --- class end ---
 }
-
-?>

@@ -27,9 +27,7 @@ define('_HAPPY_LINUX_FORM_VISIT', 'Visita');
 define('_HAPPY_LINUX_FORM_ITEM', 'Elemento');
 
 // 2007-05-12
-define('_HAPPY_LINUX_FORM_INIT_NOT','Non inizializzare tabella config');
-define('_HAPPY_LINUX_FORM_INIT_EXEC','Inizializza tabella config');
-define('_HAPPY_LINUX_FORM_VERSION_NOT','Non Versione %s');
-define('_HAPPY_LINUX_FORM_UPGRADE_EXEC','Aggiorna tabella config');
-
-?>
+define('_HAPPY_LINUX_FORM_INIT_NOT', 'Non inizializzare tabella config');
+define('_HAPPY_LINUX_FORM_INIT_EXEC', 'Inizializza tabella config');
+define('_HAPPY_LINUX_FORM_VERSION_NOT', 'Non Versione %s');
+define('_HAPPY_LINUX_FORM_UPGRADE_EXEC', 'Aggiorna tabella config');

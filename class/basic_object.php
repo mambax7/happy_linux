@@ -17,120 +17,114 @@
 //=========================================================
 class happy_linux_basic extends happy_linux_strings
 {
-	var $_vars = array();
+    public $_vars = array();
 
-	var $_DEBUG = false;
+    public $_DEBUG = false;
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-function happy_linux_basic()
-{
-	 $this->happy_linux_strings();
+    //---------------------------------------------------------
+    // constructor
+    //---------------------------------------------------------
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    //---------------------------------------------------------
+    // set & get
+    //---------------------------------------------------------
+    public function clear_vars()
+    {
+        $this->_vars = array();
+    }
+
+    public function setVar($key, $value)
+    {
+        $this->set($key, $value);
+    }
+
+    public function setVarArray($key, $value)
+    {
+        $this->set($key, serialize($value));
+    }
+
+    public function getVar($key, $format = 'n')
+    {
+        $val = $this->get($key);
+        if (!is_array($val)) {
+            $val = $this->sanitize_format_text($val, $format);
+        }
+        return $val;
+    }
+
+    public function &getVarArray($key)
+    {
+        $val = unserialize($this->get($key));
+        return $val;
+    }
+
+    public function &getVarAll($format = 'n')
+    {
+        $ret = array();
+        foreach ($this->_vars as $k => $v) {
+            $ret[$k] = $this->getVar($k, $format);
+        }
+        return $ret;
+    }
+
+    public function set($key, $value)
+    {
+        $this->_vars[$key] = $value;
+    }
+
+    public function &get($key)
+    {
+        $ret = false;
+        if (isset($this->_vars[$key])) {
+            $ret =& $this->_vars[$key];
+        }
+
+        if ($this->_DEBUG) {
+            echo "basic_object.php get(): $key <br />\n";
+            debug_print_backtrace();
+        }
+        return $ret;
+    }
+
+    public function set_vars($values)
+    {
+        $this->_vars = $values;
+    }
+
+    public function &get_vars()
+    {
+        $ret = false;
+        if (isset($this->_vars)) {
+            $ret =& $this->_vars;
+        }
+        return $ret;
+    }
+
+    public function merge_vars($values)
+    {
+        $this->_vars = array_merge($this->_vars, $values);
+    }
+
+    public function is_set($key)
+    {
+        if (isset($this->_vars[$key])) {
+            return true;
+        }
+        return false;
+    }
+
+    public function is_array($key)
+    {
+        if (isset($this->_vars[$key]) && is_array($this->_vars[$key])) {
+            return true;
+        }
+        return false;
+    }
 }
 
-//---------------------------------------------------------
-// set & get
-//---------------------------------------------------------
-function clear_vars()
-{
-	$this->_vars = array();
-}
-
-function setVar($key, $value)
-{
-	$this->set($key, $value);
-}
-
-function setVarArray($key, $value)
-{
-	$this->set($key, serialize($value) );
-}
-
-function getVar($key, $format='n')
-{
-	$val = $this->get($key);
-	if ( !is_array($val) )
-	{
-		$val = $this->sanitize_format_text( $val, $format );
-	}
-	return $val;
-}
-
-function &getVarArray($key)
-{
-	$val = unserialize( $this->get($key) );
-	return $val;
-}
-
-function &getVarAll($format='n')
-{
-	$ret = array();
-	foreach ($this->_vars as $k => $v) 
-	{
-		$ret[$k] = $this->getVar($k, $format);
-	}
-	return $ret;
-}
-
-function set($key, $value)
-{
-	$this->_vars[$key] = $value;
-}
-
-function &get($key)
-{
-	$ret = false;
-	if ( isset($this->_vars[$key]) ) {
-		$ret =& $this->_vars[$key];
-	}
-
-	if ( $this->_DEBUG ) {
-		echo "basic_object.php get(): $key <br />\n";
-		debug_print_backtrace();
-	}
-	return $ret;
-}
-
-function set_vars($values)
-{
-	$this->_vars = $values;
-}
-
-function &get_vars()
-{
-	$ret = false;
-	if ( isset($this->_vars) )
-	{
-		$ret =& $this->_vars;
-	}
-	return $ret;
-}
-
-function merge_vars($values)
-{
-	$this->_vars = array_merge($this->_vars, $values);
-}
-
-function is_set($key)
-{
-	if ( isset($this->_vars[$key]) )
-	{
-		return true;
-	}
-	return false;
-}
-
-function is_array($key)
-{
-	if ( isset($this->_vars[$key]) && is_array($this->_vars[$key]) )
-	{
-		return true;
-	}
-	return false;
-}
-
-}
 // --- class end ---
-
-?>
+;

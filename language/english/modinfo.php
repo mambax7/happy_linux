@@ -13,10 +13,8 @@
 //=========================================================
 
 // The name of this module
-define('_MI_HAPPY_LINUX_NAME','Happy Linux Framework');
-define('_MI_HAPPY_LINUX_DESC','The library collection for modules distributing in Happy Linux');
+define('_MI_HAPPY_LINUX_NAME', 'Happy Linux Framework');
+define('_MI_HAPPY_LINUX_DESC', 'The library collection for modules distributing in Happy Linux');
 
 // admin menu
-define('_MI_HAPPY_LINUX_ADMENU1','Server Environment');
-
-?>
+define('_MI_HAPPY_LINUX_ADMENU1', 'Server Environment');

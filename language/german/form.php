@@ -27,9 +27,7 @@ define('_HAPPY_LINUX_FORM_VISIT', 'Besuchen');
 define('_HAPPY_LINUX_FORM_ITEM', 'Objekt');
 
 // 2007-05-12
-define('_HAPPY_LINUX_FORM_INIT_NOT','Konfigurations Tabelle nicht initialisiert');
-define('_HAPPY_LINUX_FORM_INIT_EXEC','Initialisiere Konfigurations Tabelle');
-define('_HAPPY_LINUX_FORM_VERSION_NOT','Nicht Version %s');
-define('_HAPPY_LINUX_FORM_UPGRADE_EXEC','Erweiterung der Konfigurationstabelle');
-
-?>
+define('_HAPPY_LINUX_FORM_INIT_NOT', 'Konfigurations Tabelle nicht initialisiert');
+define('_HAPPY_LINUX_FORM_INIT_EXEC', 'Initialisiere Konfigurations Tabelle');
+define('_HAPPY_LINUX_FORM_VERSION_NOT', 'Nicht Version %s');
+define('_HAPPY_LINUX_FORM_UPGRADE_EXEC', 'Erweiterung der Konfigurationstabelle');

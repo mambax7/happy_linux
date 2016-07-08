@@ -12,8 +12,6 @@
 //---------------------------------------------------------
 
 // xoops_20, xoops_22, xoops_cube_21
-	define('HAPPY_LINUX_ADMIN_MAJOR_VERSION', 'xoops_20');
+define('HAPPY_LINUX_ADMIN_MAJOR_VERSION', 'xoops_20');
 
-	define('HAPPY_LINUX_ADMIN_TIME', 0); 
-
-?>
+define('HAPPY_LINUX_ADMIN_TIME', 0);

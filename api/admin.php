@@ -9,16 +9,11 @@
 global $xoopsConfig;
 $XOOPS_LANGUAGE = $xoopsConfig['language'];
 
-include_once XOOPS_ROOT_PATH.'/modules/happy_linux/class/admin.php';
+include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/admin.php';
 
 // admin
-if ( file_exists(XOOPS_ROOT_PATH.'/modules/happy_linux/language/'.$XOOPS_LANGUAGE.'/admin.php') ) 
-{
-	include_once XOOPS_ROOT_PATH.'/modules/happy_linux/language/'.$XOOPS_LANGUAGE.'/admin.php';
+if (file_exists(XOOPS_ROOT_PATH . '/modules/happy_linux/language/' . $XOOPS_LANGUAGE . '/admin.php')) {
+    include_once XOOPS_ROOT_PATH . '/modules/happy_linux/language/' . $XOOPS_LANGUAGE . '/admin.php';
+} else {
+    include_once XOOPS_ROOT_PATH . '/modules/happy_linux/language/english/admin.php';
 }
-else
-{
-	include_once XOOPS_ROOT_PATH.'/modules/happy_linux/language/english/admin.php';
-}
-
-?>

@@ -19,46 +19,42 @@
 // this class work for PHP 4
 // in PHP 5, occur stric error
 //=========================================================
-class Database
+class database
 {
 
-//---------------------------------------------------------
-// constructor
-//---------------------------------------------------------
-function Database()
-{
-	// dummy
-}
+    //---------------------------------------------------------
+    // constructor
+    //---------------------------------------------------------
+    public function Database()
+    {
+        // dummy
+    }
 
-function &getInstance()
-{
-	static $instance;
-	if ( !isset($instance) ) 
-	{
-// Assigning the return value of new by reference is deprecated
-		$instance = new mysql_database();
-		if ( !$instance->connect() ) 
-		{
-			echo "<font color='red'>Unable to connect to database.</font><br />\n";
-			die();
-		}
-	}
-	return $instance;
-}
+    public static function getInstance()
+    {
+        static $instance;
+        if (!isset($instance)) {
+            // Assigning the return value of new by reference is deprecated
+            $instance = new mysql_database();
+            if (!$instance->connect()) {
+                echo "<font color='red'>Unable to connect to database.</font><br />\n";
+                die();
+            }
+        }
+        return $instance;
+    }
 
-//---------------------------------------------------------
-// function
-//---------------------------------------------------------
-function prefix($tablename='')
-{
-	if ( $tablename != '' ) {
-		return XOOPS_DB_PREFIX .'_'. $tablename;
-	} else {
-		return XOOPS_DB_PREFIX;
-	}
-}
+    //---------------------------------------------------------
+    // function
+    //---------------------------------------------------------
+    public function prefix($tablename = '')
+    {
+        if ($tablename != '') {
+            return XOOPS_DB_PREFIX . '_' . $tablename;
+        } else {
+            return XOOPS_DB_PREFIX;
+        }
+    }
 
-//---------------------------------------------------------
+    //---------------------------------------------------------
 }
-
-?>

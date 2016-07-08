@@ -15,5 +15,3 @@ define('_HAPPY_LINUX_PLUGIN_DESC', 'Separate each with <b>|</b>, when specifying
 define('_HAPPY_LINUX_PLUGIN_TEST', 'Test fo plugins');
 define('_HAPPY_LINUX_PLUGIN_TESTDATA', 'Test data');
 define('_HAPPY_LINUX_PLUGIN_TESTDATA_DESC', 'Enter the form of associative array');
-
-?>

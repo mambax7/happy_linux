@@ -13,9 +13,7 @@
 // Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
 
 // page_frame
-define('_HAPPY_LINUX_THERE_ARE','Есть <b>%s</b> записей в базе данных');
-define('_HAPPY_LINUX_NO_RECORD','Нет записей');
+define('_HAPPY_LINUX_THERE_ARE', 'Есть <b>%s</b> записей в базе данных');
+define('_HAPPY_LINUX_NO_RECORD', 'Нет записей');
 define('_HAPPY_LINUX_ID_ASC', 'ID по возрастанию');
-define('_HAPPY_LINUX_ID_DESC','ID по убываению');
-
-?>
+define('_HAPPY_LINUX_ID_DESC', 'ID по убываению');
