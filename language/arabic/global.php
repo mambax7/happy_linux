@@ -1,0 +1,73 @@
+<?php
+// $Id: global.php,v 1.2 2008/02/24 02:14:19 ohwada Exp $
+
+// 2007-11-01
+// _HAPPY_LINUX_FAIL
+
+// 2007-02-20 K.OHWADA
+// _HAPPY_LINUX_SKIP_TO_NEXT
+
+// 2006-11-20 K.OHWADA
+// for happy_search
+// _HAPPY_LINUX_GOTO_MAIN
+
+// 2006-09-15 K.OHWADA
+// this is new file
+// divided from main.php
+
+//=========================================================
+// Happy Linux Framework Module
+// 2006-09-01 K.OHWADA
+//=========================================================
+
+// global
+define('_HAPPY_LINUX_HOME','ÇáÕÝÍÉ ÇáÑÆíÓíÉ');
+define('_HAPPY_LINUX_MAIN','ÇáÑÆíÓíÉ');
+define('_HAPPY_LINUX_ADD',  'ÃÖÝ');
+define('_HAPPY_LINUX_ADDED','ÃÖíÝ');
+define('_HAPPY_LINUX_DELETE', 'ÍÐÝ');
+define('_HAPPY_LINUX_DELETED','ÍõÐÝ');
+define('_HAPPY_LINUX_UPDATE', 'ÊÍÏíË');
+define('_HAPPY_LINUX_UPDATED','ÍÏËÊ');
+define('_HAPPY_LINUX_MODIFY',  'ÊÚÏíá');
+define('_HAPPY_LINUX_MODIFIED','ÚÏáÊ');
+define('_HAPPY_LINUX_SAVE', 'ÍÝÙ');
+define('_HAPPY_LINUX_SAVED','ÍÝÙÊ');
+define('_HAPPY_LINUX_CLEAR',  'ãÓÍ');
+define('_HAPPY_LINUX_CLEARED','ãÓÍÊ');
+define('_HAPPY_LINUX_EXECUTE', 'ÊäÝíÐ');
+define('_HAPPY_LINUX_EXECUTED','äÝÐÊ');
+define('_HAPPY_LINUX_CREATE', 'ÇäÔÇÁ');
+define('_HAPPY_LINUX_CREATED','ÇäÔÃÊ');
+define('_HAPPY_LINUX_SUBMIT',   'ÃÑÓá');
+define('_HAPPY_LINUX_SUBMITED', 'ÃÑÓáÊ');
+define('_HAPPY_LINUX_CANCEL',   'ÇáÛÇÁ');
+define('_HAPPY_LINUX_CANCELED', 'ÇáÛíÊ');
+define('_HAPPY_LINUX_SEARCH','ÈÍË');
+define('_HAPPY_LINUX_SHOW','ÚÑÖ');
+define('_HAPPY_LINUX_TITLE', 'ÚäæÇä');
+define('_HAPPY_LINUX_KEYWORD','ÇáßáãÉ');
+define('_HAPPY_LINUX_NUM','ÑÞã');
+define('_HAPPY_LINUX_NO_ACTION','ÛíÑ äÔØ');
+
+// 2006-11-10
+define('_HAPPY_LINUX_GOTO_MAIN',   'ÇáÐåÇÈ Åáì ÇáÑÆíÓíÉ');
+define('_HAPPY_LINUX_GOTO_TOP',    'ÇáÐåÇÈ Åáì ÃÚáì ÇáÕÝÍÉ');
+define('_HAPPY_LINUX_GOTO_ADMIN',  'ÇáÐåÇÈ Åáì ÕÝÍÉ ÇáÃÏãä');
+define('_HAPPY_LINUX_GOTO_MODULE', 'ÇáÐåÇÈ Åáì ÇáÈÑäÇãÌ');
+
+// 2007-02-20
+define('_HAPPY_LINUX_SKIP_TO_NEXT', 'ÇáÛÇÁ');
+
+// 2007-11-01
+define('_HAPPY_LINUX_WELCOME', 'ÃåáÇ æÓåáÇ %s');
+define('_HAPPY_LINUX_FAIL',   'ÝÔá');
+define('_HAPPY_LINUX_FAILED', 'íÝÔá');
+define('_HAPPY_LINUX_REFRESH',   'ÊÍÏíË');
+define('_HAPPY_LINUX_REFRESHED', 'Êã ÇáÊÍÏíË');
+define('_HAPPY_LINUX_FINISH',   'ÇäÊåì');
+define('_HAPPY_LINUX_FINISHED', 'Êã ÇáÇäÊåÇÁ');
+define('_HAPPY_LINUX_PRINT', 'ØÈÇÚÉ');
+define('_HAPPY_LINUX_SAMPLE','ÚíäÉ');
+
+?>

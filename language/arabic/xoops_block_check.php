@@ -1,0 +1,14 @@
+<?php
+// $Id: xoops_block_check.php,v 1.1 2008/02/24 02:14:19 ohwada Exp $
+
+//=========================================================
+// Happy Linux Framework Module
+// 2007-10-10 K.OHWADA
+//=========================================================
+
+define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_CHECK', 'ÝÍÕ ÈáæßÇÊ ÞæÇÚÏ Xoops');
+define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE','ÍÐÝ ÈáæßÇÊ ÞæÇÚÏ Xoops');
+define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE_DESC','äÝøÐ ÅÐÇ Êã ÇßÊÔÇÝ ÎØÃ');
+define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE_NEXT','æÈÚÏåÇ ÊÍÏíË ÇáÈÑäÇãÌ');
+
+?>

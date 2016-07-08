@@ -1,0 +1,26 @@
+<?php
+// $Id: search.php,v 1.2 2006/10/14 12:51:45 ohwada Exp $
+
+// 2006-10-15 K.OHWADA
+// _HAPPY_LINUX_SEARCH_GOOGLE
+
+// 2006-09-01 K.OHWADA
+// this is new file
+
+//=========================================================
+// Happy Linux Framework Module
+// 2006-09-01 K.OHWADA
+// Í­Êþ¼«±óÊýÍè
+//=========================================================
+
+// search
+define('_HAPPY_LINUX_SEARCH_GOOGLE','Google ¸¡º÷');
+define('_HAPPY_LINUX_SEARCH_NOT_SELECT','»ØÄê¤·¤Ê¤¤');
+define('_HAPPY_LINUX_SEARCH_WITH_SUBCAT','¥µ¥Ö¥«¥Æ¥´¥ê¤ò´Þ¤à');
+
+// for Japanese
+define('_HAPPY_LINUX_SEARCH_CANDICATE','¸¡º÷¤Î¸õÊä');
+define('_HAPPY_LINUX_ZENKAKU','Á´³Ñ');
+define('_HAPPY_LINUX_HANKAKU','È¾³Ñ');
+
+?>
