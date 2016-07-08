@@ -1,0 +1,25 @@
+<?php
+// $Id: manage.php,v 1.2 2008/02/24 02:14:19 ohwada Exp $
+
+// 2006-09-01 K.OHWADA
+// this is new file
+
+//=========================================================
+// Happy Linux Framework Module
+// 2006-09-01 K.OHWADA
+//=========================================================
+
+// manage
+define('_HAPPY_LINUX_ADD_RECORD','ÃÖÝ ÓÌá');
+define('_HAPPY_LINUX_MOD_RECORD','ÊÚÏíá ÓÌá');
+define('_HAPPY_LINUX_DEL_RECORD','ÍÐÝ ÓÌá');
+define('_HAPPY_LINUX_ADD_RECORD_SUCCEEED','ÃÖíÝ ÈäÌÇÍ !');
+define('_HAPPY_LINUX_MOD_RECORD_SUCCEEED','ÚÏá ÈäÌÇÍ !');
+define('_HAPPY_LINUX_DEL_RECORD_SUCCEEED','ÍÐÝ ÈäÌÇÍ !');
+define('_HAPPY_LINUX_ADD_RECORD_FAILD','ÝÔá Ýí ÇáÅÖÇÝÉ');
+define('_HAPPY_LINUX_MOD_RECORD_FAILD','ÝÔá Ýí ÇáÊÚÏíá');
+define('_HAPPY_LINUX_DEL_RECORD_FAILD','ÝÔá Ýí ÇáÍÐÝ');
+define('_HAPPY_LINUX_ERR_FILL',   'ÎØÃ : ÏÎæá %s');
+define('_HAPPY_LINUX_ERR_ILLEGAL','ÎØÃ : ÛíÑ ÞÇäæäí %s');
+
+?>
