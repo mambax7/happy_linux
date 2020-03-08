@@ -78,7 +78,6 @@ class happy_linux_config_form extends happy_linux_form_lib
     //---------------------------------------------------------
     public function __construct()
     {
-
         // BUG: happy_linux_form_lib -> happy_linux_form_lib
         parent::__construct();
 
@@ -111,6 +110,7 @@ class happy_linux_config_form extends happy_linux_form_lib
     public function get_post_get_op()
     {
         $op = $this->_post->get_post_get('op');
+
         return $op;
     }
 
@@ -119,7 +119,7 @@ class happy_linux_config_form extends happy_linux_form_lib
     //---------------------------------------------------------
     public function show_by_catid($catid, $title = '')
     {
-        $config_arr =& $this->get_by_catid($catid);
+        $config_arr = &$this->get_by_catid($catid);
 
         $form_name = $this->_FORM_NAME_CONFIG . '_' . $catid;
         $this->set_form_name($form_name);
@@ -153,7 +153,7 @@ class happy_linux_config_form extends happy_linux_form_lib
         foreach ($config_arr as $id => $config) {
             $title = $this->build_conf_caption($config);
             $ele   = $this->build_conf_element($config);
-            $ele .= $this->build_conf_hidden($id);
+            $ele   .= $this->build_conf_hidden($id);
 
             echo $this->build_form_table_line($title, $ele);
         }
@@ -161,14 +161,13 @@ class happy_linux_config_form extends happy_linux_form_lib
         $button = $this->build_form_submit();
 
         if ($this->_button_extend) {
-            $button .= $this->_button_extend;
+            $button               .= $this->_button_extend;
             $this->_button_extend = ''; // clear by myself
         }
 
         echo $this->build_form_table_line('', $button, 'foot', 'foot');
         echo $this->build_form_table_end();
         echo $this->build_form_end();
-
         // form end
     }
 
@@ -178,6 +177,7 @@ class happy_linux_config_form extends happy_linux_form_lib
     public function build_conf_caption($config)
     {
         $cap = $this->build_conf_caption_ccflag($config['title'], $config['description'], $config['cc_flag']);
+
         return $cap;
     }
 
@@ -187,6 +187,7 @@ class happy_linux_config_form extends happy_linux_form_lib
         if ($cc_flag) {
             $cap = $this->_CC_MARK . ' ' . $cap;
         }
+
         return $cap;
     }
 
@@ -203,55 +204,43 @@ class happy_linux_config_form extends happy_linux_form_lib
             case 'textbox':
                 $ele = $this->build_html_input_text($name, $value_s);
                 break;
-
             case 'textarea':
                 $ele = $this->build_conf_textarea($name, $value, $valuetype);
                 break;
-
             case 'select':
                 $ele = $this->build_html_select($name, $value, $options);
                 break;
-
             case 'select_multi':
                 $ele = $this->build_html_select_multiple($name, $value, $options);
                 break;
-
             case 'radio':
             case 'radio_select':
                 $ele = $this->build_html_input_radio_select($name, $value, $options);
                 break;
-
             case 'radio_nl':
-                $ele = $this->build_html_input_radio_select($name, $value, $options, '<br />');
+                $ele = $this->build_html_input_radio_select($name, $value, $options, '<br>');
                 break;
-
             case 'radio_nl_non':
-                $ele = $this->build_html_input_radio_select($name, $value, $options, '<br />', false);
+                $ele = $this->build_html_input_radio_select($name, $value, $options, '<br>', false);
                 break;
-
             case 'yesno':
             case 'radio_yesno':
                 $ele = $this->build_form_radio_yesno($name, $value);
                 break;
-
             case 'yesno_check':
             case 'checkbox_yesno':
                 // BUG : radio -> checkbox
                 $ele = $this->build_form_checkbox_yesno($name, $value_s);
                 break;
-
             case 'label':
                 $ele = $value_s;
                 break;
-
             case 'text_image':
                 $ele = $this->build_conf_text_image($name, $value);
                 break;
-
             case 'label_image':
                 $ele = $this->build_conf_label_image($name, $value);
                 break;
-
             //      case 'group':
             //          $ele = $this->build_conf_group( $config );
             //          break;
@@ -285,14 +274,13 @@ class happy_linux_config_form extends happy_linux_form_lib
         return $ele;
     }
 
-
     //---------------------------------------------------------
     // make config form
     //---------------------------------------------------------
     public function build_conf_textarea($name, $value, $valuetype)
     {
-        if ($valuetype == 'array') {
-            if ($value != '') {
+        if ('array' == $valuetype) {
+            if ('' != $value) {
                 $value_s = $this->sanitize_textarea(implode('|', $value));
                 $text    = $this->build_html_textarea($name, $value_s, 5, 50);
             } else {
@@ -309,16 +297,18 @@ class happy_linux_config_form extends happy_linux_form_lib
     public function build_conf_text_image($name, $value, $size = 50, $maxlength = 255, $width = 0, $height = 0, $border = 0, $alt = 'image')
     {
         $text = $this->build_html_input_text($name, $value, $size);
-        $text .= "<br /><br />\n";
+        $text .= "<br><br>\n";
         $text .= $this->build_html_img_tag($value, $width, $height, $border, $alt);
+
         return $text;
     }
 
     public function build_conf_label_image($name, $value, $width = 0, $height = 0, $border = 0, $alt = 'image')
     {
         $text = $value;
-        $text .= "<br /><br />\n";
+        $text .= "<br><br>\n";
         $text .= $this->build_html_img_tag($value, $width, $height, $border, $alt);
+
         return $text;
     }
 
@@ -326,48 +316,56 @@ class happy_linux_config_form extends happy_linux_form_lib
     {
         $value = $this->sanitize_text($value);
         $text  = $this->build_html_input_text($name, $value, $size);
+
         return $text;
     }
 
     public function build_conf_label($value)
     {
         $text = $this->sanitize_text($value);
+
         return $text;
     }
 
     public function build_conf_select($name, $value, $options, $none = 0, $none_name = '---', $none_value = '')
     {
         $text = $this->build_html_select($name, $value, $options, $none, $none_name, $none_value);
+
         return $text;
     }
 
     public function build_conf_select_multi($name, $value, $options, $none = 0, $none_name = '---', $none_value = '')
     {
         $text = $this->build_html_select_multiple($name, $value, $options, $none, $none_name, $none_value);
+
         return $text;
     }
 
     public function build_conf_radio_select($name, $value, $options, $del = '')
     {
         $text = $this->build_html_input_radio_select($name, $value, $options, $del);
+
         return $text;
     }
 
     public function build_conf_radio_yesno($name, $value)
     {
         $text = $this->build_form_radio_yesno($name, $value);
+
         return $text;
     }
 
     public function build_conf_checkbox_yesno($name, $value)
     {
         $text = $this->build_form_radio_yesno($name, $value);
+
         return $text;
     }
 
     public function build_conf_hidden($id)
     {
         $text = $this->build_html_input_hidden('conf_ids[]', $id);
+
         return $text;
     }
 
@@ -381,6 +379,7 @@ class happy_linux_config_form extends happy_linux_form_lib
         }
 
         $title = $this->get_by_name($name, 'title');
+
         return $title;
     }
 
@@ -394,6 +393,7 @@ class happy_linux_config_form extends happy_linux_form_lib
         $desc    = $this->get_by_name($name, 'description');
         $cc_flag = $this->get_by_name($name, 'cc_flag');
         $cap     = $this->build_conf_caption_ccflag($title, $desc, $cc_flag);
+
         return $cap;
     }
 
@@ -409,6 +409,7 @@ class happy_linux_config_form extends happy_linux_form_lib
 
         $text = $this->build_html_input_text($name, $value_s, $size);
         $text .= $this->build_conf_hidden($id);
+
         return $text;
     }
 
@@ -424,6 +425,7 @@ class happy_linux_config_form extends happy_linux_form_lib
 
         $text = $this->build_form_radio_yesno($name, $value_s);
         $text .= $this->build_conf_hidden($id);
+
         return $text;
     }
 
@@ -439,6 +441,7 @@ class happy_linux_config_form extends happy_linux_form_lib
 
         $text = $this->build_form_checkbox_yesno($name, $value_s);
         $text .= $this->build_conf_hidden($id);
+
         return $text;
     }
 
@@ -452,8 +455,9 @@ class happy_linux_config_form extends happy_linux_form_lib
         $value   = $this->get_by_name($name, 'value');
         $options = $this->get_by_name($name, 'options');
 
-        $text = $this->build_html_input_radio_select($name, $value, $options, '<br />');
+        $text = $this->build_html_input_radio_select($name, $value, $options, '<br>');
         $text .= $this->build_conf_hidden($id);
+
         return $text;
     }
 
@@ -472,6 +476,7 @@ class happy_linux_config_form extends happy_linux_form_lib
 
         $text = $this->build_html_select($name, $value, $options);
         $text .= $this->build_conf_hidden($id);
+
         return $text;
     }
 
@@ -483,6 +488,7 @@ class happy_linux_config_form extends happy_linux_form_lib
 
         $id   = $this->get_by_name($name, 'conf_id');
         $text = $this->build_conf_hidden($id);
+
         return $text;
     }
 
@@ -497,6 +503,7 @@ class happy_linux_config_form extends happy_linux_form_lib
         $text .= $this->build_token();
         $text .= $this->build_html_input_hidden('op', 'save');
         $text .= '<table class="outer" width="100%">' . "\n";
+
         return $text;
     }
 
@@ -507,7 +514,8 @@ class happy_linux_config_form extends happy_linux_form_lib
         $text .= "</tr>\n";
         $text .= "</table>\n";
         $text .= $this->build_form_end();
-        $text .= "<br />\n";
+        $text .= "<br>\n";
+
         return $text;
     }
 
@@ -549,6 +557,7 @@ class happy_linux_config_form extends happy_linux_form_lib
         $title = $this->build_conf_table_title($num_args, $args);
 
         $text = $this->build_config_table_line($num, $title, $arr);
+
         return $text;
     }
 
@@ -568,6 +577,7 @@ class happy_linux_config_form extends happy_linux_form_lib
         $title = $this->build_conf_table_title($num_args, $args);
 
         $text = $this->build_config_table_line($num, $title, $arr);
+
         return $text;
     }
 
@@ -587,6 +597,7 @@ class happy_linux_config_form extends happy_linux_form_lib
         $title = $this->build_conf_table_title($num_args, $args);
 
         $text = $this->build_config_table_line($num, $title, $arr);
+
         return $text;
     }
 
@@ -604,7 +615,7 @@ class happy_linux_config_form extends happy_linux_form_lib
 
     public function build_config_table_even_odd()
     {
-        if ($this->_conf_table_line_count % 2 == 0) {
+        if (0 == $this->_conf_table_line_count % 2) {
             $class = 'even';
         } else {
             $class = 'odd';
@@ -613,15 +624,17 @@ class happy_linux_config_form extends happy_linux_form_lib
         $this->_conf_table_line_count++;
 
         $text = '<tr class="' . $class . '">';
+
         return $text;
     }
 
     public function build_conf_table_col_space($num)
     {
-        $arr = array();
+        $arr = [];
         for ($i = 0; $i < $num; ++$i) {
             $arr[] = '&nbsp';
         }
+
         return $arr;
     }
 
@@ -651,24 +664,28 @@ class happy_linux_config_form extends happy_linux_form_lib
     public function get_by_confid($id, $key)
     {
         $val = $this->_config_define_handler->get_by_itemid($id, $key);
+
         return $val;
     }
 
     public function get_by_name($name, $key)
     {
         $val = $this->_config_define_handler->get_by_name($name, $key);
+
         return $val;
     }
 
     public function get_value_by_name($name)
     {
         $val = $this->_config_define_handler->get_by_name($name, 'value');
+
         return $val;
     }
 
     public function &get_by_catid($catid)
     {
-        $arr =& $this->_config_define_handler->get_caches_by_catid($catid);
+        $arr = &$this->_config_define_handler->get_caches_by_catid($catid);
+
         return $arr;
     }
 
@@ -744,7 +761,7 @@ class happy_linux_config_store_handler extends happy_linux_error
 
     public function set_define(&$class)
     {
-        $this->_define =& $class;
+        $this->_define = &$class;
     }
 
     //---------------------------------------------------------
@@ -760,6 +777,7 @@ class happy_linux_config_store_handler extends happy_linux_error
         if ($catid == $this->get_post_form_catid()) {
             return true;
         }
+
         return false;
     }
 
@@ -788,12 +806,12 @@ class happy_linux_config_store_handler extends happy_linux_error
             $count1 = $this->_handler->get_count_by_key_value('conf_id', (int)$id);
             $count2 = $this->_handler->get_count_by_key_value('conf_name', $name);
 
-            if (($count1 == 0) || ($count2 == 0)) {
+            if ((0 == $count1) || (0 == $count2)) {
                 $this->_set_errors("$id : $name : no record");
             } elseif (($count1 > 1) || ($count2 > 1)) {
                 $this->_set_errors("$id : $name : too many record");
             } else {
-                $obj            =& $this->_handler->get_by_confid($id);
+                $obj            = &$this->_handler->get_by_confid($id);
                 $conf_valuetype = $obj->get('conf_valuetype');
                 if ($valuetype != $conf_valuetype) {
                     $msg = "$id : $name : unmatch valuetype : $valuetype != $conf_valuetype";
@@ -820,7 +838,7 @@ class happy_linux_config_store_handler extends happy_linux_error
             $valuetype = $def['valuetype'];
             $value     = $def['default'];
 
-            $obj =& $this->_handler->create();
+            $obj = &$this->_handler->create();
             $obj->set('conf_id', $id);
             $obj->set('conf_name', $name);
             $obj->set('conf_valuetype', $valuetype);
@@ -842,9 +860,10 @@ class happy_linux_config_store_handler extends happy_linux_error
         $num = $this->_handler->getCount();
 
         // no record
-        if ($num == 0) {
+        if (0 == $num) {
             return false;
         }
+
         return true;
     }
 
@@ -859,7 +878,7 @@ class happy_linux_config_store_handler extends happy_linux_error
 
         // list from Define
         foreach ($define_arr as $id => $def) {
-            $obj =& $this->_handler->get_by_confid($id);
+            $obj = &$this->_handler->get_by_confid($id);
             if (is_object($obj)) {
                 continue;
             }
@@ -869,7 +888,7 @@ class happy_linux_config_store_handler extends happy_linux_error
             $valuetype = $def['valuetype'];
             $value     = $def['default'];
 
-            $obj =& $this->_handler->create();
+            $obj = &$this->_handler->create();
             $obj->set('conf_id', $id);
             $obj->set('conf_name', $name);
             $obj->set('conf_valuetype', $valuetype);
@@ -897,6 +916,7 @@ class happy_linux_config_store_handler extends happy_linux_error
         if (is_array($arr) && count($arr)) {
             return true;
         }
+
         return false;
     }
 
@@ -910,7 +930,7 @@ class happy_linux_config_store_handler extends happy_linux_error
         $confid_arr = $this->_post->get_post('conf_ids');
         $count      = count($confid_arr);
 
-        if (!is_array($confid_arr) || ($count == 0)) {
+        if (!is_array($confid_arr) || (0 == $count)) {
             return true;
         }   // no actuion
 
@@ -918,7 +938,7 @@ class happy_linux_config_store_handler extends happy_linux_error
         for ($i = 0; $i < $count; ++$i) {
             $id = $confid_arr[$i];
 
-            $obj =& $this->_handler->get_by_confid($id);
+            $obj = &$this->_handler->get_by_confid($id);
             if (!is_object($obj)) {
                 continue;
             }
@@ -977,7 +997,7 @@ class happy_linux_config_store_handler extends happy_linux_error
                 continue;
             }
 
-            $obj =& $this->_handler->get_by_confid($id);
+            $obj = &$this->_handler->get_by_confid($id);
             if (!is_object($obj)) {
                 continue;
             }
@@ -1007,6 +1027,7 @@ class happy_linux_config_store_handler extends happy_linux_error
         if (!$ret) {
             $this->_set_errors($this->_handler->getErrors());
         }
+
         return $ret;
     }
 
@@ -1016,6 +1037,7 @@ class happy_linux_config_store_handler extends happy_linux_error
         if (!$ret) {
             $this->_set_errors($this->_handler->getErrors());
         }
+
         return $ret;
     }
 
@@ -1025,6 +1047,7 @@ class happy_linux_config_store_handler extends happy_linux_error
         if (!$ret) {
             $this->_set_errors($this->_handler->getErrors());
         }
+
         return $ret;
     }
 
@@ -1034,6 +1057,7 @@ class happy_linux_config_store_handler extends happy_linux_error
         if (!$ret) {
             $this->_set_errors($this->_handler->getErrors());
         }
+
         return $ret;
     }
 

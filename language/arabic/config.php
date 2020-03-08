@@ -10,42 +10,42 @@
 //=========================================================
 
 // bin command
-define('_HAPPY_LINUX_CONF_COMMAND_MANAGE', 'ÅÏÇÑÉ ÇáÇæãÑ');
-define('_HAPPY_LINUX_CONF_CREATE_CONFIG', 'ÅäÔÇÁ ãáÝ Config');
+define('_HAPPY_LINUX_CONF_COMMAND_MANAGE', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_CONF_CREATE_CONFIG', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ Config');
 define('_HAPPY_LINUX_CONF_TEST_BIN', 'Test execute of bin command');
-define('_HAPPY_LINUX_CONF_BIN', 'ÊÑßíÈ ÃãÑ');
-define('_HAPPY_LINUX_CONF_BIN_DESC', 'íÓÊÚãá áÕäÏæÞ ÇáÇæÇãÑ');
-define('_HAPPY_LINUX_CONF_BIN_PASS', 'ÇáÑÞã ÇáÓÑí');
-define('_HAPPY_LINUX_CONF_BIN_MAILTO', 'ÚäæÇä ÇáÈÑíÏ áÇÑÓÇáÉ');
-define('_HAPPY_LINUX_CONF_BIN_SEND', 'ÇÑÓá ÈÑíÏ');
-define('_HAPPY_LINUX_CONF_BIN_SEND_NON', 'áã íÊã ÇáÇÑÓÇá');
-define('_HAPPY_LINUX_CONF_BIN_SEND_EXECUTE', 'ÇÑÓá ÚäÏ ÊäÝíÐ');
-define('_HAPPY_LINUX_CONF_BIN_SEND_ALWAYS', 'ÏÇÆãÇ ÇÑÓá');
+define('_HAPPY_LINUX_CONF_BIN', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_CONF_BIN_DESC', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_CONF_BIN_PASS', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_CONF_BIN_MAILTO', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_CONF_BIN_SEND', 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_CONF_BIN_SEND_NON', 'ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_CONF_BIN_SEND_EXECUTE', 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_CONF_BIN_SEND_ALWAYS', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½');
 
 // rss
-define('_HAPPY_LINUX_CONF_RSS_MANAGE', 'ÅÏÇÑÉ RDF/RSS/ATOM');
-define('_HAPPY_LINUX_CONF_RSS_MANAGE_DESC', 'ÅäÔÇÁ æÚÑÖ RDF/RSS/ATOM');
-define('_HAPPY_LINUX_CONF_SHOW_RDF', 'ÚÑÖ RDF');
-define('_HAPPY_LINUX_CONF_SHOW_RSS', 'ÚÑÖ RSS');
-define('_HAPPY_LINUX_CONF_SHOW_ATOM', 'ÚÑÖ ATOM');
-define('_HAPPY_LINUX_CONF_DEBUG_RDF', 'ÚÑÖ debug RDF');
-define('_HAPPY_LINUX_CONF_DEBUG_RSS', 'ÚÑÖ debug RSS');
-define('_HAPPY_LINUX_CONF_DEBUG_ATOM', 'ÚÑÖ debug ATOM');
+define('_HAPPY_LINUX_CONF_RSS_MANAGE', 'ï¿½ï¿½ï¿½ï¿½ï¿½ RDF/RSS/ATOM');
+define('_HAPPY_LINUX_CONF_RSS_MANAGE_DESC', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ RDF/RSS/ATOM');
+define('_HAPPY_LINUX_CONF_SHOW_RDF', 'ï¿½ï¿½ï¿½ RDF');
+define('_HAPPY_LINUX_CONF_SHOW_RSS', 'ï¿½ï¿½ï¿½ RSS');
+define('_HAPPY_LINUX_CONF_SHOW_ATOM', 'ï¿½ï¿½ï¿½ ATOM');
+define('_HAPPY_LINUX_CONF_DEBUG_RDF', 'ï¿½ï¿½ï¿½ debug RDF');
+define('_HAPPY_LINUX_CONF_DEBUG_RSS', 'ï¿½ï¿½ï¿½ debug RSS');
+define('_HAPPY_LINUX_CONF_DEBUG_ATOM', 'ï¿½ï¿½ï¿½ debug ATOM');
 
 // template
-define('_HAPPY_LINUX_CONF_TPL_COMPILED_CLEAR', 'ãÓÍ ÇáßÇÔ ááÞæÇáÈ');
-define('_HAPPY_LINUX_CONF_TPL_COMPILED_CLEAR_DIR', 'íÌÈ Ãä íäÝøÐ, ÚäÏ ÊÛíÑ ãáÝ Ýí ãÓÇÑ ÇáÞæÇáÈ %s ');
-define('_HAPPY_LINUX_CONF_RSS_CACHE_CLEAR', 'ãÓÍ ÇáßÇÔ áÜ RSS');
+define('_HAPPY_LINUX_CONF_TPL_COMPILED_CLEAR', 'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_CONF_TPL_COMPILED_CLEAR_DIR', 'ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ %s ');
+define('_HAPPY_LINUX_CONF_RSS_CACHE_CLEAR', 'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ RSS');
 define('_HAPPY_LINUX_CONF_RSS_CACHE_CLEAR_DESC', 'in anoymous user, cache RSS for one hour');
 define('_HAPPY_LINUX_CONF_RSS_CACHE_CLEAR_TIME', 'in anoymous user, cache RSS for %s hour');
-define('_HAPPY_LINUX_CONF_RSS_CACHE_TIME', 'æÞÊ ÇáßÇÔ (ÈÇáËÇäíÉ)');
+define('_HAPPY_LINUX_CONF_RSS_CACHE_TIME', 'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)');
 
-define('_HAPPY_LINUX_CONF_NOT_WRITABLE', 'åÐÇ ÇáãÓÇÑ áÇ íÞÈá ÇáßÊÇÈÉ');
+define('_HAPPY_LINUX_CONF_NOT_WRITABLE', 'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
 
 // 2007-11-24
 // table manage
-define('_HAPPY_LINUX_CONF_TABLE_MANAGE', 'ÅÏÇÑÉ ÞÇÚÏÉ ÇáÈíÇäÇÊ');
-define('_HAPPY_LINUX_CONF_TABLE_CHECK', 'ÝÍÕ %s ÌÏæá');
-define('_HAPPY_LINUX_CONF_TABLE_REINSTALL', 'ÊäÕÍ ÈÅÚÏÉ ÊËÈíÊ ÇÐÇ ÍÏËÉ ãÔßáÉ');
-define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW', 'ÊÌÏíÏ ÎíÇÑÇÊ ÇáÌÏæá');
-define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Execute if detected error. <br />The present values are repealed. <br />Set values after execution. ');
+define('_HAPPY_LINUX_CONF_TABLE_MANAGE', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_CONF_TABLE_CHECK', 'ï¿½ï¿½ï¿½ %s ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_CONF_TABLE_REINSTALL', 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Execute if detected error. <br>The present values are repealed. <br>Set values after execution. ');

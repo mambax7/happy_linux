@@ -26,7 +26,7 @@ require_once(MAGPIE_DIR . 'rss_utils.inc');
 # define('MAGPIE_CACHE_ON', 1)
 
 // setup template object
-$smarty                = new Smarty;
+$smarty                = new Smarty();
 $smarty->compile_check = true;
 
 // url of an rss file

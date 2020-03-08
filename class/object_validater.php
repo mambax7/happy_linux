@@ -12,8 +12,8 @@ class happy_linux_object_validater extends happy_linux_object
     public $_post;
 
     // local
-    public $_validater_value_arr   = array();
-    public $_validater_allow_arr   = array();
+    public $_validater_value_arr   = [];
+    public $_validater_allow_arr   = [];
     public $_validater_conf_arr    = null;
     public $_validater_name_prefix = null;
 
@@ -90,6 +90,7 @@ class happy_linux_object_validater extends happy_linux_object
         if (isset($this->_validater_value_arr[$key])) {
             return $this->_validater_value_arr[$key];
         }
+
         return false;
     }
 
@@ -118,6 +119,7 @@ class happy_linux_object_validater extends happy_linux_object
         if (isset($this->_validater_value_arr[$key]) && isset($this->_validater_allow_arr[$key]) && $this->_validater_allow_arr[$key]) {
             return true;
         }
+
         return false;
     }
 
@@ -126,7 +128,7 @@ class happy_linux_object_validater extends happy_linux_object
     //---------------------------------------------------------
     public function &validate_values_from_post(&$post, $not_gpc = false)
     {
-        $arr = array();
+        $arr = [];
 
         $flag_conf_arr = false;
 
@@ -169,7 +171,7 @@ class happy_linux_object_validater extends happy_linux_object
                 $val = $this->validate_standard_value($key, $val, $not_gpc);
             }
 
-            if ($val !== null) {
+            if (null !== $val) {
                 $arr[$key] = $val;
             }
         }
@@ -184,7 +186,7 @@ class happy_linux_object_validater extends happy_linux_object
         if (isset($this->_validater_conf_arr[$key]['data_type'])) {
             $data_type = $this->_validater_conf_arr[$key]['data_type'];
         } else {
-            return array($val, $flag_conf_valid);
+            return [$val, $flag_conf_valid];
         }
 
         switch ($data_type) {
@@ -192,14 +194,13 @@ class happy_linux_object_validater extends happy_linux_object
                 $val             = $this->_post->get_int_from_post($post, $key, 0);
                 $flag_conf_valid = true;
                 break;
-
             case 'int_time_select':
                 $val             = $this->get_int_time_select_from_post($post, $key);
                 $flag_conf_valid = true;
                 break;
         }
 
-        return array($val, $flag_conf_valid);
+        return [$val, $flag_conf_valid];
     }
 
     public function validate_standard_value($key, $val, $not_gpc = false)
@@ -214,25 +215,20 @@ class happy_linux_object_validater extends happy_linux_object
             case XOBJ_DTYPE_BOOL:
                 $val = (bool)$val;
                 break;
-
             case XOBJ_DTYPE_INT:
                 $val = (int)$val;
                 break;
-
             case XOBJ_DTYPE_FLOAT:
                 $val = (float)$val;
                 break;
-
             case XOBJ_DTYPE_TXTBOX:
                 // strip GPC slashes
                 $val = $this->prepare_text($val, $not_gpc);
                 break;
-
             case XOBJ_DTYPE_TXTAREA:
                 // strip GPC slashes
                 $val = $this->prepare_textarea($val, $not_gpc);
                 break;
-
             case XOBJ_DTYPE_URL:
                 // strip GPC slashes
                 $val = $this->prepare_url($val, $not_gpc);
@@ -258,7 +254,7 @@ class happy_linux_object_validater extends happy_linux_object
     //---------------------------------------------------------
     // get from POST
     //---------------------------------------------------------
-    public function get_int_xoops_uid(&$post, $key)
+    public function get_int_xoops_uid($post, $key)
     {
         return $this->_post->get_int_from_post($post, $key, $this->_xoops_uid);
     }
@@ -271,7 +267,7 @@ class happy_linux_object_validater extends happy_linux_object
     //---------------------------------------------------------
     // get value & allow from POST
     //---------------------------------------------------------
-    public function get_value_allow_type_int_with_flag_update_from_post(&$post, $key)
+    public function get_value_allow_type_int_with_flag_update_from_post($post, $key)
     {
         $value      = null;
         $key_update = $key . '_flag_update';
@@ -281,26 +277,28 @@ class happy_linux_object_validater extends happy_linux_object
             $value = (int)$post[$key];
         }
 
-        return array($key, $value, $allow);
+        return [$key, $value, $allow];
     }
 
-    public function get_value_allow_type_time_update_form_post(&$post, $key)
+    public function get_value_allow_type_time_update_form_post($post, $key)
     {
         $key_update = $key . '_flag_update';
         $allow      = $this->get_allow_type_user_always_admin_with_key_form_post($post, $key_update);
-        return array($key, time(), $allow);
+
+        return [$key, time(), $allow];
     }
 
-    public function get_allow_type_key_from_post(&$post, $key)
+    public function get_allow_type_key_from_post($post, $key)
     {
         $allow = false;
         if (isset($post[$key]) && $post[$key]) {
             $allow = true;
         }
+
         return $allow;
     }
 
-    public function get_allow_type_admin_with_key_form_post(&$post, $key)
+    public function get_allow_type_admin_with_key_form_post($post, $key)
     {
         $allow = false;
 
@@ -314,7 +312,7 @@ class happy_linux_object_validater extends happy_linux_object
         return $allow;
     }
 
-    public function get_allow_type_user_always_admin_with_key_form_post(&$post, $key)
+    public function get_allow_type_user_always_admin_with_key_form_post($post, $key)
     {
         $allow = false;
 

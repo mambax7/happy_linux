@@ -65,12 +65,10 @@ class happy_linux_admin
                 $msg = 'XOOPS Cube 2.1';
                 $url = $url_21;
                 break;
-
             case 'xoops_22':
                 $msg = 'XOOPS 2.2';
                 $url = $url_20;
                 break;
-
             case 'xoops_20':
             default:
                 $msg = 'XOOPS 2.0';
@@ -105,11 +103,9 @@ class happy_linux_admin
             case 'xoops_cube_21':
                 $url = $url_21;
                 break;
-
             case 'xoops_22':
                 $url = $url_20;
                 break;
-
             case 'xoops_20':
             default:
                 $url = $url_20;
@@ -141,11 +137,9 @@ class happy_linux_admin
             case 'xoops_cube_21':
                 $url = $url_21;
                 break;
-
             case 'xoops_20':
                 $url = $url_20;
                 break;
-
             case 'xoops_22':
             default:
                 $url = $url_22;
@@ -180,7 +174,6 @@ class happy_linux_admin
             case 'xoops_cube_21':
                 $url = $url_21;
                 break;
-
             case 'xoops_20':
             case 'xoops_22':
             default:
@@ -195,9 +188,9 @@ class happy_linux_admin
         echo "<ul>\n";
         echo '<li><a href="' . $url_20 . '">XOOPS 2.0 / 2.2</a></li>' . "\n";
         echo '<li><a href="' . $url_21 . '">XOOPS Cube 2.1</a></li>' . "\n";
-        echo "</ul><br />\n";
+        echo "</ul><br>\n";
 
-        echo '<b>' . _HAPPY_LINUX_AM_MODULE_UPDATE . "</b><br />\n";
+        echo '<b>' . _HAPPY_LINUX_AM_MODULE_UPDATE . "</b><br>\n";
         echo "<ul>\n";
         echo '<li><a href="' . $url_u_20 . '">XOOPS 2.0 / 2.2</a></li>' . "\n";
         echo '<li><a href="' . $url_u_21 . '">XOOPS Cube 2.1</a></li>' . "\n";
@@ -218,17 +211,17 @@ class happy_linux_admin
     {
         $name = $this->_get_name($ver);
         echo sprintf(_HAPPY_LINUX_AM_JUDGE, $name);
-        echo "<br /><br />\n";
+        echo "<br><br>\n";
     }
 
     public function _print_jump($time)
     {
         echo sprintf(_HAPPY_LINUX_AM_JUMP, $time);
-        echo "<br />\n";
+        echo "<br>\n";
         echo _HAPPY_LINUX_AM_JUMP_IFNO1;
-        echo "<br />\n";
+        echo "<br>\n";
         echo sprintf(_HAPPY_LINUX_AM_JUMP_IFNO2, $time);
-        echo "<br /><br />\n";
+        echo "<br><br>\n";
     }
 
     public function _print_js($url, $time)
@@ -239,9 +232,11 @@ class happy_linux_admin
             function happy_linux_init() {
                 setTimeout('happy_linux_jump()', <?php echo $time; ?>);
             }
+
             function happy_linux_jump() {
                 window.location = '<?php echo $url; ?>';
             }
+
             window.onload = happy_linux_init;
             //]]>
         </script>
@@ -254,15 +249,12 @@ class happy_linux_admin
             case 'xoops_cube_21':
                 $name = 'XOOPS Cube 2.1';
                 break;
-
             case 'xoops_22':
                 $name = 'XOOPS 2.2';
                 break;
-
             case 'xoops_20':
                 $name = 'XOOPS 2.0';
                 break;
-
             default:
                 $name = 'Unknown';
                 break;
@@ -297,6 +289,7 @@ class happy_linux_admin
         } else {
             $ver = 'unknown';
         }
+
         return $ver;
     }
 
@@ -310,6 +303,7 @@ class happy_linux_admin
         if (preg_match("/XOOPS[\s+]Cube.*[\s+]2\.1/i", XOOPS_VERSION)) {
             return true;
         }
+
         return false;
     }
 
@@ -319,6 +313,7 @@ class happy_linux_admin
         if (preg_match("/XOOPS[\s+]2\.2/i", XOOPS_VERSION)) {
             return true;
         }
+
         return false;
     }
 
@@ -328,24 +323,28 @@ class happy_linux_admin
         if (preg_match("/XOOPS[\s+]2\.0/i", XOOPS_VERSION)) {
             return true;
         }
+
         return false;
     }
 
     public function _get_mid()
     {
         global $xoopsModule;
+
         return $xoopsModule->getVar('mid');
     }
 
     public function _get_dirname()
     {
         global $xoopsModule;
+
         return $xoopsModule->getVar('dirname');
     }
 
     public function _get_template_set()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['template_set'];
     }
 
@@ -362,6 +361,7 @@ class happy_linux_admin
         if (is_object($module)) {
             $act = $module->getVar('isactive');
         }
+
         return $act;
     }
 
@@ -375,6 +375,7 @@ class happy_linux_admin
         if (method_exists($block, 'getByModule')) {
             return true;
         }
+
         return false;
     }
 

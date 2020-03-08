@@ -68,6 +68,7 @@ class happy_linux_language_base
     public function get_xoops_language()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['language'];
     }
 
@@ -92,7 +93,6 @@ class happy_linux_language_base
 //=========================================================
 class happy_linux_language_factory extends happy_linux_language_base
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -106,10 +106,11 @@ class happy_linux_language_factory extends happy_linux_language_base
         static $instance;
         if (!isset($instance)) {
             // Assigning the return value of new by reference is deprecated
-            $factory = new happy_linux_language_factory();
+            $factory = new self();
 
-            $instance =& $factory->get_local_instance($lang);
+            $instance = &$factory->get_local_instance($lang);
         }
+
         return $instance;
     }
 
@@ -119,7 +120,8 @@ class happy_linux_language_factory extends happy_linux_language_base
         if (empty($lang)) {
             $lang = $this->get_xoops_language();
         }
-        $local =& $this->get_instance($lang);
+        $local = &$this->get_instance($lang);
+
         return $local;
     }
 
@@ -129,13 +131,13 @@ class happy_linux_language_factory extends happy_linux_language_base
     public function &get_instance($language = null, $prefix = 'happy_linux', $dirname = 'happy_linux')
     {
         if ($language) {
-            $instance =& $this->get_instance_by_language($language, $prefix, $dirname);
+            $instance = &$this->get_instance_by_language($language, $prefix, $dirname);
             if ($instance) {
                 return $instance;
             }
         }
 
-        $instance =& $this->get_instance_by_language($this->get_default_language(), $prefix, $dirname);
+        $instance = &$this->get_instance_by_language($this->get_default_language(), $prefix, $dirname);
         if ($instance) {
             return $instance;
         }
@@ -149,8 +151,8 @@ class happy_linux_language_factory extends happy_linux_language_base
     public function &get_instance_by_language($language, $prefix = 'happy_linux', $dirname = 'happy_linux')
     {
         $instance = false;
-        $file     = XOOPS_ROOT_PATH . '/modules/' . $dirname . '/language/' . $language . '/language_local.php';
-        $class    = $prefix . '_language_local';
+        $file = XOOPS_ROOT_PATH . '/modules/' . $dirname . '/language/' . $language . '/language_local.php';
+        $class = $prefix . '_language_local';
 
         // BUG: singleton done not work correctly
         // if include file alreary

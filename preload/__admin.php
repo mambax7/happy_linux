@@ -1,5 +1,5 @@
 <?php
-// $Id: __admin.php,v 1.1 2007/06/10 14:46:00 ohwada Exp $
+// $Id: __admin.php,v 1.1 2010/11/07 14:59:16 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module

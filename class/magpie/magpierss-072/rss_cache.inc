@@ -9,11 +9,11 @@
  * License:     GPL
  *
  * The lastest version of MagpieRSS can be obtained from:
- * http://magpierss.sourceforge.net
+ * https://magpierss.sourceforge.net
  *
  * For questions, help, comments, discussion, etc., please join the
  * Magpie mailing list:
- * http://lists.sourceforge.net/lists/listinfo/magpierss-general
+ * https://lists.sourceforge.net/lists/listinfo/magpierss-general
  *
  */
 
@@ -23,7 +23,7 @@ class RSSCache
     public $MAX_AGE    = 3600;         // when are files stale, default one hour
     public $ERROR      = '';           // accumulate error messages
 
-    function __construct($base = '', $age = '')
+    public function __construct($base = '', $age = '')
     {
         if ($base) {
             $this->BASE_CACHE = $base;
@@ -129,7 +129,7 @@ class RSSCache
         }
     }
 
-    function cache_age($cache_key)
+    public function cache_age($cache_key)
     {
         $filename = $this->file_name($url);
         if (file_exists($filename)) {
@@ -166,7 +166,7 @@ class RSSCache
     public function file_name($url)
     {
         $filename = md5($url);
-        return implode(DIRECTORY_SEPARATOR, array($this->BASE_CACHE, $filename));
+        return implode(DIRECTORY_SEPARATOR, [$this->BASE_CACHE, $filename]);
     }
 
     /*=======================================================================*\

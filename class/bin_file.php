@@ -11,14 +11,12 @@
 
 // === class begin ===
 if (!class_exists('happy_linux_bin_file')) {
-
     //=========================================================
     // class happy_linux_bin_file
     // this class is used by command line
     //=========================================================
     class happy_linux_bin_file extends happy_linux_file
     {
-
         //---------------------------------------------------------
         // constructor
         //---------------------------------------------------------
@@ -45,6 +43,7 @@ if (!class_exists('happy_linux_bin_file')) {
             if ($this->_flag_write) {
                 return $this->fopen($filename, $mode);
             }
+
             return true;    // no action
         }
 
@@ -64,6 +63,5 @@ if (!class_exists('happy_linux_bin_file')) {
 
         // --- class end ---
     }
-
     // === class end ===
 }

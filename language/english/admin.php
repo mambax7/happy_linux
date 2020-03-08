@@ -19,7 +19,7 @@
 //=========================================================
 
 // 2007-05-12
-define('_HAPPY_LINUX_AM_GROUP', 'Gruop Manage');
+define('_HAPPY_LINUX_AM_GROUP', 'Group Manage');
 define('_HAPPY_LINUX_AM_GROUP_DESC', 'The management of the access permition of the module');
 define('_HAPPY_LINUX_AM_BLOCK', 'Block Manage');
 define('_HAPPY_LINUX_AM_BLOCK_DESC', 'The management of the access permition of the block');
@@ -43,4 +43,4 @@ define('_HAPPY_LINUX_AM_SERVER_ENV', 'Server Environmnet Variables');
 define('_HAPPY_LINUX_AM_DIR_NOT_WRITABLE', 'This directory is not writeable');
 define('_HAPPY_LINUX_AM_MEMORY_LIMIT_TOO_SMALL', 'memory_limit is too small');
 define('_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'Weblinks module requires more memory about %s MB');
-define('_HAPPY_LINUX_AM_MEMORY_DESC', 'This value is one standard.<br />Depending on the server environment, it is sometimes more or less.');
+define('_HAPPY_LINUX_AM_MEMORY_DESC', 'This value is one standard.<br>Depending on the server environment, it is sometimes more or less.');

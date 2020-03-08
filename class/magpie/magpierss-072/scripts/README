@@ -2,7 +2,7 @@ Some example on how to use Magpie:
 
 * magpie_simple.php *
   Simple example of fetching and parsing an RSS file. Expects to be
-  called with a query param 'rss_url=http://<some rss file>'
+  called with a query param 'rss_url=https://<some rss file>'
 
 * simple_smarty.php *
   Similiar to magpie_simple, but using the Smarty template engine to do
@@ -24,4 +24,4 @@ Some example on how to use Magpie:
   
   
 The Smarty template engine and documentation on how to use it are available from
-http://smarty.php.net
+https://smarty.php.net

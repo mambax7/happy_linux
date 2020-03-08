@@ -50,27 +50,26 @@ class happy_linux_date
     public function judge_newday($time, $days)
     {
         if (($days > 0)
-            && ($time > ($this->_time_now - $this->day_to_sec($days)))
-        ) {
+            && ($time > ($this->_time_now - $this->day_to_sec($days)))) {
             return true;
         }
+
         return false;
     }
 
     public function judge_today($time, $hours)
     {
         if (($hours > 0)
-            && ($time > ($this->_time_now - $this->hour_to_sec($hours)))
-        ) {
+            && ($time > ($this->_time_now - $this->hour_to_sec($hours)))) {
             return true;
         }
+
         return false;
     }
 
     public function set_default_timezone_by_xoops_default_timezone()
     {
         return false;
-
         $hour = $this->get_xoops_default_tz_hour();
         $tz   = $this->get_timezone_name_by_hour($hour);
         if ($tz) {
@@ -80,8 +79,10 @@ class happy_linux_date
                 $this->_tz_current     = $tz;
                 $this->_offset_current = $this->hour_to_sec($hour);
             }
+
             return $ret;
         }
+
         return false;
     }
 
@@ -111,8 +112,8 @@ class happy_linux_date
     public function get_timezone_name_by_hour_list($hour)
     {
         $hour_10   = 10 * $hour;
-        $hour_list =& $this->get_timezone_hour_list();
-        $iden_list =& $this->get_timezone_identifiers_list();
+        $hour_list = &$this->get_timezone_hour_list();
+        $iden_list = &$this->get_timezone_identifiers_list();
 
         if (isset($hour_list[$hour_10]) && is_array($iden_list) && count($iden_list)) {
             // check avilable
@@ -127,7 +128,7 @@ class happy_linux_date
 
     public function &get_timezone_hour_list()
     {
-        $arr = array(
+        $arr = [
             '-120' => 'Pacific/Kwajalein',
             '-115' => 'Pacific/Samoa',
             '-110' => 'Pacific/Midway',
@@ -168,7 +169,8 @@ class happy_linux_date
             '110'  => 'Pacific/Guadalcanal',
             '115'  => 'Pacific/Norfolk',
             '120'  => 'Pacific/Auckland',
-        );
+        ];
+
         return $arr;
     }
 
@@ -200,20 +202,22 @@ class happy_linux_date
     public function hour_to_sec($hour)
     {
         $sec = 3600 * $hour;
+
         return (int)$sec;
     }
 
     public function day_to_sec($day)
     {
         $sec = 86400 * $day;
+
         return (int)$sec;
     }
 
     //---------------------------------------------------------
-    // http://www.faqs.org/rfcs/rfc2822
+    // https://www.faqs.org/rfcs/rfc2822
     // Thu, 21 Dec 2000 16:01:07 +0200
     //
-    // http://www.php.net/manual/ja/function.date.php
+    // https://www.php.net/manual/ja/function.date.php
     //---------------------------------------------------------
     public function date_rfc822_user($time)
     {
@@ -226,10 +230,10 @@ class happy_linux_date
     }
 
     //---------------------------------------------------------
-    // http://www.w3.org/TR/NOTE-datetime
+    // https://www.w3.org/TR/NOTE-datetime
     // 2003-12-13T18:30:02+09:00
     //
-    // http://www.php.net/manual/ja/function.date.php
+    // https://www.php.net/manual/ja/function.date.php
     // User Contributed Notes
     //
     // PHP 5 support iso8601 format: date('c')
@@ -242,8 +246,9 @@ class happy_linux_date
     public function date_iso8601($time)
     {
         $tzd  = date('O', $time);
-        $tzd  = substr(chunk_split($tzd, 3, ':'), 0, 6);
+        $tzd  = mb_substr(chunk_split($tzd, 3, ':'), 0, 6);
         $date = date('Y-m-d\TH:i:s', $time) . $tzd;
+
         return $date;
     }
 
@@ -253,6 +258,7 @@ class happy_linux_date
             $time = time();
         }
         $date = date('Y', $this->get_user_timestamp($time));
+
         return $date;
     }
 
@@ -264,6 +270,7 @@ class happy_linux_date
         if (function_exists('date_default_timezone_set')) {
             return date_default_timezone_set($tz);
         }
+
         return false;
     }
 
@@ -273,6 +280,7 @@ class happy_linux_date
         if (function_exists('date_default_timezone_get')) {
             $tz = date_default_timezone_get();
         }
+
         return $tz;
     }
 
@@ -282,6 +290,7 @@ class happy_linux_date
         if (function_exists('timezone_abbreviations_list')) {
             $arr = timezone_abbreviations_list();
         }
+
         return $arr;
     }
 
@@ -291,6 +300,7 @@ class happy_linux_date
         if (function_exists('timezone_identifiers_list')) {
             $arr = timezone_identifiers_list();
         }
+
         return $arr;
     }
 
@@ -298,14 +308,15 @@ class happy_linux_date
     {
         $tz = false;
         if (function_exists('timezone_name_from_abbr')) {
-            if ($offset === null) {
+            if (null === $offset) {
                 $tz = timezone_name_from_abbr($abbr);
-            } elseif ($isdst === null) {
+            } elseif (null === $isdst) {
                 $tz = timezone_name_from_abbr($abbr, $offset);
             } else {
                 $tz = timezone_name_from_abbr($abbr, $offset, $isdst);
             }
         }
+
         return $tz;
     }
 
@@ -313,9 +324,9 @@ class happy_linux_date
     {
         if ($time > 0) {
             return date('Z', $time);
-        } else {
-            return date('Z');
         }
+
+        return date('Z');
     }
 
     //---------------------------------------------------------
@@ -324,12 +335,14 @@ class happy_linux_date
     public function get_xoops_server_tz_hour()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['server_TZ'];
     }
 
     public function get_xoops_default_tz_hour()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['default_TZ'];
     }
 
@@ -339,6 +352,7 @@ class happy_linux_date
         if (is_object($xoopsUser)) {
             return $xoopsUser->getVar('timezone_offset');
         }
+
         return 0;
     }
 

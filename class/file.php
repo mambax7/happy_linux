@@ -78,25 +78,27 @@ class happy_linux_file extends happy_linux_error
             case 'a':
                 if (!$this->_flag_write) {
                     $this->_set_errors('flag write is not set');
+
                     return false;   // NG
                 }
                 break;
-
             case 'x':
                 if (!$this->_flag_write) {
                     $this->_set_errors('flag write is not set');
+
                     return false;   // NG
                 }
                 if (file_exists($xoops_filename)) {
                     $this->_set_errors('file already exists: ' . $xoops_filename);
+
                     return false;   // NG
                 }
                 break;
-
             case 'r':
             default:
                 if (!is_readable($xoops_filename)) {
                     $this->_set_errors('file is not readable: ' . $xoops_filename);
+
                     return false;   // NG
                 }
                 break;
@@ -105,11 +107,13 @@ class happy_linux_file extends happy_linux_error
         $fp = fopen($xoops_filename, $mode);
         if (!$fp) {
             $this->_set_errors('cannot open file: ' . $xoops_filename);
+
             return false;   // NG
         }
 
         $this->_fp        = $fp;
         $this->_file_name = $filename;
+
         return true;
     }
 
@@ -119,9 +123,11 @@ class happy_linux_file extends happy_linux_error
             $ret = fclose($this->_fp);
             if (!$ret) {
                 $this->_set_errors('cannot close file: ' . $this->_file_name);
+
                 return false;   // NG
             }
         }
+
         return true;
     }
 
@@ -139,9 +145,11 @@ class happy_linux_file extends happy_linux_error
             $ret = fwrite($this->_fp, $data);
             if (!$ret) {
                 $this->_set_errors('cannot write file: ' . $data);
+
                 return false;   // NG
             }
         }
+
         return true;
     }
 
@@ -153,6 +161,7 @@ class happy_linux_file extends happy_linux_error
         if ($flag_nl) {
             $data = $data . "\n";
         }
+
         return $this->fwrite($data);
     }
 
@@ -160,15 +169,17 @@ class happy_linux_file extends happy_linux_error
     {
         $xoops_filename = XOOPS_ROOT_PATH . '/' . $this->_file_name;
         $ret            = fread($this->_fp, filesize($xoops_filename));
+
         return $ret;
     }
 
     public function &fgets_array()
     {
-        $arr = array();
+        $arr = [];
         while (!feof($this->_fp)) {
             $arr[] = fgets($this->_fp);
         }
+
         return $arr;
     }
 
@@ -177,8 +188,10 @@ class happy_linux_file extends happy_linux_error
         // check directory travers
         if (preg_match("|\.\./|", $filename)) {
             $this->_set_errors('illegal file name: ' . $filename);
+
             return false;
         }
+
         return true;
     }
 
@@ -197,13 +210,13 @@ class happy_linux_file extends happy_linux_error
         $this->_flag_write = (bool)$val;
     }
 
-
     //---------------------------------------------------------
     // file name
     //---------------------------------------------------------
     public function &read($filenam = null)
     {
         $ret = $this->file($filename);
+
         return $ret;
     }
 
@@ -217,6 +230,7 @@ class happy_linux_file extends happy_linux_error
         }
         $xoops_filename = XOOPS_ROOT_PATH . '/' . $filename;
         $ret            = file($xoops_filename);
+
         return $ret;
     }
 
@@ -229,6 +243,7 @@ class happy_linux_file extends happy_linux_error
 
         if ($flag_error) {
             $this->_set_errors('you are not owner: ' . $filename);
+
             return false;   // NG
         }
 
@@ -245,6 +260,7 @@ class happy_linux_file extends happy_linux_error
         $uid            = fileowner($xoops_filename);
         if (!$uid) {
             $this->_set_errors('cannot get fileowner: ' . $xoops_filename);
+
             return false;   // NG
         }
 
@@ -265,8 +281,10 @@ class happy_linux_file extends happy_linux_error
         $ret            = chmod($xoops_filename, $mode);
         if (!$ret) {
             $this->_set_errors('cannot chmod file: ' . $xoops_filename);
+
             return false;   // NG
         }
+
         return true;
     }
 
@@ -280,8 +298,10 @@ class happy_linux_file extends happy_linux_error
         $ret            = unlink($xoops_filename);
         if (!$ret) {
             $this->_set_errors('cannot unlink file: ' . $xoops_filename);
+
             return false;   // NG
         }
+
         return true;
     }
 
@@ -301,6 +321,7 @@ class happy_linux_file extends happy_linux_error
         if (empty($timestamp)) {
             $timestamp = time();
         }
+
         return date($format, $timestamp);
     }
 

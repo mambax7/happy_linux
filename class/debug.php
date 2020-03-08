@@ -35,21 +35,22 @@ class happy_linux_debug
         $msg = $this->get_constant_by_array($arr, $flag_normal);
 
         if ($this->_flag_set) {
-            echo implode("<br />\n", $msg);
+            echo implode("<br>\n", $msg);
         } elseif ($title) {
-            echo $title . "<br />\n";
+            echo $title . "<br>\n";
         }
     }
 
     public function get_constant_by_array($arr, $flag_normal = false)
     {
-        $msg_arr = array();
+        $msg_arr = [];
         foreach ($arr as $name) {
             $msg = $this->get_constant($name, $flag_normal);
             if ($msg) {
                 $msg_arr[] = $msg;
             }
         }
+
         return $msg_arr;
     }
 
@@ -63,6 +64,7 @@ class happy_linux_debug
         } elseif (!$flag_normal) {
             $text = '';
         }
+
         return $text;
     }
 

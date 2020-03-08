@@ -19,6 +19,7 @@ function happy_linux_html_replace_script($str)
 {
     $str = preg_replace('|<\s*/\s*script\s*>|is', '&lt; /script &gt;', $str);
     $str = preg_replace('|<\s*script(.*?)>|is', '&lt; script \\1 &gt;', $str);
+
     return $str;
 }
 
@@ -34,6 +35,7 @@ function happy_linux_html_replace_style($str)
 {
     $str = preg_replace('|<\s*/\s*style\s*>|is', '&lt; /style &gt;', $str);
     $str = preg_replace('|<\s*style(.*?)>|is', '&lt; style \\1 &gt;', $str);
+
     return $str;
 }
 
@@ -56,6 +58,7 @@ function happy_linux_html_replace_link($str)
 function happy_linux_html_remove_comment($str)
 {
     $str = preg_replace('|<\!--.*-->|is', '', $str);
+
     return $str;
 }
 
@@ -63,6 +66,7 @@ function happy_linux_html_replace_comment($str)
 {
     $str = str_replace('<!--', '&lt; !--', $str);
     $str = str_replace('-->', '-- &gt;', $str);
+
     return $str;
 }
 
@@ -74,6 +78,7 @@ function happy_linux_html_remove_cdata($str)
 {
     $str = preg_replace('|<\!\[CDATA\[.*\]\]>|is', '', $str);
     $str = preg_replace('|<\!\[CDATA\[.*\]\]&gt;|is', '', $str);
+
     return $str;
 }
 
@@ -81,6 +86,7 @@ function happy_linux_html_replace_cdata($str)
 {
     $str = str_replace('<![CDATA[', '&lt;![CDATA[', $str);
     $str = str_replace(']]>', ']] &gt;', $str);
+
     return $str;
 }
 
@@ -155,6 +161,7 @@ function happy_linux_html_check_javascript($str)
     if (preg_match('|javascript|is', $str)) {
         return true;
     }
+
     return false;
 }
 
@@ -173,6 +180,7 @@ function happy_linux_html_check_javascript_colon($str)
     if (preg_match('|javascript:|is', $str)) {
         return true;
     }
+
     return false;
 }
 
@@ -194,6 +202,7 @@ function happy_linux_html_check_vbscript_colon($str)
     if (preg_match('|vbscript:|is', $str)) {
         return true;
     }
+
     return false;
 }
 
@@ -215,5 +224,6 @@ function happy_linux_html_check_about_colon($str)
     if (preg_match('|about:|is', $str)) {
         return true;
     }
+
     return false;
 }

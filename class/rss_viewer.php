@@ -67,45 +67,51 @@ class happy_linux_rss_viewer extends happy_linux_error
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_view();
+
         return $obj;
     }
 
     public function &create_channel()
     {
         $obj = new happy_linux_rss_view_channel();
+
         return $obj;
     }
 
     public function &create_image()
     {
         $obj = new happy_linux_rss_view_image();
+
         return $obj;
     }
 
     public function &create_textinput()
     {
         $obj = new happy_linux_rss_view_textinput();
+
         return $obj;
     }
 
     public function &create_items()
     {
         $obj = new happy_linux_rss_view_items();
+
         return $obj;
     }
 
     public function &create_item_single()
     {
         $obj = new happy_linux_rss_view_item_single();
+
         return $obj;
     }
 
     //---------------------------------------------------------
     // view sanitize
     //---------------------------------------------------------
-    public function &view_format_sanitize(&$arr, $flag_sanitize = true)
+    public function &view_format_sanitize($arr, $flag_sanitize = true)
     {
-        $obj =& $this->create();
+        $obj = &$this->create();
         $obj->set_vars($arr);
         $obj->view_format();
         if ($flag_sanitize) {
@@ -113,53 +119,58 @@ class happy_linux_rss_viewer extends happy_linux_error
             $obj->view_sanitize();
         }
         $data = $obj->get_vars();
+
         return $data;
     }
 
-    public function &view_format(&$arr)
+    public function &view_format($arr)
     {
-        $obj =& $this->create();
+        $obj = &$this->create();
         $obj->set_vars($arr);
         $obj->view_format();
         $data = $obj->get_vars();
+
         return $data;
     }
 
-    public function &view_sanitize(&$arr)
+    public function &view_sanitize($arr)
     {
-        $obj =& $this->create();
+        $obj = &$this->create();
         $obj->set_vars($arr);
         $this->_set_sanitize_obj($obj);
         $obj->view_sanitize();
         $data = $obj->get_vars();
+
         return $data;
     }
 
-    public function &view_format_sanitize_items(&$items, $flag_sanitize = true)
+    public function &view_format_sanitize_items($items, $flag_sanitize = true)
     {
-        $feeds = array();
+        $feeds = [];
         if (is_array($items) && (count($items) > 0)) {
             foreach ($items as $item) {
-                $feeds[] =& $this->view_format_sanitize_single_item($items, $flag_sanitize);
+                $feeds[] = &$this->view_format_sanitize_single_item($items, $flag_sanitize);
             }
         }
+
         return $feeds;
     }
 
-    public function &view_format_sanitize_single_item(&$item, $flag_sanitize = true)
+    public function &view_format_sanitize_single_item($item, $flag_sanitize = true)
     {
-        $obj =& $this->create();
+        $obj = &$this->create();
         $obj->set_single_item($item);
         $obj->view_format_single_item();
         if ($flag_sanitize) {
             $this->_set_sanitize_obj($obj);
             $obj->view_sanitize_single_item();
         }
-        $feed =& $obj->get_single_item();
+        $feed = &$obj->get_single_item();
+
         return $feed;
     }
 
-    public function _set_sanitize_obj(&$obj)
+    public function _set_sanitize_obj($obj)
     {
         $obj->set_title_html($this->_flag_title_html);
         $obj->set_content_html($this->_flag_content_html);

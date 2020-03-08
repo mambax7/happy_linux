@@ -6,7 +6,7 @@ Author: Kenichi OHWADA
 =================================================
 
 adopted GIJOE's myblocksadmin
-http://xoops.peak.ne.jp/md/mydownloads/singlefile.php?cid=5&lid=12
+https://xoops.peak.ne.jp/md/mydownloads/singlefile.php?cid=5&lid=12
 
 modified for XC 2.1 and happy_linux
 

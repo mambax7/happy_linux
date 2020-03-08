@@ -7,7 +7,7 @@
  * License:     GPL
  *
  * The lastest version of MagpieRSS can be obtained from:
- * http://magpierss.sourceforge.net
+ * https://magpierss.sourceforge.net
  *
  * For questions, help, comments, discussion, etc., please join the
  * Magpie mailing list:
@@ -18,7 +18,7 @@
     Function: parse_w3cdtf
     Purpose:  parse a W3CDTF date into unix epoch
 
-    NOTE: http://www.w3.org/TR/NOTE-datetime
+    NOTE: https://www.w3.org/TR/NOTE-datetime
 \*======================================================================*/
 
 function parse_w3cdtf($date_str)
@@ -28,16 +28,16 @@ function parse_w3cdtf($date_str)
     $pat = "/(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(:(\d{2}))?(?:([-+])(\d{2}):?(\d{2})|(Z))?/";
 
     if (preg_match($pat, $date_str, $match)) {
-        list($year, $month, $day, $hours, $minutes, $seconds) = array($match[1], $match[2], $match[3], $match[4], $match[5], $match[6]);
+        list($year, $month, $day, $hours, $minutes, $seconds) = [$match[1], $match[2], $match[3], $match[4], $match[5], $match[6]];
 
         # calc epoch for current date assuming GMT
         $epoch = gmmktime($hours, $minutes, $seconds, $month, $day, $year);
 
         $offset = 0;
-        if ($match[10] == 'Z') {
+        if ('Z' == $match[10]) {
             # zulu time, aka GMT
         } else {
-            list($tz_mod, $tz_hour, $tz_min) = array($match[8], $match[9], $match[10]);
+            list($tz_mod, $tz_hour, $tz_min) = [$match[8], $match[9], $match[10]];
 
             # zero out the variables
             if (!$tz_hour) {
@@ -51,7 +51,7 @@ function parse_w3cdtf($date_str)
 
             # is timezone ahead of GMT?  then subtract offset
             #
-            if ($tz_mod == '+') {
+            if ('+' == $tz_mod) {
                 $offset_secs = $offset_secs * -1;
             }
 

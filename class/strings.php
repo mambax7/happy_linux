@@ -93,7 +93,7 @@ class happy_linux_strings
     public $_flag_remove_control_code = false;
 
     // allow to remove control code
-    public $_ENCODING_ARRAY = array('iso-8859-1', 'utf-8', 'euc-jp');
+    public $_ENCODING_ARRAY = ['iso-8859-1', 'utf-8', 'euc-jp'];
 
     //---------------------------------------------------------
     // constructor
@@ -125,9 +125,10 @@ class happy_linux_strings
 
     public function check_in_encoding_array($encoding)
     {
-        if (in_array(strtolower($encoding), $this->_ENCODING_ARRAY)) {
+        if (in_array(mb_strtolower($encoding), $this->_ENCODING_ARRAY)) {
             return true;
         }
+
         return false;
     }
 
@@ -143,6 +144,7 @@ class happy_linux_strings
         }
         $str = $this->strip_slashes_gpc_flag($str, $not_gpc);
         $str = $this->replace_javascript($str);
+
         return $str;
     }
 
@@ -153,6 +155,7 @@ class happy_linux_strings
         }
         $str = $this->strip_slashes_gpc_flag($str, $not_gpc);
         $str = $this->replace_javascript($str);
+
         return $str;
     }
 
@@ -167,12 +170,14 @@ class happy_linux_strings
         $str = $this->deny_javascript($str);
         $str = $this->deny_http_only($str);
         $str = $this->allow_http($str);
+
         return $str;
     }
 
     public function &prepare_array($arr, $not_gpc = false)
     {
         $str = $this->_prepare_array_recursive(0, $arr, $not_gpc);
+
         return $str;
     }
 
@@ -184,7 +189,7 @@ class happy_linux_strings
         }
 
         if (is_array($arr_in)) {
-            $arr_out = array();
+            $arr_out = [];
             reset($arr_in);
 
             foreach ($arr_in as $k => $v) {
@@ -199,6 +204,7 @@ class happy_linux_strings
         }
 
         $ret = $this->prepare_text($arr_in, $not_gpc);
+
         return $ret;
     }
 
@@ -266,6 +272,7 @@ class happy_linux_strings
             $str = happy_linux_undo_html_entity_name($str);
             $str = happy_linux_undo_html_entity_numeric($str);
         }
+
         return $str;
     }
 
@@ -285,6 +292,7 @@ class happy_linux_strings
             $str = happy_linux_undo_html_entity_name($str);
             $str = happy_linux_undo_html_entity_numeric($str);
         }
+
         return $str;
     }
 
@@ -306,6 +314,7 @@ class happy_linux_strings
             $str = happy_linux_undo_htmlspecialchars($str);
         }
         $str = htmlspecialchars($str, ENT_QUOTES);
+
         return $str;
     }
 
@@ -317,6 +326,7 @@ class happy_linux_strings
         $str = $this->strip_control($str);
         $str = $this->strip_tab($str);
         $str = $this->strip_return($str);
+
         return $str;
     }
 
@@ -356,12 +366,14 @@ class happy_linux_strings
     public function &strip_control_array($arr_in)
     {
         $ret = $this->_replace_control_array_recursive(0, $arr_in, '');
+
         return $ret;
     }
 
     public function &replace_control_array($arr_in, $replace)
     {
         $ret = $this->_replace_control_array_recursive(0, $arr_in, $replace);
+
         return $ret;
     }
 
@@ -373,7 +385,7 @@ class happy_linux_strings
         }
 
         if (is_array($arr_in)) {
-            $arr_out = array();
+            $arr_out = [];
             reset($arr_in);
 
             foreach ($arr_in as $k => $v) {
@@ -388,6 +400,7 @@ class happy_linux_strings
         }
 
         $ret = $this->replace_control($arr_in, $replace);
+
         return $ret;
     }
 
@@ -429,6 +442,7 @@ class happy_linux_strings
         $str = happy_linux_html_replace_javascript_colon($str);
         $str = happy_linux_html_replace_vbscript_colon($str);
         $str = happy_linux_html_replace_about_colon($str);
+
         return $str;
     }
 
@@ -438,6 +452,7 @@ class happy_linux_strings
         if ($this->check_javascript($str)) {
             return '';
         }
+
         return $str;
     }
 
@@ -458,6 +473,7 @@ class happy_linux_strings
         if (happy_linux_html_check_about_colon($str)) {
             return true;    // include about
         }
+
         return false;
     }
 
@@ -467,6 +483,7 @@ class happy_linux_strings
     public function &sanitize_array_text($arr_in)
     {
         $ret = $this->_sanitize_array_text_recursive(0, $arr_in);
+
         return $ret;
     }
 
@@ -478,7 +495,7 @@ class happy_linux_strings
         }
 
         if (is_array($arr_in)) {
-            $arr_out = array();
+            $arr_out = [];
             reset($arr_in);
 
             foreach ($arr_in as $k => $v) {
@@ -493,6 +510,7 @@ class happy_linux_strings
         }
 
         $ret = $this->sanitize_text($arr_in);
+
         return $ret;
     }
 
@@ -502,12 +520,13 @@ class happy_linux_strings
     public function sanitize_format($value, $format = 's')
     {
         $ret = $this->sanitize_format_text($value, $format);
+
         return $ret;
     }
 
     public function sanitize_format_text($value, $format = 's')
     {
-        switch (strtolower($format)) {
+        switch (mb_strtolower($format)) {
             // strip GPC slashes when set by serVar()
             case 's':
             case 'show':
@@ -517,12 +536,10 @@ class happy_linux_strings
             case 'formpreview':
                 $value = $this->sanitize_text($value);
                 break;
-
             case 'e':
             case 'edit':
                 $value = htmlspecialchars($value, ENT_QUOTES);
                 break;
-
             case 'n':
             case 'none':
             default:
@@ -534,7 +551,7 @@ class happy_linux_strings
 
     public function sanitize_format_textarea($value, $format = 's')
     {
-        switch (strtolower($format)) {
+        switch (mb_strtolower($format)) {
             // strip GPC slashes when set by serVar()
             case 's':
             case 'show':
@@ -544,12 +561,10 @@ class happy_linux_strings
             case 'formpreview':
                 $value = $this->sanitize_textarea($value);
                 break;
-
             case 'e':
             case 'edit':
                 $value = htmlspecialchars($value, ENT_QUOTES);
                 break;
-
             case 'n':
             case 'none':
             default:
@@ -561,7 +576,7 @@ class happy_linux_strings
 
     public function sanitize_format_url($value, $format = 's')
     {
-        switch (strtolower($format)) {
+        switch (mb_strtolower($format)) {
             // strip GPC slashes when set by serVar();
             case 's':
             case 'show':
@@ -571,12 +586,10 @@ class happy_linux_strings
             case 'formpreview':
                 $value = $this->sanitize_url($value);
                 break;
-
             case 'e':
             case 'edit':
                 $value = htmlspecialchars($value, ENT_QUOTES);
                 break;
-
             case 'n':
             case 'none':
             default:
@@ -609,37 +622,41 @@ class happy_linux_strings
         if (!$not_gpc) {
             $str = $this->strip_slashes_gpc($str);
         }
+
         return $str;
     }
 
     public function strip_slashes_gpc($str)
     {
-        if (get_magic_quotes_gpc() && !is_array($str)) {
+        if (@get_magic_quotes_gpc() && !is_array($str)) {
             $str = stripslashes($str);
         }
+
         return $str;
     }
 
     public function &add_slashes_gpc($str)
     {
-        if (!get_magic_quotes_gpc()) {
+        if (@!get_magic_quotes_gpc()) {
             $str = addslashes($str);
         }
+
         return $str;
     }
 
     public function &strip_slashes_array_gpc(&$arr_in)
     {
-        $arr_out =& $arr_in;
-        if (get_magic_quotes_gpc()) {
-            $arr_out =& $this->strip_slashes_array($arr_in);
+        $arr_out = &$arr_in;
+        if (@get_magic_quotes_gpc()) {
+            $arr_out = &$this->strip_slashes_array($arr_in);
         }
+
         return $arr_out;
     }
 
-    public function &strip_slashes_array(&$arr_in)
+    public function &strip_slashes_array($arr_in)
     {
-        $arr_out = array();
+        $arr_out = [];
         foreach ($arr_in as $k => $v) {
             $val = $v;
             if (!is_array($v)) {
@@ -647,6 +664,7 @@ class happy_linux_strings
             }
             $arr_out[$k] = $val;
         }
+
         return $arr_out;
     }
 
@@ -658,6 +676,7 @@ class happy_linux_strings
         if ($this->check_http_only($str)) {
             return '';
         }
+
         return $str;
     }
 
@@ -666,6 +685,7 @@ class happy_linux_strings
         if ($this->check_http_start($str)) {
             return $str;
         }
+
         return '';
     }
 
@@ -675,23 +695,26 @@ class happy_linux_strings
         if (preg_match('|^https?://|', $str)) {
             return true;    // include HTTP
         }
+
         return false;
     }
 
     // Checks if string is HTTP only
     public function check_http_only($str)
     {
-        if (($str == 'http://') || ($str == 'https://')) {
+        if (('https://' == $str) || ('https://' == $str)) {
             return true;    // http only
         }
+
         return false;
     }
 
     public function check_http_fill($str)
     {
-        if (($str != '') && ($str != 'http://') && ($str != 'https://')) {
+        if (('' != $str) && ('https://' != $str) && ('https://' != $str)) {
             return true;
         }
+
         return false;
     }
 
@@ -700,13 +723,14 @@ class happy_linux_strings
     // porting from xoopsmailer.php _checkValidEmail()
     // this is not fully based on RFC2822
     // RFC2822 Internet Message Format
-    // http://www.faqs.org/rfcs/rfc2822.html
+    // https://www.faqs.org/rfcs/rfc2822.html
     //--------------------------------------------------------
     public function check_email_format($str)
     {
         if (preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+([\.][a-z0-9-]+)+$/i", $str)) {
             return true;
         }
+
         return false;
     }
 
@@ -721,6 +745,7 @@ class happy_linux_strings
         $text = $this->strip_tags_for_text($text);
         $text = $this->shorten_text($text, $max, $keyword_array);
         $text = $this->sanitize_format($text, $format);
+
         return $text;
     }
 
@@ -735,6 +760,7 @@ class happy_linux_strings
         $text = strip_tags($text);
         $text = $this->strip_space($text);
         $text = $this->set_empty_if_only_space($text);
+
         return $text;
     }
 
@@ -761,6 +787,7 @@ class happy_linux_strings
         if ($this->_is_japanese) {
             $text = happy_linux_str_add_space_after_punctuation_ja($text);
         }
+
         return $text;
     }
 
@@ -771,6 +798,7 @@ class happy_linux_strings
         }
         $str = $this->replace_html_space_code_to_space($str);
         $str = $this->replace_space_code_to_single_space($str);
+
         return $str;
     }
 
@@ -786,6 +814,7 @@ class happy_linux_strings
     {
         $text = $this->convert_nl($text);
         $text = explode("\n", $text);
+
         return $text;
     }
 
@@ -797,6 +826,7 @@ class happy_linux_strings
         $text = str_replace("\r\n", "\n", $text);
         $text = str_replace("\n\r", "\n", $text);
         $text = str_replace("\r", "\n", $text);
+
         return $text;
     }
 
@@ -805,6 +835,7 @@ class happy_linux_strings
         $str = str_replace('\r\n', "\r\n", $str);
         $str = str_replace('\r', "\r", $str);
         $str = str_replace('\n', "\n", $str);
+
         return $str;
     }
 
@@ -820,7 +851,7 @@ class happy_linux_strings
 
         $str = $this->strip_space($str);
 
-        if (strlen($str) > 0) {
+        if (mb_strlen($str) > 0) {
             return true;
         }
 
@@ -837,6 +868,7 @@ class happy_linux_strings
             $arr = array_merge($arr1, $arr2);
             $arr = array_unique($arr);
         }
+
         return $arr;
     }
 
@@ -846,6 +878,7 @@ class happy_linux_strings
         if (is_array($arr) && count($arr)) {
             $val = implode($glue, $arr);
         }
+
         return $val;
     }
 
@@ -856,12 +889,13 @@ class happy_linux_strings
             $val = implode($glue, $arr);
             $val = urlencode($val);
         }
+
         return $val;
     }
 
     public function &build_unique_array_without($arr_in, $without = 0)
     {
-        $arr_out = array();
+        $arr_out = [];
         $without = (int)$without;
 
         if (is_array($arr_in)) {
@@ -883,7 +917,7 @@ class happy_linux_strings
         return $arr_out;
     }
 
-    public function sanitize_var_export(&$arr, $flag_sanitize = true)
+    public function sanitize_var_export($arr, $flag_sanitize = true)
     {
         if (is_array($arr)) {
             $val = var_export($arr, true);
@@ -897,6 +931,7 @@ class happy_linux_strings
         } else {
             $text = $this->sanitize_text_by_flag($arr, $flag_sanitize);
         }
+
         return $text;
     }
 
@@ -907,6 +942,7 @@ class happy_linux_strings
         } else {
             $text = $str;
         }
+
         return $text;
     }
 
@@ -915,9 +951,10 @@ class happy_linux_strings
     //--------------------------------------------------------
     public function add_str_to_tail($str, $add)
     {
-        if ($add && (substr(trim($str), -1, 1) != $add)) {
+        if ($add && (mb_substr(trim($str), -1, 1) != $add)) {
             $str .= $add;
         }
+
         return $str;
     }
 
@@ -930,6 +967,7 @@ class happy_linux_strings
         if ($bool) {
             $str = 'true';
         }
+
         return $str;
     }
 
@@ -939,6 +977,7 @@ class happy_linux_strings
         if ($int) {
             $bool = true;
         }
+
         return $bool;
     }
 
@@ -948,7 +987,7 @@ class happy_linux_strings
     // --------------------------------------------------------
     public function convert_array_key_to_string($arr)
     {
-        if ((count($arr) == 0) || !is_array($arr)) {
+        if ((0 == count($arr)) || !is_array($arr)) {
             return '';
         }
 
@@ -966,11 +1005,11 @@ class happy_linux_strings
 
     public function convert_string_to_array_key($str, $format = 'n')
     {
-        $array = array();
+        $array = [];
 
         $line_arr = $this->convert_string_to_array($str, "\n");
 
-        if (count($line_arr) == 0) {
+        if (0 == count($line_arr)) {
             return $array;
         }
 
@@ -1009,9 +1048,9 @@ class happy_linux_strings
 
     public function &convert_string_to_array($str, $pattern = '&')
     {
-        $arr = array();
+        $arr = [];
 
-        if ($str === '') {
+        if ('' === $str) {
             return $arr;
         }
 
@@ -1021,7 +1060,7 @@ class happy_linux_strings
         foreach ($str_arr as $value) {
             $value = trim($value);
 
-            if ($value == '') {
+            if ('' == $value) {
                 continue;
             }
 
@@ -1038,7 +1077,8 @@ class happy_linux_strings
     {
         // take out the figure of the tail
         preg_match('/^(\D+)(\d*)$/', $name, $regs);
-        $ext = $regs[2] === '' ? '' : (int)$regs[2];
+        $ext = '' === $regs[2] ? '' : (int)$regs[2];
+
         return $ext;
     }
 
@@ -1054,7 +1094,8 @@ class happy_linux_strings
         $min   = date($i, $time);
         $sec   = date($s, $time);
 
-        $arr = array($year, $month, $day, $hour, $min, $sec);
+        $arr = [$year, $month, $day, $hour, $min, $sec];
+
         return $arr;
     }
 
@@ -1086,13 +1127,14 @@ class happy_linux_strings
     public function add_script_by_type($script, $add, $type)
     {
         $ret = $script;
-        if ($type == 0) {
+        if (0 == $type) {
             $ret = $script . '?' . $add;
-        } elseif ($type == 1) {
+        } elseif (1 == $type) {
             $ret = $script . $add;
-        } elseif ($type == 2) {
+        } elseif (2 == $type) {
             $ret = $script . '&' . $add;
         }
+
         return $ret;
     }
 
@@ -1120,7 +1162,7 @@ class happy_linux_strings
     public function shorten_text($text, $max, $keyword_array = null)
     {
         // nothing, if zero
-        if ($max == 0) {
+        if (0 == $max) {
             return '';
         }
 
@@ -1130,7 +1172,7 @@ class happy_linux_strings
         }
 
         // less than
-        if (strlen($text) <= $max) {
+        if (mb_strlen($text) <= $max) {
             return $text;
         }
 
@@ -1138,7 +1180,6 @@ class happy_linux_strings
             $text = happy_linux_build_search_context($text, $keyword_array, $max);
         } else {
             $text = happy_linux_strcut($text, 0, $max) . ' ...';
-            ;
         }
 
         return $text;
@@ -1157,6 +1198,7 @@ class happy_linux_strings
             $val = happy_linux_convert_to_utf8($val);
             $val = urlencode($val);
         }
+
         return $val;
     }
 
@@ -1174,6 +1216,7 @@ class happy_linux_strings
     public function get_measure_time()
     {
         $time = $this->get_microtime() - $this->_time_start;
+
         return $time;
     }
 
@@ -1181,6 +1224,7 @@ class happy_linux_strings
     {
         list($usec, $sec) = explode(' ', microtime());
         $time = (float)$sec + (float)$usec;
+
         return $time;
     }
 
@@ -1192,6 +1236,7 @@ class happy_linux_strings
         if ($this->is_module_admin_error_reporting() && $this->exist_debug_print_backtrace()) {
             return true;
         }
+
         return false;
     }
 
@@ -1200,6 +1245,7 @@ class happy_linux_strings
         if (function_exists('debug_print_backtrace')) {
             return true;
         }
+
         return false;
     }
 
@@ -1208,6 +1254,7 @@ class happy_linux_strings
         if ($this->is_module_admin() && error_reporting()) {
             return true;
         }
+
         return false;
     }
 
@@ -1216,8 +1263,8 @@ class happy_linux_strings
         global $xoopsUser, $xoopsModule;
         if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
             return true;
-            ;
         }
+
         return false;
     }
 

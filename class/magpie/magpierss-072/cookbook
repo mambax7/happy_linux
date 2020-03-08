@@ -23,7 +23,7 @@ and more flexible approach is to take a "slice" of the array of items.  And
 array_slice() is smart enough to do the right thing if the feed has less items
 then $num_items.
 
-See: http://www.php.net/array_slice
+See: https://www.php.net/array_slice
 
 
 2. DISPLAY A CUSTOM ERROR MESSAGE IF SOMETHING GOES WRONG
@@ -66,9 +66,9 @@ You can do this with:
 
 ini_set('display_errors', 0);
 
-See: http://www.php.net/error_reporting,
-     http://www.php.net/ini_set, 
-	 http://www.php.net/manual/en/ref.errorfunc.php
+See: https://www.php.net/error_reporting,
+     https://www.php.net/ini_set,
+	 https://www.php.net/manual/en/ref.errorfunc.php
 
 3. GENERATE A NEW RSS FEED
 
@@ -78,7 +78,7 @@ Create an RSS feed for other people to use.
 
 SOLUTION:
 
-Use Useful Inc's RSSWriter (http://usefulinc.com/rss/rsswriter/)
+Use Useful Inc's RSSWriter (https://usefulinc.com/rss/rsswriter/)
 
 DISCUSSION:
 
@@ -122,4 +122,4 @@ This recipe only works for RSS 1.0 feeds that include the <dc:date> field.
 parse_w3cdtf is defined in rss_utils.inc, and parses RSS style dates into Unix
 epoch seconds.  
 
-See: http://www.php.net/manual/en/ref.datetime.php
+See: https://www.php.net/manual/en/ref.datetime.php

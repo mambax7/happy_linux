@@ -149,8 +149,7 @@ class happy_linux_bin_base
 
         // PHP 5.2: set timezone
         if (function_exists('date_default_timezone_set')
-            && function_exists('date_default_timezone_get')
-        ) {
+            && function_exists('date_default_timezone_get')) {
             $tz = @date_default_timezone_get();
             date_default_timezone_set($tz);
         }
@@ -196,6 +195,7 @@ class happy_linux_bin_base
         if ($pass && ($pass == $this->_pass)) {
             return true;
         }
+
         return false;
     }
 
@@ -207,7 +207,7 @@ class happy_linux_bin_base
         $this->_flag_chmod = $this->_FLAG_CHMOD_WEB;
         $this->_limit      = $this->_LIMIT_WEB;
 
-        $this->_opt_arr =& $_GET;
+        $this->_opt_arr = &$_GET;
 
         if ($this->isset_opt('pass')) {
             $this->_pass = $this->get_opt('pass');
@@ -249,7 +249,7 @@ class happy_linux_bin_base
 
     public function _set_cmd_option()
     {
-        $arr = array();
+        $arr = [];
 
         if ($_SERVER['argc'] > 1) {
             for ($i = 1; $i < $_SERVER['argc']; ++$i) {
@@ -261,7 +261,8 @@ class happy_linux_bin_base
             }
         }
 
-        $this->_opt_arr =& $arr;
+        $this->_opt_arr = &$arr;
+
         return $arr;
     }
 
@@ -270,6 +271,7 @@ class happy_linux_bin_base
         if (isset($this->_opt_arr[$key])) {
             return true;
         }
+
         return false;
     }
 
@@ -278,6 +280,7 @@ class happy_linux_bin_base
         if (isset($this->_opt_arr[$key])) {
             return $this->_opt_arr[$key];
         }
+
         return false;
     }
 
@@ -303,7 +306,7 @@ class happy_linux_bin_base
 <title> $this->_TITLE </title>
 </head><body>
 <h3> $this->_TITLE </h3>
-<hr />
+<hr>
 END_OF_TEXT;
 
         return $text;
@@ -314,9 +317,9 @@ END_OF_TEXT;
         $url_admin = XOOPS_URL . '/' . $this->_file_admin_index;
 
         $text = <<<END_OF_TEXT
-<br />
-<hr />
-<a href="$url_admin">$this->_GOTO_ADMIN</a><br />
+<br>
+<hr>
+<a href="$url_admin">$this->_GOTO_ADMIN</a><br>
 </head></html>
 END_OF_TEXT;
 
@@ -344,6 +347,7 @@ END_OF_TEXT;
         if ($this->_mail_level >= $level) {
             return $this->_send_mail_content($content);
         }
+
         return true;    // no action
     }
 
@@ -358,9 +362,10 @@ END_OF_TEXT;
         $subject = '[' . $this->_sitename . '] ' . $title;
         $body    = $this->_build_mail_body($title, $content);
         $header  = 'From: ' . $this->_adminmail . " \n";
-        $header .= 'X-Mailer: ' . $this->_X_MAILER . " \n";
+        $header  .= 'X-Mailer: ' . $this->_X_MAILER . " \n";
 
         $ret = happy_linux_send_mail($mailto, $subject, $body, $header);
+
         return $ret;
     }
 

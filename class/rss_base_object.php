@@ -85,7 +85,7 @@ class happy_linux_rss_base
     public function set_control($arr)
     {
         if (is_array($arr) && (count($arr) > 0)) {
-            $this->_control_obj =& $this->create_control();
+            $this->_control_obj = &$this->create_control();
             $this->_control_obj->set_vars($arr);
         }
     }
@@ -93,7 +93,7 @@ class happy_linux_rss_base
     public function set_channel($arr)
     {
         if (is_array($arr) && (count($arr) > 0)) {
-            $this->_channel_obj =& $this->create_channel();
+            $this->_channel_obj = &$this->create_channel();
             $this->_channel_obj->set_vars($arr);
         }
     }
@@ -101,7 +101,7 @@ class happy_linux_rss_base
     public function set_image($arr)
     {
         if (is_array($arr) && (count($arr) > 0)) {
-            $this->_image_obj =& $this->create_image();
+            $this->_image_obj = &$this->create_image();
             $this->_image_obj->set_vars($arr);
         }
     }
@@ -109,7 +109,7 @@ class happy_linux_rss_base
     public function set_textinput($arr)
     {
         if (is_array($arr) && (count($arr) > 0)) {
-            $this->_textinput_obj =& $this->create_textinput();
+            $this->_textinput_obj = &$this->create_textinput();
             $this->_textinput_obj->set_vars($arr);
         }
     }
@@ -117,7 +117,7 @@ class happy_linux_rss_base
     public function set_items($items)
     {
         if (is_array($items) && (count($items) > 0)) {
-            $this->_items_obj =& $this->create_items();
+            $this->_items_obj = &$this->create_items();
             $this->_items_obj->set_vars($items);
         }
     }
@@ -125,20 +125,21 @@ class happy_linux_rss_base
     public function set_single_item($arr)
     {
         if (is_array($arr) && (count($arr) > 0)) {
-            $this->_single_item_obj =& $this->create_single_item();
+            $this->_single_item_obj = &$this->create_single_item();
             $this->_single_item_obj->set_vars($arr);
         }
     }
 
     public function &get_vars()
     {
-        $arr = array(
+        $arr = [
             'control'   => $this->get_control(),
             'channel'   => $this->get_channel(),
             'image'     => $this->get_image(),
             'textinput' => $this->get_textinput(),
             'items'     => $this->get_items(),
-        );
+        ];
+
         return $arr;
     }
 
@@ -146,8 +147,9 @@ class happy_linux_rss_base
     {
         $ret = false;
         if (isset($this->_control_obj) && is_object($this->_control_obj)) {
-            $ret =& $this->_control_obj->get_vars();
+            $ret = &$this->_control_obj->get_vars();
         }
+
         return $ret;
     }
 
@@ -155,8 +157,9 @@ class happy_linux_rss_base
     {
         $ret = false;
         if (isset($this->_channel_obj) && is_object($this->_channel_obj)) {
-            $ret =& $this->_channel_obj->get_vars();
+            $ret = &$this->_channel_obj->get_vars();
         }
+
         return $ret;
     }
 
@@ -164,8 +167,9 @@ class happy_linux_rss_base
     {
         $ret = false;
         if (isset($this->_image_obj) && is_object($this->_image_obj)) {
-            $ret =& $this->_image_obj->get_vars();
+            $ret = &$this->_image_obj->get_vars();
         }
+
         return $ret;
     }
 
@@ -173,8 +177,9 @@ class happy_linux_rss_base
     {
         $ret = false;
         if (isset($this->_textinput_obj) && is_object($this->_textinput_obj)) {
-            $ret =& $this->_textinput_obj->get_vars();
+            $ret = &$this->_textinput_obj->get_vars();
         }
+
         return $ret;
     }
 
@@ -182,8 +187,9 @@ class happy_linux_rss_base
     {
         $ret = false;
         if (isset($this->_items_obj) && is_object($this->_items_obj)) {
-            $ret =& $this->_items_obj->get_vars();
+            $ret = &$this->_items_obj->get_vars();
         }
+
         return $ret;
     }
 
@@ -191,8 +197,9 @@ class happy_linux_rss_base
     {
         $ret = false;
         if (isset($this->_single_item_obj) && is_object($this->_single_item_obj)) {
-            $ret =& $this->_single_item_obj->get_vars();
+            $ret = &$this->_single_item_obj->get_vars();
         }
+
         return $ret;
     }
 
@@ -202,8 +209,9 @@ class happy_linux_rss_base
 
         $ret = false;
         if (isset($arr[$key])) {
-            $ret =& $arr[$key];
+            $ret = &$arr[$key];
         }
+
         return $ret;
     }
 
@@ -215,6 +223,7 @@ class happy_linux_rss_base
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_basic();
+
         return $obj;
     }
 
@@ -222,6 +231,7 @@ class happy_linux_rss_base
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_base_basic();
+
         return $obj;
     }
 
@@ -229,6 +239,7 @@ class happy_linux_rss_base
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_base_basic();
+
         return $obj;
     }
 
@@ -236,6 +247,7 @@ class happy_linux_rss_base
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_base_basic();
+
         return $obj;
     }
 
@@ -243,6 +255,7 @@ class happy_linux_rss_base
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_base_basic();
+
         return $obj;
     }
 
@@ -250,6 +263,7 @@ class happy_linux_rss_base
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_base_basic();
+
         return $obj;
     }
 
@@ -299,6 +313,7 @@ class happy_linux_rss_base_basic extends happy_linux_basic
                 $ret = $this->_vars[$key1];
             }
         }
+
         return $ret;
     }
 
@@ -313,6 +328,7 @@ class happy_linux_rss_base_basic extends happy_linux_basic
                 return true;
             }
         }
+
         return false;
     }
 
@@ -370,7 +386,7 @@ class happy_linux_rss_base_basic extends happy_linux_basic
             }
         }
 
-        return array($url, $type, $length);
+        return [$url, $type, $length];
     }
 
     //--------------------------------------------------------
@@ -381,10 +397,9 @@ class happy_linux_rss_base_basic extends happy_linux_basic
         $unixtime = strtotime($datetime);
 
         // maybe undefined time zone
-        if ($unixtime == -1) {
-
+        if (-1 == $unixtime) {
             // delete time zone
-            $datetime = preg_replace("/ [a-zA-Z]{3,}$/", '', $datetime);
+            $datetime = preg_replace('/ [a-zA-Z]{3,}$/', '', $datetime);
             $unixtime = strtotime($datetime);
         }
 
@@ -413,7 +428,7 @@ class happy_linux_rss_base_basic extends happy_linux_basic
 //=========================================================
 class happy_linux_rss_base_items
 {
-    public $_item_objs = array();
+    public $_item_objs = [];
 
     //---------------------------------------------------------
     // constructor
@@ -428,10 +443,10 @@ class happy_linux_rss_base_items
     //---------------------------------------------------------
     public function set_vars($items)
     {
-        $this->_item_objs = array();
+        $this->_item_objs = [];
         foreach ($items as $v) {
             // typo
-            $item_obj =& $this->create_item_single();
+            $item_obj = &$this->create_item_single();
 
             $item_obj->set_vars($v);
             $this->_item_objs[] = $item_obj;
@@ -440,10 +455,11 @@ class happy_linux_rss_base_items
 
     public function &get_vars()
     {
-        $arr = array();
+        $arr = [];
         foreach ($this->_item_objs as $item_obj) {
             $arr[] = $item_obj->get_vars();
         }
+
         return $arr;
     }
 
@@ -456,6 +472,7 @@ class happy_linux_rss_base_items
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_base_basic();
+
         return $obj;
     }
 

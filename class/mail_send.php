@@ -1,5 +1,5 @@
 <?php
-// $Id: mail_send.php,v 1.1 2007/09/15 06:47:26 ohwada Exp $
+// $Id: mail_send.php,v 1.1 2010/11/07 14:59:23 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
@@ -40,14 +40,14 @@ class happy_linux_mail_send extends happy_linux_error
     //---------------------------------------------------------
     public function send_email_by_post($debug = false)
     {
-        $param = array(
+        $param = [
             'to_emails'  => $this->_post->get_post_text('to_email'),
             'from_name'  => $this->_post->get_post_text('from_name'),
             'from_email' => $this->_post->get_post_text('from_email'),
             'subject'    => $this->_post->get_post_text('subject'),
             'body'       => $this->_post->get_post_text('body'),
             'debug'      => $debug,
-        );
+        ];
 
         return $this->send($param);
     }
@@ -65,13 +65,14 @@ class happy_linux_mail_send extends happy_linux_error
 
         if (empty($to_emails) && empty($users)) {
             $this->_set_errors($this->_LANG_ERR_NO_TO_EMAIL);
+
             return false;
         }
 
         $this->clear_errors_logs();
 
         // mail start
-        $mailer =& getMailer();
+        $mailer = &getMailer();
         $mailer->reset();
         $mailer->setFromName($from_name);
         $mailer->setFromEmail($from_email);
@@ -94,10 +95,12 @@ class happy_linux_mail_send extends happy_linux_error
         $ret = $mailer->send($debug);
         if (!$ret) {
             $this->_set_errors($mailer->getErrors(false));
+
             return false;
         }
 
         $this->_set_log($mailer->getSuccess(false));
+
         return true;
     }
 
@@ -107,12 +110,14 @@ class happy_linux_mail_send extends happy_linux_error
     public function get_xoops_sitename()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['sitename'];
     }
 
     public function get_xoops_adminmail()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['adminmail'];
     }
 

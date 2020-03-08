@@ -48,4 +48,4 @@ define('_HAPPY_LINUX_CONF_TABLE_MANAGE', 'DB Table Management');
 define('_HAPPY_LINUX_CONF_TABLE_CHECK', 'Check %s Table');
 define('_HAPPY_LINUX_CONF_TABLE_REINSTALL', 'Recommend to re-install if detected error');
 define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW', 'Renewal Config Table');
-define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Execute if detected error. <br />The present values are repealed. <br />Set values after execution. ');
+define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Execute if detected error. <br>The present values are repealed. <br>Set values after execution. ');

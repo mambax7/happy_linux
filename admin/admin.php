@@ -32,7 +32,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 // Author: Kazumi Ono (AKA onokazu)                                          //
-// URL: http://www.myweb.ne.jp/, https://xoops.org/, http://jp.xoops.org/ //
+// URL: https://www.myweb.ne.jp/, https://xoops.org/, https://jp.xoops.org/ //
 // Project: The XOOPS Project                                                //
 // ------------------------------------------------------------------------- //
 
@@ -63,7 +63,6 @@ include_once XOOPS_ROOT_PATH . '/modules/happy_linux/include/gtickets.php';
 $admintest = 0;
 
 if (is_object($xoopsUser)) {
-
     // ohwada
     //  $xoopsModule =& XoopsModule::getByDirname("system");
     //  if ( !$xoopsUser->isAdmin($xoopsModule->mid()) ) {
@@ -83,8 +82,8 @@ if (is_object($xoopsUser)) {
 // include system category definitions
 include_once XOOPS_ROOT_PATH . '/modules/system/constants.php';
 $error = false;
-if ($admintest != 0) {
-    if (isset($fct) && $fct != '') {
+if (0 != $admintest) {
+    if (isset($fct) && '' != $fct) {
         if (file_exists(XOOPS_ROOT_PATH . '/modules/system/admin/' . $fct . '/xoops_version.php')) {
             if (file_exists(XOOPS_ROOT_PATH . '/modules/system/language/' . $xoopsConfig['language'] . '/admin.php')) {
                 include XOOPS_ROOT_PATH . '/modules/system/language/' . $xoopsConfig['language'] . '/admin.php';
@@ -101,15 +100,15 @@ if ($admintest != 0) {
             $category        = !empty($modversion['category']) ? (int)$modversion['category'] : 0;
             unset($modversion);
             if ($category > 0) {
-                $groups =& $xoopsUser->getGroups();
+                $groups = &$xoopsUser->getGroups();
 
                 // ohwada
-                //              if (in_array(XOOPS_GROUP_ADMIN, $groups) || false != $sysperm_handler->checkRight('system_admin', $category, $groups, $xoopsModule->getVar('mid'))){
+                //              if (in_array(XOOPS_GROUP_ADMIN, $groups) || false !== $sysperm_handler->checkRight('system_admin', $category, $groups, $xoopsModule->getVar('mid'))){
                 //                  if (file_exists(XOOPS_ROOT_PATH."/modules/system/admin/".$fct."/main.php")) {
                 //                      include_once XOOPS_ROOT_PATH."/modules/system/admin/".$fct."/main.php"; GIJ
                 //                  if (file_exists("../include/{$fct}.inc.php")) {
                 //                      include_once "../include/{$fct}.inc.php" ;
-                if (in_array(XOOPS_GROUP_ADMIN, $groups) || false != $sysperm_handler->checkRight('system_admin', $category, $groups, $mid)) {
+                if (in_array(XOOPS_GROUP_ADMIN, $groups) || false !== $sysperm_handler->checkRight('system_admin', $category, $groups, $mid)) {
                     if (file_exists(XOOPS_ROOT_PATH . "/modules/happy_linux/include/{$fct}.inc.php")) {
                         include_once XOOPS_ROOT_PATH . "/modules/happy_linux/include/{$fct}.inc.php";
                     } else {
@@ -118,7 +117,7 @@ if ($admintest != 0) {
                 } else {
                     $error = true;
                 }
-            } elseif ($fct == 'version') {
+            } elseif ('version' == $fct) {
                 if (file_exists(XOOPS_ROOT_PATH . '/modules/system/admin/version/main.php')) {
                     include_once XOOPS_ROOT_PATH . '/modules/system/admin/version/main.php';
                 } else {
@@ -135,7 +134,7 @@ if ($admintest != 0) {
     }
 }
 
-if (false != $error) {
+if (false !== $error) {
     xoops_cp_header();
     echo '<h4>System Configuration</h4>';
     echo '<table class="outer" cellpadding="4" cellspacing="1">';
@@ -144,7 +143,7 @@ if (false != $error) {
     $all_ok = false;
     if (!in_array(XOOPS_GROUP_ADMIN, $groups)) {
         $sysperm_handler = xoops_getHandler('groupperm');
-        $ok_syscats      =& $sysperm_handler->getItemIds('system_admin', $groups);
+        $ok_syscats      = &$sysperm_handler->getItemIds('system_admin', $groups);
     } else {
         $all_ok = true;
     }
@@ -153,16 +152,16 @@ if (false != $error) {
     $counter   = 0;
     $class     = 'even';
     while ($file = readdir($handle)) {
-        if (strtolower($file) != 'cvs' && !preg_match('/[.]/', $file) && is_dir($admin_dir . '/' . $file)) {
+        if ('cvs' != mb_strtolower($file) && !preg_match('/[.]/', $file) && is_dir($admin_dir . '/' . $file)) {
             include $admin_dir . '/' . $file . '/xoops_version.php';
             if ($modversion['hasAdmin']) {
                 $category = isset($modversion['category']) ? (int)$modversion['category'] : 0;
-                if (false != $all_ok || in_array($modversion['category'], $ok_syscats)) {
+                if (false !== $all_ok || in_array($modversion['category'], $ok_syscats)) {
                     echo "<td class='$class' align='center' valign='bottom' width='19%'>";
                     echo "<a href='" . XOOPS_URL . '/modules/system/admin.php?fct=' . $file . "'><b>" . trim($modversion['name']) . "</b></a>\n";
                     echo '</td>';
                     ++$counter;
-                    $class = ($class == 'even') ? 'odd' : 'even';
+                    $class = ('even' == $class) ? 'odd' : 'even';
                 }
                 if ($counter > 4) {
                     $counter = 0;
@@ -175,7 +174,7 @@ if (false != $error) {
     }
     while ($counter < 5) {
         echo '<td class="' . $class . '">&nbsp;</td>';
-        $class = ($class == 'even') ? 'odd' : 'even';
+        $class = ('even' == $class) ? 'odd' : 'even';
         ++$counter;
     }
     echo '</tr></table>';

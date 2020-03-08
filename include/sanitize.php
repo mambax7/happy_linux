@@ -19,6 +19,7 @@ function happy_linux_sanitize_text($str)
     $str = htmlspecialchars($str, ENT_QUOTES);
     $str = happy_linux_undo_html_entity_name($str);
     $str = happy_linux_undo_html_entity_numeric($str);
+
     return $str;
 }
 
@@ -28,6 +29,7 @@ function happy_linux_sanitize_url($str)
     $str = htmlspecialchars($str, ENT_QUOTES);
     $str = happy_linux_undo_html_entity_name($str);
     $str = happy_linux_undo_html_entity_numeric($str);
+
     return $str;
 }
 
@@ -48,7 +50,7 @@ function happy_linux_sanitize_var_export($arr)
 // --------------------------------------------------------
 function happy_linux_undo_htmlspecialchars($str)
 {
-    $arr = array(
+    $arr = [
         '&amp;'  => '&',
         '&lt;'   => '<',
         '&gt;'   => '>',
@@ -56,8 +58,9 @@ function happy_linux_undo_htmlspecialchars($str)
         '&#39;'  => "'",
         '&#039;' => "'",
         '&apos;' => "'",
-    );
+    ];
     $str = strtr($str, $arr);
+
     return $str;
 }
 

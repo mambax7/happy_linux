@@ -17,7 +17,7 @@ include_once XOOPS_ROOT_PATH . '/modules/happy_linux/include/version.php';
 $modversion['name']        = _MI_HAPPY_LINUX_NAME;
 $modversion['description'] = _MI_HAPPY_LINUX_DESC;
 $modversion['version']     = HAPPY_LINUX_VERSION;
-$modversion['author']      = 'Kenichi OHWADA<br />( http://linux2.ohwada.net/ )';
+$modversion['author']      = 'Kenichi OHWADA<br>( https://linux2.ohwada.net/ )';
 $modversion['credits']     = '';
 $modversion['help']        = '';
 $modversion['license']     = 'GPL see LICENSE';
@@ -59,4 +59,3 @@ $modversion['hasSearch'] = 0;
 // Templates
 //$modversion['templates'][1]['file'] = '';
 //$modversion['templates'][1]['description'] = '';
-;

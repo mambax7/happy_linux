@@ -57,5 +57,4 @@ echo $info->build_footer();
 echo $info->build_powerdby();
 
 xoops_cp_footer();
-exit();// --- main end ---
-;
+exit(); // --- main end ---

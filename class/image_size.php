@@ -19,7 +19,6 @@
 //=========================================================
 class happy_linux_image_size
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -45,19 +44,19 @@ class happy_linux_image_size
     {
         $size = getimagesize($file);  // PHP function
         if (!$size) {
-            return array(0, 0);
+            return [0, 0];
         }
 
         $width  = (int)$size[0];
         $height = (int)$size[1];
 
-        return array($width, $height);
+        return [$width, $height];
     }
 
     public function adjust_size($width, $height, $max_width, $max_height, $flag_zero = false)
     {
-        if ($flag_zero && (($width == 0) || ($height == 0))) {
-            return array($max_width, 0);
+        if ($flag_zero && ((0 == $width) || (0 == $height))) {
+            return [$max_width, 0];
         }
 
         if ($width > $max_width) {
@@ -75,7 +74,7 @@ class happy_linux_image_size
         $width  = (int)$width;
         $height = (int)$height;
 
-        return array($width, $height);
+        return [$width, $height];
     }
 
     public function minimum_size($width, $height, $min_width = 0, $min_height = 0)
@@ -88,7 +87,7 @@ class happy_linux_image_size
             $height = $min_height;
         }
 
-        return array($width, $height);
+        return [$width, $height];
     }
 
     // --- class end ---

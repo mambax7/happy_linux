@@ -47,7 +47,7 @@ class happy_linux_rss_parser extends happy_linux_error
     public $_parse_result   = '';
 
     // language
-    public $_LANG_ASSUME_ENCODING = 'assume xml encoding %s ,<br />because cannot detect encoding automatically';
+    public $_LANG_ASSUME_ENCODING = 'assume xml encoding %s ,<br>because cannot detect encoding automatically';
 
     //---------------------------------------------------------
     // constructor
@@ -80,6 +80,7 @@ class happy_linux_rss_parser extends happy_linux_error
 
         if (!$this->_rss_utility->discover($html_url)) {
             $this->_set_errors($this->_rss_utility->getErrors());
+
             return $false;
         }
 
@@ -89,7 +90,7 @@ class happy_linux_rss_parser extends happy_linux_error
         $xml_url      = $this->_rss_utility->get_xmlurl_by_mode();
         $xml_encoding = '';
 
-        $obj =& $this->parse_by_url($xml_url, $xml_encoding, $xml_mode);
+        $obj = &$this->parse_by_url($xml_url, $xml_encoding, $xml_mode);
         if (!is_object($obj)) {
             return $false;
         }
@@ -114,6 +115,7 @@ class happy_linux_rss_parser extends happy_linux_error
             $this->_set_error_code(HAPPY_LINUX_CODE_PARSER_NOT_READ_XML_URL);
             $this->_set_errors($this->_rss_utility->getErrors());
             $this->_xml_error_code = $this->_rss_utility->getErrorCode();
+
             return $false;
         }
 
@@ -128,20 +130,22 @@ class happy_linux_rss_parser extends happy_linux_error
                 $this->_set_error_code(HAPPY_LINUX_CODE_PARSER_NOT_FIND_ENCODING);
                 $this->_set_errors($this->_rss_utility->getErrors());
                 $this->_xml_error_code = $this->_rss_utility->getErrorCode();
+
                 return $false;
             }
 
             $this->_xml_encoding_orig = $encoding_orig;
 
             $ret = $this->_rss_utility->get_result_code();
-            if ($ret == HAPPY_LINUX_RSS_CODE_XML_ENCODINGS_DEFAULT) {
+            if (HAPPY_LINUX_RSS_CODE_XML_ENCODINGS_DEFAULT == $ret) {
                 $this->_parse_result = sprintf($this->_LANG_ASSUME_ENCODING, $encoding_orig);
             }
         }
 
         list($xml_converted, $encoding_converted) = $this->_rss_utility->convert_to_parse($xml_data, $encoding_orig);
 
-        $obj =& $this->parse($xml_converted, $encoding_converted, $xml_url);
+        $obj = &$this->parse($xml_converted, $encoding_converted, $xml_url);
+
         return $obj;
     }
 
@@ -152,7 +156,8 @@ class happy_linux_rss_parser extends happy_linux_error
     {
         list($xml_converted, $encoding_converted) = $this->_rss_utility->convert_to_parse($xml_data, $xml_encoding);
 
-        $obj =& $this->parse($xml_converted, $encoding_converted);
+        $obj = &$this->parse($xml_converted, $encoding_converted);
+
         return $obj;
     }
 
@@ -175,6 +180,7 @@ class happy_linux_rss_parser extends happy_linux_error
         if (!$magpie) {
             $this->_set_error_code(HAPPY_LINUX_CODE_PARSER_FAILED);
             $this->_set_errors("cannot parse: url = $xml_url");
+
             return $false;
         }
 
@@ -182,12 +188,14 @@ class happy_linux_rss_parser extends happy_linux_error
             $this->_set_error_code(HAPPY_LINUX_CODE_PARSER_FAILED);
             $this->_set_errors("cannot parse: url = $xml_url");
             $this->_set_errors($magpie->ERROR);
+
             return $false;
         }
 
-        if ((count($magpie->channel) == 0) && (count($magpie->items) == 0)) {
+        if ((0 == count($magpie->channel)) && (0 == count($magpie->items))) {
             $this->_set_error_code(HAPPY_LINUX_CODE_PARSER_FAILED);
             $this->_set_errors("parse data is empty: url = $xml_url");
+
             return $false;
         }
 
@@ -202,11 +210,11 @@ class happy_linux_rss_parser extends happy_linux_error
         $obj->build_for_store();
 
         if ($this->_DEBUG_PRINT_ITEMS) {
-            echo "happy_linux_rss_parser->parse() <br />\n";
+            echo "happy_linux_rss_parser->parse() <br>\n";
             print_r($magpie->items);
-            echo "<hr />\n";
+            echo "<hr>\n";
             print_r($obj->get_items());
-            echo "<hr />\n";
+            echo "<hr>\n";
         }
 
         return $obj;
@@ -222,8 +230,8 @@ class happy_linux_rss_parser extends happy_linux_error
     //---------------------------------------------------------
     public function convert_xml_header_by_phpversion($xml_data, $xml_encoding, $xml_encoding_orig)
     {
-        $xml_encoding      = strtoupper($xml_encoding);
-        $xml_encoding_orig = strtoupper($xml_encoding_orig);
+        $xml_encoding      = mb_strtoupper($xml_encoding);
+        $xml_encoding_orig = mb_strtoupper($xml_encoding_orig);
 
         if ($this->is_php5() && $xml_encoding_orig && ($xml_encoding != $xml_encoding_orig)) {
             $pattern     = '/encoding=[\'"]' . $xml_encoding_orig . '[\'"]/i';
@@ -236,9 +244,10 @@ class happy_linux_rss_parser extends happy_linux_error
 
     public function is_php5()
     {
-        if (substr(phpversion(), 0, 1) == 5) {
+        if (5 == mb_substr(phpversion(), 0, 1)) {
             return true;
         }
+
         return false;
     }
 
@@ -282,24 +291,28 @@ class happy_linux_rss_parser extends happy_linux_error
     public function get_xml_mode()
     {
         $ret = $this->_rss_utility->get_xml_mode();
+
         return $ret;
     }
 
     public function get_rdf_url()
     {
         $ret = $this->_rss_utility->get_rdf_url();
+
         return $ret;
     }
 
     public function get_rss_url()
     {
         $ret = $this->_rss_utility->get_rss_url();
+
         return $ret;
     }
 
     public function get_atom_url()
     {
         $ret = $this->_rss_utility->get_atom_url();
+
         return $ret;
     }
 

@@ -14,7 +14,6 @@
 //=========================================================
 class happy_linux_build_cache
 {
-
     // for reserve, not use here
     public $_DIRNAME    = null;
     public $_tepmlate   = null;
@@ -43,7 +42,6 @@ class happy_linux_build_cache
     //=========================================================
     public function build_cache($template, $cache_time = 0, $flag_force = false)
     {
-
         // build template
         $tpl = new XoopsTpl();
 
@@ -54,17 +52,17 @@ class happy_linux_build_cache
             $tpl->xoops_setCacheTime($cache_time);
         }
 
-        if ($flag_force || ($cache_time == 0) || !$tpl->is_cached($this->_template)) {
+        if ($flag_force || (0 == $cache_time) || !$tpl->is_cached($this->_template)) {
             $this->_assign_cache($tpl);
         }
 
         $ret = $tpl->fetch($template);
+
         return $ret;
     }
 
     public function build_cache_by_cache_id($cache_id, $template, $cache_time = 0, $flag_force = false)
     {
-
         // build template
         $tpl = new XoopsTpl();
 
@@ -75,11 +73,12 @@ class happy_linux_build_cache
             $tpl->xoops_setCacheTime($cache_time);
         }
 
-        if ($flag_force || ($cache_time == 0) || !$tpl->is_cached($template, $cache_id)) {
+        if ($flag_force || (0 == $cache_time) || !$tpl->is_cached($template, $cache_id)) {
             $this->_assign_cache($tpl);
         }
 
         $ret = $tpl->fetch($template, $cache_id);
+
         return $ret;
     }
 
@@ -88,6 +87,7 @@ class happy_linux_build_cache
         $this->clear_compiled_tpl($template);
         $this->clear_cache($template);
         $ret = $this->build_cache($template, 0, true);
+
         return $ret;
     }
 
@@ -108,10 +108,10 @@ class happy_linux_build_cache
     {
         $class_dir = happy_linux_dir::getInstance();
         $dir       = $class_dir->strip_slash_from_tail($dir);
-        $arr       =& $class_dir->get_files_in_dir($dir, 'html');
+        $arr       = &$class_dir->get_files_in_dir($dir, 'html');
 
         foreach ($arr as $file) {
-            if ($file == 'index.html') {
+            if ('index.html' == $file) {
                 continue;
             }
 

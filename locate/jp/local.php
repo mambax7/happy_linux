@@ -18,7 +18,6 @@
 //=========================================================
 class happy_linux_locate_jp extends happy_linux_locate_base
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -32,21 +31,21 @@ class happy_linux_locate_jp extends happy_linux_locate_base
             $gm_location = 'Akashi Muncipal Planetaruim: Akashi, Japan';
         }
 
-        $arr = array(
-            'happy_linux_url' => 'http://linux.ohwada.jp/',
+        $arr = [
+            'happy_linux_url' => 'https://linux.ohwada.jp/',
             'country_code'    => 'jp',
             'country_name'    => 'Japan',
-            'yahoo_url'       => 'http://www.yahoo.co.jp/',
-            'yahoo_map_url'   => 'http://map.yahoo.co.jp/',
-            'google_url'      => 'http://www.google.co.jp/',
-            'google_map_url'  => 'http://maps.google.co.jp/',
-            'gm_server'       => 'http://maps.google.co.jp/',
+            'yahoo_url'       => 'https://www.yahoo.co.jp/',
+            'yahoo_map_url'   => 'https://map.yahoo.co.jp/',
+            'google_url'      => 'https://www.google.co.jp/',
+            'google_map_url'  => 'https://maps.google.co.jp/',
+            'gm_server'       => 'https://maps.google.co.jp/',
             'gm_location'     => $gm_location,
             'gm_latitude'     => '34.64933466571561',
             'gm_longitude'    => '135.0',
             'gm_zoom'         => '6',
             'ping_servers'    => $this->get_ping_servers(),
-        );
+        ];
 
         $this->array_merge($arr);
     }
@@ -54,13 +53,13 @@ class happy_linux_locate_jp extends happy_linux_locate_base
     public function get_ping_servers()
     {
         // remove cocolog-nifty, becuase service is over
-        // http://info.cocolog-nifty.com/info/2006/10/ping_6da6.html
+        // https://info.cocolog-nifty.com/info/2006/10/ping_6da6.html
 
         $list = '';
-        $list .= "http://ping.bloggers.jp/rpc/\n";
-        $list .= "http://bulkfeeds.net/rpc\n";
-        $list .= "http://ping.myblog.jp/\n";
-        $list .= "http://blog.goo.ne.jp/XMLRPC\n";
+        $list .= "https://ping.bloggers.jp/rpc/\n";
+        $list .= "https://bulkfeeds.net/rpc\n";
+        $list .= "https://ping.myblog.jp/\n";
+        $list .= "https://blog.goo.ne.jp/XMLRPC\n";
 
         return $list;
     }

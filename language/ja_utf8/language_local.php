@@ -24,7 +24,6 @@
 //=========================================================
 class happy_linux_language_local extends happy_linux_language_base
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -57,9 +56,10 @@ class happy_linux_language_local extends happy_linux_language_base
 
         $browser->presume_agent();
         $os = $browser->get_os();
-        if (($os == 'win') || ($os == 'mac')) {
+        if (('win' == $os) || ('mac' == $os)) {
             $str = $this->_convert_utf8_to_sjis($str);
         }
+
         return $str;
     }
 
@@ -68,6 +68,7 @@ class happy_linux_language_local extends happy_linux_language_base
         if (function_exists('mb_convert_encoding')) {
             $str = mb_convert_encoding($str, 'SJIS', 'UTF-8');
         }
+
         return $str;
     }
 

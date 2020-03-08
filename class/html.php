@@ -91,12 +91,14 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= $extra . " >\n";
+
         return $text;
     }
 
     public function build_html_form_tag_end()
     {
         $text = "</form>\n";
+
         return $text;
     }
 
@@ -106,48 +108,56 @@ class happy_linux_html extends happy_linux_strings
     public function build_html_input_text($name, $value, $size = 50, $maxlength = 255, $extra = '')
     {
         $text = '<input type="text" name="' . $name . '" id="' . $name . '" value="' . $value . '" size="' . $size . '" maxlength="' . $maxlength . '" ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
     public function build_html_input_text_without_maxlenghth($name, $value, $size = 50, $extra = '')
     {
         $text = '<input type="text" name="' . $name . '" id="' . $name . '" value="' . $value . '" size="' . $size . '" ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
     public function build_html_input_password($name, $value, $size = 50, $maxlength = 255, $extra = '')
     {
         $text = '<input type="password" name="' . $name . '" id="' . $name . '" value="' . $value . '" size="' . $size . '" maxlength="' . $maxlength . '" ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
     public function build_html_input_file($name, $value, $extra = '')
     {
         $text = '<input type="file" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
     public function build_html_input_hidden_max_file_size($value)
     {
         $text = '<input type="hidden" name="MAX_FILE_SIZE" value="' . $value . '" />' . "\n";
+
         return $text;
     }
 
     public function build_html_input_hidden($name, $value)
     {
         $text = '<input type="hidden" name="' . $name . '" id="' . $name . '" value="' . $value . '" />' . "\n";
+
         return $text;
     }
 
     public function build_html_input_submit($name, $value, $extra = '')
     {
         $text = '<input type="submit" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
     public function build_html_input_button($name, $value, $extra = '')
     {
         $text = '<input type="button" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
@@ -155,6 +165,7 @@ class happy_linux_html extends happy_linux_strings
     {
         $extra = ' onclick="javascript:history.go(-1)" ';
         $text  = $this->build_html_input_button($name, $value, $extra);
+
         return $text;
     }
 
@@ -162,6 +173,7 @@ class happy_linux_html extends happy_linux_strings
     {
         $extra = ' onclick="javascript:window.close()" ';
         $text  = $this->build_html_input_button($name, $value, $extra);
+
         return $text;
     }
 
@@ -170,6 +182,7 @@ class happy_linux_html extends happy_linux_strings
         $location = "window.location='" . $url . "'";
         $extra    = ' onclick="' . $location . '" ';
         $text     = $this->build_html_input_button($name, $value, $extra);
+
         return $text;
     }
 
@@ -179,9 +192,9 @@ class happy_linux_html extends happy_linux_strings
     public function build_html_input_radio_select($name, $value, $options, $del = '', $flag_sani = true)
     {
         if ($this->_DEBUG_PRINT) {
-            echo "build_html_input_radio_select($name, $value, $options, $del) <br />";
+            echo "build_html_input_radio_select($name, $value, $options, $del) <br>";
             print_r($options);
-            echo "<br />\n";
+            echo "<br>\n";
         }
 
         $text = '';
@@ -210,6 +223,7 @@ class happy_linux_html extends happy_linux_strings
     public function build_html_input_radio($name, $value, $checked = '', $extra = '')
     {
         $text = '<input type="radio" name="' . $name . '" value="' . $value . '" ' . $checked . ' ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
@@ -218,6 +232,7 @@ class happy_linux_html extends happy_linux_strings
         if (isset($val1) && ($val1 == $val2)) {
             return $this->_CHECKED;
         }
+
         return '';
     }
 
@@ -227,6 +242,7 @@ class happy_linux_html extends happy_linux_strings
             if (count($val_arr1) && in_array($val2, $val_arr1)) {
                 return $this->_CHECKED;
             }
+
             return '';
         }
 
@@ -239,9 +255,9 @@ class happy_linux_html extends happy_linux_strings
     public function build_html_input_checkbox_select($name, $value, $options, $del = '')
     {
         if ($this->_DEBUG_PRINT) {
-            echo "build_html_input_checkbox_select($name, $value, $options, $del) <br />";
+            echo "build_html_input_checkbox_select($name, $value, $options, $del) <br>";
             print_r($options);
-            echo "<br />\n";
+            echo "<br>\n";
         }
 
         $text = '';
@@ -250,11 +266,11 @@ class happy_linux_html extends happy_linux_strings
             $checked       = $this->build_html_checked($value, $opt_val);
             $opt_val_show  = $this->sanitize_text($opt_val);
             $opt_name_show = $this->sanitize_text($opt_name);
-            $text .= $this->build_html_input_checkbox($name, $opt_val_show, $checked);
-            $text .= ' ';
-            $text .= $opt_name_show;
-            $text .= ' ';
-            $text .= $del;
+            $text          .= $this->build_html_input_checkbox($name, $opt_val_show, $checked);
+            $text          .= ' ';
+            $text          .= $opt_name_show;
+            $text          .= ' ';
+            $text          .= $del;
         }
 
         return $text;
@@ -263,27 +279,27 @@ class happy_linux_html extends happy_linux_strings
     public function build_html_input_checkbox_select_multi($name, $value_arr, $options, $del = '')
     {
         if ($this->_DEBUG_PRINT) {
-            echo "build_html_input_checkbox_select_multi($name, $value, $options, $del) <br />";
+            echo "build_html_input_checkbox_select_multi($name, $value, $options, $del) <br>";
             print_r($value_arr);
             print_r($options);
-            echo "<br />\n";
+            echo "<br>\n";
         }
 
         $text = '';
 
         if (!is_array($value_arr)) {
-            $value_arr = array($value_arr);
+            $value_arr = [$value_arr];
         }
 
         foreach ($options as $opt_name => $opt_val) {
             $checked       = $this->build_html_checked_multi($value_arr, $opt_val);
             $opt_val_show  = $this->sanitize_text($opt_val);
             $opt_name_show = $this->sanitize_text($opt_name);
-            $text .= $this->build_html_input_checkbox($name, $opt_val_show, $checked);
-            $text .= ' ';
-            $text .= $opt_name_show;
-            $text .= ' ';
-            $text .= $del;
+            $text          .= $this->build_html_input_checkbox($name, $opt_val_show, $checked);
+            $text          .= ' ';
+            $text          .= $opt_name_show;
+            $text          .= ' ';
+            $text          .= $del;
         }
 
         return $text;
@@ -292,6 +308,7 @@ class happy_linux_html extends happy_linux_strings
     public function build_html_input_checkbox($name, $value, $checked = '', $extra = '')
     {
         $text = '<input type="checkbox" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $checked . ' ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
@@ -303,18 +320,21 @@ class happy_linux_html extends happy_linux_strings
         $text = $this->build_html_textarea_tag_begin($name, $rows, $cols);
         $text .= $value;
         $text .= $this->build_html_textarea_tag_end();
+
         return $text;
     }
 
     public function build_html_textarea_tag_begin($name, $rows = 5, $cols = 50, $extra = '')
     {
         $text = '<textarea name="' . $name . '" id="' . $name . '" rows="' . $rows . '" cols="' . $cols . '" ' . $extra . ' >' . "\n";
+
         return $text;
     }
 
     public function build_html_textarea_tag_end()
     {
         $text = "</textarea>\n";
+
         return $text;
     }
 
@@ -330,10 +350,11 @@ class happy_linux_html extends happy_linux_strings
         }
 
         foreach ($options as $opt_name => $opt_val) {
-            $text .= $this->build_html_option_selected($opt_name, $opt_val, array($value));
+            $text .= $this->build_html_option_selected($opt_name, $opt_val, [$value]);
         }
 
         $text .= $this->build_html_select_tag_end();
+
         return $text;
     }
 
@@ -350,6 +371,7 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= $this->build_html_select_tag_end();
+
         return $text;
     }
 
@@ -374,12 +396,14 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= $extra . " >\n";
+
         return $text;
     }
 
     public function build_html_select_tag_end()
     {
         $text = "</select>\n";
+
         return $text;
     }
 
@@ -397,6 +421,7 @@ class happy_linux_html extends happy_linux_strings
             }
         }
         $text = $this->build_html_option($opt_name, $opt_val, $flag);
+
         return $text;
     }
 
@@ -405,6 +430,7 @@ class happy_linux_html extends happy_linux_strings
         $text = $this->build_html_option_tag_begin($value, $flag_selected);
         $text .= $name;
         $text .= $this->build_html_option_tag_end();
+
         return $text;
     }
 
@@ -413,12 +439,14 @@ class happy_linux_html extends happy_linux_strings
         $selected = $this->build_html_selected_by_flag($flag_selected);
 
         $text = '<option value="' . $value . '" ' . $selected . ' > ';
+
         return $text;
     }
 
     public function build_html_option_tag_end()
     {
         $text = "</option>\n";
+
         return $text;
     }
 
@@ -427,6 +455,7 @@ class happy_linux_html extends happy_linux_strings
         if (isset($val1) && ($val1 == $val2)) {
             return $this->_SELECTED;
         }
+
         return '';
     }
 
@@ -435,6 +464,7 @@ class happy_linux_html extends happy_linux_strings
         if ($flag) {
             return $this->_SELECTED;
         }
+
         return '';
     }
 
@@ -466,6 +496,7 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
@@ -478,12 +509,14 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
     public function build_html_table_tag_end()
     {
         $text = "</table>\n";
+
         return $text;
     }
 
@@ -507,6 +540,7 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
@@ -519,12 +553,14 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
     public function build_html_tr_tag_end()
     {
         $text = "</tr>\n";
+
         return $text;
     }
 
@@ -556,6 +592,7 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
@@ -568,12 +605,14 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
     public function build_html_th_tag_end()
     {
         $text = "</th>\n";
+
         return $text;
     }
 
@@ -605,6 +644,7 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
@@ -617,12 +657,14 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
     public function build_html_td_tag_end()
     {
         $text = "</td>\n";
+
         return $text;
     }
 
@@ -631,7 +673,7 @@ class happy_linux_html extends happy_linux_strings
     //---------------------------------------------------------
     public function build_html_img_tag($src, $width = 0, $height = 0, $border = 0, $alt = 'image')
     {
-        if (empty($src) || ($src == 'http://') || ($src == 'https://')) {
+        if (empty($src) || ('https://' == $src) || ('https://' == $src)) {
             return false;
         }
 
@@ -673,12 +715,14 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
     public function build_html_a_tag_end()
     {
         $text = "</a>\n";
+
         return $text;
     }
 
@@ -713,6 +757,7 @@ class happy_linux_html extends happy_linux_strings
     {
         $mailto = 'mailto:' . $url;
         $text   = $this->build_html_a_href_name($mailto, $name, $target, $flag_name_sanitize);
+
         return $text;
     }
 
@@ -728,6 +773,7 @@ class happy_linux_html extends happy_linux_strings
         } else {
             $text = $val;
         }
+
         return $text;
     }
 
@@ -740,6 +786,7 @@ class happy_linux_html extends happy_linux_strings
         } else {
             $text = $val;
         }
+
         return $text;
     }
 
@@ -755,6 +802,7 @@ class happy_linux_html extends happy_linux_strings
         } else {
             $text = $val;
         }
+
         return $text;
     }
 
@@ -767,6 +815,7 @@ class happy_linux_html extends happy_linux_strings
         } else {
             $text = $val;
         }
+
         return $text;
     }
 
@@ -798,18 +847,21 @@ class happy_linux_html extends happy_linux_strings
     public function build_html_red($value, $background_color = '', $font_weight = '')
     {
         $text = $this->build_html_highlight($value, '#ff0000', $background_color, $font_weight);
+
         return $text;
     }
 
     public function build_html_green($value, $background_color = '', $font_weight = '')
     {
         $text = $this->build_html_highlight($value, '#00ff00', $background_color, $font_weight);
+
         return $text;
     }
 
     public function build_html_blue($value, $background_color = '', $font_weight = '')
     {
         $text = $this->build_html_highlight($value, '#0000ff', $background_color, $font_weight);
+
         return $text;
     }
 
@@ -817,6 +869,7 @@ class happy_linux_html extends happy_linux_strings
     {
         $style = $this->build_html_span_style($color, $background_color, $font_weight);
         $text  = $this->build_html_span_tag_with_style($value, $style);
+
         return $text;
     }
 
@@ -825,6 +878,7 @@ class happy_linux_html extends happy_linux_strings
         if ($num > $limit_under) {
             $num = $this->build_html_highlight($num, $color, $background_color, $font_weight);
         }
+
         return $num;
     }
 
@@ -834,6 +888,7 @@ class happy_linux_html extends happy_linux_strings
     public function build_html_link_stylesheet($url)
     {
         $text = '<link rel="stylesheet" type="text/css" href="' . $url . '" />' . "\n";
+
         return $text;
     }
 
@@ -843,6 +898,7 @@ class happy_linux_html extends happy_linux_strings
     public function build_html_comment($str)
     {
         $text = ' <!-- ' . $str . ' -->' . "\n";
+
         return $text;
     }
 
@@ -851,7 +907,7 @@ class happy_linux_html extends happy_linux_strings
     //-------------------------------------------------------------------
     public function build_html_bread_crumb($paths)
     {
-        $arr = array();
+        $arr = [];
         foreach ($paths as $path) {
             if (isset($path['url']) && isset($path['name']) && $path['url'] && $path['name']) {
                 $url   = $this->sanitize_url($path['url']);
@@ -865,7 +921,7 @@ class happy_linux_html extends happy_linux_strings
 
         $text = ' ';
         $text .= implode(' &gt;&gt; ', $arr);
-        $text .= " <br />\n";
+        $text .= " <br>\n";
 
         return $text;
     }
@@ -891,8 +947,8 @@ class happy_linux_html extends happy_linux_strings
 
         foreach ($menu_arr as $name => $url) {
             // column begin
-            if ($col_count == 0) {
-                if ($line_count % 2 == 0) {
+            if (0 == $col_count) {
+                if (0 == $line_count % 2) {
                     $class = $odd;
                 } else {
                     $class = $even;
@@ -902,7 +958,7 @@ class happy_linux_html extends happy_linux_strings
             }
 
             $class = ($class == $even) ? $odd : $even;
-            $text .= '<td class="' . $class . '" width="' . $width . '" align="center" valign="bottom" >';
+            $text  .= '<td class="' . $class . '" width="' . $width . '" align="center" valign="bottom" >';
 
             if ($name && $url) {
                 $text .= '<a href="' . $url . '"><b>' . $name . '</b></a>';
@@ -928,7 +984,7 @@ class happy_linux_html extends happy_linux_strings
         if ($col_count_2 && ($col_count_2 < $MAX_COL)) {
             while ($col_count < $MAX_COL) {
                 $class = ($class == $even) ? $odd : $even;
-                $text .= '<td class="' . $class . '">&nbsp;</td>';
+                $text  .= '<td class="' . $class . '">&nbsp;</td>';
                 ++$col_count;
 
                 // column end
@@ -938,7 +994,8 @@ class happy_linux_html extends happy_linux_strings
             }
         }
 
-        $text .= "</table><br />\n";
+        $text .= "</table><br>\n";
+
         return $text;
     }
 
@@ -949,6 +1006,7 @@ class happy_linux_html extends happy_linux_strings
     {
         $url  = XOOPS_URL . '/images/icons/email.gif';
         $text = $this->build_html_img_tag($url, $width, $height, $border, $alt);
+
         return $text;
     }
 
@@ -956,6 +1014,7 @@ class happy_linux_html extends happy_linux_strings
     {
         $url  = XOOPS_URL . '/images/icons/www.gif';
         $text = $this->build_html_img_tag($url, $width, $height, $border, $alt);
+
         return $text;
     }
 
@@ -963,6 +1022,7 @@ class happy_linux_html extends happy_linux_strings
     {
         $url  = XOOPS_URL . '/images/icons/pm.gif';
         $text = $this->build_html_img_tag($url, $width, $height, $border, $alt);
+
         return $text;
     }
 
@@ -974,6 +1034,7 @@ class happy_linux_html extends happy_linux_strings
 
         $img  = $this->build_xoops_img_email_logo();
         $text = $this->build_html_a_href_email($email, $img, $target, false);
+
         return $text;
     }
 
@@ -985,6 +1046,7 @@ class happy_linux_html extends happy_linux_strings
 
         $img  = $this->build_xoops_img_www_logo();
         $text = $this->build_html_a_href_name($url, $img, $target, false);
+
         return $text;
     }
 
@@ -999,6 +1061,7 @@ class happy_linux_html extends happy_linux_strings
         $url_pm = XOOPS_URL . '/pmlite.php?send2=1&amp;to_userid=' . $uid;
         $url    = $this->build_xoops_openWithSelfMain($url_pm, 'pmlite', 450, 370);
         $text   = $this->build_html_a_href_name($url, $img, $target, false);
+
         return $text;
     }
 
@@ -1011,12 +1074,14 @@ class happy_linux_html extends happy_linux_strings
 
         $userinfo_url = XOOPS_URL . '/userinfo.php?uid=' . $uid;
         $submitter    = $this->build_html_a_href_name($userinfo_url, $uname);
+
         return $submitter;
     }
 
     public function build_xoops_openWithSelfMain($url, $name, $width = 450, $height = 400)
     {
         $text = "javascript:openWithSelfMain('$url', '$name', $width, $height)";
+
         return $text;
     }
 

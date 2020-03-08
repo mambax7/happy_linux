@@ -17,7 +17,7 @@ class happy_linux_rss_view_item
     public $_strings;
     public $_highlight;
 
-    public $_params = array();
+    public $_params = [];
 
     // default
     public $_MAX_SUMMARY  = 250;
@@ -54,7 +54,7 @@ class happy_linux_rss_view_item
     //---------------------------------------------------------
     public function set_param(&$param)
     {
-        $this->_params =& $param;
+        $this->_params = &$param;
 
         $is_japanese = $this->_get_param_by_key('is_japanese');
         $this->_strings->set_is_japanese($is_japanese);
@@ -81,38 +81,38 @@ class happy_linux_rss_view_item
 
         $str = happy_linux_str_add_space_after_tag($str);
 
-        if ($script == 2) {
+        if (2 == $script) {
             $str = happy_linux_html_remove_script($str);
             $str = happy_linux_html_replace_script($str);
-        } elseif ($script == 1) {
+        } elseif (1 == $script) {
             $str = happy_linux_html_replace_script($str);
         }
 
-        if ($style == 2) {
+        if (2 == $style) {
             $str = happy_linux_html_remove_style($str);
             $str = happy_linux_html_replace_style($str);
-        } elseif ($style == 1) {
+        } elseif (1 == $style) {
             $str = happy_linux_html_replace_style($str);
         }
 
-        if ($link == 2) {
+        if (2 == $link) {
             $str = happy_linux_html_remove_link($str);
             $str = happy_linux_html_replace_link($str);
-        } elseif ($link == 1) {
+        } elseif (1 == $link) {
             $str = happy_linux_html_replace_link($str);
         }
 
-        if ($comment == 2) {
+        if (2 == $comment) {
             $str = happy_linux_html_remove_comment($str);
             $str = happy_linux_html_replace_comment($str);
-        } elseif ($comment == 1) {
+        } elseif (1 == $comment) {
             $str = happy_linux_html_replace_comment($str);
         }
 
-        if ($cdata == 2) {
+        if (2 == $cdata) {
             $str = happy_linux_html_remove_cdata($str);
             $str = happy_linux_html_replace_cdata($str);
-        } elseif ($cdata == 1) {
+        } elseif (1 == $cdata) {
             $str = happy_linux_html_replace_cdata($str);
         }
 
@@ -124,27 +124,27 @@ class happy_linux_rss_view_item
             }
         }
 
-        if ($onmouse == 2) {
+        if (2 == $onmouse) {
             $str = happy_linux_html_remove_onmouse($str);
             $str = happy_linux_html_replace_onmouse($str);
-        } elseif ($onmouse == 1) {
+        } elseif (1 == $onmouse) {
             $str = happy_linux_html_replace_onmouse($str);
         }
 
-        if ($attr_style == 2) {
+        if (2 == $attr_style) {
             $str = happy_linux_html_remove_attr_style($str);
             $str = happy_linux_html_remove_attr_class($str);
             $str = happy_linux_html_remove_attr_id($str);
             $str = happy_linux_html_replace_attr_style($str);
             $str = happy_linux_html_replace_attr_class($str);
             $str = happy_linux_html_replace_attr_id($str);
-        } elseif ($attr_style == 1) {
+        } elseif (1 == $attr_style) {
             $str = happy_linux_html_replace_attr_style($str);
             $str = happy_linux_html_replace_attr_class($str);
             $str = happy_linux_html_replace_attr_id($str);
         }
 
-        if ($javascript == 2) {
+        if (2 == $javascript) {
             $str = happy_linux_html_remove_javascript_colon($str);
             $str = happy_linux_html_remove_javascript($str);
             $str = happy_linux_html_remove_vbscript_colon($str);
@@ -153,7 +153,7 @@ class happy_linux_rss_view_item
             $str = happy_linux_html_replace_javascript($str);
             $str = happy_linux_html_replace_vbscript_colon($str);
             $str = happy_linux_html_replace_about_colon($str);
-        } elseif ($javascript == 1) {
+        } elseif (1 == $javascript) {
             $str = happy_linux_html_replace_javascript_colon($str);
             $str = happy_linux_html_replace_javascript($str);
             $str = happy_linux_html_replace_vbscript_colon($str);
@@ -203,15 +203,17 @@ class happy_linux_rss_view_item
     //---------------------------------------------------------
     public function _check_html_allow($str, $html, $max)
     {
-        if ($html && (($max < 0) || (strlen($str) <= $max))) {
+        if ($html && (($max < 0) || (mb_strlen($str) <= $max))) {
             return true;
         }
+
         return false;
     }
 
     public function _get_param_by_key($key, $default = 0)
     {
         $val = isset($this->_params[$key]) ? $this->_params[$key] : $default;
+
         return $val;
     }
 

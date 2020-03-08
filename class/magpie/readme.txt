@@ -6,7 +6,7 @@ Author: Kenichi OHWADA
 =================================================
 
 adopted MagpieRSS v0.72
-http://magpierss.sourceforge.net/
+https://magpierss.sourceforge.net/
 
 modified for happy_linux
 - RSS enclosure tag

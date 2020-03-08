@@ -29,15 +29,16 @@ class Database
 
     public static function getInstance()
     {
-        if (Database::$_singleton == null) {
+        if (null == self::$_singleton) {
             $singleton = new mysql_database();
             if (!$singleton->connect()) {
-                echo "<font color='red'>Unable to connect to database.</font><br />\n";
+                echo "<font color='red'>Unable to connect to database.</font><br>\n";
                 die();
             }
-            Database::$_singleton = $singleton;
+            self::$_singleton = $singleton;
         }
-        return Database::$_singleton;
+
+        return self::$_singleton;
     }
 
     //---------------------------------------------------------
@@ -45,11 +46,11 @@ class Database
     //---------------------------------------------------------
     public function prefix($tablename = '')
     {
-        if ($tablename != '') {
+        if ('' != $tablename) {
             return XOOPS_DB_PREFIX . '_' . $tablename;
-        } else {
-            return XOOPS_DB_PREFIX;
         }
+
+        return XOOPS_DB_PREFIX;
     }
 
     //---------------------------------------------------------

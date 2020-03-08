@@ -76,22 +76,22 @@ class happy_linux_remote_image extends happy_linux_remote_file
 
         $this->_clear_errors();
 
-        // add check http://
-        if (empty($url) || ($url == 'http://') || ($url == 'https://')) {
+        // add check https://
+        if (empty($url) || ('https://' == $url) || ('https://' == $url)) {
             $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_EMPTY_URL);
             $this->_set_errors('remote url is empty');
+
             return $false;
         }
 
         // BUG 4379: Undefined property: _flag_allow_url_fopen
         switch ($this->_remote_mode) {
             case 1:
-                $size =& $this->_get_image_size_remote($url);
+                $size = &$this->_get_image_size_remote($url);
                 break;
-
             case 0:
             default:
-                $size =& $this->_get_image_size_local($url);
+                $size = &$this->_get_image_size_local($url);
                 break;
         }
 
@@ -117,6 +117,7 @@ class happy_linux_remote_image extends happy_linux_remote_file
     public function &_get_image_size_local($url)
     {
         $size = getimagesize($url);
+
         return $size;
     }
 
@@ -127,6 +128,7 @@ class happy_linux_remote_image extends happy_linux_remote_file
         if (!is_writable($this->_dir_work)) {
             $this->_set_error_code(HAPPY_LINUX_ERR_REMOTE_NOT_WRITABLE);
             $this->_set_errors('work directory is not writable : ' . $this->_dir_work);
+
             return $false;
         }
 

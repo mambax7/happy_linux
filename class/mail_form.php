@@ -1,5 +1,5 @@
 <?php
-// $Id: mail_form.php,v 1.1 2007/09/15 06:47:26 ohwada Exp $
+// $Id: mail_form.php,v 1.1 2010/11/07 14:59:21 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
@@ -65,13 +65,13 @@ class happy_linux_mail_form extends happy_linux_form
     //---------------------------------------------------------
     public function print_form_email()
     {
-        $param = array(
+        $param = [
             'op'          => 'send_email',
-            'user_list'   => array(),
-            'link_list'   => array(),
+            'user_list'   => [],
+            'link_list'   => [],
             'users_label' => $this->build_to_email_input(),
             'body'        => $this->get_body('xxx'),
-        );
+        ];
 
         $this->print_form($param);
     }
@@ -80,19 +80,19 @@ class happy_linux_mail_form extends happy_linux_form
     {
         list($user_list, $users_label) = $this->get_post_memberslist();
 
-        $param = array(
+        $param = [
             'op'              => 'send_user',
             'user_list'       => $user_list,
             'users_label'     => $users_label,
             'subject_caption' => $this->get_subject_caption_user(),
             'body_caption'    => $this->get_body_caption_user(),
             'body'            => $this->get_body('{X_UNAME}'),
-        );
+        ];
 
         $this->print_form($param);
     }
 
-    public function print_form(&$param)
+    public function print_form($param)
     {
         $user_list   = isset($param['user_list']) ? $param['user_list'] : null;
         $hidden_list = isset($param['hidden_list']) ? $param['hidden_list'] : null;
@@ -166,7 +166,7 @@ class happy_linux_mail_form extends happy_linux_form
             $param['submit'] = $this->get_submit_next();
         }
 
-        echo "<br />\n";
+        echo "<br>\n";
         echo $this->build_form_begin($form_name);
         echo $this->build_token();
         echo $this->build_html_input_hidden('op', $op);
@@ -200,7 +200,7 @@ class happy_linux_mail_form extends happy_linux_form
         echo $this->build_form_end();
     }
 
-    public function build_submit_button(&$param)
+    public function build_submit_button($param)
     {
         $submit      = isset($param['submit']) ? $this->sanitize_text($param['submit']) : $this->get_submit();
         $url_cancel  = isset($param['url_cancel']) ? $this->sanitize_url($param['url_cancel']) : null;
@@ -214,6 +214,7 @@ class happy_linux_mail_form extends happy_linux_form
         if ($flag_cancel) {
             $ele_button .= ' ' . $this->build_html_input_button_location('cancel', $this->_LANG_CANCEL, $url_cancel);
         }
+
         return $ele_button;
     }
 
@@ -222,24 +223,24 @@ class happy_linux_mail_form extends happy_linux_form
     //---------------------------------------------------------
     public function get_post_memberslist()
     {
-        $user_list   = array();
+        $user_list   = [];
         $users_label = '';
 
         if (isset($_POST['memberslist_id']) && is_array($_POST['memberslist_id'])) {
-            $user_list     =& $_POST['memberslist_id'];
+            $user_list     = &$_POST['memberslist_id'];
             $user_count    = count($user_list);
             $display_names = '';
 
             for ($i = 0; $i < $user_count; ++$i) {
-                $uid   = (int)$user_list[$i];
-                $uname = $this->get_uname_by_uid($uid);
+                $uid           = (int)$user_list[$i];
+                $uname         = $this->get_uname_by_uid($uid);
                 $display_names .= "<a href='" . XOOPS_URL . '/userinfo.php?uid=' . $uid . "' target='_blank'>" . $uname . '</a>, ';
             }
 
-            $users_label = substr($display_names, 0, -2);
+            $users_label = mb_substr($display_names, 0, -2);
         }
 
-        return array($user_list, $users_label);
+        return [$user_list, $users_label];
     }
 
     //---------------------------------------------------------
@@ -282,27 +283,29 @@ class happy_linux_mail_form extends happy_linux_form
 
     public function get_body_caption_user()
     {
-        $desc2 = $this->_LANG_MAILTAGS1 . "<br />\n";
-        $desc2 .= $this->_LANG_MAILTAGS2 . "<br />\n" . $desc2 .= $this->_LANG_MAILTAGS3 . "<br />\n" . $desc2 .= $this->_LANG_MAILTAGS4;
+        $desc2 = $this->_LANG_MAILTAGS1 . "<br>\n";
+        $desc2 .= $this->_LANG_MAILTAGS2 . "<br>\n" . $desc2 .= $this->_LANG_MAILTAGS3 . "<br>\n" . $desc2 .= $this->_LANG_MAILTAGS4;
 
         return $this->build_mail_caption($this->_LANG_BODY, $this->_LANG_MAILTAGS, $desc2);
     }
 
     public function build_mail_caption($title, $desc1, $desc2)
     {
-        $caption = $title . "<br /><br />\n";
+        $caption = $title . "<br><br>\n";
         if ($desc1) {
-            $caption .= '<span style="' . $this->_STYLE_BOLD . '">' . $desc1 . "</span><br />\n";
+            $caption .= '<span style="' . $this->_STYLE_BOLD . '">' . $desc1 . "</span><br>\n";
         }
         if ($desc2) {
             $caption .= '<span style="' . $this->_STYLE_NORMAL . '">' . $desc2 . "</span>\n";
         }
+
         return $caption;
     }
 
     public function get_subject()
     {
         $text = sprintf($this->_LANG_SUBJECT_FROM, $this->get_xoops_sitename());
+
         return $text;
     }
 
@@ -338,6 +341,7 @@ END_OF_TEXT;
         $text = $this->sanitize_text($email);
         $text .= ' ';
         $text .= $this->build_html_input_hidden('to_email', $email);
+
         return $text;
     }
 
@@ -352,12 +356,14 @@ END_OF_TEXT;
     public function get_xoops_sitename()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['sitename'];
     }
 
     public function get_xoops_adminmail()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['adminmail'];
     }
 
@@ -365,6 +371,7 @@ END_OF_TEXT;
     public function get_uname_by_uid($uid, $usereal = 0)
     {
         $uname = XoopsUser::getUnameFromId($uid, $usereal);
+
         return $uname;
     }
 

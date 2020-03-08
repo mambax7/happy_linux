@@ -21,11 +21,10 @@
 //=========================================================
 class database
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
-    public function Database()
+    public function __construct()
     {
         // dummy
     }
@@ -37,10 +36,11 @@ class database
             // Assigning the return value of new by reference is deprecated
             $instance = new mysql_database();
             if (!$instance->connect()) {
-                echo "<font color='red'>Unable to connect to database.</font><br />\n";
+                echo "<font color='red'>Unable to connect to database.</font><br>\n";
                 die();
             }
         }
+
         return $instance;
     }
 
@@ -49,11 +49,11 @@ class database
     //---------------------------------------------------------
     public function prefix($tablename = '')
     {
-        if ($tablename != '') {
+        if ('' != $tablename) {
             return XOOPS_DB_PREFIX . '_' . $tablename;
-        } else {
-            return XOOPS_DB_PREFIX;
         }
+
+        return XOOPS_DB_PREFIX;
     }
 
     //---------------------------------------------------------

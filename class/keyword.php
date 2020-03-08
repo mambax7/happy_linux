@@ -14,7 +14,6 @@
 //=========================================================
 class happy_linux_keyword
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -39,13 +38,14 @@ class happy_linux_keyword
     public function &get_keyword_array_by_request()
     {
         // GET param
-        $arr =& $this->get_keyword_array_from_get();
+        $arr = &$this->get_keyword_array_from_get();
         if (is_array($arr) && count($arr)) {
             return $arr;
         }
 
         // server referer
-        $arr =& $this->get_keyword_array_from_referer();
+        $arr = &$this->get_keyword_array_from_referer();
+
         return $arr;
     }
 
@@ -73,6 +73,7 @@ class happy_linux_keyword
         if (isset($_GET[$key])) {
             $val = trim($this->strip_control($this->strip_slashes_gpc($_GET[$key])));
         }
+
         return $val;
     }
 
@@ -119,9 +120,9 @@ class happy_linux_keyword
         return $keyword;
     }
 
-    // http://www.google.com/search?hl=en&q=xoops&btnG=Google+Search
-    // http://www.google.co.jp/search?hl=ja&q=%E3%81%AF%E3%81%A3%E3%81%B4%E3%81%83&lr=&btnG=Google+%E6%A4%9C%E7%B4%A2
-    public function _get_keyword_from_google(&$arr)
+    // https://www.google.com/search?hl=en&q=xoops&btnG=Google+Search
+    // https://www.google.co.jp/search?hl=ja&q=%E3%81%AF%E3%81%A3%E3%81%B4%E3%81%83&lr=&btnG=Google+%E6%A4%9C%E7%B4%A2
+    public function _get_keyword_from_google($arr)
     {
         if (isset($arr['q'])) {
             $q = $arr['q'];
@@ -138,12 +139,13 @@ class happy_linux_keyword
         }
 
         $keyword = happy_linux_convert_encoding(urldecode($q), _CHARSET, $ie);
+
         return $keyword;
     }
 
-    // http://search.yahoo.com/search?p=xoops&fr=yfp-t-501&toggle=1&cop=mss&ei=UTF-8
-    // http://search.yahoo.co.jp/search?p=%A4%CF%A4%C3%A4%D4%A4%A3&x=14&y=13&fr=top_v2&tid=top_v2&ei=euc-jp&search.x=1
-    public function _get_keyword_from_yahoo(&$arr)
+    // https://search.yahoo.com/search?p=xoops&fr=yfp-t-501&toggle=1&cop=mss&ei=UTF-8
+    // https://search.yahoo.co.jp/search?p=%A4%CF%A4%C3%A4%D4%A4%A3&x=14&y=13&fr=top_v2&tid=top_v2&ei=euc-jp&search.x=1
+    public function _get_keyword_from_yahoo($arr)
     {
         if (isset($arr['p'])) {
             $p = $arr['p'];
@@ -157,13 +159,14 @@ class happy_linux_keyword
         }
 
         $keyword = happy_linux_convert_encoding(urldecode($p), _CHARSET, $ei);
+
         return $keyword;
     }
 
     //---------------------------------------------------------
     // utility
     //---------------------------------------------------------
-    public function urlencode_from_array(&$arr, $glue = ' ')
+    public function urlencode_from_array($arr, $glue = ' ')
     {
         return urlencode($this->convert_array_to_str($arr, $glue));
     }
@@ -172,7 +175,7 @@ class happy_linux_keyword
     {
         $arr = null;
 
-        if ($str === '') {
+        if ('' === $str) {
             return $arr;
         }
 
@@ -180,7 +183,7 @@ class happy_linux_keyword
 
         foreach ($str_arr as $value) {
             $value = trim($value);
-            if ($value != '') {
+            if ('' != $value) {
                 $arr[] = $value;
             }
         }
@@ -188,20 +191,22 @@ class happy_linux_keyword
         return $arr;
     }
 
-    public function convert_array_to_str(&$arr, $glue = ' ')
+    public function convert_array_to_str($arr, $glue = ' ')
     {
         $val = null;
         if (is_array($arr) && count($arr)) {
             $val = implode($glue, $arr);
         }
+
         return $val;
     }
 
     public function strip_slashes_gpc($str)
     {
-        if (get_magic_quotes_gpc() && !is_array($str)) {
+        if (@get_magic_quotes_gpc() && !is_array($str)) {
             $str = stripslashes($str);
         }
+
         return $str;
     }
 

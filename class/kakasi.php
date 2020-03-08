@@ -21,7 +21,7 @@ include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/dir.php';
 
 //---------------------------------------------------------
 // kanji kana simple inverter
-// http://kakasi.namazu.org/
+// https://kakasi.namazu.org/
 // kakasi [options] [jisyo1 [jisyo2 [jisyo1,,]]]
 // -w: wkatigaki
 // -c: read except for the blank and the line feed which is contained in the kanji phrase.
@@ -43,7 +43,7 @@ class happy_linux_kakasi
     public $_mode_excute = 0;  // file mode
 
     public $_encoding = 'euc';
-    public $_dicts    = array();
+    public $_dicts    = [];
 
     public $_words     = '';
     public $_errors    = '';
@@ -72,7 +72,7 @@ class happy_linux_kakasi
     //---------------------------------------------------------
     // public
     //---------------------------------------------------------
-    public function execute(&$str, $opt)
+    public function execute($str, $opt)
     {
         if (!$this->is_executable_kakasi()) {
             return false;
@@ -86,7 +86,7 @@ class happy_linux_kakasi
     }
 
     // this method works well in MS-Windows
-    public function execute_file(&$str, $opt)
+    public function execute_file($str, $opt)
     {
         $this->_words     = '';
         $this->_errors    = '';
@@ -98,9 +98,10 @@ class happy_linux_kakasi
         $cmd = $this->_kakasi_path . ' ' . $opt;
 
         // set content
-        $fp_in = fopen($file_in, 'w');
+        $fp_in = fopen($file_in, 'wb');
         if (!$fp_in) {
             $this->_cmd_error = 'cannot open file: ' . $file_in;
+
             return false;
         }
 
@@ -111,9 +112,10 @@ class happy_linux_kakasi
         exec("$cmd < $file_in > $file_out");
 
         // get parsing words
-        $fp_out = fopen($file_out, 'r');
+        $fp_out = fopen($file_out, 'rb');
         if (!$fp_out) {
             $this->_cmd_error = 'cannot open file: ' . $file_out;
+
             return false;
         }
         while ($w = fgets($fp_out)) {
@@ -129,7 +131,7 @@ class happy_linux_kakasi
 
     // this method is more efficient than using file
     // but, doesn't work in MS-Windows
-    public function execute_pipe(&$str, $opt)
+    public function execute_pipe($str, $opt)
     {
         $this->_words     = '';
         $this->_errors    = '';
@@ -137,17 +139,18 @@ class happy_linux_kakasi
 
         $cmd = $this->_kakasi_path . ' ' . $opt;
 
-        $descriptorspec = array(
-            0 => array('pipe', 'r'),  // stdin
-            1 => array('pipe', 'w'),  // stdout
-            2 => array('pipe', 'w'),  // stderr
-        );
+        $descriptorspec = [
+            0 => ['pipe', 'r'],  // stdin
+            1 => ['pipe', 'w'],  // stdout
+            2 => ['pipe', 'w'],  // stderr
+        ];
 
-        $pipes = array();
+        $pipes = [];
 
         $rp = proc_open($cmd, $descriptorspec, $pipes);
         if (!is_resource($rp)) {
             $this->_cmd_error = 'cannot excute command: ' . $opt;
+
             return false;
         }
 
@@ -168,6 +171,7 @@ class happy_linux_kakasi
         fclose($pipes[2]);
 
         proc_close($rp);
+
         return true;
     }
 
@@ -180,16 +184,18 @@ class happy_linux_kakasi
         if (file_exists($path)) {
             if (function_exists('is_executable')) {
                 return is_executable($path);
-            } else {
-                return true;    // WIN or PHP 4
             }
+
+            return true;    // WIN or PHP 4
         }
+
         return false;
     }
 
     public function get_opt()
     {
         $opt = $this->get_opt_encoding() . ' ' . $this->get_opt_dicts();
+
         return $opt;
     }
 
@@ -199,6 +205,7 @@ class happy_linux_kakasi
         if ($this->_dicts) {
             $opt = ' ' . implode(', ', $this->_dicts);
         }
+
         return $opt;
     }
 
@@ -208,6 +215,7 @@ class happy_linux_kakasi
         if ($this->_encoding) {
             $opt = ' -i' . $this->_encoding;
         }
+
         return $opt;
     }
 

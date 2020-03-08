@@ -16,11 +16,11 @@
  * License:     GPL
  *
  * The lastest version of MagpieRSS can be obtained from:
- * http://magpierss.sourceforge.net
+ * https://magpierss.sourceforge.net
  *
  * For questions, help, comments, discussion, etc., please join the
  * Magpie mailing list:
- * http://lists.sourceforge.net/lists/listinfo/magpierss-general
+ * https://lists.sourceforge.net/lists/listinfo/magpierss-general
  *
  */
 
@@ -62,10 +62,11 @@ class happy_linux_magpie_cache
     {
         $this->ERROR = '';
         $cache_file  = $this->file_name($url);
-        $fp          = @fopen($cache_file, 'w');
+        $fp          = @fopen($cache_file, 'wb');
 
         if (!$fp) {
             $this->error("Cache unable to open file for writing: $cache_file");
+
             return 0;
         }
 
@@ -89,12 +90,14 @@ class happy_linux_magpie_cache
 
         if (!file_exists($cache_file)) {
             $this->debug("Cache doesn't contain: $url (cache file: $cache_file)");
+
             return 0;
         }
 
-        $fp = @fopen($cache_file, 'r');
+        $fp = @fopen($cache_file, 'rb');
         if (!$fp) {
             $this->error("Failed to open cache file for reading: $cache_file");
+
             return 0;
         }
 
@@ -128,14 +131,12 @@ class happy_linux_magpie_cache
             if ($this->MAX_AGE > $age) {
                 // object exists and is current
                 return 'HIT';
-            } else {
-                // object exists but is old
-                return 'STALE';
             }
-        } else {
-            // object does not exist
-            return 'MISS';
+            // object exists but is old
+            return 'STALE';
         }
+        // object does not exist
+        return 'MISS';
     }
 
     public function cache_age($cache_key)
@@ -144,10 +145,11 @@ class happy_linux_magpie_cache
         if (file_exists($filename)) {
             $mtime = filemtime($filename);
             $age   = time() - $mtime;
+
             return $age;
-        } else {
-            return -1;
         }
+
+        return -1;
     }
 
     /*=======================================================================*\
@@ -175,7 +177,8 @@ class happy_linux_magpie_cache
     public function file_name($url)
     {
         $filename = md5($url);
-        return implode(DIRECTORY_SEPARATOR, array($this->BASE_CACHE, $filename));
+
+        return implode(DIRECTORY_SEPARATOR, [$this->BASE_CACHE, $filename]);
     }
 
     /*=======================================================================*\

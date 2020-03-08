@@ -67,10 +67,10 @@ if (!defined('XOBJ_DTYPE_URL_AREA')) {
 
 class happy_linux_object extends happy_linux_strings
 {
-    public $_vars  = array();
+    public $_vars  = [];
     public $_isnew = false;
 
-    public $_ALLOW_TYPES = array(
+    public $_ALLOW_TYPES = [
         XOBJ_DTYPE_BOOL,
         XOBJ_DTYPE_INT,
         XOBJ_DTYPE_FLOAT,
@@ -80,9 +80,9 @@ class happy_linux_object extends happy_linux_strings
         XOBJ_DTYPE_URL_AREA,
         XOBJ_DTYPE_ARRAY,
         XOBJ_DTYPE_OTHER,
-    );
+    ];
 
-    public $_DTYPE_NAMES = array(
+    public $_DTYPE_NAMES = [
         XOBJ_DTYPE_BOOL     => 'bool',
         XOBJ_DTYPE_INT      => 'int',
         XOBJ_DTYPE_FLOAT    => 'float',
@@ -92,7 +92,7 @@ class happy_linux_object extends happy_linux_strings
         XOBJ_DTYPE_URL_AREA => 'url_area',
         XOBJ_DTYPE_ARRAY    => 'array',
         XOBJ_DTYPE_OTHER    => 'other',
-    );
+    ];
 
     public $_DEBUG = false;
 
@@ -128,12 +128,12 @@ class happy_linux_object extends happy_linux_strings
             return;
         }
 
-        $this->_vars[$key] = array(
+        $this->_vars[$key] = [
             'data_type' => $dataType,
             'value'     => null,
             'required'  => $required ? true : false,
-            'maxlength' => $size ? (int)$size : null
-        );
+            'maxlength' => $size ? (int)$size : null,
+        ];
 
         $this->assignVar($key, $value);
     }
@@ -143,6 +143,7 @@ class happy_linux_object extends happy_linux_strings
         if (isset($this->_vars[$key])) {
             return true;
         }
+
         return false;
     }
 
@@ -159,15 +160,12 @@ class happy_linux_object extends happy_linux_strings
             case XOBJ_DTYPE_BOOL:
                 $this->setBool($key, $value);
                 break;
-
             case XOBJ_DTYPE_INT:
                 $this->setInt($key, $value);
                 break;
-
             case XOBJ_DTYPE_FLOAT:
                 $this->setFloat($key, $value);
                 break;
-
             case XOBJ_DTYPE_TXTBOX:
             case XOBJ_DTYPE_TXTAREA:
             case XOBJ_DTYPE_URL:
@@ -240,18 +238,20 @@ class happy_linux_object extends happy_linux_strings
         }
 
         if ($this->_DEBUG) {
-            echo "object.php get(): $key <br />\n";
+            echo "object.php get(): $key <br>\n";
             debug_print_backtrace();
         }
+
         return false;
     }
 
     public function &gets()
     {
-        $ret = array();
+        $ret = [];
         foreach ($this->_vars as $key => $value) {
             $ret[$key] = $value['value'];
         }
+
         return $ret;
     }
 
@@ -268,40 +268,32 @@ class happy_linux_object extends happy_linux_strings
             case XOBJ_DTYPE_BOOL:
                 $this->setBool($key, $value);
                 break;
-
             case XOBJ_DTYPE_INT:
                 $this->setInt($key, $value);
                 break;
-
             case XOBJ_DTYPE_FLOAT:
                 $this->setFloat($key, $value);
                 break;
-
             // strip GPC slashes
             case XOBJ_DTYPE_TXTBOX:
                 $this->setVarTxtbox($key, $value, $not_gpc);
                 break;
-
             // strip GPC slashes
             case XOBJ_DTYPE_TXTAREA:
                 $this->setVarTxtarea($key, $value, $not_gpc);
                 break;
-
             // strip GPC slashes
             case XOBJ_DTYPE_URL:
                 $this->setVarUrl($key, $value, $not_gpc);
                 break;
-
             // strip GPC slashes
             case XOBJ_DTYPE_URL_AREA:
                 $this->setVarUrlArea($key, $value, $not_gpc);
                 break;
-
             // strip GPC slashes
             case XOBJ_DTYPE_ARRAY:
                 $this->setVarArray($key, $value, $not_gpc);
                 break;
-
             case XOBJ_DTYPE_OTHER:
                 $this->setAsIs($key, $value);
                 break;
@@ -317,7 +309,7 @@ class happy_linux_object extends happy_linux_strings
         // strip GPC slashes
         $value = $this->prepare_text($value, $not_gpc);
 
-        if (($this->_vars[$key]['maxlength'] !== null) && (strlen($value) > $this->_vars[$key]['maxlength'])) {
+        if ((null !== $this->_vars[$key]['maxlength']) && (mb_strlen($value) > $this->_vars[$key]['maxlength'])) {
             $this->_vars[$key]['value'] = xoops_substr($value, 0, $this->_vars[$key]['maxlength'], null);
         } else {
             $this->_vars[$key]['value'] = $value;
@@ -345,7 +337,7 @@ class happy_linux_object extends happy_linux_strings
         // strip GPC slashes
         $value = $this->prepare_url($value, $not_gpc);
 
-        if (($this->_vars[$key]['maxlength'] !== null) && (strlen($value) > $this->_vars[$key]['maxlength'])) {
+        if ((null !== $this->_vars[$key]['maxlength']) && (mb_strlen($value) > $this->_vars[$key]['maxlength'])) {
             $this->_vars[$key]['value'] = xoops_substr($value, 0, $this->_vars[$key]['maxlength'], null);
         } else {
             $this->_vars[$key]['value'] = $value;
@@ -371,7 +363,7 @@ class happy_linux_object extends happy_linux_strings
         }
 
         // strip GPC slashes
-        $value =& $this->prepare_array($value, $not_gpc);
+        $value = &$this->prepare_array($value, $not_gpc);
 
         $this->_vars[$key]['value'] = serialize($value);
     }
@@ -384,7 +376,7 @@ class happy_linux_object extends happy_linux_strings
             }
         } else {
             if ($this->_DEBUG()) {
-                echo "object.php setVars(): $values, $not_gpc <br />\n";
+                echo "object.php setVars(): $values, $not_gpc <br>\n";
                 if ($this->exist_debug_print_backtrace()) {
                     debug_print_backtrace();
                 }
@@ -405,39 +397,31 @@ class happy_linux_object extends happy_linux_strings
 
         switch ($this->_vars[$key]['data_type']) {
             case XOBJ_DTYPE_BOOL:
-                $value =& $this->getVarBool($key);
+                $value = &$this->getVarBool($key);
                 break;
-
             case XOBJ_DTYPE_INT:
-                $value =& $this->getVarInt($key);
+                $value = &$this->getVarInt($key);
                 break;
-
             case XOBJ_DTYPE_FLOAT:
-                $value =& $this->getVarFloat($key);
+                $value = &$this->getVarFloat($key);
                 break;
-
             case XOBJ_DTYPE_TXTBOX:
-                $value =& $this->getVarTxtbox($key, $format);
+                $value = &$this->getVarTxtbox($key, $format);
                 break;
-
             case XOBJ_DTYPE_TXTAREA:
-                $value =& $this->getVarTxtarea($key, $format);
+                $value = &$this->getVarTxtarea($key, $format);
                 break;
-
             case XOBJ_DTYPE_URL:
-                $value =& $this->getVarUrl($key, $format);
+                $value = &$this->getVarUrl($key, $format);
                 break;
-
             case XOBJ_DTYPE_URL_AREA:
-                $value =& $this->getVarUrlArea($key, $format);
+                $value = &$this->getVarUrlArea($key, $format);
                 break;
-
             case XOBJ_DTYPE_ARRAY:
-                $value =& $this->getVarArray($key);
+                $value = &$this->getVarArray($key);
                 break;
-
             case XOBJ_DTYPE_OTHER:
-                $value =& $this->getVarAsIs($key);
+                $value = &$this->getVarAsIs($key);
                 break;
         }
 
@@ -453,6 +437,7 @@ class happy_linux_object extends happy_linux_strings
         }
 
         $value = (int)$this->_vars[$key]['value'];
+
         return $value;
     }
 
@@ -465,6 +450,7 @@ class happy_linux_object extends happy_linux_strings
         }
 
         $value = (int)$this->_vars[$key]['value'];
+
         return $value;
     }
 
@@ -477,6 +463,7 @@ class happy_linux_object extends happy_linux_strings
         }
 
         $value = (float)$this->_vars[$key]['value'];
+
         return $value;
     }
 
@@ -490,6 +477,7 @@ class happy_linux_object extends happy_linux_strings
 
         $value = $this->_vars[$key]['value'];
         $value = $this->sanitize_format_text($value, $format);
+
         return $value;
     }
 
@@ -503,6 +491,7 @@ class happy_linux_object extends happy_linux_strings
 
         $value = $this->_vars[$key]['value'];
         $value = $this->sanitize_format_textarea($value, $format);
+
         return $value;
     }
 
@@ -516,6 +505,7 @@ class happy_linux_object extends happy_linux_strings
 
         $value = $this->_vars[$key]['value'];
         $value = $this->sanitize_format_url($value, $format);
+
         return $value;
     }
 
@@ -535,6 +525,7 @@ class happy_linux_object extends happy_linux_strings
 
         $value = $this->_vars[$key]['value'];
         $value = unserialize($value);
+
         return $value;
     }
 
@@ -547,15 +538,17 @@ class happy_linux_object extends happy_linux_strings
         }
 
         $value = $this->_vars[$key]['value'];
+
         return $value;
     }
 
     public function &getVarAll($format = 'n')
     {
-        $ret = array();
+        $ret = [];
         foreach ($this->_vars as $k => $v) {
             $ret[$k] = $this->getVar($k, $format);
         }
+
         return $ret;
     }
 
@@ -569,7 +562,7 @@ class happy_linux_object extends happy_linux_strings
         }
     }
 
-    public function set_var_by_post(&$post, $key)
+    public function set_var_by_post($post, $key)
     {
         if (isset($post[$key])) {
             $this->setVar($key, $post[$key]);
@@ -585,7 +578,7 @@ class happy_linux_object extends happy_linux_strings
         $this->setVar($key, $val);
     }
 
-    public function set_var_checkbox_by_post(&$post, $key, $default = 0)
+    public function set_var_checkbox_by_post($post, $key, $default = 0)
     {
         $val = $default;
         if (isset($post[$key])) {
@@ -607,11 +600,12 @@ class happy_linux_object extends happy_linux_strings
     //---------------------------------------------------------
     // get utility
     //---------------------------------------------------------
-    public function get_var_url_null($key, $format = 's', $default = 'http://')
+    public function get_var_url_null($key, $format = 's', $default = 'https://')
     {
         $url   = $this->get($key);
         $value = $this->substute_http($value, $default);
         $value = $this->sanitize_format_url($value, $format);
+
         return $value;
     }
 
@@ -619,6 +613,7 @@ class happy_linux_object extends happy_linux_strings
     {
         $value = $this->get($key);
         $value = $this->sanitize_format_text_short($value, $format, $max);
+
         return $value;
     }
 
@@ -642,29 +637,25 @@ class happy_linux_object extends happy_linux_strings
             case XOBJ_DTYPE_INT:
                 $ret = $this->compare_data_type_to_column_int($column_type);
                 break;
-
             case XOBJ_DTYPE_FLOAT:
                 $ret = $this->compare_data_type_to_column_float($column_type);
                 break;
-
             case XOBJ_DTYPE_URL:
             case XOBJ_DTYPE_TXTBOX:
                 $ret = $this->compare_data_type_to_column_char($column_type);
                 break;
-
             case XOBJ_DTYPE_URL_AREA:
             case XOBJ_DTYPE_TXTAREA:
                 $ret = $this->compare_data_type_to_column_text($column_type);
                 break;
-
             case XOBJ_DTYPE_OTHER:
                 $ret = $this->compare_data_type_to_column_other($column_type);
                 break;
-
             default:
                 $ret = $this->compare_data_type_to_column_default($column_type);
                 break;
         }
+
         return $ret;
     }
 
@@ -673,6 +664,7 @@ class happy_linux_object extends happy_linux_strings
         if (preg_match('/int/', $column_type)) {
             return true;
         }
+
         return false;
     }
 
@@ -681,6 +673,7 @@ class happy_linux_object extends happy_linux_strings
         if (preg_match('/double/', $column_type)) {
             return true;
         }
+
         return false;
     }
 
@@ -692,6 +685,7 @@ class happy_linux_object extends happy_linux_strings
         if (preg_match('/binary/', $column_type)) {
             return true;
         }
+
         return false;
     }
 
@@ -703,6 +697,7 @@ class happy_linux_object extends happy_linux_strings
         if (preg_match('/blob/', $column_type)) {
             return true;
         }
+
         return false;
     }
 
@@ -741,4 +736,3 @@ class happy_linux_object extends happy_linux_strings
 }
 
 // --- class end ---
-;

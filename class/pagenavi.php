@@ -38,7 +38,7 @@ class happy_linux_pagenavi
     public $_sortid_default = 0;
     public $_max_sortid     = 0;
     public $_flag_sortid    = 0;
-    public $_sort_arr       = array();
+    public $_sort_arr       = [];
 
     //---------------------------------------------------------
     // constructor
@@ -214,6 +214,7 @@ class happy_linux_pagenavi
         }
 
         $this->_end = $end;
+
         return $end;
     }
 
@@ -224,6 +225,7 @@ class happy_linux_pagenavi
     {
         $page                = $this->get_get_int('page', 1);
         $this->_page_current = $page;
+
         return $page;
     }
 
@@ -232,6 +234,7 @@ class happy_linux_pagenavi
         $sortid        = $this->get_get_int('sortid', $this->_sortid_default);
         $sortid        = $this->_check_sortid($sortid);
         $this->_sortid = $sortid;
+
         return $sortid;
     }
 
@@ -253,6 +256,7 @@ class happy_linux_pagenavi
     {
         $page                = $this->get_post_int('page', 1);
         $this->_page_current = $page;
+
         return $page;
     }
 
@@ -337,29 +341,29 @@ class happy_linux_pagenavi
     public function clear_sort()
     {
         $this->_max_sortid = 0;
-        $this->_sort_arr   = array();
+        $this->_sort_arr   = [];
     }
 
     public function add_sort($title, $sort, $order = 'ASC')
     {
-        if (strtoupper($order) == 'DESC') {
+        if ('DESC' == mb_strtoupper($order)) {
             $order = 'DESC';
         } else {
             $order = 'ASC';
         }
 
-        $this->_sort_arr[$this->_max_sortid] = array(
+        $this->_sort_arr[$this->_max_sortid] = [
             'title' => $title,
             'sort'  => $sort,
             'order' => $order,
-        );
+        ];
 
         $this->_max_sortid++;
     }
 
     public function get_sort($sort_id = -1)
     {
-        if ($sort_id == -1) {
+        if (-1 == $sort_id) {
             $sort_id = $this->_sortid;
         }
 
@@ -367,15 +371,16 @@ class happy_linux_pagenavi
 
         if ($this->_sort_arr[$sort_id]) {
             $ret = $this->_sort_arr[$sort_id];
+
             return $ret;
         }
 
         return false;
     }
 
-    public function get_sort_value($sort_id = -1, $key)
+    public function get_sort_value($sort_id, $key)
     {
-        if ($sort_id == -1) {
+        if (-1 == $sort_id) {
             $sort_id = $this->_sortid;
         }
 
@@ -383,6 +388,7 @@ class happy_linux_pagenavi
 
         if ($this->_sort_arr[$sort_id][$key]) {
             $ret = $this->_sort_arr[$sort_id][$key];
+
             return $ret;
         }
 
@@ -406,20 +412,20 @@ class happy_linux_pagenavi
     //---------------------------------------------------------
     public function _add_script_sortid($script, $sortid = -1)
     {
-        if ($sortid == -2) {
+        if (-2 == $sortid) {
             return $script;
         }
 
-        if ($sortid == -1) {
+        if (-1 == $sortid) {
             $sortid = $this->_sortid;
         }
 
         $type = $this->_analyze_script_type($script);
 
         // add 'sortid='
-        if ($type == 1) {
+        if (1 == $type) {
             $script_sortid = $script . 'sortid=' . $sortid;
-        } elseif ($type == 2) {
+        } elseif (2 == $type) {
             $script_sortid = $script . '&sortid=' . $sortid;
         } else {
             $script_sortid = $script . '?sortid=' . $sortid;
@@ -436,9 +442,9 @@ class happy_linux_pagenavi
         $type = $this->_analyze_script_type($script);
 
         // add 'page='
-        if ($type == 1) {
+        if (1 == $type) {
             $script_page = $script . 'page=';
-        } elseif ($type == 2) {
+        } elseif (2 == $type) {
             $script_page = $script . '&page=';
         } else {
             $script_page = $script . '?page=';
@@ -478,6 +484,7 @@ class happy_linux_pagenavi
         $str = $this->_deny_javascript($str);
         $str = preg_replace('/&amp;/i', '&', $str);
         $str = htmlspecialchars($str, ENT_QUOTES);
+
         return $str;
     }
 
@@ -508,10 +515,9 @@ class happy_linux_pagenavi
         $current = 0;
         $last    = 0;
         $start   = 0;
-        ;
 
         if ($perpage <= 0) {
-            return array($current, $last, $start);
+            return [$current, $last, $start];
         }
 
         $last = $this->_calc_last($total, $perpage);
@@ -531,12 +537,13 @@ class happy_linux_pagenavi
         $start        = ($current - 1) * $perpage;
         $this->_start = $start;
 
-        return array($current, $last, $start);
+        return [$current, $last, $start];
     }
 
     public function _calc_last($total, $perpage)
     {
         $last = ceil($total / $perpage);
+
         return $last;
     }
 

@@ -137,7 +137,7 @@ class happy_linux_rss_view extends happy_linux_rss_base
 
     public function &_get_sanitize_param()
     {
-        $arr = array(
+        $arr = [
             'flag_title_html'   => $this->_flag_title_html,
             'max_title'         => $this->_max_title,
             'flag_content_html' => $this->_flag_content_html,
@@ -157,7 +157,7 @@ class happy_linux_rss_view extends happy_linux_rss_base
             'mode_content_javascript' => $this->_mode_content_javascript,
             'flag_content_tags'       => $this->_flag_content_tags,
             'content_tags'            => $this->_content_tags,
-        );
+        ];
 
         return $arr;
     }
@@ -265,30 +265,35 @@ class happy_linux_rss_view extends happy_linux_rss_base
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_view_channel();
+
         return $obj;
     }
 
     public function &create_image()
     {
         $obj = new happy_linux_rss_view_image();
+
         return $obj;
     }
 
     public function &create_textinput()
     {
         $obj = new happy_linux_rss_view_textinput();
+
         return $obj;
     }
 
     public function &create_items()
     {
         $obj = new happy_linux_rss_view_items();
+
         return $obj;
     }
 
     public function &create_single_item()
     {
         $obj = new happy_linux_rss_view_item_single();
+
         return $obj;
     }
 
@@ -354,6 +359,7 @@ class happy_linux_rss_view_basic extends happy_linux_rss_base_basic
                 return $val;
             }
         }
+
         return null;
     }
 
@@ -362,6 +368,7 @@ class happy_linux_rss_view_basic extends happy_linux_rss_base_basic
         if (preg_match('|^https?://|', $str)) {
             return true;    // include HTTP
         }
+
         return false;
     }
 
@@ -377,7 +384,7 @@ class happy_linux_rss_view_basic extends happy_linux_rss_base_basic
     {
         // allow HTML tag & under max content
         if ($flag) {
-            if (($max < 0) || (strlen($text) <= $max)) {
+            if (($max < 0) || (mb_strlen($text) <= $max)) {
                 $ret = $this->_strings->replace_javascript($text);
 
                 if (!$this->_strings->check_javascript($ret)) {
@@ -387,35 +394,38 @@ class happy_linux_rss_view_basic extends happy_linux_rss_base_basic
         }
 
         $ret = $this->_sanitize_summary($text, $max);
+
         return $ret;
     }
-
-
 
     //---------------------------------------------------------
     // use string class
     //---------------------------------------------------------
     public function &_sanitize_block($arr)
     {
-        $ret =& $this->_strings->sanitize_array_text($arr);
+        $ret = &$this->_strings->sanitize_array_text($arr);
+
         return $ret;
     }
 
     public function _sanitize_html_url($text)
     {
         $ret = $this->_strings->sanitize_url($text);
+
         return $ret;
     }
 
     public function _sanitize_html_text($text)
     {
         $ret = $this->_strings->sanitize_text($text);
+
         return $ret;
     }
 
     public function _sanitize_summary($text, $max, $keyword_array = null)
     {
         $ret = $this->_strings->build_summary($text, $max, $keyword_array, 's');
+
         return $ret;
     }
 
@@ -428,17 +438,17 @@ class happy_linux_rss_view_basic extends happy_linux_rss_base_basic
 class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
 {
     // RSS
-    public $DATE_RFC822_LIST = array('pubdate', 'lastbuilddate');
+    public $DATE_RFC822_LIST = ['pubdate', 'lastbuilddate'];
 
-    public $DATE_W3C_LIST = array(
+    public $DATE_W3C_LIST = [
         // ATOM 1.0
         'published',
         'updated',
         // ATOM 0.3
         'modified',
         'issued',
-        'created'
-    );
+        'created',
+    ];
 
     //---------------------------------------------------------
     // constructor
@@ -507,11 +517,11 @@ class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
             $pubdate_unix = $this->get_unixtime_rfc822($this->get_rss_var('pubdate'));
             $pubdate_long = formatTimestamp($pubdate_unix, 'l');
 
-            if ($format_date == 'l') {
+            if ('l' == $format_date) {
                 $this->set('pubdate', $pubdate_long);
             }
         } elseif ($date_unix) {
-            if ($format_date == 'l') {
+            if ('l' == $format_date) {
                 $this->set('pubdate', $date_long);
             } else {
                 $this->set('pubdate', $date_rfc822);
@@ -522,11 +532,11 @@ class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
             $lastbuilddate_unix = $this->get_unixtime_rfc822($this->get_rss_var('lastbuilddate'));
             $lastbuilddate_long = formatTimestamp($lastbuilddate_unix, 'l');
 
-            if ($format_date == 'l') {
+            if ('l' == $format_date) {
                 $this->set('lastbuilddate', $lastbuilddate_long);
             }
         } elseif ($date_unix) {
-            if ($format_date == 'l') {
+            if ('l' == $format_date) {
                 $this->set('lastbuilddate', $date_long);
             } else {
                 $this->set('lastbuilddate', $date_rfc822);
@@ -577,7 +587,7 @@ class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
     //---------------------------------------------------------
     public function sanitize()
     {
-        $arr = array();
+        $arr = [];
 
         foreach ($this->get_vars() as $k => $v) {
             switch ($k) {
@@ -589,7 +599,6 @@ class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
                 case 'contributor_url':
                     $val = $this->_sanitize_html_url($v);
                     break;
-
                 default:
                     $val = $this->_sanitize_block($v);
                     break;
@@ -609,7 +618,6 @@ class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
 //=========================================================
 class happy_linux_rss_view_image extends happy_linux_rss_view_basic
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -623,7 +631,7 @@ class happy_linux_rss_view_image extends happy_linux_rss_view_basic
     //---------------------------------------------------------
     public function sanitize()
     {
-        $arr = array();
+        $arr = [];
 
         foreach ($this->get_vars() as $k => $v) {
             switch ($k) {
@@ -631,12 +639,10 @@ class happy_linux_rss_view_image extends happy_linux_rss_view_basic
                 case 'url':
                     $val = $this->_sanitize_html_url($v);
                     break;
-
                 case 'width':
                 case 'height':
                     $val = (int)$v;
                     break;
-
                 default:
                     $val = $this->_sanitize_html_text($v);
                     break;
@@ -660,7 +666,6 @@ class happy_linux_rss_view_image extends happy_linux_rss_view_basic
 //=========================================================
 class happy_linux_rss_view_textinput extends happy_linux_rss_view_basic
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -674,14 +679,13 @@ class happy_linux_rss_view_textinput extends happy_linux_rss_view_basic
     //---------------------------------------------------------
     public function sanitize()
     {
-        $arr = array();
+        $arr = [];
 
         foreach ($this->get_vars() as $k => $v) {
             switch ($k) {
                 case 'link':
                     $val = $this->_sanitize_html_url($v);
                     break;
-
                 default:
                     $val = $this->_sanitize_html_text($v);
                     break;
@@ -705,7 +709,6 @@ class happy_linux_rss_view_textinput extends happy_linux_rss_view_basic
 //=========================================================
 class happy_linux_rss_view_items extends happy_linux_rss_base_items
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -759,6 +762,7 @@ class happy_linux_rss_view_items extends happy_linux_rss_base_items
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_view_item_single();
+
         return $obj;
     }
 
@@ -771,17 +775,17 @@ class happy_linux_rss_view_items extends happy_linux_rss_base_items
 class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
 {
     // RSS
-    public $DATE_RFC822_LIST = array('pubdate');
+    public $DATE_RFC822_LIST = ['pubdate'];
 
-    public $DATE_W3C_LIST = array(
+    public $DATE_W3C_LIST = [
         // ATOM 1.0
         'published',
         'updated',
         // ATOM 0.3
         'modified',
         'issued',
-        'created'
-    );
+        'created',
+    ];
 
     public $_view_item = null;
 
@@ -899,7 +903,7 @@ class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
     }
 
     // some feed have non URL formated guid
-    // http://news.google.com/news?ned=us&output=rss
+    // https://news.google.com/news?ned=us&output=rss
     // tag:news.google.com,2005:cluster=421c2ca3
     public function _format_guid_url()
     {
@@ -924,7 +928,7 @@ class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
     public function format_for_rss($format_date = 'l')
     {
         if ($this->is_set('pubdate')) {
-            if ($format_date == 'l') {
+            if ('l' == $format_date) {
                 $pubdate_unix = $this->get_unixtime_rfc822($this->get_rss_var('pubdate'));
                 $pubdate_long = formatTimestamp($pubdate, 'l');
                 $this->set('pubdate', $pubdate_long);
@@ -932,7 +936,7 @@ class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
         } elseif ($this->is_set('published_unix')) {
             $published_unix = $this->get_rss_var('published_unix');
 
-            if ($format_date == 'l') {
+            if ('l' == $format_date) {
                 $published_long = formatTimestamp($published_unix, 'l');
                 $this->set('pubdate', $published_long);
             } else {
@@ -949,13 +953,13 @@ class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
     //---------------------------------------------------------
     // view sanitize
     //---------------------------------------------------------
-    public function sanitize(&$param)
+    public function sanitize($param=null)
     {
         $this->_view_item->set_param($param);
 
         $this->set_is_japanese($param['is_japanese']);
 
-        $arr = array();
+        $arr = [];
 
         foreach ($this->get_vars() as $k => $v) {
             switch ($k) {
@@ -966,17 +970,13 @@ class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
                 case 'contributor_url':
                 case 'enclosure_url':
                 case 'guid_url':
-
                     // BUG: not sanitize site_url
-                case 'site_url':    // for RSSC
-
+                case 'site_url':
                     $val = $this->_sanitize_html_url($v);
                     break;
-
                 case 'title':
                     $val = $this->_view_item->sanitize_title($v);
                     break;
-
                 case 'content':
                     $v1 = $v;
                     if (is_array($v) && isset($v['encoded'])) {
@@ -984,16 +984,13 @@ class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
                     }
                     $val = $this->_view_item->sanitize_content($v1);
                     break;
-
                 case 'summary':
                     $val = $this->_view_item->sanitize_summary($v);
                     break;
-
                 case 'raws':
                 case 'item_orig':
                     $val = '';
                     break;
-
                 default:
                     //          echo "$k |$v| <br>\n";
                     $val = $this->_sanitize_block($v);

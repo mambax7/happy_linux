@@ -15,4 +15,3 @@ define('HAPPY_LINUX_DIR_TMP', '');
 
 // specify '/var/tmp'
 //  define('HAPPY_LINUX_DIR_TMP', '/var/tmp');
-;

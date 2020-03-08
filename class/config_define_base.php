@@ -19,7 +19,7 @@
 class happy_linux_config_define_base
 {
     // cache
-    public $_cached = array();
+    public $_cached = [];
 
     public $_config_country_code = null;
 
@@ -38,6 +38,7 @@ class happy_linux_config_define_base
     public function &load()
     {
         $this->_cached = $this->get_define();
+
         return $this->_cached;
     }
 
@@ -47,6 +48,7 @@ class happy_linux_config_define_base
         if (isset($this->_cached[$id][$key])) {
             $ret = $this->_cached[$id][$key];
         }
+
         return $ret;
     }
 

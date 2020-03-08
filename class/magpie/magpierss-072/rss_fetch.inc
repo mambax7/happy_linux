@@ -8,7 +8,7 @@
  * License:     GPL
  *
  * The lastest version of MagpieRSS can be obtained from:
- * http://magpierss.sourceforge.net
+ * https://magpierss.sourceforge.net
  *
  * For questions, help, comments, discussion, etc., please join the
  * Magpie mailing list:
@@ -118,7 +118,7 @@ function fetch_rss($url)
         }
 
         $cache_status    = 0;       // response of check_cache
-        $request_headers = array(); // HTTP headers to send with fetch
+        $request_headers = []; // HTTP headers to send with fetch
         $rss             = 0;       // parsed RSS object
         $errormsg        = 0;       // errors, if any
 
@@ -132,7 +132,7 @@ function fetch_rss($url)
         }
 
         // if object cached, and cache is fresh, return cached obj
-        if ($cache_status == 'HIT') {
+        if ('HIT' == $cache_status) {
             $rss = $cache->get($cache_key);
             if (isset($rss) and $rss) {
                 // should be cache age
@@ -147,7 +147,7 @@ function fetch_rss($url)
         // else attempt a conditional get
 
         // setup headers
-        if ($cache_status == 'STALE') {
+        if ('STALE' == $cache_status) {
             $rss = $cache->get($cache_key);
             if ($rss and $rss->etag and $rss->last_modified) {
                 $request_headers['If-None-Match']    = $rss->etag;
@@ -158,7 +158,7 @@ function fetch_rss($url)
         $resp = _fetch_remote_file($url, $request_headers);
 
         if (isset($resp) and $resp) {
-            if ($resp->status == '304') {
+            if ('304' == $resp->status) {
                 // we have the most current copy
                 if (MAGPIE_DEBUG > 1) {
                     debug("Got 304 for $url");
@@ -178,7 +178,7 @@ function fetch_rss($url)
                 }
             } else {
                 $errormsg = "Failed to fetch $url ";
-                if ($resp->status == '-100') {
+                if ('-100' == $resp->status) {
                     $errormsg .= '(Request timed out after ' . MAGPIE_FETCH_TIME_OUT . ' seconds)';
                 } elseif ($resp->error) {
                     # compensate for Snoopy's annoying habbit to tacking
@@ -297,11 +297,11 @@ function _response_to_rss($resp)
                 $val   = '';
             }
 
-            if ($field == 'ETag') {
+            if ('ETag' == $field) {
                 $rss->etag = $val;
             }
 
-            if ($field == 'Last-Modified') {
+            if ('Last-Modified' == $field) {
                 $rss->last_modified = $val;
             }
         }
@@ -366,7 +366,7 @@ function init()
     }
 
     if (!defined('MAGPIE_USER_AGENT')) {
-        $ua = 'MagpieRSS/' . MAGPIE_VERSION . ' (+http://magpierss.sf.net';
+        $ua = 'MagpieRSS/' . MAGPIE_VERSION . ' (+https://magpierss.sf.net';
 
         if (MAGPIE_CACHE_ON) {
             $ua = $ua . ')';

@@ -6,7 +6,7 @@
 // =========================================================
 
 // 2008-01-18 19:05:13 ken
-// translated by sato-san <http://www.xoops-magazine.com/>
+// translated by sato-san <https://www.xoops-magazine.com/>
 
 define('_HAPPY_LINUX_AM_GROUP', 'Gruppenverwaltung');
 define('_HAPPY_LINUX_AM_GROUP_DESC', 'Verwaltung der Zugriffsberechtigungen');
@@ -25,6 +25,6 @@ define('_HAPPY_LINUX_AM_MODULE_DESC', 'Zeige Modulliste');
 define('_HAPPY_LINUX_AM_MODULE_UPDATE', 'Module Update');
 define('_HAPPY_LINUX_AM_DIR_NOT_WRITABLE', 'Das Verzeichnis ist nicht beschreibbar');
 define('_HAPPY_LINUX_AM_MEMORY_LIMIT_TOO_SMALL', 'memory_limit ist zu klein');
-define('_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'Das Modul Weblinks benötigt mehr als %s MB Speicher');
+define('_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'Das Modul Weblinks benï¿½tigt mehr als %s MB Speicher');
 define('_HAPPY_LINUX_AM_SERVER_ENV', 'Server Environmnet Variables');
-define('_HAPPY_LINUX_AM_MEMORY_DESC', 'This value is one standard.<br />Depending on the server environment, it is sometimes more or less.');
+define('_HAPPY_LINUX_AM_MEMORY_DESC', 'This value is one standard.<br>Depending on the server environment, it is sometimes more or less.');

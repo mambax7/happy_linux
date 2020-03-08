@@ -10,4 +10,3 @@
 // This is for dummy in English.
 // special use for Japanese
 //---------------------------------------------------------
-;

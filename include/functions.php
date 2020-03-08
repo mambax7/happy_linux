@@ -34,16 +34,17 @@ function &happy_linux_get_singleton($name)
     }
 
     if (isset($singletons[$name])) {
-        $single =& $singletons[$name];
+        $single = &$singletons[$name];
+
         return $single;
-    } else {
-        if (happy_linux_is_admin() && function_exists('debug_print_backtrace')) {
-            echo "happy_linux_get_singleton <br />\n";
-            debug_print_backtrace();
-        }
+    }
+    if (happy_linux_is_admin() && function_exists('debug_print_backtrace')) {
+        echo "happy_linux_get_singleton <br>\n";
+        debug_print_backtrace();
     }
 
     $false = false;
+
     return $false;
 }
 
@@ -79,21 +80,22 @@ function &happy_linux_getHandler($name = null, $module_dir = null, $prefix = 'ha
     }
 
     if (isset($handlers[$module_dir][$name])) {
-        $han =& $handlers[$module_dir][$name];
-        return $han;
-    } else {
-        if (happy_linux_is_admin()) {
-            if (function_exists('debug_print_backtrace')) {
-                echo "happy_linux_get_handler <br />\n";
-                debug_print_backtrace();
-            }
+        $han = &$handlers[$module_dir][$name];
 
-            $msg = 'Handler does not exist<br />Module: ' . $module_dir . '<br />Name: ' . $name . '<br />Prefix: ' . $prefix . '<br />';
-            trigger_error($msg, E_USER_ERROR);
+        return $han;
+    }
+    if (happy_linux_is_admin()) {
+        if (function_exists('debug_print_backtrace')) {
+            echo "happy_linux_get_handler <br>\n";
+            debug_print_backtrace();
         }
+
+        $msg = 'Handler does not exist<br>Module: ' . $module_dir . '<br>Name: ' . $name . '<br>Prefix: ' . $prefix . '<br>';
+        trigger_error($msg, E_USER_ERROR);
     }
 
     $false = false;
+
     return $false;
 }
 
@@ -102,7 +104,7 @@ function happy_linux_is_admin()
     global $xoopsUser;
     if (is_object($xoopsUser) && $xoopsUser->isAdmin()) {
         return true;
-        ;
     }
+
     return false;
 }

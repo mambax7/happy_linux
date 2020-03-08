@@ -62,10 +62,10 @@ class happy_linux_basic_handler extends happy_linux_error
     public $_class_name = 'happy_linux_basic';
 
     // cache
-    public $_cached = array();
+    public $_cached = [];
 
     // config table
-    public $_conf_cached     = array();
+    public $_conf_cached     = [];
     public $_conf_table      = null;
     public $_conf_id_name    = 'conf_id';
     public $_conf_name_name  = 'conf_name';
@@ -150,6 +150,7 @@ class happy_linux_basic_handler extends happy_linux_error
     public function prefix($name)
     {
         $ret = $this->db_prefix($this->_DIRNAME . '_' . $name);
+
         return $ret;
     }
 
@@ -169,9 +170,9 @@ class happy_linux_basic_handler extends happy_linux_error
         return $obj;
     }
 
-    public function _check_class(&$obj)
+    public function _check_class($obj)
     {
-        if (strtolower(get_class($obj)) == strtolower($this->_class_name)) {
+        if (mb_strtolower(get_class($obj)) == mb_strtolower($this->_class_name)) {
             return true;
         }
 
@@ -189,17 +190,18 @@ class happy_linux_basic_handler extends happy_linux_error
     //---------------------------------------------------------
     public function &get_cache_object_by_id($id)
     {
-        $row =& $this->get_cache_row($id);
+        $row = &$this->get_cache_row($id);
         if (!is_array($row) || !count($row)) {
             return $false;
         }
 
-        $obj =& $this->create();
+        $obj = &$this->create();
         if (!is_object($obj)) {
             return $false;
         }
 
         $obj->set_vars($row);
+
         return $obj;
     }
 
@@ -207,39 +209,41 @@ class happy_linux_basic_handler extends happy_linux_error
     {
         $false = false;
 
-        $row =& $this->get_row_by_id($id);
+        $row = &$this->get_row_by_id($id);
         if (!is_array($row) || !count($row)) {
             return $false;
         }
 
-        $obj =& $this->create();
+        $obj = &$this->create();
         if (!is_object($obj)) {
             return $false;
         }
 
         $obj->set_vars($row);
+
         return $obj;
     }
 
     public function &get_objects($limit = 0, $offset = 0)
     {
-        $rows =& $this->get_rows($id);
-        $objs =& $this->get_objects_from_rows($rows);
+        $rows = &$this->get_rows($id);
+        $objs = &$this->get_objects_from_rows($rows);
+
         return $objs;
     }
 
-    public function &get_objects_from_rows(&$rows)
+    public function &get_objects_from_rows($rows)
     {
-        $objs = array();
+        $objs = [];
 
         foreach ($rows as $row) {
             if (is_array($row) && count($row)) {
-                $obj =& $this->create();
+                $obj = &$this->create();
 
                 // Fatal error: Call to a member function set_vars()
                 if (is_object($obj)) {
                     $obj->set_vars($row);
-                    $objs[] =& $obj;
+                    $objs[] = &$obj;
                     unset($obj);
                 }
             }
@@ -260,6 +264,7 @@ class happy_linux_basic_handler extends happy_linux_error
         $table = $this->db_prefix($dirname . '_' . $name);
         $sql   = 'SELECT count(*) FROM ' . $table;
         $count = $this->get_count_by_sql($sql);
+
         return $count;
     }
 
@@ -267,6 +272,7 @@ class happy_linux_basic_handler extends happy_linux_error
     {
         $sql   = 'SELECT count(*) FROM ' . $this->_table;
         $count = $this->get_count_by_sql($sql);
+
         return $count;
     }
 
@@ -277,6 +283,7 @@ class happy_linux_basic_handler extends happy_linux_error
         if ($count) {
             return true;
         }
+
         return false;
     }
 
@@ -288,10 +295,11 @@ class happy_linux_basic_handler extends happy_linux_error
         if (count($this->_cached) > 0) {
             return true;
         }
+
         return false;
     }
 
-    public function set_cached(&$arr)
+    public function set_cached($arr)
     {
         if (is_array($arr) && count($arr)) {
             $this->_cached = $arr;
@@ -307,34 +315,38 @@ class happy_linux_basic_handler extends happy_linux_error
     {
         $row = false;
         if (isset($this->_cached[$id])) {
-            $row =& $this->_cached[$id];
+            $row = &$this->_cached[$id];
         } else {
-            $row =& $this->get_row_by_id($id);
+            $row = &$this->get_row_by_id($id);
             if (is_array($row) && count($row)) {
                 $this->_cached[$id] = $row;
             }
         }
+
         return $row;
     }
 
     public function &get_row_by_id($id)
     {
         $sql = 'SELECT * FROM ' . $this->_table . ' WHERE ' . $this->_id_name . '=' . (int)$id;
-        $row =& $this->get_row_by_sql($sql);
+        $row = &$this->get_row_by_sql($sql);
+
         return $row;
     }
 
     public function &get_rows($limit = 0, $offset = 0, $id_as_key = false)
     {
         $sql = 'SELECT * FROM ' . $this->_table . ' ORDER BY ' . $this->_id_name;
-        $arr =& $this->get_rows_by_sql($sql, $limit, $offset, $id_as_key);
+        $arr = &$this->get_rows_by_sql($sql, $limit, $offset, $id_as_key);
+
         return $arr;
     }
 
     public function &get_id_array($limit = 0, $offset = 0)
     {
         $sql = 'SELECT ' . $this->_id_name . ' FROM ' . $this->_table . ' ORDER BY ' . $this->_id_name;
-        $arr =& $this->get_first_row_by_sql($sql, $limit, $offset);
+        $arr = &$this->get_first_row_by_sql($sql, $limit, $offset);
+
         return $arr;
     }
 
@@ -345,6 +357,7 @@ class happy_linux_basic_handler extends happy_linux_error
     {
         $sql = 'DELETE FROM ' . $this->_table . ' WHERE ' . $this->_id_name . '=' . (int)$id;
         $ret = $this->query($sql);
+
         return $ret;
     }
 
@@ -353,7 +366,7 @@ class happy_linux_basic_handler extends happy_linux_error
     //---------------------------------------------------------
     public function get_count_by_sql($sql)
     {
-        $res =& $this->query($sql);
+        $res = &$this->query($sql);
         if (!$res) {
             return 0;
         }
@@ -366,27 +379,29 @@ class happy_linux_basic_handler extends happy_linux_error
         }
 
         $this->freeRecordSet($res);
+
         return $count;
     }
 
     public function &get_row_by_sql($sql)
     {
-        $res =& $this->query($sql);
-        $arr =& $this->fetchArray($res);
+        $res = &$this->query($sql);
+        $arr = &$this->fetchArray($res);
         $this->freeRecordSet($res);
+
         return $arr;
     }
 
     public function &get_rows_by_sql($sql, $limit = 0, $offset = 0, $id_as_key = false)
     {
-        $res =& $this->query($sql, $limit, $offset);
+        $res = &$this->query($sql, $limit, $offset);
         if (!$res) {
             return $res;
         }
 
-        $arr = array();
+        $arr = [];
 
-        while ($row =& $this->fetchArray($res)) {
+        while ($row = &$this->fetchArray($res)) {
             if ($id_as_key) {
                 $arr[$row[$this->_id_name]] = $row;
             } else {
@@ -395,23 +410,25 @@ class happy_linux_basic_handler extends happy_linux_error
         }
 
         $this->freeRecordSet($res);
+
         return $arr;
     }
 
     public function &get_first_row_by_sql($sql, $limit = 0, $offset = 0)
     {
-        $res =& $this->query($sql, $limit, $offset);
+        $res = &$this->query($sql, $limit, $offset);
         if (!$res) {
             return $res;
         }
 
-        $arr = array();
+        $arr = [];
 
-        while ($row =& $this->fetchRow($res)) {
+        while ($row = &$this->fetchRow($res)) {
             $arr[] = $row[0];
         }
 
         $this->freeRecordSet($res);
+
         return $arr;
     }
 
@@ -444,36 +461,42 @@ class happy_linux_basic_handler extends happy_linux_error
     public function getRowsNum($res)
     {
         $ret = $this->_db->getRowsNum($res);
+
         return $ret;
     }
 
     public function getFieldsNum($res)
     {
         $ret = $this->_db->getFieldsNum($res);
+
         return $ret;
     }
 
     public function &fetchArray($res)
     {
         $ret = $this->_db->fetchArray($res);
+
         return $ret;
     }
 
     public function &fetchRow($res)
     {
         $ret = $this->_db->fetchRow($res);
+
         return $ret;
     }
 
     public function getInsertId()
     {
         $ret = $this->_db->getInsertId();
+
         return $ret;
     }
 
     public function freeRecordSet($result)
     {
         $ret = $this->_db->freeRecordSet($result);
+
         return $ret;
     }
 
@@ -486,12 +509,14 @@ class happy_linux_basic_handler extends happy_linux_error
     {
         // if tablename is empty, only prefix will be returned
         $ret = $this->_db->prefix($tablename);
+
         return $ret;
     }
 
     public function get_db_error()
     {
         $err = $this->_db->error();
+
         return $err;
     }
 
@@ -499,6 +524,7 @@ class happy_linux_basic_handler extends happy_linux_error
     public function quote($str)
     {
         $str = "'" . addslashes($str) . "'";
+
         return $str;
     }
 
@@ -514,6 +540,7 @@ class happy_linux_basic_handler extends happy_linux_error
         $sql = 'UPDATE ' . $this->_conf_table . ' SET ';
         $sql .= 'conf_value=' . $this->quote($value) . ' ';
         $sql .= 'WHERE conf_name=' . $this->quote($name);
+
         return $this->query($sql);
     }
 
@@ -529,10 +556,10 @@ class happy_linux_basic_handler extends happy_linux_error
 
     public function &_get_config_data()
     {
-        $arr = array();
+        $arr = [];
 
         $sql  = 'SELECT * FROM ' . $this->_conf_table . ' ORDER BY ' . $this->_conf_id_name . ' ASC';
-        $rows =& $this->get_rows_by_sql($sql);
+        $rows = &$this->get_rows_by_sql($sql);
 
         if (is_array($rows) && (count($rows) > 0)) {
             foreach ($rows as $row) {
@@ -541,6 +568,7 @@ class happy_linux_basic_handler extends happy_linux_error
         }
 
         $this->_conf_cached = $arr;
+
         return $arr;
     }
 
@@ -550,6 +578,7 @@ class happy_linux_basic_handler extends happy_linux_error
         if (isset($this->_conf_cached)) {
             $ret = $this->_conf_cached;
         }
+
         return $ret;
     }
 
@@ -561,6 +590,7 @@ class happy_linux_basic_handler extends happy_linux_error
         if (isset($this->_conf_cached[$name])) {
             $ret = $this->_conf_cached[$name];
         }
+
         return $ret;
     }
 
@@ -569,6 +599,7 @@ class happy_linux_basic_handler extends happy_linux_error
         if (count($this->_conf_cached) > 0) {
             return true;
         }
+
         return false;
     }
 
@@ -582,12 +613,13 @@ class happy_linux_basic_handler extends happy_linux_error
         if (!is_array($rows)) {
             return false;
         }
+
         return $rows;
     }
 
     public function update_column_type($fields)
     {
-        $arr = array();
+        $arr = [];
         foreach ($fields as $field) {
             $arr[] = ' MODIFY `' . $field['field'] . '`  ' . $field['type'] . ' ';
         }
@@ -606,11 +638,11 @@ class happy_linux_basic_handler extends happy_linux_error
         $str_arr = explode($pattern, $str);
 
         $i   = 0;
-        $arr = array();
+        $arr = [];
         foreach ($str_arr as $value) {
             $value = trim($value);
 
-            if ($value == '') {
+            if ('' == $value) {
                 continue;
             }
 

@@ -98,6 +98,7 @@ class happy_linux_remote_file extends happy_linux_error
         if (empty($url)) {
             $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_EMPTY_URL);
             $this->_set_errors('happy_linux_remote_file: remote url is empty');
+
             return false;
         }
 
@@ -105,7 +106,6 @@ class happy_linux_remote_file extends happy_linux_error
             case 1:
                 $ret = $this->_check_url_remote($url);
                 break;
-
             case 0:
             default:
                 $ret = $this->_check_url_local($url);
@@ -119,10 +119,11 @@ class happy_linux_remote_file extends happy_linux_error
     {
         if ($this->_fopen($url, 'r')) {
             $this->_fclose();
+
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     //---------------------------------------------------------
@@ -135,6 +136,7 @@ class happy_linux_remote_file extends happy_linux_error
         if (empty($url)) {
             $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_EMPTY_URL);
             $this->_set_errors('happy_linux_remote_file: remote url is empty');
+
             return false;
         }
 
@@ -142,7 +144,6 @@ class happy_linux_remote_file extends happy_linux_error
             case 1:
                 $ret = $this->_read_file_remote($url);
                 break;
-
             case 0:
             default:
                 $ret = $this->read_file_local($url);
@@ -169,6 +170,7 @@ class happy_linux_remote_file extends happy_linux_error
             $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_NO_RESULT);
             $this->_set_errors('happy_linux_remote_file: remote data is empty:');
             $this->_set_errors("url = $url");
+
             return false;
         }
 
@@ -203,10 +205,12 @@ class happy_linux_remote_file extends happy_linux_error
             $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_NOT_FOPEN);
             $this->_set_errors('happy_linux_remote_file: cannot open url:');
             $this->_set_errors("url = $url");
+
             return false;
         }
 
         $this->_fp = $fp;
+
         return $fp;
     }
 
@@ -218,11 +222,11 @@ class happy_linux_remote_file extends happy_linux_error
 
         if (fclose($this->_fp)) {
             return true;
-        } else {
-            $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_NOT_FCLOSE);
-            $this->_set_errors('happy_linux_remote_file: cannot close url');
-            return false;
         }
+        $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_NOT_FCLOSE);
+        $this->_set_errors('happy_linux_remote_file: cannot close url');
+
+        return false;
     }
 
     public function _fread()
@@ -235,7 +239,7 @@ class happy_linux_remote_file extends happy_linux_error
 
         do {
             $data = fread($this->_fp, 8192);
-            if (strlen($data) == 0) {
+            if (0 == mb_strlen($data)) {
                 break;
             }
             $content .= $data;
@@ -248,11 +252,11 @@ class happy_linux_remote_file extends happy_linux_error
     {
         if (fwrite($this->_fp, $data)) {
             return true;
-        } else {
-            $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_NOT_FWRITE);
-            $this->_set_errors('happy_linux_remote_file: cannot write to remote file');
-            return false;
         }
+        $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_NOT_FWRITE);
+        $this->_set_errors('happy_linux_remote_file: cannot write to remote file');
+
+        return false;
     }
 
     //=========================================================
@@ -290,12 +294,14 @@ class happy_linux_remote_file extends happy_linux_error
     public function _check_url_remote($url)
     {
         $ret = $this->_snoppy_fetch($url);
+
         return $ret;
     }
 
     public function _read_file_remote($url)
     {
         $ret = $this->_snoppy_fetch($url);
+
         return $ret;
     }
 
@@ -306,24 +312,24 @@ class happy_linux_remote_file extends happy_linux_error
 
             if ($res) {
                 return $res;
-            } else {
-                $this->_set_error_code(HAPPY_LINUX_SNOPPY_CODE_NO_RESULT);
-                $this->_set_errors('happy_linux_remote_file: remote data is empty:');
-                $this->_set_errors("url = $url");
-                if ($this->_snoopy->error) {
-                    $this->_set_errors('snoopy: ' . $this->_snoopy->error);
-                }
-                return false;
             }
-        } else {
-            $this->_set_error_code(HAPPY_LINUX_SNOPPY_CODE_NOT_FETCH);
-            $this->_set_errors('happy_linux_remote_file: cannot fetch remote data:');
+            $this->_set_error_code(HAPPY_LINUX_SNOPPY_CODE_NO_RESULT);
+            $this->_set_errors('happy_linux_remote_file: remote data is empty:');
             $this->_set_errors("url = $url");
             if ($this->_snoopy->error) {
                 $this->_set_errors('snoopy: ' . $this->_snoopy->error);
             }
+
             return false;
         }
+        $this->_set_error_code(HAPPY_LINUX_SNOPPY_CODE_NOT_FETCH);
+        $this->_set_errors('happy_linux_remote_file: cannot fetch remote data:');
+        $this->_set_errors("url = $url");
+        if ($this->_snoopy->error) {
+            $this->_set_errors('snoopy: ' . $this->_snoopy->error);
+        }
+
+        return false;
     }
 
     //----- class end -----

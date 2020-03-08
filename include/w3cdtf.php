@@ -30,10 +30,10 @@ function happy_linux_w3cdtf_to_unixtime($datetime)
 
 // -------------------------------------------------------------------------
 // original:
-// http://www.arielworks.net/articles/2004/0224c/
+// https://www.arielworks.net/articles/2004/0224c/
 // array parse_w3cdtf(string datetime)
 // -------------------------------------------------------------------------
-// http://www.w3.org/TR/NOTE-datetime
+// https://www.w3.org/TR/NOTE-datetime
 //  Year:
 //      YYYY (eg 1997)
 //   Year and month:
@@ -55,7 +55,6 @@ function happy_linux_w3cdtf_to_unixtime($datetime)
 // -------------------------------------------------------------------------
 function &happy_linux_parse_w3cdtf($datetime)
 {
-
     // 2004-10-24 K.OHWADA
     // suppress warning
     $year          = 0;
@@ -73,19 +72,16 @@ function &happy_linux_parse_w3cdtf($datetime)
     // Year
     if (preg_match("/^(\d{4})$/", $datetime, $val)) {
         $year = $val[1];
-
-    // Year and month
-    } elseif (preg_match("/^([0-9]{4})-(0[1-9]|1[0-2])$/", $datetime, $val)) {
+        // Year and month
+    } elseif (preg_match('/^([0-9]{4})-(0[1-9]|1[0-2])$/', $datetime, $val)) {
         $year  = $val[1];
         $month = $val[2];
-
-    // Complete date
-    } elseif (preg_match("/^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $datetime, $val)) {
+        // Complete date
+    } elseif (preg_match('/^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/', $datetime, $val)) {
         $year  = $val[1];
         $month = $val[2];
         $day   = $val[3];
-
-    // Complete date plus hours and minutes
+        // Complete date plus hours and minutes
     } elseif (preg_match("/^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([0-5][0-9]):([0-5][0-9])(Z|(\+|-)[0-5][0-9]:[0-5][0-9])$/", $datetime, $val)) {
         $year     = $val[1];
         $month    = $val[2];
@@ -93,8 +89,7 @@ function &happy_linux_parse_w3cdtf($datetime)
         $hour     = $val[4];
         $minute   = $val[5];
         $timezone = $val[6];
-
-    // Complete date plus hours, minutes and seconds
+        // Complete date plus hours, minutes and seconds
     } elseif (preg_match("/^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([0-5][0-9]):([0-5][0-9]):([0-5][0-9])(Z|(\+|-)[0-5][0-9]:[0-5][0-9])$/", $datetime, $val)) {
         $year     = $val[1];
         $month    = $val[2];
@@ -103,8 +98,7 @@ function &happy_linux_parse_w3cdtf($datetime)
         $minute   = $val[5];
         $second   = $val[6];
         $timezone = $val[7];
-
-    // Complete date plus hours, minutes, seconds and a decimal fraction of a second
+        // Complete date plus hours, minutes, seconds and a decimal fraction of a second
     } elseif (preg_match("/^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([0-5][0-9]):([0-5][0-9]):([0-5][0-9]).([0-9]+)(Z|(\+|-)[0-5][0-9]:[0-5][0-9])$/", $datetime, $val)) {
         $year     = $val[1];
         $month    = $val[2];
@@ -115,41 +109,41 @@ function &happy_linux_parse_w3cdtf($datetime)
         $fraction = $val[7];
         $timezone = $val[8];
 
-    // 2007-08-01 K.OHWADA
+        // 2007-08-01 K.OHWADA
         // Complete date plus hours and minutes without timezone
-    } elseif (preg_match("/^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([0-5][0-9]):([0-5][0-9])$/", $datetime, $val)) {
+    } elseif (preg_match('/^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([0-5][0-9]):([0-5][0-9])$/', $datetime, $val)) {
         $year   = $val[1];
         $month  = $val[2];
         $day    = $val[3];
         $hour   = $val[4];
         $minute = $val[5];
 
-    // 2007-08-01 K.OHWADA
+        // 2007-08-01 K.OHWADA
         // Complete date plus hours, minutes and seconds without timezone
-    } elseif (preg_match("/^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([0-5][0-9]):([0-5][0-9]):([0-5][0-9])$/", $datetime, $val)) {
+    } elseif (preg_match('/^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T([0-5][0-9]):([0-5][0-9]):([0-5][0-9])$/', $datetime, $val)) {
         $year   = $val[1];
         $month  = $val[2];
         $day    = $val[3];
         $hour   = $val[4];
         $minute = $val[5];
         $second = $val[6];
-
-    // Not W3C-DTF
+        // Not W3C-DTF
     } else {
         $false = false;
+
         return $false;
     }
 
     // Offset of Timezone for gmmktime()
-    if ($timezone != 'Z') {
-        $offset_sign   = substr($timezone, 0, 1);
-        $offset_hour   = substr($timezone, 1, 2);
-        $offset_minute = substr($timezone, 4, 2);
+    if ('Z' != $timezone) {
+        $offset_sign   = mb_substr($timezone, 0, 1);
+        $offset_hour   = mb_substr($timezone, 1, 2);
+        $offset_minute = mb_substr($timezone, 4, 2);
     }
 
     $timestamp = gmmktime($hour - ($offset_sign . $offset_hour), $minute - ($offset_sign . $offset_minute), $second, $month, $day, $year);
 
-    $result = array(
+    $result = [
         'year'      => $year,
         'month'     => $month,
         'day'       => $day,
@@ -158,8 +152,8 @@ function &happy_linux_parse_w3cdtf($datetime)
         'second'    => $second,
         'fraction'  => $fraction,
         'timezone'  => $timezone,
-        'timestamp' => $timestamp
-    );
+        'timestamp' => $timestamp,
+    ];
 
     return $result;
 }

@@ -36,7 +36,7 @@ class happy_linux_time
     {
         static $instance;
         if (!isset($instance)) {
-            $instance = new happy_linux_time($flag_mem);
+            $instance = new self($flag_mem);
         }
 
         return $instance;
@@ -58,12 +58,13 @@ class happy_linux_time
             $mem = (int)(memory_get_usage() / 1000) . ' KB:';
         }
 
-        echo "$count:\t $mem\t $time_elapse\t $time_lap\t $msg <br />\n";
+        echo "$count:\t $mem\t $time_elapse\t $time_lap\t $msg <br>\n";
     }
 
     public function build_elapse_time()
     {
         $text = 'execution time : ' . $this->get_elapse_time() . ' sec';
+
         return $text;
     }
 
@@ -74,7 +75,8 @@ class happy_linux_time
         $time_lap            = $time_now - $this->_time_current;
         $this->_time_current = $time_now;
         $this->_count++;
-        $ret = array($this->_count, $time_now, $time_elapse, $time_lap);
+        $ret = [$this->_count, $time_now, $time_elapse, $time_lap];
+
         return $ret;
     }
 
@@ -84,6 +86,7 @@ class happy_linux_time
         if ($format) {
             $time_elapse = sprintf('%6.3f', $time_elapse);
         }
+
         return $time_elapse;
     }
 
@@ -91,6 +94,7 @@ class happy_linux_time
     {
         list($usec, $sec) = explode(' ', microtime());
         $time = (float)$sec + (float)$usec;
+
         return $time;
     }
 
@@ -106,7 +110,8 @@ class happy_linux_time
         $min   = date($i, $time);
         $sec   = date($s, $time);
 
-        $arr = array($year, $month, $day, $hour, $min, $sec);
+        $arr = [$year, $month, $day, $hour, $min, $sec];
+
         return $arr;
     }
 
@@ -119,5 +124,6 @@ class happy_linux_time
 function happy_linux_get_execution_time()
 {
     $time = happy_linux_time::getInstance();
+
     return $time->get_elapse_time();
 }

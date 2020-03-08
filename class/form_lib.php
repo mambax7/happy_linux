@@ -62,6 +62,7 @@ class happy_linux_form_lib extends happy_linux_form
     {
         $val  = $this->build_lib_button_limit_offset($limit, $offset, $op_value, $submit_value, $action = '');
         $text = $this->build_lib_box_style($title, $desc, $val);
+
         return $text;
     }
 
@@ -71,13 +72,14 @@ class happy_linux_form_lib extends happy_linux_form
         $action      = '';
         $submit_name = 'submit';
 
-        $arr = array(
+        $arr = [
             'op'     => $op_value,
             'limit'  => $limit,
             'offset' => $offset,
-        );
+        ];
 
         $text = $this->build_lib_button_hidden_array($arr, $form_name, $action, $submit_name, $submit_value);
+
         return $text;
     }
 
@@ -89,6 +91,7 @@ class happy_linux_form_lib extends happy_linux_form
     {
         $val  = $this->build_lib_button($op_value, $submit_value, $action);
         $text = $this->build_lib_box_style($title, $desc, $val);
+
         return $text;
     }
 
@@ -96,6 +99,7 @@ class happy_linux_form_lib extends happy_linux_form
     {
         $val  = $this->build_lib_button($op_value, $submit_value, $action);
         $text = $this->build_lib_box_class($title, $desc, $val);
+
         return $text;
     }
 
@@ -114,15 +118,16 @@ class happy_linux_form_lib extends happy_linux_form
         if ($title) {
             $text .= '<span style="' . $style_span . '">';
             $text .= $title;
-            $text .= "</span><br /><br />\n";
+            $text .= "</span><br><br>\n";
         }
 
         if ($desc) {
-            $text .= $desc . "<br /><br />\n";
+            $text .= $desc . "<br><br>\n";
         }
 
         $text .= $value;
-        $text .= "</div><br />\n";
+        $text .= "</div><br>\n";
+
         return $text;
     }
 
@@ -141,15 +146,16 @@ class happy_linux_form_lib extends happy_linux_form
         if ($title) {
             $text .= '<span class="' . $class_span . '">';
             $text .= $title;
-            $text .= "</span><br /><br />\n";
+            $text .= "</span><br><br>\n";
         }
 
         if ($desc) {
-            $text .= $desc . "<br /><br />\n";
+            $text .= $desc . "<br><br>\n";
         }
 
         $text .= $value;
-        $text .= "</div><br />\n";
+        $text .= "</div><br>\n";
+
         return $text;
     }
 
@@ -162,11 +168,12 @@ class happy_linux_form_lib extends happy_linux_form
         $op_name     = $this->_OP_NAME;     // 'op'
         $submit_name = $this->_BUTTON_SUBMIT_NAME;  // 'submit'
 
-        $arr = array(
+        $arr = [
             $op_name => $op_value,
-        );
+        ];
 
         $text = $this->build_lib_button_hidden_array($arr, $form_name, $action, $submit_name, $submit_value);
+
         return $text;
     }
 
@@ -179,7 +186,7 @@ class happy_linux_form_lib extends happy_linux_form
         $cancel_name = '',
         $cancel_value = '',
         $location_name = '',
-                                                  $location_value = '',
+        $location_value = '',
         $location_url = ''
     ) {
         if (empty($form_name)) {
@@ -212,6 +219,7 @@ class happy_linux_form_lib extends happy_linux_form
         }
 
         $text .= $this->build_form_end();
+
         return $text;
     }
 
@@ -221,21 +229,21 @@ class happy_linux_form_lib extends happy_linux_form
     public function print_lib_box_init_config()
     {
         xoops_error(_HAPPY_LINUX_FORM_INIT_NOT);
-        echo "<br />\n";
+        echo "<br>\n";
         echo $this->build_lib_box_button_style(_HAPPY_LINUX_FORM_INIT_EXEC, '', 'init', _HAPPY_LINUX_SAVE);
-        echo "<br />\n";
+        echo "<br>\n";
     }
 
     public function print_lib_box_upgrade_config($ver, $extra = null)
     {
         $msg = sprintf(_HAPPY_LINUX_FORM_VERSION_NOT, $ver);
         if ($extra) {
-            $msg .= "<br />\n" . $extra;
+            $msg .= "<br>\n" . $extra;
         }
         xoops_error($msg);
-        echo "<br />\n";
+        echo "<br>\n";
         echo $this->build_lib_box_button_style(_HAPPY_LINUX_FORM_UPGRADE_EXEC, '', 'upgrade', _HAPPY_LINUX_SAVE);
-        echo "<br />\n";
+        echo "<br>\n";
     }
 
     //---------------------------------------------------------
@@ -268,10 +276,11 @@ class happy_linux_form_lib extends happy_linux_form
     {
         $uname      = $this->_system->get_uname_by_uid($uid);
         $link_uname = $uname;
-        if ($uid != 0) {
+        if (0 != $uid) {
             $url        = XOOPS_URL . '/userinfo.php?uid=' . $uid;
             $link_uname = $this->build_html_a_href_name($url, $uname, $target);
         }
+
         return $link_uname;
     }
 
@@ -279,16 +288,17 @@ class happy_linux_form_lib extends happy_linux_form
     {
         $email      = $this->_system->get_email_by_uid($uid);
         $link_email = '';
-        if (($uid != 0) && $email) {
+        if ((0 != $uid) && $email) {
             $link_email = $this->build_html_a_href_email($email, $name, $target);
         }
+
         return $link_email;
     }
 
     //---------------------------------------------------------
     // confirm
     //---------------------------------------------------------
-    public function build_confirm_form(&$param)
+    public function build_confirm_form($param)
     {
         $div_class     = isset($param['div_class']) ? $param['div_class'] : 'confirmMsg';
         $form_name     = isset($param['form_name']) ? $param['form_name'] : 'confirm_form';
@@ -323,7 +333,7 @@ class happy_linux_form_lib extends happy_linux_form
                         $text .= $this->build_html_input_radio($name, $val);
                         $text .= $caption;
                     }
-                    $text .= "<br />\n";
+                    $text .= "<br>\n";
                 } else {
                     if ($flag_sanitize) {
                         $value = $this->sanitize_text($value);
@@ -342,7 +352,7 @@ class happy_linux_form_lib extends happy_linux_form
         }
 
         $text .= $this->build_form_end();
-        $text .= "<br />\n";
+        $text .= "<br>\n";
         $text .= "</div>\n";
 
         return $text;

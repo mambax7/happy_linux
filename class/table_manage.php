@@ -95,18 +95,21 @@ class happy_linux_table_manage extends happy_linux_error
     public function get_post_op()
     {
         $this->op = $this->_post->get_post_get_text('op');
+
         return $this->op;
     }
 
     public function get_post_offset()
     {
         $this->_offset = $this->_post->get_post_get_int('offset');
+
         return $this->_offset;
     }
 
     public function get_post_limit()
     {
         $this->_limit = $this->_post->get_post_get_int('limit');
+
         return $this->_limit;
     }
 
@@ -124,6 +127,7 @@ class happy_linux_table_manage extends happy_linux_error
         if ($total && ($end > $total)) {
             $end = $total;
         }
+
         return $end;
     }
 
@@ -138,12 +142,14 @@ class happy_linux_table_manage extends happy_linux_error
 
         if (!$this->_config_store_handler->compare_to_define()) {
             $this->print_red($this->_config_store_handler->getErrors(1), false);
-            echo "<br />\n";
+            echo "<br>\n";
             $this->_print_action_define();
+
             return false;
         }
 
         $this->print_blue('check OK');
+
         return true;
     }
 
@@ -152,18 +158,20 @@ class happy_linux_table_manage extends happy_linux_error
         return $this->check_table_scheme_by_handler(happy_linux_getHandler($table_short, $module_dir, $prefix));
     }
 
-    public function check_table_scheme_by_handler(&$handler, $flag_ok = true)
+    public function check_table_scheme_by_handler($handler, $flag_ok = true)
     {
         if (!$handler->compare_to_scheme()) {
             $this->print_red('<b> Fatal Error </b>', false);
             $this->print_red($handler->getErrors(1), false);
-            echo "<br />\n";
+            echo "<br>\n";
             $this->_print_action_scheme();
+
             return false;
         }
         if ($flag_ok) {
             $this->print_blue('check OK');
         }
+
         return true;
     }
 
@@ -181,6 +189,7 @@ class happy_linux_table_manage extends happy_linux_error
 
         if (!$this->check_token()) {
             xoops_error('Token Error');
+
             return;
         }
 
@@ -225,19 +234,19 @@ class happy_linux_table_manage extends happy_linux_error
 
     public function build_bread_crumb($name)
     {
-        $arr = array(
-            array(
+        $arr = [
+            [
                 'name' => $this->_system->get_module_name(),
                 'url'  => 'index.php',
-            ),
-            array(
+            ],
+            [
                 'name' => $this->_THIS_TITLE,
                 'url'  => $this->_this_url,
-            ),
-            array(
+            ],
+            [
                 'name' => $name,
-            ),
-        );
+            ],
+        ];
 
         return $this->_form->build_html_bread_crumb($arr);
     }
@@ -259,9 +268,9 @@ class happy_linux_table_manage extends happy_linux_error
 
     public function print_finish()
     {
-        echo "<br /><hr />\n";
+        echo "<br><hr>\n";
         echo '<h4>' . _HAPPY_LINUX_FINISHED . "</h4>\n";
-        echo '<a href="' . $this->_this_url . '"> &gt;&gt; ' . $this->_THIS_TITLE . "</a><br />\n";
+        echo '<a href="' . $this->_this_url . '"> &gt;&gt; ' . $this->_THIS_TITLE . "</a><br>\n";
     }
 
     public function _print_action_define()
@@ -271,12 +280,12 @@ class happy_linux_table_manage extends happy_linux_error
 
     public function _print_action_scheme()
     {
-        echo 'check manually by phpMyAdmin or other tool' . "<br />\n";
+        echo 'check manually by phpMyAdmin or other tool' . "<br>\n";
     }
 
     public function _print_action_reinstall()
     {
-        echo _HAPPY_LINUX_CONF_TABLE_REINSTALL . "<br />\n";
+        echo _HAPPY_LINUX_CONF_TABLE_REINSTALL . "<br>\n";
     }
 
     //---------------------------------------------------------

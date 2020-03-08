@@ -10,7 +10,7 @@
 //=========================================================
 // _LANGCODE: ru
 // _CHARSET : utf-8
-// Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
+// Translator: Houston (Contour Design Studio https://www.cdesign.ru/)
 
 // bin command
 define('_HAPPY_LINUX_CONF_COMMAND_MANAGE', 'Управление командами');
@@ -51,4 +51,4 @@ define('_HAPPY_LINUX_CONF_TABLE_MANAGE', 'Управление таблицей 
 define('_HAPPY_LINUX_CONF_TABLE_CHECK', 'Проверить таблицу %s');
 define('_HAPPY_LINUX_CONF_TABLE_REINSTALL', 'Рекомендуется переустановить, если обнаружена ошибка');
 define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW', 'Обновление конфигурации таблицы');
-define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Выполнить, если обнаружена ошибка. <br />Существующие значения аннулируются. <br />Установите значения после выполнения. ');
+define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Выполнить, если обнаружена ошибка. <br>Существующие значения аннулируются. <br>Установите значения после выполнения. ');

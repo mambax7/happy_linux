@@ -28,7 +28,7 @@ class happy_linux_xoops_block_checker
     public $_mid                 = 0;
     public $_dirname             = null;
     public $_is_special          = false;
-    public $_msg_array           = array();
+    public $_msg_array           = [];
     public $_error_flag          = false;
     public $_check_same_template = true;
 
@@ -58,7 +58,8 @@ class happy_linux_xoops_block_checker
     {
         $text = '<h4>' . _HAPPY_LINUX_XOOPS_BLOCK_TABLE_CHECK . "</h4>\n";
         $text .= $this->check_block();
-        $text .= "<br /><br />\n";
+        $text .= "<br><br>\n";
+
         return $text;
     }
 
@@ -67,12 +68,14 @@ class happy_linux_xoops_block_checker
         $form   = happy_linux_form_lib::getInstance();
         $button = $form->build_lib_button($op, _HAPPY_LINUX_DELETE, $action);
         $text   = $form->build_lib_box_style(_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE, _HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE_DESC, $button);
+
         return $text;
     }
 
     public function check_token()
     {
         $form = happy_linux_form_lib::getInstance();
+
         return $form->check_token();
     }
 
@@ -86,8 +89,9 @@ class happy_linux_xoops_block_checker
         } else {
             $text .= '<h4 style="color:#ff0000">' . _HAPPY_LINUX_FAILED . "</h4>\n";
         }
-        $text .= _HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE_NEXT . "<br /><br />\n";
-        $text .= '<a href="modules.php">' . _HAPPY_LINUX_AM_MODULE . "</a><br />\n";
+        $text .= _HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE_NEXT . "<br><br>\n";
+        $text .= '<a href="modules.php">' . _HAPPY_LINUX_AM_MODULE . "</a><br>\n";
+
         return $text;
     }
 
@@ -96,14 +100,14 @@ class happy_linux_xoops_block_checker
     //--------------------------------------------------------
     public function check_block()
     {
-        $this->_msg_array = array();
+        $this->_msg_array = [];
 
         $this->_is_special = $this->_is_special_module($this->_dirname);
 
-        $module_obj   =& $this->_get_module_obj();
-        $block_objs   =& $this->_get_block_object_orber_num_by_mid($this->_mid);
-        $infos        =& $this->_get_module_info('blocks');
-        $overlap_list =& $this->_make_overlap_template_list($infos);
+        $module_obj   = &$this->_get_module_obj();
+        $block_objs   = &$this->_get_block_object_orber_num_by_mid($this->_mid);
+        $infos        = &$this->_get_module_info('blocks');
+        $overlap_list = &$this->_make_overlap_template_list($infos);
 
         foreach ($infos as $num => $info) {
             if (!isset($block_objs[$num])) {
@@ -120,8 +124,8 @@ class happy_linux_xoops_block_checker
     public function remove_block()
     {
         $error      = false;
-        $module_obj =& $this->_get_module_obj();
-        $block_objs =& $this->_get_block_object_by_mid($this->_mid);
+        $module_obj = &$this->_get_module_obj();
+        $block_objs = &$this->_get_block_object_by_mid($this->_mid);
 
         foreach ($block_objs as $obj) {
             $ret = $this->_delete_block($obj);
@@ -138,19 +142,20 @@ class happy_linux_xoops_block_checker
         if ($error) {
             return false;
         }
+
         return true;
     }
 
     //--------------------------------------------------------
     // private
     //--------------------------------------------------------
-    public function &_make_overlap_template_list(&$infos)
+    public function &_make_overlap_template_list($infos)
     {
         // some module has same name templates
         // ex) news, newbb, pical, etc
 
-        $template_list = array();
-        $overlap_list  = array();
+        $template_list = [];
+        $overlap_list  = [];
 
         foreach ($infos as $num => $info) {
             if (isset($info['template']) && $info['template']) {
@@ -168,7 +173,7 @@ class happy_linux_xoops_block_checker
         return $overlap_list;
     }
 
-    public function _check_block_by_obj(&$module_obj, &$info, &$block_obj, &$overlap_list)
+    public function _check_block_by_obj($module_obj, $info, $block_obj, $overlap_list)
     {
         $this->_error_flag = false;
 
@@ -193,7 +198,7 @@ class happy_linux_xoops_block_checker
 
             if ($template == $block_obj->getVar('template', 'n')) {
                 $count = $this->_get_tplfile_count_by_file($bid, $dirname, $template);
-                if ($count == 0) {
+                if (0 == $count) {
                     $this->_err($name . ': template not exist in tplfile');
                 }
                 if ($this->_check_same_template && !in_array($template, $overlap_list)) {
@@ -237,7 +242,8 @@ class happy_linux_xoops_block_checker
 
     public function _get_msg()
     {
-        $msg = implode("<br />\n", $this->_msg_array);
+        $msg = implode("<br>\n", $this->_msg_array);
+
         return $msg;
     }
 
@@ -247,6 +253,7 @@ class happy_linux_xoops_block_checker
         if ($msg) {
             $text = '<span style="color: #ff0000;">' . $msg . '</span>';
         }
+
         return $text;
     }
 
@@ -282,6 +289,7 @@ class happy_linux_xoops_block_checker
     public function &_get_module_obj()
     {
         global $xoopsModule;
+
         return $xoopsModule;
     }
 
@@ -295,6 +303,7 @@ class happy_linux_xoops_block_checker
     public function &_get_module_info($name = null)
     {
         global $xoopsModule;
+
         return $xoopsModule->getInfo($name);
     }
 
@@ -303,21 +312,23 @@ class happy_linux_xoops_block_checker
     //--------------------------------------------------------
     public function &_get_block_object_orber_num_by_mid($mid)
     {
-        $arr  = array();
-        $objs =& $this->_get_block_object_by_mid($mid);
+        $arr  = [];
+        $objs = &$this->_get_block_object_by_mid($mid);
         foreach ($objs as $obj) {
             $arr[$obj->getVar('func_num', 'n')] = $obj;
         }
+
         return $arr;
     }
 
     public function &_get_block_object_by_mid($mid, $asobject = true)
     {
-        $objs =& xoopsBlock::getByModule($mid, $asobject);
+        $objs = xoopsBlock::getByModule($mid, $asobject);
+
         return $objs;
     }
 
-    public function _delete_block(&$obj)
+    public function _delete_block($obj)
     {
         // NOT use xoops_gethandler in xoops 2.0.16jp
 
@@ -328,6 +339,7 @@ class happy_linux_xoops_block_checker
         } else {
             $this->_err($msg . ' Failed');
         }
+
         return $ret;
     }
 
@@ -348,21 +360,22 @@ class happy_linux_xoops_block_checker
             $criteria->add(new Criteria('tpl_file', $file));
         }
         $count = $this->_tplfile_handler->getCount($criteria);
+
         return $count;
     }
 
-    public function _delete_tplfile_by_block_obj(&$module_obj, &$block_obj)
+    public function _delete_tplfile_by_block_obj($module_obj, $block_obj)
     {
         $error    = false;
         $dirname  = $module_obj->getVar('dirname', 'n');
         $bid      = $block_obj->getVar('bid', 'n');
         $template = $block_obj->getVar('template', 'n');
 
-        if ($template != '') {
+        if ('' != $template) {
             if ($this->_check_same_template) {
-                $tpl_objs =& $this->_get_tplfile_objects_by_block_id(null, $dirname, $template);
+                $tpl_objs = &$this->_get_tplfile_objects_by_block_id(null, $dirname, $template);
             } else {
-                $tpl_objs =& $this->_get_tplfile_objects_by_block_id($bid);
+                $tpl_objs = &$this->_get_tplfile_objects_by_block_id($bid);
             }
 
             if (is_array($tpl_objs) && count($tpl_objs)) {
@@ -378,12 +391,14 @@ class happy_linux_xoops_block_checker
         if ($error) {
             return false;
         }
+
         return true;
     }
 
     public function &_get_tplfile_objects_by_block_id($block_id = null, $module = null, $file = null)
     {
-        $objs =& $this->_tplfile_handler->find(null, 'block', $block_id, $module, $file);
+        $objs = &$this->_tplfile_handler->find(null, 'block', $block_id, $module, $file);
+
         return $objs;
     }
 
@@ -396,6 +411,7 @@ class happy_linux_xoops_block_checker
         } else {
             $this->_err($msg . ' Failed');
         }
+
         return $ret;
     }
 

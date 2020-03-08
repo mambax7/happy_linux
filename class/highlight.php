@@ -25,10 +25,10 @@
 
 //---------------------------------------------------------
 // original: keyhighlighter
-// http://www.phpclasses.org/browse/package/1792.html
+// https://www.phpclasses.org/browse/package/1792.html
 //
-// porting from smartsection <http://smartfactory.ca/>
-// http://smartfactory.ca/modules/newbb/viewtopic.php?topic_id=1211
+// porting from smartsection <https://smartfactory.ca/>
+// https://smartfactory.ca/modules/newbb/viewtopic.php?topic_id=1211
 //---------------------------------------------------------
 
 //=========================================================
@@ -78,7 +78,7 @@ class happy_linux_highlight
         if ($keywords) {
             $keywords = $this->_sanitize_keyword($keywords);
 
-            $arr = array();
+            $arr = [];
             if ($flag_singlewords) {
                 $keyword_array = explode(' ', $keywords);
                 foreach ($keyword_array as $keyword) {
@@ -101,21 +101,20 @@ class happy_linux_highlight
         $ret = $str;
 
         if (is_array($keyword_array) && count($keyword_array)) {
-            $arr = array();
+            $arr = [];
 
             foreach ($keyword_array as $k) {
                 $keyword = $this->_sanitize_keyword($k);
 
                 // not empty
                 if ($keyword) {
-
                     // BUG 4647: keyword "abc" match "abcc"
                     $arr[] = '/(?' . '>' . preg_quote($keyword, '/') . ')/si';
                 }
             }
 
             if (count($arr)) {
-                $this->_pattern_array =& $arr;
+                $this->_pattern_array = &$arr;
                 $ret                  = $this->_replace_content($str);
             }
         }
@@ -147,8 +146,9 @@ class happy_linux_highlight
     public function _replace_content($str)
     {
         $str = '>' . $str . '<';
-        $str = preg_replace_callback("/(\>(((?" . ">[^><]+)|(?R))*)\<)/is", array(&$this, '_replace_with_callback'), $str);
-        $str = substr($str, 1, -1);
+        $str = preg_replace_callback("/(\>(((?" . ">[^><]+)|(?R))*)\<)/is", [&$this, '_replace_with_callback'], $str);
+        $str = mb_substr($str, 1, -1);
+
         return $str;
     }
 
@@ -161,7 +161,7 @@ class happy_linux_highlight
             $result = $matches[0];
 
             foreach ($this->_pattern_array as $pattern) {
-                if (!is_null($this->_replace_callback)) {
+                if (null !== $this->_replace_callback) {
                     $result = preg_replace_callback($pattern, $this->_replace_callback, $result);
                 } else {
                     $result = preg_replace($pattern, $replacement, $result);
@@ -227,7 +227,7 @@ class happy_linux_highlight
 // function
 //=========================================================
 //---------------------------------------------------------
-// porting from smartsection <http://smartfactory.ca/>
+// porting from smartsection <https://smartfactory.ca/>
 //---------------------------------------------------------
 function happy_linux_highlighter($matches)
 {
@@ -237,6 +237,7 @@ function happy_linux_highlighter($matches)
     if (is_array($matches) && isset($matches[0])) {
         $ret = '<span style="' . $STYLE . '">' . $matches[0] . '</span>';
     }
+
     return $ret;
 }
 
@@ -248,6 +249,7 @@ function happy_linux_highlighter_by_style($matches)
     if (is_array($matches) && isset($matches[0])) {
         $ret = '<span style="' . $style . '">' . $matches[0] . '</span>';
     }
+
     return $ret;
 }
 
@@ -259,5 +261,6 @@ function happy_linux_highlighter_by_class($matches)
     if (is_array($matches) && isset($matches[0])) {
         $ret = '<span class="' . $class . '">' . $matches[0] . '</span>';
     }
+
     return $ret;
 }

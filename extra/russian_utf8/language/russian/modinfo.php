@@ -13,7 +13,7 @@
 //=========================================================
 // _LANGCODE: ru
 // _CHARSET : utf-8
-// Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
+// Translator: Houston (Contour Design Studio https://www.cdesign.ru/)
 
 // The name of this module
 define('_MI_HAPPY_LINUX_NAME', 'Структура Happy Linux');

@@ -19,7 +19,7 @@
 //=========================================================
 // _LANGCODE: ru
 // _CHARSET : utf-8
-// Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
+// Translator: Houston (Contour Design Studio https://www.cdesign.ru/)
 
 // 2007-05-12
 define('_HAPPY_LINUX_AM_GROUP', 'Управление группой');
@@ -46,4 +46,4 @@ define('_HAPPY_LINUX_AM_SERVER_ENV', 'Переменные серверной с
 define('_HAPPY_LINUX_AM_DIR_NOT_WRITABLE', 'Эта директория недоступка для записи');
 define('_HAPPY_LINUX_AM_MEMORY_LIMIT_TOO_SMALL', 'memory_limit слишком мал');
 define('_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'Модуль веб-ссылок требует больше памяти, чем %s MB');
-define('_HAPPY_LINUX_AM_MEMORY_DESC', 'Это значение является одним стандартом.<br />В зависимости от серверной среды, иногда бывает больше или меньше.');
+define('_HAPPY_LINUX_AM_MEMORY_DESC', 'Это значение является одним стандартом.<br>В зависимости от серверной среды, иногда бывает больше или меньше.');

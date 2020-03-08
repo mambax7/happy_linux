@@ -10,7 +10,7 @@
 //=========================================================
 // _LANGCODE: ru
 // _CHARSET : utf-8
-// Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
+// Translator: Houston (Contour Design Studio https://www.cdesign.ru/)
 
 // page_frame
 define('_HAPPY_LINUX_THERE_ARE', 'Есть <b>%s</b> записей в базе данных');

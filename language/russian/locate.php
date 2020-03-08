@@ -14,4 +14,3 @@
 
 // dummy for Russian
 // define('_HAPPY_LINUX_GM_DEFAULT_LOCATION', '');
-;

@@ -12,12 +12,12 @@
 include_once XOOPS_ROOT_PATH . '/modules/happy_linux/include/multibyte.php';
 
 //---------------------------------------------------------
-// porting from Suin's Search module <http://suin.jp/>
+// porting from Suin's Search module <https://suin.jp/>
 //---------------------------------------------------------
 function happy_linux_build_search_context($text, $word_array, $max = 255)
 {
     if (!is_array($word_array)) {
-        $word_array = array();
+        $word_array = [];
     }
 
     $ret    = '';
@@ -27,11 +27,11 @@ function happy_linux_build_search_context($text, $word_array, $max = 255)
         $ret = ltrim(preg_replace('/\s+/', ' ', $text));
         list($pre, $aft) = preg_split("/$q_word/i", $ret, 2);
         $m   = (int)($max / 2);
-        $ret = (strlen($pre) > $m) ? '... ' : '';
-        $ret .= happy_linux_strcut($pre, max(strlen($pre) - $m + 1, 0), $m) . $match[0];
-        $m = $max - strlen($ret);
-        $ret .= happy_linux_strcut($aft, 0, min(strlen($aft), $m));
-        if (strlen($aft) > $m) {
+        $ret = (mb_strlen($pre) > $m) ? '... ' : '';
+        $ret .= happy_linux_strcut($pre, max(mb_strlen($pre) - $m + 1, 0), $m) . $match[0];
+        $m   = $max - mb_strlen($ret);
+        $ret .= happy_linux_strcut($aft, 0, min(mb_strlen($aft), $m));
+        if (mb_strlen($aft) > $m) {
             $ret .= ' ...';
         }
     }

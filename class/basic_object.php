@@ -17,7 +17,7 @@
 //=========================================================
 class happy_linux_basic extends happy_linux_strings
 {
-    public $_vars = array();
+    public $_vars = [];
 
     public $_DEBUG = false;
 
@@ -34,7 +34,7 @@ class happy_linux_basic extends happy_linux_strings
     //---------------------------------------------------------
     public function clear_vars()
     {
-        $this->_vars = array();
+        $this->_vars = [];
     }
 
     public function setVar($key, $value)
@@ -53,21 +53,24 @@ class happy_linux_basic extends happy_linux_strings
         if (!is_array($val)) {
             $val = $this->sanitize_format_text($val, $format);
         }
+
         return $val;
     }
 
     public function &getVarArray($key)
     {
         $val = unserialize($this->get($key));
+
         return $val;
     }
 
     public function &getVarAll($format = 'n')
     {
-        $ret = array();
+        $ret = [];
         foreach ($this->_vars as $k => $v) {
             $ret[$k] = $this->getVar($k, $format);
         }
+
         return $ret;
     }
 
@@ -80,13 +83,14 @@ class happy_linux_basic extends happy_linux_strings
     {
         $ret = false;
         if (isset($this->_vars[$key])) {
-            $ret =& $this->_vars[$key];
+            $ret = &$this->_vars[$key];
         }
 
         if ($this->_DEBUG) {
-            echo "basic_object.php get(): $key <br />\n";
+            echo "basic_object.php get(): $key <br>\n";
             debug_print_backtrace();
         }
+
         return $ret;
     }
 
@@ -99,8 +103,9 @@ class happy_linux_basic extends happy_linux_strings
     {
         $ret = false;
         if (isset($this->_vars)) {
-            $ret =& $this->_vars;
+            $ret = &$this->_vars;
         }
+
         return $ret;
     }
 
@@ -114,6 +119,7 @@ class happy_linux_basic extends happy_linux_strings
         if (isset($this->_vars[$key])) {
             return true;
         }
+
         return false;
     }
 
@@ -122,9 +128,9 @@ class happy_linux_basic extends happy_linux_strings
         if (isset($this->_vars[$key]) && is_array($this->_vars[$key])) {
             return true;
         }
+
         return false;
     }
 }
 
 // --- class end ---
-;

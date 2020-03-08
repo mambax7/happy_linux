@@ -38,6 +38,7 @@ class happy_linux_page_frame extends happy_linux_form
     // class instance
     public $_handler;  // MUST set by children class
     public $_pagenavi;
+    public $handler;
 
     // language
     public $_LANG_TITLE        = _HAPPY_LINUX_TITLE;
@@ -191,7 +192,7 @@ class happy_linux_page_frame extends happy_linux_form
         $total_all = $this->_get_total_all();
 
         printf($this->_LANG_THERE_ARE, $total_all);
-        echo "<br /><br />\n";
+        echo "<br><br>\n";
     }
 
     public function _print_top_list()
@@ -200,10 +201,10 @@ class happy_linux_page_frame extends happy_linux_form
         $script_desc = $this->_get_script_desc();
 
         echo "<ul>\n";
-        echo '<li><a href="' . $script_asc . '">' . $this->_LANG_ID_ASC . "</a><br /><br /></li>\n";
-        echo '<li><a href="' . $script_desc . '">' . $this->_LANG_ID_DESC . "</a><br /><br /></li>\n";
+        echo '<li><a href="' . $script_asc . '">' . $this->_LANG_ID_ASC . "</a><br><br></li>\n";
+        echo '<li><a href="' . $script_desc . '">' . $this->_LANG_ID_DESC . "</a><br><br></li>\n";
         echo "</ul>\n";
-        echo "<br />\n";
+        echo "<br>\n";
     }
 
     public function _print_top_extra()
@@ -215,6 +216,7 @@ class happy_linux_page_frame extends happy_linux_form
     {
         $total            = $this->_get_handler_total();
         $this->_total_all = $total;
+
         return $total;
     }
 
@@ -222,6 +224,7 @@ class happy_linux_page_frame extends happy_linux_form
     {
         $total        = $this->_get_total_all();
         $this->_total = $total;
+
         return $total;
     }
 
@@ -240,12 +243,13 @@ class happy_linux_page_frame extends happy_linux_form
         }
 
         $sortid = $this->_pagenavi->_check_sortid($sortid);
+
         return $sortid;
     }
 
     public function _convert_op_to_sortid()
     {
-        $arr =& $this->_get_op_sortid_array();
+        $arr = &$this->_get_op_sortid_array();
         $op  = $this->_get_post_op();
 
         $sortid = 0;
@@ -266,16 +270,18 @@ class happy_linux_page_frame extends happy_linux_form
         } elseif (isset($_GET['op'])) {
             $op = $_GET['op'];
         }
+
         return $op;
     }
 
     // override this
     public function &_get_op_sortid_array()
     {
-        $arr = array(
+        $arr = [
             'list_asc'  => 0,
             'list_desc' => 1,
-        );
+        ];
+
         return $arr;
     }
 
@@ -284,9 +290,9 @@ class happy_linux_page_frame extends happy_linux_form
     //---------------------------------------------------------
     public function _no_item_proc()
     {
-        echo "<br />\n";
+        echo "<br>\n";
         echo $this->_build_page_no_item();
-        echo "<br />\n";
+        echo "<br>\n";
     }
 
     //---------------------------------------------------------
@@ -301,9 +307,9 @@ class happy_linux_page_frame extends happy_linux_form
     {
         if ($flag || $this->_FLAG_EXECUTE_TIME) {
             $time = happy_linux_time::getInstance();
-            echo "<br /><hr />\n";
-            echo $time->build_elapse_time() . "<br />\n";
-            echo happy_linux_build_memory_usage_mb() . "<br />\n";
+            echo "<br><hr>\n";
+            echo $time->build_elapse_time() . "<br>\n";
+            echo happy_linux_build_memory_usage_mb() . "<br>\n";
         }
     }
 
@@ -312,7 +318,7 @@ class happy_linux_page_frame extends happy_linux_form
     //---------------------------------------------------------
     public function _main_proc()
     {
-        $item_arr =& $this->_pre_main_proc();
+        $item_arr = &$this->_pre_main_proc();
 
         foreach ($item_arr as $item) {
             $this->_item_proc($item);
@@ -328,12 +334,13 @@ class happy_linux_page_frame extends happy_linux_form
 
         if ($this->_FLAG_PRINT_NAVI_PRE) {
             $this->_print_pagenavi();
-            echo "<br />\n";
+            echo "<br>\n";
         }
 
         // --- form begin ---
         $this->_pre_main_form_begin();
-        $item_arr =& $this->_get_items($this->_PERPAGE, $start);
+        $item_arr = &$this->_get_items($this->_PERPAGE, $start);
+
         return $item_arr;
     }
 
@@ -404,12 +411,12 @@ class happy_linux_page_frame extends happy_linux_form
 
     public function _print_table_end()
     {
-        echo "</table><br />\n";
+        echo "</table><br>\n";
     }
 
     public function _print_table_header()
     {
-        $head_arr =& $this->_get_table_header();
+        $head_arr = &$this->_get_table_header();
 
         echo '<tr>';
 
@@ -422,7 +429,7 @@ class happy_linux_page_frame extends happy_linux_form
 
     public function _print_table_item(&$item)
     {
-        $col_arr =& $this->_get_cols($item);
+        $col_arr = &$this->_get_cols($item);
         $class   = $this->_get_col_class($item);
 
         if ($this->_flag_alternate) {
@@ -443,7 +450,7 @@ class happy_linux_page_frame extends happy_linux_form
 
     public function _build_page_class_alternate()
     {
-        if ($this->_item_count % 2 == 0) {
+        if (0 == $this->_item_count % 2) {
             $class = 'even';
         } else {
             $class = 'odd';
@@ -469,13 +476,14 @@ class happy_linux_page_frame extends happy_linux_form
             $text .= $this->_build_page_col_submit_null($colspan1);
         }
 
-        $text .= $this->_build_page_col_submit($colspan2);
+        $text .= $this->_build_page_col_submit(null, null, $colspan2);
 
         if ($colspan3) {
             $text .= $this->_build_page_col_submit_null($colspan3);
         }
 
         $text .= "</tr>\n";
+
         return $text;
     }
 
@@ -485,12 +493,14 @@ class happy_linux_page_frame extends happy_linux_form
     public function _get_script_asc()
     {
         $script = '?sortid=0';
+
         return $script;
     }
 
     public function _get_script_desc()
     {
         $script = '?sortid=1';
+
         return $script;
     }
 
@@ -502,19 +512,20 @@ class happy_linux_page_frame extends happy_linux_form
     //---------------------------------------------------------
     // sample of items
     //---------------------------------------------------------
-    public function &_get_table_header()
+    public function _get_table_header()
     {
-        $arr = array(
+        $arr = [
             'id',
             'title',
-        );
+        ];
 
         return $arr;
     }
 
     public function &_get_items($limit = 0, $start = 0)
     {
-        $objs =& $this->_get_handler_objs($limit, $start);
+        $objs = &$this->_get_handler_objs($limit, $start);
+
         return $objs;
     }
 
@@ -524,15 +535,15 @@ class happy_linux_page_frame extends happy_linux_form
         $id    = $this->_build_formated_id($id);
         $title = $this->_build_page_label_by_obj($obj, 'title');
 
-        $arr = array(
+        $arr = [
             $id,
             $title,
-        );
+        ];
 
         return $arr;
     }
 
-    public function _get_col_class(&$obj)
+    public function _get_col_class($obj)
     {
         return '';
     }
@@ -540,7 +551,7 @@ class happy_linux_page_frame extends happy_linux_form
     //---------------------------------------------------------
     // utility
     //---------------------------------------------------------
-    public function _build_page_id_link_by_obj(&$obj, $key, $jump, $title = '', $target = '')
+    public function _build_page_id_link_by_obj($obj, $key, $jump, $title = '', $target = '')
     {
         if (!is_object($obj)) {
             return false;
@@ -557,7 +568,7 @@ class happy_linux_page_frame extends happy_linux_form
         return $text;
     }
 
-    public function _build_page_name_link_by_obj(&$obj, $key1, $key2 = '', $target = '')
+    public function _build_page_name_link_by_obj($obj, $key1, $key2 = '', $target = '')
     {
         if (!is_object($obj)) {
             return false;
@@ -579,7 +590,7 @@ class happy_linux_page_frame extends happy_linux_form
         return '&nbsp;';
     }
 
-    public function _build_page_label_by_obj(&$obj, $key)
+    public function _build_page_label_by_obj($obj, $key)
     {
         if (!is_object($obj)) {
             return false;
@@ -597,6 +608,7 @@ class happy_linux_page_frame extends happy_linux_form
     public function _build_formated_id($id, $format = '%03d')
     {
         $text = sprintf($format, $id);
+
         return $text;
     }
 
@@ -624,6 +636,7 @@ class happy_linux_page_frame extends happy_linux_form
     {
         $script = $this->_get_script(); // null
         $navi   = $this->_pagenavi->build($script);
+
         return $navi;
     }
 
@@ -665,12 +678,13 @@ class happy_linux_page_frame extends happy_linux_form
     {
         $objs = false;
         if (is_object($this->_handler)) {
-            if ($this->_sortid == 1) {
-                $objs =& $this->_handler->get_objects_desc($limit, $start);
+            if (1 == $this->_sortid) {
+                $objs = &$this->_handler->get_objects_desc($limit, $start);
             } else {
-                $objs =& $this->_handler->get_objects_asc($limit, $start);
+                $objs = &$this->_handler->get_objects_asc($limit, $start);
             }
         }
+
         return $objs;
     }
 
@@ -686,10 +700,11 @@ class happy_linux_page_frame extends happy_linux_form
             $form .= $this->build_html_input_hidden('sortid', $this->_sortid);
         }
         if ($this->_FLAG_PRINT_REQUEST_URI && isset($_SERVER['REQUEST_URI'])) {
-            $uri = $this->sanitize_url($_SERVER['REQUEST_URI']);
+            $uri  = $this->sanitize_url($_SERVER['REQUEST_URI']);
             $form .= $this->build_html_input_hidden('request_uri', $uri);
         }
         $form .= $this->_build_page_form_begin_extra();
+
         return $form;
     }
 
@@ -701,6 +716,7 @@ class happy_linux_page_frame extends happy_linux_form
     public function _build_page_form_end()
     {
         $text = $this->build_form_end();
+
         return $text;
     }
 
@@ -709,6 +725,7 @@ class happy_linux_page_frame extends happy_linux_form
         $text = $this->build_html_th_tag_begin($this->_HEAD_ALIGN, $this->_HEAD_VALIGN, $colspan, $this->_HEAD_ROWSPAN, $this->_HEAD_CLASS);
         $text .= $this->substute_blank($value);
         $text .= $this->build_html_th_tag_end();
+
         return $text;
     }
 
@@ -717,6 +734,7 @@ class happy_linux_page_frame extends happy_linux_form
         $text = $this->build_html_td_tag_begin($this->_ITEM_ALIGN, $this->_ITEM_VALIGN, $colspan, $this->_ITEM_ROWSPAN, $this->_ITEM_CLASS);
         $text .= $this->substute_blank($value);
         $text .= $this->build_html_td_tag_end();
+
         return $text;
     }
 
@@ -725,14 +743,16 @@ class happy_linux_page_frame extends happy_linux_form
         $text = $this->build_html_td_tag_begin($this->_ITEM_ALIGN, $this->_ITEM_VALIGN, $colspan, $this->_ITEM_ROWSPAN, $this->_ITEM_CLASS);
         $text .= '&nbsp';
         $text .= $this->build_html_td_tag_end();
+
         return $text;
     }
 
-    public function _build_page_col_submit($colspan = 1)
+    public function _build_page_col_submit($name=null, $value=null, $colspan=1)
     {
         $text = $this->build_html_td_tag_begin($this->_SUBMIT_ALIGN, $this->_SUBMIT_VALIGN, $colspan, $this->_SUBMIT_ROWSPAN, $this->_SUBMIT_CLASS);
         $text .= $this->build_html_input_submit($this->_SUBMIT_NAME, $this->_LANG_SUBMIT_VALUE);
         $text .= $this->build_html_td_tag_end();
+
         return $text;
     }
 
@@ -741,12 +761,14 @@ class happy_linux_page_frame extends happy_linux_form
         $text = $this->build_html_td_tag_begin($this->_SUBMIT_ALIGN, $this->_SUBMIT_VALIGN, $colspan, $this->_SUBMIT_ROWSPAN, $this->_SUBMIT_CLASS);
         $text .= '&nbsp';
         $text .= $this->build_html_td_tag_end();
+
         return $text;
     }
 
     public function _build_page_no_item()
     {
         $text = $this->build_html_highlight($this->_LANG_NO_RECORD, $this->_NO_ITEM_COLOR, $this->_NO_ITEM_WEIGHT);
+
         return $text;
     }
 
@@ -756,6 +778,7 @@ class happy_linux_page_frame extends happy_linux_form
     public function set_handler($table_name, $dirname, $prefix = 'happy_linux')
     {
         $this->_handler = happy_linux_getHandler($table_name, $dirname, $prefix);
+        $this->handler = happy_linux_getHandler($table_name, $dirname, $prefix);
     }
 
     public function set_id_name($value)

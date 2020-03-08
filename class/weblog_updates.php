@@ -86,7 +86,7 @@ class happy_linux_weblog_updates
 
         if (($log_level > 0) && $log_file) {
             $flag_use_log = true;
-            $fp           = fopen($log_file, 'a');
+            $fp           = fopen($log_file, 'ab');
             fwrite($fp, "$today \n");
         }
 
@@ -100,7 +100,7 @@ class happy_linux_weblog_updates
         }
 
         if ($print_level >= 1) {
-            echo "<hr />\n";
+            echo "<hr>\n";
         }
 
         foreach ($ping_arr as $url) {
@@ -115,7 +115,7 @@ class happy_linux_weblog_updates
 
             if ($print_level >= 1) {
                 echo $msg;
-                echo "<br /><br />\n";
+                echo "<br><br>\n";
             }
 
             if ($flag_use_log) {
@@ -124,7 +124,7 @@ class happy_linux_weblog_updates
         }
 
         if ($print_level >= 1) {
-            echo "<hr />\n";
+            echo "<hr>\n";
         }
 
         if ($flag_use_log) {
@@ -155,16 +155,19 @@ class happy_linux_weblog_updates
 
         if (empty($url)) {
             $this->error = 'no server url';
+
             return false;
         }
 
         if (empty($this->blog_name)) {
             $this->error = 'no blog name';
+
             return false;
         }
 
         if (empty($this->blog_url)) {
             $this->error = 'no blog url';
+
             return false;
         }
 
@@ -226,6 +229,7 @@ class happy_linux_weblog_updates
             $this->_snoopy->host = $URI_PARTS['host'];
         } else {
             $this->error = 'no host in url';
+
             return false;
         }
         if (!empty($URI_PARTS['port'])) {
@@ -244,11 +248,11 @@ class happy_linux_weblog_updates
             $this->status        = $this->_snoopy->status;
             $this->error         = $this->_snoopy->error;
             $this->response_code = $this->_snoopy->response_code;
+
             return false;
-        } else {
-            $this->response_code = $this->_snoopy->response_code;
-            $this->results       = $this->_snoopy->results;
         }
+        $this->response_code = $this->_snoopy->response_code;
+        $this->results       = $this->_snoopy->results;
 
         return true;
     }
@@ -359,7 +363,7 @@ END_OF_TEXT;
             $message = $member_arr['faultString'];
         }
 
-        return array($error, $message);
+        return [$error, $message];
     }
 
     //---------------------------------------------------------
@@ -370,7 +374,7 @@ END_OF_TEXT;
         preg_match_all('/<member>(.*?)<\/member>/is', $xml, $match1);
         $arr = $match1[1];
 
-        $member_arr = array();
+        $member_arr = [];
 
         foreach ($arr as $member) {
             if (preg_match('/<name>(.*)<\/name>/is', $member, $match2)) {
@@ -407,17 +411,18 @@ END_OF_TEXT;
     //---------------------------------------------------------
     public function make_result()
     {
-        if ($this->code == 0) {
-            $msg = 'ping send - ' . $this->url . " - OK <br />\n";
+        if (0 == $this->code) {
+            $msg = 'ping send - ' . $this->url . " - OK <br>\n";
         } else {
-            $msg = '<span style="color:#ff0000;">ping send - ' . $this->url . " - NG </span><br />\n";
+            $msg = '<span style="color:#ff0000;">ping send - ' . $this->url . " - NG </span><br>\n";
             if ($this->error) {
-                $msg .= $this->error . "<br />\n";
+                $msg .= $this->error . "<br>\n";
             }
             if ($this->reason) {
-                $msg .= $this->reason . "<br />\n";
+                $msg .= $this->reason . "<br>\n";
             }
         }
+
         return $msg;
     }
 

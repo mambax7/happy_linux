@@ -11,8 +11,7 @@
 //=========================================================
 class happy_linux_rss_default
 {
-
-    // http://www.rssboard.org/rss-specification#ltimagegtSubelementOfLtchannelgt
+    // https://www.rssboard.org/rss-specification#ltimagegtSubelementOfLtchannelgt
     public $_SITE_IMAGE_WIDTH_MAX      = 144;
     public $_SITE_IMAGE_WIDTH_DEFAULT  = 88;
     public $_SITE_IMAGE_HEIGHT_MAX     = 400;
@@ -65,7 +64,8 @@ class happy_linux_rss_default
 
     public function get_default_site_link_self()
     {
-        $val = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+        $val = 'https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+
         return $val;
     }
 
@@ -75,6 +75,7 @@ class happy_linux_rss_default
         if (empty($name)) {
             $name = $this->_SITE_AUTHOR_NAME_DEFAULT;
         }
+
         return $name;
     }
 
@@ -94,6 +95,7 @@ class happy_linux_rss_default
         if (isset($parse['host'])) {
             return $parse['host'];
         }
+
         return false;
     }
 
@@ -122,7 +124,7 @@ class happy_linux_rss_default
         $height = 0;
 
         if (empty($logo)) {
-            return array($url, $width, $height);
+            return [$url, $width, $height];
         }
 
         $url  = XOOPS_URL . '/' . $logo;
@@ -134,7 +136,7 @@ class happy_linux_rss_default
             $height = (int)$size[1];
         }
 
-        return array($url, $width, $height);
+        return [$url, $width, $height];
     }
 
     public function check_site_image_width($width)
@@ -143,6 +145,7 @@ class happy_linux_rss_default
         if ($width > $this->_SITE_IMAGE_WIDTH_MAX) {
             $ret = 1;
         }
+
         return $ret;
     }
 
@@ -152,6 +155,7 @@ class happy_linux_rss_default
         if ($height > $this->_SITE_IMAGE_HEIGHT_MAX) {
             $ret = 1;
         }
+
         return $ret;
     }
 
@@ -161,18 +165,21 @@ class happy_linux_rss_default
     public function get_xoops_sitename()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['sitename'];
     }
 
     public function get_xoops_slogan()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['slogan'];
     }
 
     public function get_xoops_adminmail()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['adminmail'];
     }
 

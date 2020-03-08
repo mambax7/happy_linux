@@ -92,17 +92,20 @@ class happy_linux_dir extends happy_linux_error
 
         if (!is_dir($xoops_dir)) {
             $this->_set_errors('not directory: ' . $xoops_dir);
+
             return false;
         }
 
         $dh = opendir($xoops_dir);
         if (!$dh) {
             $this->_set_errors('cannot open directory: ' . $xoops_dir);
+
             return false;
         }
 
-        $this->_dh       =& $dh;
+        $this->_dh       = &$dh;
         $this->_dir_name = $dirname;
+
         return true;
     }
 
@@ -112,18 +115,21 @@ class happy_linux_dir extends happy_linux_error
             $ret = closedir($this->_dh);
             if (!$ret) {
                 $this->_set_errors('cannot close directory: ' . $this->_dir_name);
+
                 return false;   // NG
             }
         }
+
         return true;
     }
 
     public function &readdir_array()
     {
-        $arr = array();
+        $arr = [];
         while (false !== ($file = readdir($this->_dh))) {
             $arr[] = $file;
         }
+
         return $arr;
     }
 
@@ -137,8 +143,10 @@ class happy_linux_dir extends happy_linux_error
         // check directory travers
         if (preg_match("|\.\./|", $dirname)) {
             $this->_set_errors('illegal directory name: ' . $dirname);
+
             return false;
         }
+
         return true;
     }
 
@@ -152,7 +160,7 @@ class happy_linux_dir extends happy_linux_error
     //---------------------------------------------------------
     public function &get_all_files_attr_in_dir($dirname, $flag_sort = false, $id_as_key = false)
     {
-        $arr   = array();
+        $arr   = [];
         $false = false;
 
         $dirname = $this->strip_slash_from_tail($dirname);
@@ -165,7 +173,7 @@ class happy_linux_dir extends happy_linux_error
         foreach ($this->readdir_array() as $file) {
             $xoops_file = XOOPS_ROOT_PATH . '/' . $dirname . '/' . $file;
 
-            $temp = array(
+            $temp = [
                 'name'          => $file,
                 'path'          => $xoops_file,
                 'is_dir'        => is_dir($xoops_file),
@@ -176,7 +184,7 @@ class happy_linux_dir extends happy_linux_error
                 'is_executable' => is_executable($xoops_file),
                 'filetype'      => filetype($xoops_file),
                 'stat'          => stat($xoops_file),
-            );
+            ];
 
             if ($id_as_key) {
                 $arr[$file] = $temp;
@@ -197,7 +205,7 @@ class happy_linux_dir extends happy_linux_error
 
     public function &get_dirs_in_dir($dirname, $flag_dir = false, $flag_sort = false, $id_as_key = false)
     {
-        $arr   = array();
+        $arr   = [];
         $false = false;
 
         $dirname = $this->strip_slash_from_tail($dirname);
@@ -235,7 +243,7 @@ class happy_linux_dir extends happy_linux_error
 
     public function &get_files_in_dir($dirname, $ext = null, $flag_dir = false, $flag_sort = false, $id_as_key = false)
     {
-        $arr   = array();
+        $arr   = [];
         $false = false;
 
         $dirname = $this->strip_slash_from_tail($dirname);
@@ -245,13 +253,13 @@ class happy_linux_dir extends happy_linux_error
             return $false;
         }
 
-        $pattern = "/\." . preg_quote($ext) . "$/";
+        $pattern = "/\." . preg_quote($ext) . '$/';
 
         foreach ($this->readdir_array() as $file) {
             $xoops_file = XOOPS_ROOT_PATH . '/' . $dirname . '/' . $file;
 
             if (!is_dir($xoops_file) && is_file($xoops_file)) {
-                if (($ext && preg_match($pattern, $file)) || ($ext === '')) {
+                if (($ext && preg_match($pattern, $file)) || ('' === $ext)) {
                     $file_out = $file;
                     if ($flag_dir) {
                         $file_out = $dirname . '/' . $file;
@@ -277,17 +285,19 @@ class happy_linux_dir extends happy_linux_error
 
     public function add_slash_to_tail($dir)
     {
-        if (substr($dir, -1, 1) != '/') {
+        if ('/' != mb_substr($dir, -1, 1)) {
             $dir .= '/';
         }
+
         return $dir;
     }
 
     public function strip_slash_from_tail($dir)
     {
-        if (substr($dir, -1, 1) == '/') {
-            $dir = substr($dir, 0, -1);
+        if ('/' == mb_substr($dir, -1, 1)) {
+            $dir = mb_substr($dir, 0, -1);
         }
+
         return $dir;
     }
 
@@ -333,6 +343,7 @@ class happy_linux_dir extends happy_linux_error
         }
 
         $this->_dir_work = $dir_work;
+
         return $dir_work;
     }
 
@@ -345,7 +356,7 @@ class happy_linux_dir extends happy_linux_error
             return false;
         }
 
-        $arr =& $this->get_open_basedir(true);
+        $arr = &$this->get_open_basedir(true);
 
         // allow all directies if not set open_basedir
         if (!$arr) {
@@ -373,7 +384,7 @@ class happy_linux_dir extends happy_linux_error
     public function &get_open_basedir($flag_slash = false)
     {
         $null = null;
-        $arr2 = array();
+        $arr2 = [];
 
         $open_basedir = ini_get('open_basedir');
         if (empty($open_basedir)) {

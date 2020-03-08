@@ -16,7 +16,6 @@
 //=========================================================
 class happy_linux_kml_document_object extends happy_linux_xml_single_object
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -46,6 +45,7 @@ class happy_linux_kml_document_object extends happy_linux_xml_single_object
         if (isset($item['open'])) {
             $item['open'] = (int)$item['open'];
         }
+
         return $item;
     }
 
@@ -57,7 +57,6 @@ class happy_linux_kml_document_object extends happy_linux_xml_single_object
 //=========================================================
 class happy_linux_kml_folder_object extends happy_linux_xml_single_object
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -87,6 +86,7 @@ class happy_linux_kml_folder_object extends happy_linux_xml_single_object
         if (isset($item['open'])) {
             $item['open'] = (int)$item['open'];
         }
+
         return $item;
     }
 
@@ -98,7 +98,6 @@ class happy_linux_kml_folder_object extends happy_linux_xml_single_object
 //=========================================================
 class happy_linux_kml_placemarks_object extends happy_linux_xml_iterate_object
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -125,6 +124,7 @@ class happy_linux_kml_placemarks_object extends happy_linux_xml_iterate_object
         if (isset($item['longitude'])) {
             $item['longitude'] = (float)$item['longitude'];
         }
+
         return $item;
     }
 
@@ -278,26 +278,26 @@ class happy_linux_build_kml extends happy_linux_build_xml
     //--------------------------------------------------------
     public function _get_document_param()
     {
-        $arr = array(
+        $arr = [
             'tag_use'     => $this->_DOCUMENT_TAG_USE,
             'open_use'    => $this->_DOCUMENT_OPEN_USE,
             'name'        => $this->_DOCUMENT_NAME,
             'description' => $this->_DOCUMENT_DESCRIPTION,
             'open'        => $this->_DOCUMENT_OPEN,
-        );
+        ];
 
         return $arr;
     }
 
     public function _get_folder_param()
     {
-        $arr = array(
+        $arr = [
             'tag_use'     => $this->_FOLDER_TAG_USE,
             'open_use'    => $this->_FOLDER_OPEN_USE,
             'name'        => $this->_FOLDER_NAME,
             'description' => $this->_FOLDER_DESCRIPTION,
             'open'        => $this->_FOLDER_OPEN,
-        );
+        ];
 
         return $arr;
     }
@@ -308,9 +308,10 @@ class happy_linux_build_kml extends happy_linux_build_xml
         if ($this->_DIRNAME) {
             $str = str_replace('{MODULE_NAME}', $this->get_xoops_module_name($this->_DIRNAME), $str);
         }
-        if (!is_null($this->_page)) {
+        if (null !== $this->_page) {
             $str = str_replace('{PAGE}', $this->_page, $str);
         }
+
         return $str;
     }
 

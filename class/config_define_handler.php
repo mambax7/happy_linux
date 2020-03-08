@@ -27,8 +27,8 @@ class happy_linux_config_define_handler
     public $_config_define;
 
     // cache
-    public $_cached_by_confid = array();
-    public $_cached_by_name   = array();
+    public $_cached_by_confid = [];
+    public $_cached_by_name   = [];
 
     //---------------------------------------------------------
     // constructor
@@ -45,7 +45,7 @@ class happy_linux_config_define_handler
 
     public function set_config_define(&$class)
     {
-        $this->_config_define =& $class;
+        $this->_config_define = &$class;
     }
 
     public static function getInstance()
@@ -66,10 +66,10 @@ class happy_linux_config_define_handler
         $this->_config_handler->load();
         $country_code = $this->_config_handler->get_cache_by_name_key('country_code', 'conf_value');
         $this->_config_define->set_config_country_code($country_code);
-        $def_arr =& $this->_config_define->load();
+        $def_arr = &$this->_config_define->load();
 
-        $this->_cached_by_confid = array();
-        $this->_cached_by_name   = array();
+        $this->_cached_by_confid = [];
+        $this->_cached_by_name   = [];
 
         foreach ($def_arr as $id => $def) {
             $name      = $this->_config_define->get_cache_by_confid_key($id, 'name');
@@ -88,7 +88,7 @@ class happy_linux_config_define_handler
             $title = $this->conv_constant($title);
             $desc  = $this->conv_constant($desc);
 
-            $arr = array(
+            $arr = [
                 'conf_id'     => $id,
                 'catid'       => $catid,
                 'name'        => $name,
@@ -100,7 +100,7 @@ class happy_linux_config_define_handler
                 'options'     => $opt,
                 'cc_flag'     => $cc_flag,
                 'cc_value'    => $cc_value,
-            );
+            ];
 
             $this->_cached_by_confid[$id] = $arr;
             $this->_cached_by_name[$name] = $arr;
@@ -120,7 +120,6 @@ class happy_linux_config_define_handler
                     $text = constant($value);
                 }
                 break;
-
             default:
                 break;
         }
@@ -147,6 +146,7 @@ class happy_linux_config_define_handler
         if (isset($this->_cached_by_confid[$id][$key])) {
             $value = $this->_cached_by_confid[$id][$key];
             $value = $this->conv_by_key($key, $value);
+
             return $value;
         }
 
@@ -158,6 +158,7 @@ class happy_linux_config_define_handler
         if (isset($this->_cached_by_name[$name][$key])) {
             $value = $this->_cached_by_name[$name][$key];
             $value = $this->conv_by_key($key, $value);
+
             return $value;
         }
 
@@ -172,7 +173,7 @@ class happy_linux_config_define_handler
             return false;
         }
 
-        $arr = array();
+        $arr = [];
 
         foreach ($this->_cached_by_confid as $id => $conf) {
             if ($catid == $conf['catid']) {

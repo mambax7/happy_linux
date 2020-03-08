@@ -13,7 +13,7 @@
 //=========================================================
 // _LANGCODE: ru
 // _CHARSET : utf-8
-// Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
+// Translator: Houston (Contour Design Studio https://www.cdesign.ru/)
 
 // search
 define('_HAPPY_LINUX_SEARCH_GOOGLE', 'Поиск Google');

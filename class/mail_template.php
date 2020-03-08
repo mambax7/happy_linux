@@ -1,5 +1,5 @@
 <?php
-// $Id: mail_template.php,v 1.1 2007/09/15 06:47:26 ohwada Exp $
+// $Id: mail_template.php,v 1.1 2010/11/07 14:59:21 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
@@ -14,7 +14,7 @@ class happy_linux_mail_template
 {
     public $_DIRNAME;
 
-    public $_tags = array();
+    public $_tags = [];
 
     //---------------------------------------------------------
     // constructor
@@ -54,6 +54,7 @@ class happy_linux_mail_template
         } elseif (file_exists($dir_eng . $file)) {
             return $dir_eng;
         }
+
         return false;
     }
 
@@ -71,16 +72,19 @@ class happy_linux_mail_template
         if ($dir) {
             return $this->read_file($dir . $file);
         }
+
         return false;
     }
 
     public function read_file($file)
     {
-        $fp = fopen($file, 'r');
+        $fp = fopen($file, 'rb');
         if ($fp) {
             $ret = fread($fp, filesize($file));
+
             return $ret;
         }
+
         return false;
     }
 
@@ -112,7 +116,7 @@ class happy_linux_mail_template
             }
         } else {
             if (!empty($tag) && isset($value)) {
-                $tag               = strtoupper(trim($tag));
+                $tag               = mb_strtoupper(trim($tag));
                 $this->_tags[$tag] = $value;
             }
         }
@@ -123,6 +127,7 @@ class happy_linux_mail_template
         foreach ($this->_tags as $k => $v) {
             $str = str_replace('{' . $k . '}', $v, $str);
         }
+
         return $str;
     }
 
@@ -152,18 +157,21 @@ class happy_linux_mail_template
     public function get_xoops_sitename()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['sitename'];
     }
 
     public function get_xoops_adminmail()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['adminmail'];
     }
 
     public function get_xoops_language()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['language'];
     }
 
@@ -175,6 +183,7 @@ class happy_linux_mail_template
         if (is_object($module)) {
             $name = $module->getVar('name', $format);
         }
+
         return $name;
     }
 

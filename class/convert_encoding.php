@@ -57,41 +57,44 @@ class happy_linux_convert_encoding
     // rss_parse_object.php
     public function &convert_array(&$arr, $to, $from)
     {
-        $to   = strtolower($to);
-        $form = strtolower($from);
+        $to   = mb_strtolower($to);
+        $form = mb_strtolower($from);
 
         if ($to == $from) {
             return $arr;
         }
 
         $ret = $this->_convert_array_recursive(0, $arr, $to, $from);
+
         return $ret;
     }
 
     public function &convert_array_to_utf8(&$arr, $encoding = null)
     {
-        $ret =& $this->_convert_array_recursive(0, $arr, 'UTF-8', $encoding);
+        $ret = &$this->_convert_array_recursive(0, $arr, 'UTF-8', $encoding);
+
         return $ret;
     }
 
     public function &convert_array_from_utf8(&$arr, $encoding = null)
     {
-        $ret =& $this->_convert_array_recursive(0, $arr, $encoding, 'UTF-8');
+        $ret = &$this->_convert_array_recursive(0, $arr, $encoding, 'UTF-8');
+
         return $ret;
     }
 
     public function convert($str, $to, $from)
     {
-        $to   = strtolower($to);
-        $form = strtolower($from);
+        $to   = mb_strtolower($to);
+        $form = mb_strtolower($from);
 
         if ($to == $from) {
             return $str;
         }
 
-        if ($from == 'utf-8') {
+        if ('utf-8' == $from) {
             $str = $this->convert_from_utf8($str, $to);
-        } elseif ($to == 'utf-8') {
+        } elseif ('utf-8' == $to) {
             $str = $this->convert_to_utf8($str, $from);
         } else {
             $str = happy_linux_convert_encoding($str, $to, $from);
@@ -118,11 +121,12 @@ class happy_linux_convert_encoding
         ++$num;
         if ($num > $this->_MAX_DEPTH) {
             $false = false;
+
             return $false;
         }
 
         if (is_array($arr_in)) {
-            $arr_out = array();
+            $arr_out = [];
             reset($arr_in);
 
             foreach ($arr_in as $k => $v) {
@@ -137,6 +141,7 @@ class happy_linux_convert_encoding
         }
 
         $ret = $this->convert($arr_in, $to, $from);
+
         return $ret;
     }
 

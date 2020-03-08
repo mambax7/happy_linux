@@ -13,10 +13,10 @@ ccTLDs: Country-Code Top-Level Domains
 
 Reference
 - IANA: Root-Zone Whois Information
-http://www.iana.org/cctld/cctld-whois.htm
+https://www.iana.org/cctld/cctld-whois.htm
 
 - ISO 3166 code lists
-http://www.iso.org/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/index.html
+https://www.iso.org/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/index.html
 
 There are some difference.
 Exsample, United Kingdom is assigned UK (IANA) and GB (ISO)

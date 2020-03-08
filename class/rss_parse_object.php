@@ -5,7 +5,7 @@
 // <geo:lat>lat</geo:lat>
 
 // 2010-11-07 K.OHWADA
-// BUG: NOT parse http://maps.google.co.jp/maps/
+// BUG: NOT parse https://maps.google.co.jp/maps/
 
 // 2009-02-20 K.OHWADA
 // _build_geo() _build_media_content()
@@ -66,14 +66,14 @@ class happy_linux_rss_parse extends happy_linux_rss_base
     //---------------------------------------------------------
     // set & get vars
     //---------------------------------------------------------
-    public function set_vars_from_parse(&$obj)
+    public function set_vars_from_parse($obj)
     {
-        $control = array(
+        $control = [
             'feed_type'       => $obj->feed_type,
             'feed_version'    => $obj->feed_version,
             'source_encoding' => $obj->source_encoding,
             'encoding'        => $obj->encoding,
-        );
+        ];
 
         $this->set_control($control);
         $this->set_channel($obj->channel);
@@ -88,8 +88,9 @@ class happy_linux_rss_parse extends happy_linux_rss_base
 
         $ret = false;
         if (isset($arr['source_encoding'])) {
-            $ret =& $arr['source_encoding'];
+            $ret = &$arr['source_encoding'];
         }
+
         return $ret;
     }
 
@@ -97,8 +98,9 @@ class happy_linux_rss_parse extends happy_linux_rss_base
     {
         $ret = false;
         if (isset($this->_converted_data)) {
-            $ret =& $this->_converted_data;
+            $ret = &$this->_converted_data;
         }
+
         return $ret;
     }
 
@@ -127,7 +129,7 @@ class happy_linux_rss_parse extends happy_linux_rss_base
             $this->_textinput_obj->convert($to, $from);
         }
 
-        $this->_converted_data =& $this->get_vars();
+        $this->_converted_data = &$this->get_vars();
     }
 
     //---------------------------------------------------------
@@ -156,7 +158,6 @@ class happy_linux_rss_parse extends happy_linux_rss_base
         $this->_local_encoding = $value;
     }
 
-
     //---------------------------------------------------------
     // create
     // overload this function
@@ -165,6 +166,7 @@ class happy_linux_rss_parse extends happy_linux_rss_base
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_parse_channel();
+
         return $obj;
     }
 
@@ -172,6 +174,7 @@ class happy_linux_rss_parse extends happy_linux_rss_base
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_parse_image();
+
         return $obj;
     }
 
@@ -179,6 +182,7 @@ class happy_linux_rss_parse extends happy_linux_rss_base
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_parse_textinput();
+
         return $obj;
     }
 
@@ -186,6 +190,7 @@ class happy_linux_rss_parse extends happy_linux_rss_base
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_parse_items();
+
         return $obj;
     }
 
@@ -193,6 +198,7 @@ class happy_linux_rss_parse extends happy_linux_rss_base
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_parse_single_item();
+
         return $obj;
     }
 
@@ -238,10 +244,11 @@ class happy_linux_rss_parse_basic extends happy_linux_rss_base_basic
 
     public function &_convert_block(&$arr1, $to, $from)
     {
-        $arr2 =& $this->_convert->convert_array($arr1, $to, $from);
+        $arr2 = &$this->_convert->convert_array($arr1, $to, $from);
         if ($this->_strings->check_in_encoding_array($to)) {
             $arr2 = $this->_strings->replace_control_array($arr2, $this->_REPLACE_CHAR);
         }
+
         return $arr2;
     }
 
@@ -251,6 +258,7 @@ class happy_linux_rss_parse_basic extends happy_linux_rss_base_basic
         if ($this->_strings->check_in_encoding_array($to)) {
             $str = $this->_strings->replace_control($str, $this->_REPLACE_CHAR);
         }
+
         return $str;
     }
 
@@ -258,7 +266,7 @@ class happy_linux_rss_parse_basic extends happy_linux_rss_base_basic
     // build
     //---------------------------------------------------------
     // Declaration of happy_linux_rss_parse_item_single::build() should be compatible with that of happy_linux_rss_parse_basic::build() in happy_linux\class\rss_parse_object.php
-    public function build($site_title, $site_link, &$obj)
+    public function build($site_title, $site_link, $obj)
     {
         // no action
     }
@@ -293,17 +301,19 @@ class happy_linux_rss_parse_basic extends happy_linux_rss_base_basic
 
     public function is_rss()
     {
-        if ($this->_feed_type == HAPPY_LINUX_MAGPIE_RSS) {
+        if (HAPPY_LINUX_MAGPIE_RSS == $this->_feed_type) {
             return true;
         }
+
         return false;
     }
 
     public function is_atom()
     {
-        if ($this->_feed_type == HAPPY_LINUX_MAGPIE_ATOM) {
+        if (HAPPY_LINUX_MAGPIE_ATOM == $this->_feed_type) {
             return true;
         }
+
         return false;
     }
 
@@ -323,7 +333,6 @@ class happy_linux_rss_parse_basic extends happy_linux_rss_base_basic
 //=========================================================
 class happy_linux_rss_parse_channel extends happy_linux_rss_parse_basic
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -337,7 +346,7 @@ class happy_linux_rss_parse_channel extends happy_linux_rss_parse_basic
     //---------------------------------------------------------
     public function convert($to, $from)
     {
-        $arr =& $this->_convert_block($this->get_vars(), $to, $from);
+        $arr = &$this->_convert_block($this->get_vars(), $to, $from);
         $this->set_vars($arr);
     }
 
@@ -349,7 +358,6 @@ class happy_linux_rss_parse_channel extends happy_linux_rss_parse_basic
 //=========================================================
 class happy_linux_rss_parse_image extends happy_linux_rss_parse_basic
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -363,7 +371,7 @@ class happy_linux_rss_parse_image extends happy_linux_rss_parse_basic
     //---------------------------------------------------------
     public function convert($to, $from)
     {
-        $arr =& $this->_convert_block($this->get_vars(), $to, $from);
+        $arr = &$this->_convert_block($this->get_vars(), $to, $from);
         $this->set_vars($arr);
     }
 
@@ -375,7 +383,6 @@ class happy_linux_rss_parse_image extends happy_linux_rss_parse_basic
 //=========================================================
 class happy_linux_rss_parse_textinput extends happy_linux_rss_parse_basic
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -389,7 +396,7 @@ class happy_linux_rss_parse_textinput extends happy_linux_rss_parse_basic
     //---------------------------------------------------------
     public function convert($to, $from)
     {
-        $arr =& $this->_convert_block($this->get_vars(), $to, $from);
+        $arr = &$this->_convert_block($this->get_vars(), $to, $from);
         $this->set_vars($arr);
     }
 
@@ -401,7 +408,6 @@ class happy_linux_rss_parse_textinput extends happy_linux_rss_parse_basic
 //=========================================================
 class happy_linux_rss_parse_items extends happy_linux_rss_base_items
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -439,6 +445,7 @@ class happy_linux_rss_parse_items extends happy_linux_rss_base_items
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_parse_item_single();
+
         return $obj;
     }
 
@@ -451,17 +458,17 @@ class happy_linux_rss_parse_items extends happy_linux_rss_base_items
 class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
 {
     // RSS
-    public $DATE_RFC822_LIST = array('pubdate');
+    public $DATE_RFC822_LIST = ['pubdate'];
 
-    public $DATE_W3C_LIST = array(
+    public $DATE_W3C_LIST = [
         // ATOM 1.0
         'published',
         'updated',
         // ATOM 0.3
         'modified',
         'issued',
-        'created'
-    );
+        'created',
+    ];
 
     public $_highlight = null;
 
@@ -494,7 +501,7 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
     //---------------------------------------------------------
     // build for store
     //---------------------------------------------------------
-    public function build($site_title, $site_link, &$control_obj)
+    public function build($site_title, $site_link, $control_obj)
     {
         $this->set_control_obj($control_obj);
 
@@ -507,7 +514,7 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
 
         list($media_thumbnail_url, $media_thumbnail_width, $media_thumbnail_height) = $this->_build_media_thumbnail();
 
-        $arr = array(
+        $arr = [
             'site_title'             => $site_title,
             'site_link'              => $site_link,
             'title'                  => $this->get_rss_var('title'),
@@ -543,7 +550,7 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
             'media_thumbnail_url'    => $media_thumbnail_url,
             'media_thumbnail_width'  => $media_thumbnail_width,
             'media_thumbnail_height' => $media_thumbnail_height,
-        );
+        ];
 
         $this->set_vars($arr);
     }
@@ -552,7 +559,7 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
     // restrict feed_type
     //-------------------------------------------------
     // some feed have no link
-    // ex) http://radiozzz.com/Podcast/casty/rss.xml
+    // ex) https://radiozzz.com/Podcast/casty/rss.xml
     //-------------------------------------------------
     public function _build_link()
     {
@@ -563,6 +570,7 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
         } elseif ($this->is_rss() && $this->is_set('enclosure_url')) {
             return $this->get_rss_var('enclosure_url');
         }
+
         return false;
     }
 
@@ -700,7 +708,7 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
             list($url, $type, $length) = $this->_get_enclosure_list();
         }
 
-        return array($url, $type, $length);
+        return [$url, $type, $length];
     }
 
     //-------------------------------------------------
@@ -721,23 +729,19 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
 
         // <geo:point>
         if ($this->is_set('geo', 'point_lat')
-            || $this->is_set('geo', 'point_long')
-        ) {
+            || $this->is_set('geo', 'point_long')) {
             $lat  = $this->get_rss_var('geo', 'point_lat');
             $long = $this->get_rss_var('geo', 'point_long');
-
-        // <geo:lat>lat</geo:lat>
+            // <geo:lat>lat</geo:lat>
         } elseif ($this->is_set('geo', 'lat')
-                  || $this->is_set('geo', 'long')
-        ) {
+                  || $this->is_set('geo', 'long')) {
             $lat  = $this->get_rss_var('geo', 'lat');
             $long = $this->get_rss_var('geo', 'long');
-
-        // <georss:point>lat long</georss:point>
+            // <georss:point>lat long</georss:point>
         } elseif ($this->is_set('georss', 'point')) {
             $lat_long = $this->get_rss_var('georss', 'point');
 
-            // BUG: NOT parse http://maps.google.co.jp/maps/
+            // BUG: NOT parse https://maps.google.co.jp/maps/
             $arr = $this->_str_to_array($lat_long, ' ');
             if (isset($arr[0]) && isset($arr[1])) {
                 $lat  = $arr[0];
@@ -745,7 +749,7 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
             }
         }
 
-        return array($lat, $long);
+        return [$lat, $long];
     }
 
     public function _build_media_content()
@@ -777,7 +781,7 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
             $height = $content['height'];
         }
 
-        return array($url, $type, $medium, $filesize, $width, $height);
+        return [$url, $type, $medium, $filesize, $width, $height];
     }
 
     public function _build_media_thumbnail()
@@ -797,7 +801,7 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
             $height = $thumbnail[0]['height'];
         }
 
-        return array($url, $width, $height);
+        return [$url, $width, $height];
     }
 
     //-------------------------------------------------
@@ -806,14 +810,15 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
     public function _str_to_array($str, $pattern)
     {
         $arr1 = explode($pattern, $str);
-        $arr2 = array();
+        $arr2 = [];
         foreach ($arr1 as $v) {
             $v = trim($v);
-            if ($v == '') {
+            if ('' == $v) {
                 continue;
             }
             $arr2[] = $v;
         }
+
         return $arr2;
     }
 

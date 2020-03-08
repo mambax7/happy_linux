@@ -51,7 +51,7 @@ class happy_linux_config_file
 
     public function _fopen($file)
     {
-        $this->_fp = fopen($file, 'w');
+        $this->_fp = fopen($file, 'wb');
     }
 
     public function _fclose()

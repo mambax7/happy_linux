@@ -4,7 +4,7 @@ $Id: readme.txt,v 1.8 2012/04/08 18:24:35 ohwada Exp $
 Version: 1.80
 Date:   2012-04-02
 Author: Kenichi OHWADA
-URL:    http://linux2.ohwada.net/
+URL:    https://linux2.ohwada.net/
 Email:  webmaster@ohwada.net
 =================================================
 
@@ -54,15 +54,15 @@ This module is the library collection for modules distributing in Happy Linux
 * Changes *
 1. Migrating to PHP 5.3
 Deprecated features in PHP 5.3.x
-http://www.php.net/manual/en/migration53.deprecated.php
+https://www.php.net/manual/en/migration53.deprecated.php
 (1) ereg
 
 2. bugfix
 (1) can not get georss from Google map
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1142&forum=9
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1142&forum=9
 
 (2) NOT set offset in command
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1210&forum=9
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1210&forum=9
 
 
 =================================================
@@ -87,10 +87,10 @@ This module is the library collection for modules distributing in Happy Linux
 
 * Changes *
 (1) "Not version xx" in weblinks and rssc
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=861&forum=5
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=861&forum=5
 
 (2) wrong RSS timestamp
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=906&forum=8
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=906&forum=8
 
 
 =================================================
@@ -111,10 +111,10 @@ This module is the library collection for modules distributing in Happy Linux
 
 2. lang pack
 (1) updated arabic
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=350&forum=3
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=350&forum=3
 
 (2) updated persian
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=387&forum=2
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=387&forum=2
 
 
 =================================================
@@ -133,7 +133,7 @@ This module is the library collection for modules distributing in Happy Linux
 Version: 1.23
 Date:   2008-01-18
 Author: Kenichi OHWADA
-URL:    http://linux2.ohwada.net/
+URL:    https://linux2.ohwada.net/
 Email:  webmaster@ohwada.net
 =================================================
 
@@ -148,7 +148,7 @@ updated German. thanks sato-san
 
 3. bug fix
 (1) Only variables should be assigned by reference 
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=758&forum=5
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=758&forum=5
 
 (2) unserialize(): Argument is not an string
 
@@ -163,7 +163,7 @@ This module is the library collection for modules distributing in Happy Linux
 * Changes *
 1. bug fix
 (1) not show smiley icon in weblinks
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=746&forum=5
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=746&forum=5
 
 
 =================================================
@@ -194,36 +194,36 @@ show server enviroment variables
 (1) added memory functuion which show memory usage
 
 (2) added xoops_block_check class which check xoops_block table
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=707&forum=5
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=707&forum=5
 
 (3) change multibyte function which add space after Japanese punctuation mark
 (4) change admin class which show module management
 (5) bugfix: typo cobe -> cube
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=700&forum=5
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=700&forum=5
 
 3. changed the following feature with the update of RSSC module
 (1) change strings class which replace empty if all space code when build summary
 (2) defeat errors in PHP5 E_STRICT level
 
 (3) bugfix: preg_match()
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=709&forum=9
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=709&forum=9
 
 4. changed the following feature with the update of WhatsNew module
 (1) added date class which handle time zone
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=713&forum=8
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=713&forum=8
 
 (2) added build_cache class which handle template cache
 (3) added config language file which handle module configration
 
 4. lang pack
 (1) added Italian first version
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=337&forum=2
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=337&forum=2
 
 (2) added Arabic first version
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=350&forum=3
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=350&forum=3
 
 (3) updateed Persian v1.11
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=343&forum=2
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=343&forum=2
 
 
 =================================================
@@ -234,7 +234,7 @@ Date:   2007-09-23
 This module is the library collection for modules distributing in Happy Linux
 
 1. tempolary directory for banner image
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=694&forum=5
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=694&forum=5
 
 (1) check include /tmp in open_basedir
 (2) admin can specify optional directory using preload
@@ -274,15 +274,15 @@ This module is the library collection for modules distributing in Happy Linux
 * Changes *
 1. bug fix
 (1) build_rss.php: Only variables should be assigned by reference
-http://dev.xoops.org/modules/xfmod/tracker/?func=detail&aid=4697&group_id=1300&atid=1353
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=8&topic_id=681
+https://dev.xoops.org/modules/xfmod/tracker/?func=detail&aid=4697&group_id=1300&atid=1353
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=8&topic_id=681
 
 
 =================================================
 Version: 1.00
 Date:   2007-08-01
 Author: Kenichi OHWADA
-URL:    http://linux2.ohwada.net/
+URL:    https://linux2.ohwada.net/
 Email:  webmaster@ohwada.net
 =================================================
 
@@ -291,7 +291,7 @@ This module is the library collection for modules distributing in Happy Linux
 * Changes *
 1. Supported MySQL 4.1/5.x
 (1) character code setting
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=9&topic_id=631
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=9&topic_id=631
 For exsample in Japanese, program fixed ujis (EUC-JP) in character code of MySQL.
 Administrator can change character code, setting preload/charset.php.
 
@@ -320,7 +320,7 @@ Administrator can change character code, setting preload/charset.php.
 4. Multi Langage
 (1) added German files
 (2) added Germany (de) in locate
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=323&forum=2
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=323&forum=2
 
 5. bug fix 
 (1) not sanitize site_url in rss
@@ -458,8 +458,8 @@ This module is the library collection for modules distributing in Happy Linux
 
 4. bug fix
 (1) 4417: language singleton done not work correctly
-http://dev.xoops.org/modules/xfmod/tracker/?func=detail&aid=4417&group_id=1199&atid=971
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=256&forum=2
+https://dev.xoops.org/modules/xfmod/tracker/?func=detail&aid=4417&group_id=1199&atid=971
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=256&forum=2
 
 
 =================================================
@@ -485,14 +485,14 @@ This module is the library collection for modules distributing in Happy Linux
 
 3. bugfix
 (1) 4378: dont strip slashes in conf_value when magic_quotes_gpc is on
-http://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4378&group_id=1300&atid=1353
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=558&start=0#forumpost1975
+https://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4378&group_id=1300&atid=1353
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=558&start=0#forumpost1975
 
 (2) 4379: Undefined property: _flag_allow_url_fopen
 (3) 4380: Only variables should be assigned by reference
-http://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4379&group_id=1300&atid=1353
-http://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4380&group_id=1300&atid=1353
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=256&forum=2
+https://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4379&group_id=1300&atid=1353
+https://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4380&group_id=1300&atid=1353
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=256&forum=2
 
 
 =================================================
@@ -518,11 +518,11 @@ This module is the library collection for modules distributing in Happy Linux
 
 * main changes *
 (1) added persian lang pack
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=243&forum=5
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=243&forum=5
 
 (2) bug fix 4339: Fatal error: Call to undefined function: strcut() 
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=244&forum=5
-http://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4339&group_id=1300&atid=1353
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=244&forum=5
+https://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4339&group_id=1300&atid=1353
 
 
 =================================================
@@ -551,7 +551,7 @@ added the following feature.
 (1) introduced the mechanism of selection countory (Locate) experimentally.
 This can be select a language and a country independently.
 use ccTLDs for the country code.
-http://www.iana.org/cctld/
+https://www.iana.org/cctld/
 prepared three country code, Japan (jp), USA (us), United Kingdom (uk).
 
 (2) added file handling class
@@ -587,7 +587,7 @@ This module is the library collection for modules distributing in Happy Linux
 Version: 0.10
 Date:   2006-07-10
 Author: Kenichi OHWADA
-URL:    http://linux2.ohwada.net/
+URL:    https://linux2.ohwada.net/
 Email:  webmaster@ohwada.net
 =================================================
 

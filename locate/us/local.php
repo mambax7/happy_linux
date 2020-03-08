@@ -18,7 +18,6 @@
 //=========================================================
 class happy_linux_locate_us extends happy_linux_locate_base
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -26,20 +25,20 @@ class happy_linux_locate_us extends happy_linux_locate_base
     {
         parent::__construct();
 
-        $arr = array(
+        $arr = [
             'country_code'   => 'us',
             'country_name'   => 'United Sates of America',
-            'yahoo_url'      => 'http://www.yahoo.com/',
-            'yahoo_map_url'  => 'http://map.yahoo.com/',
-            'google_url'     => 'http://www.google.com/',
-            'google_map_url' => 'http://maps.google.com/',
-            'gm_server'      => 'http://maps.google.com/',
+            'yahoo_url'      => 'https://www.yahoo.com/',
+            'yahoo_map_url'  => 'https://map.yahoo.com/',
+            'google_url'     => 'https://www.google.com/',
+            'google_map_url' => 'https://maps.google.com/',
+            'gm_server'      => 'https://maps.google.com/',
             'gm_location'    => 'Chetopa Kansas USA',
             'gm_latitude'    => '37.0',
             'gm_longitude'   => '-95.0',
             'gm_zoom'        => '4',
             'ping_servers'   => $this->get_us_ping_servers(),
-        );
+        ];
 
         $this->array_merge($arr);
     }

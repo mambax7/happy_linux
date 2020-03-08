@@ -49,4 +49,4 @@ define('_HAPPY_LINUX_CONF_TABLE_MANAGE', 'DBテーブル管理');
 define('_HAPPY_LINUX_CONF_TABLE_CHECK', '%s テーブルの検査');
 define('_HAPPY_LINUX_CONF_TABLE_REINSTALL', 'エラーが検出されたときは、再インストールを推奨する');
 define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW', 'Config テーブルの初期化');
-define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'エラーが検出されたときに、実行する。<br />現在の登録内容は廃棄されます。<br />実行後に再設定してください。');
+define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'エラーが検出されたときに、実行する。<br>現在の登録内容は廃棄されます。<br>実行後に再設定してください。');

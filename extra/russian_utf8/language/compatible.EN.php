@@ -31,7 +31,7 @@ if (!defined('_HAPPY_LINUX_CONF_TABLE_MANAGE')) {
     define('_HAPPY_LINUX_CONF_TABLE_CHECK', 'Check %s Table');
     define('_HAPPY_LINUX_CONF_TABLE_REINSTALL', 'Recommend to re-install if detected error');
     define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW', 'Renewal Config Table');
-    define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Execute if detected error. <br />The present values are repealed. <br />Set values after execution. ');
+    define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Execute if detected error. <br>The present values are repealed. <br>Set values after execution. ');
 }
 
 //---------------------------------------------------------
@@ -60,7 +60,7 @@ if (!defined('_HAPPY_LINUX_AM_MODULE')) {
     define('_HAPPY_LINUX_AM_DIR_NOT_WRITABLE', 'This directory is not writeable');
     define('_HAPPY_LINUX_AM_MEMORY_LIMIT_TOO_SMALL', 'memory_limit is too small');
     define('_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'Weblinks module requires more memory about %s MB');
-    define('_HAPPY_LINUX_AM_MEMORY_DESC', 'This value is one standard.<br />Depending on the server environment, it is sometimes more or less.');
+    define('_HAPPY_LINUX_AM_MEMORY_DESC', 'This value is one standard.<br>Depending on the server environment, it is sometimes more or less.');
 }
 
 //---------------------------------------------------------

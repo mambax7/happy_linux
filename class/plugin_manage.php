@@ -46,7 +46,7 @@ class happy_linux_plugin_manage
         $class->set_lang_usage(_HAPPY_LINUX_PLUGIN_USAGE);
         $class->set_lang_decription(_HAPPY_LINUX_PLUGIN_DESCRIPTION);
 
-        $this->_plugin =& $class;
+        $this->_plugin = &$class;
         $this->_test->set_plugin_class($class);
     }
 
@@ -97,7 +97,7 @@ class happy_linux_plugin_manage
         echo '<h4>' . _HAPPY_LINUX_PLUGIN_TEST . "</h4>\n";
 
         $this->_form->show();
-        echo "<br /><hr />\n";
+        echo "<br><hr>\n";
 
         $this->_test->execute();
         $this->print_footer();
@@ -106,7 +106,7 @@ class happy_linux_plugin_manage
     public function print_footer()
     {
         $url = xoops_getenv('PHP_SELF');
-        echo "<hr /><br />\n";
+        echo "<hr><br>\n";
         echo '<a href="' . $url . '"> - ' . _HAPPY_LINUX_PLUGIN_LIST . "</a>\n";
     }
 
@@ -144,7 +144,7 @@ class happy_linux_plugin_test
 
     public function set_plugin_class(&$class)
     {
-        $this->_plugin =& $class;
+        $this->_plugin = &$class;
     }
 
     //---------------------------------------------------------
@@ -162,7 +162,8 @@ class happy_linux_plugin_test
 
         if (empty($plugins)) {
             xoops_error('no plugins');
-            echo "<br />\n";
+            echo "<br>\n";
+
             return false;
         }
 
@@ -172,16 +173,18 @@ class happy_linux_plugin_test
         if ($post_data) {
             $str  = '$data = ' . $this->_strings->add_str_to_tail($post_data, ';');
             $ret1 = eval($str);
-            if ($ret1 === false) {
+            if (false === $ret1) {
                 xoops_error('cannot eval data');
-                echo "<br />\n";
+                echo "<br>\n";
+
                 return false;
             }
         } else {
             $ret2 = $this->_plugin->get_exsample_data();
             if (empty($ret2)) {
                 xoops_error('cannot get data');
-                echo "<br />\n";
+                echo "<br>\n";
+
                 return false;
             }
             $data = $ret2;
@@ -202,10 +205,11 @@ class happy_linux_plugin_test
         $ret = $this->_plugin_execute($data, $plugins);
         if (!$ret) {
             echo '<h4> failed </h4>' . "\n";
+
             return true;
         }
 
-        $ret =& $this->_plugin->get_items();
+        $ret = &$this->_plugin->get_items();
 
         echo '<h4> output </h4>' . "\n";
         echo '<pre>';
@@ -218,6 +222,7 @@ class happy_linux_plugin_test
     public function _plugin_execute($data, $plugins)
     {
         $this->_plugin->add_plugin_line('test', $plugins);
+
         return $this->_plugin->_execute($data);
     }
 

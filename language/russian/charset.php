@@ -20,4 +20,3 @@
 // define('HAPPY_LINUX_MB_LANGUAGE',   'ru');
 // define('HAPPY_LINUX_MB_ENCODING',   'cp1251');
 // define('HAPPY_LINUX_MYSQL_CHARSET', 'cp1251_general_ci');
-;

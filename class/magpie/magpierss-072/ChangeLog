@@ -7,7 +7,7 @@
 	* extlib/Snoopy.class.inc: fix arbtriary code execution
 	  vulnerability when using curl+ssl
 
-	  http://www.sec-consult.com/216.html
+	  https://www.sec-consult.com/216.html
 
 2005-03-08 10:46  kellan
 

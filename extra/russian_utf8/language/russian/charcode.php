@@ -7,10 +7,9 @@
 //=========================================================
 // _LANGCODE: ru
 // _CHARSET : utf-8
-// Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
+// Translator: Houston (Contour Design Studio https://www.cdesign.ru/)
 
 //---------------------------------------------------------
 // This is for dummy in Russian.
 // special use for Japanese
 //---------------------------------------------------------
-;

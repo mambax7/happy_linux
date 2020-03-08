@@ -9,7 +9,7 @@ Trouble Installing MagpieRSS:
 2.	Cache couldn't make dir './cache'.
 
 3.	Fatal error: Failed to load PHP's XML Extension. 
-	http://www.php.net/manual/en/ref.xml.php
+	https://www.php.net/manual/en/ref.xml.php
 
 Trouble Using MagpieRSS
 
@@ -19,11 +19,11 @@ Trouble Using MagpieRSS
 5.	Warning: MagpieRSS: Failed to parse RSS file. 
 	(not well-formed (invalid token) at line 19, column 98)
 
-6.	Warning: MagpieRSS: Failed to fetch http://localhost/rss/features.1-0.rss. 
+6.	Warning: MagpieRSS: Failed to fetch https://localhost/rss/features.1-0.rss.
 	(HTTP Response: HTTP/1.1 404 Not Found)
 
 If you would rather provide a custom error, see the COOKBOOK
-(http://magpierss.sf.net/cookbook.html) recipe 2.
+(https://magpierss.sf.net/cookbook.html) recipe 2.
 
 *************************************************************************
 1.	Fatal error: Failed opening required '/path/to/script/rss_fetch.inc' 
@@ -108,12 +108,12 @@ If you would rather provide a custom error, see the COOKBOOK
 
 ************************************************************************* 3.
 3.	Fatal error: Failed to load PHP's XML Extension. 
-	http://www.php.net/manual/en/ref.xml.php
+	https://www.php.net/manual/en/ref.xml.php
 
 	-or-
 	
 	Fatal error: Failed to create an instance of PHP's XML parser.
-	http://www.php.net/manual/en/ref.xml.php
+	https://www.php.net/manual/en/ref.xml.php
 	
 	Make sure your PHP was built with --with-xml
 	
@@ -127,7 +127,7 @@ If you would rather provide a custom error, see the COOKBOOK
 4.	Warning: MagpieRSS: Failed to fetch index.rdf. 
 	(HTTP Error: Invalid protocol "")
 	
-	You need to put http:// in front of your the URL to your RSS feed
+	You need to put https:// in front of your the URL to your RSS feed
 
 *************************************************************************	
 5.	Warning: MagpieRSS: Failed to parse RSS file. 
@@ -141,10 +141,10 @@ If you would rather provide a custom error, see the COOKBOOK
 	You could try contacting the author of the RSS feed, and pointing them to
 	the online RSS validator at:
 	
-	http://feeds.archive.org/validator/
+	https://feeds.archive.org/validator/
 
 *************************************************************************	
-6.	Warning: MagpieRSS: Failed to fetch http://example.com/index.rdf 
+6.	Warning: MagpieRSS: Failed to fetch https://example.com/index.rdf
 	(HTTP Response: HTTP/1.1 404 Not Found)
 
 	Its a 404!  The RSS file ain't there.

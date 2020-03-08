@@ -62,14 +62,16 @@ class happy_linux_post extends happy_linux_strings
         if (isset($_POST[$key])) {
             return true;
         }
+
         return false;
     }
 
     public function is_post_fill($key)
     {
-        if (isset($_POST[$key]) && ($_POST[$key] !== '')) {
+        if (isset($_POST[$key]) && ('' !== $_POST[$key])) {
             return true;
         }
+
         return false;
     }
 
@@ -78,28 +80,33 @@ class happy_linux_post extends happy_linux_strings
         if (isset($_POST[$key])) {
             return $this->check_http_fill($_POST[$key]);
         }
+
         return false;
     }
 
     public function is_post_url_llegal($key)
     {
-        if (isset($_POST[$key]) && ($_POST[$key] !== '')) {
+        if (isset($_POST[$key]) && ('' !== $_POST[$key])) {
             if ($this->check_http_start($_POST[$key]) && !$this->check_javascript($_POST[$key])) {
                 return true;
             }
+
             return false;
         }
+
         return true;    // no check
     }
 
     public function is_post_email_format($key)
     {
-        if (isset($_POST[$key]) && ($_POST[$key] !== '')) {
+        if (isset($_POST[$key]) && ('' !== $_POST[$key])) {
             if ($this->check_email_format($_POST[$key])) {
                 return true;
             }
+
             return false;
         }
+
         return true;    // no check
     }
 
@@ -111,14 +118,16 @@ class happy_linux_post extends happy_linux_strings
         if (isset($_GET[$key])) {
             return true;
         }
+
         return false;
     }
 
     public function is_get_fill($key)
     {
-        if (isset($_GET[$key]) && ($_GET[$key] !== '')) {
+        if (isset($_GET[$key]) && ('' !== $_GET[$key])) {
             return true;
         }
+
         return false;
     }
 
@@ -132,6 +141,7 @@ class happy_linux_post extends happy_linux_strings
         } else {
             $val = $default;
         }
+
         return $val;
     }
 
@@ -144,9 +154,9 @@ class happy_linux_post extends happy_linux_strings
     {
         if (isset($_POST[$key])) {
             return (float)$_POST[$key];
-        } else {
-            $val = (float)$default;
         }
+        $val = (float)$default;
+
         return $val;
     }
 
@@ -169,6 +179,7 @@ class happy_linux_post extends happy_linux_strings
         } else {
             $text = $default;
         }
+
         return $text;
     }
 
@@ -179,6 +190,7 @@ class happy_linux_post extends happy_linux_strings
         } else {
             $val = trim($default);
         }
+
         return $val;
     }
 
@@ -189,6 +201,7 @@ class happy_linux_post extends happy_linux_strings
         } else {
             $val = $default;
         }
+
         return $val;
     }
 
@@ -196,11 +209,12 @@ class happy_linux_post extends happy_linux_strings
     {
         $arr = $default;
         if (isset($_POST[$key]) && is_array($_POST[$key])) {
-            $arr = array();
+            $arr = [];
             foreach ($_POST[$key] as $k => $v) {
                 $arr[$k] = (int)$v;
             }
         }
+
         return $arr;
     }
 
@@ -208,11 +222,12 @@ class happy_linux_post extends happy_linux_strings
     {
         $arr = $default;
         if (isset($_POST[$key]) && is_array($_POST[$key])) {
-            $arr = array();
+            $arr = [];
             foreach ($_POST[$key] as $k => $v) {
                 $arr[$k] = (float)$v;
             }
         }
+
         return $arr;
     }
 
@@ -220,23 +235,25 @@ class happy_linux_post extends happy_linux_strings
     {
         $arr = $default;
         if (isset($_POST[$key]) && is_array($_POST[$key])) {
-            $arr = array();
+            $arr = [];
             foreach ($_POST[$key] as $k => $v) {
                 $text    = $this->strip_slashes_gpc($v);
                 $text    = $this->strip_control($text);
                 $arr[$k] = $text;
             }
         }
+
         return $arr;
     }
 
     public function get_post_text_split($key, $pattern = "\n")
     {
-        $arr = array();
+        $arr = [];
         if (isset($_POST[$key])) {
             $val = $this->strip_slashes_gpc($_POST[$key]);
             $arr = preg_split($pattern, $val);
         }
+
         return $arr;
     }
 
@@ -250,6 +267,7 @@ class happy_linux_post extends happy_linux_strings
         } else {
             $val = $default;
         }
+
         return $val;
     }
 
@@ -265,6 +283,7 @@ class happy_linux_post extends happy_linux_strings
         } else {
             $val = (float)$default;
         }
+
         return $val;
     }
 
@@ -280,6 +299,7 @@ class happy_linux_post extends happy_linux_strings
         } else {
             $val = trim($default);
         }
+
         return $val;
     }
 
@@ -290,6 +310,7 @@ class happy_linux_post extends happy_linux_strings
         } else {
             $val = $default;
         }
+
         return $val;
     }
 
@@ -300,6 +321,7 @@ class happy_linux_post extends happy_linux_strings
         } else {
             $val = trim($default);
         }
+
         return $val;
     }
 
@@ -310,7 +332,8 @@ class happy_linux_post extends happy_linux_strings
         if ($val) {
             $arr = explode(' ', $val);
         }
-        $this->_keyword_array =& $arr;
+        $this->_keyword_array = &$arr;
+
         return $arr;
     }
 
@@ -393,18 +416,19 @@ class happy_linux_post extends happy_linux_strings
     {
         $arr = $default;
         if (isset($_POST[$key]) && is_array($_POST[$key])) {
-            $arr = array();
+            $arr = [];
             foreach ($_POST[$key] as $k => $v) {
                 $arr[$k] = (int)$v;
             }
         } elseif (isset($_GET[$key]) && is_array($_GET[$key])) {
-            $arr = array();
+            $arr = [];
             foreach ($_GET[$key] as $k => $v) {
                 $arr[$k] = (int)$v;
             }
         } else {
             $arr = false;
         }
+
         return $arr;
     }
 
@@ -422,22 +446,23 @@ class happy_linux_post extends happy_linux_strings
             $passwd    = $this->get_get_text('code');
         }
 
-        return array($passwd, $flag_passwd, $flag_code);
+        return [$passwd, $flag_passwd, $flag_code];
     }
 
     //--------------------------------------------------------
     // get form POST
     //--------------------------------------------------------
-    public function get_int_from_post(&$post, $key, $default = 0)
+    public function get_int_from_post($post, $key, $default = 0)
     {
         $val = $default;
         if (isset($post[$key])) {
             $val = $post[$key];
         }
+
         return (int)$val;
     }
 
-    public function get_text_from_post(&$post, $key, $default = '')
+    public function get_text_from_post($post, $key, $default = '')
     {
         $text = $default;
         if (isset($post[$key])) {
@@ -445,15 +470,17 @@ class happy_linux_post extends happy_linux_strings
             $text = $this->strip_slashes_gpc($post[$key]);
             $text = $this->strip_control($text);
         }
+
         return $text;
     }
 
-    public function &get_int_unique_array_without_from_post(&$post, $key, $without = 0)
+    public function &get_int_unique_array_without_from_post($post, $key, $without = 0)
     {
-        $arr = array();
+        $arr = [];
         if (isset($post[$key])) {
-            $arr =& $this->build_unique_array_without($post[$key], $without);
+            $arr = &$this->build_unique_array_without($post[$key], $without);
         }
+
         return $arr;
     }
 

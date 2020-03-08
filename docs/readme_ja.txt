@@ -4,7 +4,7 @@ $Id: readme_ja.txt,v 1.8 2012/04/08 18:24:36 ohwada Exp $
 Version: 1.80
 Date:   2012-04-0２
 Author: Kenichi OHWADA
-URL:    http://linux.ohwada.jp/
+URL:    https://linux.ohwada.jp/
 Email:  webmaster@ohwada.jp
 =================================================
 
@@ -54,15 +54,15 @@ Date:   2011-12-29
 ● 変更内容
 1. PHP 5.3 対応
 PHP 5.3.x で推奨されない機能 を修正した
-http://www.php.net/manual/ja/migration53.deprecated.php
+https://www.php.net/manual/ja/migration53.deprecated.php
 (1) ereg
 
 2. バグ修正
 (1) Google mapからgeorssの取得ができない
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1142&forum=9
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1142&forum=9
 
 (2) コマンドの offset が指定できない
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1210&forum=9
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1210&forum=9
 
 =================================================
 Version: 1.50
@@ -86,10 +86,10 @@ Date:   2009-01-04
 
 ● 変更内容
 (1) weblinks や rssc にて「バージョン xx ではない」
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=861&forum=5
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=861&forum=5
 
 (2) RSSのタイムスタンプがずれる
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=906&forum=8
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=906&forum=8
 
 
 =================================================
@@ -110,10 +110,10 @@ Date:   2008-02-24
 
 2. 言語ファイル
 (1) アラビア語 更新
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=350&forum=3
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=350&forum=3
 
 (2) ペルシア語
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=387&forum=2
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=387&forum=2
 
 
 =================================================
@@ -132,7 +132,7 @@ Date:   2008-01-30
 Version: 1.23
 Date:   2008-01-18
 Author: Kenichi OHWADA
-URL:    http://linux.ohwada.jp/
+URL:    https://linux.ohwada.jp/
 Email:  webmaster@ohwada.jp
 =================================================
 
@@ -147,7 +147,7 @@ media:group タグを出力しない
 
 3. バグ対策
 (1) Only variables should be assigned by reference 
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=758&forum=5
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=758&forum=5
 
 (2) unserialize(): Argument is not an string
 
@@ -162,7 +162,7 @@ Date:   2007-12-29
 ● 変更内容
 1. バグ対策
 (1) weblinks にて、スマイリーアイコンが表示されない
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=746&forum=5
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=746&forum=5
 
 
 =================================================
@@ -193,37 +193,37 @@ Date:   2007-11-11
 (2) メモリ使用量を表示する memory 関数を新設した
 
 (3) ブロック・テーブルの検査を行う xoops_block_check クラスを新設した
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=707&forum=5
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=707&forum=5
 
 (4) multibyte 関数に日本語句読点の後ろに空白文字を追加する処理を追加した
 (5) admin クラスにモジュール管理を追加した
 
 (6) typo 修正： cobe -> cube
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=700&forum=5
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=700&forum=5
 
 3. rssc モジュールの変更に伴い、下記の変更を行った
 (1) strings クラスに 要約作成時に全て空白文字ならば空にする処理を追加した
 (2) PHP5 の E_STRICT レベルのエラーを潰した
 
 (3) バグ修正： preg_match()
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=709&forum=9
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=709&forum=9
 
 4. whatsnew モジュールの変更に伴い、下記の変更を行った
 (1) タイムゾーンを扱うために date クラスを新設した
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=713&forum=8
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=713&forum=8
 
 (2) テンプレート・キャシュを扱うために build_cache クラスを新設した
 (3) モジュール設定のための config 言語ファイルを新設した
 
 5. 言語
 (1) イタリア語を追加した
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=337&forum=2
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=337&forum=2
 
 (2) アラビア語を追加した
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=350&forum=3
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=350&forum=3
 
 (3) ペルシャ語を更新した
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=343&forum=2
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=343&forum=2
 
 
 =================================================
@@ -235,7 +235,7 @@ Date:   2007-09-23
 
 ● 変更内容
 1. バナー画像の一時保管ディレクトリ
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=694&forum=5
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=694&forum=5
 
 (1) /tmp が open_basedir に含まれるか検査した
 (2) 管理者が preload にて任意のディレクトリを指定できる
@@ -275,8 +275,8 @@ Date:   2007-09-01
 ● 変更内容
 1. バグ対策
 (1) RSS配信で Noitce エラーが表示される
-http://dev.xoops.org/modules/xfmod/tracker/?func=detail&aid=4697&group_id=1300&atid=1353
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=8&topic_id=681
+https://dev.xoops.org/modules/xfmod/tracker/?func=detail&aid=4697&group_id=1300&atid=1353
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=8&topic_id=681
 
 
 =================================================
@@ -289,7 +289,7 @@ Date:   2007-08-05
 ● 変更内容
 1. MySQL 4.1/5.x の対応
 (1) 文字コードの指定
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=9&topic_id=631
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=9&topic_id=631
 日本語では、MySQL の文字コードは ujis (EUC-JP) に固定にしていた。
 管理者が preload/charset.php を設置して、任意の文字コードが指定できるように変更した。
 
@@ -318,7 +318,7 @@ http://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=9&topic_id=631
 4. 多言語
 (1) ドイツ語を追加した
 (2) ドイツ国を追加した
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=323&forum=2
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=323&forum=2
 
 5. バグ対策
 (1) RSS 表示の site_url がサニタイズされない
@@ -427,7 +427,7 @@ Date:   2007-05-15
 Version: 0.70
 Date:   2007-02-20
 Author: Kenichi OHWADA
-URL:    http://linux.ohwada.jp/
+URL:    https://linux.ohwada.jp/
 Email:  webmaster@ohwada.jp
 =================================================
 
@@ -459,8 +459,8 @@ Date:   2006-12-17
 
 4. バグの修正
 (1) 4417: language singleton done not work correctly
-http://dev.xoops.org/modules/xfmod/tracker/?func=detail&aid=4417&group_id=1199&atid=971
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=256&forum=2
+https://dev.xoops.org/modules/xfmod/tracker/?func=detail&aid=4417&group_id=1199&atid=971
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=256&forum=2
 
 
 =================================================
@@ -486,14 +486,14 @@ Date:   2006-11-20
 
 3. バグの修正
 (1) 4378: POST変数にバックスラッシュが付加される
-http://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4378&group_id=1300&atid=1353
-http://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=558&start=0#forumpost1975
+https://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4378&group_id=1300&atid=1353
+https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=558&start=0#forumpost1975
 
 (2) 4379: Undefined property: _flag_allow_url_fopen
 (3) 4380: Only variables should be assigned by reference
-http://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4379&group_id=1300&atid=1353
-http://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4380&group_id=1300&atid=1353
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=256&forum=2
+https://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4379&group_id=1300&atid=1353
+https://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4380&group_id=1300&atid=1353
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=256&forum=2
 
 
 =================================================
@@ -519,11 +519,11 @@ Date:   2006-10-29
 
 変更内容
 (1) ペルシャ語を追加した
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=243&forum=5
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=243&forum=5
 
 (2) バグ修正 4339：非マルチバイト環境で Fatal error が発生する
-http://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=244&forum=5
-http://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4339&group_id=1300&atid=1353
+https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=244&forum=5
+https://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4339&group_id=1300&atid=1353
 
 
 =================================================
@@ -552,7 +552,7 @@ Date:   2006-10-01
 (1) 地域選択 (Locate) の仕組みを実験的に導入した。
 言語と国・地域を独立に選択する仕組みです。
 ccTLDs の国コードを採用した。
-http://www.iana.org/cctld/
+https://www.iana.org/cctld/
 日本(jp)、米国(us)、英国(uk) の３つを用意した。
 
 (2) file 関連のクラスを追加した

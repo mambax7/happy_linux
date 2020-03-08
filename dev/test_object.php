@@ -13,7 +13,6 @@ include_once 'dev_header.php';
 //================================================================
 class test_object extends happy_linux_object
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -41,8 +40,8 @@ class test_object extends happy_linux_object
 dev_header();
 echo "<h3>test happy_linux_object</h3>\n";
 
-$gpc = get_magic_quotes_gpc();
-echo 'get_magic_quotes_gpc = ' . $gpc . "<br /><br />\n";
+$gpc = @get_magic_quotes_gpc();
+echo 'get_magic_quotes_gpc = ' . $gpc . "<br><br>\n";
 
 test_common('bool', 0, 0);
 test_common('bool', 1, 1);
@@ -77,17 +76,17 @@ if ($gpc) {
     test_common('txtarea', "\'def\'", "\'def\'", htmlspecialchars("\'def\'", ENT_QUOTES));
 }
 
-test_common('url', 'http://abc/', 'http://abc/');
-test_common('url', "http://ab \t cd \n ef \0/", 'http://ab  cd  ef /');
-test_common('url', "http://java\tscript\n:", '');
-test_common('url', 'http://', '');
+test_common('url', 'https://abc/', 'https://abc/');
+test_common('url', "https://ab \t cd \n ef \0/", 'https://ab  cd  ef /');
+test_common('url', "https://java\tscript\n:", '');
+test_common('url', 'https://', '');
 test_common('url', 'abc', '');
-test_common('url', 'http://ab &auml; cd &amp; ef & /', 'http://ab &auml; cd &amp; ef & /', 'http://ab &amp;auml; cd &amp; ef &amp; /');
+test_common('url', 'https://ab &auml; cd &amp; ef & /', 'https://ab &auml; cd &amp; ef & /', 'https://ab &amp;auml; cd &amp; ef &amp; /');
 
 if ($gpc) {
-    test_common('url', "http://\'def\'", "http://'def'", htmlspecialchars("http://'def'", ENT_QUOTES));
+    test_common('url', "https://\'def\'", "https://'def'", htmlspecialchars("https://'def'", ENT_QUOTES));
 } else {
-    test_common('url', "http://\'def\'", "http://\'def\'", htmlspecialchars("http://\'def\'", ENT_QUOTES));
+    test_common('url', "https://\'def\'", "https://\'def\'", htmlspecialchars("https://\'def\'", ENT_QUOTES));
 }
 
 test_common('other', 'abc', 'abc');
@@ -96,12 +95,12 @@ test_common('other', 'javascript:', 'javascript:');
 test_common('other', "\'def\'", "\'def\'");
 
 test_array('array', 'abc', serialize('abc'), 'abc');
-test_array('array', array('def'), serialize(array('def')), array('def'));
+test_array('array', ['def'], serialize(['def']), ['def']);
 
 if ($gpc) {
-    test_array('array', array("\'ghi\'"), serialize(array("'ghi'")), array("'ghi'"));
+    test_array('array', ["\'ghi\'"], serialize(["'ghi'"]), ["'ghi'"]);
 } else {
-    test_array('array', array("\'ghi\'"), serialize(array("\'ghi\'")), array("\'ghi\'"));
+    test_array('array', ["\'ghi\'"], serialize(["\'ghi\'"]), ["\'ghi\'"]);
 }
 
 dev_footer();
@@ -115,11 +114,11 @@ function test_common($key, $set, $get_expect, $getvar_expect = null)
     $get    = $obj->get($key);
     $getvar = $obj->getVar($key);
 
-    if ($getvar_expect === null) {
+    if (null === $getvar_expect) {
         $getvar_expect = $get_expect;
     }
 
-    echo "$key : $set : $get : $getvar <br />\n";
+    echo "$key : $set : $get : $getvar <br>\n";
 
     if (($get_expect != $get) || ($getvar_expect != $getvar)) {
         dev_print_error("unmatch $key : $set : $get_expect != $get : $getvar_expect != $getvar");
@@ -133,17 +132,17 @@ function test_array($key, $set, $get_expect, $getvar_expect = null)
     $get    = $obj->get($key);
     $getvar = $obj->getVar($key);
 
-    if ($getvar_expect === null) {
+    if (null === $getvar_expect) {
         $getvar_expect = $get_expect;
     }
 
-    echo "$key : <br />\n";
+    echo "$key : <br>\n";
     print_r($set);
-    echo "<br />\n";
+    echo "<br>\n";
     print_r($get);
-    echo "<br />\n";
+    echo "<br>\n";
     print_r($getvar);
-    echo "<br /><br />\n";
+    echo "<br><br>\n";
 
     if (($get_expect != $get) || ($getvar_expect != $getvar)) {
         dev_print_error("unmatch $key : $set : $get_expect != $get : $getvar_expect != $getvar");

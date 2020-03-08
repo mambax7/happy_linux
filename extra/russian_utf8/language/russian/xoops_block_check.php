@@ -7,7 +7,7 @@
 //=========================================================
 // _LANGCODE: ru
 // _CHARSET : utf-8
-// Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
+// Translator: Houston (Contour Design Studio https://www.cdesign.ru/)
 
 define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_CHECK', 'Проверить таблицу блоков XOOPS');
 define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE', 'Удалить таблицу блоков XOOPS');

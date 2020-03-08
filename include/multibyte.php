@@ -33,10 +33,11 @@ function happy_linux_convert_encoding($str, $to, $from = null)
     if (function_exists('mb_convert_encoding')) {
         if ($from) {
             return mb_convert_encoding($str, $to, $from);
-        } else {
-            return mb_convert_encoding($str, $to);
         }
+
+        return mb_convert_encoding($str, $to);
     }
+
     return $str;
 }
 
@@ -51,6 +52,7 @@ function happy_linux_convert_to_utf8($str, $encoding = null)
     } else {
         $str = utf8_encode($str);
     }
+
     return $str;
 }
 
@@ -65,6 +67,7 @@ function happy_linux_convert_from_utf8($str, $encoding = null)
     } else {
         $str = utf8_decode($str);
     }
+
     return $str;
 }
 
@@ -73,10 +76,11 @@ function happy_linux_convert_kana($str, $option = 'KV', $encoding = null)
     if (function_exists('mb_convert_kana')) {
         if ($encoding) {
             return mb_convert_kana($str, $option, $encoding);
-        } else {
-            return mb_convert_kana($str, $option);
         }
+
+        return mb_convert_kana($str, $option);
     }
+
     return $str;
 }
 
@@ -85,9 +89,9 @@ function happy_linux_internal_encoding($encoding = null)
     if (function_exists('mb_internal_encoding')) {
         if ($encoding) {
             return mb_internal_encoding($encoding);
-        } else {
-            return mb_internal_encoding();
         }
+
+        return mb_internal_encoding();
     }
 }
 
@@ -99,8 +103,10 @@ function happy_linux_detect_encoding($str, $encoding_list = null, $strict = null
         } elseif ($encoding_list) {
             return mb_detect_encoding($str, $encoding_list);
         }
+
         return mb_detect_encoding($str);
     }
+
     return false;
 }
 
@@ -109,14 +115,14 @@ function happy_linux_strcut($str, $start, $length, $encoding = null)
     if (function_exists('mb_strcut')) {
         if ($encoding) {
             return mb_strcut($str, $start, $length, $encoding);
-        } else {
-            return mb_strcut($str, $start, $length);
         }
+
+        return mb_strcut($str, $start, $length);
     }
 
     // BUG 4339: Fatal error: Call to undefined function: strcut()
     // strcut -> substr
-    return substr($str, $start, $length);
+    return mb_substr($str, $start, $length);
 }
 
 function happy_linux_http_output($encoding = null)
@@ -124,9 +130,9 @@ function happy_linux_http_output($encoding = null)
     if (function_exists('mb_http_output')) {
         if ($encoding) {
             return mb_http_output($encoding);
-        } else {
-            return mb_http_output();
         }
+
+        return mb_http_output();
     }
 }
 
@@ -135,9 +141,9 @@ function happy_linux_mb_language($language = null)
     if (function_exists('mb_language')) {
         if ($language) {
             return mb_language($language);
-        } else {
-            return mb_language();
         }
+
+        return mb_language();
     }
 }
 
@@ -148,9 +154,9 @@ function happy_linux_send_mail($mailto, $subject, $message, $headers = null, $pa
             return mb_send_mail($mailto, $subject, $message, $headers, $parameter);
         } elseif ($headers) {
             return mb_send_mail($mailto, $subject, $message, $headers);
-        } else {
-            return mb_send_mail($mailto, $subject, $message);
         }
+
+        return mb_send_mail($mailto, $subject, $message);
     }
 
     if ($parameter) {
@@ -158,6 +164,7 @@ function happy_linux_send_mail($mailto, $subject, $message, $headers = null, $pa
     } elseif ($headers) {
         return mail($mailto, $subject, $message, $headers);
     }
+
     return mail($mailto, $subject, $message);
 }
 
@@ -166,9 +173,9 @@ function happy_linux_mb_ereg_replace($pattern, $replace, $string, $option = null
     if (function_exists('mb_ereg_replace')) {
         if ($option) {
             return mb_ereg_replace($pattern, $replace, $string, $option);
-        } else {
-            return mb_ereg_replace($pattern, $replace, $string);
         }
+
+        return mb_ereg_replace($pattern, $replace, $string);
     }
 }
 
@@ -179,11 +186,12 @@ function happy_linux_mb_ereg_replace($pattern, $replace, $string, $option = null
 function happy_linux_mb_shorten($str, $max, $tail = ' ...')
 {
     $text = $str;
-    if (($max > 0) && (strlen($str) > $max)) {
+    if (($max > 0) && (mb_strlen($str) > $max)) {
         $text = happy_linux_strcut($str, 0, $max) . $tail;
-    } elseif ($max == 0) {
+    } elseif (0 == $max) {
         $text = null;
     }
+
     return $text;
 }
 
@@ -209,6 +217,7 @@ function happy_linux_mb_build_summary($str, $max, $tail = ' ...', $is_japanese =
     $str = happy_linux_str_replace_continuous_space_code($str);
     $str = happy_linux_str_set_empty_if_only_space($str);
     $str = happy_linux_mb_shorten($str, $max, $tail);
+
     return $str;
 }
 
@@ -224,6 +233,7 @@ function happy_linux_str_add_space_after_punctuation($str)
 {
     $str = happy_linux_str_add_space_after_str(',', $str);
     $str = happy_linux_str_add_space_after_str('.', $str);
+
     return $str;
 }
 
@@ -236,6 +246,7 @@ function happy_linux_str_add_space_after_punctuation_ja($str)
         $str = happy_linux_mb_add_space_after_str(_HAPPY_LINUX_JA_PERIOD, $str);
         $str = happy_linux_mb_add_space_after_str(_HAPPY_LINUX_JA_COMMA, $str);
     }
+
     return $str;
 }
 
@@ -252,9 +263,10 @@ function happy_linux_mb_add_space_after_str($word, $string)
 function happy_linux_str_set_empty_if_only_space($str)
 {
     $temp = happy_linux_str_replace_space_code($str, '');
-    if (strlen($temp) == 0) {
+    if (0 == mb_strlen($temp)) {
         $str = '';
     }
+
     return $str;
 }
 
@@ -265,6 +277,7 @@ function happy_linux_is_japanese()
     if (in_array($xoopsConfig['language'], happy_linux_get_lang_name_ja())) {
         return true;
     }
+
     return false;
 }
 
@@ -279,6 +292,7 @@ function happy_linux_str_replace_control_code($str, $replace = ' ')
     $str = preg_replace('/[\x0B-\x0C]/', $replace, $str);
     $str = preg_replace('/[\x0E-\x1F]/', $replace, $str);
     $str = preg_replace('/[\x7F]/', $replace, $str);
+
     return $str;
 }
 
@@ -291,6 +305,7 @@ function happy_linux_str_replace_return_code($str, $replace = ' ')
 {
     $str = preg_replace("/\n/", $replace, $str);
     $str = preg_replace("/\r/", $replace, $str);
+
     return $str;
 }
 
