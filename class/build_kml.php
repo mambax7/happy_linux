@@ -176,9 +176,10 @@ class happy_linux_build_kml extends happy_linux_build_xml
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_build_kml();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 

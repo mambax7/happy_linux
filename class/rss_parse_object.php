@@ -726,14 +726,14 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
             $lat  = $this->get_rss_var('geo', 'point_lat');
             $long = $this->get_rss_var('geo', 'point_long');
 
-            // <geo:lat>lat</geo:lat>
+        // <geo:lat>lat</geo:lat>
         } elseif ($this->is_set('geo', 'lat')
                   || $this->is_set('geo', 'long')
         ) {
             $lat  = $this->get_rss_var('geo', 'lat');
             $long = $this->get_rss_var('geo', 'long');
 
-            // <georss:point>lat long</georss:point>
+        // <georss:point>lat long</georss:point>
         } elseif ($this->is_set('georss', 'point')) {
             $lat_long = $this->get_rss_var('georss', 'point');
 

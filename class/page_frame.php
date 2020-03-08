@@ -112,9 +112,10 @@ class happy_linux_page_frame extends happy_linux_form
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_page_frame();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
@@ -754,7 +755,7 @@ class happy_linux_page_frame extends happy_linux_form
     //---------------------------------------------------------
     public function set_handler($table_name, $dirname, $prefix = 'happy_linux')
     {
-        $this->_handler = happy_linux_get_handler($table_name, $dirname, $prefix);
+        $this->_handler = happy_linux_getHandler($table_name, $dirname, $prefix);
     }
 
     public function set_id_name($value)

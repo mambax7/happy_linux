@@ -33,9 +33,10 @@ class happy_linux_plugin_manage
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_plugin_manage();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
@@ -134,9 +135,10 @@ class happy_linux_plugin_test
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_plugin_test();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
@@ -245,9 +247,10 @@ class happy_linux_plugin_test_form extends happy_linux_form_lib
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_plugin_test_form();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 

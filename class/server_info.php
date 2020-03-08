@@ -29,9 +29,10 @@ class happy_linux_server_info
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_server_info();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 

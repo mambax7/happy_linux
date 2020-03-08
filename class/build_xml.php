@@ -31,9 +31,10 @@ class happy_linux_xml_base
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_xml_base();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
@@ -421,9 +422,10 @@ class happy_linux_build_xml extends happy_linux_xml_base
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_build_xml();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 

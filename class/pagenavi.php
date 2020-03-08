@@ -51,8 +51,8 @@ class happy_linux_pagenavi
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_pagenavi();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
@@ -507,7 +507,8 @@ class happy_linux_pagenavi
     {
         $current = 0;
         $last    = 0;
-        $start   = 0;;
+        $start   = 0;
+        ;
 
         if ($perpage <= 0) {
             return array($current, $last, $start);

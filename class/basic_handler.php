@@ -84,9 +84,10 @@ class happy_linux_basic_handler extends happy_linux_error
     public static function getInstance($dirname = null)
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_basic_handler($dirname);
+        if (null === $instance) {
+            $instance = new static($dirname);
         }
+
         return $instance;
     }
 

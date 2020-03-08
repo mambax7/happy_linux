@@ -20,7 +20,7 @@
 //=========================================================
 // Happy Linux Framework Module
 // 2006-09-01 K.OHWADA
-// Í­Êþ¼«±óÊýÍè
+// Í­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //=========================================================
 
 //---------------------------------------------------------
@@ -49,7 +49,7 @@ class happy_linux_highlight
     public $_flag_remove_not_word = false;
 
     // same language match contorl code
-    // ex) BIG-5 GB2312 »Á C05C B2CD Í· B943 904A
+    // ex) BIG-5 GB2312 ï¿½ï¿½ C05C B2CD Í· B943 904A
     public $_flag_remove_control_code = false;
 
     //---------------------------------------------------------
@@ -63,9 +63,10 @@ class happy_linux_highlight
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_highlight();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 

@@ -33,9 +33,10 @@ class happy_linux_rss_default
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_rss_default();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 

@@ -53,9 +53,10 @@ class happy_linux_plugin
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_plugin();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 

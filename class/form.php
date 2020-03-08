@@ -134,9 +134,10 @@ class happy_linux_form extends happy_linux_html
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_form();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 

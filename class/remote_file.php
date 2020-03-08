@@ -73,9 +73,10 @@ class happy_linux_remote_file extends happy_linux_error
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_remote_file();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 

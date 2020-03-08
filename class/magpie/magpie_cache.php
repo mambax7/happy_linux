@@ -27,7 +27,6 @@
 //class RSSCache {
 class happy_linux_magpie_cache
 {
-
     public $BASE_CACHE = './cache';    // where the cache files are stored
     public $MAX_AGE    = 3600;         // when are files stale, default one hour
     public $ERROR      = '';           // accumulate error messages

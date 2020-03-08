@@ -223,7 +223,7 @@ class happy_linux_object_handler extends happy_linux_error
         $start     = 0;
         $id_as_key = true;
 
-        $this->_cached = $this->getObjects($criteria, $limit, $start, $id_as_key);
+        $this->_cached =& $this->getObjects($criteria, $limit, $start, $id_as_key);
     }
 
     public function set_cache_by_obj(&$obj)
@@ -425,7 +425,7 @@ class happy_linux_object_handler extends happy_linux_error
 
     public function _delete_all($criteria, $force = false)
     {
-        $objs = $this->getObjects($criteria);
+        $objs =& $this->getObjects($criteria);
 
         $flag = true;
 
@@ -645,7 +645,7 @@ class happy_linux_object_handler extends happy_linux_error
         $criteria = new CriteriaCompo();
         $criteria->setStart($start);
         $criteria->setLimit($limit);
-        $objs = $this->getObjects($criteria);
+        $objs =& $this->getObjects($criteria);
         return $objs;
     }
 
@@ -656,7 +656,7 @@ class happy_linux_object_handler extends happy_linux_error
         $criteria->setSort($sort);
         $criteria->setStart($start);
         $criteria->setLimit($limit);
-        $objs = $this->getObjects($criteria);
+        $objs =& $this->getObjects($criteria);
         return $objs;
     }
 

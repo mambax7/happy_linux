@@ -37,9 +37,10 @@ class happy_linux_date
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_date();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 

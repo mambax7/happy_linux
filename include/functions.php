@@ -47,7 +47,7 @@ function &happy_linux_get_singleton($name)
     return $false;
 }
 
-function &happy_linux_get_handler($name = null, $module_dir = null, $prefix = 'happy_linux')
+function &happy_linux_getHandler($name = null, $module_dir = null, $prefix = 'happy_linux')
 {
     static $handlers;
 
@@ -101,7 +101,8 @@ function happy_linux_is_admin()
 {
     global $xoopsUser;
     if (is_object($xoopsUser) && $xoopsUser->isAdmin()) {
-        return true;;
+        return true;
+        ;
     }
     return false;
 }

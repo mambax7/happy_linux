@@ -730,8 +730,8 @@ class happy_linux_config_store_handler extends happy_linux_error
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_config_store_handler();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
@@ -739,7 +739,7 @@ class happy_linux_config_store_handler extends happy_linux_error
 
     public function set_handler($name, $dirname, $prefix)
     {
-        $this->_handler = happy_linux_get_handler($name, $dirname, $prefix);
+        $this->_handler = happy_linux_getHandler($name, $dirname, $prefix);
     }
 
     public function set_define(&$class)

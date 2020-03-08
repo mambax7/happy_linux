@@ -131,20 +131,20 @@ function list_blocks()
             $sseln = " checked='checked' style='background-color:#FF0000;'";
         } else {
             switch ($block_arr[$i]->getVar('side')) {
-                default :
-                case XOOPS_SIDEBLOCK_LEFT :
+                default:
+                case XOOPS_SIDEBLOCK_LEFT:
                     $ssel0 = " checked='checked' style='background-color:#00FF00;'";
                     break;
-                case XOOPS_SIDEBLOCK_RIGHT :
+                case XOOPS_SIDEBLOCK_RIGHT:
                     $ssel1 = " checked='checked' style='background-color:#00FF00;'";
                     break;
-                case XOOPS_CENTERBLOCK_LEFT :
+                case XOOPS_CENTERBLOCK_LEFT:
                     $ssel2 = " checked='checked' style='background-color:#00FF00;'";
                     break;
-                case XOOPS_CENTERBLOCK_RIGHT :
+                case XOOPS_CENTERBLOCK_RIGHT:
                     $ssel4 = " checked='checked' style='background-color:#00FF00;'";
                     break;
-                case XOOPS_CENTERBLOCK_CENTER :
+                case XOOPS_CENTERBLOCK_CENTER:
                     $ssel3 = " checked='checked' style='background-color:#00FF00;'";
                     break;
             }

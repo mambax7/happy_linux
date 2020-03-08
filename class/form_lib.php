@@ -47,8 +47,8 @@ class happy_linux_form_lib extends happy_linux_form
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_form_lib();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
@@ -170,10 +170,18 @@ class happy_linux_form_lib extends happy_linux_form
         return $text;
     }
 
-    public function build_lib_button_hidden_array($hidden_array, $form_name = '', $action = '', $submit_name = '', $submit_value = '', $cancel_name = '', $cancel_value = '', $location_name = '',
-                                                  $location_value = '', $location_url = ''
-    )
-    {
+    public function build_lib_button_hidden_array(
+        $hidden_array,
+        $form_name = '',
+        $action = '',
+        $submit_name = '',
+        $submit_value = '',
+        $cancel_name = '',
+        $cancel_value = '',
+        $location_name = '',
+                                                  $location_value = '',
+        $location_url = ''
+    ) {
         if (empty($form_name)) {
             $form_name = $this->build_form_name_rand();
         }

@@ -40,7 +40,7 @@ class happy_linux_config_define_handler
 
     public function set_config_handler($name, $dirname, $prefix)
     {
-        $this->_config_handler = happy_linux_get_handler($name, $dirname, $prefix);
+        $this->_config_handler = happy_linux_getHandler($name, $dirname, $prefix);
     }
 
     public function set_config_define(&$class)
@@ -51,8 +51,8 @@ class happy_linux_config_define_handler
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_config_define_handler();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;

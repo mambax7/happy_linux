@@ -26,9 +26,10 @@ class happy_linux_keyword
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_keyword();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 

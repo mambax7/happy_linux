@@ -264,26 +264,36 @@ class happy_linux_pagerank
         switch ($len) {/* all the case statements fall through */
             case 11:
                 $c += ($url[$k + 10] << 24);
+                // no break
             case 10:
                 $c += ($url[$k + 9] << 16);
-            case 9 :
+                // no break
+            case 9:
                 $c += ($url[$k + 8] << 8);
             /* the first byte of c is reserved for the length */
-            case 8 :
+            // no break
+            case 8:
                 $b += ($url[$k + 7] << 24);
-            case 7 :
+                // no break
+            case 7:
                 $b += ($url[$k + 6] << 16);
-            case 6 :
+                // no break
+            case 6:
                 $b += ($url[$k + 5] << 8);
-            case 5 :
+                // no break
+            case 5:
                 $b += $url[$k + 4];
-            case 4 :
+                // no break
+            case 4:
                 $a += ($url[$k + 3] << 24);
-            case 3 :
+                // no break
+            case 3:
                 $a += ($url[$k + 2] << 16);
-            case 2 :
+                // no break
+            case 2:
                 $a += ($url[$k + 1] << 8);
-            case 1 :
+                // no break
+            case 1:
                 $a += $url[$k + 0];
             /* case 0: nothing left to add */
         }

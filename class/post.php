@@ -44,8 +44,8 @@ class happy_linux_post extends happy_linux_strings
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_post();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;

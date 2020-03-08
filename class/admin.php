@@ -40,9 +40,10 @@ class happy_linux_admin
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_admin();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
@@ -236,18 +237,15 @@ class happy_linux_admin
         <script type="text/javascript">
             //<![CDATA[
             function happy_linux_init() {
-                setTimeout('happy_linux_jump()', <?php echo $time;
-                    ?>);
+                setTimeout('happy_linux_jump()', <?php echo $time; ?>);
             }
             function happy_linux_jump() {
-                window.location = '<?php echo $url;
-                    ?>';
+                window.location = '<?php echo $url; ?>';
             }
             window.onload = happy_linux_init;
             //]]>
         </script>
         <?php
-
     }
 
     public function _get_name($ver)

@@ -37,9 +37,10 @@ class happy_linux_extract_word
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_extract_word();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 

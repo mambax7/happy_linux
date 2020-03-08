@@ -106,8 +106,8 @@ class happy_linux_manage extends happy_linux_error
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_manage();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
@@ -118,12 +118,12 @@ class happy_linux_manage extends happy_linux_error
     //---------------------------------------------------------
     public function set_handler($table, $dirname, $prefix)
     {
-        $this->_handler = happy_linux_get_handler($table, $dirname, $prefix);
+        $this->_handler = happy_linux_getHandler($table, $dirname, $prefix);
     }
 
     public function set_form_handler($table, $dirname, $prefix)
     {
-        $this->_form = happy_linux_get_handler($table, $dirname, $prefix);
+        $this->_form = happy_linux_getHandler($table, $dirname, $prefix);
     }
 
     public function set_form_class($form)

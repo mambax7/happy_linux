@@ -61,8 +61,8 @@ class happy_linux_system
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_system();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
@@ -229,7 +229,8 @@ class happy_linux_system
         global $xoopsUser, $xoopsModule;
 
         if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
-            return true;;
+            return true;
+            ;
         }
 
         return false;

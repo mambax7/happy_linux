@@ -100,8 +100,8 @@ class happy_linux_search
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_search();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
@@ -115,7 +115,7 @@ class happy_linux_search
         $action = $this->_post->get_post_get_text('action');
 
         switch ($action) {
-            case 'search';
+            case 'search':
             case 'results':
             case 'showall':
             case 'showallbyuser':
@@ -136,9 +136,9 @@ class happy_linux_search
         $andor = $this->_post->get_post_get_text('andor');
 
         switch ($andor) {
-            case 'AND';
-            case 'OR';
-            case 'exact';
+            case 'AND':
+            case 'OR':
+            case 'exact':
                 $ret = $andor;
                 break;
 

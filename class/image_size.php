@@ -31,8 +31,8 @@ class happy_linux_image_size
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_image_size();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;

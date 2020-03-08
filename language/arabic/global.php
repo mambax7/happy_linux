@@ -21,51 +21,51 @@
 //=========================================================
 
 // global
-define('_HAPPY_LINUX_HOME', 'วแีÝอษ วแัฦํำํษ');
-define('_HAPPY_LINUX_MAIN', 'วแัฦํำํษ');
-define('_HAPPY_LINUX_ADD', 'รึÝ');
-define('_HAPPY_LINUX_ADDED', 'รึํÝ');
-define('_HAPPY_LINUX_DELETE', 'อะÝ');
-define('_HAPPY_LINUX_DELETED', 'อ๕ะÝ');
-define('_HAPPY_LINUX_UPDATE', 'สอฯํห');
-define('_HAPPY_LINUX_UPDATED', 'อฯหส');
-define('_HAPPY_LINUX_MODIFY', 'สฺฯํแ');
-define('_HAPPY_LINUX_MODIFIED', 'ฺฯแส');
-define('_HAPPY_LINUX_SAVE', 'อÝู');
-define('_HAPPY_LINUX_SAVED', 'อÝูส');
-define('_HAPPY_LINUX_CLEAR', 'ใำอ');
-define('_HAPPY_LINUX_CLEARED', 'ใำอส');
-define('_HAPPY_LINUX_EXECUTE', 'สไÝํะ');
-define('_HAPPY_LINUX_EXECUTED', 'ไÝะส');
-define('_HAPPY_LINUX_CREATE', 'วไิวม');
-define('_HAPPY_LINUX_CREATED', 'วไิรส');
-define('_HAPPY_LINUX_SUBMIT', 'รัำแ');
-define('_HAPPY_LINUX_SUBMITED', 'รัำแส');
-define('_HAPPY_LINUX_CANCEL', 'วแÛวม');
-define('_HAPPY_LINUX_CANCELED', 'วแÛํส');
-define('_HAPPY_LINUX_SEARCH', 'ศอห');
-define('_HAPPY_LINUX_SHOW', 'ฺัึ');
-define('_HAPPY_LINUX_TITLE', 'ฺไๆวไ');
-define('_HAPPY_LINUX_KEYWORD', 'วแ฿แใษ');
-define('_HAPPY_LINUX_NUM', 'ัÞใ');
-define('_HAPPY_LINUX_NO_ACTION', 'Ûํั ไิุ');
+define('_HAPPY_LINUX_HOME', 'ุงูุตูุญุฉ ุงูุฑุฆูุณูุฉ');
+define('_HAPPY_LINUX_MAIN', 'ุงูุฑุฆูุณูุฉ');
+define('_HAPPY_LINUX_ADD', 'ุฃุถู');
+define('_HAPPY_LINUX_ADDED', 'ุฃุถูู');
+define('_HAPPY_LINUX_DELETE', 'ุญุฐู');
+define('_HAPPY_LINUX_DELETED', 'ุญูุฐู');
+define('_HAPPY_LINUX_UPDATE', 'ุชุญุฏูุซ');
+define('_HAPPY_LINUX_UPDATED', 'ุญุฏุซุช');
+define('_HAPPY_LINUX_MODIFY', 'ุชุนุฏูู');
+define('_HAPPY_LINUX_MODIFIED', 'ุนุฏูุช');
+define('_HAPPY_LINUX_SAVE', 'ุญูุธ');
+define('_HAPPY_LINUX_SAVED', 'ุญูุธุช');
+define('_HAPPY_LINUX_CLEAR', 'ู…ุณุญ');
+define('_HAPPY_LINUX_CLEARED', 'ู…ุณุญุช');
+define('_HAPPY_LINUX_EXECUTE', 'ุชูููุฐ');
+define('_HAPPY_LINUX_EXECUTED', 'ููุฐุช');
+define('_HAPPY_LINUX_CREATE', 'ุงูุดุงุก');
+define('_HAPPY_LINUX_CREATED', 'ุงูุดุฃุช');
+define('_HAPPY_LINUX_SUBMIT', 'ุฃุฑุณู');
+define('_HAPPY_LINUX_SUBMITED', 'ุฃุฑุณูุช');
+define('_HAPPY_LINUX_CANCEL', 'ุงูุบุงุก');
+define('_HAPPY_LINUX_CANCELED', 'ุงูุบูุช');
+define('_HAPPY_LINUX_SEARCH', 'ุจุญุซ');
+define('_HAPPY_LINUX_SHOW', 'ุนุฑุถ');
+define('_HAPPY_LINUX_TITLE', 'ุนููุงู');
+define('_HAPPY_LINUX_KEYWORD', 'ุงูููู…ุฉ');
+define('_HAPPY_LINUX_NUM', 'ุฑูู…');
+define('_HAPPY_LINUX_NO_ACTION', 'ุบูุฑ ูุดุท');
 
 // 2006-11-10
-define('_HAPPY_LINUX_GOTO_MAIN', 'วแะๅวศ ลแ์ วแัฦํำํษ');
-define('_HAPPY_LINUX_GOTO_TOP', 'วแะๅวศ ลแ์ รฺแ์ วแีÝอษ');
-define('_HAPPY_LINUX_GOTO_ADMIN', 'วแะๅวศ ลแ์ ีÝอษ วแรฯใไ');
-define('_HAPPY_LINUX_GOTO_MODULE', 'วแะๅวศ ลแ์ วแศัไวใฬ');
+define('_HAPPY_LINUX_GOTO_MAIN', 'ุงูุฐูุงุจ ุฅูู ุงูุฑุฆูุณูุฉ');
+define('_HAPPY_LINUX_GOTO_TOP', 'ุงูุฐูุงุจ ุฅูู ุฃุนูู ุงูุตูุญุฉ');
+define('_HAPPY_LINUX_GOTO_ADMIN', 'ุงูุฐูุงุจ ุฅูู ุตูุญุฉ ุงูุฃุฏู…ู');
+define('_HAPPY_LINUX_GOTO_MODULE', 'ุงูุฐูุงุจ ุฅูู ุงูุจุฑูุงู…ุฌ');
 
 // 2007-02-20
-define('_HAPPY_LINUX_SKIP_TO_NEXT', 'วแÛวม');
+define('_HAPPY_LINUX_SKIP_TO_NEXT', 'ุงูุบุงุก');
 
 // 2007-11-01
-define('_HAPPY_LINUX_WELCOME', 'รๅแว ๆำๅแว %s');
-define('_HAPPY_LINUX_FAIL', 'Ýิแ');
-define('_HAPPY_LINUX_FAILED', 'ํÝิแ');
-define('_HAPPY_LINUX_REFRESH', 'สอฯํห');
-define('_HAPPY_LINUX_REFRESHED', 'สใ วแสอฯํห');
-define('_HAPPY_LINUX_FINISH', 'วไสๅ์');
-define('_HAPPY_LINUX_FINISHED', 'สใ วแวไสๅวม');
-define('_HAPPY_LINUX_PRINT', 'ุศวฺษ');
-define('_HAPPY_LINUX_SAMPLE', 'ฺํไษ');
+define('_HAPPY_LINUX_WELCOME', 'ุฃููุง ูุณููุง %s');
+define('_HAPPY_LINUX_FAIL', 'ูุดู');
+define('_HAPPY_LINUX_FAILED', 'ููุดู');
+define('_HAPPY_LINUX_REFRESH', 'ุชุญุฏูุซ');
+define('_HAPPY_LINUX_REFRESHED', 'ุชู… ุงูุชุญุฏูุซ');
+define('_HAPPY_LINUX_FINISH', 'ุงูุชูู');
+define('_HAPPY_LINUX_FINISHED', 'ุชู… ุงูุงูุชูุงุก');
+define('_HAPPY_LINUX_PRINT', 'ุทุจุงุนุฉ');
+define('_HAPPY_LINUX_SAMPLE', 'ุนููุฉ');

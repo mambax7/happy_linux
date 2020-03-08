@@ -45,7 +45,7 @@ class happy_linux_module_install
         $this->_db = XoopsDatabaseFactory::getDatabaseConnection();
     }
 
-    public function set_config_define_class(&$class)
+    public function set_config_define_class($class)
     {
         $this->_config_define =& $class;
     }
@@ -73,7 +73,7 @@ CREATE TABLE ' . $this->_config_table . " (
   aux_text_2 varchar(255) default '',
   PRIMARY KEY (id),
   KEY conf_id (conf_id)
-) TYPE=MyISAM
+) ENGINE=MyISAM
 ";
 
         return $this->query($sql);

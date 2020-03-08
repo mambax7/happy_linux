@@ -56,9 +56,10 @@ class happy_linux_html extends happy_linux_strings
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_html();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 

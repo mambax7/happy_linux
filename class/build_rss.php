@@ -157,9 +157,10 @@ class happy_linux_build_rss extends happy_linux_build_cache
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_build_rss();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
@@ -204,31 +205,24 @@ class happy_linux_build_rss extends happy_linux_build_cache
         if ($this->_view_goto_url && $this->_view_goto_title) {
             $goto = '<a href="' . $this->_view_goto_url . '">';
             $goto .= $this->_utf8($this->_view_goto_title) . "</a>\n";
-        }
-
-        ?>
+        } ?>
         <html>
         <head>
             <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-            <title><?php echo $title;
-                ?></title>
+            <title><?php echo $title; ?></title>
         </head>
         <body>
-        <h3><?php echo $title;
-            ?></h3>
+        <h3><?php echo $title; ?></h3>
         This is debug mode <br/> <br/>
         <hr/>
         <pre>
-<?php echo $body;
-?>
+<?php echo $body; ?>
 </pre>
         <hr/>
-        <?php echo $goto;
-        ?>
+        <?php echo $goto; ?>
         </body>
         </html>
         <?php
-
     }
 
     public function rebuild_rss()
@@ -281,7 +275,8 @@ class happy_linux_build_rss extends happy_linux_build_cache
         if (empty($year)) {
             $year = $this->_site_year;
         }
-        $val = "tag:$site_tag,$year://1.$mid.$aid";;
+        $val = "tag:$site_tag,$year://1.$mid.$aid";
+        ;
         return $val;
     }
 
@@ -1433,7 +1428,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
                 $ret = $this->_TEMPLATE_RSS;
                 break;
 
-            case 'other';
+            case 'other':
             default:
                 $ret = $this->_TEMPLATE_OTHER;
                 break;

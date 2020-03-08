@@ -42,9 +42,10 @@ class happy_linux_rss_view_item
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_rss_view_item();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 

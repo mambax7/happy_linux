@@ -106,9 +106,10 @@ class happy_linux_strings
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_strings();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
@@ -1136,7 +1137,8 @@ class happy_linux_strings
         if (is_array($keyword_array)) {
             $text = happy_linux_build_search_context($text, $keyword_array, $max);
         } else {
-            $text = happy_linux_strcut($text, 0, $max) . ' ...';;
+            $text = happy_linux_strcut($text, 0, $max) . ' ...';
+            ;
         }
 
         return $text;
@@ -1213,7 +1215,8 @@ class happy_linux_strings
     {
         global $xoopsUser, $xoopsModule;
         if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
-            return true;;
+            return true;
+            ;
         }
         return false;
     }

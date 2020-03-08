@@ -78,9 +78,10 @@ class happy_linux_error
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_error();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 

@@ -9,7 +9,7 @@
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
+//                       <https://xoops.org/>                             //
 //  ------------------------------------------------------------------------ //
 //  This program is free software; you can redistribute it and/or modify     //
 //  it under the terms of the GNU General Public License as published by     //
@@ -54,9 +54,11 @@ $form->addElement($mod_select);
 $form->addElement(new XoopsFormText(_AM_TITLE, 'btitle', 50, 255, $block['title']), false);
 if ($block['is_custom']) {
     $textarea = new XoopsFormDhtmlTextArea(_AM_CONTENT, 'bcontent', $block['content'], 15, 70);
-    $textarea->setDescription('<span style="font-size:x-small;font-weight:bold;">' . _AM_USEFULTAGS . '</span><br /><span style="font-size:x-small;font-weight:normal;">' . sprintf(_AM_BLOCKTAG1,
+    $textarea->setDescription('<span style="font-size:x-small;font-weight:bold;">' . _AM_USEFULTAGS . '</span><br /><span style="font-size:x-small;font-weight:normal;">' . sprintf(
+        _AM_BLOCKTAG1,
                                                                                                                                                                                     '{X_SITEURL}',
-                                                                                                                                                                                    XOOPS_URL . '/')
+                                                                                                                                                                                    XOOPS_URL . '/'
+    )
                               . '</span>');
     $form->addElement($textarea, true);
     $ctype_select = new XoopsFormSelect(_AM_CTYPE, 'bctype', $block['ctype']);
@@ -67,14 +69,18 @@ if ($block['is_custom']) {
         $tplfile_handler = xoops_getHandler('tplfile');
         $btemplate       =& $tplfile_handler->find($GLOBALS['xoopsConfig']['template_set'], 'block', $block['bid']);
         if (count($btemplate) > 0) {
-            $form->addElement(new XoopsFormLabel(_AM_CONTENT,
-                                                 '<a href="' . XOOPS_URL . '/modules/system/admin.php?fct=tplsets&op=edittpl&id=' . $btemplate[0]->getVar('tpl_id') . '">' . _AM_EDITTPL . '</a>'));
+            $form->addElement(new XoopsFormLabel(
+                _AM_CONTENT,
+                                                 '<a href="' . XOOPS_URL . '/modules/system/admin.php?fct=tplsets&op=edittpl&id=' . $btemplate[0]->getVar('tpl_id') . '">' . _AM_EDITTPL . '</a>'
+            ));
         } else {
             $btemplate2 =& $tplfile_handler->find('default', 'block', $block['bid']);
             if (count($btemplate2) > 0) {
-                $form->addElement(new XoopsFormLabel(_AM_CONTENT,
+                $form->addElement(new XoopsFormLabel(
+                    _AM_CONTENT,
                                                      '<a href="' . XOOPS_URL . '/modules/system/admin.php?fct=tplsets&op=edittpl&id=' . $btemplate2[0]->getVar('tpl_id') . '" target="_blank">'
-                                                     . _AM_EDITTPL . '</a>'));
+                                                     . _AM_EDITTPL . '</a>'
+                ));
             }
         }
     }

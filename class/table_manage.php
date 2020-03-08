@@ -48,9 +48,10 @@ class happy_linux_table_manage extends happy_linux_error
     public static function getInstance($dirname = null)
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_table_manage($dirname);
+        if (null === $instance) {
+            $instance = new static($dirname);
         }
+
         return $instance;
     }
 
@@ -63,14 +64,14 @@ class happy_linux_table_manage extends happy_linux_error
         $this->_config_store_handler->set_handler($name, $dirname, $prefix);
     }
 
-    public function set_config_define(&$class)
+    public function set_config_define($class)
     {
         $this->_config_store_handler->set_define($class);
     }
 
-    public function set_install_class(&$class)
+    public function set_install_class($class)
     {
-        $this->_install =& $class;
+        $this->_install = $class;
     }
 
     public function set_xoops_block_checker()
@@ -148,7 +149,7 @@ class happy_linux_table_manage extends happy_linux_error
 
     public function check_table_scheme_by_name($table_short, $module_dir, $prefix)
     {
-        return $this->check_table_scheme_by_handler(happy_linux_get_handler($table_short, $module_dir, $prefix));
+        return $this->check_table_scheme_by_handler(happy_linux_getHandler($table_short, $module_dir, $prefix));
     }
 
     public function check_table_scheme_by_handler(&$handler, $flag_ok = true)

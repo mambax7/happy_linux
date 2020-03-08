@@ -349,7 +349,7 @@ CREATE TABLE ' . $this->_table . " (
   aux_text_2 varchar(255) default '',
   PRIMARY KEY (id),
   KEY conf_id (conf_id)
-) TYPE=MyISAM
+) ENGINE=MyISAM
 ";
 
         $ret = $this->query($sql);
