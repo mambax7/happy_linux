@@ -19,10 +19,10 @@
 //=========================================================
 
 //=========================================================
-// class happy_linux_language_local
+// class language_local
 // for japanese UTF-8
 //=========================================================
-class happy_linux_language_local extends happy_linux_language_base
+class language_local extends Happy_linux\LanguageBase
 {
     //---------------------------------------------------------
     // constructor
@@ -52,7 +52,7 @@ class happy_linux_language_local extends happy_linux_language_base
 
     public function _convert_sjis_win_mac($str)
     {
-        $browser = happy_linux_browser::getInstance();
+        $browser = Happy_linux\browser::getInstance();
 
         $browser->presume_agent();
         $os = $browser->get_os();

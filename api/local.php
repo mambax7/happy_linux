@@ -12,8 +12,8 @@
 global $xoopsConfig;
 $XOOPS_LANGUAGE = $xoopsConfig['language'];
 
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/language.php';
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/browser.php';
+//  include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/language.php';
+//  include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/browser.php';
 
 // language_local
 if (file_exists(XOOPS_ROOT_PATH . '/modules/happy_linux/language/' . $XOOPS_LANGUAGE . '/language_local.php')) {

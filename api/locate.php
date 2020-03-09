@@ -9,8 +9,10 @@
 global $xoopsConfig;
 $XOOPS_LANGUAGE = $xoopsConfig['language'];
 
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/language.php';
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/locate.php';
+
+/*
+//  include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/language.php';
+//  include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/locate.php';
 
 // language_local.php
 if (file_exists(XOOPS_ROOT_PATH . '/modules/happy_linux/language/' . $XOOPS_LANGUAGE . '/language_local.php')) {
@@ -25,3 +27,7 @@ if (file_exists(XOOPS_ROOT_PATH . '/modules/happy_linux/language/' . $XOOPS_LANG
 } else {
     include_once XOOPS_ROOT_PATH . '/modules/happy_linux/language/english/locate.php';
 }
+*/
+
+xoops_loadLanguage('language_local');
+xoops_loadLanguage('locate');

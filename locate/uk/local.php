@@ -10,10 +10,10 @@
 //=========================================================
 
 //=========================================================
-// class happy_linux_locate_uk
+// class locate_uk
 // United Kingdom (UK)
 //=========================================================
-class happy_linux_locate_uk extends happy_linux_locate_base
+class locate_uk extends Happy_linux\LocateBase
 {
     //---------------------------------------------------------
     // constructor

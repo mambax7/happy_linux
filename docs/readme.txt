@@ -102,7 +102,7 @@ This module is the library collection for modules distributing in Happy Linux
 
 * Changes *
 1. changed the following feature with the update of Weblinks module
-(1) added pagerank class which get pagerank form Google
+(1) added PageRank class which get pagerank form Google
 (2) added plugin class which handle plugins
 (3) added plugin_manage class which manage plugins
 (4) added xml_build class which build xml
@@ -301,7 +301,7 @@ Administrator can change character code, setting preload/charset.php.
 - language/english/charset.php
 - language/japanese/charset.php
 
-(3) added to set character code in bin_base class
+(3) added to set character code in BinBase class
 
 1. changed the following feature with the update of Weblinks module
 (1) added sanitize.php which sanitize value

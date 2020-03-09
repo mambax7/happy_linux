@@ -14,10 +14,10 @@
 //---------------------------------------------------------
 
 //=========================================================
-// class happy_linux_locate_ir
+// class locate_ir
 // Iran (ir)
 //=========================================================
-class happy_linux_locate_ir extends happy_linux_locate_base
+class locate_ir extends Happy_linux\LocateBase
 {
     //---------------------------------------------------------
     // constructor

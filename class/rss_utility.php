@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Happy_linux;
+
 // $Id: rss_utility.php,v 1.5 2012/04/10 18:55:18 ohwada Exp $
 
 // 2012-03-01 K.OHWADA
@@ -32,10 +35,10 @@ define('HAPPY_LINUX_RSS_CODE_DISCOVER_SUCCEEDED', 42);
 define('HAPPY_LINUX_RSS_CODE_DISCOVER_FAILED', 43);
 
 //=========================================================
-// class happy_linux_rss_utility
+// class rss_utility
 // caller: rss_parser
 //=========================================================
-class happy_linux_rss_utility extends happy_linux_error
+class rss_utility extends Error
 {
     // class instance
     public $_remote_file;

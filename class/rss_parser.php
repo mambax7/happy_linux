@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Happy_linux;
+
 // $Id: rss_parser.php,v 1.6 2007/10/25 15:28:26 ohwada Exp $
 
 // 2007-10-10 K.OHWADA
@@ -24,10 +27,10 @@ define('HAPPY_LINUX_CODE_PARSER_NOT_FIND_ENCODING', 52);
 define('HAPPY_LINUX_CODE_PARSER_FAILED', 53);
 
 //=========================================================
-// class happy_linux_rss_parser
+// class rss_parser
 // require happy_linux_magpie_parse class
 //=========================================================
-class happy_linux_rss_parser extends happy_linux_error
+class rss_parser extends Error
 {
     public $_DEBUG_PRINT_ITEMS = false;
 

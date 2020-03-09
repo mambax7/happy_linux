@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Happy_linux;
+
 // $Id: build_kml.php,v 1.1 2008/02/26 15:35:42 ohwada Exp $
 
 //=========================================================
@@ -12,9 +15,9 @@
 //=========================================================
 
 //=========================================================
-// class happy_linux_kml_document_object
+// class kml_document_object
 //=========================================================
-class happy_linux_kml_document_object extends happy_linux_xml_single_object
+class kml_document_object extends XmlSingleObject
 {
     //---------------------------------------------------------
     // constructor
@@ -53,9 +56,9 @@ class happy_linux_kml_document_object extends happy_linux_xml_single_object
 }
 
 //=========================================================
-// class happy_linux_kml_folder_object
+// class kml_folder_object
 //=========================================================
-class happy_linux_kml_folder_object extends happy_linux_xml_single_object
+class kml_folder_object extends XmlSingleObject
 {
     //---------------------------------------------------------
     // constructor
@@ -94,9 +97,9 @@ class happy_linux_kml_folder_object extends happy_linux_xml_single_object
 }
 
 //=========================================================
-// class happy_linux_kml_placemarks_object
+// class kml_placemarks_object
 //=========================================================
-class happy_linux_kml_placemarks_object extends happy_linux_xml_iterate_object
+class kml_placemarks_object extends XmlIterateObject
 {
     //---------------------------------------------------------
     // constructor
@@ -132,9 +135,9 @@ class happy_linux_kml_placemarks_object extends happy_linux_xml_iterate_object
 }
 
 //=========================================================
-// class happy_linux_build_kml
+// class build_kml
 //=========================================================
-class happy_linux_build_kml extends happy_linux_build_xml
+class build_kml extends build_xml
 {
     public $_CONTENT_TYPE_KML    = 'Content-Type: application/vnd.google-earth.kml+xml';
     public $_CONTENT_DISPOSITION = 'Content-Disposition: attachment; filename=%s';

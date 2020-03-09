@@ -1,4 +1,7 @@
 <?php
+
+use  XoopsModules\Happy_linux;
+
 // $Id: index.php,v 1.1 2007/11/12 13:17:17 ohwada Exp $
 
 //=========================================================
@@ -27,7 +30,7 @@ if (!defined('HAPPY_LINUX_URL')) {
 
 // start execution time
 include_once HAPPY_LINUX_ROOT_PATH . '/class/time.php';
-$happy_linux_time = happy_linux_time::getInstance();
+$happy_linux_time = Happy_linux\Time::getInstance();
 
 include_once HAPPY_LINUX_ROOT_PATH . '/include/memory.php';
 include_once HAPPY_LINUX_ROOT_PATH . '/class/error.php';
@@ -45,7 +48,7 @@ if (file_exists(HAPPY_LINUX_ROOT_PATH . '/language/' . $XOOPS_LANGUAGE . '/modin
 //=========================================================
 // main
 //=========================================================
-$info = happy_linux_server_info::getInstance();
+$info = Happy_linux\Server_info::getInstance();
 
 xoops_cp_header();
 

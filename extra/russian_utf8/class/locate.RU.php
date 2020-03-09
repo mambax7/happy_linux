@@ -26,9 +26,9 @@
 //=========================================================
 
 //=========================================================
-// class happy_linux_locate_base
+// class LocateBase
 //=========================================================
-class happy_linux_locate_base
+class LocateBase
 {
     public $_DEFAULT_COUNTRY_CODE = 'ru';  // Russia
 
@@ -110,9 +110,9 @@ class happy_linux_locate_base
 }
 
 //=========================================================
-// class happy_linux_locate_factory
+// class LocateFactory
 //=========================================================
-class happy_linux_locate_factory extends happy_linux_locate_base
+class LocateFactory extends Happy_linux\LocateBase
 {
     public $_DIRNAME = null;
 
@@ -172,7 +172,7 @@ class happy_linux_locate_factory extends happy_linux_locate_base
         }
 
         // Assigning the return value of new by reference is deprecated
-        $instance = new happy_linux_locate_base();
+        $instance = new Happy_linux\LocateBase();
 
         return $instance;
     }
@@ -236,7 +236,7 @@ class happy_linux_locate_factory extends happy_linux_locate_base
     //---------------------------------------------------------
     public function get_language_country_code()
     {
-        $factory = happy_linux_language_factory::getInstance();
+        $factory = Happy_linux\LanguageFactory::getInstance();
         $code    = $factory->get_country_code();
 
         return $code;
@@ -250,7 +250,7 @@ class happy_linux_locate_factory extends happy_linux_locate_base
 //=========================================================
 function get_happy_linux_url($format = 's')
 {
-    $locate = happy_linux_locate_factory::getInstance();
+    $locate = Happy_linux\LocateFactory::getInstance();
 
     return $locate->get_var('happy_linux_url', $format);
 }

@@ -14,10 +14,10 @@
 //=========================================================
 
 //=========================================================
-// class happy_linux_language_local
+// class language_local
 // for German
 //=========================================================
-class happy_linux_language_local extends happy_linux_language_base
+class language_local extends Happy_linux\LanguageBase
 {
     //---------------------------------------------------------
     // constructor

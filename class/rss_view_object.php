@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Happy_linux;
+
 // $Id: rss_view_object.php,v 1.2 2010/11/07 19:26:32 ohwada Exp $
 
 // 2010-11-07 K.OHWADA
@@ -37,9 +40,9 @@
 //=========================================================
 
 //=========================================================
-// class happy_linux_rss_view
+// class rss_view
 //=========================================================
-class happy_linux_rss_view extends happy_linux_rss_base
+class rss_view extends Rss_base
 {
     // set param
     public $_flag_title_html   = false;
@@ -301,9 +304,9 @@ class happy_linux_rss_view extends happy_linux_rss_base
 }
 
 //=========================================================
-// class happy_linux_rss_view_basic
+// class rss_view_basic
 //=========================================================
-class happy_linux_rss_view_basic extends happy_linux_rss_base_basic
+class rss_view_basic extends Rss_base_basic
 {
     // constant
     public $_TITLE_SUBSTITUTE = '---';
@@ -433,9 +436,9 @@ class happy_linux_rss_view_basic extends happy_linux_rss_base_basic
 }
 
 //=========================================================
-// class happy_linux_rss_view_channel
+// class rss_view_channel
 //=========================================================
-class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
+class rss_view_channel extends Rss_view_basic
 {
     // RSS
     public $DATE_RFC822_LIST = ['pubdate', 'lastbuilddate'];
@@ -614,9 +617,9 @@ class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
 }
 
 //=========================================================
-// class happy_linux_rss_view_image
+// class rss_view_image
 //=========================================================
-class happy_linux_rss_view_image extends happy_linux_rss_view_basic
+class rss_view_image extends Rss_view_basic
 {
     //---------------------------------------------------------
     // constructor
@@ -662,9 +665,9 @@ class happy_linux_rss_view_image extends happy_linux_rss_view_basic
 }
 
 //=========================================================
-// class happy_linux_rss_view_textinput
+// class rss_view_textinput
 //=========================================================
-class happy_linux_rss_view_textinput extends happy_linux_rss_view_basic
+class rss_view_textinput extends Rss_view_basic
 {
     //---------------------------------------------------------
     // constructor
@@ -705,9 +708,9 @@ class happy_linux_rss_view_textinput extends happy_linux_rss_view_basic
 }
 
 //=========================================================
-// class happy_linux_rss_view_items
+// class rss_view_items
 //=========================================================
-class happy_linux_rss_view_items extends happy_linux_rss_base_items
+class rss_view_items extends Rss_base_items
 {
     //---------------------------------------------------------
     // constructor
@@ -770,9 +773,9 @@ class happy_linux_rss_view_items extends happy_linux_rss_base_items
 }
 
 //=========================================================
-// class happy_linux_rss_view_item_single
+// class rss_view_item_single
 //=========================================================
-class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
+class rss_view_item_single extends Rss_view_basic
 {
     // RSS
     public $DATE_RFC822_LIST = ['pubdate'];
@@ -799,7 +802,7 @@ class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
     {
         parent::__construct();
 
-        $this->_view_item = happy_linux_rss_view_item::getInstance();
+        $this->_view_item = Rss_view_item::getInstance();
     }
 
     //-------------------------------------------------

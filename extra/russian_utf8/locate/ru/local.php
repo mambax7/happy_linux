@@ -16,10 +16,10 @@
 // Translator: Houston (Contour Design Studio https://www.cdesign.ru/)
 
 //=========================================================
-// class happy_linux_locate_ru
+// class locate_ru
 // Russian Federation (RU)
 //=========================================================
-class happy_linux_locate_ru extends happy_linux_locate_base
+class locate_ru extends Happy_linux\LocateBase
 {
     //---------------------------------------------------------
     // constructor

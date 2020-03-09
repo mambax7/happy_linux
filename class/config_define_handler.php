@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Happy_linux;
+
 // $Id: config_define_handler.php,v 1.5 2007/11/15 11:08:43 ohwada Exp $
 
 // 2007-11-11 K.OHWADA
@@ -16,12 +19,12 @@
 // 2006-07-08 K.OHWADA
 //================================================================
 
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/config_define_base.php';
+//include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/config_define_base.php';
 
 //=========================================================
-// class happy_linux_config_define_handler
+// class config_define_handler
 //=========================================================
-class happy_linux_config_define_handler
+class config_define_handler
 {
     public $_config_handler;
     public $_config_define;

@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Happy_linux;
+
 // $Id: rss_view_item.php,v 1.1 2008/01/30 08:33:13 ohwada Exp $
 
 // 2008-01-20 K.OHWADA
@@ -10,9 +13,9 @@
 //=========================================================
 
 //=========================================================
-// class happy_linux_rss_view_item
+// class rss_view_item
 //=========================================================
-class happy_linux_rss_view_item
+class rss_view_item
 {
     public $_strings;
     public $_highlight;
@@ -32,8 +35,8 @@ class happy_linux_rss_view_item
     //---------------------------------------------------------
     public function __construct()
     {
-        $this->_strings   = happy_linux_strings::getInstance();
-        $this->_highlight = happy_linux_highlight::getInstance();
+        $this->_strings   = Strings::getInstance();
+        $this->_highlight = Highlight::getInstance();
 
         $this->_highlight->set_replace_callback('happy_linux_highlighter_by_class');
         $this->_highlight->set_class('rssc_highlight');

@@ -13,10 +13,10 @@
 //=========================================================
 
 //=========================================================
-// class happy_linux_locate_jp
+// class locate_jp
 // Japan (JP)
 //=========================================================
-class happy_linux_locate_jp extends happy_linux_locate_base
+class locate_jp extends Happy_linux\LocateBase
 {
     //---------------------------------------------------------
     // constructor

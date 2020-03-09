@@ -14,7 +14,7 @@ include_once XOOPS_ROOT_PATH . '/class/snoopy.php';
 //---------------------------------------------------------
 // happy_linux
 //---------------------------------------------------------
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/image_size.php';
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/remote_file.php';
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/remote_image.php';
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/dir.php';
+//include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/image_size.php';
+//include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/remote_file.php';
+//include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/remote_image.php';
+//include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/dir.php';

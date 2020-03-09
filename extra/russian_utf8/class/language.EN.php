@@ -22,9 +22,9 @@
 //=========================================================
 
 //=========================================================
-// class happy_linux_language_base
+// class LanguageBase
 //=========================================================
-class happy_linux_language_base
+class LanguageBase
 {
     public $_DEFAULT_LANGAGE = 'english';
 
@@ -89,9 +89,9 @@ class happy_linux_language_base
 }
 
 //=========================================================
-// class happy_linux_language_factory
+// class LanguageFactory
 //=========================================================
-class happy_linux_language_factory extends happy_linux_language_base
+class LanguageFactory extends Happy_linux\LanguageBase
 {
     //---------------------------------------------------------
     // constructor

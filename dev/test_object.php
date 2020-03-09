@@ -11,7 +11,7 @@ include_once 'dev_header.php';
 //================================================================
 // class test_object
 //================================================================
-class test_object extends happy_linux_object
+class test_object extends Happy_linux\Object
 {
     //---------------------------------------------------------
     // constructor
