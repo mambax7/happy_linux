@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: post.php,v 1.8 2007/07/18 19:40:49 ohwada Exp $
 
@@ -32,6 +32,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class post
 //=========================================================
+
+/**
+ * Class Post
+ * @package XoopsModules\Happylinux
+ */
 class Post extends Strings
 {
     public $_keyword_array = null;
@@ -44,6 +49,9 @@ class Post extends Strings
         parent::__construct();
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\Post|static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -60,6 +68,10 @@ class Post extends Strings
     //---------------------------------------------------------
     // check $_POST
     //---------------------------------------------------------
+    /**
+     * @param $key
+     * @return bool
+     */
     public function is_post_set($key)
     {
         if (isset($_POST[$key])) {
@@ -69,6 +81,10 @@ class Post extends Strings
         return false;
     }
 
+    /**
+     * @param $key
+     * @return bool
+     */
     public function is_post_fill($key)
     {
         if (isset($_POST[$key]) && ('' !== $_POST[$key])) {
@@ -78,6 +94,10 @@ class Post extends Strings
         return false;
     }
 
+    /**
+     * @param $key
+     * @return bool
+     */
     public function is_post_url_fill($key)
     {
         if (isset($_POST[$key])) {
@@ -87,6 +107,10 @@ class Post extends Strings
         return false;
     }
 
+    /**
+     * @param $key
+     * @return bool
+     */
     public function is_post_url_llegal($key)
     {
         if (isset($_POST[$key]) && ('' !== $_POST[$key])) {
@@ -100,6 +124,10 @@ class Post extends Strings
         return true;    // no check
     }
 
+    /**
+     * @param $key
+     * @return bool
+     */
     public function is_post_email_format($key)
     {
         if (isset($_POST[$key]) && ('' !== $_POST[$key])) {
@@ -116,6 +144,10 @@ class Post extends Strings
     //---------------------------------------------------------
     // check $_GET
     //---------------------------------------------------------
+    /**
+     * @param $key
+     * @return bool
+     */
     public function is_get_set($key)
     {
         if (isset($_GET[$key])) {
@@ -125,6 +157,10 @@ class Post extends Strings
         return false;
     }
 
+    /**
+     * @param $key
+     * @return bool
+     */
     public function is_get_fill($key)
     {
         if (isset($_GET[$key]) && ('' !== $_GET[$key])) {
@@ -137,6 +173,11 @@ class Post extends Strings
     //---------------------------------------------------------
     // get $_POST
     //---------------------------------------------------------
+    /**
+     * @param        $key
+     * @param string $default
+     * @return mixed|string
+     */
     public function get_post($key, $default = '')
     {
         if (isset($_POST[$key])) {
@@ -148,11 +189,21 @@ class Post extends Strings
         return $val;
     }
 
+    /**
+     * @param     $key
+     * @param int $default
+     * @return int
+     */
     public function get_post_int($key, $default = 0)
     {
         return $this->get_int_from_post($_POST, $key, $default);
     }
 
+    /**
+     * @param     $key
+     * @param int $default
+     * @return float
+     */
     public function get_post_float($key, $default = 0)
     {
         if (isset($_POST[$key])) {
@@ -163,11 +214,23 @@ class Post extends Strings
         return $val;
     }
 
+    /**
+     * @param        $key
+     * @param string $default
+     * @return string|string[]|null
+     */
     public function get_post_text($key, $default = '')
     {
         return $this->get_text_from_post($_POST, $key, $default);
     }
 
+    /**
+     * @param        $key
+     * @param string $default
+     * @param bool   $flag_only
+     * @param bool   $flag_deny
+     * @return string|string[]|null
+     */
     public function get_post_url($key, $default = '', $flag_only = true, $flag_deny = true)
     {
         if (isset($_POST[$key])) {
@@ -186,6 +249,11 @@ class Post extends Strings
         return $text;
     }
 
+    /**
+     * @param        $key
+     * @param string $default
+     * @return string
+     */
     public function get_post_trim($key, $default = '')
     {
         if (isset($_POST[$key])) {
@@ -197,6 +265,11 @@ class Post extends Strings
         return $val;
     }
 
+    /**
+     * @param        $key
+     * @param string $default
+     * @return string
+     */
     public function get_post_urlencode($key, $default = '')
     {
         if (isset($_POST[$key])) {
@@ -208,6 +281,11 @@ class Post extends Strings
         return $val;
     }
 
+    /**
+     * @param      $key
+     * @param null $default
+     * @return array|null
+     */
     public function &get_post_array_int($key, $default = null)
     {
         $arr = $default;
@@ -221,6 +299,11 @@ class Post extends Strings
         return $arr;
     }
 
+    /**
+     * @param      $key
+     * @param null $default
+     * @return array|null
+     */
     public function &get_post_array_float($key, $default = null)
     {
         $arr = $default;
@@ -234,6 +317,11 @@ class Post extends Strings
         return $arr;
     }
 
+    /**
+     * @param      $key
+     * @param null $default
+     * @return array|null
+     */
     public function &get_post_array_text($key, $default = null)
     {
         $arr = $default;
@@ -249,6 +337,11 @@ class Post extends Strings
         return $arr;
     }
 
+    /**
+     * @param        $key
+     * @param string $pattern
+     * @return array|false|string[]
+     */
     public function get_post_text_split($key, $pattern = "\n")
     {
         $arr = [];
@@ -263,6 +356,11 @@ class Post extends Strings
     //---------------------------------------------------------
     // get $_GET
     //---------------------------------------------------------
+    /**
+     * @param        $key
+     * @param string $default
+     * @return mixed|string
+     */
     public function get_get($key, $default = '')
     {
         if (isset($_GET[$key])) {
@@ -274,11 +372,21 @@ class Post extends Strings
         return $val;
     }
 
+    /**
+     * @param     $key
+     * @param int $default
+     * @return int
+     */
     public function get_get_int($key, $default = 0)
     {
         return $this->get_int_from_post($_GET, $key, $default);
     }
 
+    /**
+     * @param     $key
+     * @param int $default
+     * @return float
+     */
     public function get_get_float($key, $default = 0)
     {
         if (isset($_GET[$key])) {
@@ -290,11 +398,21 @@ class Post extends Strings
         return $val;
     }
 
+    /**
+     * @param        $key
+     * @param string $default
+     * @return string|string[]|null
+     */
     public function get_get_text($key, $default = '')
     {
         return $this->get_text_from_post($_GET, $key, $default);
     }
 
+    /**
+     * @param        $key
+     * @param string $default
+     * @return string
+     */
     public function get_get_trim($key, $default = '')
     {
         if (isset($_GET[$key])) {
@@ -306,6 +424,11 @@ class Post extends Strings
         return $val;
     }
 
+    /**
+     * @param        $key
+     * @param string $default
+     * @return string
+     */
     public function get_get_urlencode($key, $default = '')
     {
         if (isset($_POST[$key])) {
@@ -317,6 +440,11 @@ class Post extends Strings
         return $val;
     }
 
+    /**
+     * @param string $key
+     * @param null   $default
+     * @return string
+     */
     public function get_get_keywords($key = 'keywords', $default = null)
     {
         if (isset($_GET[$key])) {
@@ -328,6 +456,10 @@ class Post extends Strings
         return $val;
     }
 
+    /**
+     * @param string $key
+     * @return false|string[]|null
+     */
     public function &get_get_keyword_array($key = 'keywords')
     {
         $arr = null;
@@ -340,6 +472,9 @@ class Post extends Strings
         return $arr;
     }
 
+    /**
+     * @return bool|string
+     */
     public function get_urlencode_keywords()
     {
         return $this->urlencode_from_array($this->_keyword_array);
@@ -348,6 +483,11 @@ class Post extends Strings
     //---------------------------------------------------------
     // get $_POST & $_GET
     //---------------------------------------------------------
+    /**
+     * @param        $key
+     * @param string $default
+     * @return mixed|string
+     */
     public function get_post_get($key, $default = '')
     {
         if (isset($_POST[$key])) {
@@ -361,6 +501,11 @@ class Post extends Strings
         return $val;
     }
 
+    /**
+     * @param     $key
+     * @param int $default
+     * @return int
+     */
     public function get_post_get_int($key, $default = 0)
     {
         if (isset($_POST[$key])) {
@@ -374,6 +519,11 @@ class Post extends Strings
         return $val;
     }
 
+    /**
+     * @param     $key
+     * @param int $default
+     * @return float
+     */
     public function get_post_get_float($key, $default = 0)
     {
         if (isset($_POST[$key])) {
@@ -387,6 +537,11 @@ class Post extends Strings
         return $val;
     }
 
+    /**
+     * @param        $key
+     * @param string $default
+     * @return string|string[]|null
+     */
     public function get_post_get_text($key, $default = '')
     {
         if (isset($_POST[$key])) {
@@ -402,6 +557,11 @@ class Post extends Strings
         return $text;
     }
 
+    /**
+     * @param        $key
+     * @param string $default
+     * @return string
+     */
     public function get_post_get_trim($key, $default = '')
     {
         if (isset($_POST[$key])) {
@@ -415,6 +575,11 @@ class Post extends Strings
         return $val;
     }
 
+    /**
+     * @param      $key
+     * @param null $default
+     * @return array|bool|null
+     */
     public function &get_post_get_array_int($key, $default = null)
     {
         $arr = $default;
@@ -435,6 +600,9 @@ class Post extends Strings
         return $arr;
     }
 
+    /**
+     * @return array
+     */
     public function get_post_get_passwd_old()
     {
         $flag_passwd = false;
@@ -455,6 +623,12 @@ class Post extends Strings
     //--------------------------------------------------------
     // get form POST
     //--------------------------------------------------------
+    /**
+     * @param     $post
+     * @param     $key
+     * @param int $default
+     * @return int
+     */
     public function get_int_from_post($post, $key, $default = 0)
     {
         $val = $default;
@@ -462,9 +636,15 @@ class Post extends Strings
             $val = $post[$key];
         }
 
-        return (int)$val;
+        return $val;
     }
 
+    /**
+     * @param        $post
+     * @param        $key
+     * @param string $default
+     * @return string|string[]|null
+     */
     public function get_text_from_post($post, $key, $default = '')
     {
         $text = $default;
@@ -477,6 +657,12 @@ class Post extends Strings
         return $text;
     }
 
+    /**
+     * @param     $post
+     * @param     $key
+     * @param int $without
+     * @return array
+     */
     public function &get_int_unique_array_without_from_post($post, $key, $without = 0)
     {
         $arr = [];

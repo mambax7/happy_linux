@@ -19,7 +19,11 @@
 // class locate_ru
 // Russian Federation (RU)
 //=========================================================
-class locate_ru extends Happy_linux\LocateBase
+
+/**
+ * Class locate_ru
+ */
+class locate_ru extends LocateBase
 {
     //---------------------------------------------------------
     // constructor

@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: DatabaseMysql.php,v 1.5 2007/09/23 08:26:54 ohwada Exp $
 
@@ -30,7 +30,11 @@ namespace XoopsModules\Happy_linux;
 // call connect twice by config and link
 //---------------------------------------------------------
 
-class DatabaseMysql extends  Database
+/**
+ * Class DatabaseMysql
+ * @package XoopsModules\Happylinux
+ */
+class DatabaseMysql extends Database
 {
     // Database connection
     public $conn;
@@ -52,6 +56,9 @@ class DatabaseMysql extends  Database
     //---------------------------------------------------------
     // function
     //---------------------------------------------------------
+    /**
+     * @return bool
+     */
     public function connect()
     {
         $this->conn = mysql_connect(XOOPS_DB_HOST, XOOPS_DB_USER, XOOPS_DB_PASS);
@@ -62,7 +69,7 @@ class DatabaseMysql extends  Database
             return false;
         }
 
-        if (!mysql_select_db(XOOPS_DB_NAME)) {
+        if (!mysqli_select_db($GLOBALS['xoopsDB']->conn, XOOPS_DB_NAME)) {
             $this->_print_error();
 
             return false;
@@ -77,10 +84,13 @@ class DatabaseMysql extends  Database
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function _set_charset()
     {
-        if ($this->_is_mysql_ver5() && defined('HAPPY_LINUX_MYSQL_CHARSET')) {
-            $sql = 'SET NAMES ' . HAPPY_LINUX_MYSQL_CHARSET;
+        if ($this->_is_mysql_ver5() && defined('HAPPYLINUX_MYSQL_CHARSET')) {
+            $sql = 'SET NAMES ' . HAPPYLINUX_MYSQL_CHARSET;
             $ret = $this->query($sql);
             if (!$ret) {
                 return false;
@@ -90,6 +100,9 @@ class DatabaseMysql extends  Database
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function _is_mysql_ver5()
     {
         $ver = $GLOBALS['xoopsDB']->getServerVersion();
@@ -103,56 +116,92 @@ class DatabaseMysql extends  Database
         return false;
     }
 
+    /**
+     * @param $result
+     * @return mixed
+     */
     public function fetchRow($result)
     {
-        return @mysql_fetch_row($result);
+        return @$GLOBALS['xoopsDB']->fetchRow($result);
     }
 
+    /**
+     * @param $result
+     * @return mixed
+     */
     public function fetchArray($result)
     {
-        return @mysql_fetch_assoc($result);
+        return @$GLOBALS['xoopsDB']->fetchArray($result);
     }
 
+    /**
+     * @param $result
+     * @return mixed
+     */
     public function fetchBoth($result)
     {
-        return @mysql_fetch_array($result, MYSQL_BOTH);
+        return @$GLOBALS['xoopsDB']->fetchBoth($result, MYSQL_BOTH);
     }
 
+    /**
+     * @return mixed
+     */
     public function getInsertId()
     {
-        return mysql_insert_id($this->conn);
+        return $GLOBALS['xoopsDB']->getInsertId($this->conn);
     }
 
+    /**
+     * @param $result
+     * @return mixed
+     */
     public function getRowsNum($result)
     {
-        return @mysql_num_rows($result);
+        return @$GLOBALS['xoopsDB']->getRowsNum($result);
     }
 
+    /**
+     * @return mixed
+     */
     public function getAffectedRows()
     {
-        return mysql_affected_rows($this->conn);
+        return $GLOBALS['xoopsDB']->getAffectedRows($this->conn);
     }
 
     public function close()
     {
-        mysql_close($this->conn);
+        $GLOBALS['xoopsDB']->close($this->conn);
     }
 
+    /**
+     * @param $result
+     * @return mixed
+     */
     public function freeRecordSet($result)
     {
-        return mysql_free_result($result);
+        return $GLOBALS['xoopsDB']->freeRecordSet($result);
     }
 
+    /**
+     * @return mixed
+     */
     public function error()
     {
-        return @mysql_error();
+        return @$GLOBALS['xoopsDB']->error();
     }
 
+    /**
+     * @return mixed
+     */
     public function errno()
     {
-        return @mysql_errno();
+        return @$GLOBALS['xoopsDB']->errno();
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function quoteString($str)
     {
         $str = "'" . str_replace('\\"', '"', addslashes($str)) . "'";
@@ -160,6 +209,12 @@ class DatabaseMysql extends  Database
         return $str;
     }
 
+    /**
+     * @param     $sql
+     * @param int $limit
+     * @param int $start
+     * @return bool
+     */
     public function &queryF($sql, $limit = 0, $start = 0)
     {
         if (!empty($limit)) {
@@ -171,7 +226,7 @@ class DatabaseMysql extends  Database
         }
 
         // Only variables should be assigned by reference
-        $result = mysql_query($sql, $this->conn);
+        $result = $GLOBALS['xoopsDB']->queryF($sql, $this->conn);
 
         if (!$result) {
             // BUG 2793: Fatal error: Call to undefined function: _print_sql_error()
@@ -187,16 +242,29 @@ class DatabaseMysql extends  Database
         return $result;
     }
 
+    /**
+     * @param     $sql
+     * @param int $limit
+     * @param int $start
+     * @return bool
+     */
     public function &query($sql, $limit = 0, $start = 0)
     {
         return $this->queryF($sql, $limit, $start);
     }
 
+    /**
+     * @param $value
+     */
     public function setPrefix($value)
     {
         $this->prefix = $value;
     }
 
+    /**
+     * @param string $tablename
+     * @return string
+     */
     public function prefix($tablename = '')
     {
         if ('' != $tablename) {
@@ -209,6 +277,9 @@ class DatabaseMysql extends  Database
     //---------------------------------------------------------
     // debug
     //---------------------------------------------------------
+    /**
+     * @param string $sql
+     */
     public function _print_error($sql = '')
     {
         if (!$this->flag_print_error) {

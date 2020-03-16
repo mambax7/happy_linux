@@ -1,147 +1,33 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: build_kml.php,v 1.1 2008/02/26 15:35:42 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
 // this file include 4 classes
-//   happy_linux_kml_document_object
-//   happy_linux_kml_folder_object
-//   happy_linux_kml_placemarks_object
-//   happy_linux_build_kml
+//   KmlDocumentObject
+//   KmlFolderObject
+//   KmlPlacemarksObject
+//   happylinux_build_kml
 // 2008-02-17 K.OHWADA
 //=========================================================
 
-//=========================================================
-// class kml_document_object
-//=========================================================
-class kml_document_object extends XmlSingleObject
-{
-    //---------------------------------------------------------
-    // constructor
-    //---------------------------------------------------------
-    public function __construct()
-    {
-        parent::__construct();
-        $this->set_tpl_key('document');
-    }
-
-    //---------------------------------------------------------
-    // build
-    //---------------------------------------------------------
-    public function _build(&$item)
-    {
-        if (isset($item['tag_use'])) {
-            $item['tag_use'] = (bool)$item['tag_use'];
-        }
-        if (isset($item['open_use'])) {
-            $item['open_use'] = (bool)$item['open_use'];
-        }
-        if (isset($item['name'])) {
-            $item['name'] = $this->xml_text($item['name']);
-        }
-        if (isset($item['description'])) {
-            $item['description'] = $this->xml_text($item['description']);
-        }
-        if (isset($item['open'])) {
-            $item['open'] = (int)$item['open'];
-        }
-
-        return $item;
-    }
-
-    // --- class end ---
-}
-
-//=========================================================
-// class kml_folder_object
-//=========================================================
-class kml_folder_object extends XmlSingleObject
-{
-    //---------------------------------------------------------
-    // constructor
-    //---------------------------------------------------------
-    public function __construct()
-    {
-        parent::__construct();
-        $this->set_tpl_key('folder');
-    }
-
-    //---------------------------------------------------------
-    // build
-    //---------------------------------------------------------
-    public function _build(&$item)
-    {
-        if (isset($item['tag_use'])) {
-            $item['tag_use'] = (bool)$item['tag_use'];
-        }
-        if (isset($item['open_use'])) {
-            $item['open_use'] = (bool)$item['open_use'];
-        }
-        if (isset($item['name'])) {
-            $item['name'] = $this->xml_text($item['name']);
-        }
-        if (isset($item['description'])) {
-            $item['description'] = $this->xml_text($item['description']);
-        }
-        if (isset($item['open'])) {
-            $item['open'] = (int)$item['open'];
-        }
-
-        return $item;
-    }
-
-    // --- class end ---
-}
-
-//=========================================================
-// class kml_placemarks_object
-//=========================================================
-class kml_placemarks_object extends XmlIterateObject
-{
-    //---------------------------------------------------------
-    // constructor
-    //---------------------------------------------------------
-    public function __construct()
-    {
-        parent::__construct();
-        $this->set_tpl_key('placemarks');
-    }
-
-    //---------------------------------------------------------
-    // build
-    //---------------------------------------------------------
-    public function _build(&$item)
-    {
-        if (isset($item['name'])) {
-            $item['name'] = $this->xml_text($item['name']);
-        }
-        if (isset($item['description'])) {
-            $item['description'] = $this->xml_cdata($item['description']);
-        }
-        if (isset($item['latitude'])) {
-            $item['latitude'] = (float)$item['latitude'];
-        }
-        if (isset($item['longitude'])) {
-            $item['longitude'] = (float)$item['longitude'];
-        }
-
-        return $item;
-    }
-
-    // --- class end ---
-}
 
 //=========================================================
 // class build_kml
 //=========================================================
-class build_kml extends build_xml
+
+/**
+ * Class build_kml
+ * @package XoopsModules\Happylinux
+ */
+class KmlBuild extends XmlBuild
 {
     public $_CONTENT_TYPE_KML    = 'Content-Type: application/vnd.google-earth.kml+xml';
     public $_CONTENT_DISPOSITION = 'Content-Disposition: attachment; filename=%s';
-    public $_FILENAME_KML        = 'happy_linux.kml';
+    public $_FILENAME_KML        = 'happylinux.kml';
 
     public $_DIRNAME = null;
 
@@ -176,6 +62,9 @@ class build_kml extends build_xml
         $this->set_view_title('Google KML');
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -191,7 +80,7 @@ class build_kml extends build_xml
     //=========================================================
     public function build_kml()
     {
-        happy_linux_http_output('pass');
+        happylinux_http_output('pass');
         header($this->_CONTENT_TYPE_KML);
         header(sprintf($this->_CONTENT_DISPOSITION, $this->_FILENAME_KML));
 
@@ -206,71 +95,113 @@ class build_kml extends build_xml
     //--------------------------------------------------------
     // set param
     //--------------------------------------------------------
+    /**
+     * @param $val
+     */
     public function set_dirname($val)
     {
         $this->_DIRNAME = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_document_tag_use($val)
     {
         $this->_DOCUMENT_TAG_USE = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_document_open_use($val)
     {
         $this->_DOCUMENT_OPEN_USE = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_document_open($val)
     {
         $this->_DOCUMENT_OPEN = (int)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_document_name($val)
     {
         $this->_DOCUMENT_NAME = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_document_description($val)
     {
         $this->_DOCUMENT_DESCRIPTION = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_folder_tag_use($val)
     {
         $this->_FOLDER_TAG_USE = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_folder_open_use($val)
     {
         $this->_FOLDER_OPEN_USE = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_folder_open($val)
     {
         $this->_FOLDER_OPEN = (int)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_folder_name($val)
     {
         $this->_FOLDER_NAME = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_folder_description($val)
     {
         $this->_FOLDER_DESCRIPTION = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_page($val)
     {
         $this->_page = (int)$val;
     }
 
+    /**
+     * @return string|string[]
+     */
     public function build_document_name()
     {
         return $this->_build_name($this->_DOCUMENT_NAME_TPL);
     }
 
+    /**
+     * @return string|string[]
+     */
     public function build_folder_name()
     {
         return $this->_build_name($this->_FOLDER_NAME_TPL);
@@ -279,6 +210,9 @@ class build_kml extends build_xml
     //--------------------------------------------------------
     // private
     //--------------------------------------------------------
+    /**
+     * @return array
+     */
     public function _get_document_param()
     {
         $arr = [
@@ -292,6 +226,9 @@ class build_kml extends build_xml
         return $arr;
     }
 
+    /**
+     * @return array
+     */
     public function _get_folder_param()
     {
         $arr = [
@@ -305,6 +242,10 @@ class build_kml extends build_xml
         return $arr;
     }
 
+    /**
+     * @param $str
+     * @return string|string[]
+     */
     public function _build_name($str)
     {
         $str = str_replace('{SITE_NAME}', $this->get_xoops_sitename(), $str);
@@ -323,16 +264,23 @@ class build_kml extends build_xml
     //=========================================================
     public function init_obj()
     {
-        $this->_obj_document   = new happy_linux_kml_document_object();
-        $this->_obj_folder     = new happy_linux_kml_folder_object();
-        $this->_obj_placemarks = new happy_linux_kml_placemarks_object();
+        $this->_obj_document   = new KmlDocumentObject();
+        $this->_obj_folder     = new KmlFolderObject();
+        $this->_obj_placemarks = new KmlPlacemarksObject();
     }
 
+    /**
+     * @param $val
+     */
     public function set_placemarks($val)
     {
         $this->_obj_placemarks->set_vars($val);
     }
 
+    /**
+     * @param $template
+     * @return mixed
+     */
     public function _build_template($template)
     {
         $this->_obj_document->set_vars($this->_get_document_param());
@@ -346,7 +294,7 @@ class build_kml extends build_xml
         $this->_obj_placemarks->build_iterate();
         $this->_obj_placemarks->to_utf8_iterate();
 
-        $tpl = new XoopsTpl();
+        $tpl = new \XoopsTpl();
 
         $this->_obj_document->assign($tpl);
         $this->_obj_folder->assign($tpl);

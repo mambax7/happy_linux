@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: debug.php,v 1.1 2006/12/22 15:02:34 ohwada Exp $
 
@@ -8,6 +8,11 @@ namespace XoopsModules\Happy_linux;
 // Happy Linux Framework Module
 // 2006-12-10 K.OHWADA
 //=========================================================
+
+/**
+ * Class Debug
+ * @package XoopsModules\Happylinux
+ */
 class Debug
 {
     public $_flag_set = false;
@@ -20,6 +25,9 @@ class Debug
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -33,6 +41,11 @@ class Debug
     //---------------------------------------------------------
     // fucntion
     //---------------------------------------------------------
+    /**
+     * @param      $arr
+     * @param null $title
+     * @param bool $flag_normal
+     */
     public function print_constant_by_array($arr, $title = null, $flag_normal = false)
     {
         $msg = $this->get_constant_by_array($arr, $flag_normal);
@@ -44,6 +57,11 @@ class Debug
         }
     }
 
+    /**
+     * @param      $arr
+     * @param bool $flag_normal
+     * @return array
+     */
     public function get_constant_by_array($arr, $flag_normal = false)
     {
         $msg_arr = [];
@@ -57,6 +75,11 @@ class Debug
         return $msg_arr;
     }
 
+    /**
+     * @param      $name
+     * @param bool $flag_normal
+     * @return string
+     */
     public function get_constant($name, $flag_normal = false)
     {
         $val  = constant($name);

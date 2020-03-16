@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: mail_form.php,v 1.1 2010/11/07 14:59:21 ohwada Exp $
 
@@ -12,6 +12,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class MailForm
 //=========================================================
+
+/**
+ * Class MailForm
+ * @package XoopsModules\Happylinux
+ */
 class MailForm extends Form
 {
     public $_FORM_NAME = 'mail_form';
@@ -23,13 +28,13 @@ class MailForm extends Form
     public $_STYLE_BOLD   = 'font-size:x-small; font-weight:bold;';
     public $_STYLE_NORMAL = 'font-size:x-small; font-weight:normal;';
 
-    public $_LANG_WEBMASTER    = _HAPPY_LINUX_MAIL_WEBMASTER;
-    public $_LANG_SUBJECT_FROM = _HAPPY_LINUX_MAIL_SUBJECT_FROM;
-    public $_LANG_HELLO        = _HAPPY_LINUX_MAIL_HELLO;
-    public $_LANG_SUBMIT       = _HAPPY_LINUX_MAIL_SUBMIT;
-    public $_LANG_SUBMIT_NEXT  = _HAPPY_LINUX_MAIL_SUBMIT_NEXT;
+    public $_LANG_WEBMASTER    = _HAPPYLINUX_MAIL_WEBMASTER;
+    public $_LANG_SUBJECT_FROM = _HAPPYLINUX_MAIL_SUBJECT_FROM;
+    public $_LANG_HELLO        = _HAPPYLINUX_MAIL_HELLO;
+    public $_LANG_SUBMIT       = _HAPPYLINUX_MAIL_SUBMIT;
+    public $_LANG_SUBMIT_NEXT  = _HAPPYLINUX_MAIL_SUBMIT_NEXT;
 
-    public $_LANG_SKIP   = _HAPPY_LINUX_SKIP_TO_NEXT;
+    public $_LANG_SKIP   = _HAPPYLINUX_SKIP_TO_NEXT;
     public $_LANG_CANCEL = _CANCEL;
 
     // modules/system/language/xxx/admin/mailusers.php
@@ -53,6 +58,9 @@ class MailForm extends Form
         parent::__construct();
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\Form|\XoopsModules\Happylinux\Html|\XoopsModules\Happylinux\MailForm|static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -95,6 +103,9 @@ class MailForm extends Form
         $this->print_form($param);
     }
 
+    /**
+     * @param $param
+     */
     public function print_form($param)
     {
         $user_list   = isset($param['user_list']) ? $param['user_list'] : null;
@@ -148,6 +159,9 @@ class MailForm extends Form
         echo $this->build_form_end();
     }
 
+    /**
+     * @param $param
+     */
     public function print_form_next(&$param)
     {
         $user_list   = isset($param['user_list']) ? $param['user_list'] : null;
@@ -203,6 +217,10 @@ class MailForm extends Form
         echo $this->build_form_end();
     }
 
+    /**
+     * @param $param
+     * @return string
+     */
     public function build_submit_button($param)
     {
         $submit      = isset($param['submit']) ? $this->sanitize_text($param['submit']) : $this->get_submit();
@@ -224,6 +242,9 @@ class MailForm extends Form
     //---------------------------------------------------------
     // get POST param
     //---------------------------------------------------------
+    /**
+     * @return array
+     */
     public function get_post_memberslist()
     {
         $user_list   = [];
@@ -249,41 +270,65 @@ class MailForm extends Form
     //---------------------------------------------------------
     // get param
     //---------------------------------------------------------
+    /**
+     * @return string|null
+     */
     public function get_form_name()
     {
         return $this->_FORM_NAME;
     }
 
+    /**
+     * @return string
+     */
     public function get_op()
     {
         return $this->_OP;
     }
 
+    /**
+     * @return string
+     */
     public function get_submit()
     {
         return $this->_LANG_SUBMIT;
     }
 
+    /**
+     * @return string
+     */
     public function get_submit_next()
     {
         return sprintf($this->_LANG_SUBMIT_NEXT, $this->_MAX_USER);
     }
 
+    /**
+     * @return string
+     */
     public function get_subject_caption()
     {
         return $this->_LANG_SUBJECT;
     }
 
+    /**
+     * @return string
+     */
     public function get_body_caption()
     {
         return $this->_LANG_BODY;
     }
 
+    /**
+     * @return string
+     */
     public function get_subject_caption_user()
     {
         return $this->build_mail_caption($this->_LANG_SUBJECT, $this->_LANG_MAILTAGS, $this->_LANG_MAILTAGS2);
     }
 
+    /**
+     * @return string
+     */
     public function get_body_caption_user()
     {
         $desc2 = $this->_LANG_MAILTAGS1 . "<br>\n";
@@ -292,6 +337,12 @@ class MailForm extends Form
         return $this->build_mail_caption($this->_LANG_BODY, $this->_LANG_MAILTAGS, $desc2);
     }
 
+    /**
+     * @param $title
+     * @param $desc1
+     * @param $desc2
+     * @return string
+     */
     public function build_mail_caption($title, $desc1, $desc2)
     {
         $caption = $title . "<br><br>\n";
@@ -305,6 +356,9 @@ class MailForm extends Form
         return $caption;
     }
 
+    /**
+     * @return string
+     */
     public function get_subject()
     {
         $text = sprintf($this->_LANG_SUBJECT_FROM, $this->get_xoops_sitename());
@@ -312,6 +366,10 @@ class MailForm extends Form
         return $text;
     }
 
+    /**
+     * @param string $name
+     * @return string
+     */
     public function get_body($name = '')
     {
         $SITE_URL       = $this->get_xoops_siteurl();
@@ -334,11 +392,19 @@ END_OF_TEXT;
         return $text;
     }
 
+    /**
+     * @param string $email
+     * @return string
+     */
     public function build_to_email_input($email = '')
     {
         return $this->build_html_input_text('to_email', $email);
     }
 
+    /**
+     * @param $email
+     * @return string
+     */
     public function build_to_email_label_hidden($email)
     {
         $text = $this->sanitize_text($email);
@@ -351,11 +417,17 @@ END_OF_TEXT;
     //---------------------------------------------------------
     // get system param
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function get_xoops_siteurl()
     {
         return XOOPS_URL . '/';
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xoops_sitename()
     {
         global $xoopsConfig;
@@ -363,6 +435,9 @@ END_OF_TEXT;
         return $xoopsConfig['sitename'];
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xoops_adminmail()
     {
         global $xoopsConfig;
@@ -371,9 +446,15 @@ END_OF_TEXT;
     }
 
     // name for "anonymous" if not found
+
+    /**
+     * @param     $uid
+     * @param int $usereal
+     * @return mixed
+     */
     public function get_uname_by_uid($uid, $usereal = 0)
     {
-        $uname = XoopsUser::getUnameFromId($uid, $usereal);
+        $uname = \XoopsUser::getUnameFromId($uid, $usereal);
 
         return $uname;
     }
@@ -381,6 +462,9 @@ END_OF_TEXT;
     //---------------------------------------------------------
     // set parameter
     //---------------------------------------------------------
+    /**
+     * @param $val
+     */
     public function set_max_user($val)
     {
         $this->_MAX_USER = (int)$val;

@@ -2,7 +2,7 @@
 // $Id: search.php,v 1.2 2008/02/24 02:14:19 ohwada Exp $
 
 // 2006-10-15 K.OHWADA
-// _HAPPY_LINUX_SEARCH_GOOGLE
+// _HAPPYLINUX_SEARCH_GOOGLE
 
 // 2006-09-01 K.OHWADA
 // this is new file
@@ -13,11 +13,11 @@
 //=========================================================
 
 // search
-define('_HAPPY_LINUX_SEARCH_GOOGLE', 'ÈÍË ÌæÌá');
-define('_HAPPY_LINUX_SEARCH_NOT_SELECT', 'áã ÊÍÏÏ');
-define('_HAPPY_LINUX_SEARCH_WITH_SUBCAT', 'ãÚ ÇáÃÞÓÇã ÇáÝÑÚíÉ');
+define('_HAPPYLINUX_SEARCH_GOOGLE', 'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_SEARCH_NOT_SELECT', 'ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_SEARCH_WITH_SUBCAT', 'ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
 
 // for Japanese
-define('_HAPPY_LINUX_SEARCH_CANDICATE', 'Candicate for search');
-define('_HAPPY_LINUX_ZENKAKU', 'Zenkaku');
-define('_HAPPY_LINUX_HANKAKU', 'Hanhaku');
+define('_HAPPYLINUX_SEARCH_CANDICATE', 'Candicate for search');
+define('_HAPPYLINUX_ZENKAKU', 'Zenkaku');
+define('_HAPPYLINUX_HANKAKU', 'Hanhaku');

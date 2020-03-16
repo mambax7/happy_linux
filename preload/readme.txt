@@ -15,5 +15,5 @@ This directory is for user customize
 The following is reserved
 - admin.php: preferences in admin page
 - charset.php: character set for command line mode
-- dir.php: temploraly directory for happy_linux_dir
+- dir.php: temploraly directory for happylinux_dir
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: pagerank.php,v 1.1 2008/02/26 15:35:42 ohwada Exp $
 
@@ -45,13 +45,17 @@ namespace XoopsModules\Happy_linux;
 // class pagerank
 //=========================================================
 
-define('_HAPPY_LINUX_PAGERANK_C_MIN', 0);   // min
-define('_HAPPY_LINUX_PAGERANK_C_MAX', 10);   // max
-define('_HAPPY_LINUX_PAGERANK_C_URL', -1);   // illgal url
-define('_HAPPY_LINUX_PAGERANK_C_CONN', -2);   // not connect
-define('_HAPPY_LINUX_PAGERANK_C_RANK', -3);   // google has no rank
-define('_HAPPY_LINUX_PAGERANK_C_NON', -10);   // not execute
+define('_HAPPYLINUX_PAGERANK_C_MIN', 0);   // min
+define('_HAPPYLINUX_PAGERANK_C_MAX', 10);   // max
+define('_HAPPYLINUX_PAGERANK_C_URL', -1);   // illgal url
+define('_HAPPYLINUX_PAGERANK_C_CONN', -2);   // not connect
+define('_HAPPYLINUX_PAGERANK_C_RANK', -3);   // google has no rank
+define('_HAPPYLINUX_PAGERANK_C_NON', -10);   // not execute
 
+/**
+ * Class PageRank
+ * @package XoopsModules\Happylinux
+ */
 class PageRank
 {
     public $GOOGLE_MAGIC    = 0xE6359A60;
@@ -72,6 +76,17 @@ class PageRank
         // dummy
     }
 
+
+    public static function getInstance($dirname = null)
+    {
+        static $instance;
+        if (null === $instance) {
+            $instance = new static($dirname);
+        }
+
+        return $instance;
+    }
+
     //---------------------------------------------------------
     // public
     //---------------------------------------------------------
@@ -79,6 +94,11 @@ class PageRank
     //   -1 : illgal url
     //   -2 : not connect
     //   -3 : google has no rank
+    /**
+     * @param      $url
+     * @param bool $format_url
+     * @return int|mixed
+     */
     public function get_page_rank($url, $format_url = true)
     {
         if ($format_url) {
@@ -106,7 +126,7 @@ class PageRank
         $this->google_url = 'https://toolbarqueries.google.com' . $base_get;
 
         if ($this->DEBUG) {
-            echo htmlspecialchars($this->google_url) . "<br>\n";
+            echo htmlspecialchars($this->google_url, ENT_QUOTES | ENT_HTML5) . "<br>\n";
         }
 
         fwrite($fsock, "GET $base_get HTTP/1.1\r\n");
@@ -116,7 +136,7 @@ class PageRank
         $contents = '';
 
         if ($this->TIMEOUT_READ > 0) {
-            socket_set_timeout($fsock, $this->TIMEOUT_READ);
+            stream_set_timeout($fsock, $this->TIMEOUT_READ);
         }
 
         while (!feof($fsock)) {
@@ -129,7 +149,7 @@ class PageRank
         $this->contents = $contents;
         if ($this->DEBUG) {
             echo '<pre>';
-            echo htmlspecialchars($contents) . "<br>\n";
+            echo htmlspecialchars($contents, ENT_QUOTES | ENT_HTML5) . "<br>\n";
             echo '</pre>';
         }
 
@@ -140,6 +160,10 @@ class PageRank
         return -3;
     }
 
+    /**
+     * @param $url
+     * @return string|string[]|null
+     */
     public function format_url($url)
     {
         // remove query ( after the question mark ? )
@@ -148,6 +172,10 @@ class PageRank
         return $url;
     }
 
+    /**
+     * @param $url
+     * @return bool
+     */
     public function check_url($url)
     {
         $patern  = '/^http:/';
@@ -163,6 +191,10 @@ class PageRank
         return true;
     }
 
+    /**
+     * @param $uri
+     * @return string
+     */
     public function get_checksum($uri)
     {
         $ret = '6' . $this->google_ch_new($this->google_ch($this->strord($uri)));
@@ -173,6 +205,9 @@ class PageRank
     //---------------------------------------------------------
     // private
     //---------------------------------------------------------
+    /**
+     * @param $x
+     */
     public function to_int32(&$x)
     {
         $z = hexdec(80000000);
@@ -188,6 +223,12 @@ class PageRank
     }
 
     //unsigned shift right
+
+    /**
+     * @param $a
+     * @param $b
+     * @return int
+     */
     public function zero_fill($a, $b)
     {
         $z = hexdec(80000000);
@@ -203,48 +244,60 @@ class PageRank
         return $a;
     }
 
+    /**
+     * @param $a
+     * @param $b
+     * @param $c
+     * @return int[]
+     */
     public function mix($a, $b, $c)
     {
         $a -= $b;
         $a -= $c;
         $this->to_int32($a);
-        $a = (int)($a ^ $this->zero_fill($c, 13));
+        $a = ($a ^ $this->zero_fill($c, 13));
         $b -= $c;
         $b -= $a;
         $this->to_int32($b);
-        $b = (int)($b ^ ($a << 8));
+        $b = ($b ^ ($a << 8));
         $c -= $a;
         $c -= $b;
         $this->to_int32($c);
-        $c = (int)($c ^ $this->zero_fill($b, 13));
+        $c = ($c ^ $this->zero_fill($b, 13));
         $a -= $b;
         $a -= $c;
         $this->to_int32($a);
-        $a = (int)($a ^ $this->zero_fill($c, 12));
+        $a = ($a ^ $this->zero_fill($c, 12));
         $b -= $c;
         $b -= $a;
         $this->to_int32($b);
-        $b = (int)($b ^ ($a << 16));
+        $b = ($b ^ ($a << 16));
         $c -= $a;
         $c -= $b;
         $this->to_int32($c);
-        $c = (int)($c ^ $this->zero_fill($b, 5));
+        $c = ($c ^ $this->zero_fill($b, 5));
         $a -= $b;
         $a -= $c;
         $this->to_int32($a);
-        $a = (int)($a ^ $this->zero_fill($c, 3));
+        $a = ($a ^ $this->zero_fill($c, 3));
         $b -= $c;
         $b -= $a;
         $this->to_int32($b);
-        $b = (int)($b ^ ($a << 10));
+        $b = ($b ^ ($a << 10));
         $c -= $a;
         $c -= $b;
         $this->to_int32($c);
-        $c = (int)($c ^ $this->zero_fill($b, 15));
+        $c = ($c ^ $this->zero_fill($b, 15));
 
         return [$a, $b, $c];
     }
 
+    /**
+     * @param      $url
+     * @param null $length
+     * @param null $init
+     * @return int
+     */
     public function google_ch($url, $length = null, $init = null)
     {
         if (null === $length) {
@@ -309,9 +362,14 @@ class PageRank
     }
 
     //converts a string into an array of integers containing the numeric value of the char
+
+    /**
+     * @param $string
+     * @return mixed
+     */
     public function strord($string)
     {
-        for ($i = 0; $i < mb_strlen($string); ++$i) {
+        for ($i = 0, $iMax = mb_strlen($string); $i < $iMax; ++$i) {
             $result[$i] = ord($string[$i]);
         }
 
@@ -320,9 +378,13 @@ class PageRank
 
     // converts an array of 32 bit integers into an array with 8 bit values.
     // Equivalent to (BYTE *)arr32
+    /**
+     * @param $arr32
+     * @return mixed
+     */
     public function c32to8bit($arr32)
     {
-        for ($i = 0; $i < count($arr32); ++$i) {
+        for ($i = 0, $iMax = count($arr32); $i < $iMax; ++$i) {
             for ($bitOrder = $i * 4; $bitOrder <= $i * 4 + 3; ++$bitOrder) {
                 $arr8[$bitOrder] = $arr32[$i] & 255;
                 $arr32[$i]       = $this->zero_fill($arr32[$i], 8);
@@ -332,6 +394,10 @@ class PageRank
         return $arr8;
     }
 
+    /**
+     * @param $ch
+     * @return string
+     */
     public function google_ch_new($ch)
     {
         $ch       = sprintf('%u', $ch);

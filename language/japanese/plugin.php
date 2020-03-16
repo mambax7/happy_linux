@@ -4,15 +4,15 @@
 //=========================================================
 // Happy Linux Framework Module
 // 2008-02-17 K.OHWADA
-// Í­Êþ¼«±óÊýÍè
+// Í­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //=========================================================
 
-define('_HAPPY_LINUX_PLUGIN', '¥×¥é¥°¥¤¥ó');
-define('_HAPPY_LINUX_PLUGIN_LIST', '¥×¥é¥°¥¤¥ó°ìÍ÷');
-define('_HAPPY_LINUX_PLUGIN_NAME', '¥×¥é¥°¥¤¥óÌ¾');
-define('_HAPPY_LINUX_PLUGIN_DESCRIPTION', 'ÀâÌÀ');
-define('_HAPPY_LINUX_PLUGIN_USAGE', '»È¤¤Êý');
-define('_HAPPY_LINUX_PLUGIN_DESC', 'Ê£¿ô¤Î¥×¥é¥°¥¤¥ó¤ò»ØÄê¤¹¤ë¾ì¹ç¤Ï <b>|</b> ¤Ç¶èÀÚ¤ê¤Þ¤¹');
-define('_HAPPY_LINUX_PLUGIN_TEST', '¥×¥é¥°¥¤¥ó¤Î¥Æ¥¹¥È');
-define('_HAPPY_LINUX_PLUGIN_TESTDATA', '¥Æ¥¹¥È¥Ç¡¼¥¿');
-define('_HAPPY_LINUX_PLUGIN_TESTDATA_DESC', 'Ï¢ÁÛÇÛÎó¤Î·Á¼°¤Çµ­½Ò¤¹¤ë');
+define('_HAPPYLINUX_PLUGIN', 'ï¿½×¥é¥°ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_PLUGIN_LIST', 'ï¿½×¥é¥°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_PLUGIN_NAME', 'ï¿½×¥é¥°ï¿½ï¿½ï¿½ï¿½Ì¾');
+define('_HAPPYLINUX_PLUGIN_DESCRIPTION', 'ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_PLUGIN_USAGE', 'ï¿½È¤ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_PLUGIN_DESC', 'Ê£ï¿½ï¿½ï¿½Î¥×¥é¥°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê¤¹ï¿½ï¿½ï¿½ï¿½ï¿½ <b>|</b> ï¿½Ç¶ï¿½ï¿½Ú¤ï¿½Þ¤ï¿½');
+define('_HAPPYLINUX_PLUGIN_TEST', 'ï¿½×¥é¥°ï¿½ï¿½ï¿½ï¿½Î¥Æ¥ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_PLUGIN_TESTDATA', 'ï¿½Æ¥ï¿½ï¿½È¥Ç¡ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_PLUGIN_TESTDATA_DESC', 'Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î·ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½Ò¤ï¿½ï¿½ï¿½');

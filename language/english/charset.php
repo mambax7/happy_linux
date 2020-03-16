@@ -14,6 +14,6 @@
 // You can use preload/charset.php .
 //---------------------------------------------------------
 
-// define('HAPPY_LINUX_MB_LANGUAGE',   'en');
-// define('HAPPY_LINUX_MB_ENCODING',   'ISO-8859-1');
-// define('HAPPY_LINUX_MYSQL_CHARSET', 'latin1');
+// define('HAPPYLINUX_MB_LANGUAGE',   'en');
+// define('HAPPYLINUX_MB_ENCODING',   'ISO-8859-1');
+// define('HAPPYLINUX_MYSQL_CHARSET', 'latin1');

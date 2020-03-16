@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux\Common;
+namespace XoopsModules\Happylinux\Common;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -23,7 +23,7 @@ namespace XoopsModules\Happy_linux\Common;
 trait ModuleStats
 {
     /**
-     * @param \XoopsModules\Happy_linux\Common\Configurator $configurator
+     * @param \XoopsModules\Happylinux\Common\Configurator $configurator
      * @param array $moduleStats
      * @return array
      */

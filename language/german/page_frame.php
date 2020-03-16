@@ -10,7 +10,7 @@
 //=========================================================
 
 // page_frame
-define('_HAPPY_LINUX_THERE_ARE', 'Es befinden sich <b>%s</b> Einträge in der Datenbank');
-define('_HAPPY_LINUX_NO_RECORD', 'Keine Einträge');
-define('_HAPPY_LINUX_ID_ASC', 'ID Aufsteigend');
-define('_HAPPY_LINUX_ID_DESC', 'ID Absteigend');
+define('_HAPPYLINUX_THERE_ARE', 'Es befinden sich <b>%s</b> Eintrï¿½ge in der Datenbank');
+define('_HAPPYLINUX_NO_RECORD', 'Keine Eintrï¿½ge');
+define('_HAPPYLINUX_ID_ASC', 'ID Aufsteigend');
+define('_HAPPYLINUX_ID_DESC', 'ID Absteigend');

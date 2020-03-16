@@ -1,8 +1,8 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
-// $Id: basic_handler.php,v 1.2 2012/03/18 08:18:30 ohwada Exp $
+// $Id: basicHandler.php,v 1.2 2012/03/18 08:18:30 ohwada Exp $
 
 // 2012-03-01 K.OHWADA
 // get_columns()
@@ -26,7 +26,7 @@ namespace XoopsModules\Happy_linux;
 
 // 2007-03-01 K.OHWADA
 // add renew_prefix()
-// call happy_linux_error() in happy_linux_basic_handler()
+// call happylinux_error() in happylinux_basicHandler()
 
 // 2006-11-19 K.OHWADA
 // BUG 4380: Only variables should be assigned by reference
@@ -44,14 +44,19 @@ namespace XoopsModules\Happy_linux;
 // 2006-07-10 K.OHWADA
 //=========================================================
 
-//include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/basic_object.php';
+//require_once XOOPS_ROOT_PATH . '/modules/happylinux/class/basic_object.php';
 
 //=========================================================
-// class basic_handler
+// class basicHandler
 // this class is used by command line
 // this class handle MySQL table directly
 // this class does not use another class
 //=========================================================
+
+/**
+ * Class BasicHandler
+ * @package XoopsModules\Happylinux
+ */
 class BasicHandler extends Error
 {
     // class instance
@@ -62,7 +67,7 @@ class BasicHandler extends Error
     public $_table;
     public $_id_name;
     public $_table_name_short;
-    public $_class_name = 'Happy_linux\BasicObject';
+    public $_class_name = 'Happylinux\BasicObject';
 
     // cache
     public $_cached = [];
@@ -77,6 +82,10 @@ class BasicHandler extends Error
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
+    /**
+     * BasicHandler constructor.
+     * @param $dirname
+     */
     public function __construct($dirname)
     {
         $this->_DIRNAME = $dirname;
@@ -84,6 +93,10 @@ class BasicHandler extends Error
         $this->_db = \XoopsDatabaseFactory::getDatabaseConnection();
     }
 
+    /**
+     * @param null $dirname
+     * @return \XoopsModules\Happylinux\BasicHandler|static
+     */
     public static function getInstance($dirname = null)
     {
         static $instance;
@@ -97,6 +110,9 @@ class BasicHandler extends Error
     //---------------------------------------------------------
     // set param
     //---------------------------------------------------------
+    /**
+     * @param $name
+     */
     public function set_table_name($name)
     {
         $this->_table_name_short = $name;
@@ -104,36 +120,57 @@ class BasicHandler extends Error
         $this->set_conf_table($this->_table);
     }
 
+    /**
+     * @param $name
+     */
     public function set_table_full($name)
     {
         $this->_table = $name;
     }
 
+    /**
+     * @param $name
+     */
     public function set_id_name($name)
     {
         $this->_id_name = $name;
     }
 
+    /**
+     * @param $name
+     */
     public function set_class_name($name)
     {
         $this->_class_name = $name;
     }
 
+    /**
+     * @param $name
+     */
     public function set_conf_table($name)
     {
         $this->_conf_table = $name;
     }
 
+    /**
+     * @param $name
+     */
     public function set_conf_id_name($name)
     {
         $this->_conf_id_name = $name;
     }
 
+    /**
+     * @param $name
+     */
     public function set_conf_name_name($name)
     {
         $this->_conf_name_name = $name;
     }
 
+    /**
+     * @param $name
+     */
     public function set_conf_value_name($name)
     {
         $this->_conf_value_name = $name;
@@ -142,6 +179,9 @@ class BasicHandler extends Error
     //---------------------------------------------------------
     // prefix
     //---------------------------------------------------------
+    /**
+     * @param $prefix
+     */
     public function renew_prefix($prefix)
     {
         if ($prefix) {
@@ -150,6 +190,10 @@ class BasicHandler extends Error
         }
     }
 
+    /**
+     * @param $name
+     * @return string
+     */
     public function prefix($name)
     {
         $ret = $this->db_prefix($this->_DIRNAME . '_' . $name);
@@ -159,8 +203,11 @@ class BasicHandler extends Error
 
     //---------------------------------------------------------
     // create
-    // compatible for object_handler
+    // compatible for objectHandler
     //---------------------------------------------------------
+    /**
+     * @return mixed|null
+     */
     public function &create()
     {
         $obj = null;
@@ -173,6 +220,10 @@ class BasicHandler extends Error
         return $obj;
     }
 
+    /**
+     * @param $obj
+     * @return bool
+     */
     public function _check_class($obj)
     {
         if (mb_strtolower(get_class($obj)) == mb_strtolower($this->_class_name)) {
@@ -182,6 +233,9 @@ class BasicHandler extends Error
         return false;
     }
 
+    /**
+     * @return string
+     */
     public function _class_name()
     {
         return $this->_class_name;
@@ -189,8 +243,12 @@ class BasicHandler extends Error
 
     //---------------------------------------------------------
     // get_object
-    // compatible for object_handler
+    // compatible for objectHandler
     //---------------------------------------------------------
+    /**
+     * @param $id
+     * @return mixed|null
+     */
     public function &get_cache_object_by_id($id)
     {
         $row = &$this->get_cache_row($id);
@@ -208,6 +266,10 @@ class BasicHandler extends Error
         return $obj;
     }
 
+    /**
+     * @param $id
+     * @return bool|mixed|null
+     */
     public function &get_object_by_id($id)
     {
         $false = false;
@@ -227,6 +289,11 @@ class BasicHandler extends Error
         return $obj;
     }
 
+    /**
+     * @param int $limit
+     * @param int $offset
+     * @return array
+     */
     public function &get_objects($limit = 0, $offset = 0)
     {
         $rows = &$this->get_rows($id);
@@ -235,6 +302,10 @@ class BasicHandler extends Error
         return $objs;
     }
 
+    /**
+     * @param $rows
+     * @return array
+     */
     public function &get_objects_from_rows($rows)
     {
         $objs = [];
@@ -258,6 +329,11 @@ class BasicHandler extends Error
     //---------------------------------------------------------
     // get_count
     //---------------------------------------------------------
+    /**
+     * @param      $name
+     * @param null $dirname
+     * @return int
+     */
     public function get_count_by_tablename($name, $dirname = null)
     {
         if (empty($dirname)) {
@@ -271,6 +347,9 @@ class BasicHandler extends Error
         return $count;
     }
 
+    /**
+     * @return int
+     */
     public function get_count_all()
     {
         $sql   = 'SELECT count(*) FROM ' . $this->_table;
@@ -279,6 +358,10 @@ class BasicHandler extends Error
         return $count;
     }
 
+    /**
+     * @param $id
+     * @return bool
+     */
     public function is_exist($id)
     {
         $sql   = 'SELECT count(*) FROM ' . $this->_table . ' WHERE ' . $this->_id_name . '=' . (int)$id;
@@ -293,6 +376,9 @@ class BasicHandler extends Error
     //---------------------------------------------------------
     // get_row
     //---------------------------------------------------------
+    /**
+     * @return bool
+     */
     public function has_cached()
     {
         if (count($this->_cached) > 0) {
@@ -302,6 +388,9 @@ class BasicHandler extends Error
         return false;
     }
 
+    /**
+     * @param $arr
+     */
     public function set_cached($arr)
     {
         if (is_array($arr) && count($arr)) {
@@ -309,11 +398,18 @@ class BasicHandler extends Error
         }
     }
 
+    /**
+     * @return array
+     */
     public function &get_cached_rows()
     {
         return $this->_cached;
     }
 
+    /**
+     * @param $id
+     * @return array|mixed
+     */
     public function &get_cache_row($id)
     {
         $row = false;
@@ -329,6 +425,10 @@ class BasicHandler extends Error
         return $row;
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function &get_row_by_id($id)
     {
         $sql = 'SELECT * FROM ' . $this->_table . ' WHERE ' . $this->_id_name . '=' . (int)$id;
@@ -337,6 +437,12 @@ class BasicHandler extends Error
         return $row;
     }
 
+    /**
+     * @param int  $limit
+     * @param int  $offset
+     * @param bool $id_as_key
+     * @return array|mixed
+     */
     public function &get_rows($limit = 0, $offset = 0, $id_as_key = false)
     {
         $sql = 'SELECT * FROM ' . $this->_table . ' ORDER BY ' . $this->_id_name;
@@ -345,6 +451,11 @@ class BasicHandler extends Error
         return $arr;
     }
 
+    /**
+     * @param int $limit
+     * @param int $offset
+     * @return array|mixed
+     */
     public function &get_id_array($limit = 0, $offset = 0)
     {
         $sql = 'SELECT ' . $this->_id_name . ' FROM ' . $this->_table . ' ORDER BY ' . $this->_id_name;
@@ -356,6 +467,10 @@ class BasicHandler extends Error
     //---------------------------------------------------------
     // delete
     //---------------------------------------------------------
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function delete_by_id($id)
     {
         $sql = 'DELETE FROM ' . $this->_table . ' WHERE ' . $this->_id_name . '=' . (int)$id;
@@ -367,6 +482,10 @@ class BasicHandler extends Error
     //---------------------------------------------------------
     // execute sql
     //---------------------------------------------------------
+    /**
+     * @param $sql
+     * @return int
+     */
     public function get_count_by_sql($sql)
     {
         $res = &$this->query($sql);
@@ -386,6 +505,10 @@ class BasicHandler extends Error
         return $count;
     }
 
+    /**
+     * @param $sql
+     * @return mixed
+     */
     public function &get_row_by_sql($sql)
     {
         $res = &$this->query($sql);
@@ -395,6 +518,13 @@ class BasicHandler extends Error
         return $arr;
     }
 
+    /**
+     * @param      $sql
+     * @param int  $limit
+     * @param int  $offset
+     * @param bool $id_as_key
+     * @return array|mixed
+     */
     public function &get_rows_by_sql($sql, $limit = 0, $offset = 0, $id_as_key = false)
     {
         $res = &$this->query($sql, $limit, $offset);
@@ -404,7 +534,7 @@ class BasicHandler extends Error
 
         $arr = [];
 
-        while ($row = &$this->fetchArray($res)) {
+        while (false !== ($row = &$this->fetchArray($res))) {
             if ($id_as_key) {
                 $arr[$row[$this->_id_name]] = $row;
             } else {
@@ -417,6 +547,12 @@ class BasicHandler extends Error
         return $arr;
     }
 
+    /**
+     * @param     $sql
+     * @param int $limit
+     * @param int $offset
+     * @return array|mixed
+     */
     public function &get_first_row_by_sql($sql, $limit = 0, $offset = 0)
     {
         $res = &$this->query($sql, $limit, $offset);
@@ -426,7 +562,7 @@ class BasicHandler extends Error
 
         $arr = [];
 
-        while ($row = &$this->fetchRow($res)) {
+        while (false !== ($row = &$this->fetchRow($res))) {
             $arr[] = $row[0];
         }
 
@@ -445,6 +581,12 @@ class BasicHandler extends Error
     //   xoops 2.0.15 :    query()
     //   xoops 2.0.16 jp: &query()
     //---------------------------------------------------------
+    /**
+     * @param     $sql
+     * @param int $limit
+     * @param int $offset
+     * @return mixed
+     */
     public function &query($sql, $limit = 0, $offset = 0)
     {
         $limit  = (int)$limit;
@@ -461,6 +603,10 @@ class BasicHandler extends Error
         return $res;
     }
 
+    /**
+     * @param $res
+     * @return mixed
+     */
     public function getRowsNum($res)
     {
         $ret = $this->_db->getRowsNum($res);
@@ -468,6 +614,10 @@ class BasicHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param $res
+     * @return mixed
+     */
     public function getFieldsNum($res)
     {
         $ret = $this->_db->getFieldsNum($res);
@@ -475,6 +625,10 @@ class BasicHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param $res
+     * @return mixed
+     */
     public function &fetchArray($res)
     {
         $ret = $this->_db->fetchArray($res);
@@ -482,6 +636,10 @@ class BasicHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param $res
+     * @return mixed
+     */
     public function &fetchRow($res)
     {
         $ret = $this->_db->fetchRow($res);
@@ -489,6 +647,9 @@ class BasicHandler extends Error
         return $ret;
     }
 
+    /**
+     * @return mixed
+     */
     public function getInsertId()
     {
         $ret = $this->_db->getInsertId();
@@ -496,6 +657,10 @@ class BasicHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param $result
+     * @return mixed
+     */
     public function freeRecordSet($result)
     {
         $ret = $this->_db->freeRecordSet($result);
@@ -503,11 +668,18 @@ class BasicHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param $value
+     */
     public function setPrefix($value)
     {
         $this->_db->setPrefix($value);
     }
 
+    /**
+     * @param string $tablename
+     * @return string
+     */
     public function db_prefix($tablename = '')
     {
         // if tablename is empty, only prefix will be returned
@@ -524,6 +696,11 @@ class BasicHandler extends Error
     }
 
     // strip GPC slashes when set object by serVar();
+
+    /**
+     * @param $str
+     * @return string
+     */
     public function quote($str)
     {
         $str = "'" . addslashes($str) . "'";
@@ -534,6 +711,12 @@ class BasicHandler extends Error
     //---------------------------------------------------------
     // update config
     //---------------------------------------------------------
+    /**
+     * @param      $name
+     * @param      $value
+     * @param bool $force
+     * @return bool
+     */
     public function update_config_by_name($name, $value, $force = false)
     {
         if (!$force) {
@@ -557,6 +740,9 @@ class BasicHandler extends Error
         }
     }
 
+    /**
+     * @return array
+     */
     public function &_get_config_data()
     {
         $arr = [];
@@ -575,6 +761,9 @@ class BasicHandler extends Error
         return $arr;
     }
 
+    /**
+     * @return array|bool
+     */
     public function &get_conf()
     {
         $ret = false;
@@ -587,6 +776,10 @@ class BasicHandler extends Error
 
     // BUG 4707: Only variables should be assigned by reference
     // in weblinks, store array in cache
+    /**
+     * @param $name
+     * @return bool|mixed
+     */
     public function &get_conf_by_name($name)
     {
         $ret = false;
@@ -597,6 +790,9 @@ class BasicHandler extends Error
         return $ret;
     }
 
+    /**
+     * @return bool
+     */
     public function _has_conf_cached()
     {
         if (count($this->_conf_cached) > 0) {
@@ -609,6 +805,9 @@ class BasicHandler extends Error
     //---------------------------------------------------------
     // column
     //---------------------------------------------------------
+    /**
+     * @return array|bool
+     */
     public function get_columns()
     {
         $sql  = 'SHOW COLUMNS FROM ' . $this->_table;
@@ -620,6 +819,10 @@ class BasicHandler extends Error
         return $rows;
     }
 
+    /**
+     * @param $fields
+     * @return mixed
+     */
     public function update_column_type($fields)
     {
         $arr = [];
@@ -636,6 +839,11 @@ class BasicHandler extends Error
     //---------------------------------------------------------
     // utility
     //---------------------------------------------------------
+    /**
+     * @param        $str
+     * @param string $pattern
+     * @return array
+     */
     public function &convert_string_to_array($str, $pattern = '&')
     {
         $str_arr = explode($pattern, $str);

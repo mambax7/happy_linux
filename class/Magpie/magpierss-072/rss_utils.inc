@@ -21,6 +21,10 @@
     NOTE: https://www.w3.org/TR/NOTE-datetime
 \*======================================================================*/
 
+/**
+ * @param $date_str
+ * @return float|int
+ */
 function parse_w3cdtf($date_str)
 {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: html.php,v 1.13 2008/02/28 13:12:48 ohwada Exp $
 
@@ -30,7 +30,7 @@ namespace XoopsModules\Happy_linux;
 
 // 2006-09-20 K.OHWADA
 // this is new file
-// divid from happy_linux_form
+// divid from happylinux_form
 
 //=========================================================
 // Happy Linux Framework Module
@@ -40,13 +40,18 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class html
 //=========================================================
+
+/**
+ * Class Html
+ * @package XoopsModules\Happylinux
+ */
 class Html extends Strings
 {
     public $_DEBUG_PRINT = false;
 
     // base on W3C
     public $_SELECTED = 'selected="selected"';
-    public $_CHECKED  = 'checked="checked"';
+    public $_CHECKED  = 'checked';
 
     //---------------------------------------------------------
     // constructor
@@ -56,6 +61,9 @@ class Html extends Strings
         parent::__construct();
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\Html|static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -72,6 +80,14 @@ class Html extends Strings
     //---------------------------------------------------------
     // form tag
     //---------------------------------------------------------
+    /**
+     * @param string $name
+     * @param string $action
+     * @param string $enctype
+     * @param string $method
+     * @param string $extra
+     * @return string
+     */
     public function build_html_form_tag_begin($name = '', $action = '', $enctype = '', $method = 'post', $extra = '')
     {
         $text = '<form ';
@@ -98,6 +114,9 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_form_tag_end()
     {
         $text = "</form>\n";
@@ -108,62 +127,117 @@ class Html extends Strings
     //---------------------------------------------------------
     // input tag
     //---------------------------------------------------------
+    /**
+     * @param        $name
+     * @param        $value
+     * @param int    $size
+     * @param int    $maxlength
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_text($name, $value, $size = 50, $maxlength = 255, $extra = '')
     {
-        $text = '<input type="text" name="' . $name . '" id="' . $name . '" value="' . $value . '" size="' . $size . '" maxlength="' . $maxlength . '" ' . $extra . ' />' . "\n";
+        $text = '<input type="text" name="' . $name . '" id="' . $name . '" value="' . $value . '" size="' . $size . '" maxlength="' . $maxlength . '" ' . $extra . '>' . "\n";
 
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param int    $size
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_text_without_maxlenghth($name, $value, $size = 50, $extra = '')
     {
-        $text = '<input type="text" name="' . $name . '" id="' . $name . '" value="' . $value . '" size="' . $size . '" ' . $extra . ' />' . "\n";
+        $text = '<input type="text" name="' . $name . '" id="' . $name . '" value="' . $value . '" size="' . $size . '" ' . $extra . '>' . "\n";
 
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param int    $size
+     * @param int    $maxlength
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_password($name, $value, $size = 50, $maxlength = 255, $extra = '')
     {
-        $text = '<input type="password" name="' . $name . '" id="' . $name . '" value="' . $value . '" size="' . $size . '" maxlength="' . $maxlength . '" ' . $extra . ' />' . "\n";
+        $text = '<input type="password" name="' . $name . '" id="' . $name . '" value="' . $value . '" size="' . $size . '" maxlength="' . $maxlength . '" ' . $extra . '>' . "\n";
 
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_file($name, $value, $extra = '')
     {
-        $text = '<input type="file" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $extra . ' />' . "\n";
+        $text = '<input type="file" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $extra . '>' . "\n";
 
         return $text;
     }
 
+    /**
+     * @param $value
+     * @return string
+     */
     public function build_html_input_hidden_max_file_size($value)
     {
-        $text = '<input type="hidden" name="MAX_FILE_SIZE" value="' . $value . '" />' . "\n";
+        $text = '<input type="hidden" name="MAX_FILE_SIZE" value="' . $value . '">' . "\n";
 
         return $text;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return string
+     */
     public function build_html_input_hidden($name, $value)
     {
-        $text = '<input type="hidden" name="' . $name . '" id="' . $name . '" value="' . $value . '" />' . "\n";
+        $text = '<input type="hidden" name="' . $name . '" id="' . $name . '" value="' . $value . '">' . "\n";
 
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_submit($name, $value, $extra = '')
     {
-        $text = '<input type="submit" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $extra . ' />' . "\n";
+        $text = '<input type="submit" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $extra . '>' . "\n";
 
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_button($name, $value, $extra = '')
     {
-        $text = '<input type="button" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $extra . ' />' . "\n";
+        $text = '<input type="button" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $extra . '>' . "\n";
 
         return $text;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return string
+     */
     public function build_html_input_button_cancel($name, $value)
     {
         $extra = ' onclick="javascript:history.go(-1)" ';
@@ -172,6 +246,11 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return string
+     */
     public function build_html_input_button_close($name, $value)
     {
         $extra = ' onclick="javascript:window.close()" ';
@@ -180,6 +259,12 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @param $url
+     * @return string
+     */
     public function build_html_input_button_location($name, $value, $url)
     {
         $location = "window.location='" . $url . "'";
@@ -192,6 +277,14 @@ class Html extends Strings
     //---------------------------------------------------------
     // input radio tag
     //---------------------------------------------------------
+    /**
+     * @param        $name
+     * @param        $value
+     * @param        $options
+     * @param string $del
+     * @param bool   $flag_sani
+     * @return string
+     */
     public function build_html_input_radio_select($name, $value, $options, $del = '', $flag_sani = true)
     {
         if ($this->_DEBUG_PRINT) {
@@ -223,13 +316,26 @@ class Html extends Strings
     }
 
     // base on W3C: not use id
+
+    /**
+     * @param        $name
+     * @param        $value
+     * @param string $checked
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_radio($name, $value, $checked = '', $extra = '')
     {
-        $text = '<input type="radio" name="' . $name . '" value="' . $value . '" ' . $checked . ' ' . $extra . ' />' . "\n";
+        $text = '<input type="radio" name="' . $name . '" value="' . $value . '" ' . $checked . ' ' . $extra . '>' . "\n";
 
         return $text;
     }
 
+    /**
+     * @param $val1
+     * @param $val2
+     * @return string
+     */
     public function build_html_checked($val1, $val2)
     {
         if (isset($val1) && ($val1 == $val2)) {
@@ -239,6 +345,11 @@ class Html extends Strings
         return '';
     }
 
+    /**
+     * @param $val_arr1
+     * @param $val2
+     * @return string
+     */
     public function build_html_checked_multi($val_arr1, $val2)
     {
         if (is_array($val_arr1)) {
@@ -255,6 +366,13 @@ class Html extends Strings
     //---------------------------------------------------------
     // input checkbox tag
     //---------------------------------------------------------
+    /**
+     * @param        $name
+     * @param        $value
+     * @param        $options
+     * @param string $del
+     * @return string
+     */
     public function build_html_input_checkbox_select($name, $value, $options, $del = '')
     {
         if ($this->_DEBUG_PRINT) {
@@ -279,6 +397,13 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value_arr
+     * @param        $options
+     * @param string $del
+     * @return string
+     */
     public function build_html_input_checkbox_select_multi($name, $value_arr, $options, $del = '')
     {
         if ($this->_DEBUG_PRINT) {
@@ -308,9 +433,16 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param string $checked
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_checkbox($name, $value, $checked = '', $extra = '')
     {
-        $text = '<input type="checkbox" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $checked . ' ' . $extra . ' />' . "\n";
+        $text = '<input type="checkbox" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $checked . ' ' . $extra . '>' . "\n";
 
         return $text;
     }
@@ -318,6 +450,14 @@ class Html extends Strings
     //---------------------------------------------------------
     // textarea tag
     //---------------------------------------------------------
+    /**
+     * @param        $name
+     * @param        $value
+     * @param int    $rows
+     * @param int    $cols
+     * @param string $extra
+     * @return string
+     */
     public function build_html_textarea($name, $value, $rows = 5, $cols = 50, $extra = '')
     {
         $text = $this->build_html_textarea_tag_begin($name, $rows, $cols);
@@ -327,6 +467,13 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param int    $rows
+     * @param int    $cols
+     * @param string $extra
+     * @return string
+     */
     public function build_html_textarea_tag_begin($name, $rows = 5, $cols = 50, $extra = '')
     {
         $text = '<textarea name="' . $name . '" id="' . $name . '" rows="' . $rows . '" cols="' . $cols . '" ' . $extra . ' >' . "\n";
@@ -334,6 +481,9 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_textarea_tag_end()
     {
         $text = "</textarea>\n";
@@ -344,6 +494,15 @@ class Html extends Strings
     //---------------------------------------------------------
     // select tag
     //---------------------------------------------------------
+    /**
+     * @param        $name
+     * @param        $value
+     * @param        $options
+     * @param int    $none
+     * @param string $none_name
+     * @param string $none_value
+     * @return string
+     */
     public function build_html_select($name, $value, $options, $none = 0, $none_name = '---', $none_value = '')
     {
         $text = $this->build_html_select_tag_begin($name);
@@ -361,6 +520,16 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value_arr
+     * @param        $opt_arr
+     * @param int    $size
+     * @param int    $none
+     * @param string $none_name
+     * @param string $none_value
+     * @return string
+     */
     public function build_html_select_multiple($name, $value_arr, $opt_arr, $size = 4, $none = 0, $none_name = '---', $none_value = '')
     {
         $text = $this->build_html_select_tag_begin($name, $size, true);
@@ -378,6 +547,13 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param string $size
+     * @param bool   $flag_multiple
+     * @param string $extra
+     * @return string
+     */
     public function build_html_select_tag_begin($name, $size = '', $flag_multiple = false, $extra = '')
     {
         $text = '<select ';
@@ -403,6 +579,9 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_select_tag_end()
     {
         $text = "</select>\n";
@@ -413,6 +592,12 @@ class Html extends Strings
     //---------------------------------------------------------
     // option tag
     //---------------------------------------------------------
+    /**
+     * @param $opt_name
+     * @param $opt_val
+     * @param $value_arr
+     * @return string
+     */
     public function build_html_option_selected($opt_name, $opt_val, $value_arr)
     {
         $flag = false;
@@ -428,6 +613,12 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param      $name
+     * @param      $value
+     * @param bool $flag_selected
+     * @return string
+     */
     public function build_html_option($name, $value, $flag_selected = false)
     {
         $text = $this->build_html_option_tag_begin($value, $flag_selected);
@@ -437,6 +628,11 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param      $value
+     * @param bool $flag_selected
+     * @return string
+     */
     public function build_html_option_tag_begin($value, $flag_selected = false)
     {
         $selected = $this->build_html_selected_by_flag($flag_selected);
@@ -446,6 +642,9 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_option_tag_end()
     {
         $text = "</option>\n";
@@ -453,6 +652,11 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param $val1
+     * @param $val2
+     * @return string
+     */
     public function build_html_selected($val1, $val2)
     {
         if (isset($val1) && ($val1 == $val2)) {
@@ -462,6 +666,10 @@ class Html extends Strings
         return '';
     }
 
+    /**
+     * @param $flag
+     * @return string
+     */
     public function build_html_selected_by_flag($flag)
     {
         if ($flag) {
@@ -474,6 +682,14 @@ class Html extends Strings
     //---------------------------------------------------------
     // table tag
     //---------------------------------------------------------
+    /**
+     * @param string $width
+     * @param string $height
+     * @param string $cellpadding
+     * @param string $cellspacing
+     * @param string $class
+     * @return string
+     */
     public function build_html_table_tag_begin($width = '', $height = '', $cellpadding = '', $cellspacing = '', $class = '')
     {
         $text = '<table ';
@@ -503,6 +719,10 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param string $class
+     * @return string
+     */
     public function build_html_table_tag_class($class = '')
     {
         $text = '<table ';
@@ -516,6 +736,9 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_table_tag_end()
     {
         $text = "</table>\n";
@@ -526,6 +749,12 @@ class Html extends Strings
     //---------------------------------------------------------
     // tr tag
     //---------------------------------------------------------
+    /**
+     * @param string $align
+     * @param string $valign
+     * @param string $class
+     * @return string
+     */
     public function build_html_tr_tag_begin($align = '', $valign = '', $class = '')
     {
         $text = '<tr ';
@@ -547,6 +776,10 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param string $class
+     * @return string
+     */
     public function build_html_tr_tag_class($class = '')
     {
         $text = '<tr ';
@@ -560,6 +793,9 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_tr_tag_end()
     {
         $text = "</tr>\n";
@@ -570,6 +806,14 @@ class Html extends Strings
     //---------------------------------------------------------
     // th tag
     //---------------------------------------------------------
+    /**
+     * @param string $align
+     * @param string $valign
+     * @param string $colspan
+     * @param string $rowspan
+     * @param string $class
+     * @return string
+     */
     public function build_html_th_tag_begin($align = '', $valign = '', $colspan = '', $rowspan = '', $class = '')
     {
         $text = '<th ';
@@ -599,6 +843,10 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param string $class
+     * @return string
+     */
     public function build_html_th_tag_class($class = '')
     {
         $text = '<th ';
@@ -612,6 +860,9 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_th_tag_end()
     {
         $text = "</th>\n";
@@ -622,6 +873,14 @@ class Html extends Strings
     //---------------------------------------------------------
     // td tag
     //---------------------------------------------------------
+    /**
+     * @param string $align
+     * @param string $valign
+     * @param string $colspan
+     * @param string $rowspan
+     * @param string $class
+     * @return string
+     */
     public function build_html_td_tag_begin($align = '', $valign = '', $colspan = '', $rowspan = '', $class = '')
     {
         $text = '<td ';
@@ -651,6 +910,10 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param string $class
+     * @return string
+     */
     public function build_html_td_tag_class($class = '')
     {
         $text = '<td ';
@@ -664,6 +927,9 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_td_tag_end()
     {
         $text = "</td>\n";
@@ -674,6 +940,14 @@ class Html extends Strings
     //---------------------------------------------------------
     // img tag
     //---------------------------------------------------------
+    /**
+     * @param        $src
+     * @param int    $width
+     * @param int    $height
+     * @param int    $border
+     * @param string $alt
+     * @return bool|string
+     */
     public function build_html_img_tag($src, $width = 0, $height = 0, $border = 0, $alt = 'image')
     {
         if (empty($src) || ('https://' == $src) || ('https://' == $src)) {
@@ -700,7 +974,7 @@ class Html extends Strings
 
         $text .= 'border="' . $border . '" ';
         $text .= 'alt="' . $alt . '" ';
-        $text .= " />\n";
+        $text .= ">\n";
 
         return $text;
     }
@@ -708,6 +982,11 @@ class Html extends Strings
     //---------------------------------------------------------
     // a tag
     //---------------------------------------------------------
+    /**
+     * @param        $href
+     * @param string $target
+     * @return string
+     */
     public function build_html_a_tag_begin($href, $target = '')
     {
         $text = '<a ';
@@ -722,6 +1001,9 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_a_tag_end()
     {
         $text = "</a>\n";
@@ -729,6 +1011,13 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param        $url
+     * @param string $name
+     * @param string $target
+     * @param bool   $flag_name_sanitize
+     * @return string|string[]
+     */
     public function build_html_a_href_name($url, $name = '', $target = '', $flag_name_sanitize = true)
     {
         // sanitize
@@ -756,6 +1045,13 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param        $url
+     * @param string $name
+     * @param string $target
+     * @param bool   $flag_name_sanitize
+     * @return string|string[]
+     */
     public function build_html_a_href_email($url, $name = '', $target = '', $flag_name_sanitize = true)
     {
         $mailto = 'mailto:' . $url;
@@ -767,6 +1063,11 @@ class Html extends Strings
     //-------------------------------------------------------------------
     // span tag
     //-------------------------------------------------------------------
+    /**
+     * @param $val
+     * @param $style
+     * @return string
+     */
     public function build_html_span_tag_with_style($val, $style)
     {
         if ($style) {
@@ -780,6 +1081,11 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param $val
+     * @param $class
+     * @return string
+     */
     public function build_html_span_tag_with_class($val, $class)
     {
         if ($class) {
@@ -796,6 +1102,11 @@ class Html extends Strings
     //-------------------------------------------------------------------
     // div tag
     //-------------------------------------------------------------------
+    /**
+     * @param $val
+     * @param $style
+     * @return string
+     */
     public function build_html_div_tag_with_style($val, $style)
     {
         if ($style) {
@@ -809,6 +1120,11 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param $val
+     * @param $class
+     * @return string
+     */
     public function build_html_div_tag_with_class($val, $class)
     {
         if ($class) {
@@ -825,6 +1141,12 @@ class Html extends Strings
     //-------------------------------------------------------------------
     // style
     //-------------------------------------------------------------------
+    /**
+     * @param string $color
+     * @param string $background_color
+     * @param string $font_weight
+     * @return string
+     */
     public function build_html_span_style($color = '', $background_color = '', $font_weight = '')
     {
         $text = '';
@@ -847,6 +1169,12 @@ class Html extends Strings
     //-------------------------------------------------------------------
     // highlight
     //-------------------------------------------------------------------
+    /**
+     * @param        $value
+     * @param string $background_color
+     * @param string $font_weight
+     * @return string
+     */
     public function build_html_red($value, $background_color = '', $font_weight = '')
     {
         $text = $this->build_html_highlight($value, '#ff0000', $background_color, $font_weight);
@@ -854,6 +1182,12 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param        $value
+     * @param string $background_color
+     * @param string $font_weight
+     * @return string
+     */
     public function build_html_green($value, $background_color = '', $font_weight = '')
     {
         $text = $this->build_html_highlight($value, '#00ff00', $background_color, $font_weight);
@@ -861,6 +1195,12 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param        $value
+     * @param string $background_color
+     * @param string $font_weight
+     * @return string
+     */
     public function build_html_blue($value, $background_color = '', $font_weight = '')
     {
         $text = $this->build_html_highlight($value, '#0000ff', $background_color, $font_weight);
@@ -868,6 +1208,13 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param        $value
+     * @param string $color
+     * @param string $background_color
+     * @param string $font_weight
+     * @return string
+     */
     public function build_html_highlight($value, $color = '#ff0000', $background_color = '', $font_weight = 'bold')
     {
         $style = $this->build_html_span_style($color, $background_color, $font_weight);
@@ -876,6 +1223,14 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param        $num
+     * @param int    $limit_under
+     * @param string $color
+     * @param string $background_color
+     * @param string $font_weight
+     * @return string
+     */
     public function build_html_highlight_number($num, $limit_under = 0, $color = '#ff0000', $background_color = '', $font_weight = 'bold')
     {
         if ($num > $limit_under) {
@@ -888,9 +1243,13 @@ class Html extends Strings
     //-------------------------------------------------------------------
     // stylesheet
     //-------------------------------------------------------------------
+    /**
+     * @param $url
+     * @return string
+     */
     public function build_html_link_stylesheet($url)
     {
-        $text = '<link rel="stylesheet" type="text/css" href="' . $url . '" />' . "\n";
+        $text = '<link rel="stylesheet" type="text/css" href="' . $url . '">' . "\n";
 
         return $text;
     }
@@ -898,6 +1257,10 @@ class Html extends Strings
     //-------------------------------------------------------------------
     // comment
     //-------------------------------------------------------------------
+    /**
+     * @param $str
+     * @return string
+     */
     public function build_html_comment($str)
     {
         $text = ' <!-- ' . $str . ' -->' . "\n";
@@ -908,6 +1271,10 @@ class Html extends Strings
     //-------------------------------------------------------------------
     // bread_crumb
     //-------------------------------------------------------------------
+    /**
+     * @param $paths
+     * @return string
+     */
     public function build_html_bread_crumb($paths)
     {
         $arr = [];
@@ -932,6 +1299,15 @@ class Html extends Strings
     //-------------------------------------------------------------------
     // menu
     //-------------------------------------------------------------------
+    /**
+     * @param        $menu_arr
+     * @param int    $MAX_COL
+     * @param string $width
+     * @param string $outer
+     * @param string $even
+     * @param string $odd
+     * @return string
+     */
     public function build_html_menu_table($menu_arr, $MAX_COL = 5, $width = '', $outer = 'outer', $even = 'even', $odd = 'odd')
     {
         if (empty($width)) {
@@ -1005,6 +1381,13 @@ class Html extends Strings
     //================================================================
     // build XOOPS element
     //================================================================
+    /**
+     * @param int    $width
+     * @param int    $height
+     * @param int    $border
+     * @param string $alt
+     * @return bool|string
+     */
     public function build_xoops_img_email_logo($width = 0, $height = 0, $border = 0, $alt = 'email')
     {
         $url  = XOOPS_URL . '/images/icons/email.gif';
@@ -1013,6 +1396,13 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param int    $width
+     * @param int    $height
+     * @param int    $border
+     * @param string $alt
+     * @return bool|string
+     */
     public function build_xoops_img_www_logo($width = 0, $height = 0, $border = 0, $alt = 'www')
     {
         $url  = XOOPS_URL . '/images/icons/www.gif';
@@ -1021,6 +1411,13 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param int    $width
+     * @param int    $height
+     * @param int    $border
+     * @param string $alt
+     * @return bool|string
+     */
     public function build_xoops_img_pm_logo($width = 0, $height = 0, $border = 0, $alt = 'pm')
     {
         $url  = XOOPS_URL . '/images/icons/pm.gif';
@@ -1029,6 +1426,11 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param        $email
+     * @param string $target
+     * @return string|string[]
+     */
     public function build_xoops_mailto_with_logo($email, $target = '')
     {
         if (empty($email)) {
@@ -1041,6 +1443,11 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param        $url
+     * @param string $target
+     * @return string|string[]
+     */
     public function build_xoops_url_with_logo($url, $target = '_blank')
     {
         if (empty($url)) {
@@ -1053,6 +1460,11 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param        $uid
+     * @param string $target
+     * @return string|string[]
+     */
     public function build_xoops_pm_with_logo($uid, $target = '_blank')
     {
         $uid = (int)$uid;
@@ -1068,6 +1480,11 @@ class Html extends Strings
         return $text;
     }
 
+    /**
+     * @param $uid
+     * @param $uname
+     * @return string|string[]
+     */
     public function build_xoops_url_userinfo($uid, $uname)
     {
         $uid = (int)$uid;
@@ -1081,6 +1498,13 @@ class Html extends Strings
         return $submitter;
     }
 
+    /**
+     * @param     $url
+     * @param     $name
+     * @param int $width
+     * @param int $height
+     * @return string
+     */
     public function build_xoops_openWithSelfMain($url, $name, $width = 450, $height = 400)
     {
         $text = "javascript:openWithSelfMain('$url', '$name', $width, $height)";

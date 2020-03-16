@@ -2,7 +2,7 @@
 // $Id: functions.php,v 1.4 2007/11/11 02:39:22 ohwada Exp $
 
 // 2007-11-01 K.OHWADA
-// happy_linux_get_singleton()
+// getSingleton()
 
 // 2007-07-01 K.OHWADA
 // use debug_print_backtrace()
@@ -16,16 +16,20 @@
 // 2006-07-10 K.OHWADA
 //=========================================================
 
-function &happy_linux_get_singleton($name)
+/**
+ * @param $name
+ * @return bool|mixed
+ */
+function &getSingleton($name)
 {
     static $singletons;
 
     if (!isset($singletons[$name])) {
-        $class = 'happy_linux_' . $name;
-        $file  = XOOPS_ROOT_PATH . '/modules/happy_linux/class/' . $name . '.php';
+        $class = 'happylinux_' . $name;
+        $file  = XOOPS_ROOT_PATH . '/modules/happylinux/class/' . $name . '.php';
 
         if (file_exists($file)) {
-            include_once $file;
+            require_once $file;
         }
 
         if (class_exists($class)) {
@@ -38,8 +42,8 @@ function &happy_linux_get_singleton($name)
 
         return $single;
     }
-    if (happy_linux_is_admin() && function_exists('debug_print_backtrace')) {
-        echo "happy_linux_get_singleton <br>\n";
+    if (happylinux_is_admin() && function_exists('debug_print_backtrace')) {
+        echo "getSingleton <br>\n";
         debug_print_backtrace();
     }
 
@@ -48,7 +52,13 @@ function &happy_linux_get_singleton($name)
     return $false;
 }
 
-function &happy_linux_getHandler($name = null, $module_dir = null, $prefix = 'happy_linux')
+/**
+ * @param null   $name
+ * @param null   $module_dir
+ * @param string $prefix
+ * @return bool|mixed
+ */
+function &happylinux_get_handler($name = null, $module_dir = null, $prefix = 'happylinux')
 {
     static $handlers;
 
@@ -67,11 +77,11 @@ function &happy_linux_getHandler($name = null, $module_dir = null, $prefix = 'ha
     $name = (!isset($name)) ? $module_dir : trim($name);
 
     if (!isset($handlers[$module_dir][$name])) {
-        $class = $prefix . '_' . $name . '_handler';
+        $class = $prefix . '_' . $name . 'Handler';
         $file  = XOOPS_ROOT_PATH . '/modules/' . $module_dir . '/class/' . $class . '.php';
 
         if (file_exists($file)) {
-            include_once $file;
+            require_once $file;
         }
 
         if (class_exists($class)) {
@@ -80,13 +90,13 @@ function &happy_linux_getHandler($name = null, $module_dir = null, $prefix = 'ha
     }
 
     if (isset($handlers[$module_dir][$name])) {
-        $han = &$handlers[$module_dir][$name];
+        $handler = &$handlers[$module_dir][$name];
 
-        return $han;
+        return $handler;
     }
-    if (happy_linux_is_admin()) {
+    if (happylinux_is_admin()) {
         if (function_exists('debug_print_backtrace')) {
-            echo "happy_linux_get_handler <br>\n";
+            echo "happylinux_get_handler <br>\n";
             debug_print_backtrace();
         }
 
@@ -99,7 +109,10 @@ function &happy_linux_getHandler($name = null, $module_dir = null, $prefix = 'ha
     return $false;
 }
 
-function happy_linux_is_admin()
+/**
+ * @return bool
+ */
+function happylinux_is_admin()
 {
     global $xoopsUser;
     if (is_object($xoopsUser) && $xoopsUser->isAdmin()) {
@@ -107,4 +120,17 @@ function happy_linux_is_admin()
     }
 
     return false;
+}
+
+//=========================================================
+// function
+//=========================================================
+/**
+ * @return float|int|string
+ */
+function happylinux_get_execution_time()
+{
+    $time = XoopsModules\Happylinux\Time::getInstance();
+
+    return $time->get_elapse_time();
 }

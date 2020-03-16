@@ -2,10 +2,10 @@
 // $Id: form.php,v 1.2 2008/02/24 02:14:19 ohwada Exp $
 
 // 2007-05-12 K.OHWADA
-// _HAPPY_LINUX_FORM_INIT_NOT
+// _HAPPYLINUX_FORM_INIT_NOT
 
 // 2006-11-08 K.OHWADA
-// _HAPPY_LINUX_FORM_ITEM
+// _HAPPYLINUX_FORM_ITEM
 
 // 2006-09-15 K.OHWADA
 // this is new file
@@ -17,17 +17,17 @@
 //=========================================================
 
 // form
-define('_HAPPY_LINUX_FORM_TITLE', 'العنوان');
-define('_HAPPY_LINUX_FORM_SUBMIT', 'أرسل');
-define('_HAPPY_LINUX_FORM_CANCEL', 'الغاء');
-define('_HAPPY_LINUX_FORM_LOCATION', 'رجوع إلى');
-define('_HAPPY_LINUX_FORM_VISIT', 'اذهب');
+define('_HAPPYLINUX_FORM_TITLE', 'العنوان');
+define('_HAPPYLINUX_FORM_SUBMIT', 'أرسل');
+define('_HAPPYLINUX_FORM_CANCEL', 'الغاء');
+define('_HAPPYLINUX_FORM_LOCATION', 'رجوع إلى');
+define('_HAPPYLINUX_FORM_VISIT', 'اذهب');
 
 // 2006-11-08
-define('_HAPPY_LINUX_FORM_ITEM', 'الموضوع');
+define('_HAPPYLINUX_FORM_ITEM', 'الموضوع');
 
 // 2007-05-12
-define('_HAPPY_LINUX_FORM_INIT_NOT', 'Not initialize Config table');
-define('_HAPPY_LINUX_FORM_INIT_EXEC', 'Initialize Config table');
-define('_HAPPY_LINUX_FORM_VERSION_NOT', 'Not Version %s');
-define('_HAPPY_LINUX_FORM_UPGRADE_EXEC', 'تطوير الجدوال');
+define('_HAPPYLINUX_FORM_INIT_NOT', 'Not initialize Config table');
+define('_HAPPYLINUX_FORM_INIT_EXEC', 'Initialize Config table');
+define('_HAPPYLINUX_FORM_VERSION_NOT', 'Not Version %s');
+define('_HAPPYLINUX_FORM_UPGRADE_EXEC', 'تطوير الجدوال');

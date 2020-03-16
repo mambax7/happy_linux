@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: module_install.php,v 1.6 2009/01/05 17:50:39 ohwada Exp $
 
@@ -25,6 +25,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class module_install
 //=========================================================
+
+/**
+ * Class ModuleInstall
+ * @package XoopsModules\Happylinux
+ */
 class ModuleInstall
 {
     public $_db;
@@ -48,11 +53,17 @@ class ModuleInstall
         $this->_db = \XoopsDatabaseFactory::getDatabaseConnection();
     }
 
+    /**
+     * @param $class
+     */
     public function set_config_define_class($class)
     {
         $this->_config_define = &$class;
     }
 
+    /**
+     * @param $name
+     */
     public function set_config_table_name($name)
     {
         $this->_config_table = $this->prefix($name);
@@ -61,6 +72,9 @@ class ModuleInstall
     //=========================================================
     // public
     //=========================================================
+    /**
+     * @return mixed
+     */
     public function create_config_table()
     {
         $sql = '
@@ -85,11 +99,17 @@ CREATE TABLE ' . $this->_config_table . " (
     //---------------------------------------------------------
     // install
     //---------------------------------------------------------
+    /**
+     * @return int
+     */
     public function check_init_config()
     {
         return $this->_get_config_count_all();
     }
 
+    /**
+     * @return bool
+     */
     public function init_config()
     {
         $this->clear_error();
@@ -115,6 +135,9 @@ CREATE TABLE ' . $this->_config_table . " (
     //---------------------------------------------------------
     // update
     //---------------------------------------------------------
+    /**
+     * @return bool
+     */
     public function check_update_config()
     {
         $define_arr = &$this->_config_define->get_define();
@@ -129,6 +152,9 @@ CREATE TABLE ' . $this->_config_table . " (
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function update_config()
     {
         $this->clear_error();
@@ -157,6 +183,10 @@ CREATE TABLE ' . $this->_config_table . " (
         return $this->return_errors();
     }
 
+    /**
+     * @param $table
+     * @param $ver
+     */
     public function check_and_update_table($table, $ver)
     {
         $func_check  = '_check_' . $table . '_' . $ver;
@@ -170,6 +200,10 @@ CREATE TABLE ' . $this->_config_table . " (
         }
     }
 
+    /**
+     * @param $table
+     * @return mixed
+     */
     public function drop_table($table)
     {
         $sql = 'DROP TABLE ' . $table;
@@ -177,6 +211,10 @@ CREATE TABLE ' . $this->_config_table . " (
         return $this->query($sql);
     }
 
+    /**
+     * @param $table
+     * @return mixed
+     */
     public function truncate_table($table)
     {
         $sql = 'TRUNCATE TABLE ' . $table;
@@ -187,11 +225,18 @@ CREATE TABLE ' . $this->_config_table . " (
     //---------------------------------------------------------
     // check
     //---------------------------------------------------------
+    /**
+     * @return bool
+     */
     public function exists_config_table()
     {
         return $this->exists_table($this->_config_table);
     }
 
+    /**
+     * @param $table
+     * @return bool
+     */
     public function exists_table($table)
     {
         $sql = 'SHOW TABLES LIKE ' . $this->quote($table);
@@ -201,7 +246,7 @@ CREATE TABLE ' . $this->_config_table . " (
             return false;
         }
 
-        while ($row = $this->_db->fetchRow($res)) {
+        while (false !== ($row = $this->_db->fetchRow($res))) {
             if (mb_strtolower($row[0]) == mb_strtolower($table)) {
                 return true;
             }
@@ -210,6 +255,11 @@ CREATE TABLE ' . $this->_config_table . " (
         return false;
     }
 
+    /**
+     * @param $table
+     * @param $column
+     * @return bool
+     */
     public function exists_column($table, $column)
     {
         $row = &$this->get_column_row($table, $column);
@@ -220,6 +270,10 @@ CREATE TABLE ' . $this->_config_table . " (
         return false;
     }
 
+    /**
+     * @param $name_arr
+     * @return bool
+     */
     public function exists_config_item_by_name_array($name_arr)
     {
         foreach ($name_arr as $name) {
@@ -232,6 +286,12 @@ CREATE TABLE ' . $this->_config_table . " (
         return true;
     }
 
+    /**
+     * @param $table
+     * @param $column
+     * @param $type
+     * @return bool
+     */
     public function preg_match_column_type($table, $column, $type)
     {
         $pattern = '/' . preg_quote($type) . '/i';
@@ -243,6 +303,12 @@ CREATE TABLE ' . $this->_config_table . " (
         return false;
     }
 
+    /**
+     * @param $table
+     * @param $column
+     * @param $type_array
+     * @return bool
+     */
     public function preg_match_column_type_array($table, $column, $type_array)
     {
         $subject = $this->get_column_type($table, $column);
@@ -259,6 +325,11 @@ CREATE TABLE ' . $this->_config_table . " (
     //---------------------------------------------------------
     // get
     //---------------------------------------------------------
+    /**
+     * @param $table
+     * @param $column
+     * @return bool|mixed
+     */
     public function get_column_type($table, $column)
     {
         $row = &$this->get_column_row($table, $column);
@@ -269,6 +340,11 @@ CREATE TABLE ' . $this->_config_table . " (
         return false;
     }
 
+    /**
+     * @param $table
+     * @param $column
+     * @return bool
+     */
     public function &get_column_row($table, $column)
     {
         $false = false;
@@ -280,7 +356,7 @@ CREATE TABLE ' . $this->_config_table . " (
             return $false;
         }
 
-        while ($row = $this->_db->fetchArray($res)) {
+        while (false !== ($row = $this->_db->fetchArray($res))) {
             if ($row['Field'] == $column) {
                 return $row;
             }
@@ -289,6 +365,10 @@ CREATE TABLE ' . $this->_config_table . " (
         return $false;
     }
 
+    /**
+     * @param $table
+     * @return int|mixed
+     */
     public function get_count_all($table)
     {
         $sql = 'SELECT count(*) FROM ' . $table;
@@ -296,6 +376,10 @@ CREATE TABLE ' . $this->_config_table . " (
         return $this->get_count_by_sql($sql);
     }
 
+    /**
+     * @param $sql
+     * @return int|mixed
+     */
     public function get_count_by_sql($sql)
     {
         $res = &$this->query($sql);
@@ -312,6 +396,12 @@ CREATE TABLE ' . $this->_config_table . " (
         return $count;
     }
 
+    /**
+     * @param     $sql
+     * @param int $limit
+     * @param int $offset
+     * @return array|mixed
+     */
     public function &get_rows_by_sql($sql, $limit = 0, $offset = 0)
     {
         $res = &$this->query($sql, $limit, $offset);
@@ -322,7 +412,7 @@ CREATE TABLE ' . $this->_config_table . " (
         $arr = [];
 
         // Notice [PHP]: Only variables should be assigned by reference
-        while ($row = $this->_db->fetchArray($res)) {
+        while (false !== ($row = $this->_db->fetchArray($res))) {
             $arr[] = $row;
         }
 
@@ -332,11 +422,21 @@ CREATE TABLE ' . $this->_config_table . " (
     //---------------------------------------------------------
     // query
     //---------------------------------------------------------
+    /**
+     * @param $name
+     * @return string
+     */
     public function prefix($name)
     {
         return $this->_db->prefix($name);
     }
 
+    /**
+     * @param     $sql
+     * @param int $limit
+     * @param int $offset
+     * @return mixed
+     */
     public function &query($sql, $limit = 0, $offset = 0)
     {
         if ($this->_DEBUG_SQL) {
@@ -354,6 +454,10 @@ CREATE TABLE ' . $this->_config_table . " (
         return $res;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function quote($str)
     {
         $str = "'" . addslashes($str) . "'";
@@ -364,6 +468,9 @@ CREATE TABLE ' . $this->_config_table . " (
     //---------------------------------------------------------
     // message
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function get_message()
     {
         $text = '';
@@ -378,36 +485,61 @@ CREATE TABLE ' . $this->_config_table . " (
         return $text;
     }
 
+    /**
+     * @return string|null
+     */
     public function build_create_config_msg()
     {
         return $this->build_create_msg($this->_config_table);
     }
 
+    /**
+     * @return string|null
+     */
     public function get_init_config_msg()
     {
         return $this->build_init_msg($this->_config_table);
     }
 
+    /**
+     * @return string|null
+     */
     public function get_update_config_msg()
     {
         return $this->build_update_msg($this->_config_table, $this->_count_insert);
     }
 
+    /**
+     * @param $table
+     * @return string|null
+     */
     public function build_create_msg($table)
     {
         return $this->_build_msg($table, true, 'created');
     }
 
+    /**
+     * @param $table
+     * @return string|null
+     */
     public function build_init_msg($table)
     {
         return $this->_build_msg($table, true, 'initialized');
     }
 
+    /**
+     * @param      $table
+     * @param bool $flag
+     * @return string|null
+     */
     public function build_update_msg($table, $flag = true)
     {
         return $this->_build_msg($table, $flag, 'updated');
     }
 
+    /**
+     * @param $msg
+     */
     public function set_msg($msg)
     {
         if ($msg) {
@@ -420,6 +552,9 @@ CREATE TABLE ' . $this->_config_table . " (
         $this->_errors = [];
     }
 
+    /**
+     * @return bool
+     */
     public function return_flag_error()
     {
         if ($this->_flag_error) {
@@ -429,6 +564,9 @@ CREATE TABLE ' . $this->_config_table . " (
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function return_errors()
     {
         if (count($this->_errors)) {
@@ -441,6 +579,9 @@ CREATE TABLE ' . $this->_config_table . " (
     //---------------------------------------------------------
     // utility
     //---------------------------------------------------------
+    /**
+     * @return mixed|string
+     */
     public function get_post_op()
     {
         $op = '';
@@ -456,9 +597,13 @@ CREATE TABLE ' . $this->_config_table . " (
     //---------------------------------------------------------
     // template
     //---------------------------------------------------------
+    /**
+     * @param $dir
+     * @return bool
+     */
     public function clear_compiled_tpl_by_dir($dir)
     {
-        $tpl = new XoopsTpl();
+        $tpl = new \XoopsTpl();
 
         $arr = &$this->_get_files_in_dir($dir);
         if (!is_array($arr) || !count($arr)) {
@@ -473,6 +618,9 @@ CREATE TABLE ' . $this->_config_table . " (
         }
     }
 
+    /**
+     * @return string
+     */
     public function build_tpl_msg()
     {
         $msg = null;
@@ -490,12 +638,15 @@ CREATE TABLE ' . $this->_config_table . " (
     //---------------------------------------------------------
     // Notice [PHP]: Only variables should be assigned by reference
     // XOOPS 2.0.17 : non reference
+    /**
+     * @return mixed
+     */
     public function &get_xoops_module_objects_isactive()
     {
-        $module_handler = xoops_getHandler('module');
-        $criteria       = new CriteriaCompo();
-        $criteria->add(new Criteria('isactive', '1', '='));
-        $ret = $module_handler->getObjects($criteria);
+        $moduleHandler = xoops_getHandler('module');
+        $criteria       = new \CriteriaCompo();
+        $criteria->add(new \Criteria('isactive', '1', '='));
+        $ret = $moduleHandler->getObjects($criteria);
 
         return $ret;
     }
@@ -506,11 +657,19 @@ CREATE TABLE ' . $this->_config_table . " (
     //---------------------------------------------------------
     // insert config
     //---------------------------------------------------------
+    /**
+     * @param $row
+     * @return mixed
+     */
     public function _insert_config($row)
     {
         return $this->query($this->_build_insert_config_sql($row));
     }
 
+    /**
+     * @param $row
+     * @return string
+     */
     public function _build_insert_config_sql($row)
     {
         $aux_int_1  = 0;
@@ -536,8 +695,8 @@ CREATE TABLE ' . $this->_config_table . " (
         $sql .= $this->quote($conf_name) . ', ';
         $sql .= $this->quote($conf_value) . ', ';
         $sql .= $this->quote($conf_valuetype) . ', ';
-        $sql .= (int)$aux_int_1 . ', ';
-        $sql .= (int)$aux_int_2 . ', ';
+        $sql .= $aux_int_1 . ', ';
+        $sql .= $aux_int_2 . ', ';
         $sql .= $this->quote($aux_text_1) . ', ';
         $sql .= $this->quote($aux_text_2) . ' ';
         $sql .= ')';
@@ -548,11 +707,18 @@ CREATE TABLE ' . $this->_config_table . " (
     //---------------------------------------------------------
     // get
     //---------------------------------------------------------
+    /**
+     * @return int
+     */
     public function _get_config_count_all()
     {
         return $this->get_count_all($this->_config_table);
     }
 
+    /**
+     * @param $id
+     * @return int
+     */
     public function _get_config_count_by_confid($id)
     {
         $sql = 'SELECT count(*) FROM ' . $this->_config_table . ' WHERE conf_id=' . (int)$id;
@@ -560,6 +726,10 @@ CREATE TABLE ' . $this->_config_table . " (
         return $this->get_count_by_sql($sql);
     }
 
+    /**
+     * @param $name
+     * @return int
+     */
     public function _get_config_count_by_name($name)
     {
         $sql = 'SELECT count(*) FROM ' . $this->_config_table . ' WHERE conf_name=' . $this->quote($name);
@@ -567,6 +737,9 @@ CREATE TABLE ' . $this->_config_table . " (
         return $this->get_count_by_sql($sql);
     }
 
+    /**
+     * @return array
+     */
     public function &_get_config_name_array()
     {
         $arr = [];
@@ -583,6 +756,9 @@ CREATE TABLE ' . $this->_config_table . " (
         return $arr;
     }
 
+    /**
+     * @return array
+     */
     public function &_get_config_name_value_array()
     {
         $arr = [];
@@ -602,6 +778,11 @@ CREATE TABLE ' . $this->_config_table . " (
     //---------------------------------------------------------
     // set value
     //---------------------------------------------------------
+    /**
+     * @param $value
+     * @param $valuetype
+     * @return bool|float|int|string
+     */
     public function _get_conf_value_for_input($value, $valuetype)
     {
         switch ($valuetype) {
@@ -634,6 +815,11 @@ CREATE TABLE ' . $this->_config_table . " (
     //---------------------------------------------------------
     // dirctory
     //---------------------------------------------------------
+    /**
+     * @param        $dir_in
+     * @param string $ext
+     * @return array|bool
+     */
     public function &_get_files_in_dir($dir_in, $ext = 'html')
     {
         $arr   = [];
@@ -679,6 +865,12 @@ CREATE TABLE ' . $this->_config_table . " (
     //---------------------------------------------------------
     // message
     //---------------------------------------------------------
+    /**
+     * @param $table
+     * @param $flag
+     * @param $msg_finished
+     * @return string|null
+     */
     public function _build_msg($table, $flag, $msg_finished)
     {
         $table = $this->_sanitize($table);
@@ -693,17 +885,28 @@ CREATE TABLE ' . $this->_config_table . " (
         return $msg;
     }
 
+    /**
+     * @param $msg
+     */
     public function _set_error($msg)
     {
         $this->_flag_error = true;
         $this->_errors[]   = $msg;
     }
 
+    /**
+     * @param bool $flag_highlight
+     * @return string
+     */
     public function get_error_str($flag_highlight = false)
     {
         return $this->_get_errors($flag_highlight);
     }
 
+    /**
+     * @param bool $flag_highlight
+     * @return string
+     */
     public function _get_errors($flag_highlight = true)
     {
         $text = '';
@@ -718,6 +921,11 @@ CREATE TABLE ' . $this->_config_table . " (
         return $text;
     }
 
+    /**
+     * @param      $str
+     * @param bool $flag_highlight
+     * @return string
+     */
     public function _get_error_line($str, $flag_highlight = true)
     {
         $str = $this->_sanitize($str);
@@ -728,11 +936,19 @@ CREATE TABLE ' . $this->_config_table . " (
         return $str . "<br>\n";
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function _sanitize($str)
     {
         return htmlspecialchars($str, ENT_QUOTES);
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function _highlight($str)
     {
         return '<span style="color:#ff0000;">' . $str . '</span>';

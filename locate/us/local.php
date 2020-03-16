@@ -1,4 +1,6 @@
 <?php
+
+use XoopsModules\Happylinux;
 // $Id: local.php,v 1.4 2007/08/08 03:19:52 ohwada Exp $
 
 // 2007-05-12 K.OHWADA
@@ -16,7 +18,11 @@
 // class locate_us
 // United Sates of America (US)
 //=========================================================
-class locate_us extends Happy_linux\LocateBase
+
+/**
+ * Class locate_us
+ */
+class locate_us extends Happylinux\LocateBase
 {
     //---------------------------------------------------------
     // constructor

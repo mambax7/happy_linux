@@ -1,4 +1,7 @@
 <?php
+
+use XoopsModules\Happylinux;
+
 // $Id: test_object.php,v 1.1 2006/11/21 03:04:56 ohwada Exp $
 
 //================================================================
@@ -6,12 +9,16 @@
 // 2006-11-18 K.OHWADA
 //================================================================
 
-include_once 'dev_header.php';
+require_once __DIR__ . '/dev_header.php';
 
 //================================================================
 // class test_object
 //================================================================
-class test_object extends Happy_linux\Object
+
+/**
+ * Class test_object
+ */
+class test_object extends Happylinux\BaseObject
 {
     //---------------------------------------------------------
     // constructor
@@ -38,7 +45,7 @@ class test_object extends Happy_linux\Object
 //================================================================
 
 dev_header();
-echo "<h3>test happy_linux_object</h3>\n";
+echo "<h3>test happylinux_object</h3>\n";
 
 $gpc = @get_magic_quotes_gpc();
 echo 'get_magic_quotes_gpc = ' . $gpc . "<br><br>\n";
@@ -107,6 +114,12 @@ dev_footer();
 exit();
 // === main end ==
 
+/**
+ * @param      $key
+ * @param      $set
+ * @param      $get_expect
+ * @param null $getvar_expect
+ */
 function test_common($key, $set, $get_expect, $getvar_expect = null)
 {
     $obj = new test_object();
@@ -125,6 +138,12 @@ function test_common($key, $set, $get_expect, $getvar_expect = null)
     }
 }
 
+/**
+ * @param      $key
+ * @param      $set
+ * @param      $get_expect
+ * @param null $getvar_expect
+ */
 function test_array($key, $set, $get_expect, $getvar_expect = null)
 {
     $obj = new test_object();

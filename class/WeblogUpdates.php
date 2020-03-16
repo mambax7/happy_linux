@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: weblog_updates.php,v 1.4 2008/02/05 00:42:12 ohwada Exp $
 
@@ -20,6 +20,10 @@ namespace XoopsModules\Happy_linux;
 // 2007-05-12 K.OHWADA
 //=========================================================
 
+/**
+ * Class WeblogUpdates
+ * @package XoopsModules\Happylinux
+ */
 class WeblogUpdates
 {
     public $_HTTP_METHOD  = 'POST';
@@ -51,12 +55,15 @@ class WeblogUpdates
     {
         // class
         // Assigning the return value of new by reference is deprecated
-        $this->_snoopy = new Snoopy();
+        $this->_snoopy = new \Snoopy();
 
         // for debug
         $this->reset_debug();
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -70,6 +77,9 @@ class WeblogUpdates
     //---------------------------------------------------------
     // main function
     //---------------------------------------------------------
+    /**
+     * @param $param
+     */
     public function send_pings_by_param($param)
     {
         $site_name    = $param['site_name'];
@@ -140,6 +150,10 @@ class WeblogUpdates
     // $name : my web site ( EUC-JP avalable )
     // $url  : my url
     //---------------------------------------------------------
+    /**
+     * @param $name
+     * @param $url
+     */
     public function set_blog_data($name, $url)
     {
         $this->blog_name = $name;
@@ -151,6 +165,10 @@ class WeblogUpdates
     // $url  : server url
     // $code : return code
     //---------------------------------------------------------
+    /**
+     * @param $url
+     * @return bool
+     */
     public function send_ping($url)
     {
         $this->url  = $url;
@@ -176,12 +194,12 @@ class WeblogUpdates
 
         // make message
         $payload      = $this->build_payload();
-        $payload_utf8 = happy_linux_convert_to_utf8($payload);
+        $payload_utf8 = happylinux_convert_to_utf8($payload);
 
         // print message
         if ($this->flag_debug) {
-            $msg_url     = htmlspecialchars($url);
-            $msg_payload = htmlspecialchars($payload);
+            $msg_url     = htmlspecialchars($url, ENT_QUOTES | ENT_HTML5);
+            $msg_payload = htmlspecialchars($payload, ENT_QUOTES | ENT_HTML5);
             echo '<pre>';
             echo "---SEND--- \n";
             echo $msg_url;
@@ -195,8 +213,8 @@ class WeblogUpdates
 
         // print message
         if ($this->flag_debug) {
-            $msg_code    = htmlspecialchars($this->response_code);
-            $msg_results = htmlspecialchars($this->results);
+            $msg_code    = htmlspecialchars($this->response_code, ENT_QUOTES | ENT_HTML5);
+            $msg_results = htmlspecialchars($this->results, ENT_QUOTES | ENT_HTML5);
             print '<pre>';
             print "---RESPONSE--- \n";
             echo $msg_code;
@@ -215,6 +233,11 @@ class WeblogUpdates
     //---------------------------------------------------------
     //  snoopy class
     //---------------------------------------------------------
+    /**
+     * @param $url
+     * @param $payload
+     * @return bool
+     */
     public function http_request($url, $payload)
     {
         $this->status        = 0;
@@ -260,6 +283,9 @@ class WeblogUpdates
         return true;
     }
 
+    /**
+     * @param $time
+     */
     public function set_timeout_connect($time)
     {
         if ((int)$time > 0) {
@@ -267,6 +293,9 @@ class WeblogUpdates
         }
     }
 
+    /**
+     * @param $time
+     */
     public function set_timeout_read($time)
     {
         if ((int)$time > 0) {
@@ -277,6 +306,9 @@ class WeblogUpdates
     //---------------------------------------------------------
     //  build_payload
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function build_payload()
     {
         $payload = <<<END_OF_TEXT
@@ -340,6 +372,10 @@ END_OF_TEXT;
     //   </fault>
     // </methodResponse>
     //---------------------------------------------------------
+    /**
+     * @param $response
+     * @return array
+     */
     public function parse_response($response)
     {
         $error   = 1;
@@ -372,6 +408,10 @@ END_OF_TEXT;
     //---------------------------------------------------------
     //   parse xml
     //---------------------------------------------------------
+    /**
+     * @param $xml
+     * @return array
+     */
     public function parse_xml($xml)
     {
         preg_match_all('/<member>(.*?)<\/member>/is', $xml, $match1);
@@ -412,6 +452,9 @@ END_OF_TEXT;
     // $list : result list
     // $msg  : result message
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function make_result()
     {
         if (0 == $this->code) {

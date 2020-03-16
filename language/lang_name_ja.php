@@ -6,7 +6,10 @@
 // 2007-07-01 K.OHWADA
 //=========================================================
 
-function &happy_linux_get_lang_name_ja()
+/**
+ * @return string[]
+ */
+function &happylinux_get_lang_name_ja()
 {
     $arr = ['japanese', 'japaneseutf', 'ja_utf8'];
 

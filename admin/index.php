@@ -1,6 +1,6 @@
 <?php
 
-use  XoopsModules\Happy_linux;
+//use  XoopsModules\Happylinux;
 
 // $Id: index.php,v 1.1 2007/11/12 13:17:17 ohwada Exp $
 
@@ -9,50 +9,55 @@ use  XoopsModules\Happy_linux;
 // 2007-11-01 K.OHWADA
 //=========================================================
 
-include '../../../include/cp_header.php';
+use XoopsModules\Happylinux\Common;
+
+require __DIR__ . '/admin_header.php';
+// Display Admin header
+xoops_cp_header();
+$adminObject = \Xmf\Module\Admin::getInstance();
 
 //---------------------------------------------------------
-// happy_linux
+// happylinux
 //---------------------------------------------------------
 $XOOPS_LANGUAGE = $xoopsConfig['language'];
 
-if (!defined('HAPPY_LINUX_DIRNAME')) {
-    define('HAPPY_LINUX_DIRNAME', $xoopsModule->dirname());
+if (!defined('HAPPYLINUX_DIRNAME')) {
+    define('HAPPYLINUX_DIRNAME', $xoopsModule->dirname());
 }
 
-if (!defined('HAPPY_LINUX_ROOT_PATH')) {
-    define('HAPPY_LINUX_ROOT_PATH', XOOPS_ROOT_PATH . '/modules/' . HAPPY_LINUX_DIRNAME);
+if (!defined('HAPPYLINUX_ROOT_PATH')) {
+    define('HAPPYLINUX_ROOT_PATH', XOOPS_ROOT_PATH . '/modules/' . HAPPYLINUX_DIRNAME);
 }
 
-if (!defined('HAPPY_LINUX_URL')) {
-    define('HAPPY_LINUX_URL', XOOPS_URL . '/modules/' . HAPPY_LINUX_DIRNAME);
+if (!defined('HAPPYLINUX_URL')) {
+    define('HAPPYLINUX_URL', XOOPS_URL . '/modules/' . HAPPYLINUX_DIRNAME);
 }
 
 // start execution time
-include_once HAPPY_LINUX_ROOT_PATH . '/class/time.php';
-$happy_linux_time = Happy_linux\Time::getInstance();
+//require_once HAPPYLINUX_ROOT_PATH . '/class/time.php';
+$happylinux_time = XoopsModules\Happylinux\Time::getInstance();
 
-include_once HAPPY_LINUX_ROOT_PATH . '/include/memory.php';
-include_once HAPPY_LINUX_ROOT_PATH . '/class/error.php';
-include_once HAPPY_LINUX_ROOT_PATH . '/class/dir.php';
-include_once HAPPY_LINUX_ROOT_PATH . '/class/system.php';
-include_once HAPPY_LINUX_ROOT_PATH . '/class/server_info.php';
+require_once HAPPYLINUX_ROOT_PATH . '/include/memory.php';
+//require_once HAPPYLINUX_ROOT_PATH . '/class/error.php';
+//require_once HAPPYLINUX_ROOT_PATH . '/class/dir.php';
+//require_once HAPPYLINUX_ROOT_PATH . '/class/system.php';
+//require_once HAPPYLINUX_ROOT_PATH . '/class/server_info.php';
 
 // for modinfo.php
-if (file_exists(HAPPY_LINUX_ROOT_PATH . '/language/' . $XOOPS_LANGUAGE . '/modinfo.php')) {
-    include_once HAPPY_LINUX_ROOT_PATH . '/language/' . $XOOPS_LANGUAGE . '/modinfo.php';
-} else {
-    include_once HAPPY_LINUX_ROOT_PATH . '/language/english/modinfo.php';
-}
+//if (file_exists(HAPPYLINUX_ROOT_PATH . '/language/' . $XOOPS_LANGUAGE . '/modinfo.php')) {
+//    require_once HAPPYLINUX_ROOT_PATH . '/language/' . $XOOPS_LANGUAGE . '/modinfo.php';
+//} else {
+//    require_once HAPPYLINUX_ROOT_PATH . '/language/english/modinfo.php';
+//}
 
 //=========================================================
 // main
 //=========================================================
-$info = Happy_linux\Server_info::getInstance();
+$info = XoopsModules\Happylinux\ServerInfo::getInstance();
 
-xoops_cp_header();
+//xoops_cp_header();
 
-echo $info->build_header(HAPPY_LINUX_DIRNAME, _MI_HAPPY_LINUX_DESC);
+echo $info->build_header(HAPPYLINUX_DIRNAME, _MI_HAPPYLINUX_DESC);
 echo $info->build_server_env();
 echo $info->build_check_dir_work();
 echo $info->build_check_memory_limit_default();

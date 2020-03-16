@@ -2,18 +2,18 @@
 // $Id: global.php,v 1.9 2007/11/11 02:39:22 ohwada Exp $
 
 // 2007-11-01
-// _HAPPY_LINUX_FAIL
+// _HAPPYLINUX_FAIL
 
 // 2007-08-01
-// move HAPPY_LINUX_MYSQL_CHARSET to charset.php
+// move HAPPYLINUX_MYSQL_CHARSET to charset.php
 
 // 2007-03-01 K.OHWADA
 // support mysql 5
-// _HAPPY_LINUX_SKIP_TO_NEXT
+// _HAPPYLINUX_SKIP_TO_NEXT
 
 // 2006-11-20 K.OHWADA
 // for happy_search
-// _HAPPY_LINUX_GOTO_MAIN
+// _HAPPYLINUX_GOTO_MAIN
 
 // 2006-09-15 K.OHWADA
 // this is new file
@@ -22,58 +22,58 @@
 //=========================================================
 // Happy Linux Framework Module
 // 2006-09-01 K.OHWADA
-// Í­Êþ¼«±óÊýÍè
+// Í­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //=========================================================
 
 // global
-define('_HAPPY_LINUX_HOME', '¥Û¡¼¥à');
-define('_HAPPY_LINUX_MAIN', '¥á¥¤¥ó');
-define('_HAPPY_LINUX_ADD', 'ÄÉ²Ã');
-define('_HAPPY_LINUX_ADDED', 'ÄÉ²Ã¤·¤¿');
-define('_HAPPY_LINUX_DELETE', 'ºï½ü');
-define('_HAPPY_LINUX_DELETED', 'ºï½ü¤·¤¿');
-define('_HAPPY_LINUX_UPDATE', '¹¹¿·');
-define('_HAPPY_LINUX_UPDATED', '¹¹¿·¤·¤¿');
-define('_HAPPY_LINUX_MODIFY', 'ÊÑ¹¹');
-define('_HAPPY_LINUX_MODIFIED', 'ÊÑ¹¹¤·¤¿');
-define('_HAPPY_LINUX_SAVE', 'ÊÝÂ¸');
-define('_HAPPY_LINUX_SAVED', 'ÊÝÂ¸¤·¤¿');
-define('_HAPPY_LINUX_CLEAR', '¥¯¥ê¥¢');
-define('_HAPPY_LINUX_CLEARED', '¥¯¥ê¥¢¤·¤¿');
-define('_HAPPY_LINUX_EXECUTE', '¼Â¹Ô');
-define('_HAPPY_LINUX_EXECUTED', '¼Â¹Ô¤·¤¿');
-define('_HAPPY_LINUX_CREATE', 'À¸À®');
-define('_HAPPY_LINUX_CREATED', 'À¸À®¤·¤¿');
-define('_HAPPY_LINUX_SUBMIT', 'Åê¹Æ');
-define('_HAPPY_LINUX_SUBMITED', 'Åê¹Æ¤·¤¿');
-define('_HAPPY_LINUX_CANCEL', '¥­¥ã¥ó¥»¥ë');
-define('_HAPPY_LINUX_CANCELED', '¥­¥ã¥ó¥»¥ë¤·¤¿');
-define('_HAPPY_LINUX_SEARCH', '¸¡º÷');
-define('_HAPPY_LINUX_SHOW', 'É½¼¨');
-define('_HAPPY_LINUX_TITLE', '¥¿¥¤¥È¥ë');
-define('_HAPPY_LINUX_KEYWORD', '¥­¡¼¥ï¡¼¥É');
-define('_HAPPY_LINUX_NUM', '·ï');
-define('_HAPPY_LINUX_NO_ACTION', '²¿¤â¤·¤Ê¤¤');
+define('_HAPPYLINUX_HOME', 'ï¿½Û¡ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_MAIN', 'ï¿½á¥¤ï¿½ï¿½');
+define('_HAPPYLINUX_ADD', 'ï¿½É²ï¿½');
+define('_HAPPYLINUX_ADDED', 'ï¿½É²Ã¤ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_DELETE', 'ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_DELETED', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_UPDATE', 'ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_UPDATED', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_MODIFY', 'ï¿½Ñ¹ï¿½');
+define('_HAPPYLINUX_MODIFIED', 'ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_SAVE', 'ï¿½ï¿½Â¸');
+define('_HAPPYLINUX_SAVED', 'ï¿½ï¿½Â¸ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_CLEAR', 'ï¿½ï¿½ï¿½ê¥¢');
+define('_HAPPYLINUX_CLEARED', 'ï¿½ï¿½ï¿½ê¥¢ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_EXECUTE', 'ï¿½Â¹ï¿½');
+define('_HAPPYLINUX_EXECUTED', 'ï¿½Â¹Ô¤ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_CREATE', 'ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_CREATED', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_SUBMIT', 'ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_SUBMITED', 'ï¿½ï¿½Æ¤ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_CANCEL', 'ï¿½ï¿½ï¿½ï¿½ó¥»¥ï¿½');
+define('_HAPPYLINUX_CANCELED', 'ï¿½ï¿½ï¿½ï¿½ó¥»¥ë¤·ï¿½ï¿½');
+define('_HAPPYLINUX_SEARCH', 'ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_SHOW', 'É½ï¿½ï¿½');
+define('_HAPPYLINUX_TITLE', 'ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½');
+define('_HAPPYLINUX_KEYWORD', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¡¼ï¿½ï¿½');
+define('_HAPPYLINUX_NUM', 'ï¿½ï¿½');
+define('_HAPPYLINUX_NO_ACTION', 'ï¿½ï¿½ï¿½â¤·ï¿½Ê¤ï¿½');
 
 // 2006-11-10
-define('_HAPPY_LINUX_GOTO_MAIN', '¥á¥¤¥ó¡¦¥Ú¡¼¥¸ ¤Ø');
-define('_HAPPY_LINUX_GOTO_TOP', '¥È¥Ã¥×¡¦¥Ú¡¼¥¸ ¤Ø');
-define('_HAPPY_LINUX_GOTO_ADMIN', '´ÉÍý¼Ô²èÌÌ ¤Ø');
-define('_HAPPY_LINUX_GOTO_MODULE', '¥â¥¸¥å¡¼¥ë ¤Ø');
+define('_HAPPYLINUX_GOTO_MAIN', 'ï¿½á¥¤ï¿½ó¡¦¥Ú¡ï¿½ï¿½ï¿½ ï¿½ï¿½');
+define('_HAPPYLINUX_GOTO_TOP', 'ï¿½È¥Ã¥×¡ï¿½ï¿½Ú¡ï¿½ï¿½ï¿½ ï¿½ï¿½');
+define('_HAPPYLINUX_GOTO_ADMIN', 'ï¿½ï¿½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½ï¿½ ï¿½ï¿½');
+define('_HAPPYLINUX_GOTO_MODULE', 'ï¿½â¥¸ï¿½å¡¼ï¿½ï¿½ ï¿½ï¿½');
 
 // 2007-03-01
-define('_HAPPY_LINUX_SKIP_TO_NEXT', '¥¹¥­¥Ã¥×¤·¤Æ¼¡¤Ø');
+define('_HAPPYLINUX_SKIP_TO_NEXT', 'ï¿½ï¿½ï¿½ï¿½ï¿½Ã¥×¤ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½');
 
 // 2007-08-01
-//define('HAPPY_LINUX_MYSQL_CHARSET', 'ujis');
+//define('HAPPYLINUX_MYSQL_CHARSET', 'ujis');
 
 // 2007-11-01
-define('_HAPPY_LINUX_WELCOME', '¤è¤¦¤³¤½ %s ¤µ¤ó');
-define('_HAPPY_LINUX_FAIL', '¼ºÇÔ');
-define('_HAPPY_LINUX_FAILED', '¼ºÇÔ¤·¤¿');
-define('_HAPPY_LINUX_REFRESH', '¹¹¿·');
-define('_HAPPY_LINUX_REFRESHED', '¹¹¿·¤·¤¿');
-define('_HAPPY_LINUX_FINISH', '½ªÎ»');
-define('_HAPPY_LINUX_FINISHED', '½ªÎ»¤·¤¿');
-define('_HAPPY_LINUX_PRINT', '°õºþ');
-define('_HAPPY_LINUX_SAMPLE', '¸«ËÜ');
+define('_HAPPYLINUX_WELCOME', 'ï¿½è¤¦ï¿½ï¿½ï¿½ï¿½ %s ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_FAIL', 'ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_FAILED', 'ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_REFRESH', 'ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_REFRESHED', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_FINISH', 'ï¿½ï¿½Î»');
+define('_HAPPYLINUX_FINISHED', 'ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_PRINT', 'ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_SAMPLE', 'ï¿½ï¿½ï¿½ï¿½');

@@ -2,10 +2,10 @@
 // $Id: form.php,v 1.4 2007/05/15 04:53:48 ohwada Exp $
 
 // 2007-05-12 K.OHWADA
-// _HAPPY_LINUX_FORM_INIT_NOT
+// _HAPPYLINUX_FORM_INIT_NOT
 
 // 2006-11-08 K.OHWADA
-// _HAPPY_LINUX_FORM_ITEM
+// _HAPPYLINUX_FORM_ITEM
 
 // 2006-09-15 K.OHWADA
 // this is new file
@@ -14,21 +14,21 @@
 //=========================================================
 // Happy Linux Framework Module
 // 2006-09-01 K.OHWADA
-// Í­Êþ¼«±óÊýÍè
+// Í­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //=========================================================
 
 // form
-define('_HAPPY_LINUX_FORM_TITLE', '¥¿¥¤¥È¥ë');
-define('_HAPPY_LINUX_FORM_SUBMIT', '¼Â¹Ô');
-define('_HAPPY_LINUX_FORM_CANCEL', '¥­¥ã¥ó¥»¥ë');
-define('_HAPPY_LINUX_FORM_LOCATION', 'Ìá¤ë');
-define('_HAPPY_LINUX_FORM_VISIT', 'Ë¬Ìä');
+define('_HAPPYLINUX_FORM_TITLE', 'ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½');
+define('_HAPPYLINUX_FORM_SUBMIT', 'ï¿½Â¹ï¿½');
+define('_HAPPYLINUX_FORM_CANCEL', 'ï¿½ï¿½ï¿½ï¿½ó¥»¥ï¿½');
+define('_HAPPYLINUX_FORM_LOCATION', 'ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_FORM_VISIT', 'Ë¬ï¿½ï¿½');
 
 // 2006-11-08
-define('_HAPPY_LINUX_FORM_ITEM', '¹àÌÜ');
+define('_HAPPYLINUX_FORM_ITEM', 'ï¿½ï¿½ï¿½ï¿½');
 
 // 2007-05-12
-define('_HAPPY_LINUX_FORM_INIT_NOT', 'ÀßÄê¥Æ¡¼¥Ö¥ë¤¬½é´ü²½¤µ¤ì¤Æ¤¤¤Ê¤¤');
-define('_HAPPY_LINUX_FORM_INIT_EXEC', 'ÀßÄê¥Æ¡¼¥Ö¥ë¤ò½é´ü²½¤¹¤ë');
-define('_HAPPY_LINUX_FORM_VERSION_NOT', '¥Ð¡¼¥¸¥ç¥ó %s ¤Ç¤Ï¤Ê¤¤');
-define('_HAPPY_LINUX_FORM_UPGRADE_EXEC', 'ÀßÄê¥Æ¡¼¥Ö¥ë¤ò¥¢¥Ã¥×¥°¥ì¡¼¥É¤¹¤ë');
+define('_HAPPYLINUX_FORM_INIT_NOT', 'ï¿½ï¿½ï¿½ï¿½Æ¡ï¿½ï¿½Ö¥ë¤¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½ï¿½Ê¤ï¿½');
+define('_HAPPYLINUX_FORM_INIT_EXEC', 'ï¿½ï¿½ï¿½ï¿½Æ¡ï¿½ï¿½Ö¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_FORM_VERSION_NOT', 'ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ %s ï¿½Ç¤Ï¤Ê¤ï¿½');
+define('_HAPPYLINUX_FORM_UPGRADE_EXEC', 'ï¿½ï¿½ï¿½ï¿½Æ¡ï¿½ï¿½Ö¥ï¿½ò¥¢¥Ã¥×¥ï¿½ï¿½ì¡¼ï¿½É¤ï¿½ï¿½ï¿½');

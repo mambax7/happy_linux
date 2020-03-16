@@ -7,12 +7,12 @@
 // UTF-8 Japanese
 //=========================================================
 
-define('_HAPPY_LINUX_PLUGIN', 'プラグイン');
-define('_HAPPY_LINUX_PLUGIN_LIST', 'プラグイン一覧');
-define('_HAPPY_LINUX_PLUGIN_NAME', 'プラグイン名');
-define('_HAPPY_LINUX_PLUGIN_DESCRIPTION', '説明');
-define('_HAPPY_LINUX_PLUGIN_USAGE', '使い方');
-define('_HAPPY_LINUX_PLUGIN_DESC', '複数のプラグインを指定する場合は <b>|</b> で区切ります');
-define('_HAPPY_LINUX_PLUGIN_TEST', 'プラグインのテスト');
-define('_HAPPY_LINUX_PLUGIN_TESTDATA', 'テストデータ');
-define('_HAPPY_LINUX_PLUGIN_TESTDATA_DESC', '連想配列の形式で記述する');
+define('_HAPPYLINUX_PLUGIN', 'プラグイン');
+define('_HAPPYLINUX_PLUGIN_LIST', 'プラグイン一覧');
+define('_HAPPYLINUX_PLUGIN_NAME', 'プラグイン名');
+define('_HAPPYLINUX_PLUGIN_DESCRIPTION', '説明');
+define('_HAPPYLINUX_PLUGIN_USAGE', '使い方');
+define('_HAPPYLINUX_PLUGIN_DESC', '複数のプラグインを指定する場合は <b>|</b> で区切ります');
+define('_HAPPYLINUX_PLUGIN_TEST', 'プラグインのテスト');
+define('_HAPPYLINUX_PLUGIN_TESTDATA', 'テストデータ');
+define('_HAPPYLINUX_PLUGIN_TESTDATA_DESC', '連想配列の形式で記述する');

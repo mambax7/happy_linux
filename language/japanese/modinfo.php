@@ -2,7 +2,7 @@
 // $Id: modinfo.php,v 1.2 2007/11/12 12:28:49 ohwada Exp $
 
 // 2007-11-01 K.OHWADA
-// _MI_HAPPY_LINUX_ADMENU1
+// _MI_HAPPYLINUX_ADMENU1
 
 // 2006-07-10 K.OHWADA
 // this is new file
@@ -10,12 +10,12 @@
 //=========================================================
 // Happy Linux Framework Module
 // 2006-07-10 K.OHWADA
-// Í­Êþ¼«±óÊýÍè
+// Í­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //=========================================================
 
 // The name of this module
-define('_MI_HAPPY_LINUX_NAME', 'Happy Linux Framework');
-define('_MI_HAPPY_LINUX_DESC', 'Happy Linux ¤ÇÇÛÉÛ¤·¤Æ¤¤¤ë¥â¥¸¥å¡¼¥ëÍÑ¤Î¥é¥¤¥Ö¥é¥ê½¸¤Ç¤¹');
+define('_MI_HAPPYLINUX_NAME', 'Happy Linux Framework');
+define('_MI_HAPPYLINUX_DESC', 'Happy Linux ï¿½ï¿½ï¿½ï¿½ï¿½Û¤ï¿½ï¿½Æ¤ï¿½ï¿½ï¿½â¥¸ï¿½å¡¼ï¿½ï¿½ï¿½Ñ¤Î¥é¥¤ï¿½Ö¥ï¿½ê½¸ï¿½Ç¤ï¿½');
 
 // admin menu
-define('_MI_HAPPY_LINUX_ADMENU1', '¥µ¡¼¥Ð¡¼´Ä¶­');
+define('_MI_HAPPYLINUX_ADMENU1', 'ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ä¶ï¿½');

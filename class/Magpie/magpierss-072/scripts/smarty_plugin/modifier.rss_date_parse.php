@@ -14,6 +14,11 @@
  * -------------------------------------------------------------
  */
 
+/**
+ * @param      $rss_date
+ * @param null $default_date
+ * @return float|int
+ */
 function smarty_modifier_rss_date_parse($rss_date, $default_date = null)
 {
     if ('' != $rss_date) {

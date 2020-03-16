@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: server_info.php,v 1.3 2008/01/30 08:33:13 ohwada Exp $
 
@@ -15,6 +15,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class ServerInfo
 //=========================================================
+
+/**
+ * Class ServerInfo
+ * @package XoopsModules\Happylinux
+ */
 class ServerInfo
 {
     // PHP 5.2 + XC 2.1
@@ -28,6 +33,9 @@ class ServerInfo
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -41,6 +49,11 @@ class ServerInfo
     //---------------------------------------------------------
     // function
     //---------------------------------------------------------
+    /**
+     * @param      $dirname
+     * @param null $desc
+     * @return string
+     */
     public function build_header($dirname, $desc = null)
     {
         $text = '<h3>' . $dirname . ' : ' . $this->get_module_name() . "</h3>\n";
@@ -51,17 +64,23 @@ class ServerInfo
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_footer()
     {
-        $time = happy_linux_time::getInstance();
+        $time = Time::getInstance();
 
         $text = "<br><hr>\n";
         $text .= $time->build_elapse_time() . "<br>\n";
-        $text .= happy_linux_build_memory_usage_mb() . "<br>\n";
+        $text .= happylinux_build_memory_usage_mb() . "<br>\n";
 
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_powerdby()
     {
         $year = date('Y');
@@ -71,9 +90,12 @@ class ServerInfo
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_server_env()
     {
-        $text = '<h4>' . _HAPPY_LINUX_AM_SERVER_ENV . "</h4>\n";
+        $text = '<h4>' . _HAPPYLINUX_AM_SERVER_ENV . "</h4>\n";
         $text .= 'OS: ' . php_uname() . "<br>\n";
         $text .= 'PHP: ' . PHP_VERSION . "<br>\n";
         $text .= 'MySQL: ' . $GLOBALS['xoopsDB']->getServerVersion() . "<br>\n";
@@ -108,34 +130,44 @@ class ServerInfo
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_check_dir_work()
     {
         $dir_work = $this->get_dir_work();
         $text     = '';
         if ($dir_work && !is_writable($dir_work)) {
-            $text .= $this->build_error(_HAPPY_LINUX_AM_DIR_NOT_WRITABLE);
+            $text .= $this->build_error(_HAPPYLINUX_AM_DIR_NOT_WRITABLE);
         }
         $text .= 'work directory: ' . $dir_work . "<br><br>\n";
 
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_check_memory_limit_default()
     {
         return $this->build_check_memory_limit($this->_MEMORY_WEBLINKS_REQUIRE);
     }
 
+    /**
+     * @param $require
+     * @return string
+     */
     public function build_check_memory_limit($require)
     {
         $memory_limit = $this->get_intval_ini_get('memory_limit');
-        $memory_usage = (float)happy_linux_get_memory_usage_mb();
+        $memory_usage = (float)happylinux_get_memory_usage_mb();
         $text         = '';
         if ($memory_limit && $memory_usage && ($memory_limit < ($memory_usage + $require))) {
-            $text .= $this->build_error(_HAPPY_LINUX_AM_MEMORY_LIMIT_TOO_SMALL);
+            $text .= $this->build_error(_HAPPYLINUX_AM_MEMORY_LIMIT_TOO_SMALL);
             $text .= 'memory_limit : ' . $memory_limit . " MB <br>\n";
             $text .= 'memory usage : ' . $memory_usage . " MB <br><br>\n";
-            $text .= sprintf(_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE, $require) . "<br>\n";
-            $text .= _HAPPY_LINUX_AM_MEMORY_DESC . "<br><br>\n";
+            $text .= sprintf(_HAPPYLINUX_AM_MEMORY_WEBLINKS_REQUIRE, $require) . "<br>\n";
+            $text .= _HAPPYLINUX_AM_MEMORY_DESC . "<br><br>\n";
             $text .= "Exsample <br>\n";
             $text .= "Minimum : 6 MB<br>\n";
             $text .= " - PHP 4.3.9 , XOOPS 2.0.16a JP without RSSC module <br>\n";
@@ -147,6 +179,10 @@ class ServerInfo
         return $text;
     }
 
+    /**
+     * @param $msg
+     * @return string
+     */
     public function build_error($msg)
     {
         $text = '<h4 style="color: #ff0000">' . $msg . "</h4>\n";
@@ -154,6 +190,10 @@ class ServerInfo
         return $text;
     }
 
+    /**
+     * @param string $format
+     * @return array|int|mixed|null
+     */
     public function get_module_name($format = 's')
     {
         global $xoopsModule;
@@ -161,13 +201,20 @@ class ServerInfo
         return $xoopsModule->getVar('name', $format);
     }
 
+    /**
+     * @return mixed
+     */
     public function get_dir_work()
     {
-        $dir = happy_linux_dir::getInstance();
+        $dir = Dir::getInstance();
 
         return $dir->init_dir_work();
     }
 
+    /**
+     * @param $key
+     * @return int
+     */
     public function get_intval_ini_get($key)
     {
         return (int)ini_get($key);

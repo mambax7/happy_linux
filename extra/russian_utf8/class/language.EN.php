@@ -9,7 +9,7 @@
 // change get_local_instance() get_instance_by_language() etc
 
 // 2006-10-05 K.OHWADA
-// add happy_linux_language_factory
+// add happylinux_language_factory
 // move get_google_url() to locate.php
 
 // 2006-09-10 K.OHWADA
@@ -24,6 +24,10 @@
 //=========================================================
 // class LanguageBase
 //=========================================================
+
+/**
+ * Class LanguageBase
+ */
 class LanguageBase
 {
     public $_DEFAULT_LANGAGE = 'english';
@@ -39,6 +43,9 @@ class LanguageBase
     //---------------------------------------------------------
     // get value
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function get_default_language()
     {
         return $this->_DEFAULT_LANGAGE;
@@ -47,16 +54,28 @@ class LanguageBase
     //---------------------------------------------------------
     // convert encoding
     //---------------------------------------------------------
+    /**
+     * @param $text
+     * @return mixed
+     */
     public function convert_telafriend_subject($text)
     {
         return $text;
     }
 
+    /**
+     * @param $text
+     * @return mixed
+     */
     public function convert_telafriend_body($text)
     {
         return $text;
     }
 
+    /**
+     * @param $text
+     * @return mixed
+     */
     public function convert_download_filename($text)
     {
         return $text;
@@ -65,6 +84,9 @@ class LanguageBase
     //---------------------------------------------------------
     // system param
     //---------------------------------------------------------
+    /**
+     * @return mixed
+     */
     public function get_xoops_language()
     {
         global $xoopsConfig;
@@ -72,6 +94,9 @@ class LanguageBase
         return $xoopsConfig['language'];
     }
 
+    /**
+     * @return string
+     */
     public function get_xoops_langcode()
     {
         return _LANGCODE;
@@ -80,6 +105,9 @@ class LanguageBase
     //---------------------------------------------------------
     // country code
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function get_country_code()
     {
         return 'us';    // USA
@@ -91,7 +119,11 @@ class LanguageBase
 //=========================================================
 // class LanguageFactory
 //=========================================================
-class LanguageFactory extends Happy_linux\LanguageBase
+
+/**
+ * Class LanguageFactory
+ */
+class LanguageFactory extends LanguageBase
 {
     //---------------------------------------------------------
     // constructor
@@ -101,6 +133,10 @@ class LanguageFactory extends Happy_linux\LanguageBase
         parent::__construct();
     }
 
+    /**
+     * @param null $lang
+     * @return bool|\happylinux_language_base|mixed
+     */
     public static function getInstance($lang = null)
     {
         static $instance;
@@ -114,6 +150,10 @@ class LanguageFactory extends Happy_linux\LanguageBase
         return $instance;
     }
 
+    /**
+     * @param null $lang
+     * @return bool|\happylinux_language_base|mixed
+     */
     public function &get_local_instance($lang = null)
     {
         // BUG: singleton done not work correctly
@@ -128,7 +168,13 @@ class LanguageFactory extends Happy_linux\LanguageBase
     //---------------------------------------------------------
     // get_instance
     //---------------------------------------------------------
-    public function &get_instance($language = null, $prefix = 'happy_linux', $dirname = 'happy_linux')
+    /**
+     * @param null   $language
+     * @param string $prefix
+     * @param string $dirname
+     * @return bool|\happylinux_language_base|mixed
+     */
+    public function &get_instance($language = null, $prefix = 'happylinux', $dirname = 'happylinux')
     {
         if ($language) {
             $instance = &$this->get_instance_by_language($language, $prefix, $dirname);
@@ -143,12 +189,18 @@ class LanguageFactory extends Happy_linux\LanguageBase
         }
 
         // Assigning the return value of new by reference is deprecated
-        $instance = new happy_linux_language_base();
+        $instance = new happylinux_language_base();
 
         return $instance;
     }
 
-    public function &get_instance_by_language($language, $prefix = 'happy_linux', $dirname = 'happy_linux')
+    /**
+     * @param        $language
+     * @param string $prefix
+     * @param string $dirname
+     * @return bool|mixed
+     */
+    public function &get_instance_by_language($language, $prefix = 'happylinux', $dirname = 'happylinux')
     {
         $instance = false;
         $file     = XOOPS_ROOT_PATH . '/modules/' . $dirname . '/language/' . $language . '/language_local.php';
@@ -161,7 +213,7 @@ class LanguageFactory extends Happy_linux\LanguageBase
             $instance = new $class();
         } // if NOT include file yet
         elseif (file_exists($file)) {
-            include_once $file;
+            require_once $file;
             if (class_exists($class)) {
                 // Assigning the return value of new by reference is deprecated
                 $instance = new $class();

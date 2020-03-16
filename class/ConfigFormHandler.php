@@ -1,11 +1,11 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
-// $Id: config_store_handler.php,v 1.2 2012/03/17 13:09:23 ohwada Exp $
+// $Id: config_storeHandler.php,v 1.2 2012/03/17 13:09:23 ohwada Exp $
 
 // 2012-03-01 K.OHWADA
-// BUG: happy_linux_form_lib -> happy_linux_form_lib
+// BUG: happylinux_form_lib -> happylinux_form_lib
 
 // 2007-11-24 K.OHWADA
 // compare_to_define()
@@ -43,23 +43,28 @@ namespace XoopsModules\Happy_linux;
 
 // 2006-07-10 K.OHWADA
 // this is new file
-// porting from weblinks_config_store_handler
+// porting from weblinks_config_storeHandler
 
 //================================================================
 // Happy Linux Framework Module
 // this file contain 2 class
-//   happy_linux_config_form
-//   happy_linux_config_store_handler
+//   happylinux_config_form
+//   happylinux_config_storeHandler
 // 2006-07-10 K.OHWADA
 //================================================================
 
 //================================================================
 // class ConfigFormHandler
 //================================================================
+
+/**
+ * Class ConfigFormHandler
+ * @package XoopsModules\Happylinux
+ */
 class ConfigFormHandler extends Error
 {
     // set by chieldren class
-    public $_handler;
+    public $handler;
     public $_define;
 
     // class
@@ -75,6 +80,9 @@ class ConfigFormHandler extends Error
         $this->_post = Post::getInstance();
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\ConfigFormHandler|static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -85,11 +93,25 @@ class ConfigFormHandler extends Error
         return $instance;
     }
 
-    public function set_handler($name, $dirname, $prefix)
+    /**
+     * @param $name
+     * @param $dirname
+     * @param $prefix
+     */
+    public function set_handler($name, $dirname, $prefix, $helper = null)
     {
-        $this->_handler = happy_linux_getHandler($name, $dirname, $prefix);
+        //        $this->handler = \XoopsModules\Happylinux\Helper::getInstance()->getHandler($name, $dirname, $prefix);
+        if (null === $helper) {
+            $helperType = '\XoopsModules' . '\\' . ucfirst($dirname) . '\Helper';
+            $helper     = $helperType::getInstance();
+        }
+
+        $this->handler = $helper->getHandler(ucfirst($name));
     }
 
+    /**
+     * @param $class
+     */
     public function set_define(&$class)
     {
         $this->_define = &$class;
@@ -98,11 +120,18 @@ class ConfigFormHandler extends Error
     //---------------------------------------------------------
     // POST param
     //---------------------------------------------------------
+    /**
+     * @return int
+     */
     public function get_post_form_catid()
     {
         return $this->_post->get_post_int('form_catid');
     }
 
+    /**
+     * @param $catid
+     * @return bool
+     */
     public function check_post_form_catid($catid)
     {
         if ($catid == $this->get_post_form_catid()) {
@@ -117,12 +146,15 @@ class ConfigFormHandler extends Error
     //---------------------------------------------------------
     public function load()
     {
-        $this->_handler->load();
+        $this->handler->load();
     }
 
     //---------------------------------------------------------
     // check config
     //---------------------------------------------------------
+    /**
+     * @return bool
+     */
     public function compare_to_define()
     {
         $this->_clear_errors();
@@ -134,15 +166,15 @@ class ConfigFormHandler extends Error
             $name      = $def['name'];
             $valuetype = $def['valuetype'];
 
-            $count1 = $this->_handler->get_count_by_key_value('conf_id', (int)$id);
-            $count2 = $this->_handler->get_count_by_key_value('conf_name', $name);
+            $count1 = $this->handler->get_count_by_key_value('conf_id', (int)$id);
+            $count2 = $this->handler->get_count_by_key_value('conf_name', $name);
 
             if ((0 == $count1) || (0 == $count2)) {
                 $this->_set_errors("$id : $name : no record");
             } elseif (($count1 > 1) || ($count2 > 1)) {
                 $this->_set_errors("$id : $name : too many record");
             } else {
-                $obj            = &$this->_handler->get_by_confid($id);
+                $obj            = &$this->handler->get_by_confid($id);
                 $conf_valuetype = $obj->get('conf_valuetype');
                 if ($valuetype != $conf_valuetype) {
                     $msg = "$id : $name : unmatch valuetype : $valuetype != $conf_valuetype";
@@ -157,6 +189,9 @@ class ConfigFormHandler extends Error
     //---------------------------------------------------------
     // init config
     //---------------------------------------------------------
+    /**
+     * @return bool
+     */
     public function init()
     {
         $this->_clear_errors();
@@ -169,15 +204,15 @@ class ConfigFormHandler extends Error
             $valuetype = $def['valuetype'];
             $value     = $def['default'];
 
-            $obj = &$this->_handler->create();
+            $obj = &$this->handler->create();
             $obj->set('conf_id', $id);
             $obj->set('conf_name', $name);
             $obj->set('conf_valuetype', $valuetype);
             $obj->setConfValueForInput($value);
 
-            $ret = $this->_handler->insert($obj);
+            $ret = $this->handler->insert($obj);
             if (!$ret) {
-                $this->_set_errors($this->_handler->getErrors());
+                $this->_set_errors($this->handler->getErrors());
             }
 
             unset($obj);
@@ -186,9 +221,12 @@ class ConfigFormHandler extends Error
         return $this->returnExistError();
     }
 
+    /**
+     * @return bool
+     */
     public function check_init()
     {
-        $num = $this->_handler->getCount();
+        $num = $this->handler->getCount();
 
         // no record
         if (0 == $num) {
@@ -201,6 +239,9 @@ class ConfigFormHandler extends Error
     //---------------------------------------------------------
     // upgrade config
     //---------------------------------------------------------
+    /**
+     * @return bool
+     */
     public function upgrade()
     {
         $this->_clear_errors();
@@ -209,7 +250,7 @@ class ConfigFormHandler extends Error
 
         // list from Define
         foreach ($define_arr as $id => $def) {
-            $obj = &$this->_handler->get_by_confid($id);
+            $obj = &$this->handler->get_by_confid($id);
             if (is_object($obj)) {
                 continue;
             }
@@ -219,15 +260,15 @@ class ConfigFormHandler extends Error
             $valuetype = $def['valuetype'];
             $value     = $def['default'];
 
-            $obj = &$this->_handler->create();
+            $obj = &$this->handler->create();
             $obj->set('conf_id', $id);
             $obj->set('conf_name', $name);
             $obj->set('conf_valuetype', $valuetype);
             $obj->setConfValueForInput($value);
 
-            $ret = $this->_handler->insert($obj);
+            $ret = $this->handler->insert($obj);
             if (!$ret) {
-                $this->_set_errors($this->_handler->getErrors());
+                $this->_set_errors($this->handler->getErrors());
             }
 
             unset($obj);
@@ -236,14 +277,21 @@ class ConfigFormHandler extends Error
         return $this->returnExistError();
     }
 
+    /**
+     * @return bool
+     */
     public function check_upgrade()
     {
         return false;
     }
 
+    /**
+     * @param $name
+     * @return bool
+     */
     public function check_exist_by_name($name)
     {
-        $arr = $this->_handler->get_cache_by_name($name);
+        $arr = $this->handler->get_cache_by_name($name);
         if (is_array($arr) && count($arr)) {
             return true;
         }
@@ -254,6 +302,9 @@ class ConfigFormHandler extends Error
     //---------------------------------------------------------
     // save config
     //---------------------------------------------------------
+    /**
+     * @return bool
+     */
     public function save()
     {
         $this->_clear_errors();
@@ -269,7 +320,7 @@ class ConfigFormHandler extends Error
         for ($i = 0; $i < $count; ++$i) {
             $id = $confid_arr[$i];
 
-            $obj = &$this->_handler->get_by_confid($id);
+            $obj = &$this->handler->get_by_confid($id);
             if (!is_object($obj)) {
                 continue;
             }
@@ -295,9 +346,9 @@ class ConfigFormHandler extends Error
             if ($flag_update) {
                 $obj->setConfValueForInput($value);
 
-                $ret = $this->_handler->update($obj);
+                $ret = $this->handler->update($obj);
                 if (!$ret) {
-                    $this->_set_errors($this->_handler->getErrors());
+                    $this->_set_errors($this->handler->getErrors());
                 }
             }
 
@@ -310,6 +361,9 @@ class ConfigFormHandler extends Error
     //---------------------------------------------------------
     // renew config by country code
     //---------------------------------------------------------
+    /**
+     * @return bool
+     */
     public function renew_by_country_code()
     {
         $this->_clear_errors();
@@ -328,7 +382,7 @@ class ConfigFormHandler extends Error
                 continue;
             }
 
-            $obj = &$this->_handler->get_by_confid($id);
+            $obj = &$this->handler->get_by_confid($id);
             if (!is_object($obj)) {
                 continue;
             }
@@ -338,9 +392,9 @@ class ConfigFormHandler extends Error
             $obj->set('conf_valuetype', $valuetype);
             $obj->setConfValueForInput($value);
 
-            $ret = $this->_handler->update($obj);
+            $ret = $this->handler->update($obj);
             if (!$ret) {
-                $this->_set_errors($this->_handler->getErrors());
+                $this->_set_errors($this->handler->getErrors());
             }
 
             unset($obj);
@@ -350,56 +404,76 @@ class ConfigFormHandler extends Error
     }
 
     //---------------------------------------------------------
-    // config_handler
+    // configHandler
     //---------------------------------------------------------
+    /**
+     * @return mixed
+     */
     public function create_table()
     {
-        $ret = $this->_handler->create_table();
+        $ret = $this->handler->create_table();
         if (!$ret) {
-            $this->_set_errors($this->_handler->getErrors());
+            $this->_set_errors($this->handler->getErrors());
         }
 
         return $ret;
     }
 
+    /**
+     * @return mixed
+     */
     public function clean_table()
     {
-        $ret = $this->_handler->clean_table($this->_handler->get_magic_word());
+        $ret = $this->handler->clean_table($this->handler->get_magic_word());
         if (!$ret) {
-            $this->_set_errors($this->_handler->getErrors());
+            $this->_set_errors($this->handler->getErrors());
         }
 
         return $ret;
     }
 
+    /**
+     * @return mixed
+     */
     public function compare_to_scheme()
     {
-        $ret = $this->_handler->compare_to_scheme();
+        $ret = $this->handler->compare_to_scheme();
         if (!$ret) {
-            $this->_set_errors($this->_handler->getErrors());
+            $this->_set_errors($this->handler->getErrors());
         }
 
         return $ret;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return mixed
+     */
     public function update_by_name($name, $value)
     {
-        $ret = $this->_handler->update_by_name($name, $value);
+        $ret = $this->handler->update_by_name($name, $value);
         if (!$ret) {
-            $this->_set_errors($this->_handler->getErrors());
+            $this->_set_errors($this->handler->getErrors());
         }
 
         return $ret;
     }
 
+    /**
+     * @return mixed
+     */
     public function existsTable()
     {
-        return $this->_handler->existsTable();
+        return $this->handler->existsTable();
     }
 
+    /**
+     * @return mixed
+     */
     public function getCount()
     {
-        return $this->_handler->getCount();
+        return $this->handler->getCount();
     }
 
     // --- class end ---

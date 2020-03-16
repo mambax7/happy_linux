@@ -2,7 +2,7 @@
 // $Id: main.php,v 1.2 2006/09/02 13:57:41 ohwada Exp $
 
 // 2006-09-01 K.OHWADA
-// _HAPPY_LINUX_SEARCH_CANDICATE
+// _HAPPYLINUX_SEARCH_CANDICATE
 
 // 2006-07-10 K.OHWADA
 // this is new file
@@ -13,52 +13,52 @@
 //=========================================================
 
 // form
-define('_HAPPY_LINUX_TITLE', 'Title');
-define('_HAPPY_LINUX_SAVE', 'Save');
-define('_HAPPY_LINUX_VISIT', 'Visit');
+define('_HAPPYLINUX_TITLE', 'Title');
+define('_HAPPYLINUX_SAVE', 'Save');
+define('_HAPPYLINUX_VISIT', 'Visit');
 
 // page_frame
-define('_HAPPY_LINUX_THERE_ARE', 'There are <b>%s</b> records in database');
-define('_HAPPY_LINUX_NO_RECORD', 'There are no record');
-define('_HAPPY_LINUX_ID_ASC', 'ID Ascent');
-define('_HAPPY_LINUX_ID_DESC', 'ID Descent');
+define('_HAPPYLINUX_THERE_ARE', 'There are <b>%s</b> records in database');
+define('_HAPPYLINUX_NO_RECORD', 'There are no record');
+define('_HAPPYLINUX_ID_ASC', 'ID Ascent');
+define('_HAPPYLINUX_ID_DESC', 'ID Descent');
 
 // manage
-define('_HAPPY_LINUX_ADD_RECORD', 'Add Record');
-define('_HAPPY_LINUX_MOD_RECORD', 'Modify Record');
-define('_HAPPY_LINUX_DEL_RECORD', 'Delete Record');
-define('_HAPPY_LINUX_ADD_RECORD_SUCCEEED', 'Added record successfully!');
-define('_HAPPY_LINUX_MOD_RECORD_SUCCEEED', 'Modified record successfully!');
-define('_HAPPY_LINUX_DEL_RECORD_SUCCEEED', 'Deleted record successfully!');
-define('_HAPPY_LINUX_ADD_RECORD_FAILD', 'Failed adding record');
-define('_HAPPY_LINUX_MOD_RECORD_FAILD', 'Failed modifing record');
-define('_HAPPY_LINUX_DEL_RECORD_FAILD', 'Failed deleting record');
-define('_HAPPY_LINUX_ERR_FILL', 'Error: Enter %s');
-define('_HAPPY_LINUX_ERR_ILLEGAL', 'Error: Illegal %s');
+define('_HAPPYLINUX_ADD_RECORD', 'Add Record');
+define('_HAPPYLINUX_MOD_RECORD', 'Modify Record');
+define('_HAPPYLINUX_DEL_RECORD', 'Delete Record');
+define('_HAPPYLINUX_ADD_RECORD_SUCCEEED', 'Added record successfully!');
+define('_HAPPYLINUX_MOD_RECORD_SUCCEEED', 'Modified record successfully!');
+define('_HAPPYLINUX_DEL_RECORD_SUCCEEED', 'Deleted record successfully!');
+define('_HAPPYLINUX_ADD_RECORD_FAILD', 'Failed adding record');
+define('_HAPPYLINUX_MOD_RECORD_FAILD', 'Failed modifing record');
+define('_HAPPYLINUX_DEL_RECORD_FAILD', 'Failed deleting record');
+define('_HAPPYLINUX_ERR_FILL', 'Error: Enter %s');
+define('_HAPPYLINUX_ERR_ILLEGAL', 'Error: Illegal %s');
 
 // global
-define('_HAPPY_LINUX_HOME', 'Home');
-define('_HAPPY_LINUX_MAIN', 'Main');
-define('_HAPPY_LINUX_ADDED', 'Added');
-define('_HAPPY_LINUX_DELETED', 'Deleted');
-define('_HAPPY_LINUX_UPDATE', 'Update');
-define('_HAPPY_LINUX_UPDATED', 'Updated');
-define('_HAPPY_LINUX_MODIFY', 'Modify');
-define('_HAPPY_LINUX_MODIFIED', 'Modified');
-define('_HAPPY_LINUX_SAVED', 'Saved');
-define('_HAPPY_LINUX_CLEAR', 'Clear');
-define('_HAPPY_LINUX_CLEARED', 'Cleared');
-define('_HAPPY_LINUX_EXECUTE', 'Execute');
-define('_HAPPY_LINUX_EXECUTED', 'Executed');
-define('_HAPPY_LINUX_CREATE', 'Create');
-define('_HAPPY_LINUX_CREATED', 'Created');
-define('_HAPPY_LINUX_SEARCH', 'Search');
-define('_HAPPY_LINUX_SHOW', 'Show');
-define('_HAPPY_LINUX_KEYWORD', 'Keyword');
-define('_HAPPY_LINUX_NUM', 'Num');
-define('_HAPPY_LINUX_NO_ACTION', 'No Action');
+define('_HAPPYLINUX_HOME', 'Home');
+define('_HAPPYLINUX_MAIN', 'Main');
+define('_HAPPYLINUX_ADDED', 'Added');
+define('_HAPPYLINUX_DELETED', 'Deleted');
+define('_HAPPYLINUX_UPDATE', 'Update');
+define('_HAPPYLINUX_UPDATED', 'Updated');
+define('_HAPPYLINUX_MODIFY', 'Modify');
+define('_HAPPYLINUX_MODIFIED', 'Modified');
+define('_HAPPYLINUX_SAVED', 'Saved');
+define('_HAPPYLINUX_CLEAR', 'Clear');
+define('_HAPPYLINUX_CLEARED', 'Cleared');
+define('_HAPPYLINUX_EXECUTE', 'Execute');
+define('_HAPPYLINUX_EXECUTED', 'Executed');
+define('_HAPPYLINUX_CREATE', 'Create');
+define('_HAPPYLINUX_CREATED', 'Created');
+define('_HAPPYLINUX_SEARCH', 'Search');
+define('_HAPPYLINUX_SHOW', 'Show');
+define('_HAPPYLINUX_KEYWORD', 'Keyword');
+define('_HAPPYLINUX_NUM', 'Num');
+define('_HAPPYLINUX_NO_ACTION', 'No Action');
 
 // 2006-09-01
-define('_HAPPY_LINUX_SEARCH_CANDICATE', 'Candicate for search');
-define('_HAPPY_LINUX_ZENKAKU', 'Zenkaku');
-define('_HAPPY_LINUX_HANKAKU', 'Hanhaku');
+define('_HAPPYLINUX_SEARCH_CANDICATE', 'Candicate for search');
+define('_HAPPYLINUX_ZENKAKU', 'Zenkaku');
+define('_HAPPYLINUX_HANKAKU', 'Hanhaku');

@@ -2,11 +2,11 @@
 // $Id: global.php,v 1.1 2007/09/29 12:32:39 ohwada Exp $
 
 // 2007-02-20 K.OHWADA
-// _HAPPY_LINUX_SKIP_TO_NEXT
+// _HAPPYLINUX_SKIP_TO_NEXT
 
 // 2006-11-20 K.OHWADA
 // for happy_search
-// _HAPPY_LINUX_GOTO_MAIN
+// _HAPPYLINUX_GOTO_MAIN
 
 // 2006-09-15 K.OHWADA
 // this is new file
@@ -18,40 +18,40 @@
 //=========================================================
 
 // global
-define('_HAPPY_LINUX_HOME', 'Home');
-define('_HAPPY_LINUX_MAIN', 'Principale');
-define('_HAPPY_LINUX_ADD', 'Aggiungi');
-define('_HAPPY_LINUX_ADDED', 'Aggiunto');
-define('_HAPPY_LINUX_DELETE', 'Cancella');
-define('_HAPPY_LINUX_DELETED', 'Cancellato');
-define('_HAPPY_LINUX_UPDATE', 'Aggiorna');
-define('_HAPPY_LINUX_UPDATED', 'Aggiornato');
-define('_HAPPY_LINUX_MODIFY', 'Modifica');
-define('_HAPPY_LINUX_MODIFIED', 'Modificato');
-define('_HAPPY_LINUX_SAVE', 'Salva');
-define('_HAPPY_LINUX_SAVED', 'Salvato');
-define('_HAPPY_LINUX_CLEAR', 'Azzera');
-define('_HAPPY_LINUX_CLEARED', 'Azzerato');
-define('_HAPPY_LINUX_EXECUTE', 'Esegui');
-define('_HAPPY_LINUX_EXECUTED', 'Eseguito');
-define('_HAPPY_LINUX_CREATE', 'Crea');
-define('_HAPPY_LINUX_CREATED', 'Creato');
-define('_HAPPY_LINUX_SUBMIT', 'Invia');
-define('_HAPPY_LINUX_SUBMITED', 'Inviato');
-define('_HAPPY_LINUX_CANCEL', 'Annulla');
-define('_HAPPY_LINUX_CANCELED', 'Annullato');
-define('_HAPPY_LINUX_SEARCH', 'Cerca');
-define('_HAPPY_LINUX_SHOW', 'Mostra');
-define('_HAPPY_LINUX_TITLE', 'Titolo');
-define('_HAPPY_LINUX_KEYWORD', 'Keyword');
-define('_HAPPY_LINUX_NUM', 'Num');
-define('_HAPPY_LINUX_NO_ACTION', 'Nessuna Azione');
+define('_HAPPYLINUX_HOME', 'Home');
+define('_HAPPYLINUX_MAIN', 'Principale');
+define('_HAPPYLINUX_ADD', 'Aggiungi');
+define('_HAPPYLINUX_ADDED', 'Aggiunto');
+define('_HAPPYLINUX_DELETE', 'Cancella');
+define('_HAPPYLINUX_DELETED', 'Cancellato');
+define('_HAPPYLINUX_UPDATE', 'Aggiorna');
+define('_HAPPYLINUX_UPDATED', 'Aggiornato');
+define('_HAPPYLINUX_MODIFY', 'Modifica');
+define('_HAPPYLINUX_MODIFIED', 'Modificato');
+define('_HAPPYLINUX_SAVE', 'Salva');
+define('_HAPPYLINUX_SAVED', 'Salvato');
+define('_HAPPYLINUX_CLEAR', 'Azzera');
+define('_HAPPYLINUX_CLEARED', 'Azzerato');
+define('_HAPPYLINUX_EXECUTE', 'Esegui');
+define('_HAPPYLINUX_EXECUTED', 'Eseguito');
+define('_HAPPYLINUX_CREATE', 'Crea');
+define('_HAPPYLINUX_CREATED', 'Creato');
+define('_HAPPYLINUX_SUBMIT', 'Invia');
+define('_HAPPYLINUX_SUBMITED', 'Inviato');
+define('_HAPPYLINUX_CANCEL', 'Annulla');
+define('_HAPPYLINUX_CANCELED', 'Annullato');
+define('_HAPPYLINUX_SEARCH', 'Cerca');
+define('_HAPPYLINUX_SHOW', 'Mostra');
+define('_HAPPYLINUX_TITLE', 'Titolo');
+define('_HAPPYLINUX_KEYWORD', 'Keyword');
+define('_HAPPYLINUX_NUM', 'Num');
+define('_HAPPYLINUX_NO_ACTION', 'Nessuna Azione');
 
 // 2006-11-10
-define('_HAPPY_LINUX_GOTO_MAIN', 'Vai a Pagina Principale');
-define('_HAPPY_LINUX_GOTO_TOP', 'Vai a Inizio Pagina');
-define('_HAPPY_LINUX_GOTO_ADMIN', 'Vai a Pagina Admin');
-define('_HAPPY_LINUX_GOTO_MODULE', 'Vai al Modulo');
+define('_HAPPYLINUX_GOTO_MAIN', 'Vai a Pagina Principale');
+define('_HAPPYLINUX_GOTO_TOP', 'Vai a Inizio Pagina');
+define('_HAPPYLINUX_GOTO_ADMIN', 'Vai a Pagina Admin');
+define('_HAPPYLINUX_GOTO_MODULE', 'Vai al Modulo');
 
 // 2007-02-20
-define('_HAPPY_LINUX_SKIP_TO_NEXT', 'Salta al prossimo');
+define('_HAPPYLINUX_SKIP_TO_NEXT', 'Salta al prossimo');

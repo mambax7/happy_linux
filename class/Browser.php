@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: browser.php,v 1.1 2007/11/15 11:08:43 ohwada Exp $
 
@@ -15,6 +15,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class browser
 //=========================================================
+
+/**
+ * Class Browser
+ * @package XoopsModules\Happylinux
+ */
 class Browser
 {
     public $_http_user_agent = null;
@@ -29,6 +34,9 @@ class Browser
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -90,11 +98,17 @@ class Browser
     //---------------------------------------------------------
     // get param
     //---------------------------------------------------------
+    /**
+     * @return null
+     */
     public function get_os()
     {
         return $this->_os;
     }
 
+    /**
+     * @return null
+     */
     public function get_browser()
     {
         return $this->_browser;

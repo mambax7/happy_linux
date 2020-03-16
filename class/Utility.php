@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 /*
  Utility Class Definition
@@ -22,9 +22,9 @@ namespace XoopsModules\Happy_linux;
  * @author       Mamba <mambax7@gmail.com>
  */
 
-use XoopsModules\Happy_linux;
-use XoopsModules\Happy_linux\Common;
-use XoopsModules\Happy_linux\Constants;
+use XoopsModules\Happylinux;
+use XoopsModules\Happylinux\Common;
+use XoopsModules\Happylinux\Constants;
 
 /**
  * Class Utility
@@ -49,16 +49,20 @@ class Utility extends Common\SysUtility
         return $instance;
     }
 
-    public static function &happy_linux_get_singleton($name)
+    /**
+     * @param $name
+     * @return bool|mixed
+     */
+    public static function getSingleton($name)
     {
         static $singletons;
 
         if (!isset($singletons[$name])) {
-            $class = 'happy_linux_' . $name;
-            $file  = XOOPS_ROOT_PATH . '/modules/happy_linux/class/' . $name . '.php';
+            $class = 'happylinux_' . $name;
+            $file  = XOOPS_ROOT_PATH . '/modules/happylinux/class/' . $name . '.php';
 
             if (file_exists($file)) {
-                include_once $file;
+                require_once $file;
             }
 
             if (class_exists($class)) {
@@ -71,8 +75,8 @@ class Utility extends Common\SysUtility
 
             return $single;
         }
-//        if (happy_linux_is_admin() && function_exists('debug_print_backtrace')) {
-//            echo "happy_linux_get_singleton <br>\n";
+//        if (happylinux_is_admin() && function_exists('debug_print_backtrace')) {
+//            echo "getSingleton <br>\n";
 //            debug_print_backtrace();
 //        }
 
@@ -81,7 +85,14 @@ class Utility extends Common\SysUtility
         return $false;
     }
 
-    public static function &happy_linux_getHandler($name = null, $module_dir = null, $prefix = 'happy_linux')
+    /**
+     * @param null   $name
+     * @param null   $module_dir
+     * @param string $prefix
+     * @return bool|mixed
+     */
+//    public static function &happylinux_get_handler($name = null, $module_dir = null, $prefix = 'happylinux')
+    public static function getHandler($name = null, $module_dir = null, $prefix = 'happylinux')
     {
         static $handlers;
 
@@ -100,11 +111,11 @@ class Utility extends Common\SysUtility
         $name = (!isset($name)) ? $module_dir : trim($name);
 
         if (!isset($handlers[$module_dir][$name])) {
-            $class = $prefix . '_' . $name . '_handler';
+            $class = $prefix . '_' . $name . 'Handler';
             $file  = XOOPS_ROOT_PATH . '/modules/' . $module_dir . '/class/' . $class . '.php';
 
             if (file_exists($file)) {
-                include_once $file;
+                require_once $file;
             }
 
             if (class_exists($class)) {
@@ -117,9 +128,9 @@ class Utility extends Common\SysUtility
 
             return $han;
         }
-        if (happy_linux_is_admin()) {
+        if (self::is_admin()) {
             if (function_exists('debug_print_backtrace')) {
-                echo "happy_linux_get_handler <br>\n";
+                echo "happylinux_get_handler <br>\n";
                 debug_print_backtrace();
             }
 
@@ -132,7 +143,10 @@ class Utility extends Common\SysUtility
         return $false;
     }
 
-    public static function happy_linux_is_admin()
+    /**
+     * @return bool
+     */
+    public static function is_admin()
     {
         global $xoopsUser;
         if (is_object($xoopsUser) && $xoopsUser->isAdmin()) {

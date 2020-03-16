@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: form_lib.php,v 1.6 2009/01/05 17:50:39 ohwada Exp $
 
@@ -27,12 +27,17 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class form_lib
 //=========================================================
+
+/**
+ * Class FormLib
+ * @package XoopsModules\Happylinux
+ */
 class FormLib extends Form
 {
     public $_system;
 
-    public $_LIB_BOX_DIV_CLASS        = 'happy_linux_box_class';
-    public $_LIB_BOX_SPAN_TITLE_CLASS = 'happy_linux_title_class';
+    public $_LIB_BOX_DIV_CLASS        = 'happylinux_box_class';
+    public $_LIB_BOX_SPAN_TITLE_CLASS = 'happylinux_title_class';
 
     public $_LIB_BOX_DIV_STYLE        = 'background-color: #dde1de; border: 1px solid #808080; margin: 5px; padding: 10px 10px 5px 10px; width: 90%; ';
     public $_LIB_BOX_SPAN_TITLE_STYLE = 'font-size: 120%; font-weight: bold; color: #000000; ';
@@ -47,6 +52,9 @@ class FormLib extends Form
         $this->_system = System::getInstance();
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\Form|\XoopsModules\Happylinux\FormLib|\XoopsModules\Happylinux\Html|static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -61,6 +69,16 @@ class FormLib extends Form
     // next box
     // caller: rssc/admin/table_manage.php
     //---------------------------------------------------------
+    /**
+     * @param        $title
+     * @param        $desc
+     * @param int    $limit
+     * @param int    $offset
+     * @param string $op_value
+     * @param string $submit_value
+     * @param string $action
+     * @return string
+     */
     public function build_lib_box_limit_offset($title, $desc, $limit = 0, $offset = 0, $op_value = 'save', $submit_value = 'save', $action = '')
     {
         $val  = $this->build_lib_button_limit_offset($limit, $offset, $op_value, $submit_value, $action = '');
@@ -69,6 +87,14 @@ class FormLib extends Form
         return $text;
     }
 
+    /**
+     * @param int    $limit
+     * @param int    $offset
+     * @param string $op_value
+     * @param string $submit_value
+     * @param string $action
+     * @return string
+     */
     public function build_lib_button_limit_offset($limit = 0, $offset = 0, $op_value = 'save', $submit_value = 'save', $action = '')
     {
         $form_name   = '';
@@ -90,6 +116,14 @@ class FormLib extends Form
     // box
     // caller: rssc/admin/admin_config_class.php
     //---------------------------------------------------------
+    /**
+     * @param        $title
+     * @param        $desc
+     * @param string $op_value
+     * @param string $submit_value
+     * @param string $action
+     * @return string
+     */
     public function build_lib_box_button_style($title, $desc, $op_value = 'save', $submit_value = 'save', $action = '')
     {
         $val  = $this->build_lib_button($op_value, $submit_value, $action);
@@ -98,6 +132,14 @@ class FormLib extends Form
         return $text;
     }
 
+    /**
+     * @param        $title
+     * @param        $desc
+     * @param string $op_value
+     * @param string $submit_value
+     * @param string $action
+     * @return string
+     */
     public function build_lib_box_button_class($title, $desc, $op_value = 'save', $submit_value = 'save', $action = '')
     {
         $val  = $this->build_lib_button($op_value, $submit_value, $action);
@@ -106,6 +148,14 @@ class FormLib extends Form
         return $text;
     }
 
+    /**
+     * @param        $title
+     * @param        $desc
+     * @param        $value
+     * @param string $style_div
+     * @param string $style_span
+     * @return string
+     */
     public function build_lib_box_style($title, $desc, $value, $style_div = '', $style_span = '')
     {
         if (empty($style_div)) {
@@ -134,6 +184,14 @@ class FormLib extends Form
         return $text;
     }
 
+    /**
+     * @param        $title
+     * @param        $desc
+     * @param        $value
+     * @param string $class_div
+     * @param string $class_span
+     * @return string
+     */
     public function build_lib_box_class($title, $desc, $value, $class_div = '', $class_span = '')
     {
         if (empty($class_div)) {
@@ -165,6 +223,12 @@ class FormLib extends Form
     //---------------------------------------------------------
     // button
     //---------------------------------------------------------
+    /**
+     * @param string $op_value
+     * @param string $submit_value
+     * @param string $action
+     * @return string
+     */
     public function build_lib_button($op_value = 'save', $submit_value = 'save', $action = '')
     {
         $form_name   = $this->build_form_name_rand();
@@ -180,6 +244,19 @@ class FormLib extends Form
         return $text;
     }
 
+    /**
+     * @param        $hidden_array
+     * @param string $form_name
+     * @param string $action
+     * @param string $submit_name
+     * @param string $submit_value
+     * @param string $cancel_name
+     * @param string $cancel_value
+     * @param string $location_name
+     * @param string $location_value
+     * @param string $location_url
+     * @return string
+     */
     public function build_lib_button_hidden_array(
         $hidden_array,
         $form_name = '',
@@ -231,42 +308,58 @@ class FormLib extends Form
     //---------------------------------------------------------
     public function print_lib_box_init_config()
     {
-        xoops_error(_HAPPY_LINUX_FORM_INIT_NOT);
+        xoops_error(_HAPPYLINUX_FORM_INIT_NOT);
         echo "<br>\n";
-        echo $this->build_lib_box_button_style(_HAPPY_LINUX_FORM_INIT_EXEC, '', 'init', _HAPPY_LINUX_SAVE);
+        echo $this->build_lib_box_button_style(_HAPPYLINUX_FORM_INIT_EXEC, '', 'init', _HAPPYLINUX_SAVE);
         echo "<br>\n";
     }
 
+    /**
+     * @param      $ver
+     * @param null $extra
+     */
     public function print_lib_box_upgrade_config($ver, $extra = null)
     {
-        $msg = sprintf(_HAPPY_LINUX_FORM_VERSION_NOT, $ver);
+        $msg = sprintf(_HAPPYLINUX_FORM_VERSION_NOT, $ver);
         if ($extra) {
             $msg .= "<br>\n" . $extra;
         }
         xoops_error($msg);
         echo "<br>\n";
-        echo $this->build_lib_box_button_style(_HAPPY_LINUX_FORM_UPGRADE_EXEC, '', 'upgrade', _HAPPY_LINUX_SAVE);
+        echo $this->build_lib_box_button_style(_HAPPYLINUX_FORM_UPGRADE_EXEC, '', 'upgrade', _HAPPYLINUX_SAVE);
         echo "<br>\n";
     }
 
     //---------------------------------------------------------
     // set parameter
     //---------------------------------------------------------
+    /**
+     * @param $val
+     */
     public function set_lib_box_div_class($val)
     {
         $this->_LIB_BOX_DIV_CLASS = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_lib_box_span_title_class($val)
     {
         $this->_LIB_BOX_SPAN_TITLE_CLASS = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_lib_box_div_style($val)
     {
         $this->_LIB_BOX_DIV_STYLE = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_lib_box_span_title_style($val)
     {
         $this->_LIB_BOX_SPAN_TITLE_STYLE = $val;
@@ -275,6 +368,11 @@ class FormLib extends Form
     //---------------------------------------------------------
     // user_link
     //---------------------------------------------------------
+    /**
+     * @param        $uid
+     * @param string $target
+     * @return string|string[]
+     */
     public function build_lib_user_link_uname_by_uid($uid, $target = '_blank')
     {
         $uname      = $this->_system->get_uname_by_uid($uid);
@@ -287,6 +385,12 @@ class FormLib extends Form
         return $link_uname;
     }
 
+    /**
+     * @param        $uid
+     * @param string $name
+     * @param string $target
+     * @return string|string[]
+     */
     public function build_lib_user_link_email_by_uid($uid, $name = '', $target = '_blank')
     {
         $email      = $this->_system->get_email_by_uid($uid);
@@ -301,6 +405,10 @@ class FormLib extends Form
     //---------------------------------------------------------
     // confirm
     //---------------------------------------------------------
+    /**
+     * @param $param
+     * @return string
+     */
     public function build_confirm_form($param)
     {
         $div_class     = isset($param['div_class']) ? $param['div_class'] : 'confirmMsg';

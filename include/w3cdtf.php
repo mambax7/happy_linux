@@ -13,10 +13,14 @@
 // 2004-10-24 K.OHWADA
 //=========================================================
 
-function happy_linux_w3cdtf_to_unixtime($datetime)
+/**
+ * @param $datetime
+ * @return int
+ */
+function happylinux_w3cdtf_to_unixtime($datetime)
 {
     $unixtime = 0;
-    $arr      = happy_linux_parse_w3cdtf($datetime);
+    $arr      = happylinux_parse_w3cdtf($datetime);
     if (isset($arr['timestamp'])) {
         $unixtime = (int)$arr['timestamp'];
     }
@@ -53,7 +57,11 @@ function happy_linux_w3cdtf_to_unixtime($datetime)
 //   Complete date plus hours, minutes and seconds without time zone:
 //      YYYY-MM-DDThh:mm:ss (eg 1997-07-16T19:20:30)
 // -------------------------------------------------------------------------
-function &happy_linux_parse_w3cdtf($datetime)
+/**
+ * @param $datetime
+ * @return array|bool
+ */
+function &happylinux_parse_w3cdtf($datetime)
 {
     // 2004-10-24 K.OHWADA
     // suppress warning

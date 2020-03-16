@@ -4,10 +4,10 @@
 //=========================================================
 // Happy Linux Framework Module
 // 2007-10-07 K.OHWADA
-// Í­Êþ¼«±óÊýÍè
+// Í­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //=========================================================
 
-define('_HAPPY_LINUX_JA_KUTEN', '¡£');
-define('_HAPPY_LINUX_JA_DOKUTEN', '¡¢');
-define('_HAPPY_LINUX_JA_PERIOD', '¡¥');
-define('_HAPPY_LINUX_JA_COMMA', '¡¤');
+define('_HAPPYLINUX_JA_KUTEN', 'ï¿½ï¿½');
+define('_HAPPYLINUX_JA_DOKUTEN', 'ï¿½ï¿½');
+define('_HAPPYLINUX_JA_PERIOD', 'ï¿½ï¿½');
+define('_HAPPYLINUX_JA_COMMA', 'ï¿½ï¿½');

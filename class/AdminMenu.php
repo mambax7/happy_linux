@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: admin_menu.php,v 1.1 2010/11/07 14:59:17 ohwada Exp $
 
@@ -18,6 +18,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class AdminMenu
 //=========================================================
+
+/**
+ * Class AdminMenu
+ * @package XoopsModules\Happylinux
+ */
 class AdminMenu
 {
     public $_STYLE_HIGHLIGHT = 'color:#ff0000; font_weight:bold;';
@@ -35,6 +40,9 @@ class AdminMenu
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -48,6 +56,11 @@ class AdminMenu
     //---------------------------------------------------------
     // menu
     //---------------------------------------------------------
+    /**
+     * @param      $dirname
+     * @param null $desc
+     * @return string
+     */
     public function build_header($dirname, $desc = null)
     {
         $text = '<h3>' . $dirname . ' : ' . $this->get_xoops_module_name() . "</h3>\n";
@@ -58,25 +71,31 @@ class AdminMenu
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_footer()
     {
         $text = "<br><hr>\n";
-        if (class_exists('happy_linux_time')) {
+        if (class_exists(Time::class)) {
             $time = Time::getInstance();
             $text .= $time->build_elapse_time() . "<br>\n";
         }
-        if (function_exists('happy_linux_build_memory_usage_mb')) {
-            $text .= happy_linux_build_memory_usage_mb() . "<br>\n";
+        if (function_exists('happylinux_build_memory_usage_mb')) {
+            $text .= happylinux_build_memory_usage_mb() . "<br>\n";
         }
 
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_powerdby()
     {
         $url = 'https://linux2.ohwada.net/';
-        if (function_exists('get_happy_linux_url')) {
-            $url = get_happy_linux_url();
+        if (function_exists('get_happylinux_url')) {
+            $url = get_happylinux_url();
         }
         $text = '<div align="right">';
         $text .= '<a href="' . $url . '" target="_blank">';
@@ -92,6 +111,12 @@ class AdminMenu
     //-------------------------------------------------------------------
     // bread_crumb
     //-------------------------------------------------------------------
+    /**
+     * @param        $name1
+     * @param string $url1
+     * @param string $name2
+     * @return string
+     */
     public function build_admin_bread_crumb($name1, $url1 = '', $name2 = '')
     {
         $arr = [
@@ -117,6 +142,10 @@ class AdminMenu
         return $this->build_bread_crumb($arr);
     }
 
+    /**
+     * @param $paths
+     * @return string
+     */
     public function build_bread_crumb($paths)
     {
         $arr = [];
@@ -140,6 +169,15 @@ class AdminMenu
     //-------------------------------------------------------------------
     // menu_table
     //-------------------------------------------------------------------
+    /**
+     * @param        $menu_arr
+     * @param int    $MAX_COL
+     * @param string $width
+     * @param string $outer
+     * @param string $even
+     * @param string $odd
+     * @return string
+     */
     public function build_menu_table($menu_arr, $MAX_COL = 5, $width = '', $outer = 'outer', $even = 'even', $odd = 'odd')
     {
         if (empty($width)) {
@@ -215,20 +253,29 @@ class AdminMenu
     //---------------------------------------------------------
     public function print_form_init()
     {
-        xoops_error(_HAPPY_LINUX_FORM_INIT_NOT);
-        echo $this->build_form('init', _HAPPY_LINUX_FORM_INIT_EXEC);
+        xoops_error(_HAPPYLINUX_FORM_INIT_NOT);
+        echo $this->build_form('init', _HAPPYLINUX_FORM_INIT_EXEC);
     }
 
+    /**
+     * @param      $ver
+     * @param null $extra
+     */
     public function print_form_upgrade($ver, $extra = null)
     {
-        $msg = sprintf(_HAPPY_LINUX_FORM_VERSION_NOT, $ver);
+        $msg = sprintf(_HAPPYLINUX_FORM_VERSION_NOT, $ver);
         if ($extra) {
             $msg .= "<br>\n" . $extra;
         }
         xoops_error($msg);
-        echo $this->build_form('upgrade', _HAPPY_LINUX_FORM_UPGRADE_EXEC);
+        echo $this->build_form('upgrade', _HAPPYLINUX_FORM_UPGRADE_EXEC);
     }
 
+    /**
+     * @param $op
+     * @param $title
+     * @return string
+     */
     public function build_form($op, $title)
     {
         $form_name = $this->build_form_name();
@@ -239,14 +286,17 @@ class AdminMenu
         $text .= "</span><br><br>\n";
         $text .= '<form name="' . $form_name . '" id=". $form_name ." action="' . xoops_getenv('PHP_SELF') . '" method="post" >';
         $text .= $this->build_gticket_html();
-        $text .= '<input type="hidden" name="op" id="op" value="' . $op . '" />';
-        $text .= '<input type="submit" name="submit" id="submit" value="' . _HAPPY_LINUX_EXECUTE . '" />';
+        $text .= '<input type="hidden" name="op" id="op" value="' . $op . '">';
+        $text .= '<input type="submit" name="submit" id="submit" value="' . _HAPPYLINUX_EXECUTE . '">';
         $text .= '</form>';
         $text .= "</div><br>\n";
 
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_form_name()
     {
         return 'form_' . mt_rand();
@@ -255,6 +305,9 @@ class AdminMenu
     //---------------------------------------------------------
     // token
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function build_gticket_html()
     {
         global $xoopsGTicket;
@@ -266,6 +319,9 @@ class AdminMenu
         return $text;
     }
 
+    /**
+     * @return bool
+     */
     public function check_token()
     {
         return $this->check_gticket_token();
@@ -279,6 +335,10 @@ class AdminMenu
         echo "<br>\n";
     }
 
+    /**
+     * @param bool $allow_repost
+     * @return bool
+     */
     public function check_gticket_token($allow_repost = false)
     {
         global $xoopsGTicket;
@@ -296,6 +356,9 @@ class AdminMenu
     //---------------------------------------------------------
     // html
     //---------------------------------------------------------
+    /**
+     * @param $val
+     */
     public function highlight_error($val)
     {
         $text = '<div style="' . $this->_STYLE_HIGHLIGHT . '" >';
@@ -303,6 +366,10 @@ class AdminMenu
         $text .= "</div>\n";
     }
 
+    /**
+     * @param $num
+     * @return string
+     */
     public function highlight_number($num)
     {
         $text = $num;
@@ -315,6 +382,10 @@ class AdminMenu
         return $text;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function sanitize($str)
     {
         return htmlspecialchars($str, ENT_QUOTES);
@@ -323,6 +394,10 @@ class AdminMenu
     //---------------------------------------------------------
     // xoops param
     //---------------------------------------------------------
+    /**
+     * @param string $format
+     * @return array|int|mixed|null
+     */
     public function get_xoops_module_name($format = 's')
     {
         global $xoopsModule;
@@ -330,6 +405,9 @@ class AdminMenu
         return $xoopsModule->getVar('name', $format);
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xoops_language()
     {
         global $xoopsConfig;

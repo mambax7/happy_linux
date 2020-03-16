@@ -6,5 +6,5 @@
 // 2006-07-10 K.OHWADA
 //=========================================================
 
-//define('HAPPY_LINUX_VERSION', '1.80');
-define('HAPPY_LINUX_VERSION', '1.82');
+//define('HAPPYLINUX_VERSION', '1.80');
+define('HAPPYLINUX_VERSION', '2.00');

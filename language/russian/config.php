@@ -13,42 +13,42 @@
 // Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
 
 // bin command
-define('_HAPPY_LINUX_CONF_COMMAND_MANAGE', 'Управление командами');
-define('_HAPPY_LINUX_CONF_CREATE_CONFIG', 'Создать файл конфигурации');
-define('_HAPPY_LINUX_CONF_TEST_BIN', 'Выполнить тест бинарной команды');
-define('_HAPPY_LINUX_CONF_BIN', 'Конфигурация команды');
-define('_HAPPY_LINUX_CONF_BIN_DESC', 'Используется для бинарной команды');
-define('_HAPPY_LINUX_CONF_BIN_PASS', 'Пароль');
-define('_HAPPY_LINUX_CONF_BIN_MAILTO', 'Адрес электронной почты для отправки');
-define('_HAPPY_LINUX_CONF_BIN_SEND', 'Отправить почту');
-define('_HAPPY_LINUX_CONF_BIN_SEND_NON', 'Не отправлять');
-define('_HAPPY_LINUX_CONF_BIN_SEND_EXECUTE', 'Отправлять при исполнении');
-define('_HAPPY_LINUX_CONF_BIN_SEND_ALWAYS', 'Всегда отправлять');
+define('_HAPPYLINUX_CONF_COMMAND_MANAGE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CONF_CREATE_CONFIG', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CONF_TEST_BIN', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CONF_BIN', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CONF_BIN_DESC', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CONF_BIN_PASS', 'пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CONF_BIN_MAILTO', 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CONF_BIN_SEND', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CONF_BIN_SEND_NON', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CONF_BIN_SEND_EXECUTE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CONF_BIN_SEND_ALWAYS', 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 
 // rss
-define('_HAPPY_LINUX_CONF_RSS_MANAGE', 'Управление RDF/RSS/ATOM');
-define('_HAPPY_LINUX_CONF_RSS_MANAGE_DESC', 'Создавать и показывать RDF/RSS/ATOM');
-define('_HAPPY_LINUX_CONF_SHOW_RDF', 'Показывать RDF');
-define('_HAPPY_LINUX_CONF_SHOW_RSS', 'Показывать RSS');
-define('_HAPPY_LINUX_CONF_SHOW_ATOM', 'Показывать ATOM');
-define('_HAPPY_LINUX_CONF_DEBUG_RDF', 'Показать отладку RDF');
-define('_HAPPY_LINUX_CONF_DEBUG_RSS', 'Показать отладку RSS');
-define('_HAPPY_LINUX_CONF_DEBUG_ATOM', 'Показать отладку ATOM');
+define('_HAPPYLINUX_CONF_RSS_MANAGE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ RDF/RSS/ATOM');
+define('_HAPPYLINUX_CONF_RSS_MANAGE_DESC', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ RDF/RSS/ATOM');
+define('_HAPPYLINUX_CONF_SHOW_RDF', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ RDF');
+define('_HAPPYLINUX_CONF_SHOW_RSS', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ RSS');
+define('_HAPPYLINUX_CONF_SHOW_ATOM', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ATOM');
+define('_HAPPYLINUX_CONF_DEBUG_RDF', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ RDF');
+define('_HAPPYLINUX_CONF_DEBUG_RSS', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ RSS');
+define('_HAPPYLINUX_CONF_DEBUG_ATOM', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ATOM');
 
 // template
-define('_HAPPY_LINUX_CONF_TPL_COMPILED_CLEAR', 'Очистить кэш скомпилированных шаблонов');
-define('_HAPPY_LINUX_CONF_TPL_COMPILED_CLEAR_DIR', 'НЕОБХОДИМО выполнить, при изменении файлов шаблона в директории %s');
-define('_HAPPY_LINUX_CONF_RSS_CACHE_CLEAR', 'Очистить кэш RSS');
-define('_HAPPY_LINUX_CONF_RSS_CACHE_CLEAR_DESC', 'в анонимном пользователе, кэш RSS на один час');
-define('_HAPPY_LINUX_CONF_RSS_CACHE_CLEAR_TIME', 'в анонимном пользователе, кэш RSS на %s час(ов)');
-define('_HAPPY_LINUX_CONF_RSS_CACHE_TIME', 'Время кэша (сек)');
+define('_HAPPYLINUX_CONF_TPL_COMPILED_CLEAR', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CONF_TPL_COMPILED_CLEAR_DIR', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ %s');
+define('_HAPPYLINUX_CONF_RSS_CACHE_CLEAR', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ RSS');
+define('_HAPPYLINUX_CONF_RSS_CACHE_CLEAR_DESC', 'пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ RSS пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ');
+define('_HAPPYLINUX_CONF_RSS_CACHE_CLEAR_TIME', 'пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ RSS пїЅпїЅ %s пїЅпїЅпїЅ(пїЅпїЅ)');
+define('_HAPPYLINUX_CONF_RSS_CACHE_TIME', 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ)');
 
-define('_HAPPY_LINUX_CONF_NOT_WRITABLE', 'Эта директория недоступка для записи');
+define('_HAPPYLINUX_CONF_NOT_WRITABLE', 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
 
 // 2007-11-24
 // table manage
-define('_HAPPY_LINUX_CONF_TABLE_MANAGE', 'Управление таблицей базы данных');
-define('_HAPPY_LINUX_CONF_TABLE_CHECK', 'Проверить таблицу %s');
-define('_HAPPY_LINUX_CONF_TABLE_REINSTALL', 'Рекомендуется переустановить, если обнаружена ошибка');
-define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW', 'Обновление конфигурации таблицы');
-define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Выполнить, если обнаружена ошибка. <br />Существующие значения аннулируются. <br />Установите значения после выполнения. ');
+define('_HAPPYLINUX_CONF_TABLE_MANAGE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CONF_TABLE_CHECK', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ %s');
+define('_HAPPYLINUX_CONF_TABLE_REINSTALL', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CONF_TABLE_CONFIG_RENEW', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. <br>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. <br>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. ');

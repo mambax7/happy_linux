@@ -1,16 +1,16 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: build_xml.php,v 1.1 2008/02/26 15:35:42 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
 // this file include 4 classes
-//   happy_linux_xml_base
-//   happy_linux_xml_single_object
-//   happy_linux_xml_iterate_object
-//   happy_linux_build_xml
+//   happylinux_xml_base
+//   happylinux_xml_single_object
+//   happylinux_xml_iterate_object
+//   happylinux_build_xml
 // 2008-02-17 K.OHWADA
 //=========================================================
 
@@ -18,6 +18,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class XmlIterateObject
 //=========================================================
+
+/**
+ * Class XmlIterateObject
+ * @package XoopsModules\Happylinux
+ */
 class XmlIterateObject extends XmlSingleObject
 {
     public $_TPL_KEY = 'iterate';
@@ -63,6 +68,9 @@ class XmlIterateObject extends XmlSingleObject
     //---------------------------------------------------------
     // append
     //---------------------------------------------------------
+    /**
+     * @param $tpl
+     */
     public function append_iterate($tpl)
     {
         $tpl_key = $this->get_tpl_key();

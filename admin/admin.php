@@ -10,7 +10,7 @@
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
-//                       <https://xoops.org/>                             //
+//                       <https://xoops.org>                             //
 //  ------------------------------------------------------------------------ //
 //  This program is free software; you can redistribute it and/or modify     //
 //  it under the terms of the GNU General Public License as published by     //
@@ -51,23 +51,23 @@ if (empty($fct)) {
 //}
 // include "../../../mainfile.php";
 // include "../../mainfile.php"; GIJ
-// include XOOPS_ROOT_PATH."/include/cp_functions.php";
-// include_once XOOPS_ROOT_PATH."/class/xoopsmodule.php";
-// include_once "../include/gtickets.php" ;// GIJ
+// require XOOPS_ROOT_PATH."/include/cp_functions.php";
+// require_once XOOPS_ROOT_PATH."/class/xoopsmodule.php";
+// require_once "../include/gtickets.php" ;// GIJ
 
-include_once '../../../include/cp_header.php';
-include_once XOOPS_ROOT_PATH . '/include/cp_functions.php';
-include_once XOOPS_ROOT_PATH . '/class/xoopsmodule.php';
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/include/gtickets.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
+require_once XOOPS_ROOT_PATH . '/include/cp_functions.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsmodule.php';
+require_once XOOPS_ROOT_PATH . '/modules/happylinux/include/gtickets.php';
 
 $admintest = 0;
 
 if (is_object($xoopsUser)) {
     // ohwada
-    //  $xoopsModule =& XoopsModule::getByDirname("system");
+    //  $xoopsModule = XoopsModule::getByDirname("system");
     //  if ( !$xoopsUser->isAdmin($xoopsModule->mid()) ) {
-    $module_handler = xoops_getHandler('module');
-    $module         = $module_handler->getByDirname('system');
+    $moduleHandler = xoops_getHandler('module');
+    $module         = $moduleHandler->getByDirname('system');
     $mid            = $module->mid();
     if (!$xoopsUser->isAdmin($mid)) {
         redirect_header(XOOPS_URL . '/user.php', 3, _NOPERM);
@@ -80,37 +80,37 @@ if (is_object($xoopsUser)) {
 }
 
 // include system category definitions
-include_once XOOPS_ROOT_PATH . '/modules/system/constants.php';
+require_once XOOPS_ROOT_PATH . '/modules/system/constants.php';
 $error = false;
 if (0 != $admintest) {
     if (isset($fct) && '' != $fct) {
         if (file_exists(XOOPS_ROOT_PATH . '/modules/system/admin/' . $fct . '/xoops_version.php')) {
             if (file_exists(XOOPS_ROOT_PATH . '/modules/system/language/' . $xoopsConfig['language'] . '/admin.php')) {
-                include XOOPS_ROOT_PATH . '/modules/system/language/' . $xoopsConfig['language'] . '/admin.php';
+                require XOOPS_ROOT_PATH . '/modules/system/language/' . $xoopsConfig['language'] . '/admin.php';
             } else {
-                include XOOPS_ROOT_PATH . '/modules/system/language/english/admin.php';
+                require XOOPS_ROOT_PATH . '/modules/system/language/english/admin.php';
             }
             if (file_exists(XOOPS_ROOT_PATH . '/modules/system/language/' . $xoopsConfig['language'] . '/admin/' . $fct . '.php')) {
-                include XOOPS_ROOT_PATH . '/modules/system/language/' . $xoopsConfig['language'] . '/admin/' . $fct . '.php';
+                require XOOPS_ROOT_PATH . '/modules/system/language/' . $xoopsConfig['language'] . '/admin/' . $fct . '.php';
             } elseif (file_exists(XOOPS_ROOT_PATH . '/modules/system/language/english/admin/' . $fct . '.php')) {
-                include XOOPS_ROOT_PATH . '/modules/system/language/english/admin/' . $fct . '.php';
+                require XOOPS_ROOT_PATH . '/modules/system/language/english/admin/' . $fct . '.php';
             }
-            include XOOPS_ROOT_PATH . '/modules/system/admin/' . $fct . '/xoops_version.php';
-            $sysperm_handler = xoops_getHandler('groupperm');
+            require XOOPS_ROOT_PATH . '/modules/system/admin/' . $fct . '/xoops_version.php';
+            $syspermHandler = xoops_getHandler('groupperm');
             $category        = !empty($modversion['category']) ? (int)$modversion['category'] : 0;
             unset($modversion);
             if ($category > 0) {
                 $groups = &$xoopsUser->getGroups();
 
                 // ohwada
-                //              if (in_array(XOOPS_GROUP_ADMIN, $groups) || false !== $sysperm_handler->checkRight('system_admin', $category, $groups, $xoopsModule->getVar('mid'))){
+                //              if (in_array(XOOPS_GROUP_ADMIN, $groups) || false !== $syspermHandler->checkRight('system_admin', $category, $groups, $xoopsModule->getVar('mid'))){
                 //                  if (file_exists(XOOPS_ROOT_PATH."/modules/system/admin/".$fct."/main.php")) {
-                //                      include_once XOOPS_ROOT_PATH."/modules/system/admin/".$fct."/main.php"; GIJ
+                //                      require_once XOOPS_ROOT_PATH."/modules/system/admin/".$fct."/main.php"; GIJ
                 //                  if (file_exists("../include/{$fct}.inc.php")) {
-                //                      include_once "../include/{$fct}.inc.php" ;
-                if (in_array(XOOPS_GROUP_ADMIN, $groups) || false !== $sysperm_handler->checkRight('system_admin', $category, $groups, $mid)) {
-                    if (file_exists(XOOPS_ROOT_PATH . "/modules/happy_linux/include/{$fct}.inc.php")) {
-                        include_once XOOPS_ROOT_PATH . "/modules/happy_linux/include/{$fct}.inc.php";
+                //                      require_once "../include/{$fct}.inc.php" ;
+                if (in_array(XOOPS_GROUP_ADMIN, $groups) || false !== $syspermHandler->checkRight('system_admin', $category, $groups, $mid)) {
+                    if (file_exists(XOOPS_ROOT_PATH . "/modules/happylinux/include/{$fct}.inc.php")) {
+                        require_once XOOPS_ROOT_PATH . "/modules/happylinux/include/{$fct}.inc.php";
                     } else {
                         $error = true;
                     }
@@ -119,7 +119,7 @@ if (0 != $admintest) {
                 }
             } elseif ('version' == $fct) {
                 if (file_exists(XOOPS_ROOT_PATH . '/modules/system/admin/version/main.php')) {
-                    include_once XOOPS_ROOT_PATH . '/modules/system/admin/version/main.php';
+                    require_once XOOPS_ROOT_PATH . '/modules/system/admin/version/main.php';
                 } else {
                     $error = true;
                 }
@@ -142,8 +142,8 @@ if (false !== $error) {
     $groups = $xoopsUser->getGroups();
     $all_ok = false;
     if (!in_array(XOOPS_GROUP_ADMIN, $groups)) {
-        $sysperm_handler = xoops_getHandler('groupperm');
-        $ok_syscats      = &$sysperm_handler->getItemIds('system_admin', $groups);
+        $syspermHandler = xoops_getHandler('groupperm');
+        $ok_syscats      = $syspermHandler->getItemIds('system_admin', $groups);
     } else {
         $all_ok = true;
     }

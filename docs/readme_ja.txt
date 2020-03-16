@@ -2,25 +2,25 @@ $Id: readme_ja.txt,v 1.8 2012/04/08 18:24:36 ohwada Exp $
 
 =================================================
 Version: 1.80
-Date:   2012-04-0‚Q
+Date:   2012-04-0ï¿½Q
 Author: Kenichi OHWADA
 URL:    https://linux.ohwada.jp/
 Email:  webmaster@ohwada.jp
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-1. weblinks ƒ‚ƒWƒ…[ƒ‹‚Ì•ÏX‚É”º‚¢A‰º‹L‚Ì•ÏX‚ðs‚Á‚½
-(1) pagenavi page_frame object basic_object ƒNƒ‰ƒX‚ð•ÏX‚µ‚½
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+1. weblinks ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ÏXï¿½É”ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Lï¿½Ì•ÏXï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
+(1) pagenavi page_frame object basic_object ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ÏXï¿½ï¿½ï¿½ï¿½
 
-2. ƒoƒOC³
-(1) api/rss_parser.php ‚ÉŒë‚è‚ª‚ ‚Á‚½
+2. ï¿½oï¿½Oï¿½Cï¿½ï¿½
+(1) api/rss_parser.php ï¿½ÉŒï¿½è‚ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-3. Œ¾Œêƒtƒ@ƒCƒ‹
-(1) ƒƒVƒAŒê ( CP1251 & UTF-8 ) ‚ð’Ç‰Á‚µ‚½
-language ƒfƒBƒŒƒNƒgƒŠ‚Ì‘¼‚É extra ƒfƒBƒŒƒNƒgƒŠ‚É‚à’u‚¢‚Ä‚¢‚é
-‘½ŽÓ Anthony xoops-org.ru 
+3. ï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½
+(1) ï¿½ï¿½ï¿½Vï¿½Aï¿½ï¿½ ( CP1251 & UTF-8 ) ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+language ï¿½fï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ï¿½ extra ï¿½fï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½ï¿½É‚ï¿½ï¿½uï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½ Anthony xoops-org.ru 
 
 
 =================================================
@@ -28,20 +28,20 @@ Version: 1.70
 Date:   2012-03-01
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
 1. RSS Parser
-(1) RSS Auto Discovery ‚É‚Ä base ƒ^ƒO‚É‘Î‰ž‚µ‚½
-(2) “ª‚É‹ó”’‚ª‚ ‚é xml ‚Í‹ó”’‚ðíœ‚µ‚½
-(3) <geo:point> ‚Ì‚È‚¢ georss ‚É‘Î‰ž‚µ‚½
+(1) RSS Auto Discovery ï¿½É‚ï¿½ base ï¿½^ï¿½Oï¿½É‘Î‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(2) ï¿½ï¿½ï¿½É‹ó”’‚ï¿½ï¿½ï¿½ï¿½ï¿½ xml ï¿½Í‹ó”’‚ï¿½ï¿½íœï¿½ï¿½ï¿½ï¿½
+(3) <geo:point> ï¿½Ì‚È‚ï¿½ georss ï¿½É‘Î‰ï¿½ï¿½ï¿½ï¿½ï¿½
 
-2. DB ƒnƒ“ƒhƒ‰[
-(1) SHOW COLUMNS ‚ð’Ç‰Á‚µ‚½
+2. DB ï¿½nï¿½ï¿½ï¿½hï¿½ï¿½ï¿½[
+(1) SHOW COLUMNS ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 
-3. ƒoƒOC³
-(1) ƒ‚ƒWƒ…[ƒ‹ŠÇ—‚Ö‚ÌƒŠƒ“ƒN‚Å XOOPS Cube 2.2 ‚ÆŽ¯•Ê‚Å‚«‚©‚Á‚½
-(2) happy_linux_config_form ‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^‚ÉŒë‚è‚ª‚ ‚Á‚½
+3. ï¿½oï¿½Oï¿½Cï¿½ï¿½
+(1) ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ç—ï¿½ï¿½Ö‚Ìƒï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ XOOPS Cube 2.2 ï¿½ÆŽï¿½ï¿½Ê‚Å‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+(2) happylinux_config_form ï¿½ÌƒRï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^ï¿½ÉŒï¿½è‚ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 =================================================
@@ -49,19 +49,19 @@ Version: 1.60
 Date:   2011-12-29
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-1. PHP 5.3 ‘Î‰ž
-PHP 5.3.x ‚Å„§‚³‚ê‚È‚¢‹@”\ ‚ðC³‚µ‚½
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+1. PHP 5.3 ï¿½Î‰ï¿½
+PHP 5.3.x ï¿½Åï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½@ï¿½\ ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 https://www.php.net/manual/ja/migration53.deprecated.php
 (1) ereg
 
-2. ƒoƒOC³
-(1) Google map‚©‚çgeorss‚ÌŽæ“¾‚ª‚Å‚«‚È‚¢
+2. ï¿½oï¿½Oï¿½Cï¿½ï¿½
+(1) Google mapï¿½ï¿½ï¿½ï¿½georssï¿½ÌŽæ“¾ï¿½ï¿½ï¿½Å‚ï¿½ï¿½È‚ï¿½
 https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1142&forum=9
 
-(2) ƒRƒ}ƒ“ƒh‚Ì offset ‚ªŽw’è‚Å‚«‚È‚¢
+(2) ï¿½Rï¿½}ï¿½ï¿½ï¿½hï¿½ï¿½ offset ï¿½ï¿½ï¿½wï¿½ï¿½Å‚ï¿½ï¿½È‚ï¿½
 https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=1210&forum=9
 
 =================================================
@@ -69,12 +69,12 @@ Version: 1.50
 Date:   2009-02-25
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-1. rssc ƒ‚ƒWƒ…[ƒ‹‚Ì•ÏX‚É”º‚¢A‰º‹L‚Ì•ÏX‚ðs‚Á‚½
-(1) RSS‰ðÍ‚ð GeoRSS ‚ÆMediaRSS ‚É‘Î‰ž‚µ‚½
-(2) RSS¶¬‚É media_content_medium ‚ð’Ç‰Á‚µ‚½
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+1. rssc ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ÏXï¿½É”ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Lï¿½Ì•ÏXï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
+(1) RSSï¿½ï¿½Í‚ï¿½ GeoRSS ï¿½ï¿½MediaRSS ï¿½É‘Î‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(2) RSSï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ media_content_medium ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 =================================================
@@ -82,13 +82,13 @@ Version: 1.41
 Date:   2009-01-04
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-(1) weblinks ‚â rssc ‚É‚Äuƒo[ƒWƒ‡ƒ“ xx ‚Å‚Í‚È‚¢v
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+(1) weblinks ï¿½ï¿½ rssc ï¿½É‚Äuï¿½oï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ xx ï¿½Å‚Í‚È‚ï¿½ï¿½v
 https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=861&forum=5
 
-(2) RSS‚Ìƒ^ƒCƒ€ƒXƒ^ƒ“ƒv‚ª‚¸‚ê‚é
+(2) RSSï¿½Ìƒ^ï¿½Cï¿½ï¿½ï¿½Xï¿½^ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=906&forum=8
 
 
@@ -97,22 +97,22 @@ Version: 1.40
 Date:   2008-02-24
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-1. weblinks ƒ‚ƒWƒ…[ƒ‹‚Ì•ÏX‚É”º‚¢A‰º‹L‚Ì•ÏX‚ðs‚Á‚½
-(1) Google PageRank ‚ðŽæ“¾‚·‚é pagerank ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(2) ƒvƒ‰ƒOƒCƒ“‚Ìˆ—‚ðs‚¤ plugin ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(3) ƒvƒ‰ƒOƒCƒ“‚ÌŠÇ—‚ðs‚¤ plugin_manage ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(4) xml ¶¬‚ðs‚¤ build_xml ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(5) kml ¶¬‚ðs‚¤ build_kml ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(6) Œ¾Œêƒtƒ@ƒCƒ‹ plugin ‚ðVÝ‚µ‚½
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+1. weblinks ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ÏXï¿½É”ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Lï¿½Ì•ÏXï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
+(1) Google PageRank ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½ pagerank ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(2) ï¿½vï¿½ï¿½ï¿½Oï¿½Cï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ plugin ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(3) ï¿½vï¿½ï¿½ï¿½Oï¿½Cï¿½ï¿½ï¿½ÌŠÇ—ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ plugin_manage ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(4) xml ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ build_xml ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(5) kml ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ build_kml ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(6) ï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ plugin ï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
 
-2. Œ¾Œêƒtƒ@ƒCƒ‹
-(1) ƒAƒ‰ƒrƒAŒê XV
+2. ï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½
+(1) ï¿½Aï¿½ï¿½ï¿½rï¿½Aï¿½ï¿½ ï¿½Xï¿½V
 https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=350&forum=3
 
-(2) ƒyƒ‹ƒVƒAŒê
+(2) ï¿½yï¿½ï¿½ï¿½Vï¿½Aï¿½ï¿½
 https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=387&forum=2
 
 
@@ -121,11 +121,11 @@ Version: 1.30
 Date:   2008-01-30
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-1. rssc ƒ‚ƒWƒ…[ƒ‹‚Ì•ÏX‚É”º‚¢A‰º‹L‚Ì•ÏX‚ðs‚Á‚½
-(1) JavaScript ŠÖ˜A‚Ì–³Œø‰»‚Ìˆ—‚ðs‚¤ rss_view_item ƒNƒ‰ƒX‚Æ htmlout ŠÖ”‚ðVÝ‚µ‚½
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+1. rssc ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ÏXï¿½É”ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Lï¿½Ì•ÏXï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
+(1) JavaScript ï¿½Ö˜Aï¿½Ì–ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ RssViewItem ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ htmlout ï¿½Öï¿½ï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
 
 
 =================================================
@@ -136,16 +136,16 @@ URL:    https://linux.ohwada.jp/
 Email:  webmaster@ohwada.jp
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-1. RSS ‚Ì Piclens ‘Î‰ž
-media:group ƒ^ƒO‚ðo—Í‚µ‚È‚¢
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+1. RSS ï¿½ï¿½ Piclens ï¿½Î‰ï¿½
+media:group ï¿½^ï¿½Oï¿½ï¿½ï¿½oï¿½Í‚ï¿½ï¿½È‚ï¿½
 
-2. Œ¾Œê
-ƒhƒCƒcŒê XV
+2. ï¿½ï¿½ï¿½ï¿½
+ï¿½hï¿½Cï¿½cï¿½ï¿½ ï¿½Xï¿½V
 
-3. ƒoƒO‘Îô
+3. ï¿½oï¿½Oï¿½Îï¿½
 (1) Only variables should be assigned by reference 
 https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=758&forum=5
 
@@ -157,11 +157,11 @@ Version: 1.22
 Date:   2007-12-29
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-1. ƒoƒO‘Îô
-(1) weblinks ‚É‚ÄAƒXƒ}ƒCƒŠ[ƒAƒCƒRƒ“‚ª•\Ž¦‚³‚ê‚È‚¢
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+1. ï¿½oï¿½Oï¿½Îï¿½
+(1) weblinks ï¿½É‚ÄAï¿½Xï¿½}ï¿½Cï¿½ï¿½ï¿½[ï¿½Aï¿½Cï¿½Rï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
 https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=746&forum=5
 
 
@@ -170,10 +170,10 @@ Version: 1.21
 Date:   2007-11-24
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-1. DB ƒe[ƒuƒ‹ŠÇ—‚ðs‚¤ table_manage.php ƒNƒ‰ƒX‚ð’Ç‰Á‚µ‚½
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+1. DB ï¿½eï¿½[ï¿½uï¿½ï¿½ï¿½Ç—ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ table_manage.php ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 =================================================
@@ -181,48 +181,48 @@ Version: 1.20
 Date:   2007-11-11
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-1. ŠÇ—ŽÒ‰æ–Ê‚ð’Ç‰Á‚µ‚½
-ƒT[ƒo[ŠÂ‹«•Ï”‚ð•\Ž¦‚µ‚½
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+1. ï¿½Ç—ï¿½ï¿½Ò‰ï¿½Ê‚ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+ï¿½Tï¿½[ï¿½oï¿½[ï¿½Â‹ï¿½ï¿½Ïï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-2. weblinks ƒ‚ƒWƒ…[ƒ‹‚Ì•ÏX‚É”º‚¢A‰º‹L‚Ì•ÏX‚ðs‚Á‚½
-(1) onInstall onUpdate ‚É‘Î‰ž‚µ‚½ module_install ƒNƒ‰ƒX‚ðVÝ‚µ‚½
+2. weblinks ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ÏXï¿½É”ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Lï¿½Ì•ÏXï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
+(1) onInstall onUpdate ï¿½É‘Î‰ï¿½ï¿½ï¿½ï¿½ï¿½ module_install ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
 
-(2) ƒƒ‚ƒŠŽg—p—Ê‚ð•\Ž¦‚·‚é memory ŠÖ”‚ðVÝ‚µ‚½
+(2) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½gï¿½pï¿½Ê‚ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ memory ï¿½Öï¿½ï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
 
-(3) ƒuƒƒbƒNEƒe[ƒuƒ‹‚ÌŒŸ¸‚ðs‚¤ xoops_block_check ƒNƒ‰ƒX‚ðVÝ‚µ‚½
+(3) ï¿½uï¿½ï¿½ï¿½bï¿½Nï¿½Eï¿½eï¿½[ï¿½uï¿½ï¿½ï¿½ÌŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ xoops_block_check ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
 https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=707&forum=5
 
-(4) multibyte ŠÖ”‚É“ú–{Œê‹å“Ç“_‚ÌŒã‚ë‚É‹ó”’•¶Žš‚ð’Ç‰Á‚·‚éˆ—‚ð’Ç‰Á‚µ‚½
-(5) admin ƒNƒ‰ƒX‚Éƒ‚ƒWƒ…[ƒ‹ŠÇ—‚ð’Ç‰Á‚µ‚½
+(4) multibyte ï¿½Öï¿½ï¿½É“ï¿½ï¿½{ï¿½ï¿½ï¿½Ç“_ï¿½ÌŒï¿½ï¿½É‹ó”’•ï¿½ï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½éˆï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(5) admin ï¿½Nï¿½ï¿½ï¿½Xï¿½Éƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ç—ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 
-(6) typo C³F cobe -> cube
+(6) typo ï¿½Cï¿½ï¿½ï¿½F cobe -> cube
 https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=700&forum=5
 
-3. rssc ƒ‚ƒWƒ…[ƒ‹‚Ì•ÏX‚É”º‚¢A‰º‹L‚Ì•ÏX‚ðs‚Á‚½
-(1) strings ƒNƒ‰ƒX‚É —v–ñì¬Žž‚É‘S‚Ä‹ó”’•¶Žš‚È‚ç‚Î‹ó‚É‚·‚éˆ—‚ð’Ç‰Á‚µ‚½
-(2) PHP5 ‚Ì E_STRICT ƒŒƒxƒ‹‚ÌƒGƒ‰[‚ð’×‚µ‚½
+3. rssc ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ÏXï¿½É”ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Lï¿½Ì•ÏXï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
+(1) strings ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ ï¿½vï¿½ï¿½ì¬ï¿½ï¿½ï¿½É‘Sï¿½Ä‹ó”’•ï¿½ï¿½ï¿½ï¿½È‚ï¿½Î‹ï¿½É‚ï¿½ï¿½éˆï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(2) PHP5 ï¿½ï¿½ E_STRICT ï¿½ï¿½ï¿½xï¿½ï¿½ï¿½ÌƒGï¿½ï¿½ï¿½[ï¿½ï¿½×‚ï¿½ï¿½ï¿½
 
-(3) ƒoƒOC³F preg_match()
+(3) ï¿½oï¿½Oï¿½Cï¿½ï¿½ï¿½F preg_match()
 https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=709&forum=9
 
-4. whatsnew ƒ‚ƒWƒ…[ƒ‹‚Ì•ÏX‚É”º‚¢A‰º‹L‚Ì•ÏX‚ðs‚Á‚½
-(1) ƒ^ƒCƒ€ƒ][ƒ“‚ðˆµ‚¤‚½‚ß‚É date ƒNƒ‰ƒX‚ðVÝ‚µ‚½
+4. whatsnew ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ÏXï¿½É”ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Lï¿½Ì•ÏXï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
+(1) ï¿½^ï¿½Cï¿½ï¿½ï¿½]ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½ date ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
 https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=713&forum=8
 
-(2) ƒeƒ“ƒvƒŒ[ƒgEƒLƒƒƒVƒ…‚ðˆµ‚¤‚½‚ß‚É build_cache ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(3) ƒ‚ƒWƒ…[ƒ‹Ý’è‚Ì‚½‚ß‚Ì config Œ¾Œêƒtƒ@ƒCƒ‹‚ðVÝ‚µ‚½
+(2) ï¿½eï¿½ï¿½ï¿½vï¿½ï¿½ï¿½[ï¿½gï¿½Eï¿½Lï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß‚ï¿½ build_cache ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(3) ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ý’ï¿½Ì‚ï¿½ï¿½ß‚ï¿½ config ï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
 
-5. Œ¾Œê
-(1) ƒCƒ^ƒŠƒAŒê‚ð’Ç‰Á‚µ‚½
+5. ï¿½ï¿½ï¿½ï¿½
+(1) ï¿½Cï¿½^ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=337&forum=2
 
-(2) ƒAƒ‰ƒrƒAŒê‚ð’Ç‰Á‚µ‚½
+(2) ï¿½Aï¿½ï¿½ï¿½rï¿½Aï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=350&forum=3
 
-(3) ƒyƒ‹ƒVƒƒŒê‚ðXV‚µ‚½
+(3) ï¿½yï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Xï¿½Vï¿½ï¿½ï¿½ï¿½
 https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=343&forum=2
 
 
@@ -231,20 +231,20 @@ Version: 1.11
 Date:   2007-09-23
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-1. ƒoƒi[‰æ‘œ‚ÌˆêŽž•ÛŠÇƒfƒBƒŒƒNƒgƒŠ
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+1. ï¿½oï¿½iï¿½[ï¿½æ‘œï¿½ÌˆêŽžï¿½ÛŠÇƒfï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½
 https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=694&forum=5
 
-(1) /tmp ‚ª open_basedir ‚ÉŠÜ‚Ü‚ê‚é‚©ŒŸ¸‚µ‚½
-(2) ŠÇ—ŽÒ‚ª preload ‚É‚Ä”CˆÓ‚ÌƒfƒBƒŒƒNƒgƒŠ‚ðŽw’è‚Å‚«‚é
+(1) /tmp ï¿½ï¿½ open_basedir ï¿½ÉŠÜ‚Ü‚ï¿½é‚©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+(2) ï¿½Ç—ï¿½ï¿½Ò‚ï¿½ preload ï¿½É‚Ä”Cï¿½Ó‚Ìƒfï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½wï¿½ï¿½Å‚ï¿½ï¿½ï¿½
 
-2. PHP 5.2 ‘Î‰ž
-(1) E_STRICT ƒŒƒxƒ‹‚ÌƒGƒ‰[‚ð’×‚µ‚½
-(2) ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“Eƒ‚[ƒh‚ÌDBˆ—‚ð•ÏX‚µ‚½
+2. PHP 5.2 ï¿½Î‰ï¿½
+(1) E_STRICT ï¿½ï¿½ï¿½xï¿½ï¿½ï¿½ÌƒGï¿½ï¿½ï¿½[ï¿½ï¿½×‚ï¿½ï¿½ï¿½
+(2) ï¿½Rï¿½}ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½DBï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏXï¿½ï¿½ï¿½ï¿½
 
-3. weblinks ƒ‚ƒWƒ…[ƒ‹‚ÌƒoƒO‘Îô‚É”º‚¢A‚¢‚­‚Â‚©•ÏX‚ðs‚Á‚½
+3. weblinks ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ìƒoï¿½Oï¿½Îï¿½É”ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½Â‚ï¿½ï¿½ÏXï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
 
 
 =================================================
@@ -252,17 +252,17 @@ Version: 1.10
 Date:   2007-09-15
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-1. weblinks ƒ‚ƒWƒ…[ƒ‹‚Ì•ÏX‚É”º‚¢A‰º‹L‚Ì•ÏX‚ðs‚Á‚½
-(1) ƒ[ƒ‹‚Ìƒeƒ“ƒvƒŒ[ƒg‚Ì•ÒW‚ðs‚¤ mail_template ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(2) ƒ[ƒ‹‚ÌƒtƒH[ƒ€‚ð•\Ž¦‚·‚é mail_form ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(3) ƒ[ƒ‹‚Ì‘—M‚ðs‚¤ mail_send ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(4) Œ¾Œêƒtƒ@ƒCƒ‹ main.php ‚ð’Ç‰Á‚µ‚½
-(5) page_frame ƒNƒ‰ƒX‚É op •Ï”‚ð’Ç‰Á‚µ‚½
-(6) error ƒNƒ‰ƒX‚ÌƒGƒ‰[•\Ž¦‚ð•ÏX‚µ‚½
-(7) system ƒNƒ‰ƒX‚Éƒ‚ƒWƒ…[ƒ‹ˆê——‚ÌŽæ“¾‚ð’Ç‰Á‚µ‚½
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+1. weblinks ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ÏXï¿½É”ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Lï¿½Ì•ÏXï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
+(1) ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ìƒeï¿½ï¿½ï¿½vï¿½ï¿½ï¿½[ï¿½gï¿½Ì•ÒWï¿½ï¿½ï¿½sï¿½ï¿½ mail_template ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(2) ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ìƒtï¿½Hï¿½[ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ mail_form ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(3) ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì‘ï¿½ï¿½Mï¿½ï¿½ï¿½sï¿½ï¿½ mail_send ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(4) ï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ main.php ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(5) page_frame ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ op ï¿½Ïï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(6) error ï¿½Nï¿½ï¿½ï¿½Xï¿½ÌƒGï¿½ï¿½ï¿½[ï¿½\ï¿½ï¿½ï¿½ï¿½ÏXï¿½ï¿½ï¿½ï¿½
+(7) system ï¿½Nï¿½ï¿½ï¿½Xï¿½Éƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ê——ï¿½ÌŽæ“¾ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 =================================================
@@ -270,11 +270,11 @@ Version: 1.01
 Date:   2007-09-01
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-1. ƒoƒO‘Îô
-(1) RSS”zM‚Å Noitce ƒGƒ‰[‚ª•\Ž¦‚³‚ê‚é
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+1. ï¿½oï¿½Oï¿½Îï¿½
+(1) RSSï¿½zï¿½Mï¿½ï¿½ Noitce ï¿½Gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 https://dev.xoops.org/modules/xfmod/tracker/?func=detail&aid=4697&group_id=1300&atid=1353
 https://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=8&topic_id=681
 
@@ -284,45 +284,45 @@ Version: 1.00
 Date:   2007-08-05
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-1. MySQL 4.1/5.x ‚Ì‘Î‰ž
-(1) •¶ŽšƒR[ƒh‚ÌŽw’è
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+1. MySQL 4.1/5.x ï¿½Ì‘Î‰ï¿½
+(1) ï¿½ï¿½ï¿½ï¿½ï¿½Rï¿½[ï¿½hï¿½ÌŽwï¿½ï¿½
 https://linux.ohwada.jp/modules/newbb/viewtopic.php?forum=9&topic_id=631
-“ú–{Œê‚Å‚ÍAMySQL ‚Ì•¶ŽšƒR[ƒh‚Í ujis (EUC-JP) ‚ÉŒÅ’è‚É‚µ‚Ä‚¢‚½B
-ŠÇ—ŽÒ‚ª preload/charset.php ‚ðÝ’u‚µ‚ÄA”CˆÓ‚Ì•¶ŽšƒR[ƒh‚ªŽw’è‚Å‚«‚é‚æ‚¤‚É•ÏX‚µ‚½B
+ï¿½ï¿½ï¿½{ï¿½ï¿½Å‚ÍAMySQL ï¿½Ì•ï¿½ï¿½ï¿½ï¿½Rï¿½[ï¿½hï¿½ï¿½ ujis (EUC-JP) ï¿½ÉŒÅ’ï¿½É‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½B
+ï¿½Ç—ï¿½ï¿½Ò‚ï¿½ preload/charset.php ï¿½ï¿½Ý’uï¿½ï¿½ï¿½ÄAï¿½Cï¿½Ó‚Ì•ï¿½ï¿½ï¿½ï¿½Rï¿½[ï¿½hï¿½ï¿½ï¿½wï¿½ï¿½Å‚ï¿½ï¿½ï¿½æ‚¤ï¿½É•ÏXï¿½ï¿½ï¿½ï¿½ï¿½B
 
-(2) ‰º‹L‚Ìƒtƒ@ƒCƒ‹‚ðVÝ‚µ‚½
+(2) ï¿½ï¿½ï¿½Lï¿½Ìƒtï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
 - api/bin.php
 - preload/_charset.php
 - language/english/charset.php
 - language/japanese/charset.php
 
-(3) bin_base ƒNƒ‰ƒX‚É•¶ŽšƒR[ƒh‚ÌÝ’è‚ð’Ç‰Á‚µ‚½
+(3) bin_base ï¿½Nï¿½ï¿½ï¿½Xï¿½É•ï¿½ï¿½ï¿½ï¿½Rï¿½[ï¿½hï¿½ÌÝ’ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 
-2. weblinks ƒ‚ƒWƒ…[ƒ‹‚Ì•ÏX‚É”º‚¢A‰º‹L‚Ì•ÏX‚ðs‚Á‚½
-(1) ƒTƒjƒ^ƒCƒYˆ—‚ðs‚¤ sanitize.php ‚ðVÝ‚µ‚½
-(2) strings ƒNƒ‰ƒX‚ÌƒTƒjƒ^ƒCƒYˆ—‚ð•ÏX‚µ‚½
-(3) object_handler ƒNƒ‰ƒX‚ÉƒtƒB[ƒ‹ƒh€–Ú–¼‚ÌŽæ“¾‚ð’Ç‰Á‚µ‚½
-(4) error ƒNƒ‰ƒX‚ÉƒGƒ‰[•\Ž¦‚ÌƒnƒCƒ‰ƒCƒg‚ð’Ç‰Á‚µ‚½
-(5) config_store_handler ƒNƒ‰ƒX‚ÉÝ’è’l‚ÌŽæ“¾‚ð’Ç‰Á‚µ‚½
-(6) html ƒNƒ‰ƒX‚ð W3C €‹’‚É•ÏX‚µ‚½
+2. weblinks ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ÏXï¿½É”ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Lï¿½Ì•ÏXï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
+(1) ï¿½Tï¿½jï¿½^ï¿½Cï¿½Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ sanitize.php ï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(2) strings ï¿½Nï¿½ï¿½ï¿½Xï¿½ÌƒTï¿½jï¿½^ï¿½Cï¿½Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏXï¿½ï¿½ï¿½ï¿½
+(3) object_handler ï¿½Nï¿½ï¿½ï¿½Xï¿½Éƒtï¿½Bï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Ú–ï¿½ï¿½ÌŽæ“¾ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(4) error ï¿½Nï¿½ï¿½ï¿½Xï¿½ÉƒGï¿½ï¿½ï¿½[ï¿½\ï¿½ï¿½ï¿½Ìƒnï¿½Cï¿½ï¿½ï¿½Cï¿½gï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(5) config_store_handler ï¿½Nï¿½ï¿½ï¿½Xï¿½ÉÝ’ï¿½lï¿½ÌŽæ“¾ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(6) html ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ W3C ï¿½ï¿½ï¿½ï¿½ï¿½É•ÏXï¿½ï¿½ï¿½ï¿½
 
-3. RSS‰ðÍ, RSS”zM
-(1) W3CŒ`Ž®‚Ì“ú•t‚ð•ÏŠ·‚·‚é w3cdtf.php ‚ðVÝ‚µ‚½
-(2) rss_base_object ƒNƒ‰ƒX‚Ì“ú•tˆ—‚ð•ÏX‚µ‚½
-(3) rss_parse_object ƒNƒ‰ƒX‚É–¢’è‹`•¶Žš‚Ìˆ—‚ð’Ç‰Á‚µ‚½
-(4) convert_encoding ƒNƒ‰ƒX‚Æ rss_build ƒNƒ‰ƒX‚Ì UTF-8 •ÏŠ·‚ð•ÏX‚µ‚½
+3. RSSï¿½ï¿½ï¿½, RSSï¿½zï¿½M
+(1) W3Cï¿½`ï¿½ï¿½ï¿½Ì“ï¿½ï¿½tï¿½ï¿½ÏŠï¿½ï¿½ï¿½ï¿½ï¿½ w3cdtf.php ï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(2) rss_base_object ï¿½Nï¿½ï¿½ï¿½Xï¿½Ì“ï¿½ï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÏXï¿½ï¿½ï¿½ï¿½
+(3) rss_parse_object ï¿½Nï¿½ï¿½ï¿½Xï¿½É–ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(4) convert_encoding ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ rss_build ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ UTF-8 ï¿½ÏŠï¿½ï¿½ï¿½ÏXï¿½ï¿½ï¿½ï¿½
 
-4. ‘½Œ¾Œê
-(1) ƒhƒCƒcŒê‚ð’Ç‰Á‚µ‚½
-(2) ƒhƒCƒc‘‚ð’Ç‰Á‚µ‚½
+4. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+(1) ï¿½hï¿½Cï¿½cï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(2) ï¿½hï¿½Cï¿½cï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=323&forum=2
 
-5. ƒoƒO‘Îô
-(1) RSS •\Ž¦‚Ì site_url ‚ªƒTƒjƒ^ƒCƒY‚³‚ê‚È‚¢
-(2) form ƒNƒ‰ƒX‚ÌŒë‹L‚ðC³‚µ‚½
+5. ï¿½oï¿½Oï¿½Îï¿½
+(1) RSS ï¿½\ï¿½ï¿½ï¿½ï¿½ site_url ï¿½ï¿½ï¿½Tï¿½jï¿½^ï¿½Cï¿½Yï¿½ï¿½ï¿½ï¿½È‚ï¿½
+(2) form ï¿½Nï¿½ï¿½ï¿½Xï¿½ÌŒï¿½Lï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 =================================================
@@ -330,13 +330,13 @@ Version: 0.91
 Date:   2007-07-20
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-(1) ƒ[ƒ‹ƒAƒhƒŒƒX‚ÌŒŸ¸‚ð’Ç‰Á‚µ‚½
-(2) GeoRSS ‚Æ Media RSS ‚É‘Î‰ž‚µ‚½
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+(1) ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Aï¿½hï¿½ï¿½ï¿½Xï¿½ÌŒï¿½ï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(2) GeoRSS ï¿½ï¿½ Media RSS ï¿½É‘Î‰ï¿½ï¿½ï¿½ï¿½ï¿½
 
-ƒoƒO‘Îô
+ï¿½oï¿½Oï¿½Îï¿½
 (1) 4647: keyword "abc" match "abccc"
 
 
@@ -345,26 +345,26 @@ Version: 0.90
 Date:   2007-07-01
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-1. RSSC ƒ‚ƒWƒ…[ƒ‹‚Ì•ÏX‚É”º‚¢A‰º‹L‚Ì•ÏX‚ðs‚Á‚½
-(1) XOOPS ‚ÌƒƒWƒƒ[Eƒo[ƒWƒ‡ƒ“‚ð”»’è‚·‚é admin ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(2) •ª‚©‚¿‘‚«‚ðs‚¤ extract_word ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(3) kakasi ‚Ì‘€ì‚ðs‚¤ kakasi ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(4) ƒfƒBƒŒƒNƒgƒŠ‘€ì‚ðs‚¤ dir ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(5) ƒRƒ}ƒ“ƒhŽÀsŽž‚Ìƒtƒ@ƒCƒ‹‚ðˆµ‚¤ bin_file ƒNƒ‰ƒX‚ÉVÝ‚µ‚½
-(6) rss ƒIƒuƒWƒFƒNƒgEƒNƒ‰ƒX‚ð rss_base ‚Æ rss_parse ‚Æ rss_view ‚É•ªŠ„‚µ‚½
-(7) bin_base ƒNƒ‰ƒX‚ÉƒRƒ}ƒ“ƒhEƒpƒ‰ƒ[ƒ^‚Ì‰ðÍ‚ð’Ç‰Á‚µ‚½
-(8) manage ƒNƒ‰ƒX‚ÉˆêŠ‡•ÏX‚ð’Ç‰Á‚µ‚½
-(9) file ƒNƒ‰ƒX‚É’Ç‹L‘ž‚Ý‚ð’Ç‰Á‚µ‚½
-(10) ƒfƒoƒbƒN‚Ì‚½‚ß‚É debug_print_backtrace() ‚ðÌ—p‚µ‚½
-(11) rss_paser ‚Æ rss_builder ‚Æ admin ‚Ì api ƒtƒ@ƒCƒ‹‚ð’Ç‰Á‚µ‚½
-(12) preload ƒfƒBƒŒƒBƒgƒŠ‚ð’Ç‰Á‚µ‚½
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+1. RSSC ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ÏXï¿½É”ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Lï¿½Ì•ÏXï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
+(1) XOOPS ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½Eï¿½oï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ð”»’è‚·ï¿½ï¿½ admin ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(2) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ extract_word ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(3) kakasi ï¿½Ì‘ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ kakasi ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(4) ï¿½fï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ dir ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(5) ï¿½Rï¿½}ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½sï¿½ï¿½ï¿½Ìƒtï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ bin_file ï¿½Nï¿½ï¿½ï¿½Xï¿½ÉVï¿½Ý‚ï¿½ï¿½ï¿½
+(6) rss ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Eï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ rss_base ï¿½ï¿½ rss_parse ï¿½ï¿½ rss_view ï¿½É•ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+(7) bin_base ï¿½Nï¿½ï¿½ï¿½Xï¿½ÉƒRï¿½}ï¿½ï¿½ï¿½hï¿½Eï¿½pï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½^ï¿½Ì‰ï¿½Í‚ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(8) manage ï¿½Nï¿½ï¿½ï¿½Xï¿½ÉˆêŠ‡ï¿½ÏXï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(9) file ï¿½Nï¿½ï¿½ï¿½Xï¿½É’Ç‹Lï¿½ï¿½ï¿½ï¿½ï¿½Ý‚ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(10) ï¿½fï¿½oï¿½bï¿½Nï¿½Ì‚ï¿½ï¿½ß‚ï¿½ debug_print_backtrace() ï¿½ï¿½ï¿½Ì—pï¿½ï¿½ï¿½ï¿½
+(11) rss_paser ï¿½ï¿½ rss_builder ï¿½ï¿½ admin ï¿½ï¿½ api ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(12) preload ï¿½fï¿½Bï¿½ï¿½ï¿½Bï¿½gï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 
-2. ‘½Œ¾Œê
-(1) “ú–{Œê UTF-8 ƒtƒ@ƒCƒ‹‚ð’Ç‰Á‚µ‚½
-(2) “ú–{Œê ‚Æ‚·‚éŒ¾Œêƒtƒ@ƒCƒ‹–¼ japanese, jp_utf8 ‚ðÝ’è‚·‚é‚½‚ß‚É lang_name_jp.php ‚ðVÝ‚µ‚½
+2. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+(1) ï¿½ï¿½ï¿½{ï¿½ï¿½ UTF-8 ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(2) ï¿½ï¿½ï¿½{ï¿½ï¿½ ï¿½Æ‚ï¿½ï¿½éŒ¾ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ japanese, jp_utf8 ï¿½ï¿½Ý’è‚·ï¿½é‚½ï¿½ß‚ï¿½ lang_name_jp.php ï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
 
 
 =================================================
@@ -372,35 +372,35 @@ Version: 0.80
 Date:   2007-05-15
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ •ÏX“à—e
-1. WhatsNew ƒ‚ƒWƒ…[ƒ‹‚Ì•ÏX‚É”º‚¢A‰º‹L‚Ì•ÏX‚ðs‚Á‚½
-(1) magpie rss parser ‚¨‚æ‚Ñ rss ‰ðÍ‚ÌƒNƒ‰ƒX‚ð RSSC ƒ‚ƒWƒ…[ƒ‹‚æ‚èˆÚÝ‚µ‚½
+ï¿½ï¿½ ï¿½ÏXï¿½ï¿½ï¿½e
+1. WhatsNew ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ÏXï¿½É”ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Lï¿½Ì•ÏXï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½
+(1) magpie rss parser ï¿½ï¿½ï¿½ï¿½ï¿½ rss ï¿½ï¿½Í‚ÌƒNï¿½ï¿½ï¿½Xï¿½ï¿½ RSSC ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ÚÝ‚ï¿½ï¿½ï¿½
 - magpie_parser
 - magpie_cache
 - rss_object
 - rss_parser
-- rss_utility
+- RssUtility
 
-(2) weblog update ‚ÌƒNƒ‰ƒX‚ð WhatsNew ƒ‚ƒWƒ…[ƒ‹‚æ‚èˆÚA‚µ‚½
+(2) weblog update ï¿½ÌƒNï¿½ï¿½ï¿½Xï¿½ï¿½ WhatsNew ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ÚAï¿½ï¿½ï¿½ï¿½
 - weblog update
 
-(3) Œ¾Œêƒtƒ@ƒCƒ‹‚ð RSSC ƒ‚ƒWƒ…[ƒ‹‚æ‚èˆÚÝ‚µ‚½
+(3) ï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ RSSC ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ÚÝ‚ï¿½ï¿½ï¿½
 - rss_view.php
 
-(4) ƒeƒ“ƒvƒŒ[ƒg‚ð RSSC ƒ‚ƒWƒ…[ƒ‹‚æ‚èˆÚÝ‚µ‚½
+(4) ï¿½eï¿½ï¿½ï¿½vï¿½ï¿½ï¿½[ï¿½gï¿½ï¿½ RSSC ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ÚÝ‚ï¿½ï¿½ï¿½
 - view_rss.html
 - view_rdf.html
 - view_atom.html
 
-(5) RSS ¶¬Žž‚ÉƒTƒCƒgî•ñ‚ð•ÏX‰Â”\‚É‚µ‚½
+(5) RSS ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÉƒTï¿½Cï¿½gï¿½ï¿½ï¿½ï¿½ÏXï¿½Â”\ï¿½É‚ï¿½ï¿½ï¿½
 
-2. XoopsCube 2.1 ‚É‘Î‰ž‚µ‚½
-(1) legacy ƒ‚ƒWƒ…[ƒ‹‚ªƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚Ä‚¢‚é‚©‚ðŠm”F‚·‚éŠÖ”‚ð’Ç‰Á‚µ‚½
-(2) ƒTƒCƒgŠÇ—ŽÒ‚ð meta_author ‚©‚ç uid=1 ‚Ìƒ†[ƒU‚É•ÏX‚µ‚½
+2. XoopsCube 2.1 ï¿½É‘Î‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(1) legacy ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Xï¿½gï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½ï¿½ï¿½mï¿½Fï¿½ï¿½ï¿½ï¿½Öï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(2) ï¿½Tï¿½Cï¿½gï¿½Ç—ï¿½ï¿½Ò‚ï¿½ meta_author ï¿½ï¿½ï¿½ï¿½ uid=1 ï¿½Ìƒï¿½ï¿½[ï¿½Uï¿½É•ÏXï¿½ï¿½ï¿½ï¿½
 
-3. GIJOE ‚³‚ñ‚Ì myblocksadmin ‚ðÌ—p‚µ‚½
+3. GIJOE ï¿½ï¿½ï¿½ï¿½ï¿½ myblocksadmin ï¿½ï¿½ï¿½Ì—pï¿½ï¿½ï¿½ï¿½
 - admin.php
 - myblockform.php
 - myblocksadmin.php
@@ -409,18 +409,18 @@ Date:   2007-05-15
 - blocksadmin.inc.php
 - updateblock.inc.php
 
-4. ‚»‚Ì‚Ù‚©
-(1) UNIX ŠÂ‹«‚É‚ÄAwork ƒfƒBƒŒƒNƒgƒŠ ‚É /tmp ‚ðŽw’è‚µ‚½
-(2) appache Œ ŒÀ‚Åì¬‚µ‚½ƒtƒ@ƒCƒ‹‚ðÁ‹Ž‚Å‚«‚é‚æ‚¤‚ÉA
-ƒtƒ@ƒCƒ‹ì¬Žž‚ÉƒAƒNƒZƒXŒ  ‚ð 666 ‚É‚µ‚½
+4. ï¿½ï¿½ï¿½Ì‚Ù‚ï¿½
+(1) UNIX ï¿½Â‹ï¿½ï¿½É‚ÄAwork ï¿½fï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½ ï¿½ï¿½ /tmp ï¿½ï¿½ï¿½wï¿½è‚µï¿½ï¿½
+(2) appache ï¿½ï¿½ï¿½ï¿½ï¿½Åì¬ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½æ‚¤ï¿½ÉA
+ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ì¬ï¿½ï¿½ï¿½ÉƒAï¿½Nï¿½Zï¿½Xï¿½ï¿½ ï¿½ï¿½ 666 ï¿½É‚ï¿½ï¿½ï¿½
 
-5. ‘½Œ¾Œê ‘Î‰ž
-ƒyƒ‹ƒVƒƒŒêƒtƒ@ƒCƒ‹ (xoops persian –|–ó)
+5. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î‰ï¿½
+ï¿½yï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ (xoops persian ï¿½|ï¿½ï¿½)
 
-œ ’ˆÓ
-‘½‚­‚ÌƒvƒƒOƒ‰ƒ€‚ð’Ç‰Á‚µ‚Ä‚¢‚Ü‚·B
-‘å‚«‚È–â‘è‚Í‚È‚¢‚Í‚¸‚Å‚·‚ªA¬‚³‚È–â‘è‚Í‚ ‚é‚ÆŽv‚¢‚Ü‚·B
-ƒoƒO•ñ‚âƒoƒO‰ðŒˆ‚È‚Ç‚ðŠ½Œ}‚µ‚Ü‚·B
+ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒvï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½B
+ï¿½å‚«ï¿½È–ï¿½ï¿½Í‚È‚ï¿½ï¿½Í‚ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½È–ï¿½ï¿½Í‚ï¿½ï¿½ï¿½ÆŽvï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
+ï¿½oï¿½Oï¿½ñ‚ï¿½oï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½È‚Ç‚ï¿½ï¿½ï¿½ï¿½}ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
 
 
 =================================================
@@ -431,11 +431,11 @@ URL:    https://linux.ohwada.jp/
 Email:  webmaster@ohwada.jp
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-•ÏX“à—e
-(1) ƒvƒƒOƒ‰ƒ€‚ÌŽÀsŽžŠÔ‚ðŒv‘ª‚·‚é‚½‚ß‚Ì time ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(2) Weblinks ƒ‚ƒWƒ…[ƒ‹‚Ì•ÏX‚É”º‚¢AŽáŠ±•ÏX‚µ‚½
+ï¿½ÏXï¿½ï¿½ï¿½e
+(1) ï¿½vï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ÌŽï¿½ï¿½sï¿½ï¿½ï¿½Ô‚ï¿½ï¿½vï¿½ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ß‚ï¿½ time ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(2) Weblinks ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ÏXï¿½É”ï¿½ï¿½ï¿½ï¿½Aï¿½áŠ±ï¿½ÏXï¿½ï¿½ï¿½ï¿½
 
 
 =================================================
@@ -443,21 +443,21 @@ Version: 0.60
 Date:   2006-12-17
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-•ÏX“à—e
-1. Weblinks ƒ‚ƒWƒ…[ƒ‹‚Ì•ÏX‚É”º‚¢A‰º‹L‚Ì‹@”\‚ð’Ç‰Á‚µ‚½
-(1) ƒf[ƒ^ƒx[ƒX‚É•Û‘¶‚·‚éƒIƒuƒWƒFƒNƒg‚ð‰ÁH‚·‚é object_validate ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(2) ƒfƒoƒbƒN•Ï”‚Ì•\Ž¦‚·‚é debug ƒNƒ‰ƒX‚ðVÝ‚µ‚½
-(3) ƒtƒH[ƒ€ƒNƒ‰ƒX‚Æ•¶ŽšƒNƒ‰ƒX‚ÉŒ»ÝŽž‚ð”NŒŽ“ú‚É•ªŠ„‚·‚éƒƒ\ƒbƒh‚ð’Ç‰Á‚µ‚½
+ï¿½ÏXï¿½ï¿½ï¿½e
+1. Weblinks ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ÏXï¿½É”ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Lï¿½Ì‹@ï¿½\ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(1) ï¿½fï¿½[ï¿½^ï¿½xï¿½[ï¿½Xï¿½É•Û‘ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½Hï¿½ï¿½ï¿½ï¿½ object_validate ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(2) ï¿½fï¿½oï¿½bï¿½Nï¿½Ïï¿½ï¿½Ì•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ debug ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(3) ï¿½tï¿½Hï¿½[ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Xï¿½Æ•ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Xï¿½ÉŒï¿½ï¿½ÝŽï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½É•ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½éƒï¿½\ï¿½bï¿½hï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 
-2. Œ¾Œêƒtƒ@ƒCƒ‹
-(1) ‰ºˆÊŒÝŠ·—p‚ÌŒ¾Œêƒtƒ@ƒCƒ‹‚ð’Ç‰Á‚µ‚½
+2. ï¿½ï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½
+(1) ï¿½ï¿½ï¿½ÊŒÝŠï¿½ï¿½pï¿½ÌŒï¿½ï¿½ï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 
-3. ’nˆæ
-(1) ƒCƒ‰ƒ“ (ir) ‚ð’Ç‰Á‚µ‚½
+3. ï¿½nï¿½ï¿½
+(1) ï¿½Cï¿½ï¿½ï¿½ï¿½ (ir) ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 
-4. ƒoƒO‚ÌC³
+4. ï¿½oï¿½Oï¿½ÌCï¿½ï¿½
 (1) 4417: language singleton done not work correctly
 https://dev.xoops.org/modules/xfmod/tracker/?func=detail&aid=4417&group_id=1199&atid=971
 https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=256&forum=2
@@ -468,24 +468,24 @@ Version: 0.50
 Date:   2006-11-20
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-•ÏX“à—e
-1. happy_search ƒ‚ƒWƒ…[ƒ‹‚ÌVÝ‚É”º‚¢A‰º‹L‚Ì‹@”\‚ð’Ç‰Á‚µ‚½
-(1) ŒŸõƒNƒ‰ƒX‚ÉXOOPSƒVƒXƒeƒ€•Ï”‚ðŽæ“¾‚·‚éƒƒ\ƒbƒh‚Ì’Ç‰Á
-(2) POST•Ï”ƒNƒ‰ƒX‚É®””z—ñ‚ðŽæ“¾‚·‚éƒƒ\ƒbƒh‚Ì’Ç‰Á
-(3) ƒIƒuƒWƒFƒNƒgEƒNƒ‰ƒX‚ÉcheckboxŒ`Ž®‚Ì•Ï”‚ð“o˜^‚·‚é‚½‚ß‚Ìƒƒ\ƒbƒh‚Ì’Ç‰Á
-(4) ƒVƒXƒeƒ€EƒNƒ‰ƒX‚Égrouppermƒe[ƒuƒ‹‚ð‘€ì‚·‚éƒƒ\ƒbƒh‚Ì’Ç‰Á
-(5) •¶ŽšƒGƒ“ƒR[ƒh•ÏŠ·ƒNƒ‰ƒX‚ÉUTF8•ÏŠ·‚·‚éƒƒ\ƒbƒh‚Ì’Ç‰Á
-(6) •¶ŽšƒNƒ‰ƒX‚É”z—ñ‚ð˜AŒ‹‚·‚éƒƒ\ƒbƒh‚Ì’Ç‰Á
-(7) ƒnƒCƒ‰ƒCƒgEƒNƒ‰ƒX‚É‹æØ‚è•¶Žš‚ðƒGƒXƒP[ƒv‚·‚é•ÏX
+ï¿½ÏXï¿½ï¿½ï¿½e
+1. happy_search ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÌVï¿½Ý‚É”ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Lï¿½Ì‹@ï¿½\ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(1) ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½XOOPSï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½Ïï¿½ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½éƒï¿½\ï¿½bï¿½hï¿½Ì’Ç‰ï¿½
+(2) POSTï¿½Ïï¿½ï¿½Nï¿½ï¿½ï¿½Xï¿½Éï¿½ï¿½ï¿½ï¿½zï¿½ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½éƒï¿½\ï¿½bï¿½hï¿½Ì’Ç‰ï¿½
+(3) ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Eï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½checkboxï¿½`ï¿½ï¿½ï¿½Ì•Ïï¿½ï¿½ï¿½oï¿½^ï¿½ï¿½ï¿½é‚½ï¿½ß‚Ìƒï¿½ï¿½\ï¿½bï¿½hï¿½Ì’Ç‰ï¿½
+(4) ï¿½Vï¿½Xï¿½eï¿½ï¿½ï¿½Eï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½grouppermï¿½eï¿½[ï¿½uï¿½ï¿½ï¿½ð‘€ì‚·ï¿½éƒï¿½\ï¿½bï¿½hï¿½Ì’Ç‰ï¿½
+(5) ï¿½ï¿½ï¿½ï¿½ï¿½Gï¿½ï¿½ï¿½Rï¿½[ï¿½hï¿½ÏŠï¿½ï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½UTF8ï¿½ÏŠï¿½ï¿½ï¿½ï¿½éƒï¿½\ï¿½bï¿½hï¿½Ì’Ç‰ï¿½
+(6) ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½Xï¿½É”zï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½éƒï¿½\ï¿½bï¿½hï¿½Ì’Ç‰ï¿½
+(7) ï¿½nï¿½Cï¿½ï¿½ï¿½Cï¿½gï¿½Eï¿½Nï¿½ï¿½ï¿½Xï¿½É‹ï¿½Ø‚è•¶ï¿½ï¿½ï¿½ï¿½ï¿½Gï¿½Xï¿½Pï¿½[ï¿½vï¿½ï¿½ï¿½ï¿½ÏX
 
-2. ŠJ”­ŽÒŒü‚¯‚É‰º‹L‚Ì‹@”\‚ðVÝ‚µ‚½
-(1) ƒIƒuƒWƒFƒNƒgEƒNƒ‰ƒX‚ðƒeƒXƒg‚·‚é
-(2) Ý’èƒIƒuƒWƒFƒNƒgEƒNƒ‰ƒX‚ðƒeƒXƒg‚·‚é
+2. ï¿½Jï¿½ï¿½ï¿½ÒŒï¿½ï¿½ï¿½ï¿½É‰ï¿½ï¿½Lï¿½Ì‹@ï¿½\ï¿½ï¿½Vï¿½Ý‚ï¿½ï¿½ï¿½
+(1) ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Eï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½eï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½
+(2) ï¿½Ý’ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Eï¿½Nï¿½ï¿½ï¿½Xï¿½ï¿½ï¿½eï¿½Xï¿½gï¿½ï¿½ï¿½ï¿½
 
-3. ƒoƒO‚ÌC³
-(1) 4378: POST•Ï”‚ÉƒoƒbƒNƒXƒ‰ƒbƒVƒ…‚ª•t‰Á‚³‚ê‚é
+3. ï¿½oï¿½Oï¿½ÌCï¿½ï¿½
+(1) 4378: POSTï¿½Ïï¿½ï¿½Éƒoï¿½bï¿½Nï¿½Xï¿½ï¿½ï¿½bï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 https://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4378&group_id=1300&atid=1353
 https://linux.ohwada.jp/modules/newbb/viewtopic.php?topic_id=558&start=0#forumpost1975
 
@@ -501,13 +501,13 @@ Version: 0.40
 Date:   2006-11-08
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-•ÏX“à—e
-RSSC ƒ‚ƒWƒ…[ƒ‹‚Ì•ÏX‚É”º‚¢A‰º‹L‚Ì‹@”\‚ð’Ç‰Á‚µ‚½
-(1) ƒvƒƒLƒVEƒT[ƒo[‚Ö‚Ì‘Î‰ž
-(2) Ý’èƒe[ƒuƒ‹‚ÌƒtƒH[ƒ€—p‚Ì•ÏX
-(3) ƒTƒjƒ^ƒCƒY‚Ì¬•ÏX
+ï¿½ÏXï¿½ï¿½ï¿½e
+RSSC ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Ì•ÏXï¿½É”ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½Lï¿½Ì‹@ï¿½\ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(1) ï¿½vï¿½ï¿½ï¿½Lï¿½Vï¿½Eï¿½Tï¿½[ï¿½oï¿½[ï¿½Ö‚Ì‘Î‰ï¿½
+(2) ï¿½Ý’ï¿½eï¿½[ï¿½uï¿½ï¿½ï¿½Ìƒtï¿½Hï¿½[ï¿½ï¿½ï¿½pï¿½Ì•ÏX
+(3) ï¿½Tï¿½jï¿½^ï¿½Cï¿½Yï¿½Ìï¿½ï¿½ÏX
 
 
 =================================================
@@ -515,13 +515,13 @@ Version: 0.32
 Date:   2006-10-29
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-•ÏX“à—e
-(1) ƒyƒ‹ƒVƒƒŒê‚ð’Ç‰Á‚µ‚½
+ï¿½ÏXï¿½ï¿½ï¿½e
+(1) ï¿½yï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=243&forum=5
 
-(2) ƒoƒOC³ 4339F”ñƒ}ƒ‹ƒ`ƒoƒCƒgŠÂ‹«‚Å Fatal error ‚ª”­¶‚·‚é
+(2) ï¿½oï¿½Oï¿½Cï¿½ï¿½ 4339ï¿½Fï¿½ï¿½}ï¿½ï¿½ï¿½`ï¿½oï¿½Cï¿½gï¿½Â‹ï¿½ï¿½ï¿½ Fatal error ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 https://linux2.ohwada.net/modules/newbb/viewtopic.php?topic_id=244&forum=5
 https://dev.xoops.org/modules/xfmod/tracker/index.php?func=detail&aid=4339&group_id=1300&atid=1353
 
@@ -531,11 +531,11 @@ Version: 0.31
 Date:   2006-10-14
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-•ÏX“à—e
-(1) GoogleŒŸõ—p‚Ì‹@”\‚ð’Ç‰Á‚µ‚½
-(2) ‚Qd‚ÉƒnƒCƒ‰ƒCƒg‚³‚ê‚éƒoƒO‚ðC³‚µ‚½
+ï¿½ÏXï¿½ï¿½ï¿½e
+(1) Googleï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Ì‹@ï¿½\ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(2) ï¿½Qï¿½dï¿½Éƒnï¿½Cï¿½ï¿½ï¿½Cï¿½gï¿½ï¿½ï¿½ï¿½ï¿½oï¿½Oï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 =================================================
@@ -543,19 +543,19 @@ Version: 0.30
 Date:   2006-10-01
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-•ÏX“à—e
-1. WebLinks ‚ÅÌ—p‚µ‚½
-‚»‚ê‚É‡‚í‚¹‚ÄA‰º‹L‚Ì‹@”\‚ð’Ç‰Á‚µ‚½
+ï¿½ÏXï¿½ï¿½ï¿½e
+1. WebLinks ï¿½ÅÌ—pï¿½ï¿½ï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½Éï¿½ï¿½í‚¹ï¿½ÄAï¿½ï¿½ï¿½Lï¿½Ì‹@ï¿½\ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 
-(1) ’nˆæ‘I‘ð (Locate) ‚ÌŽd‘g‚Ý‚ðŽÀŒ±“I‚É“±“ü‚µ‚½B
-Œ¾Œê‚Æ‘E’nˆæ‚ð“Æ—§‚É‘I‘ð‚·‚éŽd‘g‚Ý‚Å‚·B
-ccTLDs ‚Ì‘ƒR[ƒh‚ðÌ—p‚µ‚½B
+(1) ï¿½nï¿½ï¿½Iï¿½ï¿½ (Locate) ï¿½ÌŽdï¿½gï¿½Ý‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
+ï¿½ï¿½ï¿½ï¿½Æï¿½ï¿½Eï¿½nï¿½ï¿½ï¿½Æ—ï¿½ï¿½É‘Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½dï¿½gï¿½Ý‚Å‚ï¿½ï¿½B
+ccTLDs ï¿½Ìï¿½ï¿½Rï¿½[ï¿½hï¿½ï¿½ï¿½Ì—pï¿½ï¿½ï¿½ï¿½ï¿½B
 https://www.iana.org/cctld/
-“ú–{(jp)A•Ä‘(us)A‰p‘(uk) ‚Ì‚R‚Â‚ð—pˆÓ‚µ‚½B
+ï¿½ï¿½ï¿½{(jp)ï¿½Aï¿½Äï¿½(us)ï¿½Aï¿½pï¿½ï¿½(uk) ï¿½Ì‚Rï¿½Â‚ï¿½pï¿½Ó‚ï¿½ï¿½ï¿½ï¿½B
 
-(2) file ŠÖ˜A‚ÌƒNƒ‰ƒX‚ð’Ç‰Á‚µ‚½
+(2) file ï¿½Ö˜Aï¿½ÌƒNï¿½ï¿½ï¿½Xï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 =================================================
@@ -563,25 +563,25 @@ Version: 0.20
 Date:   2006-09-10
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-•ÏX“à—e
-(1) ŒŸõ
-(1-1) ƒnƒCƒ‰ƒCƒg•\Ž¦ƒNƒ‰ƒX ‚ð’Ç‰Á‚µ‚½
-      SmartSection ‚ðŽQl‚É—¬—p‚µ‚½
-(1-2) ƒL[ƒ[ƒh‚ð’†S‚É—v–ñ‚·‚éŠÖ”‚ð’Ç‰Á‚µ‚½
-(1-3) ‚ä‚ç‚¬ŒŸõ ‚ð’Ç‰Á‚µ‚½i“ú–{Œê‚Ì‚Ýj
-      Amethyst Blue ‚É‚Ä”z•z‚µ‚Ä‚¢‚éŒŸõƒ‚ƒWƒ…[ƒ‹‚ðŽQl‚É‚µ‚½
+ï¿½ÏXï¿½ï¿½ï¿½e
+(1) ï¿½ï¿½ï¿½ï¿½
+(1-1) ï¿½nï¿½Cï¿½ï¿½ï¿½Cï¿½gï¿½\ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½X ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+      SmartSection ï¿½ï¿½ï¿½Qï¿½lï¿½É—ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½
+(1-2) ï¿½Lï¿½[ï¿½ï¿½ï¿½[ï¿½hï¿½ð’†Sï¿½É—vï¿½ñ‚·‚ï¿½Öï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(1-3) ï¿½ï¿½ç‚¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½ï¿½ï¿½{ï¿½ï¿½Ì‚Ýj
+      Amethyst Blue ï¿½É‚Ä”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éŒŸï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½lï¿½É‚ï¿½ï¿½ï¿½
 
-(2) ƒZƒbƒVƒ‡ƒ“ƒ`ƒPƒbƒgEƒNƒ‰ƒX (XoopsGTicket) ‚ð’Ç‰Á‚µ‚½
-    Peak ‚É‚Ä”z•z‚µ‚Ä‚¢‚é Tinyd ‚©‚ç—¬—p‚µ‚½
+(2) ï¿½Zï¿½bï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½Pï¿½bï¿½gï¿½Eï¿½Nï¿½ï¿½ï¿½X (XoopsGTicket) ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+    Peak ï¿½É‚Ä”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ Tinyd ï¿½ï¿½ï¿½ç—¬ï¿½pï¿½ï¿½ï¿½ï¿½
 
-(3) form¶¬ƒNƒ‰ƒX ‚©‚ç html¶¬ƒNƒ‰ƒX ‚Æ form ƒ‰ƒCƒuƒ‰ƒŠEƒNƒ‰ƒX ‚ð•ª—£‚µ‚½
-(4) RDF/RSS/ATOM ¶¬ƒNƒ‰ƒX ‚ð’Ç‰Á‚µ‚½
-(5) ƒT[ƒo[ŠÂ‹«•Ï”‚ÌƒNƒ‰ƒX ‚ð’Ç‰Á‚µ‚½
-(6) Œ¾Œê•Ê‚ÌƒNƒ‰ƒX ‚ð’Ç‰Á‚µ‚½
-(7) ƒ}ƒ‹ƒ`ƒoƒCƒgŠÖ” ‚ð‚P‚Â‚Ìƒtƒ@ƒCƒ‹‚É‚Ü‚Æ‚ß‚½
-(8) typo ‚ÌC³
+(3) formï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½X ï¿½ï¿½ï¿½ï¿½ htmlï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½X ï¿½ï¿½ form ï¿½ï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½Nï¿½ï¿½ï¿½X ï¿½ð•ª—ï¿½ï¿½ï¿½ï¿½ï¿½
+(4) RDF/RSS/ATOM ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½X ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(5) ï¿½Tï¿½[ï¿½oï¿½[ï¿½Â‹ï¿½ï¿½Ïï¿½ï¿½ÌƒNï¿½ï¿½ï¿½X ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(6) ï¿½ï¿½ï¿½ï¿½Ê‚ÌƒNï¿½ï¿½ï¿½X ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
+(7) ï¿½}ï¿½ï¿½ï¿½`ï¿½oï¿½Cï¿½gï¿½Öï¿½ ï¿½ï¿½ï¿½Pï¿½Â‚Ìƒtï¿½@ï¿½Cï¿½ï¿½ï¿½É‚Ü‚Æ‚ß‚ï¿½
+(8) typo ï¿½ÌCï¿½ï¿½
 
 
 =================================================
@@ -589,22 +589,22 @@ Version: 0.10
 Date:   2006-07-10
 =================================================
 
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹‚ÍAHappy Linux ‚Å”z•z‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹—p‚Ìƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÍAHappy Linux ï¿½Å”zï¿½zï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½pï¿½Ìƒï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½
 
-œ ŠT—v
-ƒ‚ƒWƒ…[ƒ‹‚ÌŒ`‘Ô‚ð‚Æ‚Á‚Ä‚¢‚Ü‚·‚ªA
-‚±‚Ìƒ‚ƒWƒ…[ƒ‹’P‘Ì‚Å‚Í ‰½‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ“‹@”\‚ð’ñ‹Ÿ‚µ‚È‚¢
-ƒvƒƒOƒ‰ƒ€Eƒ‰ƒCƒuƒ‰ƒŠW‚Å‚·B
-ƒ‚ƒWƒ…[ƒ‹EƒCƒ“ƒXƒg[ƒ‹‚ð‚µ‚Ä‚àA‚µ‚È‚­‚Æ‚à“®ì‚µ‚Ü‚·B
+ï¿½ï¿½ ï¿½Tï¿½v
+ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÌŒ`ï¿½Ô‚ï¿½ï¿½Æ‚ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½A
+ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Pï¿½Ì‚Å‚ï¿½ ï¿½ï¿½ï¿½ÌƒAï¿½vï¿½ï¿½ï¿½Pï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½@ï¿½\ï¿½ï¿½ñ‹Ÿ‚ï¿½ï¿½È‚ï¿½
+ï¿½vï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Å‚ï¿½ï¿½B
+ï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Eï¿½Cï¿½ï¿½ï¿½Xï¿½gï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Aï¿½ï¿½ï¿½È‚ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ì‚µï¿½Ü‚ï¿½ï¿½B
 
-‚±‚ê‚ð—˜—p‚µ‚Ä‚¢‚éƒ‚ƒWƒ…[ƒ‹
-ERSSƒZƒ“ƒ^[
+ï¿½ï¿½ï¿½ï¿½ð—˜—pï¿½ï¿½ï¿½Ä‚ï¿½ï¿½éƒ‚ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½
+ï¿½ERSSï¿½Zï¿½ï¿½ï¿½^ï¿½[
 
-¡Œã —˜—p‚·‚é—\’è‚Ìƒ‚ƒWƒ…[ƒ‹
-EWebLinks
-EWhat's New
+ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½Ìƒï¿½ï¿½Wï¿½ï¿½ï¿½[ï¿½ï¿½
+ï¿½EWebLinks
+ï¿½EWhat's New
 
-œ TODO
-«—ˆ“I‚É‚ÍAXOOPS Cube 2.1 ‚ÅŽÀ‘•‚³‚ê‚é—\’è‚Ì ƒtƒŒ[ƒ€ƒ[ƒN‚ð—˜—p‚·‚é‚Â‚à‚è‚Å‚·B
-‚µ‚©‚µAŒ»s‚ÍA XOOPS 2.0A2.2A2.0 JPACube 2.1 ‚È‚Ç•¡”‚Ìƒvƒ‰ƒbƒgƒz[ƒ€‚ª‚ ‚é‚½‚ßA
-‚»‚ê‚ç‚É‹¤’Ê‚ÅŽg—p‚Å‚«‚éƒAƒhƒzƒbƒN‚ÈƒvƒƒOƒ‰ƒ€Eƒ‰ƒCƒuƒ‰ƒŠW‚Æ‚µ‚Ä‚Ü‚Æ‚ß‚Ü‚µ‚½B
+ï¿½ï¿½ TODO
+ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½É‚ÍAXOOPS Cube 2.1 ï¿½ÅŽï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ ï¿½tï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½Nï¿½ð—˜—pï¿½ï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½Å‚ï¿½ï¿½B
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½sï¿½ÍA XOOPS 2.0ï¿½A2.2ï¿½A2.0 JPï¿½ACube 2.1 ï¿½È‚Ç•ï¿½ï¿½ï¿½ï¿½Ìƒvï¿½ï¿½ï¿½bï¿½gï¿½zï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ßA
+ï¿½ï¿½ï¿½ï¿½ï¿½É‹ï¿½ï¿½Ê‚ÅŽgï¿½pï¿½Å‚ï¿½ï¿½ï¿½Aï¿½hï¿½zï¿½bï¿½Nï¿½Èƒvï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½ï¿½Wï¿½Æ‚ï¿½ï¿½Ä‚Ü‚Æ‚ß‚Ü‚ï¿½ï¿½ï¿½ï¿½B

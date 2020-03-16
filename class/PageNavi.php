@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: pagenavi.php,v 1.2 2012/04/08 18:22:28 ohwada Exp $
 
@@ -22,6 +22,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class pagenavi
 //=========================================================
+
+/**
+ * Class PageNavi
+ * @package XoopsModules\Happylinux
+ */
 class PageNavi
 {
     public $_MAX_PAGELIST = 10;
@@ -51,6 +56,9 @@ class PageNavi
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -71,6 +79,14 @@ class PageNavi
     // script:
     //   acceptable type: NULL, foo.php, foo.php?, foo.php?bar=abc
     //---------------------------------------------------------
+    /**
+     * @param string $script
+     * @param int    $total
+     * @param int    $page
+     * @param int    $perpage
+     * @param int    $sortid
+     * @return string
+     */
     public function build($script = '', $total = -1, $page = -1, $perpage = -1, $sortid = -1)
     {
         if ($total < 0) {
@@ -166,6 +182,11 @@ class PageNavi
         return $navi;
     }
 
+    /**
+     * @param int $total
+     * @param int $perpage
+     * @return false|float
+     */
     public function calc_page_last($total = -1, $perpage = -1)
     {
         if ($total < 0) {
@@ -181,6 +202,12 @@ class PageNavi
     //---------------------------------------------------------
     // calc Start
     //---------------------------------------------------------
+    /**
+     * @param int $total
+     * @param int $page
+     * @param int $perpage
+     * @return mixed
+     */
     public function calcStart($total = -1, $page = -1, $perpage = -1)
     {
         if ($total < 0) {
@@ -198,6 +225,12 @@ class PageNavi
         return $this->_start;
     }
 
+    /**
+     * @param int $total
+     * @param int $start
+     * @param int $perpage
+     * @return int
+     */
     public function calcEnd($total = -1, $start = -1, $perpage = -1)
     {
         if ($total < 0) {
@@ -224,6 +257,9 @@ class PageNavi
     //---------------------------------------------------------
     // GET paramter
     //---------------------------------------------------------
+    /**
+     * @return int
+     */
     public function getGetPage()
     {
         $page                = $this->get_get_int('page', 1);
@@ -232,6 +268,9 @@ class PageNavi
         return $page;
     }
 
+    /**
+     * @return int
+     */
     public function getGetSortid()
     {
         $sortid        = $this->get_get_int('sortid', $this->_sortid_default);
@@ -241,6 +280,11 @@ class PageNavi
         return $sortid;
     }
 
+    /**
+     * @param     $key
+     * @param int $default
+     * @return int
+     */
     public function get_get_int($key, $default = 0)
     {
         if (isset($_GET[$key])) {
@@ -255,6 +299,9 @@ class PageNavi
     //---------------------------------------------------------
     // POST paramter
     //---------------------------------------------------------
+    /**
+     * @return int
+     */
     public function getPostPage()
     {
         $page                = $this->get_post_int('page', 1);
@@ -263,6 +310,11 @@ class PageNavi
         return $page;
     }
 
+    /**
+     * @param     $key
+     * @param int $default
+     * @return int
+     */
     public function get_post_int($key, $default = 0)
     {
         if (isset($_POST[$key])) {
@@ -277,11 +329,17 @@ class PageNavi
     //---------------------------------------------------------
     // set and get parameter
     //---------------------------------------------------------
+    /**
+     * @param $value
+     */
     public function set_sortid($value)
     {
         $this->_sortid = $this->_check_sortid((int)$value);
     }
 
+    /**
+     * @param $value
+     */
     public function setPerpage($value)
     {
         $value = (int)$value;
@@ -293,6 +351,9 @@ class PageNavi
         }
     }
 
+    /**
+     * @param $value
+     */
     public function setTotal($value)
     {
         $value = (int)$value;
@@ -304,6 +365,9 @@ class PageNavi
         }
     }
 
+    /**
+     * @param $value
+     */
     public function set_sortid_default($value)
     {
         $value = (int)$value;
@@ -317,6 +381,9 @@ class PageNavi
         }
     }
 
+    /**
+     * @param $value
+     */
     public function set_max_sortid($value)
     {
         $value = (int)$value;
@@ -328,11 +395,17 @@ class PageNavi
         }
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_sortid($value)
     {
         $this->_flag_sortid = (int)$value;
     }
 
+    /**
+     * @return int
+     */
     public function get_page_current()
     {
         return $this->_page_current;
@@ -347,6 +420,11 @@ class PageNavi
         $this->_sort_arr   = [];
     }
 
+    /**
+     * @param        $title
+     * @param        $sort
+     * @param string $order
+     */
     public function add_sort($title, $sort, $order = 'ASC')
     {
         if ('DESC' == mb_strtoupper($order)) {
@@ -364,6 +442,10 @@ class PageNavi
         $this->_max_sortid++;
     }
 
+    /**
+     * @param int $sort_id
+     * @return bool|mixed
+     */
     public function get_sort($sort_id = -1)
     {
         if (-1 == $sort_id) {
@@ -381,6 +463,11 @@ class PageNavi
         return false;
     }
 
+    /**
+     * @param $sort_id
+     * @param $key
+     * @return bool|mixed
+     */
     public function get_sort_value($sort_id, $key)
     {
         if (-1 == $sort_id) {
@@ -413,6 +500,11 @@ class PageNavi
     //   -2: dont add sortid
     //       ex) foo.php
     //---------------------------------------------------------
+    /**
+     * @param     $script
+     * @param int $sortid
+     * @return string
+     */
     public function _add_script_sortid($script, $sortid = -1)
     {
         if (-2 == $sortid) {
@@ -440,6 +532,10 @@ class PageNavi
     //---------------------------------------------------------
     // add_script_page
     //---------------------------------------------------------
+    /**
+     * @param $script
+     * @return string
+     */
     public function _add_script_page($script)
     {
         $type = $this->_analyze_script_type($script);
@@ -464,6 +560,10 @@ class PageNavi
     //   type 1: foo.php?
     //   type 2: foo.php?bar=abc
     //---------------------------------------------------------
+    /**
+     * @param $script
+     * @return int
+     */
     public function _analyze_script_type($script)
     {
         $type = 0;  // foo.php
@@ -482,6 +582,10 @@ class PageNavi
         return $type;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function _sanitize_html_url($str)
     {
         $str = $this->_deny_javascript($str);
@@ -492,6 +596,11 @@ class PageNavi
     }
 
     // Checks if Javascript are included in string
+
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function _deny_javascript($str)
     {
         $str = preg_replace('/[\x00-\x1F]/', '', $str);
@@ -513,6 +622,12 @@ class PageNavi
     //---------------------------------------------------------
     // calculation
     //---------------------------------------------------------
+    /**
+     * @param $total
+     * @param $page
+     * @param $perpage
+     * @return array|int[]
+     */
     public function _calc_page($total, $page, $perpage)
     {
         $current = 0;
@@ -543,6 +658,11 @@ class PageNavi
         return [$current, $last, $start];
     }
 
+    /**
+     * @param $total
+     * @param $perpage
+     * @return false|float
+     */
     public function _calc_last($total, $perpage)
     {
         $last = ceil($total / $perpage);
@@ -553,6 +673,10 @@ class PageNavi
     //---------------------------------------------------------
     // sortid
     //---------------------------------------------------------
+    /**
+     * @param $id
+     * @return int
+     */
     public function _check_sortid($id)
     {
         $id = (int)$id;

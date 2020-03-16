@@ -9,7 +9,7 @@
 // _CHARSET : utf-8
 // Translator: Houston (Contour Design Studio https://www.cdesign.ru/)
 
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_CHECK', 'Проверить таблицу блоков XOOPS');
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE', 'Удалить таблицу блоков XOOPS');
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE_DESC', 'Выполнить, если обнаружена ошибка');
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE_NEXT', 'А потом обновить модуль');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_CHECK', 'Проверить таблицу блоков XOOPS');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_REMOVE', 'Удалить таблицу блоков XOOPS');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_REMOVE_DESC', 'Выполнить, если обнаружена ошибка');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_REMOVE_NEXT', 'А потом обновить модуль');

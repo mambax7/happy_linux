@@ -16,7 +16,11 @@
 // class locate_jp
 // Japan (JP)
 //=========================================================
-class locate_jp extends Happy_linux\LocateBase
+
+/**
+ * Class locate_jp
+ */
+class locate_jp extends LocateBase
 {
     //---------------------------------------------------------
     // constructor
@@ -25,14 +29,14 @@ class locate_jp extends Happy_linux\LocateBase
     {
         parent::__construct();
 
-        if (defined('_HAPPY_LINUX_GM_DEFAULT_LOCATION')) {
-            $gm_location = _HAPPY_LINUX_GM_DEFAULT_LOCATION;
+        if (defined('_HAPPYLINUX_GM_DEFAULT_LOCATION')) {
+            $gm_location = _HAPPYLINUX_GM_DEFAULT_LOCATION;
         } else {
             $gm_location = 'Akashi Muncipal Planetaruim: Akashi, Japan';
         }
 
         $arr = [
-            'happy_linux_url' => 'https://linux.ohwada.jp/',
+            'happylinux_url' => 'https://linux.ohwada.jp/',
             'country_code'    => 'jp',
             'country_name'    => 'Japan',
             'yahoo_url'       => 'https://www.yahoo.co.jp/',
@@ -50,6 +54,9 @@ class locate_jp extends Happy_linux\LocateBase
         $this->array_merge($arr);
     }
 
+    /**
+     * @return string
+     */
     public function get_ping_servers()
     {
         // remove cocolog-nifty, becuase service is over

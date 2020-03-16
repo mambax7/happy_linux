@@ -1,16 +1,16 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: build_xml.php,v 1.1 2008/02/26 15:35:42 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
 // this file include 4 classes
-//   happy_linux_xml_base
-//   happy_linux_xml_single_object
-//   happy_linux_xml_iterate_object
-//   happy_linux_build_xml
+//   happylinux_xml_base
+//   happylinux_xml_single_object
+//   happylinux_xml_iterate_object
+//   happylinux_build_xml
 // 2008-02-17 K.OHWADA
 //=========================================================
 
@@ -18,6 +18,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class XmlBuild
 //=========================================================
+
+/**
+ * Class XmlBuild
+ * @package XoopsModules\Happylinux
+ */
 class XmlBuild extends XmlBase
 {
     public $_CONTENT_TYPE_HTML = 'Content-Type:text/html; charset=utf-8';
@@ -43,6 +48,9 @@ class XmlBuild extends XmlBase
         parent::__construct();
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\XmlBuild|static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -59,7 +67,7 @@ class XmlBuild extends XmlBase
     public function build_xml()
     {
         // header
-        happy_linux_http_output('pass');
+        happylinux_http_output('pass');
         header($this->_CONTENT_TYPE_XML);
 
         echo $this->_build_template($this->_get_template());
@@ -88,6 +96,11 @@ class XmlBuild extends XmlBase
         echo $this->build_html_footer();
     }
 
+    /**
+     * @param null $title
+     * @param bool $flag
+     * @return string
+     */
     public function build_html_header($title = null, $flag = true)
     {
         if (empty($title)) {
@@ -95,7 +108,7 @@ class XmlBuild extends XmlBase
         }
 
         $text = '<html><head>' . "\n";
-        $text .= '<meta http-equiv="content-type" content="text/html; charset=utf-8" />' . "\n";
+        $text .= '<meta http-equiv="content-type" content="text/html; charset=utf-8">' . "\n";
         $text .= '<title>' . $title . '</title>' . "\n";
         $text .= '</head>' . "\n";
         $text .= '<body>' . "\n";
@@ -108,6 +121,9 @@ class XmlBuild extends XmlBase
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_footer()
     {
         $lang_close = $this->xml_utf8(_CLOSE);
@@ -122,13 +138,17 @@ class XmlBuild extends XmlBase
         $text .= $goto;
         $text .= '<br>' . "\n";
         $text .= '<div style="text-align:center;">' . "\n";
-        $text .= '<input value="' . $lang_close . '" type="button" onclick="javascript:window.close();" />' . "\n";
+        $text .= '<input value="' . $lang_close . '" type="button" onclick="javascript:window.close();">' . "\n";
         $text .= '</div>' . "\n";
         $text .= '</body></html>' . "\n";
 
         return $text;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function build_highlight($str)
     {
         $text = '<span style="color: #ff0000;">' . $str . '</span><br>' . "\n";
@@ -139,26 +159,41 @@ class XmlBuild extends XmlBase
     // --------------------------------------------------------
     // set param
     // --------------------------------------------------------
+    /**
+     * @param $val
+     */
     public function set_template($val)
     {
         $this->set_template_xml($val);
     }
 
+    /**
+     * @param $val
+     */
     public function set_template_xml($val)
     {
         $this->_TEMPLATE_XML = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_view_title($val)
     {
         $this->_view_title = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_view_goto_title($val)
     {
         $this->_view_goto_title = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_view_goto_url($val)
     {
         $this->_view_goto_url = $val;
@@ -167,11 +202,17 @@ class XmlBuild extends XmlBase
     //=========================================================
     // private
     //=========================================================
+    /**
+     * @return null |null
+     */
     public function _get_template()
     {
         return $this->_get_template_xml();
     }
 
+    /**
+     * @return null |null
+     */
     public function _get_template_xml()
     {
         return $this->_TEMPLATE_XML;
@@ -183,22 +224,31 @@ class XmlBuild extends XmlBase
     public function _init_obj()
     {
         //  dummy
-        //  $this->_obj_single  = new happy_linux_xml_single_object();
-        //  $this->_obj_iterate = new happy_linux_xml_iterate_object();
+        //  $this->_obj_single  = new happylinux_xml_single_object();
+        //  $this->_obj_iterate = new happylinux_xml_iterate_object();
     }
 
+    /**
+     * @param $val
+     */
     public function _set_single($val)
     {
         //  dummy
         //  $this->_obj_single->set_vars( $val );
     }
 
+    /**
+     * @param $val
+     */
     public function _set_iterate($val)
     {
         //  dummy
         //  $this->_obj_iterate->set_vars( $val );
     }
 
+    /**
+     * @param $template
+     */
     public function _build_template($template)
     {
         //  dummy
@@ -206,7 +256,7 @@ class XmlBuild extends XmlBase
         //  $this->_obj_single->to_utf8();
         //  $this->_obj_iterate->build_iterate();
         //  $this->_obj_iterate->to_utf8_iterate();
-        //  $tpl = new XoopsTpl();
+        //  $tpl = new \XoopsTpl();
         //  $this->_obj_single->assign( $tpl );
         //  $this->_obj_iterate->append_iterate( $tpl );
         //  return $tpl->fetch( $template );

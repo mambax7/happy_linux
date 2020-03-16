@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: bin_base.php,v 1.2 2011/12/30 00:50:30 ohwada Exp $
 
@@ -12,11 +12,11 @@ namespace XoopsModules\Happy_linux;
 // _print_data()
 
 // 2007-09-20 K.OHWADA
-// PHP 5.2: Non-static method happy_linux_bin_file::getInstance() should not be called statically
+// PHP 5.2: Non-static method happylinux_bin_file::getInstance() should not be called statically
 // PHP 5.2: set timezone
 
 // 2007-08-01 K.OHWADA
-// HAPPY_LINUX_MB_LANGUAGE
+// HAPPYLINUX_MB_LANGUAGE
 
 // 2007-06-10 K.OHWADA
 // divid to bin_file
@@ -41,6 +41,10 @@ namespace XoopsModules\Happy_linux;
 // php xxx.php -pass=pass [ -limit=0 -offset=0 -abc ]
 //---------------------------------------------------------
 
+/**
+ * Class BinBase
+ * @package XoopsModules\Happylinux
+ */
 class BinBase
 {
     public $_DIRNAME;
@@ -92,18 +96,22 @@ class BinBase
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
+    /**
+     * BinBase constructor.
+     * @param $dirname
+     */
     public function __construct($dirname)
     {
         $this->_DIRNAME          = $dirname;
         $this->_file_admin_index = 'modules/' . $this->_DIRNAME . '/admin/index.php';
 
-        // MUST set before happy_linux_bin_file
-        if (!defined('HAPPY_LINUX_BIN_MODE')) {
-            define('HAPPY_LINUX_BIN_MODE', '1');
+        // MUST set before happylinux_bin_file
+        if (!defined('HAPPYLINUX_BIN_MODE')) {
+            define('HAPPYLINUX_BIN_MODE', '1');
         }
 
-        // Non-static method happy_linux_bin_file::getInstance() should not be called statically
-        $this->_bin_file = new happy_linux_bin_file();
+        // Non-static method happylinux_bin_file::getInstance() should not be called statically
+        $this->_bin_file = new BinFile();
 
         // system parameter
         $this->_set_system_param();
@@ -143,11 +151,11 @@ class BinBase
         }
 
         // multibyte
-        if (defined('HAPPY_LINUX_MB_LANGUAGE')) {
-            happy_linux_mb_language(HAPPY_LINUX_MB_LANGUAGE);
+        if (defined('HAPPYLINUX_MB_LANGUAGE')) {
+            happylinux_mb_language(HAPPYLINUX_MB_LANGUAGE);
         }
-        if (defined('HAPPY_LINUX_MB_ENCODING')) {
-            happy_linux_internal_encoding(HAPPY_LINUX_MB_ENCODING);
+        if (defined('HAPPYLINUX_MB_ENCODING')) {
+            happylinux_internal_encoding(HAPPYLINUX_MB_ENCODING);
         }
 
         // PHP 5.2: set timezone
@@ -158,16 +166,25 @@ class BinBase
         }
     }
 
+    /**
+     * @param $val
+     */
     public function set_sitename($val)
     {
         $this->_sitename = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_adminmail($val)
     {
         $this->_adminmail = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_charset($val)
     {
         $this->_CHARSET = $val;
@@ -193,6 +210,10 @@ class BinBase
         $this->_set_flag_write_to_bin_file($this->_flag_write);
     }
 
+    /**
+     * @param $pass
+     * @return bool
+     */
     public function check_pass($pass)
     {
         if ($pass && ($pass == $this->_pass)) {
@@ -250,6 +271,9 @@ class BinBase
         }
     }
 
+    /**
+     * @return array
+     */
     public function _set_cmd_option()
     {
         $arr = [];
@@ -269,6 +293,10 @@ class BinBase
         return $arr;
     }
 
+    /**
+     * @param $key
+     * @return bool
+     */
     public function isset_opt($key)
     {
         if (isset($this->_opt_arr[$key])) {
@@ -278,6 +306,10 @@ class BinBase
         return false;
     }
 
+    /**
+     * @param $key
+     * @return bool|mixed
+     */
     public function get_opt($key)
     {
         if (isset($this->_opt_arr[$key])) {
@@ -300,6 +332,9 @@ class BinBase
         $this->_print_write_data($this->_print_write_html_footer());
     }
 
+    /**
+     * @return string
+     */
     public function _get_html_header()
     {
         $text = <<<END_OF_TEXT
@@ -315,6 +350,9 @@ END_OF_TEXT;
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function _get_html_footer()
     {
         $url_admin = XOOPS_URL . '/' . $this->_file_admin_index;
@@ -329,12 +367,18 @@ END_OF_TEXT;
         return $text;
     }
 
+    /**
+     * @param $data
+     */
     public function _print_write_data($data)
     {
         $this->_print_data($data);
         $this->_write_data($data);
     }
 
+    /**
+     * @param $data
+     */
     public function _print_data($data)
     {
         if ($this->_flag_print) {
@@ -345,6 +389,11 @@ END_OF_TEXT;
     //---------------------------------------------------------
     // mail
     //---------------------------------------------------------
+    /**
+     * @param $content
+     * @param $level
+     * @return bool
+     */
     public function _send_mail_content_by_level($content, $level)
     {
         if ($this->_mail_level >= $level) {
@@ -354,11 +403,21 @@ END_OF_TEXT;
         return true;    // no action
     }
 
+    /**
+     * @param $content
+     * @return bool
+     */
     public function _send_mail_content($content)
     {
         return $this->_send_mail($this->_mail_to, $this->_mail_title, $content);
     }
 
+    /**
+     * @param $mailto
+     * @param $title
+     * @param $content
+     * @return bool
+     */
     public function _send_mail($mailto, $title, $content)
     {
         $mailto  = $this->_adminmail;
@@ -367,11 +426,16 @@ END_OF_TEXT;
         $header  = 'From: ' . $this->_adminmail . " \n";
         $header  .= 'X-Mailer: ' . $this->_X_MAILER . " \n";
 
-        $ret = happy_linux_send_mail($mailto, $subject, $body, $header);
+        $ret = happylinux_send_mail($mailto, $subject, $body, $header);
 
         return $ret;
     }
 
+    /**
+     * @param $title
+     * @param $body
+     * @return string
+     */
     public function _build_mail_body($title, $body)
     {
         $siteurl = XOOPS_URL . '/';
@@ -401,32 +465,51 @@ END_OF_TEXT;
     //---------------------------------------------------------
     // set param
     //---------------------------------------------------------
+    /**
+     * @param $val
+     */
     public function set_mailer($val)
     {
         $this->_X_MAILER = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_mail_to($val)
     {
         $this->_mail_to = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_mail_title($val)
     {
         $this->_mail_title = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_mail_level($val)
     {
         $this->_mail_level = (int)$val;
     }
 
     // not include XOOPS_URL
+
+    /**
+     * @param $file
+     */
     public function set_filename($file)
     {
         $this->_filename = $file;
     }
 
+    /**
+     * @return null
+     */
     public function get_filename()
     {
         return $this->_filename;
@@ -435,6 +518,11 @@ END_OF_TEXT;
     //---------------------------------------------------------
     // bin file class
     //---------------------------------------------------------
+    /**
+     * @param        $filename
+     * @param string $mode
+     * @return mixed
+     */
     public function _open_file($filename, $mode = 'w')
     {
         return $this->_bin_file->open_bin($filename, $mode);
@@ -445,11 +533,17 @@ END_OF_TEXT;
         $this->_bin_file->close_bin($this->_flag_chmod);
     }
 
+    /**
+     * @param $data
+     */
     public function _write_file($data)
     {
         $this->_bin_file->write_bin($data);
     }
 
+    /**
+     * @param $val
+     */
     public function _set_flag_write_to_bin_file($val)
     {
         $this->_bin_file->set_flag_write($val);

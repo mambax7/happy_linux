@@ -5,7 +5,7 @@
 // plugin.php
 
 // 2007-11-11 K.OHWADA
-// happy_linux_include_lang()
+// happylinux_include_lang()
 // config.php charcode.php xoops_block_check.php
 
 // 2007-09-01 K.OHWADA
@@ -37,18 +37,21 @@
 //---------------------------------------------------------
 
 //---------------------------------------------------------
-// function happy_linux_include_lang
+// function happylinux_include_lang
 //---------------------------------------------------------
-function happy_linux_include_lang($file)
+/**
+ * @param $file
+ */
+function happylinux_include_lang($file)
 {
     global $xoopsConfig;
     $LANGUAGE = $xoopsConfig['language'];
-    $DIR_LANG = XOOPS_ROOT_PATH . '/modules/happy_linux/language';
+    $DIR_LANG = XOOPS_ROOT_PATH . '/modules/happylinux/language';
 
     if (file_exists($DIR_LANG . '/' . $LANGUAGE . '/' . $file)) {
-        include_once $DIR_LANG . '/' . $LANGUAGE . '/' . $file;
+        require_once $DIR_LANG . '/' . $LANGUAGE . '/' . $file;
     } else {
-        include_once $DIR_LANG . '/english/' . $file;
+        require_once $DIR_LANG . '/english/' . $file;
     }
 }
 
@@ -56,19 +59,19 @@ function happy_linux_include_lang($file)
 // execute
 //---------------------------------------------------------
 
-happy_linux_include_lang('global.php');
-happy_linux_include_lang('search.php');
-happy_linux_include_lang('form.php');
-happy_linux_include_lang('page_frame.php');
-happy_linux_include_lang('manage.php');
-happy_linux_include_lang('rss_view.php');
-happy_linux_include_lang('modinfo.php');
-happy_linux_include_lang('admin.php');
-happy_linux_include_lang('mail.php');
-happy_linux_include_lang('config.php');
-happy_linux_include_lang('charcode.php');
-happy_linux_include_lang('xoops_block_check.php');
-happy_linux_include_lang('plugin.php');
+happylinux_include_lang('global.php');
+happylinux_include_lang('search.php');
+happylinux_include_lang('form.php');
+happylinux_include_lang('page_frame.php');
+happylinux_include_lang('manage.php');
+happylinux_include_lang('rss_view.php');
+happylinux_include_lang('modinfo.php');
+happylinux_include_lang('admin.php');
+happylinux_include_lang('mail.php');
+happylinux_include_lang('config.php');
+happylinux_include_lang('charcode.php');
+happylinux_include_lang('xoops_block_check.php');
+happylinux_include_lang('plugin.php');
 
 // compatible
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/language/compatible.php';
+require_once XOOPS_ROOT_PATH . '/modules/happylinux/language/compatible.php';

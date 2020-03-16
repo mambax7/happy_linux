@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: rss_viewer.php,v 1.4 2008/01/31 14:07:05 ohwada Exp $
 
@@ -12,7 +12,7 @@ namespace XoopsModules\Happy_linux;
 // set_is_japanese()
 
 // 2007-06-01 K.OHWADA
-// porting from happy_linux_rss_viewer.php
+// porting from happylinux_rss_viewer.php
 
 //=========================================================
 // Happy Linux Framework Module
@@ -22,7 +22,12 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class RssViewer
 //=========================================================
-class RssViewer extends  Error
+
+/**
+ * Class RssViewer
+ * @package XoopsModules\Happylinux
+ */
+class RssViewer extends Error
 {
     // parameter
     public $_flag_title_html   = false;
@@ -53,6 +58,9 @@ class RssViewer extends  Error
         parent::__construct();
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\RssViewer|static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -66,45 +74,63 @@ class RssViewer extends  Error
     //---------------------------------------------------------
     // create object
     //---------------------------------------------------------
+    /**
+     * @return \XoopsModules\Happylinux\RssView
+     */
     public function &create()
     {
         // Assigning the return value of new by reference is deprecated
-        $obj = new happy_linux_rss_view();
+        $obj = new RssView();
 
         return $obj;
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\RssViewChannel
+     */
     public function &create_channel()
     {
-        $obj = new happy_linux_rss_view_channel();
+        $obj = new RssViewChannel();
 
         return $obj;
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\RssViewImage
+     */
     public function &create_image()
     {
-        $obj = new happy_linux_rss_view_image();
+        $obj = new RssViewImage();
 
         return $obj;
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\RssViewTextinput
+     */
     public function &create_textinput()
     {
-        $obj = new happy_linux_rss_view_textinput();
+        $obj = new RssViewTextinput();
 
         return $obj;
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\RssViewItems
+     */
     public function &create_items()
     {
-        $obj = new happy_linux_rss_view_items();
+        $obj = new RssViewItems();
 
         return $obj;
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\RssViewItemSingle
+     */
     public function &create_item_single()
     {
-        $obj = new happy_linux_rss_view_item_single();
+        $obj = new RssViewItemSingle();
 
         return $obj;
     }
@@ -112,6 +138,11 @@ class RssViewer extends  Error
     //---------------------------------------------------------
     // view sanitize
     //---------------------------------------------------------
+    /**
+     * @param      $arr
+     * @param bool $flag_sanitize
+     * @return mixed
+     */
     public function &view_format_sanitize($arr, $flag_sanitize = true)
     {
         $obj = &$this->create();
@@ -126,6 +157,10 @@ class RssViewer extends  Error
         return $data;
     }
 
+    /**
+     * @param $arr
+     * @return mixed
+     */
     public function &view_format($arr)
     {
         $obj = &$this->create();
@@ -136,6 +171,10 @@ class RssViewer extends  Error
         return $data;
     }
 
+    /**
+     * @param $arr
+     * @return mixed
+     */
     public function &view_sanitize($arr)
     {
         $obj = &$this->create();
@@ -147,6 +186,11 @@ class RssViewer extends  Error
         return $data;
     }
 
+    /**
+     * @param      $items
+     * @param bool $flag_sanitize
+     * @return array
+     */
     public function &view_format_sanitize_items($items, $flag_sanitize = true)
     {
         $feeds = [];
@@ -159,6 +203,11 @@ class RssViewer extends  Error
         return $feeds;
     }
 
+    /**
+     * @param      $item
+     * @param bool $flag_sanitize
+     * @return mixed
+     */
     public function &view_format_sanitize_single_item($item, $flag_sanitize = true)
     {
         $obj = &$this->create();
@@ -173,6 +222,9 @@ class RssViewer extends  Error
         return $feed;
     }
 
+    /**
+     * @param $obj
+     */
     public function _set_sanitize_obj($obj)
     {
         $obj->set_title_html($this->_flag_title_html);
@@ -199,41 +251,65 @@ class RssViewer extends  Error
     //---------------------------------------------------------
     // sanitize property
     //---------------------------------------------------------
+    /**
+     * @param $value
+     */
     public function set_title_html($value)
     {
         $this->_flag_title_html = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_content_html($value)
     {
         $this->_flag_content_html = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_highlight($value)
     {
         $this->_flag_highlight = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_max_title($value)
     {
         $this->_max_title = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_max_summary($value)
     {
         $this->_max_summary = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_max_content($value)
     {
         $this->_max_content = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_is_japanese($value)
     {
         $this->_is_japanese = (bool)$value;
     }
 
+    /**
+     * @param $arr
+     */
     public function set_keyword_array($arr)
     {
         if (is_array($arr) && count($arr)) {
@@ -241,51 +317,81 @@ class RssViewer extends  Error
         }
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_script($value)
     {
         $this->_mode_content_script = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_style($value)
     {
         $this->_mode_content_style = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_link($value)
     {
         $this->_mode_content_link = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_comment($value)
     {
         $this->_mode_content_comment = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_cdata($value)
     {
         $this->_mode_content_cdata = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_onmouse($value)
     {
         $this->_mode_content_onmouse = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_attr_style($value)
     {
         $this->_mode_content_attr_style = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_javascript($value)
     {
         $this->_mode_content_javascript = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_content_tags($value)
     {
         $this->_flag_content_tags = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_content_tags($value)
     {
         $this->_content_tags = $value;

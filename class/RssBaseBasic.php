@@ -1,12 +1,12 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: rss_base_object.php,v 1.6 2008/01/31 14:07:05 ohwada Exp $
 
 // 2008-01-30 K.OHWADA
 // typo: create_item_singlel
-// happy_linux_rss_basic -> happy_linux_rss_base_basic
+// happylinux_rss_basic -> happylinux_rss_base_basic
 
 // 2007-10-10 K.OHWADA
 // set_is_japanese()
@@ -14,14 +14,14 @@ namespace XoopsModules\Happy_linux;
 // 2007-09-20 K.OHWADA
 // PHP5.2
 // Assigning the return value of new by reference is deprecated
-// Declaration of happy_linux_rss_base_basic::get() should be compatible with that of happy_linux_basic::get()
+// Declaration of happylinux_rss_base_basic::get() should be compatible with that of happylinux_basic::get()
 
 // 2007-08-01 K.OHWADA
 // w3cdtf.php
 
 // 2007-06-01 K.OHWADA
 // divid from rss_object.php
-// move get_unixtime_rfc822 from rss_utility.php
+// move get_unixtime_rfc822 from RssUtility.php
 
 // 2007-05-12 K.OHWADA
 // this is new file
@@ -30,17 +30,22 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // Happy Linux Framework Module
 // this file contains 3 classes
-//   happy_linux_rss_base
-//   happy_linux_rss_base_basic
-//   happy_linux_rss_base_items
+//   happylinux_rss_base
+//   happylinux_rss_base_basic
+//   happylinux_rss_base_items
 // 2007-05-12 K.OHWADA
 //=========================================================
 
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/include/w3cdtf.php';
+require_once XOOPS_ROOT_PATH . '/modules/happylinux/include/w3cdtf.php';
 
 //=========================================================
 // class rss_base_basic
 //=========================================================
+
+/**
+ * Class RssBaseBasic
+ * @package XoopsModules\Happylinux
+ */
 class RssBaseBasic extends BasicObject
 {
     // class
@@ -60,6 +65,9 @@ class RssBaseBasic extends BasicObject
     //--------------------------------------------------------
     // set parameter
     //--------------------------------------------------------
+    /**
+     * @param $val
+     */
     public function set_is_japanese($val)
     {
         $this->_strings->set_is_japanese($val);
@@ -68,7 +76,12 @@ class RssBaseBasic extends BasicObject
     //---------------------------------------------------------
     // is set & array
     //---------------------------------------------------------
-    // Declaration of happy_linux_rss_base_basic::get() should be compatible with that of happy_linux_basic::get()
+    // Declaration of happylinux_rss_base_basic::get() should be compatible with that of happylinux_basic::get()
+    /**
+     * @param      $key1
+     * @param bool $key2
+     * @return bool|mixed
+     */
     public function get_rss_var($key1, $key2 = false)
     {
         $ret = false;
@@ -85,6 +98,11 @@ class RssBaseBasic extends BasicObject
         return $ret;
     }
 
+    /**
+     * @param      $key1
+     * @param bool $key2
+     * @return bool
+     */
     public function is_set($key1, $key2 = false)
     {
         if (isset($this->_vars[$key1])) {
@@ -104,6 +122,9 @@ class RssBaseBasic extends BasicObject
     // non restrict feed_type
     // caller build, format_from_parse, format_from_db
     //-------------------------------------------------
+    /**
+     * @return string
+     */
     public function _build_summary_for_format()
     {
         $val = '';
@@ -134,6 +155,9 @@ class RssBaseBasic extends BasicObject
 
     // some RSS have twe or more enclosure tag
     // set first one
+    /**
+     * @return array
+     */
     public function _get_enclosure_list()
     {
         $url    = null;
@@ -160,6 +184,10 @@ class RssBaseBasic extends BasicObject
     //--------------------------------------------------------
     // get unixtime from RFC822
     //--------------------------------------------------------
+    /**
+     * @param $datetime
+     * @return int
+     */
     public function get_unixtime_rfc822($datetime)
     {
         $unixtime = strtotime($datetime);
@@ -183,9 +211,13 @@ class RssBaseBasic extends BasicObject
     // -------------------------------------------------------------------------
     // get unixtime from W3C DTF (dc:date)
     // -------------------------------------------------------------------------
+    /**
+     * @param $datetime
+     * @return int
+     */
     public function get_unixtime_w3cdtf($datetime)
     {
-        return happy_linux_w3cdtf_to_unixtime($datetime);
+        return happylinux_w3cdtf_to_unixtime($datetime);
     }
 
     // --- class end ---

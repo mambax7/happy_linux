@@ -7,16 +7,16 @@
 //=========================================================
 
 // mail_send
-define('_HAPPY_LINUX_MAIL_NO_TO_EMAIL', 'ÚäæÇä ÇáÈÑíÏ áã íÍÏÏ');
+define('_HAPPYLINUX_MAIL_NO_TO_EMAIL', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½');
 
 // mail_form
-define('_HAPPY_LINUX_MAIL_WEBMASTER', 'ÇáãÏíÑ');
-define('_HAPPY_LINUX_MAIL_SUBJECT_FROM', 'ãÚáæãÇÊ ãä %s');
-define('_HAPPY_LINUX_MAIL_HELLO', 'ãÑÍÈÇ %s');
-define('_HAPPY_LINUX_MAIL_SUBMIT', 'ÃÑÓá ÑÓÇáÉ');
-define('_HAPPY_LINUX_MAIL_SUBMIT_NEXT', 'ÃÑÓá ÇáÊÇáí %s ÈÑíÏ');
+define('_HAPPYLINUX_MAIL_WEBMASTER', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_MAIL_SUBJECT_FROM', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ %s');
+define('_HAPPYLINUX_MAIL_HELLO', 'ï¿½ï¿½ï¿½ï¿½ï¿½ %s');
+define('_HAPPYLINUX_MAIL_SUBMIT', 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_MAIL_SUBMIT_NEXT', 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ %s ï¿½ï¿½ï¿½ï¿½');
 
 // for future
-define('_HAPPY_LINUX_MAIL_TITLE', 'ÃÑÓá ÑÓÇáÉ');
-define('_HAPPY_LINUX_MAIL_THERE_ARE', 'íæÌÏ <b>%s</b> ÈÑíÏ');
-define('_HAPPY_LINUX_MAIL_SEND_NUM', 'ÃÑÓá ãä %s Åáì %s  ÔÎÕ');
+define('_HAPPYLINUX_MAIL_TITLE', 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_MAIL_THERE_ARE', 'ï¿½ï¿½ï¿½ï¿½ <b>%s</b> ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_MAIL_SEND_NUM', 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ %s ï¿½ï¿½ï¿½ %s  ï¿½ï¿½ï¿½');

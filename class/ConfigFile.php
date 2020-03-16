@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: config_file.php,v 1.2 2006/10/05 10:40:36 ohwada Exp $
 
@@ -16,6 +16,10 @@ namespace XoopsModules\Happy_linux;
 // 2006-07-10 K.OHWADA
 //=========================================================
 
+/**
+ * Class ConfigFile
+ * @package XoopsModules\Happylinux
+ */
 class ConfigFile
 {
     public $_fp;
@@ -28,6 +32,9 @@ class ConfigFile
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -41,6 +48,9 @@ class ConfigFile
     //---------------------------------------------------------
     // function
     //---------------------------------------------------------
+    /**
+     * @param $file
+     */
     public function _save_config($file)
     {
         $this->_fopen($file);
@@ -52,6 +62,9 @@ class ConfigFile
         $this->_fclose();
     }
 
+    /**
+     * @param $file
+     */
     public function _fopen($file)
     {
         $this->_fp = fopen($file, 'wb');
@@ -80,6 +93,10 @@ class ConfigFile
         fwrite($this->_fp, "\n");
     }
 
+    /**
+     * @param        $key
+     * @param string $value
+     */
     public function _write_constant($key, $value = '')
     {
         if (empty($value)) {
@@ -90,6 +107,10 @@ class ConfigFile
         fwrite($this->_fp, "$data \n");
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function _write_variable($key, $value)
     {
         $data = "$key = '$value';";

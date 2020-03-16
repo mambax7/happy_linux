@@ -134,6 +134,11 @@ class MagpieRSS
         $this->normalize();
     }
 
+    /**
+     * @param $p
+     * @param $element
+     * @param $attrs
+     */
     public function feed_start_element($p, $element, &$attrs)
     {
         $el    = $element = strtolower($element);
@@ -218,6 +223,10 @@ class MagpieRSS
         }
     }
 
+    /**
+     * @param $p
+     * @param $text
+     */
     public function feed_cdata($p, $text)
     {
         if (ATOM == $this->feed_type and $this->incontent) {
@@ -228,6 +237,10 @@ class MagpieRSS
         }
     }
 
+    /**
+     * @param $p
+     * @param $el
+     */
     public function feed_end_element($p, $el)
     {
         $el = strtolower($el);
@@ -250,7 +263,7 @@ class MagpieRSS
             if ($this->stack[0] == $el) {
                 $this->append_content("</$el>");
             } else {
-                $this->append_content("<$el />");
+                $this->append_content("<$el>");
             }
 
             array_shift($this->stack);
@@ -261,6 +274,10 @@ class MagpieRSS
         $this->current_namespace = false;
     }
 
+    /**
+     * @param        $str1
+     * @param string $str2
+     */
     public function concat(&$str1, $str2 = '')
     {
         if (!isset($str1)) {
@@ -269,6 +286,9 @@ class MagpieRSS
         $str1 .= $str2;
     }
 
+    /**
+     * @param $text
+     */
     public function append_content($text)
     {
         if ($this->initem) {
@@ -279,6 +299,11 @@ class MagpieRSS
     }
 
     // smart append - field and namespace aware
+
+    /**
+     * @param $el
+     * @param $text
+     */
     public function append($el, $text)
     {
         if (!$el) {
@@ -313,7 +338,7 @@ class MagpieRSS
         // if atom populate rss fields
         if ($this->is_atom()) {
             $this->channel['description'] = $this->channel['tagline'];
-            for ($i = 0; $i < count($this->items); $i++) {
+            for ($i = 0, $iMax = count($this->items); $i < $iMax; $i++) {
                 $item = $this->items[$i];
                 if (isset($item['summary'])) {
                     $item['description'] = $item['summary'];
@@ -334,7 +359,7 @@ class MagpieRSS
             }
         } elseif ($this->is_rss()) {
             $this->channel['tagline'] = $this->channel['description'];
-            for ($i = 0; $i < count($this->items); $i++) {
+            for ($i = 0, $iMax = count($this->items); $i < $iMax; $i++) {
                 $item = $this->items[$i];
                 if (isset($item['description'])) {
                     $item['summary'] = $item['description'];
@@ -360,6 +385,9 @@ class MagpieRSS
         }
     }
 
+    /**
+     * @return bool
+     */
     public function is_rss()
     {
         if (RSS == $this->feed_type) {
@@ -369,6 +397,9 @@ class MagpieRSS
         }
     }
 
+    /**
+     * @return bool
+     */
     public function is_atom()
     {
         if (ATOM == $this->feed_type) {
@@ -487,6 +518,10 @@ class MagpieRSS
         return [xml_parser_create(), $source];
     }
 
+    /**
+     * @param $enc
+     * @return bool|string
+     */
     public function known_encoding($enc)
     {
         $enc = strtoupper($enc);
@@ -497,6 +532,10 @@ class MagpieRSS
         }
     }
 
+    /**
+     * @param     $errormsg
+     * @param int $lvl
+     */
     public function error($errormsg, $lvl = E_USER_WARNING)
     {
         // append PHP's error message if track_errors enabled
@@ -519,6 +558,11 @@ class MagpieRSS
 
 } // end class RSS
 
+/**
+ * @param $k
+ * @param $v
+ * @return string
+ */
 function map_attrs($k, $v)
 {
     return "$k=\"$v\"";
@@ -531,11 +575,16 @@ if (!function_exists('array_change_key_case')) {
     define('CASE_UPPER', 1);
     define('CASE_LOWER', 0);
 
+    /**
+     * @param     $array
+     * @param int $case
+     * @return mixed
+     */
     function array_change_key_case($array, $case = CASE_LOWER)
     {
         if ($case = CASE_LOWER) {
-            $cmd = strtolower;
-        } elseif ($case = CASE_UPPER) $cmd = strtoupper;
+            $cmd = strtolower();
+        } elseif ($case = CASE_UPPER) $cmd = strtoupper();
         foreach ($array as $key => $value) {
             $output[$cmd($key)] = $value;
         }

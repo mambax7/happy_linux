@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: object.php,v 1.3 2012/04/10 02:29:32 ohwada Exp $
 
@@ -39,7 +39,7 @@ namespace XoopsModules\Happy_linux;
 
 // 2006-07-10 K.OHWADA
 // this is new file
-// porting from weblinks_object_handler.php
+// porting from weblinks_objectHandler.php
 
 //=========================================================
 // Happy Linux Framework Module
@@ -68,7 +68,11 @@ if (!defined('XOBJ_DTYPE_URL_AREA')) {
 // base on XopsCube's XoopsSimpleObject
 //=========================================================
 
-class Object extends Strings
+/**
+ * Class Object
+ * @package XoopsModules\Happylinux
+ */
+class BaseObject extends Strings
 {
     public $_vars  = [];
     public $_isnew = false;
@@ -120,11 +124,21 @@ class Object extends Strings
         $this->_isnew = false;
     }
 
+    /**
+     * @return bool
+     */
     public function isNew()
     {
         return $this->_isnew;
     }
 
+    /**
+     * @param      $key
+     * @param      $dataType
+     * @param null $value
+     * @param bool $required
+     * @param null $size
+     */
     public function initVar($key, $dataType, $value = null, $required = false, $size = null)
     {
         if (!in_array($dataType, $this->_ALLOW_TYPES)) {
@@ -141,6 +155,10 @@ class Object extends Strings
         $this->assignVar($key, $value);
     }
 
+    /**
+     * @param $key
+     * @return bool
+     */
     public function is_set($key)
     {
         if (isset($this->_vars[$key])) {
@@ -153,6 +171,10 @@ class Object extends Strings
     //---------------------------------------------------------
     // set value just as original
     //---------------------------------------------------------
+    /**
+     * @param $key
+     * @param $value
+     */
     public function set($key, $value)
     {
         if (!isset($this->_vars[$key])) {
@@ -179,6 +201,10 @@ class Object extends Strings
         }
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function setBool($key, $value)
     {
         if (!isset($this->_vars[$key])) {
@@ -192,6 +218,10 @@ class Object extends Strings
         $this->_vars[$key]['value'] = $val;
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function setInt($key, $value)
     {
         if (!isset($this->_vars[$key])) {
@@ -201,6 +231,10 @@ class Object extends Strings
         $this->_vars[$key]['value'] = (int)$value;
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function setFloat($key, $value)
     {
         if (!isset($this->_vars[$key])) {
@@ -210,6 +244,10 @@ class Object extends Strings
         $this->_vars[$key]['value'] = (float)$value;
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function setAsIs($key, $value)
     {
         if (!isset($this->_vars[$key])) {
@@ -219,11 +257,18 @@ class Object extends Strings
         $this->_vars[$key]['value'] = $value;
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function assignVar($key, $value)
     {
         $this->set($key, $value);
     }
 
+    /**
+     * @param $values
+     */
     public function assignVars($values)
     {
         foreach ($values as $key => $value) {
@@ -234,6 +279,10 @@ class Object extends Strings
     //---------------------------------------------------------
     // get value just as set
     //---------------------------------------------------------
+    /**
+     * @param $key
+     * @return bool|mixed
+     */
     public function get($key)
     {
         if (isset($this->_vars[$key]['value'])) {
@@ -248,6 +297,9 @@ class Object extends Strings
         return false;
     }
 
+    /**
+     * @return array
+     */
     public function &gets()
     {
         $ret = [];
@@ -261,6 +313,11 @@ class Object extends Strings
     //---------------------------------------------------------
     // set value just after formating
     //---------------------------------------------------------
+    /**
+     * @param      $key
+     * @param      $value
+     * @param bool $not_gpc
+     */
     public function setVar($key, $value, $not_gpc = false)
     {
         if (!isset($this->_vars[$key])) {
@@ -303,6 +360,11 @@ class Object extends Strings
         }
     }
 
+    /**
+     * @param      $key
+     * @param      $value
+     * @param bool $not_gpc
+     */
     public function setVarTxtbox($key, $value, $not_gpc = false)
     {
         if (!isset($this->_vars[$key])) {
@@ -319,6 +381,11 @@ class Object extends Strings
         }
     }
 
+    /**
+     * @param      $key
+     * @param      $value
+     * @param bool $not_gpc
+     */
     public function setVarTxtarea($key, $value, $not_gpc = false)
     {
         if (!isset($this->_vars[$key])) {
@@ -331,6 +398,11 @@ class Object extends Strings
         $this->_vars[$key]['value'] = $value;
     }
 
+    /**
+     * @param      $key
+     * @param      $value
+     * @param bool $not_gpc
+     */
     public function setVarUrl($key, $value, $not_gpc = false)
     {
         if (!isset($this->_vars[$key])) {
@@ -347,6 +419,11 @@ class Object extends Strings
         }
     }
 
+    /**
+     * @param      $key
+     * @param      $value
+     * @param bool $not_gpc
+     */
     public function setVarUrlArea($key, $value, $not_gpc = false)
     {
         if (!isset($this->_vars[$key])) {
@@ -359,6 +436,11 @@ class Object extends Strings
         $this->_vars[$key]['value'] = $value;
     }
 
+    /**
+     * @param      $key
+     * @param      $value
+     * @param bool $not_gpc
+     */
     public function setVarArray($key, $value, $not_gpc = false)
     {
         if (!isset($this->_vars[$key])) {
@@ -371,6 +453,10 @@ class Object extends Strings
         $this->_vars[$key]['value'] = serialize($value);
     }
 
+    /**
+     * @param      $values
+     * @param bool $not_gpc
+     */
     public function setVars($values, $not_gpc = false)
     {
         if (is_array($values)) {
@@ -390,6 +476,11 @@ class Object extends Strings
     //---------------------------------------------------------
     // get value just after formating
     //---------------------------------------------------------
+    /**
+     * @param        $key
+     * @param string $format
+     * @return float|int|mixed|string|string[]|null
+     */
     public function &getVar($key, $format = 's')
     {
         $value = null;
@@ -431,6 +522,10 @@ class Object extends Strings
         return $value;
     }
 
+    /**
+     * @param $key
+     * @return int|null
+     */
     public function &getVarBool($key)
     {
         $value = null;
@@ -444,6 +539,10 @@ class Object extends Strings
         return $value;
     }
 
+    /**
+     * @param $key
+     * @return int|null
+     */
     public function &getVarInt($key)
     {
         $value = null;
@@ -457,6 +556,10 @@ class Object extends Strings
         return $value;
     }
 
+    /**
+     * @param $key
+     * @return float|null
+     */
     public function &getVarFloat($key)
     {
         $value = null;
@@ -470,6 +573,11 @@ class Object extends Strings
         return $value;
     }
 
+    /**
+     * @param        $key
+     * @param string $format
+     * @return string|string[]|null
+     */
     public function &getVarTxtbox($key, $format = 's')
     {
         $value = null;
@@ -484,6 +592,11 @@ class Object extends Strings
         return $value;
     }
 
+    /**
+     * @param        $key
+     * @param string $format
+     * @return string|string[]|null
+     */
     public function &getVarTxtarea($key, $format = 's')
     {
         $value = null;
@@ -498,6 +611,11 @@ class Object extends Strings
         return $value;
     }
 
+    /**
+     * @param        $key
+     * @param string $format
+     * @return string|null
+     */
     public function &getVarUrl($key, $format = 's')
     {
         $value = null;
@@ -512,11 +630,20 @@ class Object extends Strings
         return $value;
     }
 
+    /**
+     * @param        $key
+     * @param string $format
+     * @return string|null
+     */
     public function &getVarUrlArea($key, $format = 's')
     {
         return $this->getVarUrl($key, $format);
     }
 
+    /**
+     * @param $key
+     * @return mixed|null
+     */
     public function &getVarArray($key)
     {
         $value = null;
@@ -532,6 +659,10 @@ class Object extends Strings
         return $value;
     }
 
+    /**
+     * @param $key
+     * @return mixed|null
+     */
     public function &getVarAsIs($key)
     {
         $value = null;
@@ -545,6 +676,10 @@ class Object extends Strings
         return $value;
     }
 
+    /**
+     * @param string $format
+     * @return array
+     */
     public function &getVarAll($format = 'n')
     {
         $ret = [];
@@ -558,6 +693,9 @@ class Object extends Strings
     //---------------------------------------------------------
     // set utility
     //---------------------------------------------------------
+    /**
+     * @param $key
+     */
     public function set_var_by_global_post($key)
     {
         if (isset($_POST[$key])) {
@@ -565,6 +703,10 @@ class Object extends Strings
         }
     }
 
+    /**
+     * @param $post
+     * @param $key
+     */
     public function set_var_by_post($post, $key)
     {
         if (isset($post[$key])) {
@@ -572,6 +714,10 @@ class Object extends Strings
         }
     }
 
+    /**
+     * @param     $key
+     * @param int $default
+     */
     public function set_var_checkbox_by_global_post($key, $default = 0)
     {
         $val = $default;
@@ -581,6 +727,11 @@ class Object extends Strings
         $this->setVar($key, $val);
     }
 
+    /**
+     * @param     $post
+     * @param     $key
+     * @param int $default
+     */
     public function set_var_checkbox_by_post($post, $key, $default = 0)
     {
         $val = $default;
@@ -603,6 +754,12 @@ class Object extends Strings
     //---------------------------------------------------------
     // get utility
     //---------------------------------------------------------
+    /**
+     * @param        $key
+     * @param string $format
+     * @param string $default
+     * @return string
+     */
     public function get_var_url_null($key, $format = 's', $default = 'https://')
     {
         $url   = $this->get($key);
@@ -612,6 +769,12 @@ class Object extends Strings
         return $value;
     }
 
+    /**
+     * @param        $key
+     * @param string $format
+     * @param int    $max
+     * @return string
+     */
     public function get_var_text_short($key, $format = 's', $max = 100)
     {
         $value = $this->get($key);
@@ -623,11 +786,19 @@ class Object extends Strings
     //---------------------------------------------------------
     // compare
     //---------------------------------------------------------
+    /**
+     * @return array
+     */
     public function get_scheme()
     {
         return $this->_vars;
     }
 
+    /**
+     * @param $key
+     * @param $column_type
+     * @return bool
+     */
     public function compare_data_type_to_column($key, $column_type)
     {
         if (!isset($this->_vars[$key])) {
@@ -662,6 +833,10 @@ class Object extends Strings
         return $ret;
     }
 
+    /**
+     * @param $column_type
+     * @return bool
+     */
     public function compare_data_type_to_column_int($column_type)
     {
         if (preg_match('/int/', $column_type)) {
@@ -671,6 +846,10 @@ class Object extends Strings
         return false;
     }
 
+    /**
+     * @param $column_type
+     * @return bool
+     */
     public function compare_data_type_to_column_float($column_type)
     {
         if (preg_match('/double/', $column_type)) {
@@ -680,6 +859,10 @@ class Object extends Strings
         return false;
     }
 
+    /**
+     * @param $column_type
+     * @return bool
+     */
     public function compare_data_type_to_column_char($column_type)
     {
         if (preg_match('/char/', $column_type)) {
@@ -692,6 +875,10 @@ class Object extends Strings
         return false;
     }
 
+    /**
+     * @param $column_type
+     * @return bool
+     */
     public function compare_data_type_to_column_text($column_type)
     {
         if (preg_match('/text/', $column_type)) {
@@ -704,6 +891,10 @@ class Object extends Strings
         return false;
     }
 
+    /**
+     * @param $column_type
+     * @return bool
+     */
     public function compare_data_type_to_column_other($column_type)
     {
         if ($this->compare_data_type_to_column_char($column_type)) {
@@ -717,11 +908,19 @@ class Object extends Strings
         return false;
     }
 
+    /**
+     * @param $column_type
+     * @return bool
+     */
     public function compare_data_type_to_column_default($column_type)
     {
         return false;
     }
 
+    /**
+     * @param $key
+     * @return bool|string
+     */
     public function get_data_type_name($key)
     {
         if (!isset($this->_vars[$key])) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: image_size.php,v 1.2 2009/03/01 06:45:12 ohwada Exp $
 
@@ -20,6 +20,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class ImageSize
 //=========================================================
+
+/**
+ * Class ImageSize
+ * @package XoopsModules\Happylinux
+ */
 class ImageSize
 {
     //---------------------------------------------------------
@@ -30,6 +35,9 @@ class ImageSize
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -43,6 +51,10 @@ class ImageSize
     //---------------------------------------------------------
     // function
     //---------------------------------------------------------
+    /**
+     * @param $file
+     * @return int[]
+     */
     public function get_size($file)
     {
         $size = getimagesize($file);  // PHP function
@@ -56,6 +68,14 @@ class ImageSize
         return [$width, $height];
     }
 
+    /**
+     * @param      $width
+     * @param      $height
+     * @param      $max_width
+     * @param      $max_height
+     * @param bool $flag_zero
+     * @return array|int[]
+     */
     public function adjust_size($width, $height, $max_width, $max_height, $flag_zero = false)
     {
         if ($flag_zero && ((0 == $width) || (0 == $height))) {
@@ -80,6 +100,13 @@ class ImageSize
         return [$width, $height];
     }
 
+    /**
+     * @param     $width
+     * @param     $height
+     * @param int $min_width
+     * @param int $min_height
+     * @return int[]
+     */
     public function minimum_size($width, $height, $min_width = 0, $min_height = 0)
     {
         if (empty($width)) {

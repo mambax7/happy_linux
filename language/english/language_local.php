@@ -1,8 +1,11 @@
 <?php
+
+use XoopsModules\Happylinux;
+
 // $Id: language_local.php,v 1.2 2006/10/07 04:56:50 ohwada Exp $
 
 // 2006-10-05 K.OHWADA
-// happy_linux_language_base
+// happylinux_language_base
 
 // 2006-09-10 K.OHWADA
 // this is new file
@@ -17,7 +20,11 @@
 // class language_local
 // dummy class for English
 //=========================================================
-class language_local extends Happy_linux\LanguageBase
+
+/**
+ * Class language_local
+ */
+class language_local extends Happylinux\LanguageBase
 {
     //---------------------------------------------------------
     // constructor
@@ -30,6 +37,9 @@ class language_local extends Happy_linux\LanguageBase
     //---------------------------------------------------------
     // country code
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function get_country_code()
     {
         return 'us';    // USA

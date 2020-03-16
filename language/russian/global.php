@@ -2,14 +2,14 @@
 // $Id: global.php,v 1.1 2012/04/08 18:22:28 ohwada Exp $
 
 // 2007-11-01
-// _HAPPY_LINUX_FAIL
+// _HAPPYLINUX_FAIL
 
 // 2007-02-20 K.OHWADA
-// _HAPPY_LINUX_SKIP_TO_NEXT
+// _HAPPYLINUX_SKIP_TO_NEXT
 
 // 2006-11-20 K.OHWADA
 // for happy_search
-// _HAPPY_LINUX_GOTO_MAIN
+// _HAPPYLINUX_GOTO_MAIN
 
 // 2006-09-15 K.OHWADA
 // this is new file
@@ -24,51 +24,51 @@
 // Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
 
 // global
-define('_HAPPY_LINUX_HOME', 'В начало');
-define('_HAPPY_LINUX_MAIN', 'Главная');
-define('_HAPPY_LINUX_ADD', 'Добавить');
-define('_HAPPY_LINUX_ADDED', 'Добавлено');
-define('_HAPPY_LINUX_DELETE', 'Удалить');
-define('_HAPPY_LINUX_DELETED', 'Удалено');
-define('_HAPPY_LINUX_UPDATE', 'Обновление');
-define('_HAPPY_LINUX_UPDATED', 'Обновлено');
-define('_HAPPY_LINUX_MODIFY', 'Изменить');
-define('_HAPPY_LINUX_MODIFIED', 'Изменено');
-define('_HAPPY_LINUX_SAVE', 'Сохранить');
-define('_HAPPY_LINUX_SAVED', 'Сохранено');
-define('_HAPPY_LINUX_CLEAR', 'Очистить');
-define('_HAPPY_LINUX_CLEARED', 'Очищено');
-define('_HAPPY_LINUX_EXECUTE', 'Выполнить');
-define('_HAPPY_LINUX_EXECUTED', 'Выполнено');
-define('_HAPPY_LINUX_CREATE', 'Создать');
-define('_HAPPY_LINUX_CREATED', 'Создано');
-define('_HAPPY_LINUX_SUBMIT', 'Отправить');
-define('_HAPPY_LINUX_SUBMITED', 'Отправлено');
-define('_HAPPY_LINUX_CANCEL', 'Отменить');
-define('_HAPPY_LINUX_CANCELED', 'Отменено');
-define('_HAPPY_LINUX_SEARCH', 'Поиск');
-define('_HAPPY_LINUX_SHOW', 'Показать');
-define('_HAPPY_LINUX_TITLE', 'Заголовок');
-define('_HAPPY_LINUX_KEYWORD', 'Ключевое слово');
-define('_HAPPY_LINUX_NUM', 'Номер');
-define('_HAPPY_LINUX_NO_ACTION', 'Нет действия');
+define('_HAPPYLINUX_HOME', 'пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_MAIN', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_ADD', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_ADDED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_DELETE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_DELETED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_UPDATE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_UPDATED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_MODIFY', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_MODIFIED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_SAVE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_SAVED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CLEAR', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CLEARED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_EXECUTE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_EXECUTED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CREATE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CREATED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_SUBMIT', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_SUBMITED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CANCEL', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CANCELED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_SEARCH', 'пїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_SHOW', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_TITLE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_KEYWORD', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_NUM', 'пїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_NO_ACTION', 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 
 // 2006-11-10
-define('_HAPPY_LINUX_GOTO_MAIN', 'Перейти на главную страницу');
-define('_HAPPY_LINUX_GOTO_TOP', 'Перейти на главную страницу');
-define('_HAPPY_LINUX_GOTO_ADMIN', 'Перейти на страницу администрирования');
-define('_HAPPY_LINUX_GOTO_MODULE', 'Перейти к модулю');
+define('_HAPPYLINUX_GOTO_MAIN', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_GOTO_TOP', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_GOTO_ADMIN', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_GOTO_MODULE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
 
 // 2007-02-20
-define('_HAPPY_LINUX_SKIP_TO_NEXT', 'Перейти к следующему');
+define('_HAPPYLINUX_SKIP_TO_NEXT', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 
 // 2007-11-01
-define('_HAPPY_LINUX_WELCOME', 'Добро пожаловать %s');
-define('_HAPPY_LINUX_FAIL', 'Неудача');
-define('_HAPPY_LINUX_FAILED', 'Не удалось');
-define('_HAPPY_LINUX_REFRESH', 'Обновить');
-define('_HAPPY_LINUX_REFRESHED', 'Обновлено');
-define('_HAPPY_LINUX_FINISH', 'Закончить');
-define('_HAPPY_LINUX_FINISHED', 'Закончено');
-define('_HAPPY_LINUX_PRINT', 'Печать');
-define('_HAPPY_LINUX_SAMPLE', 'Пример');
+define('_HAPPYLINUX_WELCOME', 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ %s');
+define('_HAPPYLINUX_FAIL', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_FAILED', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_REFRESH', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_REFRESHED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_FINISH', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_FINISHED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_PRINT', 'пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_SAMPLE', 'пїЅпїЅпїЅпїЅпїЅпїЅ');

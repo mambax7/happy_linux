@@ -1,8 +1,8 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
-// $Id: rss_utility.php,v 1.5 2012/04/10 18:55:18 ohwada Exp $
+// $Id: RssUtility.php,v 1.5 2012/04/10 18:55:18 ohwada Exp $
 
 // 2012-03-01 K.OHWADA
 // join_xml_url()
@@ -20,7 +20,7 @@ namespace XoopsModules\Happy_linux;
 
 // 2007-05-12 K.OHWADA
 // this is new file
-// porting form rssc_parse_handler.php
+// porting form rssc_parseHandler.php
 
 //=========================================================
 // Happy Linux Framework Module
@@ -30,15 +30,20 @@ namespace XoopsModules\Happy_linux;
 //---------------------------------------------------------
 // define constant
 //---------------------------------------------------------
-define('HAPPY_LINUX_RSS_CODE_XML_ENCODINGS_DEFAULT', 41);
-define('HAPPY_LINUX_RSS_CODE_DISCOVER_SUCCEEDED', 42);
-define('HAPPY_LINUX_RSS_CODE_DISCOVER_FAILED', 43);
+define('HAPPYLINUX_RSS_CODE_XML_ENCODINGS_DEFAULT', 41);
+define('HAPPYLINUX_RSS_CODE_DISCOVER_SUCCEEDED', 42);
+define('HAPPYLINUX_RSS_CODE_DISCOVER_FAILED', 43);
 
 //=========================================================
-// class rss_utility
-// caller: rss_parser
+// class RssUtility
+// caller: RssParser
 //=========================================================
-class rss_utility extends Error
+
+/**
+ * Class RssUtility
+ * @package XoopsModules\Happylinux
+ */
+class RssUtility extends Error
 {
     // class instance
     public $_remote_file;
@@ -46,7 +51,7 @@ class rss_utility extends Error
     public $_strings;
 
     // basic config
-    public $_sel_priority = HAPPY_LINUX_RSS_SEL_ATOM;
+    public $_sel_priority = HAPPYLINUX_RSS_SEL_ATOM;
 
     // result
     public $_html_text;
@@ -64,7 +69,7 @@ class rss_utility extends Error
     public $_SOURCE_ENCODINGS  = 'utf-8';
 
     // select mode
-    public $_SEL_MODE = HAPPY_LINUX_RSS_SEL_RSS;
+    public $_SEL_MODE = HAPPYLINUX_RSS_SEL_RSS;
     public $_TEMPLATE_RDF;
     public $_TEMPLATE_RSS;
     public $_TEMPLATE_ATOM;
@@ -79,11 +84,14 @@ class rss_utility extends Error
 
         // PHP 5.2: Non-static method
         // class instance
-        $this->_remote_file      = happy_linux_get_singleton('remote_file');
-        $this->_convert_encoding = happy_linux_get_singleton('convert_encoding');
-        $this->_strings          = happy_linux_get_singleton('strings');
+        $this->_remote_file      = RemoteFile::getInstance(); //getSingleton('remote_file');
+        $this->_convert_encoding = ConvertEncoding::getInstance(); //getSingleton('convert_encoding');
+        $this->_strings          = Strings::getInstance(); //getSingleton('strings');
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\RssUtility|static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -97,6 +105,12 @@ class rss_utility extends Error
     //---------------------------------------------------------
     // init
     //---------------------------------------------------------
+    /**
+     * @param        $host
+     * @param string $port
+     * @param string $user
+     * @param string $pass
+     */
     public function set_proxy($host, $port = '8080', $user = '', $pass = '')
     {
         $this->_remote_file->set_snoopy_proxy($host, $port, $user, $pass);
@@ -108,6 +122,11 @@ class rss_utility extends Error
     //---------------------------------------------------------
     // discover XML link
     //---------------------------------------------------------
+    /**
+     * @param        $html_url
+     * @param string $sel
+     * @return bool
+     */
     public function discover($html_url, $sel = '')
     {
         $this->_set_log_func_name('discover');
@@ -123,18 +142,18 @@ class rss_utility extends Error
 
         list($rdf_url, $rss_url, $atom_url) = $this->find_link($html_text, $html_url);
 
-        if ((HAPPY_LINUX_RSS_SEL_ATOM == $sel) && $atom_url) {
-            $xml_mode = HAPPY_LINUX_RSS_MODE_ATOM;
-        } elseif ((HAPPY_LINUX_RSS_SEL_RSS == $sel) && $rss_url) {
-            $xml_mode = HAPPY_LINUX_RSS_MODE_RSS;
-        } elseif ((HAPPY_LINUX_RSS_SEL_RDF == $sel) && $rdf_url) {
-            $xml_mode = HAPPY_LINUX_RSS_MODE_RDF;
+        if ((HAPPYLINUX_RSS_SEL_ATOM == $sel) && $atom_url) {
+            $xml_mode = HAPPYLINUX_RSS_MODE_ATOM;
+        } elseif ((HAPPYLINUX_RSS_SEL_RSS == $sel) && $rss_url) {
+            $xml_mode = HAPPYLINUX_RSS_MODE_RSS;
+        } elseif ((HAPPYLINUX_RSS_SEL_RDF == $sel) && $rdf_url) {
+            $xml_mode = HAPPYLINUX_RSS_MODE_RDF;
         } elseif ($atom_url) {
-            $xml_mode = HAPPY_LINUX_RSS_MODE_ATOM;
+            $xml_mode = HAPPYLINUX_RSS_MODE_ATOM;
         } elseif ($rss_url) {
-            $xml_mode = HAPPY_LINUX_RSS_MODE_RSS;
+            $xml_mode = HAPPYLINUX_RSS_MODE_RSS;
         } elseif ($rdf_url) {
-            $xml_mode = HAPPY_LINUX_RSS_MODE_RDF;
+            $xml_mode = HAPPYLINUX_RSS_MODE_RDF;
         } else {
             return false;
         }
@@ -151,15 +170,24 @@ class rss_utility extends Error
     // check_exist_rssurl
     // for admin/link_manage.php
     //---------------------------------------------------------
+    /**
+     * @param $mode
+     * @param $url
+     * @param $rdf_url
+     * @param $rss_url
+     * @param $atom_url
+     * @param $sel
+     * @return int
+     */
     public function discover_for_manage($mode, $url, $rdf_url, $rss_url, $atom_url, $sel)
     {
         $ret_code = 0;
 
         // RSS auto discovery
-        if (HAPPY_LINUX_RSS_MODE_AUTO == $mode) {
+        if (HAPPYLINUX_RSS_MODE_AUTO == $mode) {
             $ret = $this->discover($url, $sel);
             if ($ret) {
-                $ret_code      = HAPPY_LINUX_RSS_CODE_DISCOVER_SUCCEEDED;
+                $ret_code      = HAPPYLINUX_RSS_CODE_DISCOVER_SUCCEEDED;
                 $mode          = $this->get_xml_mode();
                 $auto_rdf_url  = $this->get_rdf_url();
                 $auto_rss_url  = $this->get_rss_url();
@@ -178,7 +206,7 @@ class rss_utility extends Error
                 }
             } else {
                 // cannot discover xml link
-                $ret_code = HAPPY_LINUX_RSS_CODE_DISCOVER_FAILED;
+                $ret_code = HAPPYLINUX_RSS_CODE_DISCOVER_FAILED;
                 $this->_set_errors('cannot discover xml link');
                 $this->_set_errors($this->getErrors());
             }
@@ -195,6 +223,10 @@ class rss_utility extends Error
     //---------------------------------------------------------
     // read remote HTML
     //---------------------------------------------------------
+    /**
+     * @param $url
+     * @return bool
+     */
     public function read_html($url)
     {
         $this->_set_log_func_name('read_html');
@@ -222,6 +254,10 @@ class rss_utility extends Error
     // head spaces
     // https://www.iwate-svc.jp/feed
     //---------------------------------------------------------
+    /**
+     * @param $url
+     * @return bool|string|string[]|null
+     */
     public function read_xml($url)
     {
         $this->_set_log_func_name('read_xml');
@@ -247,6 +283,11 @@ class rss_utility extends Error
     //---------------------------------------------------------
     // find XML link: auto discovery
     //---------------------------------------------------------
+    /**
+     * @param        $html_text
+     * @param string $html_url
+     * @return array|string[]
+     */
     public function find_link($html_text, $html_url = '')
     {
         $this->_set_log_func_name('find_link');
@@ -263,6 +304,10 @@ class rss_utility extends Error
     //---------------------------------------------------------
     // find XML encoding
     //---------------------------------------------------------
+    /**
+     * @param $xml
+     * @return bool|string
+     */
     public function find_encoding($xml)
     {
         $this->_set_log_func_name('find_encoding');
@@ -273,7 +318,7 @@ class rss_utility extends Error
         } else {
             if ($this->_DEFAULT_ENCODINGS) {
                 $encoding           = $this->_DEFAULT_ENCODINGS;
-                $this->_result_code = HAPPY_LINUX_RSS_CODE_XML_ENCODINGS_DEFAULT;
+                $this->_result_code = HAPPYLINUX_RSS_CODE_XML_ENCODINGS_DEFAULT;
             } else {
                 $this->_set_errors('cannot find xml encoding');
 
@@ -289,6 +334,10 @@ class rss_utility extends Error
     //---------------------------------------------------------
     // find XML mode
     //---------------------------------------------------------
+    /**
+     * @param $xml
+     * @return bool|int
+     */
     public function find_kind($xml)
     {
         $this->_set_log_func_name('find_kind');
@@ -302,13 +351,13 @@ class rss_utility extends Error
 
         switch ($kind) {
             case 'rdf':
-                $mode = HAPPY_LINUX_RSS_MODE_RDF;
+                $mode = HAPPYLINUX_RSS_MODE_RDF;
                 break;
             case 'rss':
-                $mode = HAPPY_LINUX_RSS_MODE_RSS;
+                $mode = HAPPYLINUX_RSS_MODE_RSS;
                 break;
             case 'atom':
-                $mode = HAPPY_LINUX_RSS_MODE_ATOM;
+                $mode = HAPPYLINUX_RSS_MODE_ATOM;
                 break;
             default:
                 $this->_set_errors('cannot find xml kind');
@@ -326,6 +375,11 @@ class rss_utility extends Error
     //---------------------------------------------------------
     // convert XML to parse
     //---------------------------------------------------------
+    /**
+     * @param $xml_data
+     * @param $xml_encoding
+     * @return array
+     */
     public function convert_to_parse($xml_data, $xml_encoding)
     {
         $this->_set_log_func_name('convert_to_parse');
@@ -337,11 +391,17 @@ class rss_utility extends Error
     //---------------------------------------------------------
     // set param
     //---------------------------------------------------------
+    /**
+     * @param $value
+     */
     public function set_priority($value)
     {
         $this->_sel_priority = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_encoding_local($value)
     {
         $this->_xml_encoding_local = $value;
@@ -350,41 +410,59 @@ class rss_utility extends Error
     //---------------------------------------------------------
     // get result of auto discovery
     //---------------------------------------------------------
+    /**
+     * @return mixed
+     */
     public function get_html_text()
     {
         return $this->_html_text;
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xml_mode()
     {
         return $this->_xml_mode;
     }
 
+    /**
+     * @return mixed
+     */
     public function get_rdf_url()
     {
         return $this->_rdf_url;
     }
 
+    /**
+     * @return mixed
+     */
     public function get_rss_url()
     {
         return $this->_rss_url;
     }
 
+    /**
+     * @return mixed
+     */
     public function get_atom_url()
     {
         return $this->_atom_url;
     }
 
+    /**
+     * @return bool
+     */
     public function get_xmlurl_by_mode()
     {
         switch ($this->_xml_mode) {
-            case HAPPY_LINUX_RSS_MODE_RDF:
+            case HAPPYLINUX_RSS_MODE_RDF:
                 return $this->_rdf_url;
                 break;
-            case HAPPY_LINUX_RSS_MODE_RSS:
+            case HAPPYLINUX_RSS_MODE_RSS:
                 return $this->_rss_url;
                 break;
-            case HAPPY_LINUX_RSS_MODE_ATOM:
+            case HAPPYLINUX_RSS_MODE_ATOM:
                 return $this->_atom_url;
                 break;
         }
@@ -395,16 +473,25 @@ class rss_utility extends Error
     //---------------------------------------------------------
     // get result of parse
     //---------------------------------------------------------
+    /**
+     * @return mixed
+     */
     public function get_xml()
     {
         return $this->_xml_data;
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xml_kind()
     {
         return $this->_xml_kind;
     }
 
+    /**
+     * @return int
+     */
     public function get_result_code()
     {
         return $this->_result_code;
@@ -418,10 +505,15 @@ class rss_utility extends Error
     // find RDF/RSS/ATOM link in HTML
     //---------------------------------------------------------
     // <base href="xxx">
-    // <link rel="alternate" type="application/rdf+xml"  title="RDF" href="xxx" />
-    // <link rel="alternate" type="application/rss+xml"  title="RSS" href="xxx" />
-    // <link rel="alternate" type="application/atom+xml" title="ATOM" href="xxx" />
+    // <link rel="alternate" type="application/rdf+xml"  title="RDF" href="xxx">
+    // <link rel="alternate" type="application/rss+xml"  title="RSS" href="xxx">
+    // <link rel="alternate" type="application/atom+xml" title="ATOM" href="xxx">
     //---------------------------------------------------------
+    /**
+     * @param        $html
+     * @param string $url
+     * @return array|string[]
+     */
     public function _find_xml_link($html, $url = '')
     {
         $href_base = '';
@@ -503,6 +595,12 @@ class rss_utility extends Error
     //---------------------------------------------------------
     // relative_to_full_url
     //---------------------------------------------------------
+    /**
+     * @param $url_xml
+     * @param $url_html
+     * @param $url_base
+     * @return string
+     */
     public function _relative_to_full_url($url_xml, $url_html, $url_base)
     {
         if (empty($url_xml)) {
@@ -545,6 +643,11 @@ class rss_utility extends Error
         return $full;
     }
 
+    /**
+     * @param $url_html
+     * @param $url_xml
+     * @return string
+     */
     public function join_xml_url($url_html, $url_xml)
     {
         $html = $this->strip_slash_from_tail($url_html);
@@ -554,6 +657,10 @@ class rss_utility extends Error
         return $full;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function strip_slash_from_head($str)
     {
         // ord : the ASCII value of the first character of string
@@ -566,6 +673,10 @@ class rss_utility extends Error
         return $str;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function strip_slash_from_tail($str)
     {
         if ('/' == mb_substr($str, -1, 1)) {
@@ -579,6 +690,11 @@ class rss_utility extends Error
     // find HTML encoding
     // < meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
     //---------------------------------------------------------
+    /**
+     * @param      $text
+     * @param bool $flag_auto
+     * @return bool|false|string|null
+     */
     public function find_html_encoding($text, $flag_auto = false)
     {
         $encoding = null;
@@ -588,7 +704,7 @@ class rss_utility extends Error
             }
         }
         if (empty($encoding) && $flag_auto) {
-            $encoding = happy_linux_detect_encoding($text);
+            $encoding = happylinux_detect_encoding($text);
         }
 
         return $encoding;
@@ -598,6 +714,11 @@ class rss_utility extends Error
     // find XML encoding
     // < ? xml version="1.0" encoding="UTF-8" ? >
     //---------------------------------------------------------
+    /**
+     * @param      $text
+     * @param bool $flag_auto
+     * @return bool|false|string
+     */
     public function find_xml_encoding($text, $flag_auto = false)
     {
         $encoding = false;
@@ -607,7 +728,7 @@ class rss_utility extends Error
             }
         }
         if (empty($encoding) && $flag_auto) {
-            $encoding = happy_linux_detect_encoding($text);
+            $encoding = happylinux_detect_encoding($text);
         }
 
         return $encoding;
@@ -620,6 +741,10 @@ class rss_utility extends Error
     // < feed version="0.3" xmlns="https://purl.org/atom/ns#" >
     // < feed xmlns="https://www.w3.org/2005/Atom" >
     //---------------------------------------------------------
+    /**
+     * @param $text
+     * @return bool|string
+     */
     public function _find_xml_kind($text)
     {
         if (preg_match('/<rdf:RDF(.*?)>/si', $text)) {
@@ -644,6 +769,11 @@ class rss_utility extends Error
     //---------------------------------------------------------
     // convert xml to parse
     //---------------------------------------------------------
+    /**
+     * @param $xml
+     * @param $encoding
+     * @return array
+     */
     public function _convert_xml_to_parse($xml, $encoding)
     {
         // not convert, if PHP default
@@ -665,6 +795,10 @@ class rss_utility extends Error
         return [$xml, $encoding];
     }
 
+    /**
+     * @param $text
+     * @return mixed
+     */
     public function _cleanup_xml($text)
     {
         $text = $this->_strings->strip_control($text);
@@ -673,6 +807,10 @@ class rss_utility extends Error
         return $text;
     }
 
+    /**
+     * @param $enc
+     * @return bool
+     */
     public function _check_known_encoding($enc)
     {
         $enc = mb_strtolower($enc);
@@ -686,6 +824,12 @@ class rss_utility extends Error
     //---------------------------------------------------------
     // convert class
     //---------------------------------------------------------
+    /**
+     * @param $str
+     * @param $to
+     * @param $from
+     * @return mixed
+     */
     public function convert($str, $to, $from)
     {
         return $this->_convert_encoding->convert($str, $to, $from);
@@ -694,61 +838,82 @@ class rss_utility extends Error
     //---------------------------------------------------------
     // select by mode
     //---------------------------------------------------------
+    /**
+     * @param $mode
+     */
     public function set_sel_mode($mode)
     {
         switch ($mode) {
-            case HAPPY_LINUX_RSS_SEL_RDF:
-            case HAPPY_LINUX_RSS_SEL_RSS:
-            case HAPPY_LINUX_RSS_SEL_ATOM:
+            case HAPPYLINUX_RSS_SEL_RDF:
+            case HAPPYLINUX_RSS_SEL_RSS:
+            case HAPPYLINUX_RSS_SEL_ATOM:
                 $this->_SEL_MODE = $mode;
                 break;
-            case HAPPY_LINUX_RSS_SEL_OTHER:
+            case HAPPYLINUX_RSS_SEL_OTHER:
             default:
-                $this->_SEL_MODE = HAPPY_LINUX_RSS_SEL_OTHER;
+                $this->_SEL_MODE = HAPPYLINUX_RSS_SEL_OTHER;
                 break;
         }
     }
 
+    /**
+     * @return string
+     */
     public function get_sel_mode()
     {
         return $this->_SEL_MODE;
     }
 
+    /**
+     * @param $val
+     */
     public function set_template_rdf($val)
     {
         $this->_TEMPLATE_RDF = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_template_rss($val)
     {
         $this->_TEMPLATE_RSS = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_template_atom($val)
     {
         $this->_TEMPLATE_ATOM = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_template_other($val)
     {
         $this->_TEMPLATE_OTHER = $val;
     }
 
+    /**
+     * @return mixed
+     */
     public function get_sel_template()
     {
         $template = '';
 
         switch ($this->_SEL_MODE) {
-            case HAPPY_LINUX_RSS_SEL_RDF:
+            case HAPPYLINUX_RSS_SEL_RDF:
                 $template = $this->_TEMPLATE_RDF;
                 break;
-            case HAPPY_LINUX_RSS_SEL_RSS:
+            case HAPPYLINUX_RSS_SEL_RSS:
                 $template = $this->_TEMPLATE_RSS;
                 break;
-            case HAPPY_LINUX_RSS_SEL_ATOM:
+            case HAPPYLINUX_RSS_SEL_ATOM:
                 $template = $this->_TEMPLATE_ATOM;
                 break;
-            case HAPPY_LINUX_RSS_SEL_OTHER:
+            case HAPPYLINUX_RSS_SEL_OTHER:
             default:
                 $template = $this->_TEMPLATE_OTHER;
                 break;
@@ -757,6 +922,11 @@ class rss_utility extends Error
         return $template;
     }
 
+    /**
+     * @param $html_text
+     * @param $html_url
+     * @return mixed|string
+     */
     public function get_sel_find_link($html_text, $html_url)
     {
         $url = '';
@@ -764,16 +934,16 @@ class rss_utility extends Error
         list($url_rdf, $url_rss, $url_atom) = $this->find_link($html_text, $html_url);
 
         switch ($this->_SEL_MODE) {
-            case HAPPY_LINUX_RSS_SEL_RDF:
+            case HAPPYLINUX_RSS_SEL_RDF:
                 $url = $url_rdf;
                 break;
-            case HAPPY_LINUX_RSS_SEL_RSS:
+            case HAPPYLINUX_RSS_SEL_RSS:
                 $url = $url_rss;
                 break;
-            case HAPPY_LINUX_RSS_SEL_ATOM:
+            case HAPPYLINUX_RSS_SEL_ATOM:
                 $url = $url_atom;
                 break;
-            case HAPPY_LINUX_RSS_SEL_OTHER:
+            case HAPPYLINUX_RSS_SEL_OTHER:
             default:
                 break;
         }
@@ -784,76 +954,79 @@ class rss_utility extends Error
     //---------------------------------------------------------
     // lang_items
     //---------------------------------------------------------
+    /**
+     * @return array
+     */
     public function &get_lang_items()
     {
         $arr = [
-            'lang_site_desc'              => _HAPPY_LINUX_VIEW_SITE_DESCRIPTION,
-            'lang_site_updated'           => _HAPPY_LINUX_VIEW_SITE_UPDATED,
-            'lang_site_date'              => _HAPPY_LINUX_VIEW_SITE_DATE,
-            'lang_site_webmaster'         => _HAPPY_LINUX_VIEW_SITE_WEBMASTER,
-            'lang_site_language'          => _HAPPY_LINUX_VIEW_SITE_LANGUAGE,
-            'lang_site_generator'         => _HAPPY_LINUX_VIEW_SITE_GENERATOR,
-            'lang_site_category'          => _HAPPY_LINUX_VIEW_SITE_CATEGORY,
-            'lang_site_description'       => _HAPPY_LINUX_VIEW_SITE_DESCRIPTION,
-            'lang_site_docs'              => _HAPPY_LINUX_VIEW_RSS_SITE_DOCS,
-            'lang_site_copyright'         => _HAPPY_LINUX_VIEW_RSS_SITE_COPYRIGHT,
-            'lang_site_cloud'             => _HAPPY_LINUX_VIEW_RSS_SITE_CLOUD,
-            'lang_site_ttl'               => _HAPPY_LINUX_VIEW_RSS_SITE_TTL,
-            'lang_site_rating'            => _HAPPY_LINUX_VIEW_RSS_SITE_RATING,
-            'lang_site_textinput'         => _HAPPY_LINUX_VIEW_RSS_SITE_TEXTINPUT,
-            'lang_site_skiphours'         => _HAPPY_LINUX_VIEW_RSS_SITE_SKIPHOURS,
-            'lang_site_skipdays'          => _HAPPY_LINUX_VIEW_RSS_SITE_SKIPDAYS,
-            'lang_site_rights'            => _HAPPY_LINUX_VIEW_ATOM_SITE_RIGHTS,
-            'lang_site_source'            => _HAPPY_LINUX_VIEW_ATOM_SITE_SOURCE,
-            'lang_site_subtitle'          => _HAPPY_LINUX_VIEW_ATOM_SITE_SUBTITLE,
-            'lang_site_id'                => _HAPPY_LINUX_VIEW_ATOM_SITE_ID,
-            'lang_site_icon'              => _HAPPY_LINUX_VIEW_ATOM_SITE_ICON,
-            'lang_site_logo'              => _HAPPY_LINUX_VIEW_ATOM_SITE_LOGO,
-            'lang_site_lastbuilddate'     => _HAPPY_LINUX_VIEW_RSS_SITE_LASTBUILDDATE,
-            'lang_site_pubdate'           => _HAPPY_LINUX_VIEW_RSS_SITE_PUBDATE,
-            'lang_site_managingeditor'    => _HAPPY_LINUX_VIEW_RSS_SITE_MANAGINGEDITOR,
-            'lang_site_link_self'         => _HAPPY_LINUX_VIEW_ATOM_SITE_LINK_SELF,
-            'lang_site_author_name'       => _HAPPY_LINUX_VIEW_ATOM_SITE_AUTHOR_NAME,
-            'lang_site_author_email'      => _HAPPY_LINUX_VIEW_ATOM_SITE_AUTHOR_EMAIL,
-            'lang_site_author_uri'        => _HAPPY_LINUX_VIEW_ATOM_SITE_AUTHOR_URI,
-            'lang_site_contributor_name'  => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_NAME,
-            'lang_site_contributor_email' => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_EMAIL,
-            'lang_site_contributor_uri'   => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_URI,
-            'lang_site_creator'           => _HAPPY_LINUX_VIEW_DC_CREATOR,
-            'lang_title'                  => _HAPPY_LINUX_VIEW_TITLE,
-            'lang_published'              => _HAPPY_LINUX_VIEW_PUBLISHED,
-            'lang_updated'                => _HAPPY_LINUX_VIEW_UPDATED,
-            'lang_created'                => _HAPPY_LINUX_VIEW_CREATED,
-            'lang_summary'                => _HAPPY_LINUX_VIEW_SUMMARY,
-            'lang_category'               => _HAPPY_LINUX_VIEW_CATEGORY,
-            'lang_rights'                 => _HAPPY_LINUX_VIEW_RIGHTS,
-            'lang_source'                 => _HAPPY_LINUX_VIEW_SOURCE,
-            'lang_guid'                   => _HAPPY_LINUX_VIEW_RSS_GUID,
-            'lang_pubdate'                => _HAPPY_LINUX_VIEW_RSS_PUBDATE,
-            'lang_author'                 => _HAPPY_LINUX_VIEW_RSS_AUTHOR,
-            'lang_comments'               => _HAPPY_LINUX_VIEW_RSS_COMMENTS,
-            'lang_enclosure'              => _HAPPY_LINUX_VIEW_RSS_ENCLOSURE,
-            'lang_enclosure_url'          => _HAPPY_LINUX_VIEW_ENCLOSURE_URL,
-            'lang_enclosure_type'         => _HAPPY_LINUX_VIEW_ENCLOSURE_TYPE,
-            'lang_enclosure_length'       => _HAPPY_LINUX_VIEW_ENCLOSURE_LENGTH,
-            'lang_entry_id'               => _HAPPY_LINUX_VIEW_ATOM_ID,
-            'lang_description'            => _HAPPY_LINUX_VIEW_DESCRIPTION,
-            'lang_author_name'            => _HAPPY_LINUX_VIEW_AUTHOR_NAME,
-            'lang_author_email'           => _HAPPY_LINUX_VIEW_AUTHOR_EMAIL,
-            'lang_author_uri'             => _HAPPY_LINUX_VIEW_AUTHOR_URI,
-            'lang_contributor_name'       => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_NAME,
-            'lang_contributor_email'      => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_EMAIL,
-            'lang_contributor_uri'        => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_URI,
-            'lang_subject'                => _HAPPY_LINUX_VIEW_DC_SUBJECT,
-            'lang_publisher'              => _HAPPY_LINUX_VIEW_DC_PUBLISHER,
-            'lang_creator'                => _HAPPY_LINUX_VIEW_DC_CREATOR,
-            'lang_date'                   => _HAPPY_LINUX_VIEW_DC_DATE,
-            'lang_format'                 => _HAPPY_LINUX_VIEW_DC_FORMAT,
-            'lang_relation'               => _HAPPY_LINUX_VIEW_DC_RELATION,
-            'lang_identifier'             => _HAPPY_LINUX_VIEW_DC_IDENTIFIER,
-            'lang_coverage'               => _HAPPY_LINUX_VIEW_DC_COVERAGE,
-            'lang_audience'               => _HAPPY_LINUX_VIEW_DC_AUDIENCE,
-            'lang_encoded'                => _HAPPY_LINUX_VIEW_CONTENT_ENCODED,
+            'lang_site_desc'              => _HAPPYLINUX_VIEW_SITE_DESCRIPTION,
+            'lang_site_updated'           => _HAPPYLINUX_VIEW_SITE_UPDATED,
+            'lang_site_date'              => _HAPPYLINUX_VIEW_SITE_DATE,
+            'lang_site_webmaster'         => _HAPPYLINUX_VIEW_SITE_WEBMASTER,
+            'lang_site_language'          => _HAPPYLINUX_VIEW_SITE_LANGUAGE,
+            'lang_site_generator'         => _HAPPYLINUX_VIEW_SITE_GENERATOR,
+            'lang_site_category'          => _HAPPYLINUX_VIEW_SITE_CATEGORY,
+            'lang_site_description'       => _HAPPYLINUX_VIEW_SITE_DESCRIPTION,
+            'lang_site_docs'              => _HAPPYLINUX_VIEW_RSS_SITE_DOCS,
+            'lang_site_copyright'         => _HAPPYLINUX_VIEW_RSS_SITE_COPYRIGHT,
+            'lang_site_cloud'             => _HAPPYLINUX_VIEW_RSS_SITE_CLOUD,
+            'lang_site_ttl'               => _HAPPYLINUX_VIEW_RSS_SITE_TTL,
+            'lang_site_rating'            => _HAPPYLINUX_VIEW_RSS_SITE_RATING,
+            'lang_site_textinput'         => _HAPPYLINUX_VIEW_RSS_SITE_TEXTINPUT,
+            'lang_site_skiphours'         => _HAPPYLINUX_VIEW_RSS_SITE_SKIPHOURS,
+            'lang_site_skipdays'          => _HAPPYLINUX_VIEW_RSS_SITE_SKIPDAYS,
+            'lang_site_rights'            => _HAPPYLINUX_VIEW_ATOM_SITE_RIGHTS,
+            'lang_site_source'            => _HAPPYLINUX_VIEW_ATOM_SITE_SOURCE,
+            'lang_site_subtitle'          => _HAPPYLINUX_VIEW_ATOM_SITE_SUBTITLE,
+            'lang_site_id'                => _HAPPYLINUX_VIEW_ATOM_SITE_ID,
+            'lang_site_icon'              => _HAPPYLINUX_VIEW_ATOM_SITE_ICON,
+            'lang_site_logo'              => _HAPPYLINUX_VIEW_ATOM_SITE_LOGO,
+            'lang_site_lastbuilddate'     => _HAPPYLINUX_VIEW_RSS_SITE_LASTBUILDDATE,
+            'lang_site_pubdate'           => _HAPPYLINUX_VIEW_RSS_SITE_PUBDATE,
+            'lang_site_managingeditor'    => _HAPPYLINUX_VIEW_RSS_SITE_MANAGINGEDITOR,
+            'lang_site_link_self'         => _HAPPYLINUX_VIEW_ATOM_SITE_LINK_SELF,
+            'lang_site_author_name'       => _HAPPYLINUX_VIEW_ATOM_SITE_AUTHOR_NAME,
+            'lang_site_author_email'      => _HAPPYLINUX_VIEW_ATOM_SITE_AUTHOR_EMAIL,
+            'lang_site_author_uri'        => _HAPPYLINUX_VIEW_ATOM_SITE_AUTHOR_URI,
+            'lang_site_contributor_name'  => _HAPPYLINUX_VIEW_ATOM_CONTRIBUTOR_NAME,
+            'lang_site_contributor_email' => _HAPPYLINUX_VIEW_ATOM_CONTRIBUTOR_EMAIL,
+            'lang_site_contributor_uri'   => _HAPPYLINUX_VIEW_ATOM_CONTRIBUTOR_URI,
+            'lang_site_creator'           => _HAPPYLINUX_VIEW_DC_CREATOR,
+            'lang_title'                  => _HAPPYLINUX_VIEW_TITLE,
+            'lang_published'              => _HAPPYLINUX_VIEW_PUBLISHED,
+            'lang_updated'                => _HAPPYLINUX_VIEW_UPDATED,
+            'lang_created'                => _HAPPYLINUX_VIEW_CREATED,
+            'lang_summary'                => _HAPPYLINUX_VIEW_SUMMARY,
+            'lang_category'               => _HAPPYLINUX_VIEW_CATEGORY,
+            'lang_rights'                 => _HAPPYLINUX_VIEW_RIGHTS,
+            'lang_source'                 => _HAPPYLINUX_VIEW_SOURCE,
+            'lang_guid'                   => _HAPPYLINUX_VIEW_RSS_GUID,
+            'lang_pubdate'                => _HAPPYLINUX_VIEW_RSS_PUBDATE,
+            'lang_author'                 => _HAPPYLINUX_VIEW_RSS_AUTHOR,
+            'lang_comments'               => _HAPPYLINUX_VIEW_RSS_COMMENTS,
+            'lang_enclosure'              => _HAPPYLINUX_VIEW_RSS_ENCLOSURE,
+            'lang_enclosure_url'          => _HAPPYLINUX_VIEW_ENCLOSURE_URL,
+            'lang_enclosure_type'         => _HAPPYLINUX_VIEW_ENCLOSURE_TYPE,
+            'lang_enclosure_length'       => _HAPPYLINUX_VIEW_ENCLOSURE_LENGTH,
+            'lang_entry_id'               => _HAPPYLINUX_VIEW_ATOM_ID,
+            'lang_description'            => _HAPPYLINUX_VIEW_DESCRIPTION,
+            'lang_author_name'            => _HAPPYLINUX_VIEW_AUTHOR_NAME,
+            'lang_author_email'           => _HAPPYLINUX_VIEW_AUTHOR_EMAIL,
+            'lang_author_uri'             => _HAPPYLINUX_VIEW_AUTHOR_URI,
+            'lang_contributor_name'       => _HAPPYLINUX_VIEW_ATOM_CONTRIBUTOR_NAME,
+            'lang_contributor_email'      => _HAPPYLINUX_VIEW_ATOM_CONTRIBUTOR_EMAIL,
+            'lang_contributor_uri'        => _HAPPYLINUX_VIEW_ATOM_CONTRIBUTOR_URI,
+            'lang_subject'                => _HAPPYLINUX_VIEW_DC_SUBJECT,
+            'lang_publisher'              => _HAPPYLINUX_VIEW_DC_PUBLISHER,
+            'lang_creator'                => _HAPPYLINUX_VIEW_DC_CREATOR,
+            'lang_date'                   => _HAPPYLINUX_VIEW_DC_DATE,
+            'lang_format'                 => _HAPPYLINUX_VIEW_DC_FORMAT,
+            'lang_relation'               => _HAPPYLINUX_VIEW_DC_RELATION,
+            'lang_identifier'             => _HAPPYLINUX_VIEW_DC_IDENTIFIER,
+            'lang_coverage'               => _HAPPYLINUX_VIEW_DC_COVERAGE,
+            'lang_audience'               => _HAPPYLINUX_VIEW_DC_AUDIENCE,
+            'lang_encoded'                => _HAPPYLINUX_VIEW_CONTENT_ENCODED,
         ];
 
         return $arr;

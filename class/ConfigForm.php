@@ -1,11 +1,11 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
-// $Id: config_store_handler.php,v 1.2 2012/03/17 13:09:23 ohwada Exp $
+// $Id: config_storeHandler.php,v 1.2 2012/03/17 13:09:23 ohwada Exp $
 
 // 2012-03-01 K.OHWADA
-// BUG: happy_linux_form_lib -> happy_linux_form_lib
+// BUG: happylinux_form_lib -> happylinux_form_lib
 
 // 2007-11-24 K.OHWADA
 // compare_to_define()
@@ -43,19 +43,24 @@ namespace XoopsModules\Happy_linux;
 
 // 2006-07-10 K.OHWADA
 // this is new file
-// porting from weblinks_config_store_handler
+// porting from weblinks_config_storeHandler
 
 //================================================================
 // Happy Linux Framework Module
 // this file contain 2 class
-//   happy_linux_config_form
-//   happy_linux_config_store_handler
+//   happylinux_config_form
+//   happylinux_config_storeHandler
 // 2006-07-10 K.OHWADA
 //================================================================
 
 //=========================================================
 // class ConfigForm
 //=========================================================
+
+/**
+ * Class ConfigForm
+ * @package XoopsModules\Happylinux
+ */
 class ConfigForm extends FormLib
 {
     // constant
@@ -65,7 +70,7 @@ class ConfigForm extends FormLib
     public $_CC_MARK          = '<span style="color:#0000ff;">#</span>';
 
     // set by childen class
-    public $_config_define_handler;
+    public $configDefineHandler;
 
     // class
     public $_post;
@@ -81,35 +86,46 @@ class ConfigForm extends FormLib
     //---------------------------------------------------------
     public function __construct()
     {
-        // BUG: happy_linux_form_lib -> happy_linux_form_lib
+        // BUG: happylinux_form_lib -> happylinux_form_lib
         parent::__construct();
 
         $this->set_form_name($this->_FORM_NAME_CONFIG);
 
-        $this->_config_define_handler = happy_linux_config_define_handler::getInstance();
+        $this->configDefineHandler = ConfigDefineHandler::getInstance();
         $this->_post                  = Post::getInstance();
 
-        if (defined('_HAPPY_LINUX_FORM_ITEM')) {
-            $this->_LANG_FORM_ITEM = _HAPPY_LINUX_FORM_ITEM;
+        if (defined('_HAPPYLINUX_FORM_ITEM')) {
+            $this->_LANG_FORM_ITEM = _HAPPYLINUX_FORM_ITEM;
         }
-        if (defined('_HAPPY_LINUX_UPDATE')) {
-            $this->set_submit_value(_HAPPY_LINUX_UPDATE);
+        if (defined('_HAPPYLINUX_UPDATE')) {
+            $this->set_submit_value(_HAPPYLINUX_UPDATE);
         }
     }
 
-    public function set_config_handler($name, $dirname, $prefix)
+    /**
+     * @param $name
+     * @param $dirname
+     * @param $prefix
+     */
+    public function set_config_handler($name, $dirname, $prefix, $helper = null)
     {
-        $this->_config_define_handler->set_config_handler($name, $dirname, $prefix);
+        $this->configDefineHandler->set_config_handler($name, $dirname, $prefix, $helper);
     }
 
+    /**
+     * @param $class
+     */
     public function set_config_define(&$class)
     {
-        $this->_config_define_handler->set_config_define($class);
+        $this->configDefineHandler->set_config_define($class);
     }
 
     //---------------------------------------------------------
     // main function
     //---------------------------------------------------------
+    /**
+     * @return mixed|string
+     */
     public function get_post_get_op()
     {
         $op = $this->_post->get_post_get('op');
@@ -120,6 +136,10 @@ class ConfigForm extends FormLib
     //---------------------------------------------------------
     // show config
     //---------------------------------------------------------
+    /**
+     * @param        $catid
+     * @param string $title
+     */
     public function show_by_catid($catid, $title = '')
     {
         $config_arr = &$this->get_by_catid($catid);
@@ -134,6 +154,10 @@ class ConfigForm extends FormLib
         $this->show($config_arr, $catid);
     }
 
+    /**
+     * @param     $config_arr
+     * @param int $catid
+     */
     public function show($config_arr, $catid = 0)
     {
         if (!is_array($config_arr) || empty($config_arr)) {
@@ -177,6 +201,10 @@ class ConfigForm extends FormLib
     //---------------------------------------------------------
     // make config element
     //---------------------------------------------------------
+    /**
+     * @param $config
+     * @return string
+     */
     public function build_conf_caption($config)
     {
         $cap = $this->build_conf_caption_ccflag($config['title'], $config['description'], $config['cc_flag']);
@@ -184,6 +212,12 @@ class ConfigForm extends FormLib
         return $cap;
     }
 
+    /**
+     * @param      $title
+     * @param      $desc
+     * @param bool $cc_flag
+     * @return string
+     */
     public function build_conf_caption_ccflag($title, $desc, $cc_flag = false)
     {
         $cap = $this->build_form_caption($title, $desc);
@@ -194,6 +228,10 @@ class ConfigForm extends FormLib
         return $cap;
     }
 
+    /**
+     * @param $config
+     * @return string|string[]|null
+     */
     public function build_conf_element($config)
     {
         $formtype  = $config['formtype'];
@@ -280,6 +318,12 @@ class ConfigForm extends FormLib
     //---------------------------------------------------------
     // make config form
     //---------------------------------------------------------
+    /**
+     * @param $name
+     * @param $value
+     * @param $valuetype
+     * @return string
+     */
     public function build_conf_textarea($name, $value, $valuetype)
     {
         if ('array' == $valuetype) {
@@ -297,6 +341,17 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param int    $size
+     * @param int    $maxlength
+     * @param int    $width
+     * @param int    $height
+     * @param int    $border
+     * @param string $alt
+     * @return string
+     */
     public function build_conf_text_image($name, $value, $size = 50, $maxlength = 255, $width = 0, $height = 0, $border = 0, $alt = 'image')
     {
         $text = $this->build_html_input_text($name, $value, $size);
@@ -306,6 +361,15 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param int    $width
+     * @param int    $height
+     * @param int    $border
+     * @param string $alt
+     * @return string
+     */
     public function build_conf_label_image($name, $value, $width = 0, $height = 0, $border = 0, $alt = 'image')
     {
         $text = $value;
@@ -315,6 +379,13 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param     $name
+     * @param     $value
+     * @param int $size
+     * @param int $maxlength
+     * @return string
+     */
     public function build_conf_textbox($name, $value, $size = 50, $maxlength = 255)
     {
         $value = $this->sanitize_text($value);
@@ -323,6 +394,10 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param $value
+     * @return string|string[]|null
+     */
     public function build_conf_label($value)
     {
         $text = $this->sanitize_text($value);
@@ -330,6 +405,15 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param        $options
+     * @param int    $none
+     * @param string $none_name
+     * @param string $none_value
+     * @return string
+     */
     public function build_conf_select($name, $value, $options, $none = 0, $none_name = '---', $none_value = '')
     {
         $text = $this->build_html_select($name, $value, $options, $none, $none_name, $none_value);
@@ -337,6 +421,15 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param        $options
+     * @param int    $none
+     * @param string $none_name
+     * @param string $none_value
+     * @return string
+     */
     public function build_conf_select_multi($name, $value, $options, $none = 0, $none_name = '---', $none_value = '')
     {
         $text = $this->build_html_select_multiple($name, $value, $options, $none, $none_name, $none_value);
@@ -344,6 +437,13 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param        $options
+     * @param string $del
+     * @return string
+     */
     public function build_conf_radio_select($name, $value, $options, $del = '')
     {
         $text = $this->build_html_input_radio_select($name, $value, $options, $del);
@@ -351,6 +451,11 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return string
+     */
     public function build_conf_radio_yesno($name, $value)
     {
         $text = $this->build_form_radio_yesno($name, $value);
@@ -358,6 +463,11 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return string
+     */
     public function build_conf_checkbox_yesno($name, $value)
     {
         $text = $this->build_form_radio_yesno($name, $value);
@@ -365,6 +475,10 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param $id
+     * @return string
+     */
     public function build_conf_hidden($id)
     {
         $text = $this->build_html_input_hidden('conf_ids[]', $id);
@@ -375,6 +489,10 @@ class ConfigForm extends FormLib
     //---------------------------------------------------------
     // make config by name
     //---------------------------------------------------------
+    /**
+     * @param $name
+     * @return mixed|string
+     */
     public function build_conf_title_by_name($name)
     {
         if (empty($name)) {
@@ -386,6 +504,10 @@ class ConfigForm extends FormLib
         return $title;
     }
 
+    /**
+     * @param $name
+     * @return string
+     */
     public function build_conf_caption_by_name($name)
     {
         if (empty($name)) {
@@ -400,6 +522,11 @@ class ConfigForm extends FormLib
         return $cap;
     }
 
+    /**
+     * @param     $name
+     * @param int $size
+     * @return string
+     */
     public function build_conf_textbox_by_name($name, $size = 5)
     {
         if (empty($name)) {
@@ -416,6 +543,10 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param $name
+     * @return string
+     */
     public function build_conf_radio_yesno_by_name($name)
     {
         if (empty($name)) {
@@ -432,6 +563,10 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param $name
+     * @return string
+     */
     public function build_conf_checkbox_by_name($name)
     {
         if (empty($name)) {
@@ -448,6 +583,10 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param $name
+     * @return string
+     */
     public function build_conf_radio_select_by_name($name)
     {
         if (empty($name)) {
@@ -464,6 +603,11 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param      $name
+     * @param null $options
+     * @return string
+     */
     public function build_conf_select_by_name($name, $options = null)
     {
         if (empty($name)) {
@@ -483,6 +627,10 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param $name
+     * @return string|void
+     */
     public function build_conf_hidden_by_name($name)
     {
         if (empty($name)) {
@@ -498,6 +646,10 @@ class ConfigForm extends FormLib
     //---------------------------------------------------------
     // build config table
     //---------------------------------------------------------
+    /**
+     * @param $form_name
+     * @return string
+     */
     public function build_conf_table_begin($form_name)
     {
         $this->_conf_table_line_count = 0;
@@ -510,6 +662,10 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param $num
+     * @return string
+     */
     public function build_conf_table_end($num)
     {
         $text = '<tr class="foot"><td></td><td colspan="' . $num . '">';
@@ -522,6 +678,10 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param $num
+     * @return string
+     */
     public function build_conf_table_head($num)
     {
         $num_args = func_num_args();
@@ -544,6 +704,10 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param $num
+     * @return string
+     */
     public function build_conf_table_textbox($num)
     {
         $num_args = func_num_args();
@@ -564,6 +728,10 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param $num
+     * @return string
+     */
     public function build_conf_table_yesno($num)
     {
         $num_args = func_num_args();
@@ -584,6 +752,10 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param $num
+     * @return string
+     */
     public function build_conf_table_select($num)
     {
         $num_args = func_num_args();
@@ -604,6 +776,12 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param $num
+     * @param $title
+     * @param $arr
+     * @return string
+     */
     public function build_config_table_line($num, $title, $arr)
     {
         $text = $this->build_config_table_even_odd();
@@ -616,6 +794,9 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_config_table_even_odd()
     {
         if (0 == $this->_conf_table_line_count % 2) {
@@ -631,6 +812,10 @@ class ConfigForm extends FormLib
         return $text;
     }
 
+    /**
+     * @param $num
+     * @return array
+     */
     public function build_conf_table_col_space($num)
     {
         $arr = [];
@@ -641,6 +826,11 @@ class ConfigForm extends FormLib
         return $arr;
     }
 
+    /**
+     * @param $num
+     * @param $args
+     * @return string
+     */
     public function build_conf_table_title($num, $args)
     {
         $title = '';
@@ -657,37 +847,55 @@ class ConfigForm extends FormLib
     }
 
     //---------------------------------------------------------
-    // config_define_handler
+    // ConfigDefineHandler
     //---------------------------------------------------------
     public function load()
     {
-        $this->_config_define_handler->load();
+        $this->configDefineHandler->load();
     }
 
+    /**
+     * @param $id
+     * @param $key
+     * @return mixed
+     */
     public function get_by_confid($id, $key)
     {
-        $val = $this->_config_define_handler->get_by_itemid($id, $key);
+        $val = $this->configDefineHandler->get_by_itemid($id, $key);
 
         return $val;
     }
 
+    /**
+     * @param $name
+     * @param $key
+     * @return mixed
+     */
     public function get_by_name($name, $key)
     {
-        $val = $this->_config_define_handler->get_by_name($name, $key);
+        $val = $this->configDefineHandler->get_by_name($name, $key);
 
         return $val;
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     */
     public function get_value_by_name($name)
     {
-        $val = $this->_config_define_handler->get_by_name($name, 'value');
+        $val = $this->configDefineHandler->get_by_name($name, 'value');
 
         return $val;
     }
 
+    /**
+     * @param $catid
+     * @return mixed
+     */
     public function &get_by_catid($catid)
     {
-        $arr = &$this->_config_define_handler->get_caches_by_catid($catid);
+        $arr = $this->configDefineHandler->get_caches_by_catid($catid);
 
         return $arr;
     }
@@ -695,16 +903,26 @@ class ConfigForm extends FormLib
     //---------------------------------------------------------
     // set parameter
     //---------------------------------------------------------
+    /**
+     * @param $value
+     */
     public function set_form_name_config($value)
     {
         $this->_FORM_NAME_CONFIG = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_button_extend($value)
     {
         $this->_button_extend = $value;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     */
     public function set_submit_button_extend($name, $value)
     {
         $button = $this->build_form_submit($name, $value);
@@ -714,6 +932,10 @@ class ConfigForm extends FormLib
     //---------------------------------------------------------
     // override
     //---------------------------------------------------------
+    /**
+     * @param $config
+     * @return string
+     */
     public function build_conf_extra_func($config)
     {
         $name    = $config['name'];

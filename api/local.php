@@ -12,12 +12,12 @@
 global $xoopsConfig;
 $XOOPS_LANGUAGE = $xoopsConfig['language'];
 
-//  include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/language.php';
-//  include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/browser.php';
+//  require_once XOOPS_ROOT_PATH . '/modules/happylinux/class/language.php';
+//  require_once XOOPS_ROOT_PATH . '/modules/happylinux/class/browser.php';
 
 // language_local
-if (file_exists(XOOPS_ROOT_PATH . '/modules/happy_linux/language/' . $XOOPS_LANGUAGE . '/language_local.php')) {
-    include_once XOOPS_ROOT_PATH . '/modules/happy_linux/language/' . $XOOPS_LANGUAGE . '/language_local.php';
+if (file_exists(XOOPS_ROOT_PATH . '/modules/happylinux/language/' . $XOOPS_LANGUAGE . '/language_local.php')) {
+    require_once XOOPS_ROOT_PATH . '/modules/happylinux/language/' . $XOOPS_LANGUAGE . '/language_local.php';
 } else {
-    include_once XOOPS_ROOT_PATH . '/modules/happy_linux/language/english/language_local.php';
+    require_once XOOPS_ROOT_PATH . '/modules/happylinux/language/english/language_local.php';
 }

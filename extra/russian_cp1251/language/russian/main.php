@@ -2,7 +2,7 @@
 // $Id: main.php,v 1.1 2012/04/08 18:22:28 ohwada Exp $
 
 // 2006-09-01 K.OHWADA
-// _HAPPY_LINUX_SEARCH_CANDICATE
+// _HAPPYLINUX_SEARCH_CANDICATE
 
 // 2006-07-10 K.OHWADA
 // this is new file
@@ -16,52 +16,52 @@
 // Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
 
 // form
-define('_HAPPY_LINUX_TITLE', 'Заголовок');
-define('_HAPPY_LINUX_SAVE', 'Сохранить');
-define('_HAPPY_LINUX_VISIT', 'Посетить');
+define('_HAPPYLINUX_TITLE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_SAVE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_VISIT', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 
 // page_frame
-define('_HAPPY_LINUX_THERE_ARE', 'Есть <b>%s</b> записей в базе данных');
-define('_HAPPY_LINUX_NO_RECORD', 'Нет записей');
-define('_HAPPY_LINUX_ID_ASC', 'ID по возрастанию');
-define('_HAPPY_LINUX_ID_DESC', 'ID по убываению');
+define('_HAPPYLINUX_THERE_ARE', 'пїЅпїЅпїЅпїЅ <b>%s</b> пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_NO_RECORD', 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_ID_ASC', 'ID пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_ID_DESC', 'ID пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 
 // manage
-define('_HAPPY_LINUX_ADD_RECORD', 'Добавить запись');
-define('_HAPPY_LINUX_MOD_RECORD', 'Изменить запись');
-define('_HAPPY_LINUX_DEL_RECORD', 'Удалить запись');
-define('_HAPPY_LINUX_ADD_RECORD_SUCCEEED', 'Запись успешно добавлена!');
-define('_HAPPY_LINUX_MOD_RECORD_SUCCEEED', 'Запись успешно изменена!');
-define('_HAPPY_LINUX_DEL_RECORD_SUCCEEED', 'Запись успешно удалена!');
-define('_HAPPY_LINUX_ADD_RECORD_FAILD', 'Не удалось добавить запись');
-define('_HAPPY_LINUX_MOD_RECORD_FAILD', 'Не удалось изменить запись');
-define('_HAPPY_LINUX_DEL_RECORD_FAILD', 'Не удалось изменить запись');
-define('_HAPPY_LINUX_ERR_FILL', 'Ошибка: Введите %s');
-define('_HAPPY_LINUX_ERR_ILLEGAL', 'Ошибка: Неправильный %s');
+define('_HAPPYLINUX_ADD_RECORD', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_MOD_RECORD', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_DEL_RECORD', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_ADD_RECORD_SUCCEEED', 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!');
+define('_HAPPYLINUX_MOD_RECORD_SUCCEEED', 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!');
+define('_HAPPYLINUX_DEL_RECORD_SUCCEEED', 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ!');
+define('_HAPPYLINUX_ADD_RECORD_FAILD', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_MOD_RECORD_FAILD', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_DEL_RECORD_FAILD', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_ERR_FILL', 'пїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ %s');
+define('_HAPPYLINUX_ERR_ILLEGAL', 'пїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ %s');
 
 // global
-define('_HAPPY_LINUX_HOME', 'В начало');
-define('_HAPPY_LINUX_MAIN', 'Главная');
-define('_HAPPY_LINUX_ADDED', 'Добавлено');
-define('_HAPPY_LINUX_DELETED', 'Удалено');
-define('_HAPPY_LINUX_UPDATE', 'Обновление');
-define('_HAPPY_LINUX_UPDATED', 'Обновлено');
-define('_HAPPY_LINUX_MODIFY', 'Изменить');
-define('_HAPPY_LINUX_MODIFIED', 'Изменено');
-define('_HAPPY_LINUX_SAVED', 'Сохранено');
-define('_HAPPY_LINUX_CLEAR', 'Очистить');
-define('_HAPPY_LINUX_CLEARED', 'Очищено');
-define('_HAPPY_LINUX_EXECUTE', 'Выполнить');
-define('_HAPPY_LINUX_EXECUTED', 'Выполнено');
-define('_HAPPY_LINUX_CREATE', 'Создать');
-define('_HAPPY_LINUX_CREATED', 'Создано');
-define('_HAPPY_LINUX_SEARCH', 'Поиск');
-define('_HAPPY_LINUX_SHOW', 'Показать');
-define('_HAPPY_LINUX_KEYWORD', 'Ключевое слово');
-define('_HAPPY_LINUX_NUM', 'Номер');
-define('_HAPPY_LINUX_NO_ACTION', 'Нет действия');
+define('_HAPPYLINUX_HOME', 'пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_MAIN', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_ADDED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_DELETED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_UPDATE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_UPDATED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_MODIFY', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_MODIFIED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_SAVED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CLEAR', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CLEARED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_EXECUTE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_EXECUTED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CREATE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_CREATED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_SEARCH', 'пїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_SHOW', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_KEYWORD', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_NUM', 'пїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_NO_ACTION', 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 
 // 2006-09-01
-define('_HAPPY_LINUX_SEARCH_CANDICATE', 'Кандидат для поиска');
-define('_HAPPY_LINUX_ZENKAKU', 'Zenkaku');
-define('_HAPPY_LINUX_HANKAKU', 'Hanhaku');
+define('_HAPPYLINUX_SEARCH_CANDICATE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_ZENKAKU', 'Zenkaku');
+define('_HAPPYLINUX_HANKAKU', 'Hanhaku');

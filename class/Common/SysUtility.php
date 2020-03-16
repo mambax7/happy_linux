@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux\Common;
+namespace XoopsModules\Happylinux\Common;
 
 /*
  Utility Class Definition
@@ -26,18 +26,24 @@ namespace XoopsModules\Happy_linux\Common;
 use MyTextSanitizer;
 use XoopsFormDhtmlTextArea;
 use XoopsFormTextArea;
-use XoopsModules\Happy_linux;
+use XoopsModules\Happylinux;
 
 /**
  * Class Utility
  */
 class SysUtility
 {
-    use VersionChecks; //checkVerXoops, checkVerPhp Traits
+    use VersionChecks;
 
-    use ServerStats; // getServerStats Trait
+    //checkVerXoops, checkVerPhp Traits
 
-    use FilesManagement; // Files Management Trait
+    use ServerStats;
+
+    // getServerStats Trait
+
+    use FilesManagement;
+
+    // Files Management Trait
 
     /**
      * truncateHtml can truncate a string up to a number of characters while preserving whole words and HTML tags
@@ -184,7 +190,7 @@ class SysUtility
      *
      * @return bool
      */
-    function fieldExists($fieldname, $table)
+    public function fieldExists($fieldname, $table)
     {
         global $xoopsDB;
         $result = $xoopsDB->queryF("SHOW COLUMNS FROM   $table LIKE '$fieldname'");

@@ -9,5 +9,5 @@ return code
 10-19: remote_file.php
 20-29: remote_image.php
 30-39: search.php
-40-49: rss_utility.php
-50-59: rss_parser.php
+40-49: RssUtility.php
+50-59: RssParser.php

@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux\Magpie;
+namespace XoopsModules\Happylinux\Magpie;
 
 // $Id: magpie_cache.php,v 1.1 2007/05/15 04:56:01 ohwada Exp $
 
@@ -28,6 +28,11 @@ namespace XoopsModules\Happy_linux\Magpie;
  */
 
 //class RSSCache {
+
+/**
+ * Class magpie_cache
+ * @package XoopsModules\Happylinux\Magpie
+ */
 class magpie_cache
 {
     public $BASE_CACHE = './cache';    // where the cache files are stored
@@ -35,6 +40,11 @@ class magpie_cache
     public $ERROR      = '';           // accumulate error messages
 
     //  function RSSCache ($base='', $age='') {
+    /**
+     * magpie_cache constructor.
+     * @param string $base
+     * @param string $age
+     */
     public function __construct($base = '', $age = '')
     {
         if ($base) {
@@ -61,6 +71,11 @@ class magpie_cache
         Input:      url from wich the rss file was fetched
         Output:     true on sucess
     \*=======================================================================*/
+    /**
+     * @param $url
+     * @param $rss
+     * @return int|string
+     */
     public function set($url, $rss)
     {
         $this->ERROR = '';
@@ -86,6 +101,10 @@ class magpie_cache
         Input:      url from wich the rss file was fetched
         Output:     cached object on HIT, false on MISS
     \*=======================================================================*/
+    /**
+     * @param $url
+     * @return int|mixed
+     */
     public function get($url)
     {
         $this->ERROR = '';
@@ -121,6 +140,10 @@ class magpie_cache
         Input:      url from wich the rss file was fetched
         Output:     cached object on HIT, false on MISS
     \*=======================================================================*/
+    /**
+     * @param $url
+     * @return string
+     */
     public function check_cache($url)
     {
         $this->ERROR = '';
@@ -142,6 +165,10 @@ class magpie_cache
         return 'MISS';
     }
 
+    /**
+     * @param $cache_key
+     * @return false|int
+     */
     public function cache_age($cache_key)
     {
         $filename = $this->file_name($url);
@@ -158,6 +185,10 @@ class magpie_cache
     /*=======================================================================*\
         Function:   serialize
     \*=======================================================================*/
+    /**
+     * @param $rss
+     * @return string
+     */
     public function serialize($rss)
     {
         return serialize($rss);
@@ -166,6 +197,10 @@ class magpie_cache
     /*=======================================================================*\
         Function:   unserialize
     \*=======================================================================*/
+    /**
+     * @param $data
+     * @return mixed
+     */
     public function unserialize($data)
     {
         return unserialize($data);
@@ -177,6 +212,10 @@ class magpie_cache
         Input:      url from wich the rss file was fetched
         Output:     a file name
     \*=======================================================================*/
+    /**
+     * @param $url
+     * @return string
+     */
     public function file_name($url)
     {
         $filename = md5($url);
@@ -188,6 +227,10 @@ class magpie_cache
         Function:   error
         Purpose:    register error
     \*=======================================================================*/
+    /**
+     * @param     $errormsg
+     * @param int $lvl
+     */
     public function error($errormsg, $lvl = E_USER_WARNING)
     {
         // append PHP's error message if track_errors enabled
@@ -202,6 +245,10 @@ class magpie_cache
         }
     }
 
+    /**
+     * @param     $debugmsg
+     * @param int $lvl
+     */
     public function debug($debugmsg, $lvl = E_USER_NOTICE)
     {
         if (MAGPIE_DEBUG) {

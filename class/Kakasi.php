@@ -1,25 +1,25 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: Kakasi.php,v 1.5 2007/10/13 06:48:19 ohwada Exp $
 
 // 2007-10-10 K.OHWADA
-// not use happy_linux_dir
+// not use happylinux_dir
 
 // 2007-09-20 K.OHWADA
-// happy_linux_dir
+// happylinux_dir
 
 //=========================================================
 // Happy Linux Framework Module
 // 2007-06-01 K.OHWADA
 //=========================================================
 
-//  include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/dir.php';
+//  require_once XOOPS_ROOT_PATH . '/modules/happylinux/class/dir.php';
 
 //=========================================================
-// class  happy_linux_kakasi
-// requre happy_linux_dir
+// class  happylinux_kakasi
+// requre happylinux_dir
 //=========================================================
 
 //---------------------------------------------------------
@@ -40,6 +40,10 @@ namespace XoopsModules\Happy_linux;
 // E: kigou (except the above)
 //---------------------------------------------------------
 
+/**
+ * Class Kakasi
+ * @package XoopsModules\Happylinux
+ */
 class Kakasi
 {
     public $_kakasi_path = '/usr/local/bin/kakasi';
@@ -59,9 +63,12 @@ class Kakasi
     public function __construct()
     {
         // caller can change
-        $this->_dir_work = XOOPS_ROOT_PATH . '/modules/happy_linux/cache';
+        $this->_dir_work = XOOPS_ROOT_PATH . '/modules/happylinux/cache';
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -75,6 +82,11 @@ class Kakasi
     //---------------------------------------------------------
     // public
     //---------------------------------------------------------
+    /**
+     * @param $str
+     * @param $opt
+     * @return bool
+     */
     public function execute($str, $opt)
     {
         if (!$this->is_executable_kakasi()) {
@@ -89,6 +101,12 @@ class Kakasi
     }
 
     // this method works well in MS-Windows
+
+    /**
+     * @param $str
+     * @param $opt
+     * @return bool
+     */
     public function execute_file($str, $opt)
     {
         $this->_words     = '';
@@ -134,6 +152,11 @@ class Kakasi
 
     // this method is more efficient than using file
     // but, doesn't work in MS-Windows
+    /**
+     * @param $str
+     * @param $opt
+     * @return bool
+     */
     public function execute_pipe($str, $opt)
     {
         $this->_words     = '';
@@ -178,6 +201,10 @@ class Kakasi
         return true;
     }
 
+    /**
+     * @param null $path
+     * @return bool
+     */
     public function is_executable_kakasi($path = null)
     {
         if (empty($path)) {
@@ -195,6 +222,9 @@ class Kakasi
         return false;
     }
 
+    /**
+     * @return string
+     */
     public function get_opt()
     {
         $opt = $this->get_opt_encoding() . ' ' . $this->get_opt_dicts();
@@ -202,6 +232,9 @@ class Kakasi
         return $opt;
     }
 
+    /**
+     * @return string
+     */
     public function get_opt_dicts()
     {
         $opt = '';
@@ -212,6 +245,9 @@ class Kakasi
         return $opt;
     }
 
+    /**
+     * @return string
+     */
     public function get_opt_encoding()
     {
         $opt = '';
@@ -225,36 +261,57 @@ class Kakasi
     //---------------------------------------------------------
     // set and get property
     //---------------------------------------------------------
+    /**
+     * @param $val
+     */
     public function set_kakasi_path($val)
     {
         $this->_kakasi_path = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_mode_execute($val)
     {
         $this->_mode_excute = (int)$val;
     }
 
+    /**
+     * @param $value
+     */
     public function set_dir_work($value)
     {
         $this->_dir_work = $value;
     }
 
+    /**
+     * @return string
+     */
     public function get_words()
     {
         return $this->_words;
     }
 
+    /**
+     * @return string
+     */
     public function get_errors()
     {
         return $this->_errors;
     }
 
+    /**
+     * @return string
+     */
     public function get_cmd_error()
     {
         return $this->_cmd_error;
     }
 
+    /**
+     * @return string|null
+     */
     public function get_dir_work()
     {
         return $this->_dir_work;

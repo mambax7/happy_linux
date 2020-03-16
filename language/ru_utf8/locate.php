@@ -13,4 +13,4 @@
 // Translator: Houston (Contour Design Studio https://www.cdesign.ru/)
 
 // dummy for Russian
-// define('_HAPPY_LINUX_GM_DEFAULT_LOCATION', '');
+// define('_HAPPYLINUX_GM_DEFAULT_LOCATION', '');

@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: file.php,v 1.5 2007/06/17 03:19:52 ohwada Exp $
 
@@ -24,6 +24,10 @@ namespace XoopsModules\Happy_linux;
 // this class has one resource handle
 //---------------------------------------------------------
 
+/**
+ * Class File
+ * @package XoopsModules\Happylinux
+ */
 class File extends Error
 {
     public $_fp          = null;
@@ -41,6 +45,9 @@ class File extends Error
         parent::__construct();
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\File|static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -54,6 +61,11 @@ class File extends Error
     //---------------------------------------------------------
     // file pointer
     //---------------------------------------------------------
+    /**
+     * @param null $filename
+     * @param null $mode
+     * @return bool
+     */
     public function fopen($filename = null, $mode = null)
     {
         $this->_fp = null;
@@ -120,6 +132,9 @@ class File extends Error
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function fclose()
     {
         if ($this->_fp) {
@@ -134,6 +149,9 @@ class File extends Error
         return true;
     }
 
+    /**
+     * @param bool $flag_chmod
+     */
     public function fclose_chmod($flag_chmod = false)
     {
         $this->fclose();
@@ -142,6 +160,10 @@ class File extends Error
         }
     }
 
+    /**
+     * @param $data
+     * @return bool
+     */
     public function fwrite($data)
     {
         if ($this->_flag_write && $this->_fp) {
@@ -156,6 +178,12 @@ class File extends Error
         return true;
     }
 
+    /**
+     * @param      $data
+     * @param bool $flag_date
+     * @param bool $flag_nl
+     * @return bool
+     */
     public function fwrite_with_date($data, $flag_date = false, $flag_nl = false)
     {
         if ($flag_date) {
@@ -168,6 +196,9 @@ class File extends Error
         return $this->fwrite($data);
     }
 
+    /**
+     * @return false|string
+     */
     public function fread()
     {
         $xoops_filename = XOOPS_ROOT_PATH . '/' . $this->_file_name;
@@ -176,6 +207,9 @@ class File extends Error
         return $ret;
     }
 
+    /**
+     * @return array
+     */
     public function &fgets_array()
     {
         $arr = [];
@@ -186,6 +220,10 @@ class File extends Error
         return $arr;
     }
 
+    /**
+     * @param $filename
+     * @return bool
+     */
     public function check_filename($filename)
     {
         // check directory travers
@@ -198,16 +236,25 @@ class File extends Error
         return true;
     }
 
+    /**
+     * @param $val
+     */
     public function set_file_name($val)
     {
         $this->_file_name = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_file_mode($val)
     {
         $this->_file_mode = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_flag_write($val)
     {
         $this->_flag_write = (bool)$val;
@@ -216,6 +263,10 @@ class File extends Error
     //---------------------------------------------------------
     // file name
     //---------------------------------------------------------
+    /**
+     * @param null $filenam
+     * @return array|bool|false
+     */
     public function &read($filenam = null)
     {
         $ret = $this->file($filename);
@@ -223,7 +274,11 @@ class File extends Error
         return $ret;
     }
 
-    public function &file($filenam = null)
+    /**
+     * @param null $filenam
+     * @return array|bool|false
+     */
+    public function file($filenam = null)
     {
         if (empty($filename)) {
             $filename = $this->_file_name;
@@ -238,6 +293,13 @@ class File extends Error
     }
 
     // give permission to orignal user and apache
+
+    /**
+     * @param null $filename
+     * @param null $mode
+     * @param bool $flag_error
+     * @return bool
+     */
     public function chmod_if_owner($filename = null, $mode = null, $flag_error = true)
     {
         if (getmyuid() == $this->fileowner($filename, $flag_error)) {
@@ -253,6 +315,11 @@ class File extends Error
         return true;    // no action
     }
 
+    /**
+     * @param null $filename
+     * @param bool $flag_error
+     * @return bool|false|int
+     */
     public function fileowner($filename = null, $flag_error = true)
     {
         if (empty($filename)) {
@@ -270,6 +337,11 @@ class File extends Error
         return $uid;
     }
 
+    /**
+     * @param null $filename
+     * @param null $mode
+     * @return bool
+     */
     public function chmod($filename = null, $mode = null)
     {
         if (empty($filename)) {
@@ -291,6 +363,10 @@ class File extends Error
         return true;
     }
 
+    /**
+     * @param null $filename
+     * @return bool
+     */
     public function unlink($filename = null)
     {
         if (empty($filename)) {
@@ -308,6 +384,9 @@ class File extends Error
         return true;
     }
 
+    /**
+     * @param $val
+     */
     public function set_chmod_mode($val)
     {
         $this->_CHMOD_MODE = (int)$val;
@@ -316,6 +395,11 @@ class File extends Error
     //---------------------------------------------------------
     // utility
     //---------------------------------------------------------
+    /**
+     * @param null $format
+     * @param null $timestamp
+     * @return false|string
+     */
     public function date($format = null, $timestamp = null)
     {
         if (empty($format)) {
@@ -328,6 +412,9 @@ class File extends Error
         return date($format, $timestamp);
     }
 
+    /**
+     * @param $val
+     */
     public function set_date_format($val)
     {
         $this->_DATE_FORMAT = (int)$val;

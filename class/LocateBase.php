@@ -1,12 +1,12 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: locate.php,v 1.8 2007/11/15 11:08:43 ohwada Exp $
 
 // 2007-11-11 K.OHWADA
 // set_config_country_conty_code()
-// get_happy_linux_url()
+// get_happylinux_url()
 // add format in get_var()
 
 // 2007-09-20 K.OHWADA
@@ -31,6 +31,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class LocateBase
 //=========================================================
+
+/**
+ * Class LocateBase
+ * @package XoopsModules\Happylinux
+ */
 class LocateBase
 {
     public $_DEFAULT_COUNTRY_CODE = 'us';  // USA
@@ -43,13 +48,19 @@ class LocateBase
     public function __construct()
     {
         $this->_vars = [
-            'happy_linux_url' => 'https://linux2.ohwada.net/',
+            'happylinux_url' => 'https://linux2.ohwada.net/',
         ];
     }
 
     //---------------------------------------------------------
     // function
     //---------------------------------------------------------
+    /**
+     * @param      $query
+     * @param null $google_url
+     * @param null $lang
+     * @return string
+     */
     public function build_google_search_url($query, $google_url = null, $lang = null)
     {
         if (empty($google_url)) {
@@ -60,7 +71,7 @@ class LocateBase
             $lang = _LANGCODE;
         }
 
-        $query = happy_linux_convert_to_utf8($query);
+        $query = happylinux_convert_to_utf8($query);
         $query = urlencode($query);
         $url   = $google_url . 'search?hl=' . $lang . '&q=' . $query;
 
@@ -70,16 +81,27 @@ class LocateBase
     //---------------------------------------------------------
     // get value
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function get_default_contry_code()
     {
         return $this->_DEFAULT_COUNTRY_CODE;
     }
 
+    /**
+     * @return array|string[]
+     */
     public function &get_vars()
     {
         return $this->_vars;
     }
 
+    /**
+     * @param      $name
+     * @param null $format
+     * @return bool|mixed|string
+     */
     public function get_var($name, $format = null)
     {
         $val = false;
@@ -93,6 +115,9 @@ class LocateBase
         return $val;
     }
 
+    /**
+     * @param $arr
+     */
     public function array_merge($arr)
     {
         // overwrite previus value
@@ -102,6 +127,9 @@ class LocateBase
     //---------------------------------------------------------
     // default value
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function get_us_ping_servers()
     {
         $list = "https://rpc.weblogs.com/RPC2\n";

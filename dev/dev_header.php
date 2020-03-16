@@ -7,17 +7,17 @@
 //================================================================
 
 // set true, if you want to use
-$HAPPY_LINUX_DEV_PERMIT = false;
+$HAPPYLINUX_DEV_PERMIT = false;
 
-include '../../../mainfile.php';
-include_once 'dev_functions.php';
-//include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/strings.php';
-//include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/error.php';
-//include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/object.php';
-//include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/object_handler.php';
-//include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/config_base_handler.php';
+require dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+require_once __DIR__ . '/dev_functions.php';
+//require_once XOOPS_ROOT_PATH . '/modules/happylinux/class/strings.php';
+//require_once XOOPS_ROOT_PATH . '/modules/happylinux/class/error.php';
+//require_once XOOPS_ROOT_PATH . '/modules/happylinux/class/object.php';
+//require_once XOOPS_ROOT_PATH . '/modules/happylinux/class/objectHandler.php';
+//require_once XOOPS_ROOT_PATH . '/modules/happylinux/class/config_baseHandler.php';
 
-if (!$HAPPY_LINUX_DEV_PERMIT) {
+if (!$HAPPYLINUX_DEV_PERMIT) {
     dev_header();
     echo '<h1 style="color: #ff0000;">not permit</h1>' . "\n";
     dev_footer();

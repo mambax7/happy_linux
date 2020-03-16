@@ -10,16 +10,16 @@
 // Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
 
 // mail_send
-define('_HAPPY_LINUX_MAIL_NO_TO_EMAIL', 'Не указан адрес электронной почты');
+define('_HAPPYLINUX_MAIL_NO_TO_EMAIL', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ');
 
 // mail_form
-define('_HAPPY_LINUX_MAIL_WEBMASTER', 'Web-мастер');
-define('_HAPPY_LINUX_MAIL_SUBJECT_FROM', 'Информация от %s');
-define('_HAPPY_LINUX_MAIL_HELLO', 'Здравствуйте, %s');
-define('_HAPPY_LINUX_MAIL_SUBMIT', 'Отправить электронную почту');
-define('_HAPPY_LINUX_MAIL_SUBMIT_NEXT', 'Отправить следующие %s электронных сообщений');
+define('_HAPPYLINUX_MAIL_WEBMASTER', 'Web-пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_MAIL_SUBJECT_FROM', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ %s');
+define('_HAPPYLINUX_MAIL_HELLO', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, %s');
+define('_HAPPYLINUX_MAIL_SUBMIT', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_MAIL_SUBMIT_NEXT', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ %s пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 
 // for future
-define('_HAPPY_LINUX_MAIL_TITLE', 'Отправить электронную почту');
-define('_HAPPY_LINUX_MAIL_THERE_ARE', 'Есть <b>%s</b> электронных сообщений');
-define('_HAPPY_LINUX_MAIL_SEND_NUM', 'Отправить электронные сообщения с %s по %s человека');
+define('_HAPPYLINUX_MAIL_TITLE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_MAIL_THERE_ARE', 'пїЅпїЅпїЅпїЅ <b>%s</b> пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_MAIL_SEND_NUM', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ %s пїЅпїЅ %s пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');

@@ -83,6 +83,10 @@ define('MAGPIE_VERSION', '0.72');
 
 $MAGPIE_ERROR = '';
 
+/**
+ * @param $url
+ * @return bool|int|\MagpieRSS|mixed|null
+ */
 function fetch_rss($url)
 {
     // initialize constants
@@ -216,6 +220,10 @@ function fetch_rss($url)
     Purpose:    set MAGPIE_ERROR, and trigger error
 \*=======================================================================*/
 
+/**
+ * @param     $errormsg
+ * @param int $lvl
+ */
 function error($errormsg, $lvl = E_USER_WARNING)
 {
     global $MAGPIE_ERROR;
@@ -231,6 +239,10 @@ function error($errormsg, $lvl = E_USER_WARNING)
     }
 }
 
+/**
+ * @param     $debugmsg
+ * @param int $lvl
+ */
 function debug($debugmsg, $lvl = E_USER_NOTICE)
 {
     trigger_error("MagpieRSS [debug] $debugmsg", $lvl);
@@ -240,6 +252,10 @@ function debug($debugmsg, $lvl = E_USER_NOTICE)
     Function:   magpie_error
     Purpose:    accessor for the magpie error variable
 \*=======================================================================*/
+/**
+ * @param string $errormsg
+ * @return string
+ */
 function magpie_error($errormsg = '')
 {
     global $MAGPIE_ERROR;
@@ -258,6 +274,11 @@ function magpie_error($errormsg = '')
                 headers to send along with the request (optional)
     Output:     an HTTP response object (see Snoopy.class.inc)  
 \*=======================================================================*/
+/**
+ * @param        $url
+ * @param string $headers
+ * @return \Snoopy
+ */
 function _fetch_remote_file($url, $headers = '')
 {
     // Snoopy is an HTTP client in PHP
@@ -280,6 +301,10 @@ function _fetch_remote_file($url, $headers = '')
     Input:      an HTTP response object (see Snoopy)
     Output:     parsed RSS object (see rss_parse)
 \*=======================================================================*/
+/**
+ * @param $resp
+ * @return bool|\MagpieRSS
+ */
 function _response_to_rss($resp)
 {
     $rss = new MagpieRSS($resp->results, MAGPIE_OUTPUT_ENCODING, MAGPIE_INPUT_ENCODING, MAGPIE_DETECT_ENCODING);
@@ -404,6 +429,10 @@ function init()
     Function:   is_info
     Purpose:    return true if Informational status code
 \*=======================================================================*/
+/**
+ * @param $sc
+ * @return bool
+ */
 function is_info($sc)
 {
     return $sc >= 100 && $sc < 200;
@@ -413,6 +442,10 @@ function is_info($sc)
     Function:   is_success
     Purpose:    return true if Successful status code
 \*=======================================================================*/
+/**
+ * @param $sc
+ * @return bool
+ */
 function is_success($sc)
 {
     return $sc >= 200 && $sc < 300;
@@ -422,6 +455,10 @@ function is_success($sc)
     Function:   is_redirect
     Purpose:    return true if Redirection status code
 \*=======================================================================*/
+/**
+ * @param $sc
+ * @return bool
+ */
 function is_redirect($sc)
 {
     return $sc >= 300 && $sc < 400;
@@ -431,6 +468,10 @@ function is_redirect($sc)
     Function:   is_error
     Purpose:    return true if Error status code
 \*=======================================================================*/
+/**
+ * @param $sc
+ * @return bool
+ */
 function is_error($sc)
 {
     return $sc >= 400 && $sc < 600;
@@ -440,6 +481,10 @@ function is_error($sc)
     Function:   is_client_error
     Purpose:    return true if Error status code, and its a client error
 \*=======================================================================*/
+/**
+ * @param $sc
+ * @return bool
+ */
 function is_client_error($sc)
 {
     return $sc >= 400 && $sc < 500;
@@ -449,6 +494,10 @@ function is_client_error($sc)
     Function:   is_client_error
     Purpose:    return true if Error status code, and its a server error
 \*=======================================================================*/
+/**
+ * @param $sc
+ * @return bool
+ */
 function is_server_error($sc)
 {
     return $sc >= 500 && $sc < 600;

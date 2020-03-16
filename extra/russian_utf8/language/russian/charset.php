@@ -17,6 +17,6 @@
 // You can use preload/charset.php .
 //---------------------------------------------------------
 
-// define('HAPPY_LINUX_MB_LANGUAGE',   'ru');
-// define('HAPPY_LINUX_MB_ENCODING',   'utf8');
-// define('HAPPY_LINUX_MYSQL_CHARSET', 'utf8_unicode_ci');
+// define('HAPPYLINUX_MB_LANGUAGE',   'ru');
+// define('HAPPYLINUX_MB_ENCODING',   'utf8');
+// define('HAPPYLINUX_MYSQL_CHARSET', 'utf8_unicode_ci');

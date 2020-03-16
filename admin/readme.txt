@@ -8,7 +8,7 @@ Author: Kenichi OHWADA
 adopted GIJOE's myblocksadmin
 https://xoops.peak.ne.jp/md/mydownloads/singlefile.php?cid=5&lid=12
 
-modified for XC 2.1 and happy_linux
+modified for XC 2.1 and happylinux
 
 included 5 files in admin directory.
 - admin.php

@@ -10,4 +10,4 @@
 // UTF-8
 //=========================================================
 
-define('_HAPPY_LINUX_GM_DEFAULT_LOCATION', '明石市立天文科学館: 明石市 日本');
+define('_HAPPYLINUX_GM_DEFAULT_LOCATION', '明石市立天文科学館: 明石市 日本');

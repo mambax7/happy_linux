@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: mail_template.php,v 1.1 2010/11/07 14:59:21 ohwada Exp $
 
@@ -13,6 +13,11 @@ namespace XoopsModules\Happy_linux;
 // class mail_template
 // referrence: kernel/notification.php
 //=========================================================
+
+/**
+ * Class MailTemplate
+ * @package XoopsModules\Happylinux
+ */
 class MailTemplate
 {
     public $_DIRNAME;
@@ -22,6 +27,10 @@ class MailTemplate
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
+    /**
+     * MailTemplate constructor.
+     * @param null $dirname
+     */
     public function __construct($dirname = null)
     {
         if ($dirname) {
@@ -31,6 +40,10 @@ class MailTemplate
         }
     }
 
+    /**
+     * @param null $dirname
+     * @return static
+     */
     public static function getInstance($dirname = null)
     {
         static $instance;
@@ -46,6 +59,10 @@ class MailTemplate
     // REQ 3028: send apoval email to anonymous user
     // move from submit_form.php
     //-------------------------------------------------------------------
+    /**
+     * @param $file
+     * @return bool|string
+     */
     public function get_dir_mail_template($file)
     {
         $DIR_LANG = $this->get_module_path() . 'language/';
@@ -64,11 +81,19 @@ class MailTemplate
     //---------------------------------------------------------
     // read template file
     //---------------------------------------------------------
+    /**
+     * @param $file
+     * @return string|string[]
+     */
     public function replace_tags_by_template($file)
     {
         return $this->replace_tags($this->read_template($file));
     }
 
+    /**
+     * @param $file
+     * @return bool|false|string
+     */
     public function read_template($file)
     {
         $dir = $this->get_dir_mail_template($file);
@@ -79,6 +104,10 @@ class MailTemplate
         return false;
     }
 
+    /**
+     * @param $file
+     * @return bool|false|string
+     */
     public function read_file($file)
     {
         $fp = fopen($file, 'rb');
@@ -104,6 +133,9 @@ class MailTemplate
         $this->assign('X_UNSUBSCRIBE_URL', $this->get_unsubscribe_url());
     }
 
+    /**
+     * @param $tags
+     */
     public function merge_tags($tags)
     {
         if (is_array($tags)) {
@@ -111,6 +143,10 @@ class MailTemplate
         }
     }
 
+    /**
+     * @param      $tag
+     * @param null $value
+     */
     public function assign($tag, $value = null)
     {
         if (is_array($tag)) {
@@ -125,6 +161,10 @@ class MailTemplate
         }
     }
 
+    /**
+     * @param $str
+     * @return string|string[]
+     */
     public function replace_tags($str)
     {
         foreach ($this->_tags as $k => $v) {
@@ -137,26 +177,41 @@ class MailTemplate
     //---------------------------------------------------------
     // get system param
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function get_module_path()
     {
         return XOOPS_ROOT_PATH . '/modules/' . $this->_DIRNAME . '/';
     }
 
+    /**
+     * @return string
+     */
     public function get_module_url()
     {
         return XOOPS_URL . '/modules/' . $this->_DIRNAME . '/';
     }
 
+    /**
+     * @return string
+     */
     public function get_unsubscribe_url()
     {
         return XOOPS_URL . '/notifications.php';
     }
 
+    /**
+     * @return string
+     */
     public function get_xoops_siteurl()
     {
         return XOOPS_URL . '/';
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xoops_sitename()
     {
         global $xoopsConfig;
@@ -164,6 +219,9 @@ class MailTemplate
         return $xoopsConfig['sitename'];
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xoops_adminmail()
     {
         global $xoopsConfig;
@@ -171,6 +229,9 @@ class MailTemplate
         return $xoopsConfig['adminmail'];
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xoops_language()
     {
         global $xoopsConfig;
@@ -178,11 +239,15 @@ class MailTemplate
         return $xoopsConfig['language'];
     }
 
+    /**
+     * @param string $format
+     * @return bool
+     */
     public function get_xoops_module_name($format = 'n')
     {
         $name           = false;
-        $module_handler = xoops_getHandler('module');
-        $module         = $module_handler->getByDirname($this->_DIRNAME);
+        $moduleHandler = xoops_getHandler('module');
+        $module         = $moduleHandler->getByDirname($this->_DIRNAME);
         if (is_object($module)) {
             $name = $module->getVar('name', $format);
         }

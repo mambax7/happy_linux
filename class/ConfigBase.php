@@ -1,11 +1,11 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
-// $Id: config_base_handler.php,v 1.82 2010/11/07 14:59:23 ohwada Exp $
+// $Id: config_baseHandler.php,v 1.82 2010/11/07 14:59:23 ohwada Exp $
 
 // 2007-11-24 K.OHWADA
-// move get_first_obj_from_objs() to object_handler.php
+// move get_first_obj_from_objs() to objectHandler.php
 
 // 2007-05-12 K.OHWADA
 // get_value_by_name()
@@ -18,13 +18,13 @@ namespace XoopsModules\Happy_linux;
 
 // 2006-07-10 K.OHWADA
 // this is new file
-// porting from weblinks_config_store_handler
+// porting from weblinks_config_storeHandler
 
 //================================================================
 // Happy Linux Framework Module
 // this file contain 2 class
-//   happy_linux_config_base
-//   happy_linux_config_base_handler
+//   ConfigBase
+//   happylinux_config_baseHandler
 // 2006-07-10 K.OHWADA
 //================================================================
 
@@ -33,7 +33,11 @@ namespace XoopsModules\Happy_linux;
 // modify form system XoopsConfigItem
 //================================================================
 
-class ConfigBase extends Object
+/**
+ * Class ConfigBase
+ * @package XoopsModules\Happylinux
+ */
+class ConfigBase extends BaseObject
 {
     //---------------------------------------------------------
     // constructor
@@ -56,6 +60,10 @@ class ConfigBase extends Object
     //---------------------------------------------------------
     // set value
     //---------------------------------------------------------
+    /**
+     * @param      $value
+     * @param bool $force_slash
+     */
     public function setConfValueForInput(&$value, $force_slash = false)
     {
         // BUG 4378: dont strip slashes in conf_value when magic_quotes_gpc is on
@@ -91,6 +99,10 @@ class ConfigBase extends Object
     //---------------------------------------------------------
     // get value
     //---------------------------------------------------------
+    /**
+     * @param string $format
+     * @return float|int|mixed|string|string[]|null
+     */
     public function &getConfValueForOutput($format = 's')
     {
         switch ($this->get('conf_valuetype')) {
@@ -121,6 +133,10 @@ class ConfigBase extends Object
         return $value;
     }
 
+    /**
+     * @param string $format
+     * @return array
+     */
     public function getConfVarAll($format = 's')
     {
         $ret                 = $this->getVarAll($format);

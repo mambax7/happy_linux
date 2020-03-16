@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: manage.php,v 1.11 2008/01/31 14:07:05 ohwada Exp $
 
@@ -28,13 +28,17 @@ namespace XoopsModules\Happy_linux;
 // 2006-07-10 K.OHWADA
 //=========================================================
 
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/include/memory.php';
+require_once XOOPS_ROOT_PATH . '/modules/happylinux/include/memory.php';
 
+/**
+ * Class Manage
+ * @package XoopsModules\Happylinux
+ */
 class Manage extends Error
 {
     // constant
     public $_DIRNAME;
-    public $_MODULE_DIRNAME = 'happy_linux';
+    public $_MODULE_DIRNAME = 'happylinux';
 
     public $_CHECK_RESULT_ADD_TABLE = false;
     public $_CHECK_RESULT_MOD_TABLE = false;
@@ -50,18 +54,18 @@ class Manage extends Error
     public $_FLAG_EXECUTE_TIME = false;
 
     // laguage
-    public $_LANG_TITLE_ADD     = _HAPPY_LINUX_ADD_RECORD;
-    public $_LANG_TITLE_MOD     = _HAPPY_LINUX_MOD_RECORD;
-    public $_LANG_TITLE_DEL     = _HAPPY_LINUX_DEL_RECORD;
-    public $_LANG_MSG_ADD       = _HAPPY_LINUX_ADD_RECORD_SUCCEEED;
-    public $_LANG_MSG_MOD       = _HAPPY_LINUX_MOD_RECORD_SUCCEEED;
-    public $_LANG_MSG_DEL       = _HAPPY_LINUX_DEL_RECORD_SUCCEEED;
-    public $_LANG_FAIL_ADD      = _HAPPY_LINUX_ADD_RECORD_FAILD;
-    public $_LANG_FAIL_MOD      = _HAPPY_LINUX_MOD_RECORD_FAILD;
-    public $_LANG_FAIL_DEL      = _HAPPY_LINUX_DEL_RECORD_FAILD;
-    public $_LANG_ERR_NO_RECORD = _HAPPY_LINUX_NO_RECORD;
-    public $_LANG_ERR_FILL      = _HAPPY_LINUX_ERR_FILL;
-    public $_LANG_ERR_ILLEGAL   = _HAPPY_LINUX_ERR_ILLEGAL;
+    public $_LANG_TITLE_ADD     = _HAPPYLINUX_ADD_RECORD;
+    public $_LANG_TITLE_MOD     = _HAPPYLINUX_MOD_RECORD;
+    public $_LANG_TITLE_DEL     = _HAPPYLINUX_DEL_RECORD;
+    public $_LANG_MSG_ADD       = _HAPPYLINUX_ADD_RECORD_SUCCEEED;
+    public $_LANG_MSG_MOD       = _HAPPYLINUX_MOD_RECORD_SUCCEEED;
+    public $_LANG_MSG_DEL       = _HAPPYLINUX_DEL_RECORD_SUCCEEED;
+    public $_LANG_FAIL_ADD      = _HAPPYLINUX_ADD_RECORD_FAILD;
+    public $_LANG_FAIL_MOD      = _HAPPYLINUX_MOD_RECORD_FAILD;
+    public $_LANG_FAIL_DEL      = _HAPPYLINUX_DEL_RECORD_FAILD;
+    public $_LANG_ERR_NO_RECORD = _HAPPYLINUX_NO_RECORD;
+    public $_LANG_ERR_FILL      = _HAPPYLINUX_ERR_FILL;
+    public $_LANG_ERR_ILLEGAL   = _HAPPYLINUX_ERR_ILLEGAL;
 
     // class
     public $_post;
@@ -96,6 +100,10 @@ class Manage extends Error
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
+    /**
+     * Manage constructor.
+     * @param $dirname
+     */
     public function __construct($dirname)
     {
         parent::__construct();
@@ -107,6 +115,9 @@ class Manage extends Error
         $this->_system = System::getInstance();
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\Manage|static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -120,38 +131,78 @@ class Manage extends Error
     //---------------------------------------------------------
     // set patameter
     //---------------------------------------------------------
-    public function set_handler($table, $dirname, $prefix)
+    /**
+     * @param $table
+     * @param $dirname
+     * @param $prefix
+     */
+    public function set_handler($table, $dirname, $prefix, $helper = null)
     {
-        $this->_handler = happy_linux_getHandler($table, $dirname, $prefix);
-        $this->handler = happy_linux_getHandler($table, $dirname, $prefix);
+        if (null === $helper) {
+            $helperType = '\XoopsModules' . '\\' . ucfirst($dirname) . '\Helper';
+            $helper     = $helperType::getInstance();
+        }
+        $this->handler  = $helper->getHandler(ucfirst($table), $dirname, $prefix);
+        $this->_handler = $helper->getHandler(ucfirst($table), $dirname, $prefix);
     }
 
-    public function set_form_handler($table, $dirname, $prefix)
+    public function setHandler($table, $dirname, $prefix, $helper = null)
     {
-        $this->_form = happy_linux_getHandler($table, $dirname, $prefix);
+        if (null === $helper) {
+            $helperType = '\XoopsModules' . '\\' . ucfirst($dirname) . '\Helper';
+            $helper     = $helperType::getInstance();
+        }
+        $this->handler  = $helper->getHandler(ucfirst($table), $dirname, $prefix);
+        $this->_handler = $helper->getHandler(ucfirst($table), $dirname, $prefix);
     }
 
+    /**
+     * @param $table
+     * @param $dirname
+     * @param $prefix
+     */
+    public function set_formHandler($table, $dirname, $prefix, $helper = null)
+    {
+        $this->_form = $helper->getHandler($table, $dirname, $prefix);
+    }
+
+    /**
+     * @param $form
+     */
     public function set_form_class($form)
     {
         // Assigning the return value of new by reference is deprecated
         $this->_form = new $form();
     }
 
+    /**
+     * @param $id
+     */
     public function set_id_name($id)
     {
         $this->_id_name = $id;
     }
 
+    /**
+     * @param $val
+     */
     public function set_list_id_name($val)
     {
         $this->_list_id_name = $val;
     }
 
+    /**
+     * @param $script
+     */
     public function set_script($script)
     {
         $this->_script = $script;
     }
 
+    /**
+     * @param $script0
+     * @param $script1
+     */
     public function set_redirect($script0, $script1)
     {
         $this->set_redirect_asc($script0);
@@ -160,61 +211,99 @@ class Manage extends Error
         $this->set_redirect_del_all($script0);
     }
 
+    /**
+     * @param $script
+     */
     public function set_redirect_asc($script)
     {
         $this->_redirect_asc = $script;
     }
 
+    /**
+     * @param $script
+     */
     public function set_redirect_desc($script)
     {
         $this->_redirect_desc = $script;
     }
 
+    /**
+     * @param $script
+     */
     public function set_redirect_mod_all($script)
     {
         $this->_redirect_mod_all = $script;
     }
 
+    /**
+     * @param $script
+     */
     public function set_redirect_del_all($script)
     {
         $this->_redirect_del_all = $script;
     }
 
+    /**
+     * @param $val
+     */
     public function set_style_error($val)
     {
         $this->_STYLE_EROOR = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_module_dirname($val)
     {
         $this->_MODULE_DIRNAME = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_check_token($val)
     {
         $this->_DEBUG_CHECK_TOKEN = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_insert($val)
     {
         $this->_DEBUG_INSERT = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_update($val)
     {
         $this->_DEBUG_UPDATE = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_delete($val)
     {
         $this->_DEBUG_DELETE = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_flag_execute_time($val)
     {
         $this->_FLAG_EXECUTE_TIME = (bool)$val;
     }
 
+    /**
+     * @param $add
+     * @param $mod
+     * @param $del
+     */
     public function set_title($add, $mod, $del)
     {
         if ($add) {
@@ -230,21 +319,33 @@ class Manage extends Error
         }
     }
 
+    /**
+     * @param $val
+     */
     public function set_err_no_record($val)
     {
         $this->_LANG_ERR_NO_RECORD = $val;
     }
 
+    /**
+     * @return string
+     */
     public function get_title_add()
     {
         return $this->_LANG_TITLE_ADD;
     }
 
+    /**
+     * @return string
+     */
     public function get_title_mod()
     {
         return $this->_LANG_TITLE_MOD;
     }
 
+    /**
+     * @return string
+     */
     public function get_title_del()
     {
         return $this->_LANG_TITLE_DEL;
@@ -253,6 +354,9 @@ class Manage extends Error
     //---------------------------------------------------------
     // POST GET parameter
     //---------------------------------------------------------
+    /**
+     * @return mixed|string
+     */
     public function _main_get_op()
     {
         $op = '';
@@ -267,6 +371,9 @@ class Manage extends Error
         return $op;
     }
 
+    /**
+     * @return int
+     */
     public function _get_post_get_id()
     {
         $this->_id = $this->_post->get_post_get_int($this->_id_name);
@@ -274,6 +381,9 @@ class Manage extends Error
         return $this->_id;
     }
 
+    /**
+     * @return mixed|string
+     */
     public function _get_post_list_id()
     {
         $this->_list_id = $this->_post->get_post($this->_list_id_name);
@@ -291,6 +401,9 @@ class Manage extends Error
         $this->_print_cp_footer();
     }
 
+    /**
+     * @param $op
+     */
     public function _main_switch($op)
     {
         switch ($op) {
@@ -332,9 +445,12 @@ class Manage extends Error
         $this->_print_cp_footer();
     }
 
+    /**
+     * @return bool
+     */
     public function _print_add_form()
     {
-        $obj = &$this->_handler->create();
+        $obj = &$this->handler->create();
         $this->_form->_show_add($obj);
 
         return true;
@@ -343,6 +459,9 @@ class Manage extends Error
     //---------------------------------------------------------
     // main_add_table()
     //---------------------------------------------------------
+    /**
+     * @param bool $check_flag
+     */
     public function _main_add_table($check_flag = false)
     {
         if ($check_flag) {
@@ -364,15 +483,18 @@ class Manage extends Error
         exit();
     }
 
+    /**
+     * @return bool
+     */
     public function _exec_add_table()
     {
         if ($this->_DEBUG_INSERT) {
-            $obj = &$this->_handler->create();
+            $obj = &$this->handler->create();
             $obj->_set_vars_insert();
-            $newid = $this->_handler->insert($obj);
+            $newid = $this->handler->insert($obj);
             if (!$newid) {
                 $this->_set_errors($this->_LANG_FAIL_ADD);
-                $this->_set_errors($this->_handler->getErrors());
+                $this->_set_errors($this->handler->getErrors());
 
                 return false;
             }
@@ -406,7 +528,7 @@ class Manage extends Error
 
     public function _print_add_preview_form()
     {
-        $obj = &$this->_handler->create();
+        $obj = &$this->handler->create();
 
         // set values just as enter
         $obj->assignVars($_POST);
@@ -415,6 +537,10 @@ class Manage extends Error
     }
 
     // override this function
+
+    /**
+     * @return bool
+     */
     public function _check_add_table()
     {
         return $this->_CHECK_RESULT_ADD_TABLE;
@@ -441,6 +567,9 @@ class Manage extends Error
         $this->_print_cp_footer();
     }
 
+    /**
+     * @return bool
+     */
     public function _print_mod_form()
     {
         $this->_form->_show_mod($this->_obj);
@@ -456,6 +585,9 @@ class Manage extends Error
     //---------------------------------------------------------
     // main_mod_table()
     //---------------------------------------------------------
+    /**
+     * @param bool $check_flag
+     */
     public function _main_mod_table($check_flag = false)
     {
         if ($check_flag) {
@@ -482,14 +614,17 @@ class Manage extends Error
         exit();
     }
 
+    /**
+     * @return bool
+     */
     public function _exec_mod_table()
     {
         $this->_modid = $this->_get_post_get_id();
         if ($this->_DEBUG_UPDATE) {
             $this->_obj->_set_vars_update();
-            if (!$this->_handler->update($this->_obj)) {
+            if (!$this->handler->update($this->_obj)) {
                 $this->_set_errors($this->_LANG_FAIL_MOD);
-                $this->_set_errors($this->_handler->getErrors());
+                $this->_set_errors($this->handler->getErrors());
 
                 return false;
             }
@@ -517,6 +652,9 @@ class Manage extends Error
         $this->_print_cp_footer();
     }
 
+    /**
+     * @return bool
+     */
     public function _print_mod_preview_form()
     {
         // set values just as enter
@@ -528,6 +666,10 @@ class Manage extends Error
     }
 
     // override this function
+
+    /**
+     * @return bool
+     */
     public function _check_mod_table()
     {
         return $this->_CHECK_RESULT_MOD_TABLE;
@@ -536,6 +678,9 @@ class Manage extends Error
     //---------------------------------------------------------
     // main_del_table()
     //---------------------------------------------------------
+    /**
+     * @param bool $check_flag
+     */
     public function _main_del_table($check_flag = false)
     {
         if ($check_flag) {
@@ -567,12 +712,15 @@ class Manage extends Error
         exit();
     }
 
+    /**
+     * @return bool
+     */
     public function _exec_del_table()
     {
         if ($this->_DEBUG_DELETE) {
-            if (!$this->_handler->delete($this->_obj)) {
+            if (!$this->handler->delete($this->_obj)) {
                 $this->_set_errors($this->_LANG_FAIL_DEL);
-                $this->_set_errors($this->_handler->getErrors());
+                $this->_set_errors($this->handler->getErrors());
 
                 return false;
             }
@@ -581,6 +729,9 @@ class Manage extends Error
         return true;
     }
 
+    /**
+     * @return array|string
+     */
     public function _get_del_error()
     {
         return $this->getErrors(1);
@@ -595,6 +746,10 @@ class Manage extends Error
     }
 
     // override this function
+
+    /**
+     * @return bool
+     */
     public function _check_del_table()
     {
         return $this->_CHECK_RESULT_DEL_TABLE;
@@ -603,6 +758,9 @@ class Manage extends Error
     //---------------------------------------------------------
     // main_mod_all
     //---------------------------------------------------------
+    /**
+     * @param bool $check_flag
+     */
     public function _main_mod_all($check_flag = false)
     {
         if ($check_flag) {
@@ -629,6 +787,9 @@ class Manage extends Error
         exit();
     }
 
+    /**
+     * @return bool
+     */
     public function _exec_mod_all()
     {
         $id_arr = $this->_get_post_list_id();
@@ -638,7 +799,7 @@ class Manage extends Error
 
         foreach ($id_arr as $id) {
             $this->_id  = $id;
-            $this->_obj = &$this->_handler->get($id);
+            $this->_obj = &$this->handler->get($id);
 
             if (!is_object($this->_obj)) {
                 continue;
@@ -653,12 +814,15 @@ class Manage extends Error
     public function _exec_mod_all_each()
     {
         $obj = &$this->_get_obj_mod_all();
-        if (!$this->_handler->update($obj)) {
+        if (!$this->handler->update($obj)) {
             $this->_set_errors($this->_id . ': ' . $this->_LANG_FAIL_DEL);
-            $this->_set_errors($this->_handler->getErrors());
+            $this->_set_errors($this->handler->getErrors());
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function &_get_obj_mod_all()
     {
         return $this->_obj;
@@ -672,6 +836,9 @@ class Manage extends Error
         $this->_print_cp_footer();
     }
 
+    /**
+     * @return array|string
+     */
     public function _get_mod_all_error()
     {
         return $this->getErrors(1);
@@ -686,6 +853,10 @@ class Manage extends Error
     }
 
     // override this function
+
+    /**
+     * @return bool
+     */
     public function _check_mod_all()
     {
         return $this->_CHECK_RESULT_MOD_ALL;
@@ -694,6 +865,9 @@ class Manage extends Error
     //---------------------------------------------------------
     // main_del_all
     //---------------------------------------------------------
+    /**
+     * @param bool $check_flag
+     */
     public function _main_del_all($check_flag = false)
     {
         if ($check_flag) {
@@ -720,6 +894,9 @@ class Manage extends Error
         exit();
     }
 
+    /**
+     * @return bool
+     */
     public function _exec_del_all()
     {
         $id_arr = $this->_get_post_list_id();
@@ -729,7 +906,7 @@ class Manage extends Error
 
         foreach ($id_arr as $id) {
             $this->_id  = $id;
-            $this->_obj = &$this->_handler->get($id);
+            $this->_obj = &$this->handler->get($id);
 
             if (!is_object($this->_obj)) {
                 continue;
@@ -743,9 +920,9 @@ class Manage extends Error
 
     public function _exec_del_all_each()
     {
-        if (!$this->_handler->delete($this->_obj)) {
+        if (!$this->handler->delete($this->_obj)) {
             $this->_set_errors($this->_id . ': ' . $this->_LANG_FAIL_DEL);
-            $this->_set_errors($this->_handler->getErrors());
+            $this->_set_errors($this->handler->getErrors());
         }
     }
 
@@ -757,6 +934,9 @@ class Manage extends Error
         $this->_print_cp_footer();
     }
 
+    /**
+     * @return array|string
+     */
     public function _get_del_all_error()
     {
         return $this->getErrors(1);
@@ -771,6 +951,10 @@ class Manage extends Error
     }
 
     // override this function
+
+    /**
+     * @return bool
+     */
     public function _check_del_all()
     {
         return $this->_CHECK_RESULT_DEL_ALL;
@@ -789,6 +973,9 @@ class Manage extends Error
         $this->_flag_cp_header = true;  // already
     }
 
+    /**
+     * @param bool $flag
+     */
     public function _print_cp_footer($flag = false)
     {
         $this->_print_execute_time($flag);
@@ -796,22 +983,35 @@ class Manage extends Error
         exit();
     }
 
+    /**
+     * @param bool $flag
+     */
     public function _print_execute_time($flag = false)
     {
         if ($flag || $this->_FLAG_EXECUTE_TIME) {
             $time = Time::getInstance();
             echo "<br><hr>\n";
             echo $time->build_elapse_time() . "<br>\n";
-            echo happy_linux_build_memory_usage_mb() . "<br>\n";
+            echo happylinux_build_memory_usage_mb() . "<br>\n";
         }
     }
 
+    /**
+     * @param        $title
+     * @param string $op
+     * @param string $name
+     */
     public function _print_bread_op($title, $op = '', $name = '')
     {
         $query = $this->_build_script_query($op);
         $this->_print_bread_query($title, $query, $name);
     }
 
+    /**
+     * @param        $name1
+     * @param string $query1
+     * @param string $name2
+     */
     public function _print_bread_query($name1, $query1 = '', $name2 = '')
     {
         $arr = [
@@ -837,6 +1037,9 @@ class Manage extends Error
         echo $this->_form->build_html_bread_crumb($arr);
     }
 
+    /**
+     * @return string
+     */
     public function _build_script_mod_form()
     {
         if ($this->_script) {
@@ -848,6 +1051,10 @@ class Manage extends Error
         return $url;
     }
 
+    /**
+     * @param string $op
+     * @return string
+     */
     public function _build_script_by_op($op = '')
     {
         $query = $this->_build_script_query($op);
@@ -856,6 +1063,10 @@ class Manage extends Error
         return $url;
     }
 
+    /**
+     * @param string $query
+     * @return string
+     */
     public function _build_script_by_query($query = '')
     {
         $url = '';
@@ -866,6 +1077,10 @@ class Manage extends Error
         return $url;
     }
 
+    /**
+     * @param string $op
+     * @return string
+     */
     public function _build_script_query($op = '')
     {
         $query = '';
@@ -886,6 +1101,9 @@ class Manage extends Error
         // dummy
     }
 
+    /**
+     * @param $title
+     */
     public function _print_title($title)
     {
         if ($title) {
@@ -896,16 +1114,25 @@ class Manage extends Error
     //---------------------------------------------------------
     // error
     //---------------------------------------------------------
+    /**
+     * @param $value
+     */
     public function _set_error_title($value)
     {
         $this->_error_title = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function _set_error_extra($value)
     {
         $this->_error_extra = $value;
     }
 
+    /**
+     * @param string $format
+     */
     public function _print_token_error($format = '')
     {
         if (!$this->_flag_token) {
@@ -916,12 +1143,19 @@ class Manage extends Error
         }
     }
 
+    /**
+     * @param string $format
+     */
     public function _print_db_error($format = '')
     {
         xoops_error('DB Error');
         $this->_print_error($format);
     }
 
+    /**
+     * @param string $format
+     * @param bool   $flag_sanitize
+     */
     public function _print_error($format = '', $flag_sanitize = true)
     {
         if ($this->_error_title) {
@@ -937,6 +1171,10 @@ class Manage extends Error
         echo "<br>\n";
     }
 
+    /**
+     * @param string $format
+     * @return string
+     */
     public function _get_errors($format = 'n')
     {
         $err = $this->getErrors($format);
@@ -955,6 +1193,10 @@ class Manage extends Error
     //---------------------------------------------------------
     // check POST param & set error
     //---------------------------------------------------------
+    /**
+     * @param $str
+     * @return string
+     */
     public function _build_comment($str)
     {
         $text = ' <!-- ' . $this->_MODULE_DIRNAME . ' : ' . $str . ' -->' . "\n";
@@ -965,6 +1207,10 @@ class Manage extends Error
     //---------------------------------------------------------
     // check POST param & set error
     //---------------------------------------------------------
+    /**
+     * @param $key
+     * @param $name
+     */
     public function _check_fill_by_post($key, $name)
     {
         if (!$this->_post->is_post_fill($key)) {
@@ -973,6 +1219,11 @@ class Manage extends Error
         }
     }
 
+    /**
+     * @param      $key
+     * @param      $name
+     * @param bool $flag_fill
+     */
     public function _check_url_by_post($key, $name, $flag_fill = true)
     {
         if ($flag_fill) {
@@ -991,10 +1242,13 @@ class Manage extends Error
     //---------------------------------------------------------
     // handler
     //---------------------------------------------------------
+    /**
+     * @return mixed
+     */
     public function _get_obj()
     {
         $id  = $this->_get_post_get_id();
-        $obj = $this->_handler->get($id);
+        $obj = $this->handler->get($id);
         if (is_object($obj)) {
             $this->_obj = &$obj;
         }
@@ -1005,6 +1259,9 @@ class Manage extends Error
     //---------------------------------------------------------
     // check_token
     //---------------------------------------------------------
+    /**
+     * @return bool
+     */
     public function _check_token()
     {
         if ($this->_DEBUG_CHECK_TOKEN) {

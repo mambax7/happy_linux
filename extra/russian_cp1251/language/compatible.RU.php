@@ -2,19 +2,19 @@
 // $Id: compatible.RU.php,v 1.1 2012/04/08 18:22:28 ohwada Exp $
 
 // 2007-11-24 K.OHWADA
-// _HAPPY_LINUX_CONF_TABLE_MANAGE
+// _HAPPYLINUX_CONF_TABLE_MANAGE
 
 // 2007-11-01 K.OHWADA
-// _HAPPY_LINUX_FAIL
+// _HAPPYLINUX_FAIL
 
 // 2007-06-01 K.OHWADA
-// _HAPPY_LINUX_AM_JUDGE
+// _HAPPYLINUX_AM_JUDGE
 
 // 2007-05-12 K.OHWADA
-// _HAPPY_LINUX_FORM_INIT_NOT
+// _HAPPYLINUX_FORM_INIT_NOT
 
 // 2007-02-20 K.OHWADA
-// _HAPPY_LINUX_SKIP_TO_NEXT
+// _HAPPYLINUX_SKIP_TO_NEXT
 
 //=========================================================
 // Happy Linux Framework Module
@@ -28,103 +28,103 @@
 // compatible for v1.21
 //---------------------------------------------------------
 // config
-if (!defined('_HAPPY_LINUX_CONF_TABLE_MANAGE')) {
+if (!defined('_HAPPYLINUX_CONF_TABLE_MANAGE')) {
     // table manage
-    define('_HAPPY_LINUX_CONF_TABLE_MANAGE', 'Управление таблицей базы данных');
-    define('_HAPPY_LINUX_CONF_TABLE_CHECK', 'Проверить таблицу %s');
-    define('_HAPPY_LINUX_CONF_TABLE_REINSTALL', 'Рекомендуется переустановить, если обнаружена ошибка');
-    define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW', 'Обновление конфигурации таблицы');
-    define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Выполнить, если обнаружена ошибка. <br />Существующие значения аннулируются. <br />Установите значения после выполнения. ');
+    define('_HAPPYLINUX_CONF_TABLE_MANAGE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_CONF_TABLE_CHECK', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ %s');
+    define('_HAPPYLINUX_CONF_TABLE_REINSTALL', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_CONF_TABLE_CONFIG_RENEW', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. <br>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. <br>пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. ');
 }
 
 //---------------------------------------------------------
 // compatible for v1.20
 //---------------------------------------------------------
 // global
-if (!defined('_HAPPY_LINUX_FAIL')) {
-    define('_HAPPY_LINUX_WELCOME', 'Добро пожаловать %s');
-    define('_HAPPY_LINUX_FAIL', 'Неудача');
-    define('_HAPPY_LINUX_FAILED', 'Не удалось');
-    define('_HAPPY_LINUX_REFRESH', 'Обновить');
-    define('_HAPPY_LINUX_REFRESHED', 'Обновлено');
-    define('_HAPPY_LINUX_FINISH', 'Закончить');
-    define('_HAPPY_LINUX_FINISHED', 'Закончено');
-    define('_HAPPY_LINUX_PRINT', 'Печать');
-    define('_HAPPY_LINUX_SAMPLE', 'Пример');
+if (!defined('_HAPPYLINUX_FAIL')) {
+    define('_HAPPYLINUX_WELCOME', 'пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ %s');
+    define('_HAPPYLINUX_FAIL', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_FAILED', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_REFRESH', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_REFRESHED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_FINISH', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_FINISHED', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_PRINT', 'пїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_SAMPLE', 'пїЅпїЅпїЅпїЅпїЅпїЅ');
 }
 
 // admin
-if (!defined('_HAPPY_LINUX_AM_MODULE')) {
-    define('_HAPPY_LINUX_AM_MODULE', 'Управление модулем');
-    define('_HAPPY_LINUX_AM_MODULE_DESC', 'Показать список модулей');
-    define('_HAPPY_LINUX_AM_MODULE_UPDATE', 'Обновление модуля');
+if (!defined('_HAPPYLINUX_AM_MODULE')) {
+    define('_HAPPYLINUX_AM_MODULE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_AM_MODULE_DESC', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_AM_MODULE_UPDATE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
 
-    define('_HAPPY_LINUX_AM_SERVER_ENV', 'Переменные серверной среды');
-    define('_HAPPY_LINUX_AM_DIR_NOT_WRITABLE', 'Эта директория недоступка для записи');
-    define('_HAPPY_LINUX_AM_MEMORY_LIMIT_TOO_SMALL', 'memory_limit слишком мал');
-    define('_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'Модуль веб-ссылок требует больше памяти, чем %s MB');
-    define('_HAPPY_LINUX_AM_MEMORY_DESC', 'Это значение является одним стандартом.<br />В зависимости от серверной среды, иногда бывает больше или меньше.');
+    define('_HAPPYLINUX_AM_SERVER_ENV', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_AM_DIR_NOT_WRITABLE', 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_AM_MEMORY_LIMIT_TOO_SMALL', 'memory_limit пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ');
+    define('_HAPPYLINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ %s MB');
+    define('_HAPPYLINUX_AM_MEMORY_DESC', 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.<br>пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.');
 }
 
 //---------------------------------------------------------
 // compatible for v0.90
 //---------------------------------------------------------
 // admin
-if (!defined('_HAPPY_LINUX_AM_JUDGE')) {
-    define('_HAPPY_LINUX_AM_JUDGE', 'Программа judegs <b>%s</b>');
-    define('_HAPPY_LINUX_AM_JUMP', 'Эта страница перезагрузится автоматически через <b>%s</b> сек');
-    define('_HAPPY_LINUX_AM_JUMP_IFNO1', 'Пожалуйста, нажмите следующее, если страница автоматически не перезагрузится, или программа mis-judges.');
-    define('_HAPPY_LINUX_AM_JUMP_IFNO2', 'Пожалуйста, установите <i>modules/happy_linux/preload/admin.php</i>, когда %s секунд долго');
+if (!defined('_HAPPYLINUX_AM_JUDGE')) {
+    define('_HAPPYLINUX_AM_JUDGE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ judegs <b>%s</b>');
+    define('_HAPPYLINUX_AM_JUMP', 'пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ <b>%s</b> пїЅпїЅпїЅ');
+    define('_HAPPYLINUX_AM_JUMP_IFNO1', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ mis-judges.');
+    define('_HAPPYLINUX_AM_JUMP_IFNO2', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ <i>modules/happylinux/preload/admin.php</i>, пїЅпїЅпїЅпїЅпїЅ %s пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ');
 }
 
 //---------------------------------------------------------
 // compatible for v0.80
 //---------------------------------------------------------
 // form
-if (!defined('_HAPPY_LINUX_FORM_INIT_NOT')) {
-    define('_HAPPY_LINUX_FORM_INIT_NOT', 'Не инициализирована таблица конфигурации');
-    define('_HAPPY_LINUX_FORM_INIT_EXEC', 'Инициализация таблицы конфигурации');
-    define('_HAPPY_LINUX_FORM_VERSION_NOT', 'Не версия %s');
-    define('_HAPPY_LINUX_FORM_UPGRADE_EXEC', 'Обновление таблицы конфигурации');
+if (!defined('_HAPPYLINUX_FORM_INIT_NOT')) {
+    define('_HAPPYLINUX_FORM_INIT_NOT', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_FORM_INIT_EXEC', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_FORM_VERSION_NOT', 'пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ %s');
+    define('_HAPPYLINUX_FORM_UPGRADE_EXEC', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 }
 
 // admin
-if (!defined('_HAPPY_LINUX_AM_GROUP')) {
-    define('_HAPPY_LINUX_AM_GROUP', 'Управление группой');
-    define('_HAPPY_LINUX_AM_GROUP_DESC', 'Управление правами доступа модуля');
-    define('_HAPPY_LINUX_AM_BLOCK', 'Управление блоком');
-    define('_HAPPY_LINUX_AM_BLOCK_DESC', 'Управление правами доступа блока');
-    define('_HAPPY_LINUX_AM_GROUP_BLOCK', 'Группа / Управление блоком');
-    define('_HAPPY_LINUX_AM_GROUP_BLOCK_DESC', 'Управление правами доступа модуля и блока');
-    define('_HAPPY_LINUX_AM_TEMPLATE', 'Управление шаблоном');
-    define('_HAPPY_LINUX_AM_TEMPLATE_DESC', 'Управление шаблоном');
+if (!defined('_HAPPYLINUX_AM_GROUP')) {
+    define('_HAPPYLINUX_AM_GROUP', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_AM_GROUP_DESC', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_AM_BLOCK', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_AM_BLOCK_DESC', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_AM_GROUP_BLOCK', 'пїЅпїЅпїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_AM_GROUP_BLOCK_DESC', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_AM_TEMPLATE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_AM_TEMPLATE_DESC', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 }
 
 // rss_view
-if (!defined('_HAPPY_LINUX_VIEW_SITE_TITLE')) {
-    include_once XOOPS_ROOT_PATH . '/modules/happy_linux/language/english/rss_view.php';
+if (!defined('_HAPPYLINUX_VIEW_SITE_TITLE')) {
+    require_once XOOPS_ROOT_PATH . '/modules/happylinux/language/english/rss_view.php';
 }
 
 //---------------------------------------------------------
 // compatible for v0.70
 //---------------------------------------------------------
 // global
-if (!defined('_HAPPY_LINUX_SKIP_TO_NEXT')) {
-    define('_HAPPY_LINUX_SKIP_TO_NEXT', 'Перейти к следующему');
+if (!defined('_HAPPYLINUX_SKIP_TO_NEXT')) {
+    define('_HAPPYLINUX_SKIP_TO_NEXT', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
 }
 
 //---------------------------------------------------------
 // compatible for v0.40
 //---------------------------------------------------------
 // global
-if (!defined('_HAPPY_LINUX_GOTO_MAIN')) {
-    define('_HAPPY_LINUX_GOTO_MAIN', 'Перейти на главную страницу');
-    define('_HAPPY_LINUX_GOTO_TOP', 'Перейти на главную страницу');
-    define('_HAPPY_LINUX_GOTO_ADMIN', 'Перейти на страницу администрирования');
-    define('_HAPPY_LINUX_GOTO_MODULE', 'Перейти к модулю');
+if (!defined('_HAPPYLINUX_GOTO_MAIN')) {
+    define('_HAPPYLINUX_GOTO_MAIN', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_GOTO_TOP', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_GOTO_ADMIN', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    define('_HAPPYLINUX_GOTO_MODULE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
 }
 
 // form
-if (!defined('_HAPPY_LINUX_FORM_ITEM')) {
-    define('_HAPPY_LINUX_FORM_ITEM', 'Пункт');
+if (!defined('_HAPPYLINUX_FORM_ITEM')) {
+    define('_HAPPYLINUX_FORM_ITEM', 'пїЅпїЅпїЅпїЅпїЅ');
 }

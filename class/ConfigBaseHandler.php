@@ -1,11 +1,11 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
-// $Id: config_base_handler.php,v 1.82 2010/11/07 14:59:23 ohwada Exp $
+// $Id: config_baseHandler.php,v 1.82 2010/11/07 14:59:23 ohwada Exp $
 
 // 2007-11-24 K.OHWADA
-// move get_first_obj_from_objs() to object_handler.php
+// move get_first_obj_from_objs() to objectHandler.php
 
 // 2007-05-12 K.OHWADA
 // get_value_by_name()
@@ -18,20 +18,25 @@ namespace XoopsModules\Happy_linux;
 
 // 2006-07-10 K.OHWADA
 // this is new file
-// porting from weblinks_config_store_handler
+// porting from weblinks_config_storeHandler
 
 //================================================================
 // Happy Linux Framework Module
 // this file contain 2 class
-//   happy_linux_config_base
-//   happy_linux_config_base_handler
+//   ConfigBase
+//   happylinux_config_baseHandler
 // 2006-07-10 K.OHWADA
 //================================================================
 
 //=========================================================
 // class config handler
 //=========================================================
-class ConfigBaseHandler extends  ObjectHandler
+
+/**
+ * Class ConfigBaseHandler
+ * @package XoopsModules\Happylinux
+ */
+class ConfigBaseHandler extends BaseObjectHandler
 {
     public $_cached_by_confid = [];
     public $_cached_by_name   = [];
@@ -39,6 +44,13 @@ class ConfigBaseHandler extends  ObjectHandler
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
+    /**
+     * ConfigBaseHandler constructor.
+     * @param $dirname
+     * @param $table_name
+     * @param $id_name
+     * @param $class_name
+     */
     public function __construct($dirname, $table_name, $id_name, $class_name)
     {
         parent::__construct($dirname, $table_name, $id_name, $class_name);
@@ -47,6 +59,10 @@ class ConfigBaseHandler extends  ObjectHandler
     //---------------------------------------------------------
     // basic function
     //---------------------------------------------------------
+    /**
+     * @param $obj
+     * @return string|void
+     */
     public function _build_insert_sql($obj)
     {
         foreach ($obj->gets() as $k => $v) {
@@ -76,6 +92,10 @@ class ConfigBaseHandler extends  ObjectHandler
         return $sql;
     }
 
+    /**
+     * @param $obj
+     * @return string|void
+     */
     public function _build_update_sql($obj)
     {
         foreach ($obj->gets() as $k => $v) {
@@ -115,6 +135,10 @@ class ConfigBaseHandler extends  ObjectHandler
     //---------------------------------------------------------
     // get_cache
     //---------------------------------------------------------
+    /**
+     * @param $id
+     * @return bool|mixed
+     */
     public function get_cache_by_confid($id)
     {
         $ret = false;
@@ -125,6 +149,11 @@ class ConfigBaseHandler extends  ObjectHandler
         return $ret;
     }
 
+    /**
+     * @param $id
+     * @param $key
+     * @return bool|mixed
+     */
     public function get_cache_by_confid_key($id, $key)
     {
         $ret = false;
@@ -135,6 +164,10 @@ class ConfigBaseHandler extends  ObjectHandler
         return $ret;
     }
 
+    /**
+     * @param $name
+     * @return bool|mixed
+     */
     public function get_cache_by_name($name)
     {
         $ret = false;
@@ -145,6 +178,11 @@ class ConfigBaseHandler extends  ObjectHandler
         return $ret;
     }
 
+    /**
+     * @param $name
+     * @param $key
+     * @return bool|mixed
+     */
     public function get_cache_by_name_key($name, $key)
     {
         $ret = false;
@@ -158,6 +196,11 @@ class ConfigBaseHandler extends  ObjectHandler
     //---------------------------------------------------------
     // update
     //---------------------------------------------------------
+    /**
+     * @param $id
+     * @param $value
+     * @return bool
+     */
     public function update_by_confid($id, $value)
     {
         $id = (int)$id;
@@ -176,6 +219,11 @@ class ConfigBaseHandler extends  ObjectHandler
         return $ret;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return bool
+     */
     public function update_by_name($name, $value)
     {
         $obj = &$this->get_by_name($name);
@@ -192,16 +240,28 @@ class ConfigBaseHandler extends  ObjectHandler
     //---------------------------------------------------------
     // get
     //---------------------------------------------------------
+    /**
+     * @param $id
+     * @return bool|mixed
+     */
     public function &get_by_confid($id)
     {
         return $this->get_one_by_key_value('conf_id', (int)$id);
     }
 
+    /**
+     * @param $name
+     * @return bool|mixed
+     */
     public function &get_by_name($name)
     {
         return $this->get_one_by_key_value('conf_name', $name);
     }
 
+    /**
+     * @param $id
+     * @return bool
+     */
     public function get_value_by_confid($id)
     {
         $val = false;
@@ -213,6 +273,10 @@ class ConfigBaseHandler extends  ObjectHandler
         return $val;
     }
 
+    /**
+     * @param $name
+     * @return bool
+     */
     public function get_value_by_name($name)
     {
         $val = false;
@@ -227,6 +291,9 @@ class ConfigBaseHandler extends  ObjectHandler
     //---------------------------------------------------------
     // create_table
     //---------------------------------------------------------
+    /**
+     * @return bool
+     */
     public function create_table()
     {
         // BUG : cannot create table in MySQL 3.23

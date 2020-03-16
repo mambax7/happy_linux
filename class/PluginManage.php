@@ -1,21 +1,26 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: plugin_manage.php,v 1.1 2008/02/26 15:35:43 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
 // this file contain 3 class
-//   happy_linux_plugin_manage
-//   happy_linux_plugin_test
-//   happy_linux_plugin_test_form
+//   happylinux_plugin_manage
+//   happylinux_plugin_test
+//   happylinux_plugin_test_form
 // 2008-02-17 K.OHWADA
 //=========================================================
 
 //=========================================================
 // class PluginManage
 //=========================================================
+
+/**
+ * Class PluginManage
+ * @package XoopsModules\Happylinux
+ */
 class PluginManage
 {
     public $_plugin;
@@ -29,10 +34,13 @@ class PluginManage
     public function __construct()
     {
         $this->_post = Post::getInstance();
-        $this->_test = Plugin_test::getInstance();
-        $this->_form = Plugin_test_form::getInstance();
+        $this->_test = PluginTest::getInstance();
+        $this->_form = PluginTestForm::getInstance();
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -43,11 +51,14 @@ class PluginManage
         return $instance;
     }
 
+    /**
+     * @param $class
+     */
     public function set_plugin_class(&$class)
     {
-        $class->set_lang_name(_HAPPY_LINUX_PLUGIN_NAME);
-        $class->set_lang_usage(_HAPPY_LINUX_PLUGIN_USAGE);
-        $class->set_lang_decription(_HAPPY_LINUX_PLUGIN_DESCRIPTION);
+        $class->set_lang_name(_HAPPYLINUX_PLUGIN_NAME);
+        $class->set_lang_usage(_HAPPYLINUX_PLUGIN_USAGE);
+        $class->set_lang_decription(_HAPPYLINUX_PLUGIN_DESCRIPTION);
 
         $this->_plugin = &$class;
         $this->_test->set_plugin_class($class);
@@ -56,6 +67,9 @@ class PluginManage
     //---------------------------------------------------------
     // post
     //---------------------------------------------------------
+    /**
+     * @return string|string[]|null
+     */
     public function get_op()
     {
         return $this->_post->get_post_text('op');
@@ -73,10 +87,10 @@ class PluginManage
     {
         $this->_plugin->init_class_list();
 
-        echo '<h4>' . _HAPPY_LINUX_PLUGIN_LIST . "</h4>\n";
+        echo '<h4>' . _HAPPYLINUX_PLUGIN_LIST . "</h4>\n";
         echo $this->_plugin->build_table();
 
-        echo '<h4>' . _HAPPY_LINUX_PLUGIN_TEST . "</h4>\n";
+        echo '<h4>' . _HAPPYLINUX_PLUGIN_TEST . "</h4>\n";
         $data = null;
 
         $plugin_data = $this->_plugin->get_exsample_data();
@@ -97,7 +111,7 @@ class PluginManage
 
     public function _execute()
     {
-        echo '<h4>' . _HAPPY_LINUX_PLUGIN_TEST . "</h4>\n";
+        echo '<h4>' . _HAPPYLINUX_PLUGIN_TEST . "</h4>\n";
 
         $this->_form->show();
         echo "<br><hr>\n";
@@ -110,7 +124,7 @@ class PluginManage
     {
         $url = xoops_getenv('PHP_SELF');
         echo "<hr><br>\n";
-        echo '<a href="' . $url . '"> - ' . _HAPPY_LINUX_PLUGIN_LIST . "</a>\n";
+        echo '<a href="' . $url . '"> - ' . _HAPPYLINUX_PLUGIN_LIST . "</a>\n";
     }
 
     // --- class end ---

@@ -4,20 +4,20 @@
 //=========================================================
 // Happy Linux Framework Module
 // 2007-09-01 K.OHWADA
-// EUC-JP Í­Êþ¼«±óÊýÍè
+// EUC-JP Í­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //=========================================================
 
 // mail_send
-define('_HAPPY_LINUX_MAIL_NO_TO_EMAIL', '¥á¡¼¥ë¥¢¥É¥ì¥¹¤¬ÀßÄê¤µ¤ì¤Æ¤¤¤Ê¤¤');
+define('_HAPPYLINUX_MAIL_NO_TO_EMAIL', 'ï¿½á¡¼ï¿½ë¥¢ï¿½É¥ì¥¹ï¿½ï¿½ï¿½ï¿½ï¿½ê¤µï¿½ï¿½Æ¤ï¿½ï¿½Ê¤ï¿½');
 
 // mail_form
-define('_HAPPY_LINUX_MAIL_WEBMASTER', 'WEB´ÉÍý¼Ô');
-define('_HAPPY_LINUX_MAIL_SUBJECT_FROM', '%s ¤«¤é¤Î¤ªÃÎ¤é¤»');
-define('_HAPPY_LINUX_MAIL_HELLO', '%s ¤µ¤ó ¤³¤ó¤Ë¤Á¤Ï');
-define('_HAPPY_LINUX_MAIL_SUBMIT', '£Å¥á¡¼¥ë¤òÁ÷¿®¤¹¤ë');
-define('_HAPPY_LINUX_MAIL_SUBMIT_NEXT', '¼¡¤Î %s ·ï¤òÁ÷¿®¤¹¤ë');
+define('_HAPPYLINUX_MAIL_WEBMASTER', 'WEBï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_MAIL_SUBJECT_FROM', '%s ï¿½ï¿½ï¿½ï¿½Î¤ï¿½ï¿½Î¤é¤»');
+define('_HAPPYLINUX_MAIL_HELLO', '%s ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ë¤ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_MAIL_SUBMIT', 'ï¿½Å¥á¡¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_MAIL_SUBMIT_NEXT', 'ï¿½ï¿½ï¿½ï¿½ %s ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
 
 // for future
-define('_HAPPY_LINUX_MAIL_TITLE', '£Å¥á¡¼¥ë¤ÎÁ÷¿®');
-define('_HAPPY_LINUX_MAIL_THERE_ARE', '<b>%s</b> ¿Í°¸¤Î£Å¥á¡¼¥ë¤¬¤¢¤ê¤Þ¤¹');
-define('_HAPPY_LINUX_MAIL_SEND_NUM', '%s ¿ÍÌÜ¤«¤é %s ¿ÍÌÜ¤Þ¤Ç¤òÁ÷¿®¤·¤Þ¤¹');
+define('_HAPPYLINUX_MAIL_TITLE', 'ï¿½Å¥á¡¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_MAIL_THERE_ARE', '<b>%s</b> ï¿½Í°ï¿½ï¿½Î£Å¥á¡¼ï¿½ë¤¬ï¿½ï¿½ï¿½ï¿½Þ¤ï¿½');
+define('_HAPPYLINUX_MAIL_SEND_NUM', '%s ï¿½ï¿½ï¿½Ü¤ï¿½ï¿½ï¿½ %s ï¿½ï¿½ï¿½Ü¤Þ¤Ç¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¤ï¿½');

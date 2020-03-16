@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: convert_encoding.php,v 1.6 2007/08/09 18:05:30 ohwada Exp $
 
@@ -23,11 +23,16 @@ namespace XoopsModules\Happy_linux;
 // 2006-07-10 K.OHWADA
 //=========================================================
 
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/include/multibyte.php';
+require_once XOOPS_ROOT_PATH . '/modules/happylinux/include/multibyte.php';
 
 //=========================================================
 // class convert
 //=========================================================
+
+/**
+ * Class ConvertEncoding
+ * @package XoopsModules\Happylinux
+ */
 class ConvertEncoding
 {
     public $_MAX_DEPTH    = 10;
@@ -44,6 +49,9 @@ class ConvertEncoding
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -58,6 +66,12 @@ class ConvertEncoding
     // public function
     //---------------------------------------------------------
     // rss_parse_object.php
+    /**
+     * @param $arr
+     * @param $to
+     * @param $from
+     * @return array|bool|string
+     */
     public function &convert_array(&$arr, $to, $from)
     {
         $to   = mb_strtolower($to);
@@ -72,6 +86,11 @@ class ConvertEncoding
         return $ret;
     }
 
+    /**
+     * @param      $arr
+     * @param null $encoding
+     * @return array|bool|string
+     */
     public function &convert_array_to_utf8(&$arr, $encoding = null)
     {
         $ret = &$this->_convert_array_recursive(0, $arr, 'UTF-8', $encoding);
@@ -79,6 +98,11 @@ class ConvertEncoding
         return $ret;
     }
 
+    /**
+     * @param      $arr
+     * @param null $encoding
+     * @return array|bool|string
+     */
     public function &convert_array_from_utf8(&$arr, $encoding = null)
     {
         $ret = &$this->_convert_array_recursive(0, $arr, $encoding, 'UTF-8');
@@ -86,6 +110,12 @@ class ConvertEncoding
         return $ret;
     }
 
+    /**
+     * @param $str
+     * @param $to
+     * @param $from
+     * @return string
+     */
     public function convert($str, $to, $from)
     {
         $to   = mb_strtolower($to);
@@ -100,25 +130,42 @@ class ConvertEncoding
         } elseif ('utf-8' == $to) {
             $str = $this->convert_to_utf8($str, $from);
         } else {
-            $str = happy_linux_convert_encoding($str, $to, $from);
+            $str = Happylinux\ConvertEncoding($str, $to, $from);
         }
 
         return $str;
     }
 
+    /**
+     * @param      $str
+     * @param null $encoding
+     * @return string
+     */
     public function convert_to_utf8($str, $encoding = null)
     {
-        return happy_linux_convert_to_utf8($str, $encoding);
+        return happylinux_convert_to_utf8($str, $encoding);
     }
 
+    /**
+     * @param      $str
+     * @param null $encoding
+     * @return string
+     */
     public function convert_from_utf8($str, $encoding = null)
     {
-        return happy_linux_convert_from_utf8($str, $encoding);
+        return happylinux_convert_from_utf8($str, $encoding);
     }
 
     //---------------------------------------------------------
     // private
     //---------------------------------------------------------
+    /**
+     * @param $num
+     * @param $arr_in
+     * @param $to
+     * @param $from
+     * @return array|bool|string
+     */
     public function &_convert_array_recursive($num, &$arr_in, $to, $from)
     {
         ++$num;

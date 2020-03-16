@@ -14,9 +14,9 @@
  * @author          Michael Beck (aka Mamba)
  */
 
-use XoopsModules\Happy_linux;
-use XoopsModules\Happy_linux\Common;
-use XoopsModules\Happy_linux\Utility;
+use XoopsModules\Happylinux;
+use XoopsModules\Happylinux\Common;
+use XoopsModules\Happylinux\Utility;
 
 require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 require dirname(__DIR__) . '/preloads/autoloader.php';
@@ -26,7 +26,7 @@ $op = \Xmf\Request::getCmd('op', '');
 $moduleDirName = basename(dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-$helper = Happy_linux\Helper::getInstance();
+$helper = Happylinux\Helper::getInstance();
 // Load language files
 $helper->loadLanguage('common');
 
@@ -57,7 +57,7 @@ function loadSampleData()
     $moduleDirName = basename(dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
-    $utility      = new Happy_linux\Utility();
+    $utility      = new Utility();
     $configurator = new Common\Configurator();
 
     $tables = \Xmf\Module\Helper::getHelper($moduleDirName)->getModule()->getInfo('tables');
@@ -77,7 +77,7 @@ function loadSampleData()
 
     //  ---  COPY test folder files ---------------
     if (is_array($configurator->copyTestFolders) && count($configurator->copyTestFolders) > 0) {
-        //        $file = __DIR__ . '/../testdata/images/';
+        //        $file =  dirname(__DIR__) . '/testdata/images/';
         foreach (array_keys($configurator->copyTestFolders) as $i) {
             $src  = $configurator->copyTestFolders[$i][0];
             $dest = $configurator->copyTestFolders[$i][1];
@@ -122,7 +122,7 @@ function exportSchema()
 
     try {
         // TODO set exportSchema
-        //        $migrate = new Happy_linux\Migrate($moduleDirName);
+        //        $migrate = new Migrate($moduleDirName);
         //        $migrate->saveCurrentSchema();
         //
         //        redirect_header('../admin/index.php', 1, constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA_SUCCESS'));

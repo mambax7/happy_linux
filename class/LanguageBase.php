@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: language.php,v 1.6 2007/09/23 05:07:25 ohwada Exp $
 
@@ -12,7 +12,7 @@ namespace XoopsModules\Happy_linux;
 // change get_local_instance() get_instance_by_language() etc
 
 // 2006-10-05 K.OHWADA
-// add happy_linux_language_factory
+// add happylinux_language_factory
 // move get_google_url() to locate.php
 
 // 2006-09-10 K.OHWADA
@@ -27,6 +27,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class LanguageBase
 //=========================================================
+
+/**
+ * Class LanguageBase
+ * @package XoopsModules\Happylinux
+ */
 class LanguageBase
 {
     public $_DEFAULT_LANGAGE = 'english';
@@ -42,6 +47,9 @@ class LanguageBase
     //---------------------------------------------------------
     // get value
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function get_default_language()
     {
         return $this->_DEFAULT_LANGAGE;
@@ -50,16 +58,28 @@ class LanguageBase
     //---------------------------------------------------------
     // convert encoding
     //---------------------------------------------------------
+    /**
+     * @param $text
+     * @return mixed
+     */
     public function convert_telafriend_subject($text)
     {
         return $text;
     }
 
+    /**
+     * @param $text
+     * @return mixed
+     */
     public function convert_telafriend_body($text)
     {
         return $text;
     }
 
+    /**
+     * @param $text
+     * @return mixed
+     */
     public function convert_download_filename($text)
     {
         return $text;
@@ -68,6 +88,9 @@ class LanguageBase
     //---------------------------------------------------------
     // system param
     //---------------------------------------------------------
+    /**
+     * @return mixed
+     */
     public function get_xoops_language()
     {
         global $xoopsConfig;
@@ -75,6 +98,9 @@ class LanguageBase
         return $xoopsConfig['language'];
     }
 
+    /**
+     * @return string
+     */
     public function get_xoops_langcode()
     {
         return _LANGCODE;
@@ -83,6 +109,9 @@ class LanguageBase
     //---------------------------------------------------------
     // country code
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function get_country_code()
     {
         return 'us';    // USA

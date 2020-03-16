@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: build_rss.php,v 1.19 2009/02/25 08:57:04 ohwada Exp $
 
@@ -11,11 +11,11 @@ namespace XoopsModules\Happy_linux;
 // set_media_group_default()
 
 // 2007-11-11 K.OHWADA
-// happy_linux_rss_default
+// happylinux_rss_default
 
 // 2007-10-10 K.OHWADA
-// divid to happy_linux_build_rss
-// divid to happy_linux_date
+// divid to happylinux_build_rss
+// divid to happylinux_date
 
 // 2007-08-31 K.OHWADA
 // BUG 4697: Notice [PHP]: Only variables should be assigned by reference
@@ -60,11 +60,16 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class builder base
 //=========================================================
-class BuildRss extends build_cache
+
+/**
+ * Class BuildRss
+ * @package XoopsModules\Happylinux
+ */
+class BuildRss extends BuildCache
 {
     // constant
-    public $_CACHE_ID_GUEST = HAPPY_LINUX_RSS_CACHE_ID_GUEST;
-    public $_CACHE_ID_USER  = HAPPY_LINUX_RSS_CACHE_ID_USER;
+    public $_CACHE_ID_GUEST = HAPPYLINUX_RSS_CACHE_ID_GUEST;
+    public $_CACHE_ID_USER  = HAPPYLINUX_RSS_CACHE_ID_USER;
 
     public $_MODULE_ID_DEFUALT   = 1;
     public $_HEADER_BUILD        = 'Content-Type:text/xml;  charset=utf-8';
@@ -148,14 +153,17 @@ class BuildRss extends build_cache
         parent::__construct();
 
         // class instance
-        $this->_default = Rss_default::getInstance();
+        $this->_default = RssDefault::getInstance();
         $this->_system  = System::getInstance();
         $this->_strings = Strings::getInstance();
         $this->_convert = ConvertEncoding::getInstance();
-        $this->_image   = Image_size::getInstance();
+        $this->_image   = ImageSize::getInstance();
         $this->_date    = Date::getInstance();
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -172,7 +180,7 @@ class BuildRss extends build_cache
     public function build_rss()
     {
         // header
-        happy_linux_http_output('pass');
+        happylinux_http_output('pass');
         header($this->_HEADER_BUILD);
 
         $cache_id   = $this->_CACHE_ID_GUEST;
@@ -211,7 +219,7 @@ class BuildRss extends build_cache
         } ?>
         <html>
         <head>
-            <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+            <meta http-equiv="content-type" content="text/html; charset=utf-8">
             <title><?php echo $title; ?></title>
         </head>
         <body>
@@ -252,6 +260,11 @@ class BuildRss extends build_cache
     //---------------------------------------------------------
     // utlity
     //---------------------------------------------------------
+    /**
+     * @param null $author
+     * @param null $year
+     * @return string
+     */
     public function build_site_copyright($author = null, $year = null)
     {
         if (empty($author)) {
@@ -265,6 +278,13 @@ class BuildRss extends build_cache
         return $val;
     }
 
+    /**
+     * @param null $mid
+     * @param null $aid
+     * @param null $site_tag
+     * @param null $year
+     * @return string
+     */
     public function build_entry_id($mid = null, $aid = null, $site_tag = null, $year = null)
     {
         if (empty($mid)) {
@@ -287,46 +307,74 @@ class BuildRss extends build_cache
     //---------------------------------------------------------
     // site information
     //---------------------------------------------------------
+    /**
+     * @return mixed
+     */
     public function get_default_site_url()
     {
         return $this->_default->get_default_site_url();
     }
 
+    /**
+     * @return mixed
+     */
     public function get_default_site_name()
     {
         return $this->_default->get_default_site_name();
     }
 
+    /**
+     * @return mixed
+     */
     public function get_default_site_desc()
     {
         return $this->_default->get_default_site_desc();
     }
 
+    /**
+     * @return mixed
+     */
     public function get_default_site_tag()
     {
         return $this->_default->get_default_site_tag();
     }
 
+    /**
+     * @return mixed
+     */
     public function get_default_site_link_self()
     {
         return $this->_default->get_default_site_link_self();
     }
 
+    /**
+     * @return mixed
+     */
     public function get_default_site_author_name()
     {
         return $this->_default->get_default_site_author_name();
     }
 
+    /**
+     * @return mixed
+     */
     public function get_default_site_author_email()
     {
         return $this->_default->get_default_site_author_email();
     }
 
+    /**
+     * @return mixed
+     */
     public function get_default_site_author_uri()
     {
         return $this->_default->get_default_site_author_uri();
     }
 
+    /**
+     * @param $url
+     * @return mixed
+     */
     public function parse_site_tag($url)
     {
         return $this->_default->parse_site_tag($url);
@@ -335,31 +383,52 @@ class BuildRss extends build_cache
     //---------------------------------------------------------
     // site image
     //---------------------------------------------------------
+    /**
+     * @return mixed
+     */
     public function get_default_site_image_logo()
     {
         return $this->_default->get_default_site_image_logo();
     }
 
+    /**
+     * @return mixed
+     */
     public function get_site_image_width_max()
     {
         return $this->_default->get_site_image_width_max();
     }
 
+    /**
+     * @return mixed
+     */
     public function get_site_image_height_max()
     {
         return $this->_default->get_site_image_height_max();
     }
 
+    /**
+     * @param $logo
+     * @return mixed
+     */
     public function get_site_image_size($logo)
     {
         return $this->_default->get_site_image_size($logo);
     }
 
+    /**
+     * @param $width
+     * @return mixed
+     */
     public function check_site_image_width($width)
     {
         return $this->_default->check_site_image_width($width);
     }
 
+    /**
+     * @param $height
+     * @return mixed
+     */
     public function check_site_image_height($height)
     {
         return $this->_default->check_site_image_height($height);
@@ -368,111 +437,177 @@ class BuildRss extends build_cache
     // --------------------------------------------------------
     // set param
     // --------------------------------------------------------
+    /**
+     * @param $value
+     */
     public function set_site_url($value)
     {
         $this->_site_url = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_name($value)
     {
         $this->_site_name = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_desc($value)
     {
         $this->_site_desc = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_tag($value)
     {
         $this->_site_tag = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_year($value)
     {
         $this->_site_year = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_copyright($value)
     {
         $this->_site_copyright = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_link_self($value)
     {
         $this->_site_link_self = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_author_name($value)
     {
         $this->_site_author_name = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_author_email($value)
     {
         $this->_site_author_email = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_author_uri($value)
     {
         $this->_site_author_uri = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_image_url($value)
     {
         $this->_site_image_url = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_image_link($value)
     {
         $this->_site_image_link = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_image_title($value)
     {
         $this->_site_image_title = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_image_width($value)
     {
         $this->_site_image_width = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_image_height($value)
     {
         $this->_site_image_height = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_max_summary($value)
     {
         $this->_max_summary = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_channel($value)
     {
         $this->_channel = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_items($value)
     {
         $this->_items = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_view_title($value)
     {
         $this->_view_title = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_view_goto_title($value)
     {
         $this->_view_goto_title = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_view_goto_url($value)
     {
         $this->_view_goto_url = $value;
     }
 
+    /**
+     * @param $val
+     */
     public function set_mode($val)
     {
         switch ($val) {
@@ -487,141 +622,225 @@ class BuildRss extends build_cache
         }
     }
 
+    /**
+     * @param $value
+     */
     public function set_header_build($value)
     {
         $this->_HEADER_BUILD = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_generator($value)
     {
         $this->_GENERATOR = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_generator_uri($value)
     {
         $this->_GENERATOR_URI = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_category($value)
     {
         $this->_CATEGORY = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_template_rdf($value)
     {
         $this->_TEMPLATE_RDF = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_template_rss($value)
     {
         $this->_TEMPLATE_RSS = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_template_atom($value)
     {
         $this->_TEMPLATE_ATOM = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_template_other($value)
     {
         $this->_TEMPLATE_OTHER = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_rdf_template($value)
     {
         $this->_TEMPLATE_RDF = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_rss_template($value)
     {
         $this->_TEMPLATE_RSS = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_atom_template($value)
     {
         $this->_TEMPLATE_ATOM = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_other_template($value)
     {
         $this->_TEMPLATE_OTHER = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_title_rdf($value)
     {
         $this->_TITLE_RDF = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_title_rss($value)
     {
         $this->_TITLE_RSS = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_title_atom($value)
     {
         $this->_TITLE_ATOM = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_title_other($value)
     {
         $this->_TITLE_OTHER = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_rdf_title($value)
     {
         $this->_TITLE_RDF = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_rss_title($value)
     {
         $this->_TITLE_RSS = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_atom_title($value)
     {
         $this->_TITLE_ATOM = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_other_title($value)
     {
         $this->_TITLE_OTHER = $value;
     }
 
+    /**
+     * @param $val
+     */
     public function set_flag_default_timezone($val)
     {
         $this->_flag_default_timezone = (bool)$val;
     }
 
+    /**
+     * @param $value
+     */
     public function set_cache_time_guest($value)
     {
         $this->_cache_time_guest = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_cache_time_user($value)
     {
         $this->_cache_time_user = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_force_guest($value)
     {
         $this->_flag_force_guest = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_force_user($value)
     {
         $this->_flag_force_user = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_cache_id_guest($value)
     {
         $this->_CACHE_ID_GUEST = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_cache_id_user($value)
     {
         $this->_CACHE_ID_USER = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_media_group_default($value)
     {
         $this->_media_group_default = $value;
@@ -651,6 +870,9 @@ class BuildRss extends build_cache
         $this->set_site_copyright($this->build_site_copyright());
     }
 
+    /**
+     * @return string
+     */
     public function _get_title()
     {
         switch ($this->_MODE_BUILD) {
@@ -675,6 +897,12 @@ class BuildRss extends build_cache
     // --------------------------------------------------------
     // meke title
     // --------------------------------------------------------
+    /**
+     * @param     $title
+     * @param int $flag_char
+     * @param int $flag_numeric
+     * @return string|string[]|null
+     */
     public function _build_xml_title($title, $flag_char = 1, $flag_numeric = 1)
     {
         if ($flag_char) {
@@ -693,6 +921,12 @@ class BuildRss extends build_cache
     // --------------------------------------------------------
     // meke content
     // --------------------------------------------------------
+    /**
+     * @param     $content
+     * @param int $flag_control
+     * @param int $flag_undo
+     * @return string|string[]|null
+     */
     public function _build_xml_content($content, $flag_control = 1, $flag_undo = 1)
     {
         if ($flag_control) {
@@ -709,6 +943,10 @@ class BuildRss extends build_cache
         return $cont;
     }
 
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _convert_cdata($text)
     {
         $text = preg_replace('/]]>/', ']]&gt;', $text);
@@ -719,6 +957,18 @@ class BuildRss extends build_cache
     // --------------------------------------------------------
     // meke summary
     // --------------------------------------------------------
+    /**
+     * @param     $sum
+     * @param int $flag_char
+     * @param int $flag_numeric
+     * @param int $flag_control
+     * @param int $flag_undo
+     * @param int $flag_return
+     * @param int $flag_tab
+     * @param int $flag_style
+     * @param int $flag_space
+     * @return string|string[]|null
+     */
     public function _build_xml_summary($sum, $flag_char = 1, $flag_numeric = 1, $flag_control = 1, $flag_undo = 1, $flag_return = 1, $flag_tab = 1, $flag_style = 1, $flag_space = 1)
     {
         if ($flag_char) {
@@ -771,6 +1021,10 @@ class BuildRss extends build_cache
     //   "  -> &quot;
     //   '  -> &apos;
     // --------------------------------------------------------
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _xml($text)
     {
         $ret = $this->_xml_htmlspecialchars_strict($text);
@@ -778,6 +1032,10 @@ class BuildRss extends build_cache
         return $ret;
     }
 
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _xml_url($text)
     {
         $ret = $this->_xml_htmlspecialchars_url($text);
@@ -785,14 +1043,22 @@ class BuildRss extends build_cache
         return $ret;
     }
 
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _xml_htmlspecialchars($text)
     {
-        $text = htmlspecialchars($text);
+        $text = htmlspecialchars($text, ENT_QUOTES | ENT_HTML5);
         $text = preg_replace("/'/", '&apos;', $text);
 
         return $text;
     }
 
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _xml_htmlspecialchars_strict($text)
     {
         $text = $this->_strip_html_entity_char($text);
@@ -801,6 +1067,10 @@ class BuildRss extends build_cache
         return $text;
     }
 
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _xml_htmlspecialchars_url($text)
     {
         $text = preg_replace('/&amp;/sU', '&', $text);
@@ -819,6 +1089,10 @@ class BuildRss extends build_cache
     //   &amp;  -> &
     //   &amp;nbsp; -> &nbsp;
     // --------------------------------------------------------
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _undo_html_special_chars($text)
     {
         $text = preg_replace('/&gt;/i', '>', $text);
@@ -834,6 +1108,10 @@ class BuildRss extends build_cache
     // undo html entities
     //   &amp;abc;  -> &abc;
     // --------------------------------------------------------
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _undo_html_entity_char($text)
     {
         $ret = preg_replace('/&amp;([0-9a-zA-z]+);/sU', '&\\1;', $text);
@@ -845,6 +1123,10 @@ class BuildRss extends build_cache
     // undo html entities
     //   &amp;#123; -> &#123;
     // --------------------------------------------------------
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _undo_html_entity_numeric($text)
     {
         $ret = preg_replace('/&amp;#([0-9a-fA-F]+);/sU', '&#\\1;', $text);
@@ -856,6 +1138,10 @@ class BuildRss extends build_cache
     // strip html entities
     //   &abc; -> ' '
     // --------------------------------------------------------
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _strip_html_entity_char($text)
     {
         $ret = preg_replace('/&[0-9a-zA-z]+;/sU', ' ', $text);
@@ -867,6 +1153,10 @@ class BuildRss extends build_cache
     // strip html entities
     //   &#123; -> ' '
     // --------------------------------------------------------
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _strip_html_entity_numeric($text)
     {
         $ret = preg_replace('/&amp;#([0-9a-fA-F]+);/sU', '&#\\1;', $text);
@@ -877,9 +1167,13 @@ class BuildRss extends build_cache
     //-----------------------------------------------
     // use convert class
     //-----------------------------------------------
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function _utf8($str)
     {
-        $str = happy_linux_convert_to_utf8($str, _CHARSET);
+        $str = happylinux_convert_to_utf8($str, _CHARSET);
         if ($this->_FLAG_REPLACE_CONTROL_CODE) {
             $str = $this->_strings->replace_control($str, $this->_REPLACE_CHAR);
         }
@@ -901,6 +1195,9 @@ class BuildRss extends build_cache
     //   - title
     //   - link
     //---------------------------------------------------------
+    /**
+     * @param $tpl
+     */
     public function _assign_rdf(&$tpl)
     {
         $channel_list = [
@@ -930,6 +1227,9 @@ class BuildRss extends build_cache
         $this->_assign_items($tpl, $item_list, $items, 'items');
     }
 
+    /**
+     * @return array
+     */
     public function &_build_rdf_channel()
     {
         $ret = &$this->_build_common_channel();
@@ -937,6 +1237,9 @@ class BuildRss extends build_cache
         return $ret;
     }
 
+    /**
+     * @return array
+     */
     public function &_build_rdf_items()
     {
         $arr               = [];
@@ -953,7 +1256,11 @@ class BuildRss extends build_cache
         return $arr;
     }
 
-    public function &_build_rdf_item_default(&$item)
+    /**
+     * @param $item
+     * @return mixed
+     */
+    public function &_build_rdf_item_default($item)
     {
         $ret = &$this->_build_common_item($item);
 
@@ -972,6 +1279,9 @@ class BuildRss extends build_cache
     //   - link
     //   - description
     //---------------------------------------------------------
+    /**
+     * @param $tpl
+     */
     public function _assign_rss(&$tpl)
     {
         $channel_list = [
@@ -1041,6 +1351,9 @@ class BuildRss extends build_cache
         $this->_assign_items($tpl, $item_list, $items, 'items');
     }
 
+    /**
+     * @return array
+     */
     public function &_build_rss_channel()
     {
         $channel = &$this->_build_common_channel();
@@ -1058,6 +1371,9 @@ class BuildRss extends build_cache
         return $channel;
     }
 
+    /**
+     * @return array
+     */
     public function &_build_rss_items()
     {
         $arr               = [];
@@ -1074,7 +1390,11 @@ class BuildRss extends build_cache
         return $arr;
     }
 
-    public function &_build_rss_item_default(&$item)
+    /**
+     * @param $item
+     * @return mixed
+     */
+    public function &_build_rss_item_default($item)
     {
         $arr = &$this->_build_common_item($item);
 
@@ -1101,6 +1421,9 @@ class BuildRss extends build_cache
     //   - author name
     //   - summary or content
     //---------------------------------------------------------
+    /**
+     * @param $tpl
+     */
     public function _assign_atom(&$tpl)
     {
         $channel_list = [
@@ -1140,6 +1463,9 @@ class BuildRss extends build_cache
         $this->_assign_items($tpl, $item_list, $entrys, 'entrys');
     }
 
+    /**
+     * @return array
+     */
     public function &_build_atom_channel()
     {
         $channel = &$this->_build_common_channel();
@@ -1154,6 +1480,9 @@ class BuildRss extends build_cache
         return $channel;
     }
 
+    /**
+     * @return array
+     */
     public function &_build_atom_entrys()
     {
         $arr               = [];
@@ -1170,7 +1499,11 @@ class BuildRss extends build_cache
         return $arr;
     }
 
-    public function &_build_atom_entry_default(&$entry)
+    /**
+     * @param $entry
+     * @return mixed
+     */
+    public function &_build_atom_entry_default($entry)
     {
         $arr = &$this->_build_common_item($entry);
 
@@ -1207,6 +1540,9 @@ class BuildRss extends build_cache
     // common
     //---------------------------------------------------------
     // BUG 4697: Notice [PHP]: Only variables should be assigned by reference
+    /**
+     * @return array
+     */
     public function &_build_common_channel()
     {
         $site_url_xml          = $this->_xml_url($this->_site_url);
@@ -1267,6 +1603,9 @@ class BuildRss extends build_cache
     // <webMaster>luksa@dallas.example.com (Frank Luksa)</webMaster>
     // <managingEditor>luksa@dallas.example.com (Frank Luksa)</managingEditor>
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function _build_site_email()
     {
         $text = $this->_site_author_email . ' (' . $this->_site_author_name . ')';
@@ -1274,6 +1613,10 @@ class BuildRss extends build_cache
         return $text;
     }
 
+    /**
+     * @param $items
+     * @return bool
+     */
     public function _get_last_updated_unix($items)
     {
         $time = false;
@@ -1284,6 +1627,10 @@ class BuildRss extends build_cache
         return $time;
     }
 
+    /**
+     * @param $item
+     * @return |null |null
+     */
     public function _get_item_guid($item)
     {
         $val = null;
@@ -1296,6 +1643,10 @@ class BuildRss extends build_cache
         return $val;
     }
 
+    /**
+     * @param $item
+     * @return |null |null
+     */
     public function _get_item_pubdate($item)
     {
         $val = null;
@@ -1308,6 +1659,10 @@ class BuildRss extends build_cache
         return $val;
     }
 
+    /**
+     * @param $item
+     * @return string|null
+     */
     public function _get_item_georss_point($item)
     {
         $val = null;
@@ -1322,6 +1677,10 @@ class BuildRss extends build_cache
         return $val;
     }
 
+    /**
+     * @param $item
+     * @return |null |null
+     */
     public function _get_item_media_group($item)
     {
         $val = null;
@@ -1335,6 +1694,12 @@ class BuildRss extends build_cache
         return $val;
     }
 
+    /**
+     * @param        $tpl
+     * @param        $list
+     * @param        $channel
+     * @param string $prefix
+     */
     public function _assign_channel($tpl, $list, $channel, $prefix = 'channel')
     {
         foreach ($list as $name) {
@@ -1345,6 +1710,11 @@ class BuildRss extends build_cache
         }
     }
 
+    /**
+     * @param $tpl
+     * @param $list
+     * @param $channel
+     */
     public function _assign_image($tpl, $list, $channel)
     {
         foreach ($list as $name) {
@@ -1355,6 +1725,12 @@ class BuildRss extends build_cache
         }
     }
 
+    /**
+     * @param        $tpl
+     * @param        $list
+     * @param        $items
+     * @param string $tpl_key
+     */
     public function _assign_items(&$tpl, $list, $items, $tpl_key = 'items')
     {
         foreach ($items as $item) {
@@ -1362,6 +1738,12 @@ class BuildRss extends build_cache
         }
     }
 
+    /**
+     * @param $tpl
+     * @param $list
+     * @param $item
+     * @return array
+     */
     public function _utf8_item(&$tpl, $list, $item)
     {
         $arr = [];
@@ -1384,22 +1766,38 @@ class BuildRss extends build_cache
         }
     }
 
+    /**
+     * @param $time
+     * @return false|string
+     */
     public function _date_rfc822($time)
     {
         return $this->_date->date_rfc822_user($time);
     }
 
+    /**
+     * @param $time
+     * @return string
+     */
     public function _date_iso8601($time)
     {
         return $this->_date->date_iso8601_user($time);
     }
 
     // for lower compatible: caller whatsnew
+
+    /**
+     * @param $time
+     * @return string
+     */
     public function _iso8601_date($time)
     {
         return $this->_date_iso8601($time);
     }
 
+    /**
+     * @return false|string
+     */
     public function get_default_site_year()
     {
         return $this->_date->date_year_user();
@@ -1408,6 +1806,9 @@ class BuildRss extends build_cache
     //=========================================================
     // override into build_cache
     //=========================================================
+    /**
+     * @param $tpl
+     */
     public function _assign_cache(&$tpl)
     {
         $this->_init_rss();
@@ -1430,6 +1831,9 @@ class BuildRss extends build_cache
         }
     }
 
+    /**
+     * @return null |null
+     */
     public function _get_template()
     {
         switch ($this->_MODE_BUILD) {
@@ -1454,6 +1858,9 @@ class BuildRss extends build_cache
     //=========================================================
     // override for caller
     //=========================================================
+    /**
+     * @param $tpl
+     */
     public function _assign_other(&$tpl)
     {
         // dummy
@@ -1464,36 +1871,58 @@ class BuildRss extends build_cache
         // dummy
     }
 
+    /**
+     * @return array
+     */
     public function &_get_channel()
     {
         return $this->_channel;
     }
 
+    /**
+     * @return array
+     */
     public function &_get_items()
     {
         return $this->_items;
     }
 
-    public function &_build_common_item(&$item)
+    /**
+     * @param $item
+     * @return mixed
+     */
+    public function &_build_common_item($item)
     {
         return $item;
     }
 
-    public function &_build_rdf_item(&$item)
+    /**
+     * @param $item
+     * @return mixed
+     */
+    public function &_build_rdf_item($item)
     {
         $ret = &$this->_build_rdf_item_default($item);
 
         return $ret;
     }
 
-    public function &_build_rss_item(&$item)
+    /**
+     * @param $item
+     * @return mixed
+     */
+    public function &_build_rss_item($item)
     {
         $ret = &$this->_build_rss_item_default($item);
 
         return $ret;
     }
 
-    public function &_build_atom_entry(&$entry)
+    /**
+     * @param $entry
+     * @return mixed
+     */
+    public function &_build_atom_entry($entry)
     {
         $ret = &$this->_build_atom_entry_default($entry);
 

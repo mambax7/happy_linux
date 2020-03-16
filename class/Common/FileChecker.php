@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux\Common;
+namespace XoopsModules\Happylinux\Common;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -21,7 +21,7 @@ namespace XoopsModules\Happy_linux\Common;
  */
 
 use Xmf\Request;
-use XoopsModules\Happy_linux;
+use XoopsModules\Happylinux;
 
 //defined('XOOPS_ROOT_PATH') || die('XOOPS root path not defined');
 

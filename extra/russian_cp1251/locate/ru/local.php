@@ -16,10 +16,14 @@
 // Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
 
 //=========================================================
-// class happy_linux_locate_ru
+// class happylinux_locate_ru
 // Russian Federation (RU)
 //=========================================================
-class happy_linux_locate_ru extends happy_linux_locate_base
+
+/**
+ * Class happylinux_locate_ru
+ */
+class happylinux_locate_ru extends happylinux_locate_base
 {
     //---------------------------------------------------------
     // constructor
@@ -30,13 +34,13 @@ class happy_linux_locate_ru extends happy_linux_locate_base
 
         $arr = [
             'country_code' => 'ru',
-            'country_name' => 'Российская Федерация',
+            'country_name' => 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
             'yahoo_url' => 'http://ru.yahoo.com/',
             'yahoo_map_url' => 'http://map.yahoo.com/',
             'google_url' => 'http://www.google.ru/',
             'google_map_url' => 'http://maps.google.ru/',
             'gm_server' => 'http://maps.google.ru/',
-            'gm_location' => 'Москва, Российская Федерация',
+            'gm_location' => 'пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ',
             'gm_latitude' => '55.755833',
             'gm_longitude' => '37.617778',
             'gm_zoom' => '10',

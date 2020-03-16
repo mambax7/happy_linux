@@ -1,15 +1,15 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: plugin_manage.php,v 1.1 2008/02/26 15:35:43 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
 // this file contain 3 class
-//   happy_linux_plugin_manage
-//   happy_linux_plugin_test
-//   happy_linux_plugin_test_form
+//   happylinux_plugin_manage
+//   happylinux_plugin_test
+//   happylinux_plugin_test_form
 // 2008-02-17 K.OHWADA
 //=========================================================
 
@@ -17,6 +17,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class PluginTest
 //=========================================================
+
+/**
+ * Class PluginTest
+ * @package XoopsModules\Happylinux
+ */
 class PluginTest
 {
     public $_plugin;
@@ -30,9 +35,12 @@ class PluginTest
     {
         $this->_post    = Post::getInstance();
         $this->_strings = Strings::getInstance();
-        $this->_form    = Plugin_test_form::getInstance();
+        $this->_form    = PluginTestForm::getInstance();
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -43,6 +51,9 @@ class PluginTest
         return $instance;
     }
 
+    /**
+     * @param $class
+     */
     public function set_plugin_class(&$class)
     {
         $this->_plugin = &$class;
@@ -51,11 +62,17 @@ class PluginTest
     //---------------------------------------------------------
     // excute
     //---------------------------------------------------------
+    /**
+     * @return bool
+     */
     public function execute()
     {
         return $this->_execute();
     }
 
+    /**
+     * @return bool
+     */
     public function _execute()
     {
         $plugins   = $this->_post->get_post_text('plugins');
@@ -93,12 +110,12 @@ class PluginTest
 
         echo '<h4> plugins </h4>' . "\n";
         echo '<pre>';
-        echo happy_linux_sanitize($plugins);
+        echo happylinux_sanitize($plugins);
         echo '</pre>';
 
         echo '<h4> input </h4>' . "\n";
         echo '<pre>';
-        echo happy_linux_sanitize_var_export($data);
+        echo happylinux_sanitize_var_export($data);
         echo '</pre>' . "\n";
 
         echo '<h4> execute </h4>' . "\n";
@@ -114,12 +131,17 @@ class PluginTest
 
         echo '<h4> output </h4>' . "\n";
         echo '<pre>';
-        echo happy_linux_sanitize_var_export($ret);
+        echo happylinux_sanitize_var_export($ret);
         echo '</pre>' . "\n";
 
         return true;
     }
 
+    /**
+     * @param $data
+     * @param $plugins
+     * @return mixed
+     */
     public function _plugin_execute($data, $plugins)
     {
         $this->_plugin->add_plugin_line('test', $plugins);

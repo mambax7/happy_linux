@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: plugin.php,v 1.1 2008/02/26 15:35:42 ohwada Exp $
 
@@ -12,6 +12,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class plugin
 //=========================================================
+
+/**
+ * Class Plugin
+ * @package XoopsModules\Happylinux
+ */
 class Plugin
 {
     public $_DIRNAME          = '';
@@ -48,11 +53,14 @@ class Plugin
     //---------------------------------------------------------
     public function __construct()
     {
-        $this->_class_dir = happy_linux_get_singleton('dir');
-        $this->_strings   = happy_linux_get_singleton('strings');
-        $this->_system    = happy_linux_get_singleton('system');
+        $this->_class_dir = Dir::getInstance(); //Utility::getSingleton('dir');
+        $this->_strings   = Strings::getInstance(); //Utility::getSingleton('strings');
+        $this->_system    = System::getInstance(); //Utility::getSingleton('system');
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -66,11 +74,19 @@ class Plugin
     //---------------------------------------------------------
     // set param
     //---------------------------------------------------------
+    /**
+     * @param $dirname
+     */
     public function set_dirname($dirname)
     {
         $this->_DIRNAME = $dirname;
     }
 
+    /**
+     * @param string $dir_plugins
+     * @param string $dir_data
+     * @param string $dir_lang
+     */
     public function set_dir_plugins($dir_plugins = 'plugins', $dir_data = 'data', $dir_lang = 'language')
     {
         $this->_DIR_PLUGINS = 'modules/' . $this->_DIRNAME . '/' . $dir_plugins;
@@ -78,41 +94,65 @@ class Plugin
         $this->set_dir_plugins_lang($dir_lang);
     }
 
+    /**
+     * @param string $dir_data
+     */
     public function set_dir_plugins_data($dir_data = 'data')
     {
         $this->_DIR_PLUGINS_DATA = $this->_DIR_PLUGINS . '/' . $dir_data;
     }
 
+    /**
+     * @param string $dir_lang
+     */
     public function set_dir_plugins_lang($dir_lang = 'language')
     {
         $this->_DIR_PLUGINS_LANG = $this->_DIR_PLUGINS . '/' . $dir_lang . '/' . $this->_system->get_language();
     }
 
+    /**
+     * @param $val
+     */
     public function set_prefix_class($val)
     {
         $this->_PREFIX_CLASS = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_prefix_func_data($val)
     {
         $this->_PREFIX_FUNC_DATA = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_flag_print($val)
     {
         $this->_FLAG_PRINT = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_lang_name($val)
     {
         $this->_LANG_NAME = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_lang_usage($val)
     {
         $this->_LANG_USAGE = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_lang_decription($val)
     {
         $this->_LANG_DESCRIPTION = $val;
@@ -121,6 +161,10 @@ class Plugin
     //---------------------------------------------------------
     // execute
     //---------------------------------------------------------
+    /**
+     * @param $items
+     * @return bool
+     */
     public function _execute($items)
     {
         $this->_item_array = $items;
@@ -168,6 +212,9 @@ class Plugin
         return true;
     }
 
+    /**
+     * @return null
+     */
     public function get_items()
     {
         return $this->_item_array;
@@ -176,6 +223,11 @@ class Plugin
     //---------------------------------------------------------
     // plugin line
     //---------------------------------------------------------
+    /**
+     * @param $name
+     * @param $plugin_line
+     * @return bool
+     */
     public function add_plugin_line($name, $plugin_line)
     {
         $arr = &$this->_parse_plugin_line($plugin_line);
@@ -189,11 +241,18 @@ class Plugin
         return false;
     }
 
+    /**
+     * @param $name
+     */
     public function set_plugin_line_name($name)
     {
         $this->_plugin_line_name = $name;
     }
 
+    /**
+     * @param $name
+     * @return bool|mixed
+     */
     public function &get_cached_plugin_line_array_by_name($name)
     {
         $false = false;
@@ -215,16 +274,26 @@ class Plugin
         }
     }
 
+    /**
+     * @return int
+     */
     public function get_total_plugins()
     {
         return count($this->_class_name_array);
     }
 
+    /**
+     * @return array
+     */
     public function &get_name_list()
     {
         return $this->_class_name_array;
     }
 
+    /**
+     * @param $name
+     * @return bool|mixed|string
+     */
     public function get_cached_description_by_name($name)
     {
         if (isset($this->_description_array[$name])) {
@@ -252,6 +321,10 @@ class Plugin
         return $desc;
     }
 
+    /**
+     * @param $name
+     * @return bool|mixed
+     */
     public function get_cached_usage_by_name($name)
     {
         if (isset($this->_usage_array[$name])) {
@@ -276,6 +349,10 @@ class Plugin
         return $usage;
     }
 
+    /**
+     * @param $name
+     * @return bool|mixed
+     */
     public function &get_cached_class_object_by_name($name)
     {
         $false = false;
@@ -296,6 +373,10 @@ class Plugin
         return $false;
     }
 
+    /**
+     * @param string $name
+     * @return bool
+     */
     public function get_exsample_data($name = 'default')
     {
         $func = $this->_get_func_data_by_name($name);
@@ -314,6 +395,9 @@ class Plugin
         $this->_log_array = [];
     }
 
+    /**
+     * @param $arr
+     */
     public function set_logs($arr)
     {
         if (is_array($arr)) {
@@ -325,6 +409,9 @@ class Plugin
         }
     }
 
+    /**
+     * @return array
+     */
     public function &get_logs()
     {
         return $this->_log_array;
@@ -350,6 +437,10 @@ class Plugin
         }
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     */
     public function &_get_class_obj_by_name($name)
     {
         $file  = $this->_DIR_PLUGINS . '/' . $name . '.php';
@@ -358,7 +449,7 @@ class Plugin
         $flase = false;
 
         if (file_exists(XOOPS_ROOT_PATH . '/' . $file)) {
-            include_once XOOPS_ROOT_PATH . '/' . $file;
+            require_once XOOPS_ROOT_PATH . '/' . $file;
         } else {
             return $false;
         }
@@ -372,13 +463,17 @@ class Plugin
         return $false;
     }
 
+    /**
+     * @param $name
+     * @return bool|string
+     */
     public function _get_lang_description_by_name($name)
     {
         $PLUGIN_DESCRIPTION = '';
         $file               = $this->_DIR_PLUGINS_LANG . '/' . $name . '.php';
 
         if (file_exists(XOOPS_ROOT_PATH . '/' . $file)) {
-            include_once XOOPS_ROOT_PATH . '/' . $file;
+            require_once XOOPS_ROOT_PATH . '/' . $file;
         } else {
             return false;
         }
@@ -387,13 +482,17 @@ class Plugin
         return $PLUGIN_DESCRIPTION;
     }
 
+    /**
+     * @param $name
+     * @return bool|string
+     */
     public function _get_func_data_by_name($name)
     {
         $file = $this->_DIR_PLUGINS_DATA . '/' . $name . '.php';
         $func = $this->_PREFIX_FUNC_DATA . '_' . $name;
 
         if (file_exists(XOOPS_ROOT_PATH . '/' . $file)) {
-            include_once XOOPS_ROOT_PATH . '/' . $file;
+            require_once XOOPS_ROOT_PATH . '/' . $file;
         } else {
             return false;
         }
@@ -405,6 +504,10 @@ class Plugin
         return false;
     }
 
+    /**
+     * @param $name
+     * @param $params
+     */
     public function _print_msg_name_params($name, $params)
     {
         $msg = 'plugin: ' . $name;
@@ -414,6 +517,9 @@ class Plugin
         $this->_print_msg($msg);
     }
 
+    /**
+     * @param $logs
+     */
     public function _print_msg_logs($logs)
     {
         if (is_array($logs) && count($logs)) {
@@ -423,6 +529,9 @@ class Plugin
         }
     }
 
+    /**
+     * @param $msg
+     */
     public function _print_msg($msg)
     {
         if ($this->_FLAG_PRINT) {
@@ -452,6 +561,10 @@ class Plugin
     //         )
     //     )
     //---------------------------------------------------------
+    /**
+     * @param $plugin_line
+     * @return array
+     */
     public function &_parse_plugin_line($plugin_line)
     {
         $ret_arr = [];
@@ -470,6 +583,10 @@ class Plugin
         return $ret_arr;
     }
 
+    /**
+     * @param $plugin
+     * @return array
+     */
     public function &_parse_plugin_line_plugin($plugin)
     {
         $name   = $plugin;
@@ -496,6 +613,10 @@ class Plugin
         return $ret;
     }
 
+    /**
+     * @param $param_list
+     * @return array
+     */
     public function &_parse_plugin_line_param($param_list)
     {
         $arr = [];
@@ -527,6 +648,9 @@ class Plugin
     //---------------------------------------------------------
     // plugin table
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function build_table()
     {
         $text = '<table class="outer" width="100%" cellpadding="4" cellspacing="1">' . "\n";
@@ -555,6 +679,9 @@ class Plugin
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function _get_alternate_class()
     {
         if (0 != $this->_line_count % 2) {

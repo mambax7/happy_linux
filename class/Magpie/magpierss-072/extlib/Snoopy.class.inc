@@ -119,6 +119,10 @@ class Snoopy
         Output:		$this->results	the output text from the fetch
     \*======================================================================*/
 
+    /**
+     * @param $URI
+     * @return bool
+     */
     public function fetch($URI)
     {
         //preg_match("|^([^:]+)://([^:/]+)(:[\d]+)*(.*)|",$URI,$URI_PARTS);
@@ -247,6 +251,10 @@ class Snoopy
         Output:		$match		an array of the links
     \*======================================================================*/
 
+    /**
+     * @param $document
+     * @return mixed
+     */
     public function _striplinks($document)
     {
         preg_match_all(
@@ -284,6 +292,10 @@ class Snoopy
         Output:		$match		an array of the links
     \*======================================================================*/
 
+    /**
+     * @param $document
+     * @return string
+     */
     public function _stripform($document)
     {
         preg_match_all("'<\/?(FORM|INPUT|SELECT|TEXTAREA|(OPTION))[^<>]*>(?(2)(.*(?=<\/?(option|select)[^<>]*>[\r\n]*)|(?=[\r\n]*))|(?=[\r\n]*))'Usi", $document, $elements);
@@ -302,6 +314,10 @@ class Snoopy
         Output:		$text		the resulting text
     \*======================================================================*/
 
+    /**
+     * @param $document
+     * @return string|string[]|null
+     */
     public function _striptext($document)
     {
         // I didn't use preg eval (//e) since that is only available in PHP 4.0.
@@ -326,7 +342,7 @@ class Snoopy
             '',
             '',
             "\\1",
-            "\"",
+            '"',
             '&',
             '<',
             '>',
@@ -350,6 +366,11 @@ class Snoopy
         Output:		$expandedLinks	the expanded links
     \*======================================================================*/
 
+    /**
+     * @param $links
+     * @param $URI
+     * @return string|string[]|null
+     */
     public function _expandlinks($links, $URI)
     {
         preg_match("/^[^\?]+/", $URI, $match);
@@ -385,6 +406,15 @@ class Snoopy
         Output:
     \*======================================================================*/
 
+    /**
+     * @param        $url
+     * @param        $fp
+     * @param        $URI
+     * @param        $http_method
+     * @param string $content_type
+     * @param string $body
+     * @return bool
+     */
     public function _httprequest($url, $fp, $URI, $http_method, $content_type = '', $body = '')
     {
         if ($this->passcookies && $this->_redirectaddr) {
@@ -409,7 +439,7 @@ class Snoopy
         if ($this->use_gzip) {
             // make sure PHP was built with --with-zlib
             // and we can handle gzipp'ed data
-            if (function_exists(gzinflate)) {
+            if (function_exists(gzinflate())) {
                 $headers .= "Accept-encoding: gzip\r\n";
             } else {
                 trigger_error('use_gzip is on, but PHP was built without zlib support.' . '  Requesting file(s) without gzip encoding.', E_USER_NOTICE);
@@ -459,7 +489,7 @@ class Snoopy
 
         // set the read timeout if needed
         if ($this->read_timeout > 0) {
-            socket_set_timeout($fp, $this->read_timeout);
+            stream_set_timeout($fp, $this->read_timeout);
         }
         $this->timed_out = false;
 
@@ -545,7 +575,7 @@ class Snoopy
         // have we hit our frame depth and is there frame src to fetch?
         if (($this->_framedepth < $this->maxframes) && preg_match_all("'<frame\s+.*src[\s]*=[\'\"]?([^\'\"\>]+)'i", $results, $match)) {
             $this->results[] = $results;
-            for ($x = 0; $x < count($match[1]); $x++) {
+            for ($x = 0, $xMax = count($match[1]); $x < $xMax; $x++) {
                 $this->_frameurls[] = $this->_expandlinks($match[1][$x], $URI_PARTS['scheme'] . '://' . $this->host);
             }
         } // have we already fetched framed content?
@@ -568,6 +598,14 @@ class Snoopy
         Output:
     \*======================================================================*/
 
+    /**
+     * @param        $url
+     * @param        $URI
+     * @param        $http_method
+     * @param string $content_type
+     * @param string $body
+     * @return bool
+     */
     public function _httpsrequest($url, $URI, $http_method, $content_type = '', $body = '')
     {
         if ($this->passcookies && $this->_redirectaddr) {
@@ -630,8 +668,8 @@ class Snoopy
             $headers[] = 'Authorization: BASIC ' . base64_encode($this->user . ':' . $this->pass);
         }
 
-        for ($curr_header = 0; $curr_header < count($headers); $curr_header++) {
-            $cmdline_params .= " -H \"" . $headers[$curr_header] . "\"";
+        for ($curr_header = 0, $curr_headerMax = count($headers); $curr_header < $curr_headerMax; $curr_header++) {
+            $cmdline_params .= ' -H "' . $headers[$curr_header] . '"';
         }
 
         if (!empty($body)) {
@@ -642,7 +680,7 @@ class Snoopy
             $cmdline_params .= ' -m ' . $this->read_timeout;
         }
 
-        $headerfile = uniqid(time());
+        $headerfile = uniqid(time(), true);
 
         # accept self-signed certs
         $cmdline_params .= ' -k';
@@ -660,7 +698,7 @@ class Snoopy
         $this->_redirectaddr = false;
         unset($this->headers);
 
-        for ($currentHeader = 0; $currentHeader < count($result_headers); $currentHeader++) {
+        for ($currentHeader = 0, $currentHeaderMax = count($result_headers); $currentHeader < $currentHeaderMax; $currentHeader++) {
             // if a header begins with Location: or URI:, set the redirect
             if (preg_match('/^(Location: |URI: )/i', $result_headers[$currentHeader])) {
                 // get URL portion of the redirect
@@ -698,7 +736,7 @@ class Snoopy
         // have we hit our frame depth and is there frame src to fetch?
         if (($this->_framedepth < $this->maxframes) && preg_match_all("'<frame\s+.*src[\s]*=[\'\"]?([^\'\"\>]+)'i", $results, $match)) {
             $this->results[] = $results;
-            for ($x = 0; $x < count($match[1]); $x++) {
+            for ($x = 0, $xMax = count($match[1]); $x < $xMax; $x++) {
                 $this->_frameurls[] = $this->_expandlinks($match[1][$x], $URI_PARTS['scheme'] . '://' . $this->host);
             }
         } // have we already fetched framed content?
@@ -721,7 +759,7 @@ class Snoopy
 
     public function setcookies()
     {
-        for ($x = 0; $x < count($this->headers); $x++) {
+        for ($x = 0, $xMax = count($this->headers); $x < $xMax; $x++) {
             if (preg_match("/^set-cookie:[\s]+([^=]+)=([^;]+)/i", $this->headers[$x], $match)) {
                 $this->cookies[$match[1]] = $match[2];
             }
@@ -734,10 +772,14 @@ class Snoopy
         Input:		$fp	file pointer
     \*======================================================================*/
 
+    /**
+     * @param $fp
+     * @return bool
+     */
     public function _check_timeout($fp)
     {
         if ($this->read_timeout > 0) {
-            $fp_status = socket_get_status($fp);
+            $fp_status = stream_get_meta_data($fp);
             if ($fp_status['timed_out']) {
                 $this->timed_out = true;
                 return true;
@@ -752,6 +794,10 @@ class Snoopy
         Input:		$fp	file pointer
     \*======================================================================*/
 
+    /**
+     * @param $fp
+     * @return bool
+     */
     public function _connect(&$fp)
     {
         if (!empty($this->proxy_host) && !empty($this->proxy_port)) {
@@ -792,6 +838,10 @@ class Snoopy
         Input:		$fp	file pointer
     \*======================================================================*/
 
+    /**
+     * @param $fp
+     * @return bool
+     */
     public function _disconnect($fp)
     {
         return fclose($fp);
@@ -805,10 +855,15 @@ class Snoopy
         Output:		post body
     \*======================================================================*/
 
+    /**
+     * @param $formvars
+     * @param $formfiles
+     * @return string|void
+     */
     public function _prepare_post_body($formvars, $formfiles)
     {
-        settype($formvars, 'array');
-        settype($formfiles, 'array');
+        $formvars  = (array)$formvars;
+        $formfiles = (array)$formfiles;
 
         if (0 == count($formvars) && 0 == count($formfiles)) {
             return;
@@ -829,7 +884,7 @@ class Snoopy
                 break;
 
             case 'multipart/form-data':
-                $this->_mime_boundary = 'Snoopy' . md5(uniqid(microtime()));
+                $this->_mime_boundary = 'Snoopy' . md5(uniqid(microtime(), true));
 
                 reset($formvars);
                 while (list($key, $val) = each($formvars)) {
@@ -848,7 +903,7 @@ class Snoopy
 
                 reset($formfiles);
                 while (list($field_name, $file_names) = each($formfiles)) {
-                    settype($file_names, 'array');
+                    $file_names = (array)$file_names;
                     while (list(, $file_name) = each($file_names)) {
                         if (!is_readable($file_name)) {
                             continue;

@@ -13,7 +13,11 @@
 // class locate_de
 // Germany (DE)
 //=========================================================
-class locate_de extends Happy_linux\LocateBase
+
+/**
+ * Class locate_de
+ */
+class locate_de extends LocateBase
 {
     //---------------------------------------------------------
     // constructor

@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: xoops_database.php,v 1.3 2007/09/23 08:26:54 ohwada Exp $
 
@@ -22,6 +22,11 @@ namespace XoopsModules\Happy_linux;
 // this class work for PHP 4
 // in PHP 5, occur stric error
 //=========================================================
+
+/**
+ * Class Database
+ * @package XoopsModules\Happylinux
+ */
 class Database
 {
     //---------------------------------------------------------
@@ -32,12 +37,15 @@ class Database
         // dummy
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\DatabaseMysql
+     */
     public static function getInstance()
     {
         static $instance;
         if (!isset($instance)) {
             // Assigning the return value of new by reference is deprecated
-            $instance = new Happy_linux\DatabaseMysql();
+            $instance = new DatabaseMysql();
             if (!$instance->connect()) {
                 echo "<font color='red'>Unable to connect to database.</font><br>\n";
                 die();
@@ -50,6 +58,10 @@ class Database
     //---------------------------------------------------------
     // function
     //---------------------------------------------------------
+    /**
+     * @param string $tablename
+     * @return string
+     */
     public function prefix($tablename = '')
     {
         if ('' != $tablename) {

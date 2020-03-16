@@ -35,6 +35,9 @@ echo '</pre>';
 # just some quick and ugly php to generate html
 #
 #
+/**
+ * @param $rss
+ */
 function slashbox($rss)
 {
     echo '<table cellpadding=2 cellspacing=0><tr>';

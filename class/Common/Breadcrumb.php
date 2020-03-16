@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux\Common;
+namespace XoopsModules\Happylinux\Common;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -26,10 +26,10 @@ namespace XoopsModules\Happy_linux\Common;
  * $breadcrumb->addLink( 'bread 3', 'index3.php' );
  * echo $breadcrumb->render();
  */
-use XoopsModules\Happy_linux;
-use XoopsModules\Happy_linux\Common;
+use XoopsModules\Happylinux;
+use XoopsModules\Happylinux\Common;
 
-defined('XOOPS_ROOT_PATH') || exit('XOOPS Root Path not defined');
+defined('XOOPS_ROOT_PATH') || die('XOOPS Root Path not defined');
 
 /**
  * Class Breadcrumb

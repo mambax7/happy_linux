@@ -5,11 +5,14 @@
 // WebLinks Module
 // 2006-09-20 K.OHWADA
 //================================================================
+/**
+ * @param null $title
+ */
 function dev_header($title = null)
 {
     global $xoopsConfig, $xoopsModule;
 
-    $MOD_NAME = 'happy_linux';
+    $MOD_NAME = 'happylinux';
 
     header('Content-Type:text/html; charset=' . _CHARSET);
 
@@ -20,7 +23,7 @@ function dev_header($title = null)
     echo "<!DOCTYPE html PUBLIC '//W3C//DTD XHTML 1.0 Transitional//EN' 'https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>\n";
     echo '<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="' . _LANGCODE . '" lang="' . _LANGCODE . '">' . "\n";
     echo "<head>\n";
-    echo '<meta http-equiv="content-type" content="text/html; charset=' . _CHARSET . '" />' . "\n";
+    echo '<meta http-equiv="content-type" content="text/html; charset=' . _CHARSET . '">' . "\n";
     echo '<title>' . $title . "</title>\n";
     echo "</head><body>\n";
     echo "<br>\n";
@@ -36,6 +39,9 @@ function dev_footer()
     exit();
 }
 
+/**
+ * @param $msg
+ */
 function dev_print_error($msg)
 {
     echo '<span style="color: #ff0000;">' . $msg . "</span><br>\n";

@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: date.php,v 1.4 2009/01/04 13:20:50 ohwada Exp $
 
@@ -18,6 +18,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class time
 //=========================================================
+
+/**
+ * Class Date
+ * @package XoopsModules\Happylinux
+ */
 class Date
 {
     public $_time_now;
@@ -37,6 +42,9 @@ class Date
         $this->_offset_orginal = (int)$this->get_timezone_offset();
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -50,6 +58,11 @@ class Date
     //---------------------------------------------------------
     // public
     //---------------------------------------------------------
+    /**
+     * @param $time
+     * @param $days
+     * @return bool
+     */
     public function judge_newday($time, $days)
     {
         if (($days > 0)
@@ -60,6 +73,11 @@ class Date
         return false;
     }
 
+    /**
+     * @param $time
+     * @param $hours
+     * @return bool
+     */
     public function judge_today($time, $hours)
     {
         if (($hours > 0)
@@ -70,6 +88,9 @@ class Date
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function set_default_timezone_by_xoops_default_timezone()
     {
         return false;
@@ -89,6 +110,10 @@ class Date
         return false;
     }
 
+    /**
+     * @param $hour
+     * @return bool|false|mixed|string
+     */
     public function get_timezone_name_by_hour($hour)
     {
         // first try
@@ -112,6 +137,10 @@ class Date
         return false;
     }
 
+    /**
+     * @param $hour
+     * @return bool|string
+     */
     public function get_timezone_name_by_hour_list($hour)
     {
         $hour_10   = 10 * $hour;
@@ -129,6 +158,9 @@ class Date
         return false;
     }
 
+    /**
+     * @return string[]
+     */
     public function &get_timezone_hour_list()
     {
         $arr = [
@@ -177,11 +209,19 @@ class Date
         return $arr;
     }
 
+    /**
+     * @param $hour
+     * @return bool|false|string
+     */
     public function get_timezone_name_by_abbr($hour)
     {
         return $this->get_timezone_name_from_abbr('', $this->hour_to_sec($hour), 0);
     }
 
+    /**
+     * @param $hour
+     * @return bool|mixed
+     */
     public function get_timezone_name_by_abbreviations_list($hour)
     {
         $sec = $this->hour_to_sec($hour);
@@ -202,6 +242,10 @@ class Date
         return false;
     }
 
+    /**
+     * @param $hour
+     * @return int
+     */
     public function hour_to_sec($hour)
     {
         $sec = 3600 * $hour;
@@ -209,6 +253,10 @@ class Date
         return (int)$sec;
     }
 
+    /**
+     * @param $day
+     * @return int
+     */
     public function day_to_sec($day)
     {
         $sec = 86400 * $day;
@@ -222,11 +270,19 @@ class Date
     //
     // https://www.php.net/manual/ja/function.date.php
     //---------------------------------------------------------
+    /**
+     * @param $time
+     * @return false|string
+     */
     public function date_rfc822_user($time)
     {
         return $this->date_rfc822($time);
     }
 
+    /**
+     * @param $time
+     * @return false|string
+     */
     public function date_rfc822($time)
     {
         return date('r', $time);
@@ -241,11 +297,19 @@ class Date
     //
     // PHP 5 support iso8601 format: date('c')
     //---------------------------------------------------------
+    /**
+     * @param $time
+     * @return string
+     */
     public function date_iso8601_user($time)
     {
         return $this->date_iso8601($time);
     }
 
+    /**
+     * @param $time
+     * @return string
+     */
     public function date_iso8601($time)
     {
         $tzd  = date('O', $time);
@@ -255,6 +319,10 @@ class Date
         return $date;
     }
 
+    /**
+     * @param null $time
+     * @return false|string
+     */
     public function date_year_user($time = null)
     {
         if (empty($time)) {
@@ -268,6 +336,10 @@ class Date
     //---------------------------------------------------------
     // PHP 5.1 support this function
     //---------------------------------------------------------
+    /**
+     * @param $tz
+     * @return bool
+     */
     public function set_default_timezone($tz)
     {
         if (function_exists('date_default_timezone_set')) {
@@ -277,6 +349,9 @@ class Date
         return false;
     }
 
+    /**
+     * @return bool|string
+     */
     public function get_default_timezone()
     {
         $tz = false;
@@ -287,6 +362,9 @@ class Date
         return $tz;
     }
 
+    /**
+     * @return array|bool|false
+     */
     public function &get_timezone_abbreviations_list()
     {
         $arr = false;
@@ -297,6 +375,9 @@ class Date
         return $arr;
     }
 
+    /**
+     * @return array|bool|false
+     */
     public function &get_timezone_identifiers_list()
     {
         $arr = false;
@@ -307,6 +388,12 @@ class Date
         return $arr;
     }
 
+    /**
+     * @param      $abbr
+     * @param null $offset
+     * @param null $isdst
+     * @return bool|false|string
+     */
     public function get_timezone_name_from_abbr($abbr, $offset = null, $isdst = null)
     {
         $tz = false;
@@ -323,6 +410,10 @@ class Date
         return $tz;
     }
 
+    /**
+     * @param int $time
+     * @return false|string
+     */
     public function get_timezone_offset($time = 0)
     {
         if ($time > 0) {
@@ -335,6 +426,9 @@ class Date
     //---------------------------------------------------------
     // XOOPS variable
     //---------------------------------------------------------
+    /**
+     * @return mixed
+     */
     public function get_xoops_server_tz_hour()
     {
         global $xoopsConfig;
@@ -342,6 +436,9 @@ class Date
         return $xoopsConfig['server_TZ'];
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xoops_default_tz_hour()
     {
         global $xoopsConfig;
@@ -349,6 +446,9 @@ class Date
         return $xoopsConfig['default_TZ'];
     }
 
+    /**
+     * @return array|int|mixed|null
+     */
     public function get_xoops_user_timezone_offset()
     {
         global $xoopsUser;
@@ -360,12 +460,25 @@ class Date
     }
 
     // user local to unix time
+
+    /**
+     * @param        $time
+     * @param string $timeoffset
+     * @return float|int
+     */
     public function get_user_timestamp($time, $timeoffset = '')
     {
         return xoops_getUserTimestamp($time, $timeoffset);
     }
 
     // same as formatTimestamp
+
+    /**
+     * @param        $time
+     * @param        $format
+     * @param string $timeoffset
+     * @return false|string
+     */
     public function format_timestamp($time, $format, $timeoffset = '')
     {
         return date($format, $this->get_user_timestamp($time, $timeoffset));

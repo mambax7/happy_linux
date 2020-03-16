@@ -8,7 +8,7 @@ Author: Kenichi OHWADA
 adopted MagpieRSS v0.72
 https://magpierss.sourceforge.net/
 
-modified for happy_linux
+modified for happylinux
 - RSS enclosure tag
 - ATOM 1.0 category tag
 

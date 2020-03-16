@@ -14,6 +14,6 @@
 // and rename this file to "charset.php"
 //---------------------------------------------------------
 
-define('HAPPY_LINUX_MB_LANGUAGE', 'uni');
-define('HAPPY_LINUX_MB_ENCODING', 'UTF-8');
-define('HAPPY_LINUX_MYSQL_CHARSET', 'utf8');
+define('HAPPYLINUX_MB_LANGUAGE', 'uni');
+define('HAPPYLINUX_MB_ENCODING', 'UTF-8');
+define('HAPPYLINUX_MYSQL_CHARSET', 'utf8');

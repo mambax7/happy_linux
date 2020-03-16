@@ -1,22 +1,27 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: build_xml.php,v 1.1 2008/02/26 15:35:42 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
 // this file include 4 classes
-//   happy_linux_xml_base
-//   happy_linux_xml_single_object
-//   happy_linux_xml_iterate_object
-//   happy_linux_build_xml
+//   happylinux_xml_base
+//   happylinux_xml_single_object
+//   happylinux_xml_iterate_object
+//   happylinux_build_xml
 // 2008-02-17 K.OHWADA
 //=========================================================
 
 //=========================================================
 // class xml_single_object
 //=========================================================
+
+/**
+ * Class XmlSingleObject
+ * @package XoopsModules\Happylinux
+ */
 class XmlSingleObject extends XmlBase
 {
     public $_vars    = [];
@@ -38,6 +43,9 @@ class XmlSingleObject extends XmlBase
         $this->_vars = [];
     }
 
+    /**
+     * @param $val
+     */
     public function set_vars($val)
     {
         if (is_array($val) && count($val)) {
@@ -45,16 +53,27 @@ class XmlSingleObject extends XmlBase
         }
     }
 
+    /**
+     * @return array
+     */
     public function get_vars()
     {
         return $this->_vars;
     }
 
+    /**
+     * @param $key
+     * @param $val
+     */
     public function set($key, $val)
     {
         $this->_vars[$key] = $val;
     }
 
+    /**
+     * @param $key
+     * @return bool|mixed
+     */
     public function get($key)
     {
         $ret = false;
@@ -65,11 +84,17 @@ class XmlSingleObject extends XmlBase
         return $ret;
     }
 
+    /**
+     * @param $val
+     */
     public function set_tpl_key($val)
     {
         $this->_TPL_KEY = $val;
     }
 
+    /**
+     * @return string
+     */
     public function get_tpl_key()
     {
         return $this->_TPL_KEY;
@@ -87,11 +112,19 @@ class XmlSingleObject extends XmlBase
         }
     }
 
+    /**
+     * @param $arr
+     * @return array
+     */
     public function _build($arr)
     {
         return $this->_build_text($arr);
     }
 
+    /**
+     * @param $arr
+     * @return array
+     */
     public function _build_text($arr)
     {
         $ret = [];
@@ -116,6 +149,10 @@ class XmlSingleObject extends XmlBase
         }
     }
 
+    /**
+     * @param $arr
+     * @return array
+     */
     public function _to_utf8($arr)
     {
         $ret = [];
@@ -131,21 +168,37 @@ class XmlSingleObject extends XmlBase
     //---------------------------------------------------------
     // assign
     //---------------------------------------------------------
+    /**
+     * @param $tpl
+     */
     public function assign($tpl)
     {
         $this->_assign($tpl, $this->_TPL_KEY, $this->get_vars());
     }
 
+    /**
+     * @param $tpl
+     */
     public function append($tpl)
     {
         $this->_append($tpl, $this->_TPL_KEY, $this->get_vars());
     }
 
+    /**
+     * @param $tpl
+     * @param $key
+     * @param $val
+     */
     public function _assign($tpl, $key, $val)
     {
         $tpl->assign($key, $val);
     }
 
+    /**
+     * @param $tpl
+     * @param $key
+     * @param $val
+     */
     public function _append($tpl, $key, $val)
     {
         $tpl->append($key, $val);

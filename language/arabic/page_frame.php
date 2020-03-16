@@ -10,7 +10,7 @@
 //=========================================================
 
 // page_frame
-define('_HAPPY_LINUX_THERE_ARE', 'МФло <b>%s</b> слА ');
-define('_HAPPY_LINUX_NO_RECORD', 'Аг йФло слАгй');
-define('_HAPPY_LINUX_ID_ASC', 'йяйМх йугзоМ');
-define('_HAPPY_LINUX_ID_DESC', 'йяйМх йДгрАМ');
+define('_HAPPYLINUX_THERE_ARE', 'О©╫О©╫О©╫О©╫ <b>%s</b> О©╫О©╫О©╫ ');
+define('_HAPPYLINUX_NO_RECORD', 'О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫');
+define('_HAPPYLINUX_ID_ASC', 'О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫');
+define('_HAPPYLINUX_ID_DESC', 'О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫');

@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: mail_send.php,v 1.1 2010/11/07 14:59:23 ohwada Exp $
 
@@ -12,11 +12,16 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class mail_send
 //=========================================================
+
+/**
+ * Class MailSend
+ * @package XoopsModules\Happylinux
+ */
 class MailSend extends Error
 {
     public $_post;
 
-    public $_LANG_ERR_NO_TO_EMAIL = _HAPPY_LINUX_MAIL_NO_TO_EMAIL;
+    public $_LANG_ERR_NO_TO_EMAIL = _HAPPYLINUX_MAIL_NO_TO_EMAIL;
 
     //---------------------------------------------------------
     // constructor
@@ -28,6 +33,9 @@ class MailSend extends Error
         $this->_post = Post::getInstance();
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\MailSend|static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -41,6 +49,10 @@ class MailSend extends Error
     //---------------------------------------------------------
     // send email
     //---------------------------------------------------------
+    /**
+     * @param bool $debug
+     * @return bool
+     */
     public function send_email_by_post($debug = false)
     {
         $param = [
@@ -55,6 +67,10 @@ class MailSend extends Error
         return $this->send($param);
     }
 
+    /**
+     * @param $param
+     * @return bool
+     */
     public function send($param)
     {
         $to_emails  = isset($param['to_emails']) ? $param['to_emails'] : null;
@@ -75,7 +91,7 @@ class MailSend extends Error
         $this->clear_errors_logs();
 
         // mail start
-        $mailer = &getMailer();
+        $mailer = getMailer();
         $mailer->reset();
         $mailer->setFromName($from_name);
         $mailer->setFromEmail($from_email);
@@ -110,6 +126,9 @@ class MailSend extends Error
     //---------------------------------------------------------
     // get system param
     //---------------------------------------------------------
+    /**
+     * @return mixed
+     */
     public function get_xoops_sitename()
     {
         global $xoopsConfig;
@@ -117,6 +136,9 @@ class MailSend extends Error
         return $xoopsConfig['sitename'];
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xoops_adminmail()
     {
         global $xoopsConfig;

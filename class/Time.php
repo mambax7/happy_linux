@@ -1,12 +1,12 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: time.php,v 1.4 2007/11/15 11:08:43 ohwada Exp $
 
 // 2007-11-11 K.OHWADA
 // build_elapse_time()
-// happy_linux_get_execution_time()
+// happylinux_get_execution_time()
 
 //=========================================================
 // Happy Linux Framework Module
@@ -16,6 +16,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class time
 //=========================================================
+
+/**
+ * Class Time
+ * @package XoopsModules\Happylinux
+ */
 class Time
 {
     public $_flag_mem     = false;
@@ -26,6 +31,10 @@ class Time
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
+    /**
+     * Time constructor.
+     * @param bool $flag_mem
+     */
     public function __construct($flag_mem = false)
     {
         $this->_flag_mem = $flag_mem;
@@ -35,11 +44,15 @@ class Time
         $this->_time_current = $time;
     }
 
+    /**
+     * @param bool $flag_mem
+     * @return \XoopsModules\Happylinux\Time
+     */
     public static function getInstance($flag_mem = false)
     {
         static $instance;
         if (!isset($instance)) {
-            $instance = new self($flag_mem);
+            $instance = new static($flag_mem);
         }
 
         return $instance;
@@ -48,6 +61,10 @@ class Time
     //-------------------------------------------------------------------
     // measure time
     //-------------------------------------------------------------------
+    /**
+     * @param null $msg
+     * @param bool $format
+     */
     public function print_lap_time($msg = null, $format = true)
     {
         list($count, $time_now, $time_elapse, $time_lap) = $this->get_lap_time();
@@ -64,6 +81,9 @@ class Time
         echo "$count:\t $mem\t $time_elapse\t $time_lap\t $msg <br>\n";
     }
 
+    /**
+     * @return string
+     */
     public function build_elapse_time()
     {
         $text = 'execution time : ' . $this->get_elapse_time() . ' sec';
@@ -71,6 +91,9 @@ class Time
         return $text;
     }
 
+    /**
+     * @return array
+     */
     public function get_lap_time()
     {
         $time_now            = $this->get_microtime();
@@ -83,6 +106,10 @@ class Time
         return $ret;
     }
 
+    /**
+     * @param bool $format
+     * @return float|int|string
+     */
     public function get_elapse_time($format = true)
     {
         $time_elapse = $this->get_microtime() - $this->_time_start;
@@ -93,6 +120,9 @@ class Time
         return $time_elapse;
     }
 
+    /**
+     * @return float
+     */
     public function get_microtime()
     {
         list($usec, $sec) = explode(' ', microtime());
@@ -104,6 +134,16 @@ class Time
     //-------------------------------------------------------------------
     // time utility
     //-------------------------------------------------------------------
+    /**
+     * @param        $time
+     * @param string $y
+     * @param string $m
+     * @param string $d
+     * @param string $h
+     * @param string $i
+     * @param string $s
+     * @return array
+     */
     public function &split_time_ymd($time, $y = 'Y', $m = 'n', $d = 'd', $h = 'H', $i = 'i', $s = 's')
     {
         $year  = date($y, $time);
@@ -124,9 +164,12 @@ class Time
 //=========================================================
 // function
 //=========================================================
-function happy_linux_get_execution_time()
-{
-    $time = Time::getInstance();
-
-    return $time->get_elapse_time();
-}
+/**
+ * @return float|int|string
+ */
+//function happylinux_get_execution_time()
+//{
+//    $time = Time::getInstance();
+//
+//    return $time->get_elapse_time();
+//}

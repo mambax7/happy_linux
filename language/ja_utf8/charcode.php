@@ -7,7 +7,7 @@
 // Japanese UTF-8
 //=========================================================
 
-define('_HAPPY_LINUX_JA_KUTEN', '。');
-define('_HAPPY_LINUX_JA_DOKUTEN', '、');
-define('_HAPPY_LINUX_JA_PERIOD', '．');
-define('_HAPPY_LINUX_JA_COMMA', '，');
+define('_HAPPYLINUX_JA_KUTEN', '。');
+define('_HAPPYLINUX_JA_DOKUTEN', '、');
+define('_HAPPYLINUX_JA_PERIOD', '．');
+define('_HAPPYLINUX_JA_COMMA', '，');

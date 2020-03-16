@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: bin_file.php,v 1.1 2007/06/17 03:20:40 ohwada Exp $
 
@@ -13,11 +13,16 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 
 // === class begin ===
-if (!class_exists('happy_linux_bin_file')) {
+if (!class_exists('happylinux_bin_file')) {
     //=========================================================
     // class bin_file
     // this class is used by command line
     //=========================================================
+
+    /**
+     * Class BinFile
+     * @package XoopsModules\Happylinux
+     */
     class BinFile extends File
     {
         //---------------------------------------------------------
@@ -28,6 +33,9 @@ if (!class_exists('happy_linux_bin_file')) {
             parent::__construct();
         }
 
+        /**
+         * @return \XoopsModules\Happylinux\BinFile|\XoopsModules\Happylinux\File|static
+         */
         public static function getInstance()
         {
             static $instance;
@@ -41,6 +49,11 @@ if (!class_exists('happy_linux_bin_file')) {
         //---------------------------------------------------------
         // bin
         //---------------------------------------------------------
+        /**
+         * @param        $filename
+         * @param string $mode
+         * @return bool
+         */
         public function open_bin($filename, $mode = 'w')
         {
             if ($this->_flag_write) {
@@ -50,6 +63,9 @@ if (!class_exists('happy_linux_bin_file')) {
             return true;    // no action
         }
 
+        /**
+         * @param $flag_chmod
+         */
         public function close_bin($flag_chmod)
         {
             if ($this->_flag_write) {
@@ -57,6 +73,9 @@ if (!class_exists('happy_linux_bin_file')) {
             }
         }
 
+        /**
+         * @param $data
+         */
         public function write_bin($data)
         {
             if ($this->_flag_write) {

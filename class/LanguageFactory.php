@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: language.php,v 1.6 2007/09/23 05:07:25 ohwada Exp $
 
@@ -12,7 +12,7 @@ namespace XoopsModules\Happy_linux;
 // change get_local_instance() get_instance_by_language() etc
 
 // 2006-10-05 K.OHWADA
-// add happy_linux_language_factory
+// add happylinux_language_factory
 // move get_google_url() to locate.php
 
 // 2006-09-10 K.OHWADA
@@ -28,6 +28,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class LanguageFactory
 //=========================================================
+
+/**
+ * Class LanguageFactory
+ * @package XoopsModules\Happylinux
+ */
 class LanguageFactory extends LanguageBase
 {
     //---------------------------------------------------------
@@ -38,6 +43,10 @@ class LanguageFactory extends LanguageBase
         parent::__construct();
     }
 
+    /**
+     * @param null $lang
+     * @return bool|mixed|\XoopsModules\Happylinux\happylinux_language_base
+     */
     public static function getInstance($lang = null)
     {
         static $instance;
@@ -51,6 +60,10 @@ class LanguageFactory extends LanguageBase
         return $instance;
     }
 
+    /**
+     * @param null $lang
+     * @return bool|mixed|\XoopsModules\Happylinux\happylinux_language_base
+     */
     public function &get_local_instance($lang = null)
     {
         // BUG: singleton done not work correctly
@@ -65,7 +78,13 @@ class LanguageFactory extends LanguageBase
     //---------------------------------------------------------
     // get_instance
     //---------------------------------------------------------
-    public function &get_instance($language = null, $prefix = 'happy_linux', $dirname = 'happy_linux')
+    /**
+     * @param null   $language
+     * @param string $prefix
+     * @param string $dirname
+     * @return bool|mixed|\XoopsModules\Happylinux\happylinux_language_base
+     */
+    public function &get_instance($language = null, $prefix = 'happylinux', $dirname = 'happylinux')
     {
         if ($language) {
             $instance = &$this->get_instance_by_language($language, $prefix, $dirname);
@@ -80,12 +99,18 @@ class LanguageFactory extends LanguageBase
         }
 
         // Assigning the return value of new by reference is deprecated
-        $instance = new happy_linux_language_base();
+        $instance = new LanguageBase();
 
         return $instance;
     }
 
-    public function &get_instance_by_language($language, $prefix = 'happy_linux', $dirname = 'happy_linux')
+    /**
+     * @param        $language
+     * @param string $prefix
+     * @param string $dirname
+     * @return bool|mixed
+     */
+    public function &get_instance_by_language($language, $prefix = 'happylinux', $dirname = 'happylinux')
     {
         $instance = false;
         $file     = XOOPS_ROOT_PATH . '/modules/' . $dirname . '/language/' . $language . '/language_local.php';
@@ -98,7 +123,7 @@ class LanguageFactory extends LanguageBase
             $instance = new $class();
         } // if NOT include file yet
         elseif (file_exists($file)) {
-            include_once $file;
+            require_once $file;
             if (class_exists($class)) {
                 // Assigning the return value of new by reference is deprecated
                 $instance = new $class();

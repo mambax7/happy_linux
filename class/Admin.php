@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: admin.php,v 1.2 2012/03/17 13:09:23 ohwada Exp $
 
@@ -12,7 +12,7 @@ namespace XoopsModules\Happy_linux;
 
 // 2007-09-30 K.OHWADA
 // print_modules()
-// BUG: typo happy_liunx -> happy_linux
+// BUG: typo happy_liunx -> happylinux
 
 // 2007-09-30 K.OHWADA
 // typo cobe -> cube
@@ -25,12 +25,17 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class admin
 //=========================================================
+
+/**
+ * Class Admin
+ * @package XoopsModules\Happylinux
+ */
 class Admin
 {
     public $_TIME = 10;    // sec
 
-    // BUG: typo happy_liunx -> happy_linux
-    public $_FILE_PRELOAD = 'modules/happy_linux/preload/admin.php';
+    // BUG: typo happy_liunx -> happylinux
+    public $_FILE_PRELOAD = 'modules/happylinux/preload/admin.php';
 
     //---------------------------------------------------------
     // constructor
@@ -40,6 +45,9 @@ class Admin
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -115,7 +123,7 @@ class Admin
                 break;
         }
 
-        $this->_print_title(_HAPPY_LINUX_AM_TEMPLATE);
+        $this->_print_title(_HAPPYLINUX_AM_TEMPLATE);
         $this->_print_judge($ver);
         $this->_print_jump($this->_TIME);
 
@@ -149,7 +157,7 @@ class Admin
                 break;
         }
 
-        $this->_print_title(_HAPPY_LINUX_AM_BLOCK);
+        $this->_print_title(_HAPPYLINUX_AM_BLOCK);
         $this->_print_judge($ver);
         $this->_print_jump($this->_TIME);
 
@@ -162,6 +170,9 @@ class Admin
         $this->_print_js($url, $this->_TIME * 1000);
     }
 
+    /**
+     * @param bool $flag
+     */
     public function print_modules($flag = false)
     {
         $dirname  = $this->_get_dirname();
@@ -184,7 +195,7 @@ class Admin
                 break;
         }
 
-        $this->_print_title(_HAPPY_LINUX_AM_MODULE);
+        $this->_print_title(_HAPPYLINUX_AM_MODULE);
         $this->_print_judge($ver);
         $this->_print_jump($this->_TIME);
 
@@ -193,7 +204,7 @@ class Admin
         echo '<li><a href="' . $url_21 . '">XOOPS Cube 2.1</a></li>' . "\n";
         echo "</ul><br>\n";
 
-        echo '<b>' . _HAPPY_LINUX_AM_MODULE_UPDATE . "</b><br>\n";
+        echo '<b>' . _HAPPYLINUX_AM_MODULE_UPDATE . "</b><br>\n";
         echo "<ul>\n";
         echo '<li><a href="' . $url_u_20 . '">XOOPS 2.0 / 2.2</a></li>' . "\n";
         echo '<li><a href="' . $url_u_21 . '">XOOPS Cube 2.1</a></li>' . "\n";
@@ -205,47 +216,64 @@ class Admin
     //---------------------------------------------------------
     // private
     //---------------------------------------------------------
+    /**
+     * @param $title
+     */
     public function _print_title($title)
     {
         echo '<h4>' . $title . "</h4>\n";
     }
 
+    /**
+     * @param $ver
+     */
     public function _print_judge($ver)
     {
         $name = $this->_get_name($ver);
-        echo sprintf(_HAPPY_LINUX_AM_JUDGE, $name);
+        echo sprintf(_HAPPYLINUX_AM_JUDGE, $name);
         echo "<br><br>\n";
     }
 
+    /**
+     * @param $time
+     */
     public function _print_jump($time)
     {
-        echo sprintf(_HAPPY_LINUX_AM_JUMP, $time);
+        echo sprintf(_HAPPYLINUX_AM_JUMP, $time);
         echo "<br>\n";
-        echo _HAPPY_LINUX_AM_JUMP_IFNO1;
+        echo _HAPPYLINUX_AM_JUMP_IFNO1;
         echo "<br>\n";
-        echo sprintf(_HAPPY_LINUX_AM_JUMP_IFNO2, $time);
+        echo sprintf(_HAPPYLINUX_AM_JUMP_IFNO2, $time);
         echo "<br><br>\n";
     }
 
+    /**
+     * @param $url
+     * @param $time
+     */
     public function _print_js($url, $time)
     {
         ?>
         <script type="text/javascript">
             //<![CDATA[
-            function happy_linux_init() {
-                setTimeout('happy_linux_jump()', <?php echo $time; ?>);
+            function happylinux_init() {
+                setTimeout('happylinux_jump()', <?php echo $time; ?>);
             }
 
-            function happy_linux_jump() {
+            function happylinux_jump() {
                 window.location = '<?php echo $url; ?>';
             }
 
-            window.onload = happy_linux_init;
+            window.onload = happylinux_init;
             //]]>
         </script>
         <?php
     }
 
+    /**
+     * @param $ver
+     * @return string
+     */
     public function _get_name($ver)
     {
         switch ($ver) {
@@ -266,21 +294,27 @@ class Admin
         return $name;
     }
 
+    /**
+     * @return string
+     */
     public function _preload_file()
     {
         if (file_exists(XOOPS_ROOT_PATH . '/' . $this->_FILE_PRELOAD)) {
-            include_once XOOPS_ROOT_PATH . '/' . $this->_FILE_PRELOAD;
+            require_once XOOPS_ROOT_PATH . '/' . $this->_FILE_PRELOAD;
         }
 
-        if (defined('HAPPY_LINUX_ADMIN_TIME')) {
-            $this->_TIME = HAPPY_LINUX_ADMIN_TIME;
+        if (defined('HAPPYLINUX_ADMIN_TIME')) {
+            $this->_TIME = HAPPYLINUX_ADMIN_TIME;
         }
 
-        if (defined('HAPPY_LINUX_ADMIN_MAJOR_VERSION')) {
-            return HAPPY_LINUX_ADMIN_MAJOR_VERSION;
+        if (defined('HAPPYLINUX_ADMIN_MAJOR_VERSION')) {
+            return HAPPYLINUX_ADMIN_MAJOR_VERSION;
         }
     }
 
+    /**
+     * @return string
+     */
     public function _judge_version()
     {
         if ($this->_is_version_xc_21() && $this->_is_active_legacy_module()) {
@@ -296,6 +330,9 @@ class Admin
         return $ver;
     }
 
+    /**
+     * @return bool
+     */
     public function _is_version_xc_21()
     {
         // XOOPS Cube Legacy 2.1
@@ -310,6 +347,9 @@ class Admin
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function _is_version_xoops_22()
     {
         // XOOPS 2.2
@@ -320,6 +360,9 @@ class Admin
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function _is_version_xoops_20()
     {
         // XOOPS 2.0
@@ -330,6 +373,9 @@ class Admin
         return false;
     }
 
+    /**
+     * @return array|int|mixed|null
+     */
     public function _get_mid()
     {
         global $xoopsModule;
@@ -337,6 +383,9 @@ class Admin
         return $xoopsModule->getVar('mid');
     }
 
+    /**
+     * @return array|int|mixed|null
+     */
     public function _get_dirname()
     {
         global $xoopsModule;
@@ -344,6 +393,9 @@ class Admin
         return $xoopsModule->getVar('dirname');
     }
 
+    /**
+     * @return mixed
+     */
     public function _get_template_set()
     {
         global $xoopsConfig;
@@ -351,16 +403,23 @@ class Admin
         return $xoopsConfig['template_set'];
     }
 
+    /**
+     * @return bool
+     */
     public function _is_active_legacy_module()
     {
         return $this->_is_active_module_by_dirname('legacy');
     }
 
+    /**
+     * @param $dirname
+     * @return bool
+     */
     public function _is_active_module_by_dirname($dirname)
     {
         $act            = false;
-        $module_handler = xoops_getHandler('module');
-        $module         = $module_handler->getByDirname($dirname);
+        $moduleHandler = xoops_getHandler('module');
+        $module         = $moduleHandler->getByDirname($dirname);
         if (is_object($module)) {
             $act = $module->getVar('isactive');
         }
@@ -368,12 +427,15 @@ class Admin
         return $act;
     }
 
+    /**
+     * @return bool
+     */
     public function _method_exists_xoops_block_get_by_module()
     {
-        include_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
+        require_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
 
         // Assigning the return value of new by reference is deprecated
-        $block = new XoopsBlock();
+        $block = new \XoopsBlock();
 
         if (method_exists($block, 'getByModule')) {
             return true;

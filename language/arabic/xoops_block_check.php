@@ -6,7 +6,7 @@
 // 2007-10-10 K.OHWADA
 //=========================================================
 
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_CHECK', 'ÝÍÕ ÈáæßÇÊ ÞæÇÚÏ Xoops');
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE', 'ÍÐÝ ÈáæßÇÊ ÞæÇÚÏ Xoops');
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE_DESC', 'äÝøÐ ÅÐÇ Êã ÇßÊÔÇÝ ÎØÃ');
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE_NEXT', 'æÈÚÏåÇ ÊÍÏíË ÇáÈÑäÇãÌ');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_CHECK', 'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Xoops');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_REMOVE', 'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Xoops');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_REMOVE_DESC', 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_REMOVE_NEXT', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');

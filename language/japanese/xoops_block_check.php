@@ -4,10 +4,10 @@
 //=========================================================
 // Happy Linux Framework Module
 // 2007-10-10 K.OHWADA
-// Í­Êþ¼«±óÊýÍè
+// Í­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //=========================================================
 
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_CHECK', 'XOOPS ¥Ö¥í¥Ã¥¯¡¦¥Æ¡¼¥Ö¥ë¤Î¸¡ºº');
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE', 'XOOPS ¥Ö¥í¥Ã¥¯¡¦¥Æ¡¼¥Ö¥ë¤Îºï½ü');
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE_DESC', '¥¨¥é¡¼¤¬¸¡½Ð¤µ¤ì¤¿¤È¤­¤Ë¡¢¼Â¹Ô¤¹¤ë');
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE_NEXT', '¼¡¤Ë¡¢¥â¥¸¥å¡¼¥ë¡¦¥¢¥Ã¥×¥Ç¡¼¥È¤ò¼Â¹Ô¤¹¤ë');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_CHECK', 'XOOPS ï¿½Ö¥ï¿½Ã¥ï¿½ï¿½ï¿½ï¿½Æ¡ï¿½ï¿½Ö¥ï¿½Î¸ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_REMOVE', 'XOOPS ï¿½Ö¥ï¿½Ã¥ï¿½ï¿½ï¿½ï¿½Æ¡ï¿½ï¿½Ö¥ï¿½Îºï¿½ï¿½');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_REMOVE_DESC', 'ï¿½ï¿½ï¿½é¡¼ï¿½ï¿½ï¿½ï¿½ï¿½Ð¤ï¿½ï¿½ì¤¿ï¿½È¤ï¿½ï¿½Ë¡ï¿½ï¿½Â¹Ô¤ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_REMOVE_NEXT', 'ï¿½ï¿½ï¿½Ë¡ï¿½ï¿½â¥¸ï¿½å¡¼ï¿½ë¡¦ï¿½ï¿½ï¿½Ã¥×¥Ç¡ï¿½ï¿½È¤ï¿½Â¹Ô¤ï¿½ï¿½ï¿½');

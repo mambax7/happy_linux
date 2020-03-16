@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: basic_object.php,v 1.3 2012/04/10 02:29:32 ohwada Exp $
 
@@ -8,7 +8,7 @@ namespace XoopsModules\Happy_linux;
 // debug_print_backtrace()
 
 // 2007-06-01 K.OHWADA
-// divid from basic_handler
+// divid from basicHandler
 
 //=========================================================
 // Happy Linux Framework Module
@@ -18,6 +18,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class basic
 //=========================================================
+
+/**
+ * Class BasicObject
+ * @package XoopsModules\Happylinux
+ */
 class BasicObject extends Strings
 {
     public $_vars = [];
@@ -40,16 +45,29 @@ class BasicObject extends Strings
         $this->_vars = [];
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function setVar($key, $value)
     {
         $this->set($key, $value);
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function setVarArray($key, $value)
     {
         $this->set($key, serialize($value));
     }
 
+    /**
+     * @param        $key
+     * @param string $format
+     * @return array|bool|mixed|string|string[]|null
+     */
     public function getVar($key, $format = 'n')
     {
         $val = $this->get($key);
@@ -60,6 +78,10 @@ class BasicObject extends Strings
         return $val;
     }
 
+    /**
+     * @param $key
+     * @return mixed
+     */
     public function &getVarArray($key)
     {
         $val = unserialize($this->get($key));
@@ -67,6 +89,10 @@ class BasicObject extends Strings
         return $val;
     }
 
+    /**
+     * @param string $format
+     * @return array
+     */
     public function &getVarAll($format = 'n')
     {
         $ret = [];
@@ -77,11 +103,19 @@ class BasicObject extends Strings
         return $ret;
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function set($key, $value)
     {
         $this->_vars[$key] = $value;
     }
 
+    /**
+     * @param $key
+     * @return bool|mixed
+     */
     public function &get($key)
     {
         $ret = false;
@@ -97,11 +131,17 @@ class BasicObject extends Strings
         return $ret;
     }
 
+    /**
+     * @param $values
+     */
     public function set_vars($values)
     {
         $this->_vars = $values;
     }
 
+    /**
+     * @return array|bool
+     */
     public function &get_vars()
     {
         $ret = false;
@@ -112,11 +152,18 @@ class BasicObject extends Strings
         return $ret;
     }
 
+    /**
+     * @param $values
+     */
     public function merge_vars($values)
     {
         $this->_vars = array_merge($this->_vars, $values);
     }
 
+    /**
+     * @param $key
+     * @return bool
+     */
     public function is_set($key)
     {
         if (isset($this->_vars[$key])) {
@@ -126,6 +173,10 @@ class BasicObject extends Strings
         return false;
     }
 
+    /**
+     * @param $key
+     * @return bool
+     */
     public function is_array($key)
     {
         if (isset($this->_vars[$key]) && is_array($this->_vars[$key])) {

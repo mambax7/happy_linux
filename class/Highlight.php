@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: highlight.php,v 1.7 2007/11/16 11:59:37 ohwada Exp $
 
@@ -30,22 +30,27 @@ namespace XoopsModules\Happy_linux;
 // original: keyhighlighter
 // https://www.phpclasses.org/browse/package/1792.html
 //
-// porting from smartsection <https://smartfactory.ca/>
+// porting from smartsection <https://smartfactory.ca>
 // https://smartfactory.ca/modules/newbb/viewtopic.php?topic_id=1211
 //---------------------------------------------------------
 
 //=========================================================
 // class highlight
 //=========================================================
+
+/**
+ * Class Highlight
+ * @package XoopsModules\Happylinux
+ */
 class Highlight
 {
     // keyword
     public $_pattern_array;
-    public $_replace_callback = 'happy_linux_highlighter_by_style';
+    public $_replace_callback = 'happylinux_highlighter_by_style';
 
     // background-color: light yellow
     public $_style = 'font-weight: bolder; background-color: #ffff80; ';
-    public $_class = 'happy_linux_highlight';
+    public $_class = 'happylinux_highlight';
 
     public $_flag_trim            = true;
     public $_flag_sanitize        = true;
@@ -63,6 +68,9 @@ class Highlight
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -76,6 +84,12 @@ class Highlight
     //---------------------------------------------------------
     // function
     //---------------------------------------------------------
+    /**
+     * @param      $str
+     * @param      $keywords
+     * @param bool $flag_singlewords
+     * @return string
+     */
     public function build_highlight_keywords($str, $keywords, $flag_singlewords = true)
     {
         if ($keywords) {
@@ -99,6 +113,11 @@ class Highlight
         return $str;
     }
 
+    /**
+     * @param $str
+     * @param $keyword_array
+     * @return string
+     */
     public function build_highlight_keyword_array($str, $keyword_array)
     {
         $ret = $str;
@@ -125,6 +144,10 @@ class Highlight
         return $ret;
     }
 
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function _sanitize_keyword($str)
     {
         if ($this->_flag_trim) {
@@ -146,6 +169,10 @@ class Highlight
         return $str;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function _replace_content($str)
     {
         $str = '>' . $str . '<';
@@ -155,6 +182,10 @@ class Highlight
         return $str;
     }
 
+    /**
+     * @param $matches
+     * @return bool|mixed|string|string[]|null
+     */
     public function _replace_with_callback($matches)
     {
         $replacement = '<span class="' . $this->_class . '">\\0</span>';
@@ -178,46 +209,73 @@ class Highlight
     //---------------------------------------------------------
     // set parameter
     //---------------------------------------------------------
+    /**
+     * @param $val
+     */
     public function set_replace_callback($val)
     {
         $this->_replace_callback = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_flag_sanitize($val)
     {
         $this->_flag_sanitize = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_flag_trim($val)
     {
         $this->_flag_trim = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_flag_remove_control_code($val)
     {
         $this->_flag_remove_control_code = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_flag_remove_not_word($val)
     {
         $this->_flag_remove_not_word = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_style($val)
     {
         $this->_style = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_class($val)
     {
         $this->_class = $val;
     }
 
+    /**
+     * @return string
+     */
     public function get_style()
     {
         return $this->_style;
     }
 
+    /**
+     * @return string
+     */
     public function get_class()
     {
         return $this->_class;
@@ -230,9 +288,13 @@ class Highlight
 // function
 //=========================================================
 //---------------------------------------------------------
-// porting from smartsection <https://smartfactory.ca/>
+// porting from smartsection <https://smartfactory.ca>
 //---------------------------------------------------------
-function happy_linux_highlighter($matches)
+/**
+ * @param $matches
+ * @return bool|string
+ */
+function happylinux_highlighter($matches)
 {
     // background-color: light yellow
     $STYLE = 'font-weight: bolder; background-color: #ffff80; ';
@@ -244,7 +306,11 @@ function happy_linux_highlighter($matches)
     return $ret;
 }
 
-function happy_linux_highlighter_by_style($matches)
+/**
+ * @param $matches
+ * @return bool|string
+ */
+function happylinux_highlighter_by_style($matches)
 {
     $highlight = Highlight::getInstance();
     $style     = $highlight->get_style();
@@ -256,7 +322,11 @@ function happy_linux_highlighter_by_style($matches)
     return $ret;
 }
 
-function happy_linux_highlighter_by_class($matches)
+/**
+ * @param $matches
+ * @return bool|string
+ */
+function happylinux_highlighter_by_class($matches)
 {
     $highlight = Highlight::getInstance();
     $class     = $highlight->get_class();

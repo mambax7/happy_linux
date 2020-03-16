@@ -6,7 +6,10 @@
 // 2007-11-01 K.OHWADA
 //=========================================================
 
-function happy_linux_build_memory_usage_mb()
+/**
+ * @return bool|string
+ */
+function happylinux_build_memory_usage_mb()
 {
     if (function_exists('memory_get_usage')) {
         $usage = sprintf('%6.3f', memory_get_usage() / 1000000);
@@ -17,7 +20,10 @@ function happy_linux_build_memory_usage_mb()
     return false;
 }
 
-function happy_linux_get_memory_usage_mb()
+/**
+ * @return bool|string
+ */
+function happylinux_get_memory_usage_mb()
 {
     if (function_exists('memory_get_usage')) {
         $usage = sprintf('%6.3f', memory_get_usage() / 1000000);
@@ -28,7 +34,10 @@ function happy_linux_get_memory_usage_mb()
     return false;
 }
 
-function happy_linux_memory_get_usage()
+/**
+ * @return bool|int
+ */
+function happylinux_memory_get_usage()
 {
     if (function_exists('memory_get_usage')) {
         return memory_get_usage();
@@ -37,7 +46,10 @@ function happy_linux_memory_get_usage()
     return false;
 }
 
-function happy_linux_memory_get_peak_usage()
+/**
+ * @return bool|int
+ */
+function happylinux_memory_get_peak_usage()
 {
     if (function_exists('memory_get_peak_usage')) {
         return memory_get_peak_usage();

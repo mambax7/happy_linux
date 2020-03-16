@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: extract_word.php,v 1.5 2007/10/25 15:28:26 ohwada Exp $
 
@@ -12,6 +12,10 @@ namespace XoopsModules\Happy_linux;
 // 2007-06-01 K.OHWADA
 //=========================================================
 
+/**
+ * Class ExtractWord
+ * @package XoopsModules\Happylinux
+ */
 class ExtractWord
 {
     public $_kakasi;
@@ -34,9 +38,12 @@ class ExtractWord
     public function __construct()
     {
         // PHP 5.2: Non-static method
-        $this->_kakasi = happy_linux_get_singleton('kakasi');
+        $this->_kakasi = Kakasi::getInstance(); //getSingleton('kakasi');
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -50,6 +57,10 @@ class ExtractWord
     //---------------------------------------------------------
     // public
     //---------------------------------------------------------
+    /**
+     * @param $str
+     * @return array
+     */
     public function &execute($str)
     {
         $text = $this->_pre_extract($str);
@@ -67,26 +78,41 @@ class ExtractWord
         return $ret;
     }
 
+    /**
+     * @param $val
+     */
     public function set_extract_mode($val)
     {
         $this->_extract_mode = (int)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_kakasi_path($val)
     {
         $this->_kakasi->set_kakasi_path($val);
     }
 
+    /**
+     * @param $val
+     */
     public function set_kakasi_mode($val)
     {
         $this->_kakasi->set_mode_execute($val);
     }
 
+    /**
+     * @param $val
+     */
     public function set_kakasi_dir_work($val)
     {
         $this->_kakasi->set_dir_work($val);
     }
 
+    /**
+     * @return mixed
+     */
     public function get_kakasi_dir_work()
     {
         return $this->_kakasi->get_dir_work();
@@ -95,6 +121,10 @@ class ExtractWord
     //---------------------------------------------------------
     // private
     //---------------------------------------------------------
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function _pre_extract($str)
     {
         if ($this->_flag_strip_tags) {
@@ -112,7 +142,7 @@ class ExtractWord
         }
 
         if ($this->_flag_space_zen_to_han) {
-            $text = happy_linux_convert_kana($text, 's');
+            $text = happylinux_convert_kana($text, 's');
         }
 
         // remove continous space
@@ -121,6 +151,10 @@ class ExtractWord
         return $text;
     }
 
+    /**
+     * @param $str
+     * @return array
+     */
     public function &_post_extract($str)
     {
         $arr  = [];
@@ -161,6 +195,10 @@ class ExtractWord
     // \x41-\x5A A-Z
     // \x61-\x7A a-z
     //---------------------------------------------------------
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function _strip_symbol($str)
     {
         $text = $str;
@@ -178,16 +216,25 @@ class ExtractWord
     //---------------------------------------------------------
     // set and get property
     //---------------------------------------------------------
+    /**
+     * @param $val
+     */
     public function set_min_char_length($val)
     {
         $this->_min_char_length = (int)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_flag_join_prev($val)
     {
         $this->_flag_join_prev = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_join_glue($val)
     {
         $this->_join_glue = $val;

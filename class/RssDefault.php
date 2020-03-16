@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: rss_default.php,v 1.1 2007/11/14 11:30:03 ohwada Exp $
 
@@ -12,6 +12,11 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // class builder base
 //=========================================================
+
+/**
+ * Class RssDefault
+ * @package XoopsModules\Happylinux
+ */
 class RssDefault
 {
     // https://www.rssboard.org/rss-specification#ltimagegtSubelementOfLtchannelgt
@@ -32,6 +37,9 @@ class RssDefault
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -45,26 +53,41 @@ class RssDefault
     //---------------------------------------------------------
     // site information
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function get_default_site_url()
     {
         return XOOPS_URL . '/';
     }
 
+    /**
+     * @return mixed
+     */
     public function get_default_site_name()
     {
         return $this->get_xoops_sitename();
     }
 
+    /**
+     * @return mixed
+     */
     public function get_default_site_desc()
     {
         return $this->get_xoops_slogan();
     }
 
+    /**
+     * @return bool|mixed
+     */
     public function get_default_site_tag()
     {
         return $this->parse_site_tag($this->get_default_site_url());
     }
 
+    /**
+     * @return string
+     */
     public function get_default_site_link_self()
     {
         $val = 'https://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
@@ -72,6 +95,9 @@ class RssDefault
         return $val;
     }
 
+    /**
+     * @return mixed|string
+     */
     public function get_default_site_author_name()
     {
         $name = $this->get_xoops_uname_from_id($this->_SITE_AUTHOR_NAME_UID);
@@ -82,16 +108,26 @@ class RssDefault
         return $name;
     }
 
+    /**
+     * @return mixed
+     */
     public function get_default_site_author_email()
     {
         return $this->get_xoops_adminmail();
     }
 
+    /**
+     * @return string
+     */
     public function get_default_site_author_uri()
     {
         return '';
     }
 
+    /**
+     * @param $url
+     * @return bool|mixed
+     */
     public function parse_site_tag($url)
     {
         $parse = parse_url($url);
@@ -105,21 +141,34 @@ class RssDefault
     //---------------------------------------------------------
     // site image
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function get_default_site_image_logo()
     {
         return $this->_SITE_IMAGE_LOGO;
     }
 
+    /**
+     * @return int
+     */
     public function get_site_image_width_max()
     {
         return $this->_SITE_IMAGE_WIDTH_MAX;
     }
 
+    /**
+     * @return int
+     */
     public function get_site_image_height_max()
     {
         return $this->_SITE_IMAGE_HEIGHT_MAX;
     }
 
+    /**
+     * @param $logo
+     * @return array
+     */
     public function get_site_image_size($logo)
     {
         $url    = '';
@@ -142,6 +191,10 @@ class RssDefault
         return [$url, $width, $height];
     }
 
+    /**
+     * @param $width
+     * @return int
+     */
     public function check_site_image_width($width)
     {
         $ret = 0;
@@ -152,6 +205,10 @@ class RssDefault
         return $ret;
     }
 
+    /**
+     * @param $height
+     * @return int
+     */
     public function check_site_image_height($height)
     {
         $ret = 0;
@@ -165,6 +222,9 @@ class RssDefault
     //---------------------------------------------------------
     // xoops param
     //---------------------------------------------------------
+    /**
+     * @return mixed
+     */
     public function get_xoops_sitename()
     {
         global $xoopsConfig;
@@ -172,6 +232,9 @@ class RssDefault
         return $xoopsConfig['sitename'];
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xoops_slogan()
     {
         global $xoopsConfig;
@@ -179,6 +242,9 @@ class RssDefault
         return $xoopsConfig['slogan'];
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xoops_adminmail()
     {
         global $xoopsConfig;
@@ -186,9 +252,14 @@ class RssDefault
         return $xoopsConfig['adminmail'];
     }
 
+    /**
+     * @param     $uid
+     * @param int $usereal
+     * @return mixed
+     */
     public function get_xoops_uname_from_id($uid, $usereal = 0)
     {
-        return XoopsUser::getUnameFromId($uid, $usereal);
+        return \XoopsUser::getUnameFromId($uid, $usereal);
     }
 
     // --- class end ---

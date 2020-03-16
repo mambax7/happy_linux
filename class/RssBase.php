@@ -1,12 +1,12 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: rss_base_object.php,v 1.6 2008/01/31 14:07:05 ohwada Exp $
 
 // 2008-01-30 K.OHWADA
 // typo: create_item_singlel
-// happy_linux_rss_basic -> happy_linux_rss_base_basic
+// happylinux_rss_basic -> happylinux_rss_base_basic
 
 // 2007-10-10 K.OHWADA
 // set_is_japanese()
@@ -14,14 +14,14 @@ namespace XoopsModules\Happy_linux;
 // 2007-09-20 K.OHWADA
 // PHP5.2
 // Assigning the return value of new by reference is deprecated
-// Declaration of happy_linux_rss_base_basic::get() should be compatible with that of happy_linux_basic::get()
+// Declaration of happylinux_rss_base_basic::get() should be compatible with that of happylinux_basic::get()
 
 // 2007-08-01 K.OHWADA
 // w3cdtf.php
 
 // 2007-06-01 K.OHWADA
 // divid from rss_object.php
-// move get_unixtime_rfc822 from rss_utility.php
+// move get_unixtime_rfc822 from RssUtility.php
 
 // 2007-05-12 K.OHWADA
 // this is new file
@@ -30,17 +30,22 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 // Happy Linux Framework Module
 // this file contains 3 classes
-//   happy_linux_rss_base
-//   happy_linux_rss_base_basic
-//   happy_linux_rss_base_items
+//   happylinux_rss_base
+//   happylinux_rss_base_basic
+//   happylinux_rss_base_items
 // 2007-05-12 K.OHWADA
 //=========================================================
 
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/include/w3cdtf.php';
+require_once XOOPS_ROOT_PATH . '/modules/happylinux/include/w3cdtf.php';
 
 //=========================================================
 // class RssBase
 //=========================================================
+
+/**
+ * Class RssBase
+ * @package XoopsModules\Happylinux
+ */
 class RssBase
 {
     // object
@@ -62,6 +67,9 @@ class RssBase
     //---------------------------------------------------------
     // set & get vars
     //---------------------------------------------------------
+    /**
+     * @param $arr
+     */
     public function set_vars($arr)
     {
         if (isset($arr['control'])) {
@@ -85,6 +93,9 @@ class RssBase
         }
     }
 
+    /**
+     * @param $arr
+     */
     public function set_control($arr)
     {
         if (is_array($arr) && (count($arr) > 0)) {
@@ -93,6 +104,9 @@ class RssBase
         }
     }
 
+    /**
+     * @param $arr
+     */
     public function set_channel($arr)
     {
         if (is_array($arr) && (count($arr) > 0)) {
@@ -101,6 +115,9 @@ class RssBase
         }
     }
 
+    /**
+     * @param $arr
+     */
     public function set_image($arr)
     {
         if (is_array($arr) && (count($arr) > 0)) {
@@ -109,6 +126,9 @@ class RssBase
         }
     }
 
+    /**
+     * @param $arr
+     */
     public function set_textinput($arr)
     {
         if (is_array($arr) && (count($arr) > 0)) {
@@ -117,6 +137,9 @@ class RssBase
         }
     }
 
+    /**
+     * @param $items
+     */
     public function set_items($items)
     {
         if (is_array($items) && (count($items) > 0)) {
@@ -125,6 +148,9 @@ class RssBase
         }
     }
 
+    /**
+     * @param $arr
+     */
     public function set_single_item($arr)
     {
         if (is_array($arr) && (count($arr) > 0)) {
@@ -133,6 +159,9 @@ class RssBase
         }
     }
 
+    /**
+     * @return array
+     */
     public function &get_vars()
     {
         $arr = [
@@ -146,6 +175,9 @@ class RssBase
         return $arr;
     }
 
+    /**
+     * @return bool
+     */
     public function &get_control()
     {
         $ret = false;
@@ -156,6 +188,9 @@ class RssBase
         return $ret;
     }
 
+    /**
+     * @return bool
+     */
     public function &get_channel()
     {
         $ret = false;
@@ -166,6 +201,9 @@ class RssBase
         return $ret;
     }
 
+    /**
+     * @return bool
+     */
     public function &get_image()
     {
         $ret = false;
@@ -176,6 +214,9 @@ class RssBase
         return $ret;
     }
 
+    /**
+     * @return bool
+     */
     public function &get_textinput()
     {
         $ret = false;
@@ -186,6 +227,9 @@ class RssBase
         return $ret;
     }
 
+    /**
+     * @return bool
+     */
     public function &get_items()
     {
         $ret = false;
@@ -196,6 +240,9 @@ class RssBase
         return $ret;
     }
 
+    /**
+     * @return bool
+     */
     public function &get_single_item()
     {
         $ret = false;
@@ -206,6 +253,10 @@ class RssBase
         return $ret;
     }
 
+    /**
+     * @param $key
+     * @return bool|mixed
+     */
     public function &get_channel_by_key($key)
     {
         $arr = $this->get_channel();
@@ -222,50 +273,68 @@ class RssBase
     // create
     // overload this function
     //---------------------------------------------------------
+    /**
+     * @return \XoopsModules\Happylinux\BasicObject
+     */
     public function &create_control()
     {
         // Assigning the return value of new by reference is deprecated
-        $obj = new happy_linux_basic();
+        $obj = new BasicObject();
 
         return $obj;
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\RssBaseBasic
+     */
     public function &create_channel()
     {
         // Assigning the return value of new by reference is deprecated
-        $obj = new Happy_linux\RssBaseBasic();
+        $obj = new RssBaseBasic();
 
         return $obj;
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\RssBaseBasic
+     */
     public function &create_image()
     {
         // Assigning the return value of new by reference is deprecated
-        $obj = new Happy_linux\RssBaseBasic();
+        $obj = new RssBaseBasic();
 
         return $obj;
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\RssBaseBasic
+     */
     public function &create_textinput()
     {
         // Assigning the return value of new by reference is deprecated
-        $obj = new Happy_linux\RssBaseBasic();
+        $obj = new RssBaseBasic();
 
         return $obj;
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\RssBaseBasic
+     */
     public function &create_items()
     {
         // Assigning the return value of new by reference is deprecated
-        $obj = new Happy_linux\RssBaseBasic();
+        $obj = new RssBaseBasic();
 
         return $obj;
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\RssBaseBasic
+     */
     public function &create_single_item()
     {
         // Assigning the return value of new by reference is deprecated
-        $obj = new Happy_linux\RssBaseBasic();
+        $obj = new RssBaseBasic();
 
         return $obj;
     }

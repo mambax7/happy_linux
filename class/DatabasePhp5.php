@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: xoops_database_php5.php,v 1.1 2007/09/23 08:27:34 ohwada Exp $
 
@@ -18,6 +18,11 @@ namespace XoopsModules\Happy_linux;
 // substitute for class XOOPS Database
 // this class work only for PHP 5
 //=========================================================
+
+/**
+ * Class DatabasePhp5
+ * @package XoopsModules\Happylinux
+ */
 class DatabasePhp5
 {
     private static $_singleton = null;
@@ -30,10 +35,13 @@ class DatabasePhp5
         // dummy
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\DatabaseMysql|null
+     */
     public static function getInstance()
     {
-        if (null == self::$_singleton) {
-            $singleton = new Happy_linux\DatabaseMysql();
+        if (null === self::$_singleton) {
+            $singleton = new DatabaseMysql();
             if (!$singleton->connect()) {
                 echo "<font color='red'>Unable to connect to database.</font><br>\n";
                 die();
@@ -47,6 +55,10 @@ class DatabasePhp5
     //---------------------------------------------------------
     // function
     //---------------------------------------------------------
+    /**
+     * @param string $tablename
+     * @return string
+     */
     public function prefix($tablename = '')
     {
         if ('' != $tablename) {

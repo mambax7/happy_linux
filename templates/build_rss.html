@@ -41,7 +41,7 @@
         <language><{$channel_language}></language>
         <{/if}>
         <{if $channel_atom_link != ""}>
-        <atom:link href="<{$channel_atom_link}>" rel="self" type="application/rss+xml"/>
+        <atom:link href="<{$channel_atom_link}>" rel="self" type="application/rss+xml">
         <{/if}>
         <{if $image_url != ""}>
         <image>
@@ -73,9 +73,9 @@
             <{/if}>
             <{if $item.enclosure_url != ""}>
             <{if ($item.enclosure_type != "") &&($item.enclosure_length != "") }>
-            <enclosure url="<{$item.enclosure_url}>" type="<{$item.enclosure_type}>" length="<{$item.enclosure_length}>"/>
+            <enclosure url="<{$item.enclosure_url}>" type="<{$item.enclosure_type}>" length="<{$item.enclosure_length}>">
             <{else}>
-            <enclosure url="<{$item.enclosure_url}>"/>
+            <enclosure url="<{$item.enclosure_url}>">
             <{/if}>
             <{/if}>
             <{* === content === *}>
@@ -120,16 +120,16 @@
                 <media:credit><{$item.media_credit}></media:credit>
                 <{/if}>
                 <{if $item.media_content_url != ""}>
-                <media:content url="<{$item.media_content_url}>" height="<{$item.media_content_height}>" width="<{$item.media_content_width}>" type="<{$item.media_content_type}>" medium="image"/>
+                <media:content url="<{$item.media_content_url}>" height="<{$item.media_content_height}>" width="<{$item.media_content_width}>" type="<{$item.media_content_type}>" medium="image">
                 <{/if}>
                 <{if $item.media_thumbnail_url != ""}>
-                <media:thumbnail url="<{$item.media_thumbnail_url}>" height="<{$item.media_thumbnail_height}>" width="<{$item.media_thumbnail_width}>"/>
+                <media:thumbnail url="<{$item.media_thumbnail_url}>" height="<{$item.media_thumbnail_height}>" width="<{$item.media_thumbnail_width}>">
                 <{/if}>
                 <{if $item.media_thumbnail_medium_url != ""}>
-                <media:thumbnail url="<{$item.media_thumbnail_medium_url}>" height="<{$item.media_thumbnail_medium_height}>" width="<{$item.media_thumbnail_medium_width}>"/>
+                <media:thumbnail url="<{$item.media_thumbnail_medium_url}>" height="<{$item.media_thumbnail_medium_height}>" width="<{$item.media_thumbnail_medium_width}>">
                 <{/if}>
                 <{if $item.media_thumbnail_large_url != ""}>
-                <media:thumbnail url="<{$item.media_thumbnail_large_url}>" height="<{$item.media_thumbnail_large_height}>" width="<{$item.media_thumbnail_large_width}>"/>
+                <media:thumbnail url="<{$item.media_thumbnail_large_url}>" height="<{$item.media_thumbnail_large_height}>" width="<{$item.media_thumbnail_large_width}>">
                 <{/if}>
                 <{if $item.media_group != ""}>
             </media:group>

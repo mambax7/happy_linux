@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: remote_file.php,v 1.5 2008/02/05 00:42:12 ohwada Exp $
 
@@ -30,19 +30,26 @@ namespace XoopsModules\Happy_linux;
 //---------------------------------------------------------
 // define constant
 //---------------------------------------------------------
-define('HAPPY_LINUX_REMOTE_CODE_EMPTY_URL', 11);
-define('HAPPY_LINUX_REMOTE_CODE_NOT_FOPEN', 12);
-define('HAPPY_LINUX_REMOTE_CODE_NOT_FCLOSE', 13);
-define('HAPPY_LINUX_REMOTE_CODE_NOT_FWRITE', 14);
-define('HAPPY_LINUX_REMOTE_CODE_NO_RESULT', 15);
+define('HAPPYLINUX_REMOTE_CODE_EMPTY_URL', 11);
+define('HAPPYLINUX_REMOTE_CODE_NOT_FOPEN', 12);
+define('HAPPYLINUX_REMOTE_CODE_NOT_FCLOSE', 13);
+define('HAPPYLINUX_REMOTE_CODE_NOT_FWRITE', 14);
+define('HAPPYLINUX_REMOTE_CODE_NO_RESULT', 15);
 
-define('HAPPY_LINUX_SNOPPY_CODE_NOT_FETCH', 17);
-define('HAPPY_LINUX_SNOPPY_CODE_NO_RESULT', 18);
+define('HAPPYLINUX_SNOPPY_CODE_NOT_FETCH', 17);
+define('HAPPYLINUX_SNOPPY_CODE_NO_RESULT', 18);
 
 //=========================================================
 // class RemoteFile
 // use class snoopy
 //=========================================================
+
+require_once XOOPS_ROOT_PATH . '/class/snoopy.php';
+
+/**
+ * Class RemoteFile
+ * @package XoopsModules\Happylinux
+ */
 class RemoteFile extends Error
 {
     // class instance
@@ -63,7 +70,7 @@ class RemoteFile extends Error
         parent::__construct();
 
         // class instance
-        $this->_snoopy = new Snoopy();
+        $this->_snoopy = new \Snoopy();
 
         // allow_url_fopen
         if (ini_get('allow_url_fopen')) {
@@ -73,6 +80,9 @@ class RemoteFile extends Error
         }
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\RemoteFile|static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -86,6 +96,9 @@ class RemoteFile extends Error
     //---------------------------------------------------------
     // init
     //---------------------------------------------------------
+    /**
+     * @param $mode
+     */
     public function set_remote_mode($mode)
     {
         $this->_remote_mode = (int)$mode;
@@ -94,13 +107,17 @@ class RemoteFile extends Error
     //---------------------------------------------------------
     // check_url
     //---------------------------------------------------------
+    /**
+     * @param $url
+     * @return bool
+     */
     public function check_url($url)
     {
         $this->_clear_errors();
 
         if (empty($url)) {
-            $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_EMPTY_URL);
-            $this->_set_errors('happy_linux_remote_file: remote url is empty');
+            $this->_set_error_code(HAPPYLINUX_REMOTE_CODE_EMPTY_URL);
+            $this->_set_errors('happylinux_remote_file: remote url is empty');
 
             return false;
         }
@@ -118,6 +135,10 @@ class RemoteFile extends Error
         return $ret;
     }
 
+    /**
+     * @param $url
+     * @return bool
+     */
     public function _check_url_local($url)
     {
         if ($this->_fopen($url, 'r')) {
@@ -132,13 +153,17 @@ class RemoteFile extends Error
     //---------------------------------------------------------
     // read_file
     //---------------------------------------------------------
+    /**
+     * @param $url
+     * @return bool|string
+     */
     public function read_file($url)
     {
         $this->_clear_errors();
 
         if (empty($url)) {
-            $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_EMPTY_URL);
-            $this->_set_errors('happy_linux_remote_file: remote url is empty');
+            $this->_set_error_code(HAPPYLINUX_REMOTE_CODE_EMPTY_URL);
+            $this->_set_errors('happylinux_remote_file: remote url is empty');
 
             return false;
         }
@@ -159,6 +184,10 @@ class RemoteFile extends Error
     //---------------------------------------------------------
     // read & write file
     //---------------------------------------------------------
+    /**
+     * @param $url
+     * @return bool|string
+     */
     public function read_file_local($url)
     {
         $fp = $this->_fopen($url, 'r');
@@ -170,8 +199,8 @@ class RemoteFile extends Error
         $this->_fclose();
 
         if (!$content) {
-            $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_NO_RESULT);
-            $this->_set_errors('happy_linux_remote_file: remote data is empty:');
+            $this->_set_error_code(HAPPYLINUX_REMOTE_CODE_NO_RESULT);
+            $this->_set_errors('happylinux_remote_file: remote data is empty:');
             $this->_set_errors("url = $url");
 
             return false;
@@ -180,6 +209,11 @@ class RemoteFile extends Error
         return $content;
     }
 
+    /**
+     * @param $filename
+     * @param $data
+     * @return bool
+     */
     public function write_file_local($filename, $data)
     {
         $fp = $this->_fopen($filename, 'w');
@@ -199,14 +233,19 @@ class RemoteFile extends Error
     //---------------------------------------------------------
     // file handler
     //---------------------------------------------------------
+    /**
+     * @param $url
+     * @param $mode
+     * @return bool|false|resource
+     */
     public function _fopen($url, $mode)
     {
         $this->_fp = false;
         $fp        = fopen($url, $mode);
 
         if (!$fp) {
-            $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_NOT_FOPEN);
-            $this->_set_errors('happy_linux_remote_file: cannot open url:');
+            $this->_set_error_code(HAPPYLINUX_REMOTE_CODE_NOT_FOPEN);
+            $this->_set_errors('happylinux_remote_file: cannot open url:');
             $this->_set_errors("url = $url");
 
             return false;
@@ -217,6 +256,9 @@ class RemoteFile extends Error
         return $fp;
     }
 
+    /**
+     * @return bool
+     */
     public function _fclose()
     {
         if (!$this->_fp) {
@@ -226,12 +268,15 @@ class RemoteFile extends Error
         if (fclose($this->_fp)) {
             return true;
         }
-        $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_NOT_FCLOSE);
-        $this->_set_errors('happy_linux_remote_file: cannot close url');
+        $this->_set_error_code(HAPPYLINUX_REMOTE_CODE_NOT_FCLOSE);
+        $this->_set_errors('happylinux_remote_file: cannot close url');
 
         return false;
     }
 
+    /**
+     * @return bool|string
+     */
     public function _fread()
     {
         if (!$this->_fp) {
@@ -251,13 +296,17 @@ class RemoteFile extends Error
         return $content;
     }
 
+    /**
+     * @param $data
+     * @return bool
+     */
     public function _fwrite($data)
     {
         if (fwrite($this->_fp, $data)) {
             return true;
         }
-        $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_NOT_FWRITE);
-        $this->_set_errors('happy_linux_remote_file: cannot write to remote file');
+        $this->_set_error_code(HAPPYLINUX_REMOTE_CODE_NOT_FWRITE);
+        $this->_set_errors('happylinux_remote_file: cannot write to remote file');
 
         return false;
     }
@@ -265,6 +314,12 @@ class RemoteFile extends Error
     //=========================================================
     // use class spoopy
     //=========================================================
+    /**
+     * @param        $host
+     * @param string $port
+     * @param string $user
+     * @param string $pass
+     */
     public function set_snoopy_proxy($host, $port = '8080', $user = '', $pass = '')
     {
         $this->set_remote_mode(1);  // use snoopy
@@ -280,6 +335,9 @@ class RemoteFile extends Error
         }
     }
 
+    /**
+     * @param $time
+     */
     public function set_snoopy_timeout_connect($time)
     {
         if ((int)$time > 0) {
@@ -287,6 +345,9 @@ class RemoteFile extends Error
         }
     }
 
+    /**
+     * @param $time
+     */
     public function set_snoopy_timeout_read($time)
     {
         if ((int)$time > 0) {
@@ -294,6 +355,10 @@ class RemoteFile extends Error
         }
     }
 
+    /**
+     * @param $url
+     * @return bool
+     */
     public function _check_url_remote($url)
     {
         $ret = $this->_snoppy_fetch($url);
@@ -301,6 +366,10 @@ class RemoteFile extends Error
         return $ret;
     }
 
+    /**
+     * @param $url
+     * @return bool
+     */
     public function _read_file_remote($url)
     {
         $ret = $this->_snoppy_fetch($url);
@@ -308,6 +377,10 @@ class RemoteFile extends Error
         return $ret;
     }
 
+    /**
+     * @param $url
+     * @return bool
+     */
     public function _snoppy_fetch($url)
     {
         if ($this->_snoopy->fetch($url)) {
@@ -316,8 +389,8 @@ class RemoteFile extends Error
             if ($res) {
                 return $res;
             }
-            $this->_set_error_code(HAPPY_LINUX_SNOPPY_CODE_NO_RESULT);
-            $this->_set_errors('happy_linux_remote_file: remote data is empty:');
+            $this->_set_error_code(HAPPYLINUX_SNOPPY_CODE_NO_RESULT);
+            $this->_set_errors('happylinux_remote_file: remote data is empty:');
             $this->_set_errors("url = $url");
             if ($this->_snoopy->error) {
                 $this->_set_errors('snoopy: ' . $this->_snoopy->error);
@@ -325,8 +398,8 @@ class RemoteFile extends Error
 
             return false;
         }
-        $this->_set_error_code(HAPPY_LINUX_SNOPPY_CODE_NOT_FETCH);
-        $this->_set_errors('happy_linux_remote_file: cannot fetch remote data:');
+        $this->_set_error_code(HAPPYLINUX_SNOPPY_CODE_NOT_FETCH);
+        $this->_set_errors('happylinux_remote_file: cannot fetch remote data:');
         $this->_set_errors("url = $url");
         if ($this->_snoopy->error) {
             $this->_set_errors('snoopy: ' . $this->_snoopy->error);

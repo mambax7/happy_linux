@@ -1,11 +1,11 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
-// $Id: object_handler.php,v 1.15 2007/11/26 02:49:28 ohwada Exp $
+// $Id: objectHandler.php,v 1.15 2007/11/26 02:49:28 ohwada Exp $
 
 // 2007-11-24 K.OHWADA
-// move get_first_obj_from_objs() from config_base_handler.php
+// move get_first_obj_from_objs() from config_baseHandler.php
 // compare_to_scheme()
 
 // 2007-09-20 K.OHWADA
@@ -40,7 +40,7 @@ namespace XoopsModules\Happy_linux;
 
 // 2006-07-10 K.OHWADA
 // this is new file
-// porting from weblinks_object_handler.php
+// porting from weblinks_objectHandler.php
 
 //=========================================================
 // Happy Linux Framework Module
@@ -48,10 +48,15 @@ namespace XoopsModules\Happy_linux;
 //=========================================================
 
 //=========================================================
-// class object_generic_handler
-// support XC2.1 CriteriaElement class
+// class object_genericHandler
+// support XC2.1 \CriteriaElement class
 //=========================================================
-class ObjectHandler extends Error
+
+/**
+ * Class ObjectHandler
+ * @package XoopsModules\Happylinux
+ */
+class BaseObjectHandler extends Error
 {
     public $_DIRNAME;
 
@@ -68,7 +73,7 @@ class ObjectHandler extends Error
     public $_class_name;
     public $_table_name_short;
 
-    public $_criteria_class_name = 'criteriaelement';
+    public $_criteria_class_name = 'CriteriaElement';
 
     public $_MODE_CRITERIA = 0;    // 0: XOOPS 2.0, 1: XC2.1
 
@@ -88,6 +93,13 @@ class ObjectHandler extends Error
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
+    /**
+     * ObjectHandler constructor.
+     * @param $dirname
+     * @param $table_name
+     * @param $id_name
+     * @param $class_name
+     */
     public function __construct($dirname, $table_name, $id_name, $class_name)
     {
         parent::__construct();
@@ -106,17 +118,26 @@ class ObjectHandler extends Error
     //---------------------------------------------------------
     // set param
     //---------------------------------------------------------
+    /**
+     * @param $name
+     */
     public function set_table_name($name)
     {
         $this->_table_name_short = $name;
         $this->_table            = $this->prefix($name);
     }
 
+    /**
+     * @param $name
+     */
     public function set_id_name($name)
     {
         $this->_id_name = $name;
     }
 
+    /**
+     * @param $name
+     */
     public function set_class_name($name)
     {
         $this->_class_name = $name;
@@ -125,6 +146,9 @@ class ObjectHandler extends Error
     //---------------------------------------------------------
     // prefix
     //---------------------------------------------------------
+    /**
+     * @param $prefix
+     */
     public function renew_prefix($prefix)
     {
         if ($prefix) {
@@ -133,6 +157,10 @@ class ObjectHandler extends Error
         }
     }
 
+    /**
+     * @param $name
+     * @return string
+     */
     public function prefix($name)
     {
         $ret = $this->db_prefix($this->_DIRNAME . '_' . $name);
@@ -143,6 +171,10 @@ class ObjectHandler extends Error
     //---------------------------------------------------------
     // create
     //---------------------------------------------------------
+    /**
+     * @param bool $isNew
+     * @return mixed|null
+     */
     public function &create($isNew = true)
     {
         $obj = null;
@@ -158,6 +190,10 @@ class ObjectHandler extends Error
         return $obj;
     }
 
+    /**
+     * @param $obj
+     * @return bool
+     */
     public function _check_class($obj)
     {
         if (mb_strtolower(get_class($obj)) == mb_strtolower($this->_class_name)) {
@@ -170,6 +206,9 @@ class ObjectHandler extends Error
         return false;
     }
 
+    /**
+     * @return mixed
+     */
     public function _class_name()
     {
         return $this->_class_name;
@@ -178,6 +217,10 @@ class ObjectHandler extends Error
     //---------------------------------------------------------
     // pubilic function
     //---------------------------------------------------------
+    /**
+     * @param $id
+     * @return bool
+     */
     public function is_exist($id)
     {
         $sql   = 'SELECT count(*) FROM ' . $this->_table . ' WHERE ' . $this->_id_name . '=' . (int)$id;
@@ -189,6 +232,10 @@ class ObjectHandler extends Error
         return false;
     }
 
+    /**
+     * @param $id
+     * @return mixed|null
+     */
     public function &get($id)
     {
         $ret = null;
@@ -208,6 +255,10 @@ class ObjectHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param $id
+     * @return mixed|null
+     */
     public function &getCache($id)
     {
         if (isset($this->_cached[$id])) {
@@ -232,6 +283,9 @@ class ObjectHandler extends Error
         $this->_cached = &$this->getObjects($criteria, $limit, $start, $id_as_key);
     }
 
+    /**
+     * @param $obj
+     */
     public function set_cache_by_obj($obj)
     {
         $id = $this->_get_id_value_by_obj($obj);
@@ -240,6 +294,11 @@ class ObjectHandler extends Error
         }
     }
 
+    /**
+     * @param        $id
+     * @param string $format
+     * @return array
+     */
     public function &getVarAll($id, $format = 'n')
     {
         $arr = [];
@@ -251,6 +310,13 @@ class ObjectHandler extends Error
         return $arr;
     }
 
+    /**
+     * @param null $criteria
+     * @param bool $param1
+     * @param bool $param2
+     * @param bool $param3
+     * @return array
+     */
     public function &getObjects($criteria = null, $param1 = false, $param2 = false, $param3 = false)
     {
         $ret = [];
@@ -277,6 +343,11 @@ class ObjectHandler extends Error
     }
 
     // BUG: return the first field value instead of id
+
+    /**
+     * @param null $criteria
+     * @return array|bool
+     */
     public function &getList($criteria = null)
     {
         $ret   = [];
@@ -300,6 +371,10 @@ class ObjectHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param null|\CriteriaCompo $criteria
+     * @return bool|mixed
+     */
     public function getCount($criteria = null)
     {
         $ret = [];
@@ -317,7 +392,12 @@ class ObjectHandler extends Error
         return $this->get_count_by_sql($sql);
     }
 
-    public function insert(XoopsObject $obj, $force = false)
+    /**
+     * @param \XoopsObject|Happylinux\BaseObject $obj
+     * @param bool         $force
+     * @return bool|mixed
+     */
+    public function insert($obj, $force = false)
     {
         if ($this->_DEBUG_INSERT) {
             return $this->_insert($obj, $force);
@@ -326,7 +406,12 @@ class ObjectHandler extends Error
         return true;
     }
 
-    public function _insert(&$obj, $force = false)
+    /**
+     * @param      $obj
+     * @param bool $force
+     * @return bool|mixed
+     */
+    public function _insert($obj, $force = false)
     {
         if (!$this->_check_class($obj)) {
             $this->_set_errors($this->_table . ': not match class');
@@ -357,7 +442,12 @@ class ObjectHandler extends Error
         return $newid;
     }
 
-    public function update(&$obj, $force = false)
+    /**
+     * @param      $obj
+     * @param bool $force
+     * @return bool
+     */
+    public function update($obj, $force = false)
     {
         if ($this->_DEBUG_UPDATE) {
             return $this->_update($obj, $force);
@@ -366,7 +456,12 @@ class ObjectHandler extends Error
         return true;
     }
 
-    public function _update(&$obj, $force = false)
+    /**
+     * @param      $obj
+     * @param bool $force
+     * @return bool
+     */
+    public function _update($obj, $force = false)
     {
         if (!$this->_check_class($obj)) {
             $this->_set_errors($this->_table . ': not match class');
@@ -396,6 +491,10 @@ class ObjectHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param $obj
+     * @return bool|int
+     */
     public function _get_id_value_by_obj($obj)
     {
         $val = false;
@@ -406,7 +505,12 @@ class ObjectHandler extends Error
         return $val;
     }
 
-    public function delete(XoopsObject $obj, $force = false)
+    /**
+     * @param \XoopsObject|Happylinux\BaseObject $obj
+     * @param bool         $force
+     * @return bool
+     */
+    public function delete($obj, $force = false)
     {
         if ($this->_DEBUG_DELETE) {
             return $this->_delete($obj, $force);
@@ -415,6 +519,11 @@ class ObjectHandler extends Error
         return true;
     }
 
+    /**
+     * @param      $obj
+     * @param bool $force
+     * @return bool
+     */
     public function _delete($obj, $force = false)
     {
         $id  = $this->_get_id_value_by_obj($obj);
@@ -428,6 +537,11 @@ class ObjectHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param      $id
+     * @param bool $force
+     * @return bool
+     */
     public function delete_by_id($id, $force = false)
     {
         $obj = &$this->get($id);
@@ -435,11 +549,21 @@ class ObjectHandler extends Error
         return $this->delete($obj, $force);
     }
 
+    /**
+     * @param      $obj
+     * @param bool $force
+     * @return bool
+     */
     public function deleteAll($obj, $force = false)
     {
         return $this->_delete_all($obj, $force);
     }
 
+    /**
+     * @param      $criteria
+     * @param bool $force
+     * @return bool
+     */
     public function _delete_all($criteria, $force = false)
     {
         $objs = &$this->getObjects($criteria);
@@ -457,6 +581,10 @@ class ObjectHandler extends Error
     // field
     //---------------------------------------------------------
     // get_field_meta_name_array() => "SHOW COLUMNS"
+    /**
+     * @param $name
+     * @return bool
+     */
     public function existsFieldName($name)
     {
         $sql = 'SHOW COLUMNS FROM ' . $this->_table . ' LIKE ' . $this->quote($name);
@@ -466,7 +594,7 @@ class ObjectHandler extends Error
             return false;
         }
 
-        while ($row = $this->fetchArray($res)) {
+        while (false !== ($row = $this->fetchArray($res))) {
             if ($row['Field'] == $name) {
                 return true;
             }
@@ -475,6 +603,9 @@ class ObjectHandler extends Error
         return false;
     }
 
+    /**
+     * @return array|bool
+     */
     public function &get_all_columns()
     {
         $sql = 'SHOW COLUMNS FROM ' . $this->_table;
@@ -482,6 +613,9 @@ class ObjectHandler extends Error
         return $this->get_rows_by_sql($sql, 0, 0, true);
     }
 
+    /**
+     * @return bool
+     */
     public function compare_to_scheme()
     {
         $this->_clear_errors();
@@ -512,7 +646,7 @@ class ObjectHandler extends Error
 
                 if ($column_name == $scheme_name) {
                     if (!$obj->compare_data_type_to_column($scheme_name, $column_type)) {
-                        $this->_set_errors("$scheme_name : unmatch type : $scheme_type_name != $column_type");
+                        $this->_set_errors("$scheme_name : unmatch1 type : $scheme_type_name != $column_type");
                     }
 
                     $flag_match = true;
@@ -535,7 +669,7 @@ class ObjectHandler extends Error
 
                 if ($column_name == $scheme_name) {
                     if (!$obj->compare_data_type_to_column($scheme_name, $column_type)) {
-                        $this->_set_errors("$scheme_name : unmatch type : $scheme_type_name != $column_type");
+                        $this->_set_errors("$scheme_name : unmatch2 type : $scheme_type_name != $column_type");
                     }
 
                     $flag_match = true;
@@ -552,7 +686,10 @@ class ObjectHandler extends Error
     }
 
     // for lower compatblity
-    // caller : weblinks_link_handler.php
+    // caller : weblinks_linkHandler.php
+    /**
+     * @return array|bool
+     */
     public function &get_field_meta_name_array()
     {
         $arr_meta = [];
@@ -583,11 +720,17 @@ class ObjectHandler extends Error
         return $arr_meta;
     }
 
+    /**
+     * @return array
+     */
     public function &get_field_meta_array()
     {
         return $this->_field_meta_array;
     }
 
+    /**
+     * @return array
+     */
     public function &get_field_name_array()
     {
         return $this->_field_name_array;
@@ -596,6 +739,9 @@ class ObjectHandler extends Error
     //---------------------------------------------------------
     // table
     //---------------------------------------------------------
+    /**
+     * @return bool
+     */
     public function existsTable()
     {
         $arr = &$this->get_table_name_array();
@@ -612,6 +758,9 @@ class ObjectHandler extends Error
         return false;
     }
 
+    /**
+     * @return array|bool
+     */
     public function &get_table_name_array()
     {
         $arr = [];
@@ -625,7 +774,7 @@ class ObjectHandler extends Error
             return $false;
         }
 
-        while ($myrow = &$this->fetchRow($res)) {
+        while (false !== ($myrow = &$this->fetchRow($res))) {
             $arr[] = mb_strtolower($myrow[0]);
         }
 
@@ -635,6 +784,10 @@ class ObjectHandler extends Error
     //---------------------------------------------------------
     // create & drop table
     //---------------------------------------------------------
+    /**
+     * @param $magic
+     * @return bool
+     */
     public function drop_table($magic)
     {
         $ret = false;
@@ -646,6 +799,10 @@ class ObjectHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param $magic
+     * @return bool
+     */
     public function clean_table($magic)
     {
         $ret = false;
@@ -657,6 +814,9 @@ class ObjectHandler extends Error
         return $ret;
     }
 
+    /**
+     * @return string
+     */
     public function get_magic_word()
     {
         return $this->_magic_word;
@@ -665,9 +825,14 @@ class ObjectHandler extends Error
     //---------------------------------------------------------
     // execute query
     //---------------------------------------------------------
+    /**
+     * @param int $limit
+     * @param int $start
+     * @return array
+     */
     public function &get_objects_asc($limit = 0, $start = 0)
     {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setStart($start);
         $criteria->setLimit($limit);
         $objs = &$this->getObjects($criteria);
@@ -675,10 +840,15 @@ class ObjectHandler extends Error
         return $objs;
     }
 
+    /**
+     * @param int $limit
+     * @param int $start
+     * @return array
+     */
     public function &get_objects_desc($limit = 0, $start = 0)
     {
         $sort     = $this->_id_name . ' DESC';
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         $criteria->setSort($sort);
         $criteria->setStart($start);
         $criteria->setLimit($limit);
@@ -687,27 +857,46 @@ class ObjectHandler extends Error
         return $objs;
     }
 
+    /**
+     * @param $key
+     * @param $value
+     * @return bool|mixed
+     */
     public function get_count_by_key_value($key, $value)
     {
-        $criteria = new CriteriaCompo();
-        $criteria->add(new criteria($key, $value, '='));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria($key, $value, '='));
 
         return $this->getCount($criteria);
     }
 
+    /**
+     * @param $key
+     * @param $value
+     * @return bool|mixed
+     */
     public function &get_one_by_key_value($key, $value)
     {
         return $this->get_first_obj_from_objs($this->get_all_by_key_value($key, $value));
     }
 
+    /**
+     * @param $key
+     * @param $value
+     * @return array
+     */
     public function &get_all_by_key_value($key, $value)
     {
-        $criteria = new CriteriaCompo();
-        $criteria->add(new criteria($key, $value, '='));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria($key, $value, '='));
 
         return $this->getObjects($criteria);
     }
 
+    /**
+     * @param $objs
+     * @return bool|mixed
+     */
     public function &get_first_obj_from_objs($objs)
     {
         $obj   = false;
@@ -736,6 +925,10 @@ class ObjectHandler extends Error
     //---------------------------------------------------------
     // execute query by sql
     //---------------------------------------------------------
+    /**
+     * @param null $sql
+     * @return bool|mixed
+     */
     public function get_count_by_sql($sql = null)
     {
         $result = $this->query($sql);
@@ -749,6 +942,13 @@ class ObjectHandler extends Error
         return $count;
     }
 
+    /**
+     * @param null $sql
+     * @param int  $limit
+     * @param int  $start
+     * @param bool $id_as_key
+     * @return array
+     */
     public function &get_objects_by_sql($sql = null, $limit = 0, $start = 0, $id_as_key = false)
     {
         $ret = [];
@@ -759,26 +959,30 @@ class ObjectHandler extends Error
             return $ret;
         }
 
-        while ($row = &$this->fetchArray($result)) {
-            // Assigning the return value of new by reference is deprecated
-            $obj = &$this->create();
+        while (false !== ($row = &$this->fetchArray($result))) {
+            $obj = $this->create();
+            if (null !== $obj) {
+                $obj->assignVars($row);
+                $obj->unsetNew();
 
-            $obj->assignVars($row);
-            $obj->unsetNew();
+                if ($id_as_key) {
+                    $id       = $this->_get_id_value_by_obj($obj);
+                    $ret[$id] = $obj;
+                } else {
+                    $ret[] = $obj;
+                }
 
-            if ($id_as_key) {
-                $id       = $this->_get_id_value_by_obj($obj);
-                $ret[$id] = &$obj;
-            } else {
-                $ret[] = &$obj;
+                unset($obj);
             }
-
-            unset($obj);
         }
 
         return $ret;
     }
 
+    /**
+     * @param $sql
+     * @return mixed
+     */
     public function &get_row_by_sql($sql)
     {
         $res = &$this->query($sql);
@@ -787,6 +991,13 @@ class ObjectHandler extends Error
         return $arr;
     }
 
+    /**
+     * @param      $sql
+     * @param int  $limit
+     * @param int  $offset
+     * @param bool $force
+     * @return array|bool
+     */
     public function &get_rows_by_sql($sql, $limit = 0, $offset = 0, $force = false)
     {
         $res = &$this->query($sql, $limit, $offset, $force);
@@ -796,13 +1007,19 @@ class ObjectHandler extends Error
 
         $arr = [];
 
-        while ($row = &$this->fetchArray($res)) {
+        while (false !== ($row = &$this->fetchArray($res))) {
             $arr[] = $row;
         }
 
         return $arr;
     }
 
+    /**
+     * @param     $sql
+     * @param int $limit
+     * @param int $start
+     * @return array|bool
+     */
     public function &get_first_rows_by_sql($sql, $limit = 0, $start = 0)
     {
         $res = &$this->query($sql, $limit, $start);
@@ -812,13 +1029,17 @@ class ObjectHandler extends Error
 
         $arr = [];
 
-        while ($row = &$this->fetchRow($res)) {
+        while (false !== ($row = &$this->fetchRow($res))) {
             $arr[] = $row[0];
         }
 
         return $arr;
     }
 
+    /**
+     * @param $criteria
+     * @return bool
+     */
     public function _check_criteria_class($criteria)
     {
         if (isset($criteria) && is_a($criteria, $this->_criteria_class_name)) {
@@ -836,6 +1057,13 @@ class ObjectHandler extends Error
     //   xoops 2.0.15 :    query()
     //   xoops 2.0.16 jp: &query()
     //---------------------------------------------------------
+    /**
+     * @param      $sql
+     * @param int  $limit
+     * @param int  $offset
+     * @param bool $force
+     * @return bool
+     */
     public function &query($sql, $limit = 0, $offset = 0, $force = false)
     {
         $limit  = (int)$limit;
@@ -859,6 +1087,12 @@ class ObjectHandler extends Error
         return $res;
     }
 
+    /**
+     * @param     $sql
+     * @param int $limit
+     * @param int $offset
+     * @return bool
+     */
     public function &queryF($sql, $limit = 0, $offset = 0)
     {
         $limit  = (int)$limit;
@@ -878,6 +1112,10 @@ class ObjectHandler extends Error
         return $res;
     }
 
+    /**
+     * @param $res
+     * @return mixed
+     */
     public function getRowsNum($res)
     {
         $ret = $this->_db->getRowsNum($res);
@@ -885,6 +1123,10 @@ class ObjectHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param $res
+     * @return mixed
+     */
     public function getFieldsNum($res)
     {
         $ret = $this->_db->getFieldsNum($res);
@@ -892,6 +1134,10 @@ class ObjectHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param $res
+     * @return mixed
+     */
     public function &fetchArray($res)
     {
         $ret = $this->_db->fetchArray($res);
@@ -899,6 +1145,10 @@ class ObjectHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param $res
+     * @return mixed
+     */
     public function &fetchRow($res)
     {
         $ret = $this->_db->fetchRow($res);
@@ -906,6 +1156,9 @@ class ObjectHandler extends Error
         return $ret;
     }
 
+    /**
+     * @return mixed
+     */
     public function getInsertId()
     {
         $ret = $this->_db->getInsertId();
@@ -913,6 +1166,10 @@ class ObjectHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param $result
+     * @return mixed
+     */
     public function freeRecordSet($result)
     {
         $ret = $this->_db->freeRecordSet($result);
@@ -920,11 +1177,18 @@ class ObjectHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param $value
+     */
     public function setPrefix($value)
     {
         $this->_db->setPrefix($value);
     }
 
+    /**
+     * @param string $tablename
+     * @return string
+     */
     public function db_prefix($tablename = '')
     {
         // if tablename is empty, only prefix will be returned
@@ -941,6 +1205,11 @@ class ObjectHandler extends Error
     }
 
     // strip GPC slashes when set object by serVar();
+
+    /**
+     * @param $str
+     * @return string
+     */
     public function quoteString($str)
     {
         $str = $this->quote($str);
@@ -948,6 +1217,10 @@ class ObjectHandler extends Error
         return $str;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function quote($str)
     {
         $str = "'" . addslashes($str) . "'";
@@ -957,8 +1230,12 @@ class ObjectHandler extends Error
 
     //---------------------------------------------------------
     // build sql
-    // require XOOPS 2.0 CriteriaElement class
+    // require XOOPS 2.0 \CriteriaElement class
     //---------------------------------------------------------
+    /**
+     * @param null $criteria
+     * @return string
+     */
     public function _build_object_sql($criteria = null)
     {
         $sql = 'SELECT * FROM ' . $this->_table;
@@ -978,6 +1255,10 @@ class ObjectHandler extends Error
         return $sql;
     }
 
+    /**
+     * @param null $criteria
+     * @return string
+     */
     public function _build_list_sql($criteria = null)
     {
         $sql = 'SELECT ' . $this->_id_name . ' FROM ' . $this->_table;
@@ -997,6 +1278,10 @@ class ObjectHandler extends Error
         return $sql;
     }
 
+    /**
+     * @param null $criteria
+     * @return string
+     */
     public function _build_count_sql($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->_table;
@@ -1009,12 +1294,20 @@ class ObjectHandler extends Error
     }
 
     // override this function
+
+    /**
+     * @param $obj
+     */
     public function _build_insert_sql($obj)
     {
         // dummy
     }
 
     // override this function
+
+    /**
+     * @param $obj
+     */
     public function _build_update_sql($obj)
     {
         // dummy
@@ -1022,8 +1315,12 @@ class ObjectHandler extends Error
 
     //---------------------------------------------------------
     // build sql
-    // require XC2.1 CriteriaElement class
+    // require XC2.1 \CriteriaElement class
     //---------------------------------------------------------
+    /**
+     * @param null $criteria
+     * @return string
+     */
     public function _build_object_sql_new($criteria = null)
     {
         $sql = 'SELECT * FROM ' . $this->_table;
@@ -1035,6 +1332,10 @@ class ObjectHandler extends Error
         return $sql;
     }
 
+    /**
+     * @param null $criteria
+     * @return string
+     */
     public function _build_list_sql_new($criteria = null)
     {
         $sql = 'SELECT ' . $this->_id_name . ' FROM ' . $this->_table;
@@ -1046,6 +1347,10 @@ class ObjectHandler extends Error
         return $sql;
     }
 
+    /**
+     * @param $criteria
+     * @return string
+     */
     public function _build_object_sql_addtion($criteria)
     {
         $sql = '';
@@ -1069,6 +1374,10 @@ class ObjectHandler extends Error
         return $sql;
     }
 
+    /**
+     * @param null $criteria
+     * @return string
+     */
     public function _build_count_sql_new($criteria = null)
     {
         $sql = 'SELECT COUNT(*) FROM ' . $this->_table;
@@ -1084,6 +1393,10 @@ class ObjectHandler extends Error
         return $sql;
     }
 
+    /**
+     * @param $obj
+     * @return string
+     */
     public function _build_insert_sql_new($obj)
     {
         $fileds = [];
@@ -1101,6 +1414,10 @@ class ObjectHandler extends Error
         return $sql;
     }
 
+    /**
+     * @param $obj
+     * @return string
+     */
     public function _build_update_sql_new($obj)
     {
         $set_lists = [];
@@ -1121,6 +1438,10 @@ class ObjectHandler extends Error
         return $sql;
     }
 
+    /**
+     * @param $obj
+     * @return array
+     */
     public function _makeVars4sql($obj)
     {
         $ret = [];
@@ -1138,6 +1459,10 @@ class ObjectHandler extends Error
         return $ret;
     }
 
+    /**
+     * @param $criteria
+     * @return string|null
+     */
     public function _makeCriteria4sql($criteria)
     {
         $dmmyObj = &$this->create();
@@ -1145,6 +1470,11 @@ class ObjectHandler extends Error
         return $this->_makeCriteriaElement4sql($criteria, $dmmyObj);
     }
 
+    /**
+     * @param $criteria
+     * @param $obj
+     * @return string|null
+     */
     public function _makeCriteriaElement4sql($criteria, $obj)
     {
         if (is_a($criteria, $this->_criteria_class_name)) {
@@ -1179,6 +1509,11 @@ class ObjectHandler extends Error
         }
     }
 
+    /**
+     * @param $criteria
+     * @param $obj
+     * @return float|int|string
+     */
     public function _makeCriteriaElement4sql_datatype($criteria, $obj)
     {
         $name     = $criteria->getName();
@@ -1209,46 +1544,73 @@ class ObjectHandler extends Error
     //---------------------------------------------------------
     // set parameter
     //---------------------------------------------------------
+    /**
+     * @param $val
+     */
     public function set_criteria_class_name($val)
     {
         $this->_criteria_class_name = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_mode_criteria($val)
     {
         $this->_MODE_CRITERIA = (int)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_insert($val)
     {
         $this->_DEBUG_INSERT = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_update($val)
     {
         $this->_DEBUG_UPDATE = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_delete($val)
     {
         $this->_DEBUG_DELETE = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_query($val)
     {
         $this->_DEBUG_QUERY = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_query_force($val)
     {
         $this->_DEBUG_QUERY_FORCE = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_query_res($val)
     {
         $this->_DEBUG_QUERY_RES = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_query_force_res($val)
     {
         $this->_DEBUG_QUERY_FORCE_RES = (bool)$val;
@@ -1257,6 +1619,9 @@ class ObjectHandler extends Error
     //---------------------------------------------------------
     // get parameter
     //---------------------------------------------------------
+    /**
+     * @return mixed
+     */
     public function get_table_name()
     {
         return $this->_table;

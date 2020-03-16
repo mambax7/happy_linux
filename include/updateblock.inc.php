@@ -21,7 +21,7 @@ if ($record) {
     /* $sql = "SELECT * FROM ".$xoopsDB->prefix('newblocks')." WHERE mid=".$mid." AND block_type ='D'";
     $fresult = $xoopsDB->query($sql);
     $n_funcnum = $count;
-    while ($fblock = $xoopsDB->fetchArray($fresult)) {
+    while (false !== ($fblock = $xoopsDB->fetchArray($fresult))) {
         $bnum = 0;
         for ($i = 1 ; $i <= $count ; ++$i) {
             if (($modversion['blocks'][$i]['file'] == $fblock['func_file']) and ($modversion['blocks'][$i]['show_func'] == $fblock['show_func'])) {
@@ -64,7 +64,7 @@ if ($record) {
 
     $sql     = 'SELECT * FROM ' . $xoopsDB->prefix('newblocks') . ' WHERE mid=' . $mid . " AND block_type <>'D' AND func_num > $count";
     $fresult = $xoopsDB->query($sql);
-    while ($fblock = $xoopsDB->fetchArray($fresult)) {
+    while (false !== ($fblock = $xoopsDB->fetchArray($fresult))) {
         $local_msgs[] = 'Non Defined Block <b>' . $fblock['name'] . '</b> will be deleted';
         $sql          = 'DELETE FROM ' . $xoopsDB->prefix('newblocks') . " WHERE bid='" . $fblock['bid'] . "'";
         $iret         = $xoopsDB->query($sql);
@@ -81,7 +81,7 @@ if ($record) {
                 $modversion['blocks'][$i]['options'] = $fblock['options'];
                 $local_msgs[]                        = "Option's values of the block <b>" . $fblock['name'] . '</b> will be kept. (value = <b>' . $fblock['options'] . '</b>)';
             } elseif (count($old_vals) < count($def_vals)) {
-                for ($j = 0; $j < count($old_vals); ++$j) {
+                for ($j = 0, $jMax = count($old_vals); $j < $jMax; ++$j) {
                     $def_vals[$j] = $old_vals[$j];
                 }
                 $modversion['blocks'][$i]['options'] = implode('|', $def_vals);

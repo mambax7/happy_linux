@@ -114,11 +114,11 @@ ini_set('display_errors', 0);
 <h3>See:</h3>
 <a
         href="https://www.php.net/error_reporting">https://www.php.net/error_reporting</a>,<br
-/>
+>
 <a href="https://www.php.net/ini_set">https://www.php.net/ini_set</a>, <br>
 <a
         href="https://www.php.net/manual/en/ref.errorfunc.php">https://www.php.net/manual/en/ref.errorfunc.php</a><br
-/>
+>
 
 <a name="write_rss"></a>
 <h2>3. Generate a New RSS Feed</h2>
@@ -205,7 +205,7 @@ else {
 # in php >= 4.3.0 you can simply use file_get_contents()
 #
 function read_file($filename) {
-    $fh = fopen($filename, 'r') or die($php_errormsg);
+    $fh = fopen($filename, 'r') || die($php_errormsg);
     $rss_string = fread($fh, filesize($filename) );
     fclose($fh);
     return $rss_string;
@@ -221,7 +221,7 @@ function read_file($filename) {
     <h3>See: </h3>
     <a
             href="https://www.php.net/manual/en/ref.filesystem.php">https://www.php.net/manual/en/ref.filesystem.php</a>,<br
-    />
+   >
     <a
             href="https://www.php.net/manual/en/language.oop.php">https://www.php.net/manual/en/language.oop.php</a>
 

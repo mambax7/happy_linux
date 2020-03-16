@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: page_frame.php,v 1.2 2012/04/08 18:22:28 ohwada Exp $
 
@@ -31,11 +31,16 @@ namespace XoopsModules\Happy_linux;
 // 2006-07-10 K.OHWADA
 //=========================================================
 
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/include/memory.php';
+require_once XOOPS_ROOT_PATH . '/modules/happylinux/include/memory.php';
 
 //=========================================================
 // class page_frame
 //=========================================================
+
+/**
+ * Class PageFrame
+ * @package XoopsModules\Happylinux
+ */
 class PageFrame extends Form
 {
     // class instance
@@ -44,11 +49,11 @@ class PageFrame extends Form
     public $handler;
 
     // language
-    public $_LANG_TITLE        = _HAPPY_LINUX_TITLE;
-    public $_LANG_THERE_ARE    = _HAPPY_LINUX_THERE_ARE;
-    public $_LANG_NO_RECORD    = _HAPPY_LINUX_NO_RECORD;
-    public $_LANG_ID_ASC       = _HAPPY_LINUX_ID_ASC;
-    public $_LANG_ID_DESC      = _HAPPY_LINUX_ID_DESC;
+    public $_LANG_TITLE        = _HAPPYLINUX_TITLE;
+    public $_LANG_THERE_ARE    = _HAPPYLINUX_THERE_ARE;
+    public $_LANG_NO_RECORD    = _HAPPYLINUX_NO_RECORD;
+    public $_LANG_ID_ASC       = _HAPPYLINUX_ID_ASC;
+    public $_LANG_ID_DESC      = _HAPPYLINUX_ID_DESC;
     public $_LANG_SUBMIT_VALUE = _EDIT;
 
     // constant
@@ -110,9 +115,12 @@ class PageFrame extends Form
         parent::__construct();
 
         // class instance
-        $this->_pagenavi = Pagenavi::getInstance();
+        $this->_pagenavi = PageNavi::getInstance();
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\Form|\XoopsModules\Happylinux\Html|\XoopsModules\Happylinux\PageFrame|static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -126,6 +134,11 @@ class PageFrame extends Form
     //---------------------------------------------------------
     // main
     //---------------------------------------------------------
+    /**
+     * @param null $obj
+     * @param null $extra
+     * @param int  $mode
+     */
     public function _show($obj = null, $extra = null, $mode = 0)
     {
         $total = $this->_pre_proc();
@@ -139,6 +152,9 @@ class PageFrame extends Form
         $this->_post_proc();
     }
 
+    /**
+     * @param $sortid
+     */
     public function _show_by_sortid($sortid)
     {
         $this->_pagenavi->set_sortid($sortid);
@@ -149,6 +165,9 @@ class PageFrame extends Form
     //---------------------------------------------------------
     // Pre processing
     //---------------------------------------------------------
+    /**
+     * @return int
+     */
     public function _pre_proc()
     {
         $this->_init();
@@ -215,6 +234,9 @@ class PageFrame extends Form
         // dummy
     }
 
+    /**
+     * @return int
+     */
     public function _get_total_all()
     {
         $total            = $this->_get_handler_total();
@@ -223,6 +245,9 @@ class PageFrame extends Form
         return $total;
     }
 
+    /**
+     * @return int
+     */
     public function _get_total()
     {
         $total        = $this->_get_total_all();
@@ -234,6 +259,9 @@ class PageFrame extends Form
     //---------------------------------------------------------
     // get POST GET sortid
     //---------------------------------------------------------
+    /**
+     * @return int
+     */
     public function _get_post_sortid()
     {
         $sortid = 0;
@@ -250,6 +278,9 @@ class PageFrame extends Form
         return $sortid;
     }
 
+    /**
+     * @return int
+     */
     public function _convert_op_to_sortid()
     {
         $arr = &$this->_get_op_sortid_array();
@@ -262,9 +293,12 @@ class PageFrame extends Form
             $sortid = $this->_pagenavi->_sortid_default;
         }
 
-        return (int)$sortid;
+        return $sortid;
     }
 
+    /**
+     * @return mixed|null
+     */
     public function _get_post_op()
     {
         $op = null;
@@ -278,6 +312,10 @@ class PageFrame extends Form
     }
 
     // override this
+
+    /**
+     * @return int[]
+     */
     public function &_get_op_sortid_array()
     {
         $arr = [
@@ -301,18 +339,24 @@ class PageFrame extends Form
     //---------------------------------------------------------
     // Post processing
     //---------------------------------------------------------
+    /**
+     * @param bool $flag
+     */
     public function _post_proc($flag = false)
     {
         $this->_print_execute_time($flag);
     }
 
+    /**
+     * @param bool $flag
+     */
     public function _print_execute_time($flag = false)
     {
         if ($flag || $this->_FLAG_EXECUTE_TIME) {
             $time = Time::getInstance();
             echo "<br><hr>\n";
             echo $time->build_elapse_time() . "<br>\n";
-            echo happy_linux_build_memory_usage_mb() . "<br>\n";
+            echo happylinux_build_memory_usage_mb() . "<br>\n";
         }
     }
 
@@ -330,6 +374,9 @@ class PageFrame extends Form
         $this->_post_main_proc();
     }
 
+    /**
+     * @return bool
+     */
     public function &_pre_main_proc()
     {
         $start = $this->_calc_pagenavi();
@@ -359,7 +406,10 @@ class PageFrame extends Form
         $this->_print_table_header();
     }
 
-    public function _item_proc(&$item)
+    /**
+     * @param $item
+     */
+    public function _item_proc($item)
     {
         $this->_print_table_item($item);
     }
@@ -419,7 +469,7 @@ class PageFrame extends Form
 
     public function _print_table_header()
     {
-        $head_arr = &$this->_get_table_header();
+        $head_arr = $this->_get_table_header();
 
         echo '<tr>';
 
@@ -430,7 +480,10 @@ class PageFrame extends Form
         echo "</tr>\n";
     }
 
-    public function _print_table_item(&$item)
+    /**
+     * @param $item
+     */
+    public function _print_table_item($item)
     {
         $col_arr = &$this->_get_cols($item);
         $class   = $this->_get_col_class($item);
@@ -451,6 +504,9 @@ class PageFrame extends Form
         echo "</tr>\n";
     }
 
+    /**
+     * @return string
+     */
     public function _build_page_class_alternate()
     {
         if (0 == $this->_item_count % 2) {
@@ -471,6 +527,12 @@ class PageFrame extends Form
         }
     }
 
+    /**
+     * @param int $colspan1
+     * @param int $colspan2
+     * @param int $colspan3
+     * @return string
+     */
     public function _build_page_submit($colspan1 = 0, $colspan2 = 2, $colspan3 = 0)
     {
         $text = '<tr>';
@@ -493,6 +555,9 @@ class PageFrame extends Form
     //---------------------------------------------------------
     // get_script
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function _get_script_asc()
     {
         $script = '?sortid=0';
@@ -500,6 +565,9 @@ class PageFrame extends Form
         return $script;
     }
 
+    /**
+     * @return string
+     */
     public function _get_script_desc()
     {
         $script = '?sortid=1';
@@ -507,6 +575,9 @@ class PageFrame extends Form
         return $script;
     }
 
+    /**
+     * @return string
+     */
     public function _get_script()
     {
         return $this->_SCRIPT;  // null
@@ -515,6 +586,9 @@ class PageFrame extends Form
     //---------------------------------------------------------
     // sample of items
     //---------------------------------------------------------
+    /**
+     * @return string[]
+     */
     public function _get_table_header()
     {
         $arr = [
@@ -525,6 +599,11 @@ class PageFrame extends Form
         return $arr;
     }
 
+    /**
+     * @param int $limit
+     * @param int $start
+     * @return bool
+     */
     public function &_get_items($limit = 0, $start = 0)
     {
         $objs = &$this->_get_handler_objs($limit, $start);
@@ -532,7 +611,11 @@ class PageFrame extends Form
         return $objs;
     }
 
-    public function &_get_cols(&$obj)
+    /**
+     * @param $obj
+     * @return array
+     */
+    public function &_get_cols($obj)
     {
         $id    = $this->_build_page_label_by_obj($obj, $this->_id_name);
         $id    = $this->_build_formated_id($id);
@@ -546,6 +629,10 @@ class PageFrame extends Form
         return $arr;
     }
 
+    /**
+     * @param $obj
+     * @return string
+     */
     public function _get_col_class($obj)
     {
         return '';
@@ -554,6 +641,14 @@ class PageFrame extends Form
     //---------------------------------------------------------
     // utility
     //---------------------------------------------------------
+    /**
+     * @param        $obj
+     * @param        $key
+     * @param        $jump
+     * @param string $title
+     * @param string $target
+     * @return bool|string|string[]
+     */
     public function _build_page_id_link_by_obj($obj, $key, $jump, $title = '', $target = '')
     {
         if (!is_object($obj)) {
@@ -571,6 +666,13 @@ class PageFrame extends Form
         return $text;
     }
 
+    /**
+     * @param        $obj
+     * @param        $key1
+     * @param string $key2
+     * @param string $target
+     * @return bool|string|string[]
+     */
     public function _build_page_name_link_by_obj($obj, $key1, $key2 = '', $target = '')
     {
         if (!is_object($obj)) {
@@ -593,6 +695,11 @@ class PageFrame extends Form
         return '&nbsp;';
     }
 
+    /**
+     * @param $obj
+     * @param $key
+     * @return bool|string
+     */
     public function _build_page_label_by_obj($obj, $key)
     {
         if (!is_object($obj)) {
@@ -608,6 +715,11 @@ class PageFrame extends Form
         return '&nbsp;';
     }
 
+    /**
+     * @param        $id
+     * @param string $format
+     * @return string
+     */
     public function _build_formated_id($id, $format = '%03d')
     {
         $text = sprintf($format, $id);
@@ -625,6 +737,9 @@ class PageFrame extends Form
         $this->_pagenavi->set_flag_sortid($this->_flag_sortid);
     }
 
+    /**
+     * @return mixed
+     */
     public function _calc_pagenavi()
     {
         $start = $this->_pagenavi->calcStart();
@@ -635,6 +750,9 @@ class PageFrame extends Form
         return $start;
     }
 
+    /**
+     * @return string
+     */
     public function _build_pagenavi()
     {
         $script = $this->_get_script(); // null
@@ -643,21 +761,33 @@ class PageFrame extends Form
         return $navi;
     }
 
+    /**
+     * @param $val
+     */
     public function _set_sortid($val)
     {
         $this->_sortid = (int)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function _set_total($val)
     {
         $this->_total = (int)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function _set_start($val)
     {
         $this->_start = (int)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function _set_end($val)
     {
         $this->_end = (int)$val;
@@ -666,25 +796,33 @@ class PageFrame extends Form
     //---------------------------------------------------------
     // handler class
     //---------------------------------------------------------
+    /**
+     * @return int
+     */
     public function _get_handler_total()
     {
         $count = 0;
 
-        if (is_object($this->_handler)) {
-            $count = $this->_handler->getCount();
+        if (is_object($this->handler)) {
+            $count = $this->handler->getCount();
         }
 
         return $count;
     }
 
+    /**
+     * @param int $limit
+     * @param int $start
+     * @return bool|array
+     */
     public function &_get_handler_objs($limit = 0, $start = 0)
     {
         $objs = false;
-        if (is_object($this->_handler)) {
+        if (is_object($this->handler)) {
             if (1 == $this->_sortid) {
-                $objs = &$this->_handler->get_objects_desc($limit, $start);
+                $objs = &$this->handler->get_objects_desc($limit, $start);
             } else {
-                $objs = &$this->_handler->get_objects_asc($limit, $start);
+                $objs = &$this->handler->get_objects_asc($limit, $start);
             }
         }
 
@@ -694,6 +832,9 @@ class PageFrame extends Form
     //---------------------------------------------------------
     // wrapper for build_form class
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function _build_page_form_begin()
     {
         $form = $this->build_form_begin($this->_FORM_NAME, $this->_ACTION);
@@ -711,11 +852,17 @@ class PageFrame extends Form
         return $form;
     }
 
+    /**
+     * @return string
+     */
     public function _build_page_form_begin_extra()
     {
         return '';
     }
 
+    /**
+     * @return string
+     */
     public function _build_page_form_end()
     {
         $text = $this->build_form_end();
@@ -723,6 +870,11 @@ class PageFrame extends Form
         return $text;
     }
 
+    /**
+     * @param     $value
+     * @param int $colspan
+     * @return string
+     */
     public function _build_page_col_head($value, $colspan = 1)
     {
         $text = $this->build_html_th_tag_begin($this->_HEAD_ALIGN, $this->_HEAD_VALIGN, $colspan, $this->_HEAD_ROWSPAN, $this->_HEAD_CLASS);
@@ -732,6 +884,11 @@ class PageFrame extends Form
         return $text;
     }
 
+    /**
+     * @param     $value
+     * @param int $colspan
+     * @return string
+     */
     public function _build_page_col_item($value, $colspan = 1)
     {
         $text = $this->build_html_td_tag_begin($this->_ITEM_ALIGN, $this->_ITEM_VALIGN, $colspan, $this->_ITEM_ROWSPAN, $this->_ITEM_CLASS);
@@ -741,6 +898,10 @@ class PageFrame extends Form
         return $text;
     }
 
+    /**
+     * @param int $colspan
+     * @return string
+     */
     public function _build_page_col_null($colspan = 1)
     {
         $text = $this->build_html_td_tag_begin($this->_ITEM_ALIGN, $this->_ITEM_VALIGN, $colspan, $this->_ITEM_ROWSPAN, $this->_ITEM_CLASS);
@@ -750,6 +911,12 @@ class PageFrame extends Form
         return $text;
     }
 
+    /**
+     * @param null $name
+     * @param null $value
+     * @param int  $colspan
+     * @return string
+     */
     public function _build_page_col_submit($name=null, $value=null, $colspan=1)
     {
         $text = $this->build_html_td_tag_begin($this->_SUBMIT_ALIGN, $this->_SUBMIT_VALIGN, $colspan, $this->_SUBMIT_ROWSPAN, $this->_SUBMIT_CLASS);
@@ -759,6 +926,10 @@ class PageFrame extends Form
         return $text;
     }
 
+    /**
+     * @param int $colspan
+     * @return string
+     */
     public function _build_page_col_submit_null($colspan = 1)
     {
         $text = $this->build_html_td_tag_begin($this->_SUBMIT_ALIGN, $this->_SUBMIT_VALIGN, $colspan, $this->_SUBMIT_ROWSPAN, $this->_SUBMIT_CLASS);
@@ -768,6 +939,9 @@ class PageFrame extends Form
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function _build_page_no_item()
     {
         $text = $this->build_html_highlight($this->_LANG_NO_RECORD, $this->_NO_ITEM_COLOR, $this->_NO_ITEM_WEIGHT);
@@ -778,82 +952,146 @@ class PageFrame extends Form
     //---------------------------------------------------------
     // set param
     //---------------------------------------------------------
-    public function set_handler($table_name, $dirname, $prefix = 'happy_linux')
+    /**
+     * @param        $table_name
+     * @param        $dirname
+     * @param string $prefix
+     * @param null|\Xmf\Module\Helper\ $helper
+     */
+    public function set_handler($table_name, $dirname, $prefix = 'happylinux', $helper = null)
     {
-        $this->_handler = happy_linux_getHandler($table_name, $dirname, $prefix);
-        $this->handler = happy_linux_getHandler($table_name, $dirname, $prefix);
+//        $this->_handler = happylinux_get_handler($table_name, $dirname, $prefix);
+        if (null === $helper) {
+            $helperType = '\XoopsModules' . '\\' . ucfirst($dirname) . '\Helper';
+            $helper     = $helperType::getInstance();
+        }
+        $this->handler = $helper->getHandler(ucfirst($table_name));
+        $this->_handler = $this->handler;
     }
 
+    public function setHandler($table_name, $helper = null)
+    {
+        $this->handler = $helper->getHandler(ucfirst($table_name));
+        $this->_handler = $helper->getHandler(ucfirst($table_name));
+    }
+
+    /**
+     * @param $value
+     */
     public function set_id_name($value)
     {
         $this->_id_name = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_sortid($value)
     {
         $this->_flag_sortid = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_alternate($value)
     {
         $this->_flag_alternate = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_form($value)
     {
         $this->_flag_form = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_perpage($value)
     {
         $this->_PERPAGE = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_max_sortid($value)
     {
         $this->_MAX_SORTID = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_script($value)
     {
         $this->_SCRIPT = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_head_align($value)
     {
         $this->_HEAD_ALIGN = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_head_class($value)
     {
         $this->_HEAD_CLASS = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_item_align($value)
     {
         $this->_ITEM_ALIGN = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_item_class($value)
     {
         $this->_ITEM_CLASS = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_submit_name($value)
     {
         $this->_SUBMIT_NAME = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_submit_align($value)
     {
         $this->_SUBMIT_ALIGN = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_submit_class($value)
     {
         $this->_SUBMIT_CLASS = $value;
     }
 
+    /**
+     * @param int $col1
+     * @param int $col2
+     * @param int $col3
+     */
     public function set_submit_colspan($col1 = 0, $col2 = 2, $col3 = 0)
     {
         $this->_SUBMIT_COLSPAN1 = (int)$col1;
@@ -861,91 +1099,145 @@ class PageFrame extends Form
         $this->_SUBMIT_COLSPAN3 = (int)$col3;
     }
 
+    /**
+     * @param $value
+     */
     public function set_no_item_color($value)
     {
         $this->_NO_ITEM_COLOR = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_no_item_weight($value)
     {
         $this->_NO_ITEM_WEIGHT = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_get_sortid($value)
     {
         $this->_FLAG_GET_SORTID = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_print_top($value)
     {
         $this->_FLAG_PRINT_TOP = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_print_navi($value)
     {
         $this->set_flag_print_navi_post($value);
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_print_navi_pre($value)
     {
         $this->_FLAG_PRINT_NAVI_PRE = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_print_navi_post($value)
     {
         $this->_FLAG_PRINT_NAVI_POST = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_print_sortid($value)
     {
         $this->_FLAG_PRINT_SOTRID = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_print_request_uri($value)
     {
         $this->_FLAG_PRINT_REQUEST_URI = (bool)$value;
     }
 
+    /**
+     * @param $val
+     */
     public function set_flag_execute_time($val)
     {
         $this->_FLAG_EXECUTE_TIME = (bool)$val;
     }
 
+    /**
+     * @param $value
+     */
     public function set_lang_title($value)
     {
         $this->_LANG_TITLE = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_lang_there_are($value)
     {
         $this->_LANG_THERE_ARE = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_lang_no_item($value)
     {
         $this->_LANG_NO_RECORD = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_lang_id_asc($value)
     {
         $this->_LANG_ID_ASC = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_lang_id_desc($value)
     {
         $this->_LANG_ID_DESC = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_lang_submit_value($value)
     {
         $this->_LANG_SUBMIT_VALUE = $value;
     }
 
+    /**
+     * @return int
+     */
     public function get_page_current()
     {
         return $this->_pagenavi->get_page_current();
     }
 
+    /**
+     * @return false|float
+     */
     public function get_page_last()
     {
         return $this->_pagenavi->calc_page_last();
@@ -954,6 +1246,9 @@ class PageFrame extends Form
     //---------------------------------------------------------
     // overwrit to form class
     //---------------------------------------------------------
+    /**
+     * @param $value
+     */
     public function set_operation($value)
     {
         $this->set_op_value($value);

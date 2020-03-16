@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: error.php,v 1.11 2007/09/23 05:07:25 ohwada Exp $
 
@@ -18,10 +18,10 @@ namespace XoopsModules\Happy_linux;
 // _sanitize()
 
 // 2007-03-01 K.OHWADA
-// happy_linux_time()
+// Time()
 
 // 2006-09-20 K.OHWADA
-// use happy_linux_strcut
+// use happylinux_strcut
 // add get_db_error()
 
 // 2006-07-10 K.OHWADA
@@ -33,11 +33,16 @@ namespace XoopsModules\Happy_linux;
 // 2006-07-10 K.OHWADA
 //=========================================================
 
-//  include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/time.php';
+//  require_once XOOPS_ROOT_PATH . '/modules/happylinux/class/time.php';
 
 //=========================================================
 // class error
 //=========================================================
+
+/**
+ * Class Error
+ * @package XoopsModules\Happylinux
+ */
 class Error
 {
     // class
@@ -70,7 +75,7 @@ class Error
     public function __construct()
     {
         // bin mode
-        if (defined('HAPPY_LINUX_BIN_MODE') && HAPPY_LINUX_BIN_MODE) {
+        if (defined('HAPPYLINUX_BIN_MODE') && HAPPYLINUX_BIN_MODE) {
             // dummy
         } // normal
         else {
@@ -78,6 +83,9 @@ class Error
         }
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -97,6 +105,11 @@ class Error
         $this->_clear_logs();
     }
 
+    /**
+     * @param string $format
+     * @param bool   $flag_sanitize
+     * @return array|string
+     */
     public function &getLogs($format = 'n', $flag_sanitize = true)
     {
         $ret = '';
@@ -118,6 +131,11 @@ class Error
         return $ret;
     }
 
+    /**
+     * @param string $format
+     * @param bool   $flag_sanitize
+     * @return array|string
+     */
     public function &getErrors($format = 'n', $flag_sanitize = true)
     {
         // Only variable references should be returned by reference
@@ -141,11 +159,17 @@ class Error
         return $ret;
     }
 
+    /**
+     * @return int
+     */
     public function getErrorCode()
     {
         return $this->_error_code;
     }
 
+    /**
+     * @return bool
+     */
     public function returnExistError()
     {
         if ($this->_error_flag) {
@@ -155,21 +179,33 @@ class Error
         return true;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_print_log($val)
     {
         $this->_flag_debug_print_log = (int)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_print_error($val)
     {
         $this->_flag_debug_print_error = (int)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_print_time($val)
     {
         $this->_flag_debug_print_time = (int)$val;
     }
 
+    /**
+     * @return int
+     */
     public function get_debug_print_time()
     {
         return $this->_flag_debug_print_time;
@@ -178,12 +214,21 @@ class Error
     //---------------------------------------------------------
     // print error
     //---------------------------------------------------------
+    /**
+     * @param      $msg
+     * @param bool $flag_sanitize
+     */
     public function print_error_in_div($msg, $flag_sanitize = true)
     {
         echo $this->build_error_in_div($msg, $flag_sanitize);
         echo "<br>\n";
     }
 
+    /**
+     * @param      $msg
+     * @param bool $flag_sanitize
+     * @return string
+     */
     public function build_error_in_div($msg, $flag_sanitize = true)
     {
         if ($flag_sanitize) {
@@ -197,11 +242,17 @@ class Error
         return $text;
     }
 
+    /**
+     * @param $val
+     */
     public function set_span_style_error($val)
     {
         $this->_SPAN_STYLE_ERROR = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_div_style_error($val)
     {
         $this->_DIV_STYLE_ERROR = $val;
@@ -210,16 +261,25 @@ class Error
     //---------------------------------------------------------
     // for db handler
     //---------------------------------------------------------
+    /**
+     * @param $val
+     */
     public function set_debug_db_error($val)
     {
         $this->set_debug_print_error($val);
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_db_sql($val)
     {
         $this->_flag_debug_print_db_sql = (int)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_db_max_sql($val)
     {
         $this->_debug_db_max_sql = (int)$val;
@@ -240,11 +300,17 @@ class Error
         $this->_logs = [];
     }
 
+    /**
+     * @param $text
+     */
     public function _set_log_func_name($text)
     {
         $this->_set_log('function: ' . $text);
     }
 
+    /**
+     * @param $text_arr
+     */
     public function _set_log($text_arr)
     {
         if (is_array($text_arr)) {
@@ -264,6 +330,9 @@ class Error
         }
     }
 
+    /**
+     * @param $text_arr
+     */
     public function _set_errors($text_arr)
     {
         if (is_array($text_arr)) {
@@ -290,23 +359,38 @@ class Error
         $this->_error_flag = true;  // error
     }
 
+    /**
+     * @param $code
+     */
     public function _set_error_code($code)
     {
         $this->_error_code = $code;
     }
 
+    /**
+     * @param $text
+     */
     public function _print_line($text)
     {
         echo $this->_sanitize($text);
         echo "<br>\n";
     }
 
+    /**
+     * @param      $msg
+     * @param bool $flag_sanitize
+     */
     public function _print_error($msg, $flag_sanitize = true)
     {
         echo $this->_build_error_in_span($msg, $flag_sanitize = true);
         echo "<br>\n";
     }
 
+    /**
+     * @param      $msg
+     * @param bool $flag_sanitize
+     * @return string
+     */
     public function _build_error_in_span($msg, $flag_sanitize = true)
     {
         if ($flag_sanitize) {
@@ -320,6 +404,10 @@ class Error
         return $text;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function _sanitize($str)
     {
         return htmlspecialchars($str, ENT_QUOTES);
@@ -328,6 +416,11 @@ class Error
     //---------------------------------------------------------
     // for db handler
     //---------------------------------------------------------
+    /**
+     * @param string $sql
+     * @param int    $limit
+     * @param int    $offset
+     */
     public function _set_db_error($sql = '', $limit = 0, $offset = 0)
     {
         $err1 = $this->get_db_error();
@@ -339,6 +432,11 @@ class Error
         }
     }
 
+    /**
+     * @param     $sql
+     * @param int $limit
+     * @param int $offset
+     */
     public function _print_db_sql($sql, $limit = 0, $offset = 0)
     {
         if (!$this->_flag_debug_print_db_sql) {
@@ -352,6 +450,12 @@ class Error
         $this->_time_class->print_lap_time("sql: $sql");
     }
 
+    /**
+     * @param     $sql
+     * @param int $limit
+     * @param int $offset
+     * @return string
+     */
     public function _make_db_sql($sql, $limit = 0, $offset = 0)
     {
         $sql = $this->_shorten_text($sql, $this->_debug_db_max_sql);
@@ -369,10 +473,15 @@ class Error
     //---------------------------------------------------------
     // multibyte function
     //---------------------------------------------------------
+    /**
+     * @param     $text
+     * @param int $max
+     * @return string
+     */
     public function _shorten_text($text, $max = 100)
     {
         if (mb_strlen($text) > $max) {
-            $text = happy_linux_strcut($text, 0, $max) . ' ...';
+            $text = happylinux_strcut($text, 0, $max) . ' ...';
         }
 
         return $text;

@@ -7,11 +7,11 @@
 //=========================================================
 // Happy Linux Framework Module
 // 2006-09-01 K.OHWADA
-// Í­Êþ¼«±óÊýÍè
+// Í­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //=========================================================
 
 // page_frame
-define('_HAPPY_LINUX_THERE_ARE', '¥Ç¡¼¥¿¥Ù¡¼¥¹¤Ë <b>%s</b> ·ï¤Î¥ì¥³¡¼¥É¤¬¤¢¤ê¤Þ¤¹');
-define('_HAPPY_LINUX_NO_RECORD', '³ºÅö¤¹¤ë¥ì¥³¡¼¥É¤¬Â¸ºß¤·¤Þ¤»¤ó');
-define('_HAPPY_LINUX_ID_ASC', 'ID Àµ½ç');
-define('_HAPPY_LINUX_ID_DESC', 'ID µÕ½ç');
+define('_HAPPYLINUX_THERE_ARE', 'ï¿½Ç¡ï¿½ï¿½ï¿½ï¿½Ù¡ï¿½ï¿½ï¿½ï¿½ï¿½ <b>%s</b> ï¿½ï¿½Î¥ì¥³ï¿½ï¿½ï¿½É¤ï¿½ï¿½ï¿½ï¿½ï¿½Þ¤ï¿½');
+define('_HAPPYLINUX_NO_RECORD', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì¥³ï¿½ï¿½ï¿½É¤ï¿½Â¸ï¿½ß¤ï¿½ï¿½Þ¤ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_ID_ASC', 'ID ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_ID_DESC', 'ID ï¿½Õ½ï¿½');

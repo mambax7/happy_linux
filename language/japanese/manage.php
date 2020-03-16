@@ -7,18 +7,18 @@
 //=========================================================
 // Happy Linux Framework Module
 // 2006-09-01 K.OHWADA
-// Í­Êþ¼«±óÊýÍè
+// Í­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //=========================================================
 
 // manage
-define('_HAPPY_LINUX_ADD_RECORD', '¥ì¥³¡¼¥É¤ÎÄÉ²Ã');
-define('_HAPPY_LINUX_MOD_RECORD', '¥ì¥³¡¼¥É¤ÎÊÑ¹¹');
-define('_HAPPY_LINUX_DEL_RECORD', '¥ì¥³¡¼¥É¤Îºï½ü');
-define('_HAPPY_LINUX_ADD_RECORD_SUCCEEED', '¥ì¥³¡¼¥É¤òÄÉ²Ã¤·¤¿');
-define('_HAPPY_LINUX_MOD_RECORD_SUCCEEED', '¥ì¥³¡¼¥É¤òÊÑ¹¹¤·¤¿');
-define('_HAPPY_LINUX_DEL_RECORD_SUCCEEED', '¥ì¥³¡¼¥É¤òºï½ü¤·¤¿');
-define('_HAPPY_LINUX_ADD_RECORD_FAILD', '¥ì¥³¡¼¥É¤ÎÄÉ²Ã¤¬¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿');
-define('_HAPPY_LINUX_MOD_RECORD_FAILD', '¥ì¥³¡¼¥É¤ÎÊÑ¹¹¤¬¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿');
-define('_HAPPY_LINUX_DEL_RECORD_FAILD', '¥ì¥³¡¼¥É¤Îºï½ü¤¬¤Ç¤­¤Þ¤»¤ó¤Ç¤·¤¿');
-define('_HAPPY_LINUX_ERR_FILL', '¥¨¥é¡¼: %s ¤òÆþÎÏ¤·¤Æ²¼¤µ¤¤');
-define('_HAPPY_LINUX_ERR_ILLEGAL', '¥¨¥é¡¼: %s ¤Î·Á¼°¤¬ÉÔÀµ¤Ç¤¹');
+define('_HAPPYLINUX_ADD_RECORD', 'ï¿½ì¥³ï¿½ï¿½ï¿½É¤ï¿½ï¿½É²ï¿½');
+define('_HAPPYLINUX_MOD_RECORD', 'ï¿½ì¥³ï¿½ï¿½ï¿½É¤ï¿½ï¿½Ñ¹ï¿½');
+define('_HAPPYLINUX_DEL_RECORD', 'ï¿½ì¥³ï¿½ï¿½ï¿½É¤Îºï¿½ï¿½');
+define('_HAPPYLINUX_ADD_RECORD_SUCCEEED', 'ï¿½ì¥³ï¿½ï¿½ï¿½É¤ï¿½ï¿½É²Ã¤ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_MOD_RECORD_SUCCEEED', 'ï¿½ì¥³ï¿½ï¿½ï¿½É¤ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_DEL_RECORD_SUCCEEED', 'ï¿½ì¥³ï¿½ï¿½ï¿½É¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_ADD_RECORD_FAILD', 'ï¿½ì¥³ï¿½ï¿½ï¿½É¤ï¿½ï¿½É²Ã¤ï¿½ï¿½Ç¤ï¿½ï¿½Þ¤ï¿½ï¿½ï¿½Ç¤ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_MOD_RECORD_FAILD', 'ï¿½ì¥³ï¿½ï¿½ï¿½É¤ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½Ç¤ï¿½ï¿½Þ¤ï¿½ï¿½ï¿½Ç¤ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_DEL_RECORD_FAILD', 'ï¿½ì¥³ï¿½ï¿½ï¿½É¤Îºï¿½ï¿½ï¿½ï¿½ï¿½Ç¤ï¿½ï¿½Þ¤ï¿½ï¿½ï¿½Ç¤ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_ERR_FILL', 'ï¿½ï¿½ï¿½é¡¼: %s ï¿½ï¿½ï¿½ï¿½ï¿½Ï¤ï¿½ï¿½Æ²ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPYLINUX_ERR_ILLEGAL', 'ï¿½ï¿½ï¿½é¡¼: %s ï¿½Î·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¤ï¿½');

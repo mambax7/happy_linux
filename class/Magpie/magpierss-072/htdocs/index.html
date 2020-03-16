@@ -2,7 +2,7 @@
 <head>
     <title>Magpie RSS - PHP RSS Parser</title>
     <link rel="alternate" type="application/rss+xml" title="RSS"
-          href="https://laughingmeme.org/magpierss.rdf"/>
+          href="https://laughingmeme.org/magpierss.rdf">
     <style>
         body {
             font-family: trebuchet MS, trebuchet, verdana, arial, sans-serif;
@@ -344,7 +344,7 @@ tags.
 
 A very simple example would be:
 <pre>
-require_once 'rss_fetch.inc';
+require_once __DIR__ . '/rss_fetch.inc';
 
 $url = 'https://magpie.sf.net/samples/imc.1-0.rdf';
 $rss = fetch_rss($url);

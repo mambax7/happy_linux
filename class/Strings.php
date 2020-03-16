@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: strings.php,v 1.31 2008/02/26 15:30:05 ohwada Exp $
 
@@ -27,7 +27,7 @@ namespace XoopsModules\Happy_linux;
 // comment for RFC2822
 
 // 2007-08-01 K.OHWADA
-// happy_linux/include/sanitize.php
+// happylinux/include/sanitize.php
 // bool_to_str()
 // strip_control_array()
 
@@ -74,13 +74,18 @@ namespace XoopsModules\Happy_linux;
 // —L•üŽ©‰“•û—ˆ
 //=========================================================
 
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/include/sanitize.php';
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/include/multibyte.php';
-include_once XOOPS_ROOT_PATH . '/modules/happy_linux/include/htmlout.php';
+require_once XOOPS_ROOT_PATH . '/modules/happylinux/include/sanitize.php';
+require_once XOOPS_ROOT_PATH . '/modules/happylinux/include/multibyte.php';
+require_once XOOPS_ROOT_PATH . '/modules/happylinux/include/htmlout.php';
 
 //=========================================================
 // class strings
 //=========================================================
+
+/**
+ * Class Strings
+ * @package XoopsModules\Happylinux
+ */
 class Strings
 {
     public $_MAX_DEPTH = 10;
@@ -106,6 +111,9 @@ class Strings
         $this->init_strings();
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -126,6 +134,10 @@ class Strings
         }
     }
 
+    /**
+     * @param $encoding
+     * @return bool
+     */
     public function check_in_encoding_array($encoding)
     {
         if (in_array(mb_strtolower($encoding), $this->_ENCODING_ARRAY)) {
@@ -138,6 +150,11 @@ class Strings
     //=========================================================
     // for object->setVar()
     //=========================================================
+    /**
+     * @param      $str
+     * @param bool $not_gpc
+     * @return string|string[]|null
+     */
     public function prepare_text($str, $not_gpc = false)
     {
         if ($this->_flag_remove_control_code) {
@@ -151,6 +168,11 @@ class Strings
         return $str;
     }
 
+    /**
+     * @param      $str
+     * @param bool $not_gpc
+     * @return string|string[]|null
+     */
     public function prepare_textarea($str, $not_gpc = false)
     {
         if ($this->_flag_remove_control_code) {
@@ -162,6 +184,11 @@ class Strings
         return $str;
     }
 
+    /**
+     * @param      $str
+     * @param bool $not_gpc
+     * @return string
+     */
     public function prepare_url($str, $not_gpc = false)
     {
         if ($this->_flag_remove_control_code) {
@@ -177,6 +204,11 @@ class Strings
         return $str;
     }
 
+    /**
+     * @param      $arr
+     * @param bool $not_gpc
+     * @return array|bool|string|string[]|null
+     */
     public function &prepare_array($arr, $not_gpc = false)
     {
         $str = $this->_prepare_array_recursive(0, $arr, $not_gpc);
@@ -184,6 +216,12 @@ class Strings
         return $str;
     }
 
+    /**
+     * @param      $num
+     * @param      $arr_in
+     * @param bool $not_gpc
+     * @return array|bool|string|string[]|null
+     */
     public function _prepare_array_recursive($num, $arr_in, $not_gpc = false)
     {
         ++$num;
@@ -227,6 +265,11 @@ class Strings
     //   false: undo htmlentities
     //          ex ) &auml; => &amp;auml; => &auml;
     // --------------------------------------------------------
+    /**
+     * @param      $str
+     * @param bool $flag_amp
+     * @return array|string|string[]|null
+     */
     public function html_specialchars($str, $flag_amp = true)
     {
         if (is_array($str)) {
@@ -237,8 +280,8 @@ class Strings
         $str = htmlspecialchars($str, ENT_QUOTES);
 
         if (!$flag_amp) {
-            $str = happy_linux_undo_html_entity_name($str);
-            $str = happy_linux_undo_html_entity_numeric($str);
+            $str = happylinux_undo_html_entity_name($str);
+            $str = happylinux_undo_html_entity_numeric($str);
         }
 
         return $str;
@@ -254,14 +297,24 @@ class Strings
     //   &#039;  =>  '
     //   &apos;  =>  ' (xml format)
     // --------------------------------------------------------
+    /**
+     * @param $str
+     * @return string
+     */
     public function undo_html_specialchars($str)
     {
-        return happy_linux_undo_htmlspecialchars($str);
+        return happylinux_undo_htmlspecialchars($str);
     }
 
     // --------------------------------------------------------
     // sanitize and convert htmlspecialchars for text
     // --------------------------------------------------------
+    /**
+     * @param      $str
+     * @param bool $flag_java
+     * @param bool $flag_amp
+     * @return string|string[]|null
+     */
     public function sanitize_text($str, $flag_java = true, $flag_amp = false)
     {
         if ($this->_flag_remove_control_code) {
@@ -272,8 +325,8 @@ class Strings
         }
         $str = htmlspecialchars($str, ENT_QUOTES);
         if (!$flag_amp) {
-            $str = happy_linux_undo_html_entity_name($str);
-            $str = happy_linux_undo_html_entity_numeric($str);
+            $str = happylinux_undo_html_entity_name($str);
+            $str = happylinux_undo_html_entity_numeric($str);
         }
 
         return $str;
@@ -282,6 +335,12 @@ class Strings
     // --------------------------------------------------------
     // sanitize and convert htmlspecialchars for textarea
     // --------------------------------------------------------
+    /**
+     * @param      $str
+     * @param bool $flag_java
+     * @param bool $flag_amp
+     * @return string|string[]|null
+     */
     public function sanitize_textarea($str, $flag_java = true, $flag_amp = false)
     {
         if ($this->_flag_remove_control_code) {
@@ -292,8 +351,8 @@ class Strings
         }
         $str = htmlspecialchars($str, ENT_QUOTES);
         if (!$flag_amp) {
-            $str = happy_linux_undo_html_entity_name($str);
-            $str = happy_linux_undo_html_entity_numeric($str);
+            $str = happylinux_undo_html_entity_name($str);
+            $str = happylinux_undo_html_entity_numeric($str);
         }
 
         return $str;
@@ -302,6 +361,13 @@ class Strings
     //---------------------------------------------------------
     // sanitize and convert htmlspecialchars for url
     //---------------------------------------------------------
+    /**
+     * @param      $str
+     * @param bool $flag_java
+     * @param bool $flag_deny
+     * @param bool $flag_undo
+     * @return string
+     */
     public function sanitize_url($str, $flag_java = true, $flag_deny = true, $flag_undo = true)
     {
         if ($this->_flag_remove_control_code) {
@@ -314,7 +380,7 @@ class Strings
             $str = $this->deny_http_only($str);
         }
         if ($flag_undo) {
-            $str = happy_linux_undo_htmlspecialchars($str);
+            $str = happylinux_undo_htmlspecialchars($str);
         }
         $str = htmlspecialchars($str, ENT_QUOTES);
 
@@ -324,6 +390,10 @@ class Strings
     //---------------------------------------------------------
     // strip control code
     //---------------------------------------------------------
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function strip_control_all($str)
     {
         $str = $this->strip_control($str);
@@ -339,33 +409,60 @@ class Strings
     // LF  \xOA \n
     // CR  \xOD \r
     //---------------------------------------------------------
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function strip_control($str)
     {
         return $this->replace_control($str, '');
     }
 
+    /**
+     * @param $str
+     * @param $replace
+     * @return string|string[]|null
+     */
     public function replace_control($str, $replace)
     {
-        return happy_linux_str_replace_control_code($str, $replace);
+        return happylinux_str_replace_control_code($str, $replace);
     }
 
     // strip TAB code
+
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function strip_tab($str)
     {
-        return happy_linux_str_replace_tab_code($str, '');
+        return happylinux_str_replace_tab_code($str, '');
     }
 
     // strip LF, CR code
+
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function strip_return($str)
     {
-        return happy_linux_str_replace_return_code($str, '');
+        return happylinux_str_replace_return_code($str, '');
     }
 
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function replace_return_to_space($str)
     {
-        return happy_linux_str_replace_return_code($str, ' ');
+        return happylinux_str_replace_return_code($str, ' ');
     }
 
+    /**
+     * @param $arr_in
+     * @return array|bool|string|string[]|null
+     */
     public function &strip_control_array($arr_in)
     {
         $ret = $this->_replace_control_array_recursive(0, $arr_in, '');
@@ -373,6 +470,11 @@ class Strings
         return $ret;
     }
 
+    /**
+     * @param $arr_in
+     * @param $replace
+     * @return array|bool|string|string[]|null
+     */
     public function &replace_control_array($arr_in, $replace)
     {
         $ret = $this->_replace_control_array_recursive(0, $arr_in, $replace);
@@ -380,6 +482,12 @@ class Strings
         return $ret;
     }
 
+    /**
+     * @param $num
+     * @param $arr_in
+     * @param $replace
+     * @return array|bool|string|string[]|null
+     */
     public function _replace_control_array_recursive($num, $arr_in, $replace)
     {
         ++$num;
@@ -411,45 +519,74 @@ class Strings
     // strip space code
     // SPACE \x20
     //---------------------------------------------------------
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function strip_space_code($str)
     {
-        return happy_linux_str_replace_space_code($str, '');
+        return happylinux_str_replace_space_code($str, '');
     }
 
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function strip_html_space_code($str)
     {
-        return happy_linux_str_replace_html_space_code($str, '');
+        return happylinux_str_replace_html_space_code($str, '');
     }
 
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function replace_html_amp_space_code_to_space($str)
     {
         return preg_replace('/&amp;nbsp;/i', ' ', $str);
     }
 
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function replace_space_code_to_single_space($str)
     {
-        return happy_linux_str_replace_html_space_code($str, ' ');
+        return happylinux_str_replace_html_space_code($str, ' ');
     }
 
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function replace_html_space_code_to_space($str)
     {
-        return happy_linux_str_replace_continuous_space_code($str, ' ');
+        return happylinux_str_replace_continuous_space_code($str, ' ');
     }
 
     //--------------------------------------------------------
     // javascript
     //--------------------------------------------------------
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function replace_javascript($str)
     {
-        $str = happy_linux_html_replace_javascript($str);
-        $str = happy_linux_html_replace_javascript_colon($str);
-        $str = happy_linux_html_replace_vbscript_colon($str);
-        $str = happy_linux_html_replace_about_colon($str);
+        $str = happylinux_html_replace_javascript($str);
+        $str = happylinux_html_replace_javascript_colon($str);
+        $str = happylinux_html_replace_vbscript_colon($str);
+        $str = happylinux_html_replace_about_colon($str);
 
         return $str;
     }
 
     // deny_javascript
+
+    /**
+     * @param $str
+     * @return string
+     */
     public function deny_javascript($str)
     {
         if ($this->check_javascript($str)) {
@@ -460,20 +597,25 @@ class Strings
     }
 
     // Checks if Javascript are included in string
+
+    /**
+     * @param $str
+     * @return bool
+     */
     public function check_javascript($str)
     {
         $str = $this->strip_control_all($str);
 
-        if (happy_linux_html_check_javascript($str)) {
+        if (happylinux_html_check_javascript($str)) {
             return true;    // include JavaScript
         }
-        if (happy_linux_html_check_javascript_colon($str)) {
+        if (happylinux_html_check_javascript_colon($str)) {
             return true;    // include JavaScript
         }
-        if (happy_linux_html_check_vbscript_colon($str)) {
+        if (happylinux_html_check_vbscript_colon($str)) {
             return true;    // include vbscript
         }
-        if (happy_linux_html_check_about_colon($str)) {
+        if (happylinux_html_check_about_colon($str)) {
             return true;    // include about
         }
 
@@ -483,6 +625,10 @@ class Strings
     //--------------------------------------------------------
     // sanitize array
     //--------------------------------------------------------
+    /**
+     * @param $arr_in
+     * @return array|bool|string|string[]|null
+     */
     public function &sanitize_array_text($arr_in)
     {
         $ret = $this->_sanitize_array_text_recursive(0, $arr_in);
@@ -490,6 +636,11 @@ class Strings
         return $ret;
     }
 
+    /**
+     * @param $num
+     * @param $arr_in
+     * @return array|bool|string|string[]|null
+     */
     public function _sanitize_array_text_recursive($num, $arr_in)
     {
         ++$num;
@@ -520,6 +671,11 @@ class Strings
     //--------------------------------------------------------
     // sanitize for XOOPS object
     //--------------------------------------------------------
+    /**
+     * @param        $value
+     * @param string $format
+     * @return string|string[]|null
+     */
     public function sanitize_format($value, $format = 's')
     {
         $ret = $this->sanitize_format_text($value, $format);
@@ -527,6 +683,11 @@ class Strings
         return $ret;
     }
 
+    /**
+     * @param        $value
+     * @param string $format
+     * @return string|string[]|null
+     */
     public function sanitize_format_text($value, $format = 's')
     {
         switch (mb_strtolower($format)) {
@@ -552,6 +713,11 @@ class Strings
         return $value;
     }
 
+    /**
+     * @param        $value
+     * @param string $format
+     * @return string|string[]|null
+     */
     public function sanitize_format_textarea($value, $format = 's')
     {
         switch (mb_strtolower($format)) {
@@ -577,6 +743,11 @@ class Strings
         return $value;
     }
 
+    /**
+     * @param        $value
+     * @param string $format
+     * @return string
+     */
     public function sanitize_format_url($value, $format = 's')
     {
         switch (mb_strtolower($format)) {
@@ -602,6 +773,12 @@ class Strings
         return $value;
     }
 
+    /**
+     * @param        $value
+     * @param string $format
+     * @param int    $max
+     * @return string
+     */
     public function sanitize_format_text_short($value, $format = 's', $max = 100)
     {
         if ($value) {
@@ -620,6 +797,11 @@ class Strings
     //--------------------------------------------------------
     // get_magic_quotes_gpc
     //--------------------------------------------------------
+    /**
+     * @param      $str
+     * @param bool $not_gpc
+     * @return array|string
+     */
     public function strip_slashes_gpc_flag($str, $not_gpc = false)
     {
         if (!$not_gpc) {
@@ -629,6 +811,10 @@ class Strings
         return $str;
     }
 
+    /**
+     * @param $str
+     * @return array|string
+     */
     public function strip_slashes_gpc($str)
     {
         if (@get_magic_quotes_gpc() && !is_array($str)) {
@@ -638,6 +824,10 @@ class Strings
         return $str;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function &add_slashes_gpc($str)
     {
         if (@!get_magic_quotes_gpc()) {
@@ -647,6 +837,10 @@ class Strings
         return $str;
     }
 
+    /**
+     * @param $arr_in
+     * @return array
+     */
     public function &strip_slashes_array_gpc(&$arr_in)
     {
         $arr_out = &$arr_in;
@@ -657,6 +851,10 @@ class Strings
         return $arr_out;
     }
 
+    /**
+     * @param $arr_in
+     * @return array
+     */
     public function &strip_slashes_array($arr_in)
     {
         $arr_out = [];
@@ -674,6 +872,10 @@ class Strings
     //--------------------------------------------------------
     // check url string
     //--------------------------------------------------------
+    /**
+     * @param $str
+     * @return string
+     */
     public function deny_http_only($str)
     {
         if ($this->check_http_only($str)) {
@@ -683,6 +885,10 @@ class Strings
         return $str;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function allow_http($str)
     {
         if ($this->check_http_start($str)) {
@@ -693,6 +899,11 @@ class Strings
     }
 
     // Checks if string is started from HTTP
+
+    /**
+     * @param $str
+     * @return bool
+     */
     public function check_http_start($str)
     {
         if (preg_match('|^https?://|', $str)) {
@@ -703,15 +914,24 @@ class Strings
     }
 
     // Checks if string is HTTP only
+
+    /**
+     * @param $str
+     * @return bool
+     */
     public function check_http_only($str)
     {
-        if (('https://' == $str) || ('https://' == $str)) {
+        if (('http://' == $str) || ('https://' == $str)) {
             return true;    // http only
         }
 
         return false;
     }
 
+    /**
+     * @param $str
+     * @return bool
+     */
     public function check_http_fill($str)
     {
         if (('' != $str) && ('https://' != $str) && ('https://' != $str)) {
@@ -728,6 +948,10 @@ class Strings
     // RFC2822 Internet Message Format
     // https://www.faqs.org/rfcs/rfc2822.html
     //--------------------------------------------------------
+    /**
+     * @param $str
+     * @return bool
+     */
     public function check_email_format($str)
     {
         if (preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+([\.][a-z0-9-]+)+$/i", $str)) {
@@ -743,6 +967,13 @@ class Strings
     // --------------------------------------------------------
     // summary
     // --------------------------------------------------------
+    /**
+     * @param        $text
+     * @param        $max
+     * @param null   $keyword_array
+     * @param string $format
+     * @return string|string[]|null
+     */
     public function build_summary($text, $max, $keyword_array = null, $format = 'n')
     {
         $text = $this->strip_tags_for_text($text);
@@ -752,6 +983,10 @@ class Strings
         return $text;
     }
 
+    /**
+     * @param $text
+     * @return string
+     */
     public function strip_tags_for_text($text)
     {
         if ($this->_flag_remove_control_code) {
@@ -767,33 +1002,53 @@ class Strings
         return $text;
     }
 
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function strip_script_tag($text)
     {
-        return happy_linux_html_remove_script($text);
+        return happylinux_html_remove_script($text);
     }
 
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function strip_style_tag($text)
     {
-        return happy_linux_html_remove_style($text);
+        return happylinux_html_remove_style($text);
     }
 
+    /**
+     * @param $text
+     * @return string|string[]
+     */
     public function add_space_after_tag($text)
     {
-        return happy_linux_str_add_space_after_tag($text);
+        return happylinux_str_add_space_after_tag($text);
     }
 
+    /**
+     * @param $text
+     * @return false|string
+     */
     public function add_space_after_punctuation($text)
     {
         // BUG: not show smile icon
-        //  $text = happy_linux_str_add_space_after_punctuation($text);
+        //  $text = happylinux_str_add_space_after_punctuation($text);
 
         if ($this->_is_japanese) {
-            $text = happy_linux_str_add_space_after_punctuation_ja($text);
+            $text = happylinux_str_add_space_after_punctuation_ja($text);
         }
 
         return $text;
     }
 
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function strip_space($str)
     {
         if ($this->_is_japanese) {
@@ -805,14 +1060,22 @@ class Strings
         return $str;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function set_empty_if_only_space($str)
     {
-        return happy_linux_str_set_empty_if_only_space($str);
+        return happylinux_str_set_empty_if_only_space($str);
     }
 
     //--------------------------------------------------------
     // split_nl
     //--------------------------------------------------------
+    /**
+     * @param $text
+     * @return false|string[]
+     */
     public function split_nl($text)
     {
         $text = $this->convert_nl($text);
@@ -824,6 +1087,10 @@ class Strings
     //--------------------------------------------------------
     // convert_nl
     //--------------------------------------------------------
+    /**
+     * @param $text
+     * @return string|string[]
+     */
     public function convert_nl($text)
     {
         $text = str_replace("\r\n", "\n", $text);
@@ -833,6 +1100,10 @@ class Strings
         return $text;
     }
 
+    /**
+     * @param $str
+     * @return string|string[]
+     */
     public function convert_str_to_crlf($str)
     {
         $str = str_replace('\r\n', "\r\n", $str);
@@ -845,6 +1116,10 @@ class Strings
     //--------------------------------------------------------
     // check valid strings
     //--------------------------------------------------------
+    /**
+     * @param $str
+     * @return bool
+     */
     public function check_valid($str)
     {
         // remove control and space
@@ -864,6 +1139,11 @@ class Strings
     // --------------------------------------------------------
     // utility for array
     // --------------------------------------------------------
+    /**
+     * @param $arr1
+     * @param $arr2
+     * @return array|bool
+     */
     public function &merge_unique_array($arr1, $arr2)
     {
         $arr = false;
@@ -875,6 +1155,11 @@ class Strings
         return $arr;
     }
 
+    /**
+     * @param $glue
+     * @param $arr
+     * @return bool|string
+     */
     public function implode_array($glue, $arr)
     {
         $val = false;
@@ -885,6 +1170,11 @@ class Strings
         return $val;
     }
 
+    /**
+     * @param        $arr
+     * @param string $glue
+     * @return bool|string
+     */
     public function urlencode_from_array($arr, $glue = ' ')
     {
         $val = false;
@@ -896,6 +1186,11 @@ class Strings
         return $val;
     }
 
+    /**
+     * @param     $arr_in
+     * @param int $without
+     * @return array
+     */
     public function &build_unique_array_without($arr_in, $without = 0)
     {
         $arr_out = [];
@@ -920,6 +1215,11 @@ class Strings
         return $arr_out;
     }
 
+    /**
+     * @param      $arr
+     * @param bool $flag_sanitize
+     * @return string|string[]|null
+     */
     public function sanitize_var_export($arr, $flag_sanitize = true)
     {
         if (is_array($arr)) {
@@ -938,6 +1238,11 @@ class Strings
         return $text;
     }
 
+    /**
+     * @param      $str
+     * @param bool $flag_sanitize
+     * @return string|string[]|null
+     */
     public function sanitize_text_by_flag($str, $flag_sanitize = true)
     {
         if ($flag_sanitize) {
@@ -952,6 +1257,11 @@ class Strings
     //--------------------------------------------------------
     // add strings to tail
     //--------------------------------------------------------
+    /**
+     * @param $str
+     * @param $add
+     * @return string
+     */
     public function add_str_to_tail($str, $add)
     {
         if ($add && (mb_substr(trim($str), -1, 1) != $add)) {
@@ -964,6 +1274,10 @@ class Strings
     // --------------------------------------------------------
     // convert bool, int to strings
     // --------------------------------------------------------
+    /**
+     * @param $bool
+     * @return string
+     */
     public function bool_to_str($bool)
     {
         $str = 'false';
@@ -974,6 +1288,10 @@ class Strings
         return $str;
     }
 
+    /**
+     * @param $int
+     * @return bool
+     */
     public function bool_val($int)
     {
         $bool = false;
@@ -988,6 +1306,10 @@ class Strings
     // onvert_array_key_to_string
     // array($key => $value)  ==> $key:$value
     // --------------------------------------------------------
+    /**
+     * @param $arr
+     * @return string
+     */
     public function convert_array_key_to_string($arr)
     {
         if ((0 == count($arr)) || !is_array($arr)) {
@@ -1006,6 +1328,11 @@ class Strings
         return $str;
     }
 
+    /**
+     * @param        $str
+     * @param string $format
+     * @return array
+     */
     public function convert_string_to_array_key($str, $format = 'n')
     {
         $array = [];
@@ -1032,6 +1359,11 @@ class Strings
     // convert array to string
     // array($a, $b, $c)  ==> $a & $b & $c
     //---------------------------------------------------------
+    /**
+     * @param        $arr
+     * @param string $pattern
+     * @return string
+     */
     public function convert_array_to_string($arr, $pattern = '&')
     {
         if (is_array($arr)) {
@@ -1049,6 +1381,11 @@ class Strings
         return $str;
     }
 
+    /**
+     * @param        $str
+     * @param string $pattern
+     * @return array
+     */
     public function &convert_string_to_array($str, $pattern = '&')
     {
         $arr = [];
@@ -1076,6 +1413,10 @@ class Strings
     //-------------------------------------------------------------------
     // parse strings
     //-------------------------------------------------------------------
+    /**
+     * @param $name
+     * @return int|string
+     */
     public function parse_tail_figure($name)
     {
         // take out the figure of the tail
@@ -1088,6 +1429,16 @@ class Strings
     //-------------------------------------------------------------------
     // time utility
     //-------------------------------------------------------------------
+    /**
+     * @param        $time
+     * @param string $y
+     * @param string $m
+     * @param string $d
+     * @param string $h
+     * @param string $i
+     * @param string $s
+     * @return array
+     */
     public function &split_time_ymd($time, $y = 'Y', $m = 'n', $d = 'd', $h = 'H', $i = 'i', $s = 's')
     {
         $year  = date($y, $time);
@@ -1110,6 +1461,10 @@ class Strings
     //   type 1: foo.php?
     //   type 2: foo.php?bar=abc
     //---------------------------------------------------------
+    /**
+     * @param $script
+     * @return int
+     */
     public function analyze_script_type($script)
     {
         $type = 0;  // foo.php
@@ -1127,6 +1482,12 @@ class Strings
         return $type;
     }
 
+    /**
+     * @param $script
+     * @param $add
+     * @param $type
+     * @return string
+     */
     public function add_script_by_type($script, $add, $type)
     {
         $ret = $script;
@@ -1144,16 +1505,25 @@ class Strings
     //--------------------------------------------------------
     // set parameter
     //--------------------------------------------------------
+    /**
+     * @param $value
+     */
     public function set_max_summary($value)
     {
         $this->_max_summary = (int)$value;
     }
 
+    /**
+     * @param $val
+     */
     public function set_flag_remove_control_code($val)
     {
         $this->_flag_remove_control_code = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_is_japanese($val)
     {
         $this->_is_japanese = (bool)$val;
@@ -1162,6 +1532,12 @@ class Strings
     //========================================================
     // multibyte function
     //========================================================
+    /**
+     * @param      $text
+     * @param      $max
+     * @param null $keyword_array
+     * @return string
+     */
     public function shorten_text($text, $max, $keyword_array = null)
     {
         // nothing, if zero
@@ -1180,25 +1556,34 @@ class Strings
         }
 
         if (is_array($keyword_array)) {
-            $text = happy_linux_build_search_context($text, $keyword_array, $max);
+            $text = happylinux_build_search_context($text, $keyword_array, $max);
         } else {
-            $text = happy_linux_strcut($text, 0, $max) . ' ...';
+            $text = happylinux_strcut($text, 0, $max) . ' ...';
         }
 
         return $text;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function convert_space_zen_to_han($str)
     {
-        return happy_linux_convert_kana($str, 's');
+        return happylinux_convert_kana($str, 's');
     }
 
+    /**
+     * @param        $arr
+     * @param string $glue
+     * @return bool|string
+     */
     public function utf8_urlencode_from_array($arr, $glue = ' ')
     {
         $val = false;
         if (is_array($arr) && count($arr)) {
             $val = implode($glue, $arr);
-            $val = happy_linux_convert_to_utf8($val);
+            $val = happylinux_convert_to_utf8($val);
             $val = urlencode($val);
         }
 
@@ -1208,7 +1593,7 @@ class Strings
     //========================================================
     // measure time
     // this function is deprecated
-    // recommend happy_linux_time
+    // recommend Time
     //========================================================
     public function start_measure_time()
     {
@@ -1216,6 +1601,9 @@ class Strings
         $this->_time_current = $this->_time_start;
     }
 
+    /**
+     * @return float|int
+     */
     public function get_measure_time()
     {
         $time = $this->get_microtime() - $this->_time_start;
@@ -1223,6 +1611,9 @@ class Strings
         return $time;
     }
 
+    /**
+     * @return float
+     */
     public function get_microtime()
     {
         list($usec, $sec) = explode(' ', microtime());
@@ -1234,6 +1625,9 @@ class Strings
     //---------------------------------------------------------
     // xoops param
     //---------------------------------------------------------
+    /**
+     * @return bool
+     */
     public function is_module_admin_error_reporting_debug_print_backtrace()
     {
         if ($this->is_module_admin_error_reporting() && $this->exist_debug_print_backtrace()) {
@@ -1243,6 +1637,9 @@ class Strings
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function exist_debug_print_backtrace()
     {
         if (function_exists('debug_print_backtrace')) {
@@ -1252,6 +1649,9 @@ class Strings
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function is_module_admin_error_reporting()
     {
         if ($this->is_module_admin() && error_reporting()) {
@@ -1261,6 +1661,9 @@ class Strings
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function is_module_admin()
     {
         global $xoopsUser, $xoopsModule;

@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: xoops_block_checker.php,v 1.6 2007/11/26 02:49:28 ohwada Exp $
 
@@ -18,15 +18,20 @@ namespace XoopsModules\Happy_linux;
 // xoops cube 2.1 : class/xoopsblock.php and kernel/block.php are the same
 //---------------------------------------------------------
 
-include_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
-include_once XOOPS_ROOT_PATH . '/kernel/tplfile.php';
+require_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
+require_once XOOPS_ROOT_PATH . '/kernel/tplfile.php';
 
 //=========================================================
 // class BlockChecker
 //=========================================================
+
+/**
+ * Class BlockChecker
+ * @package XoopsModules\Happylinux
+ */
 class BlockChecker
 {
-    public $_tplfile_handler;
+    public $_tplfileHandler;
 
     public $_mid                 = 0;
     public $_dirname             = null;
@@ -40,10 +45,13 @@ class BlockChecker
     //---------------------------------------------------------
     public function __construct()
     {
-        $this->_tplfile_handler = xoops_getHandler('tplfile');
+        $this->_tplfileHandler = xoops_getHandler('tplfile');
         $this->_get_module_param();
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -57,24 +65,35 @@ class BlockChecker
     //---------------------------------------------------------
     // admin
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function build_menu_check_block()
     {
-        $text = '<h4>' . _HAPPY_LINUX_XOOPS_BLOCK_TABLE_CHECK . "</h4>\n";
+        $text = '<h4>' . _HAPPYLINUX_XOOPS_BLOCK_TABLE_CHECK . "</h4>\n";
         $text .= $this->check_block();
         $text .= "<br><br>\n";
 
         return $text;
     }
 
+    /**
+     * @param null   $action
+     * @param string $op
+     * @return string
+     */
     public function build_form_remove_block($action = null, $op = 'remove_block')
     {
         $form   = FormLib::getInstance();
-        $button = $form->build_lib_button($op, _HAPPY_LINUX_DELETE, $action);
-        $text   = $form->build_lib_box_style(_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE, _HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE_DESC, $button);
+        $button = $form->build_lib_button($op, _HAPPYLINUX_DELETE, $action);
+        $text   = $form->build_lib_box_style(_HAPPYLINUX_XOOPS_BLOCK_TABLE_REMOVE, _HAPPYLINUX_XOOPS_BLOCK_TABLE_REMOVE_DESC, $button);
 
         return $text;
     }
 
+    /**
+     * @return bool
+     */
     public function check_token()
     {
         $form = FormLib::getInstance();
@@ -82,18 +101,21 @@ class BlockChecker
         return $form->check_token();
     }
 
+    /**
+     * @return string
+     */
     public function execute_remove_block()
     {
         $text = '';
         $ret  = $this->remove_block();
         $text .= $this->_get_msg();
         if ($ret) {
-            $text .= '<h4 style="color:#0000ff">' . _HAPPY_LINUX_DELETED . "</h4>\n";
+            $text .= '<h4 style="color:#0000ff">' . _HAPPYLINUX_DELETED . "</h4>\n";
         } else {
-            $text .= '<h4 style="color:#ff0000">' . _HAPPY_LINUX_FAILED . "</h4>\n";
+            $text .= '<h4 style="color:#ff0000">' . _HAPPYLINUX_FAILED . "</h4>\n";
         }
-        $text .= _HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE_NEXT . "<br><br>\n";
-        $text .= '<a href="modules.php">' . _HAPPY_LINUX_AM_MODULE . "</a><br>\n";
+        $text .= _HAPPYLINUX_XOOPS_BLOCK_TABLE_REMOVE_NEXT . "<br><br>\n";
+        $text .= '<a href="modules.php">' . _HAPPYLINUX_AM_MODULE . "</a><br>\n";
 
         return $text;
     }
@@ -101,6 +123,9 @@ class BlockChecker
     //--------------------------------------------------------
     // function
     //--------------------------------------------------------
+    /**
+     * @return string
+     */
     public function check_block()
     {
         $this->_msg_array = [];
@@ -114,7 +139,7 @@ class BlockChecker
 
         foreach ($infos as $num => $info) {
             if (!isset($block_objs[$num])) {
-                $this->_err(htmlspecialchars($info['name']) . ': not exist in block table');
+                $this->_err(htmlspecialchars($info['name'], ENT_QUOTES | ENT_HTML5) . ': not exist in block table');
                 continue;
             }
 
@@ -124,6 +149,9 @@ class BlockChecker
         return $this->_get_msg();
     }
 
+    /**
+     * @return bool
+     */
     public function remove_block()
     {
         $error      = false;
@@ -152,6 +180,10 @@ class BlockChecker
     //--------------------------------------------------------
     // private
     //--------------------------------------------------------
+    /**
+     * @param $infos
+     * @return array
+     */
     public function &_make_overlap_template_list($infos)
     {
         // some module has same name templates
@@ -176,13 +208,19 @@ class BlockChecker
         return $overlap_list;
     }
 
+    /**
+     * @param $module_obj
+     * @param $info
+     * @param $block_obj
+     * @param $overlap_list
+     */
     public function _check_block_by_obj($module_obj, $info, $block_obj, $overlap_list)
     {
         $this->_error_flag = false;
 
         $dirname = $module_obj->getVar('dirname', 'n');
         $bid     = $block_obj->getVar('bid', 'n');
-        $name    = htmlspecialchars($info['name']);
+        $name    = htmlspecialchars($info['name'], ENT_QUOTES | ENT_HTML5);
 
         if (isset($info['file']) && ($info['file'] != $block_obj->getVar('func_file', 'n'))) {
             $this->_err($name . ': file unmatch');
@@ -232,17 +270,26 @@ class BlockChecker
         }
     }
 
+    /**
+     * @param $msg
+     */
     public function _msg($msg)
     {
         $this->_msg_array[] = $msg;
     }
 
+    /**
+     * @param $msg
+     */
     public function _err($msg)
     {
         $this->_msg_array[] = $this->_highlight($msg);
         $this->_error_flag  = true;
     }
 
+    /**
+     * @return string
+     */
     public function _get_msg()
     {
         $msg = implode("<br>\n", $this->_msg_array);
@@ -250,6 +297,10 @@ class BlockChecker
         return $msg;
     }
 
+    /**
+     * @param $msg
+     * @return string|null
+     */
     public function _highlight($msg)
     {
         $text = null;
@@ -263,6 +314,10 @@ class BlockChecker
     //--------------------------------------------------------
     // special module
     //--------------------------------------------------------
+    /**
+     * @param $dirname
+     * @return bool
+     */
     public function _is_special_module($dirname)
     {
         $dir = XOOPS_ROOT_PATH . '/modules/' . $dirname;
@@ -289,6 +344,9 @@ class BlockChecker
     //--------------------------------------------------------
     // module handler
     //--------------------------------------------------------
+    /**
+     * @return bool|FALSE|mixed|\XoopsModule
+     */
     public function &_get_module_obj()
     {
         global $xoopsModule;
@@ -303,6 +361,10 @@ class BlockChecker
         $this->_dirname = $xoopsModule->getVar('dirname', 'n');
     }
 
+    /**
+     * @param null $name
+     * @return array|bool|string
+     */
     public function &_get_module_info($name = null)
     {
         global $xoopsModule;
@@ -313,6 +375,10 @@ class BlockChecker
     //--------------------------------------------------------
     // block handler
     //--------------------------------------------------------
+    /**
+     * @param $mid
+     * @return array
+     */
     public function &_get_block_object_orber_num_by_mid($mid)
     {
         $arr  = [];
@@ -324,16 +390,25 @@ class BlockChecker
         return $arr;
     }
 
+    /**
+     * @param      $mid
+     * @param bool $asobject
+     * @return mixed
+     */
     public function &_get_block_object_by_mid($mid, $asobject = true)
     {
-        $objs = xoopsBlock::getByModule($mid, $asobject);
+        $objs = \XoopsBlock::getByModule($mid, $asobject);
 
         return $objs;
     }
 
+    /**
+     * @param $obj
+     * @return mixed
+     */
     public function _delete_block($obj)
     {
-        // NOT use xoops_gethandler in xoops 2.0.16jp
+        // NOT use xoops_getHandler in xoops 2.0.16jp
 
         $msg = 'block: ' . $obj->getVar('bid') . ' ' . $obj->getVar('name', 's');
         $ret = $obj->delete();
@@ -349,24 +424,35 @@ class BlockChecker
     //--------------------------------------------------------
     // tplfile handler
     //--------------------------------------------------------
+    /**
+     * @param null $block_id
+     * @param null $module
+     * @param null $file
+     * @return mixed
+     */
     public function _get_tplfile_count_by_file($block_id = null, $module = null, $file = null)
     {
-        $criteria = new CriteriaCompo();
-        $criteria->add(new Criteria('tpl_type', 'block'));
+        $criteria = new \CriteriaCompo();
+        $criteria->add(new \Criteria('tpl_type', 'block'));
         if (isset($block_id)) {
-            $criteria->add(new Criteria('tpl_refid', $block_id));
+            $criteria->add(new \Criteria('tpl_refid', $block_id));
         }
         if (isset($module)) {
-            $criteria->add(new Criteria('tpl_module', $module));
+            $criteria->add(new \Criteria('tpl_module', $module));
         }
         if (isset($file)) {
-            $criteria->add(new Criteria('tpl_file', $file));
+            $criteria->add(new \Criteria('tpl_file', $file));
         }
-        $count = $this->_tplfile_handler->getCount($criteria);
+        $count = $this->_tplfileHandler->getCount($criteria);
 
         return $count;
     }
 
+    /**
+     * @param $module_obj
+     * @param $block_obj
+     * @return bool
+     */
     public function _delete_tplfile_by_block_obj($module_obj, $block_obj)
     {
         $error    = false;
@@ -398,17 +484,26 @@ class BlockChecker
         return true;
     }
 
+    /**
+     * @param null $block_id
+     * @param null $module
+     * @param null $file
+     * @return mixed
+     */
     public function &_get_tplfile_objects_by_block_id($block_id = null, $module = null, $file = null)
     {
-        $objs = &$this->_tplfile_handler->find(null, 'block', $block_id, $module, $file);
+        $objs = $this->_tplfileHandler->find(null, 'block', $block_id, $module, $file);
 
         return $objs;
     }
 
+    /**
+     * @param $obj
+     */
     public function _delete_tplfile($obj)
     {
         $msg = 'tplfile: ' . $obj->getVar('tpl_id') . ' ' . $obj->getVar('tpl_file');
-        $ret = $this->_tplfile_handler->delete($obj);
+        $ret = $this->_tplfileHandler->delete($obj);
         if ($ret) {
             $this->_msg($msg);
         } else {

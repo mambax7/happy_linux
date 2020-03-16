@@ -1,6 +1,6 @@
 <?php
 
-namespace XoopsModules\Happy_linux;
+namespace XoopsModules\Happylinux;
 
 // $Id: form.php,v 1.20 2008/02/28 13:12:48 ohwada Exp $
 
@@ -35,7 +35,7 @@ namespace XoopsModules\Happy_linux;
 // change build_gticket_token()
 
 // 2006-09-20 K.OHWADA
-// divid to happy_linux_form happy_linux_form_lib
+// divid to happylinux_form happylinux_form_lib
 // use XoopsGTicket
 // add get_obj_var() etc
 // add set_action() set_op_value()
@@ -50,26 +50,31 @@ namespace XoopsModules\Happy_linux;
 // 2006-07-10 K.OHWADA
 //=========================================================
 
-define('HAPPY_LINUX_MODE_ADD', 0);
-define('HAPPY_LINUX_MODE_MOD', 1);
-define('HAPPY_LINUX_MODE_ADD_PREVIEW', 2);
-define('HAPPY_LINUX_MODE_MOD_PREVIEW', 3);
-define('HAPPY_LINUX_MODE_DEL_PREVIEW', 4);
+define('HAPPYLINUX_MODE_ADD', 0);
+define('HAPPYLINUX_MODE_MOD', 1);
+define('HAPPYLINUX_MODE_ADD_PREVIEW', 2);
+define('HAPPYLINUX_MODE_MOD_PREVIEW', 3);
+define('HAPPYLINUX_MODE_DEL_PREVIEW', 4);
 
 //=========================================================
 // class form
 //=========================================================
+
+/**
+ * Class Form
+ * @package XoopsModules\Happylinux
+ */
 class Form extends Html
 {
     // language
     public $_LANG_YES        = _YES;
     public $_LANG_NO         = _NO;
-    public $_LANG_FORM_TITLE = _HAPPY_LINUX_FORM_TITLE;
-    public $_LANG_VISIT      = _HAPPY_LINUX_FORM_VISIT;
+    public $_LANG_FORM_TITLE = _HAPPYLINUX_FORM_TITLE;
+    public $_LANG_VISIT      = _HAPPYLINUX_FORM_VISIT;
 
-    public $_LANG_BUTTON_SUBMIT_VALUE   = _HAPPY_LINUX_FORM_SUBMIT;
-    public $_LANG_BUTTON_CANCEL_VALUE   = _HAPPY_LINUX_FORM_CANCEL;
-    public $_LANG_BUTTON_LOCATION_VALUE = _HAPPY_LINUX_FORM_LOCATION;
+    public $_LANG_BUTTON_SUBMIT_VALUE   = _HAPPYLINUX_FORM_SUBMIT;
+    public $_LANG_BUTTON_CANCEL_VALUE   = _HAPPYLINUX_FORM_CANCEL;
+    public $_LANG_BUTTON_LOCATION_VALUE = _HAPPYLINUX_FORM_LOCATION;
     public $_LANG_BUTTON_CLOSE_VALUE    = _CLOSE;
 
     // color: red;  background-color: lightyellow;  border: gray
@@ -134,6 +139,9 @@ class Form extends Html
         parent::__construct();
     }
 
+    /**
+     * @return \XoopsModules\Happylinux\Form|\XoopsModules\Happylinux\Html|static
+     */
     public static function getInstance()
     {
         static $instance;
@@ -150,6 +158,14 @@ class Form extends Html
     //---------------------------------------------------------
     // build table form
     //---------------------------------------------------------
+    /**
+     * @param string $width
+     * @param string $height
+     * @param int    $cellpadding
+     * @param int    $cellspacing
+     * @param string $class
+     * @return string
+     */
     public function build_form_table_begin($width = '100%', $height = '', $cellpadding = 1, $cellspacing = 1, $class = 'outer')
     {
         $text = $this->build_html_table_tag_begin($width, $height, $cellpadding, $cellspacing, $class);
@@ -157,6 +173,9 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_form_table_end()
     {
         $text = $this->build_html_table_tag_end();
@@ -164,6 +183,12 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param string $title
+     * @param int    $th_colspan
+     * @param string $th_class
+     * @return string
+     */
     public function build_form_table_title($title = '', $th_colspan = 2, $th_class = '')
     {
         $th_align   = '';
@@ -183,6 +208,13 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param string $title
+     * @param string $ele
+     * @param string $title_class
+     * @param string $ele_class
+     * @return string
+     */
     public function build_form_table_line($title = '', $ele = '', $title_class = 'head', $ele_class = 'odd')
     {
         if (empty($title)) {
@@ -201,6 +233,11 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param        $value
+     * @param string $class
+     * @return string
+     */
     public function build_form_td_class($value, $class = '')
     {
         $text = $this->build_html_td_tag_class($class);
@@ -213,6 +250,14 @@ class Form extends Html
     //---------------------------------------------------------
     // build table form
     //---------------------------------------------------------
+    /**
+     * @param     $cap
+     * @param     $name
+     * @param     $value
+     * @param int $size
+     * @param int $maxlength
+     * @return string
+     */
     public function build_form_table_text($cap, $name, $value, $size = 50, $maxlength = 255)
     {
         $ele  = $this->build_html_input_text($name, $value, $size, $maxlength);
@@ -221,6 +266,14 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param        $cap
+     * @param        $name
+     * @param        $value
+     * @param string $rows
+     * @param string $cols
+     * @return string
+     */
     public function build_form_table_textarea($cap, $name, $value, $rows = '10', $cols = '60')
     {
         $ele  = $this->build_html_textarea($name, $value, $rows, $cols);
@@ -229,6 +282,14 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param        $cap
+     * @param        $name
+     * @param        $value
+     * @param        $options
+     * @param string $del
+     * @return string
+     */
     public function build_form_table_radio_select($cap, $name, $value, $options, $del = '')
     {
         $ele  = $this->build_html_input_radio_select($name, $value, $options, $del = '');
@@ -237,6 +298,12 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param $cap
+     * @param $name
+     * @param $value
+     * @return string
+     */
     public function build_form_table_submit($cap, $name, $value)
     {
         $ele  = $this->build_html_input_submit($name, $value);
@@ -245,6 +312,11 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param      $arr
+     * @param bool $flag_sanitize
+     * @return string
+     */
     public function build_form_table_by_array($arr, $flag_sanitize = true)
     {
         $text = $this->build_form_table_begin();
@@ -279,6 +351,9 @@ class Form extends Html
         $this->_line_count = 0;
     }
 
+    /**
+     * @return string
+     */
     public function build_form_class_even_odd()
     {
         if (0 == $this->_line_count % 2) {
@@ -295,6 +370,14 @@ class Form extends Html
     //---------------------------------------------------------
     // build form
     //---------------------------------------------------------
+    /**
+     * @param string $name
+     * @param string $action
+     * @param string $method
+     * @param string $enctype
+     * @param string $extra
+     * @return string
+     */
     public function build_form_begin($name = '', $action = '', $method = 'post', $enctype = '', $extra = '')
     {
         if (empty($name)) {
@@ -324,6 +407,9 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_form_end()
     {
         $text = $this->build_html_form_tag_end();
@@ -331,6 +417,9 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_form_name_rand()
     {
         $name = $this->_FORM_NAME_DEFAULT . '_' . mt_rand();
@@ -341,6 +430,11 @@ class Form extends Html
     //---------------------------------------------------------
     // complex form
     //---------------------------------------------------------
+    /**
+     * @param $name
+     * @param $value
+     * @return string
+     */
     public function build_form_radio_yesno($name, $value)
     {
         $value = (int)$value;
@@ -355,6 +449,9 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @return int[]
+     */
     public function &get_form_radio_yesno_options()
     {
         $arr = [
@@ -365,6 +462,11 @@ class Form extends Html
         return $arr;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return string
+     */
     public function build_form_checkbox_yesno($name, $value)
     {
         // check, if yes
@@ -374,6 +476,10 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param $val
+     * @return string
+     */
     public function build_html_error_with_style($val)
     {
         if ($val) {
@@ -383,6 +489,12 @@ class Form extends Html
         return $val;
     }
 
+    /**
+     * @param        $name
+     * @param int    $time
+     * @param string $format
+     * @return string|string[]|null
+     */
     public function build_form_select_time($name, $time = 0, $format = '%y - %m - %d  %h : %i')
     {
         $time = (int)$time;
@@ -439,6 +551,11 @@ class Form extends Html
         return $format;
     }
 
+    /**
+     * @param $post
+     * @param $name
+     * @return false|int
+     */
     public function get_unixtime_form_select_time_from_post($post, $name)
     {
         $year  = 0;
@@ -477,6 +594,12 @@ class Form extends Html
         return $time;
     }
 
+    /**
+     * @param     $post
+     * @param     $name
+     * @param int $default
+     * @return int
+     */
     public function get_unixtime_form_select_time_with_flag_from_post($post, $name, $default = 0)
     {
         $name_flag = $name . '_flag';
@@ -489,9 +612,17 @@ class Form extends Html
         return (int)$val;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param int    $rows
+     * @param int    $cols
+     * @param string $hiddentext
+     * @return mixed
+     */
     public function build_form_dhtml_textarea($name, $value, $rows = 5, $cols = 50, $hiddentext = 'xoopsHiddenText')
     {
-        $ele  = new XoopsFormDhtmlTextArea('', $name, $value, $rows, $cols, $hiddentext);
+        $ele  = new \XoopsFormDhtmlTextArea('', $name, $value, $rows, $cols, $hiddentext);
         $text = $ele->render();
 
         return $text;
@@ -500,6 +631,12 @@ class Form extends Html
     //---------------------------------------------------------
     // button
     //---------------------------------------------------------
+    /**
+     * @param string $name
+     * @param string $value
+     * @param string $extra
+     * @return string
+     */
     public function build_form_submit($name = '', $value = '', $extra = '')
     {
         $text = $this->build_form_button_submit($name, $value, $extra);
@@ -507,6 +644,12 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param string $name
+     * @param string $value
+     * @param string $extra
+     * @return string
+     */
     public function build_form_button_submit($name = '', $value = '', $extra = '')
     {
         if (empty($name)) {
@@ -522,6 +665,11 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param string $name
+     * @param string $value
+     * @return string
+     */
     public function build_form_button_cancel($name = '', $value = '')
     {
         if (empty($name)) {
@@ -537,6 +685,12 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @param $url
+     * @return string
+     */
     public function build_form_button_location($name, $value, $url)
     {
         if (empty($name)) {
@@ -552,6 +706,11 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return string
+     */
     public function build_form_button_close($name, $value)
     {
         if (empty($name)) {
@@ -565,6 +724,12 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param string $name
+     * @param string $value
+     * @param string $style
+     * @return string
+     */
     public function build_form_button_close_style($name = '', $value = '', $style = 'text-align:center;')
     {
         $text = $this->build_form_button_close($name, $value);
@@ -578,6 +743,11 @@ class Form extends Html
     //---------------------------------------------------------
     // substute
     //---------------------------------------------------------
+    /**
+     * @param        $value
+     * @param string $default
+     * @return string
+     */
     public function substute_blank($value, $default = '&nbsp;')
     {
         if ('' == $value) {
@@ -587,6 +757,11 @@ class Form extends Html
         return $value;
     }
 
+    /**
+     * @param        $value
+     * @param string $default
+     * @return string
+     */
     public function substute_http($value, $default = 'https://')
     {
         if ('' == $value) {
@@ -599,11 +774,19 @@ class Form extends Html
     //================================================================
     // build object element
     //================================================================
+    /**
+     * @param $obj
+     */
     public function set_obj($obj)
     {
         $this->_obj = $obj;
     }
 
+    /**
+     * @param        $key
+     * @param string $format
+     * @return mixed
+     */
     public function get_obj_var($key, $format = 's')
     {
         $val = $this->_obj->getVar($key, $format);
@@ -611,6 +794,11 @@ class Form extends Html
         return $val;
     }
 
+    /**
+     * @param $caption
+     * @param $key
+     * @return string
+     */
     public function build_obj_table_label($caption, $key)
     {
         $value = $this->_obj->getVar($key, 's');
@@ -619,6 +807,13 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param        $caption
+     * @param        $key
+     * @param string $size
+     * @param string $maxlength
+     * @return string
+     */
     public function build_obj_table_text($caption, $key, $size = '', $maxlength = '')
     {
         $ele  = $this->build_obj_text($key, $size, $maxlength);
@@ -627,6 +822,13 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param        $caption
+     * @param        $key
+     * @param string $rows
+     * @param string $cols
+     * @return string
+     */
     public function build_obj_table_textarea($caption, $key, $rows = '', $cols = '')
     {
         $ele  = $this->build_obj_textarea($key, $rows, $cols);
@@ -635,6 +837,11 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param $caption
+     * @param $key
+     * @return string
+     */
     public function build_obj_table_radio_yesno($caption, $key)
     {
         $ele  = $this->build_obj_radio_yesno($key);
@@ -643,6 +850,12 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param        $key
+     * @param string $size
+     * @param string $maxlength
+     * @return string
+     */
     public function build_obj_text($key, $size = '', $maxlength = '')
     {
         if (empty($size)) {
@@ -657,6 +870,12 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param        $key
+     * @param string $rows
+     * @param string $cols
+     * @return string
+     */
     public function build_obj_textarea($key, $rows = '', $cols = '')
     {
         if (empty($rows)) {
@@ -671,6 +890,10 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param $key
+     * @return string
+     */
     public function build_obj_radio_yesno($key)
     {
         $value = $this->_obj->getVar($key, 's');
@@ -682,6 +905,11 @@ class Form extends Html
     //================================================================
     // build edit element
     //================================================================
+    /**
+     * @param $name
+     * @param $urllist
+     * @return string
+     */
     public function build_edit_textarea_urllist($name, $urllist)
     {
         $url_s = $this->build_edit_url($urllist);
@@ -690,6 +918,15 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $url
+     * @param int    $size
+     * @param int    $maxlength
+     * @param string $extra
+     * @param string $del
+     * @return string
+     */
     public function build_edit_url_with_visit($name, $url, $size = 70, $maxlength = 255, $extra = '', $del = '')
     {
         $url_s = $this->build_edit_url($url);
@@ -709,6 +946,11 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param        $url
+     * @param string $default
+     * @return string
+     */
     public function build_edit_url($url, $default = 'https://')
     {
         if ($url) {
@@ -722,6 +964,11 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param        $url
+     * @param string $target
+     * @return string|string[]
+     */
     public function build_edit_visit($url, $target = '_blank')
     {
         $ret = $this->build_html_a_href_name($url, $this->get_edit_visit_mark(), $target);
@@ -729,6 +976,9 @@ class Form extends Html
         return $ret;
     }
 
+    /**
+     * @return string
+     */
     public function get_edit_visit_mark()
     {
         $mark = ' [' . $this->_LANG_VISIT . '] ';
@@ -742,6 +992,11 @@ class Form extends Html
     //---------------------------------------------------------
     // build data form
     //---------------------------------------------------------
+    /**
+     * @param $caption
+     * @param $key
+     * @return string
+     */
     public function build_data_table_label_hidden($caption, $key)
     {
         $value = $this->get_data_value($key);
@@ -752,6 +1007,11 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param $caption
+     * @param $key
+     * @return string
+     */
     public function build_data_table_label($caption, $key)
     {
         $ele  = $this->get_data_value($key);
@@ -760,6 +1020,11 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param $caption
+     * @param $key
+     * @return string
+     */
     public function build_data_table_text($caption, $key)
     {
         $ele  = $this->build_data_text($key);
@@ -768,6 +1033,11 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param $caption
+     * @param $key
+     * @return string
+     */
     public function build_data_table_textarea($caption, $key)
     {
         $ele = $this->build_data_textarea($key);
@@ -777,6 +1047,11 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param $caption
+     * @param $key
+     * @return string
+     */
     public function build_data_table_radio_yesno($caption, $key)
     {
         $ele  = $this->build_data_radio_yesno($key);
@@ -785,6 +1060,10 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param $key
+     * @return string
+     */
     public function build_data_text($key)
     {
         $value = $this->get_data_value($key);
@@ -793,6 +1072,10 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param $key
+     * @return string
+     */
     public function build_data_textarea($key)
     {
         $value = $this->get_data_value($key);
@@ -801,6 +1084,10 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param $key
+     * @return string
+     */
     public function build_data_radio_yesno($key)
     {
         $value = $this->get_data_value($key);
@@ -809,6 +1096,11 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param     $key
+     * @param int $max
+     * @return string
+     */
     public function build_data_short($key, $max = 100)
     {
         $value = '';
@@ -827,6 +1119,10 @@ class Form extends Html
         return $value;
     }
 
+    /**
+     * @param $key
+     * @return bool|mixed
+     */
     public function get_data_value($key)
     {
         $val = false;
@@ -837,6 +1133,10 @@ class Form extends Html
         return $val;
     }
 
+    /**
+     * @param $key
+     * @return bool
+     */
     public function isset_data_value($key)
     {
         if (isset($this->_datas[$key])) {
@@ -849,31 +1149,56 @@ class Form extends Html
     //---------------------------------------------------------
     // show for manage class
     //---------------------------------------------------------
+    /**
+     * @param      $obj
+     * @param null $extra
+     */
     public function _show_add($obj, $extra = null)
     {
-        $this->_show($obj, $extra, HAPPY_LINUX_MODE_ADD);
+        $this->_show($obj, $extra, HAPPYLINUX_MODE_ADD);
     }
 
+    /**
+     * @param      $obj
+     * @param null $extra
+     */
     public function _show_mod($obj, $extra = null)
     {
-        $this->_show($obj, $extra, HAPPY_LINUX_MODE_MOD);
+        $this->_show($obj, $extra, HAPPYLINUX_MODE_MOD);
     }
 
+    /**
+     * @param      $obj
+     * @param null $extra
+     */
     public function _show_add_preview($obj, $extra = null)
     {
-        $this->_show($obj, $extra, HAPPY_LINUX_MODE_ADD_PREVIEW);
+        $this->_show($obj, $extra, HAPPYLINUX_MODE_ADD_PREVIEW);
     }
 
+    /**
+     * @param      $obj
+     * @param null $extra
+     */
     public function _show_mod_preview($obj, $extra = null)
     {
-        $this->_show($obj, $extra, HAPPY_LINUX_MODE_MOD_PREVIEW);
+        $this->_show($obj, $extra, HAPPYLINUX_MODE_MOD_PREVIEW);
     }
 
+    /**
+     * @param      $obj
+     * @param null $extra
+     */
     public function _show_del_preview($obj, $extra = null)
     {
-        $this->_show($obj, $extra, HAPPY_LINUX_MODE_DEL_PREVIEW);
+        $this->_show($obj, $extra, HAPPYLINUX_MODE_DEL_PREVIEW);
     }
 
+    /**
+     * @param      $obj
+     * @param null $extra
+     * @param int  $mode
+     */
     public function _show($obj, $extra = null, $mode = 0)
     {
         // dummy
@@ -882,6 +1207,11 @@ class Form extends Html
     //---------------------------------------------------------
     // utility
     //---------------------------------------------------------
+    /**
+     * @param        $title
+     * @param string $desc
+     * @return string
+     */
     public function build_form_caption($title, $desc = '')
     {
         $text = '';
@@ -915,6 +1245,10 @@ class Form extends Html
     //---------------------------------------------------------
     // XOOPS JavaScript
     //---------------------------------------------------------
+    /**
+     * @param $form_name
+     * @return string
+     */
     public function build_xoops_js_checkall($form_name)
     {
         $value   = '';
@@ -928,6 +1262,11 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param $form_name
+     * @param $value
+     * @return string
+     */
     public function build_xoops_js_checkbox($form_name, $value)
     {
         $name = $form_name . '_id[]';
@@ -936,6 +1275,9 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_form_js_checkall()
     {
         $text = $this->build_xoops_js_checkall($this->_FORM_NAME);
@@ -943,6 +1285,10 @@ class Form extends Html
         return $text;
     }
 
+    /**
+     * @param $value
+     * @return string
+     */
     public function build_form_js_checkbox($value)
     {
         $text = $this->build_xoops_js_checkbox($this->_FORM_NAME, $value);
@@ -954,6 +1300,9 @@ class Form extends Html
     // token class
     //=========================================================
     // return html format
+    /**
+     * @return string|null
+     */
     public function build_token()
     {
         switch ($this->_SEL_TOKEN_CLASS) {
@@ -966,12 +1315,19 @@ class Form extends Html
     }
 
     // return ( name, value )
-    public function &get_token_pair()
+
+    /**
+     * @return array|null
+     */
+    public function get_token_pair()
     {
         return $this->get_token();
     }
 
-    public function &get_token()
+    /**
+     * @return array|null
+     */
+    public function get_token()
     {
         switch ($this->_SEL_TOKEN_CLASS) {
             case 'xoops':
@@ -984,6 +1340,10 @@ class Form extends Html
         return null;    // dummy
     }
 
+    /**
+     * @param bool $allow_repost
+     * @return bool
+     */
     public function check_token($allow_repost = false)
     {
         if ($this->_DEBUG_CHECK_TOKEN) {
@@ -1002,6 +1362,9 @@ class Form extends Html
     //---------------------------------------------------------
     // XoopsMultiTokenHandler
     //---------------------------------------------------------
+    /**
+     * @return string
+     */
     public function build_xoops_token()
     {
         if (class_exists('XoopsMultiTokenHandler')) {
@@ -1014,10 +1377,14 @@ class Form extends Html
     }
 
     // return ( name, value )
+
+    /**
+     * @return array
+     */
     public function &get_xoops_token()
     {
         if (class_exists('XoopsMultiTokenHandler')) {
-            $token = XoopsMultiTokenHandler::quickCreate($this->_TOKEN_NAME);
+            $token = \XoopsMultiTokenHandler::quickCreate($this->_TOKEN_NAME);
             $name  = $token->getTokenName();
             $value = $token->getTokenValue();
         } else {
@@ -1029,10 +1396,13 @@ class Form extends Html
         return $arr;
     }
 
+    /**
+     * @return bool
+     */
     public function check_xoops_token()
     {
         if (class_exists('XoopsMultiTokenHandler')) {
-            if (!XoopsMultiTokenHandler::quickValidate($this->_TOKEN_NAME)) {
+            if (!\XoopsMultiTokenHandler::quickValidate($this->_TOKEN_NAME)) {
                 return false;
             }
         }
@@ -1044,6 +1414,9 @@ class Form extends Html
     //---------------------------------------------------------
     // XoopsGTicket
     //---------------------------------------------------------
+    /**
+     * @return string|null
+     */
     public function build_gticket_token()
     {
         // get same token on one page, becuase max ticket is 10
@@ -1063,6 +1436,10 @@ class Form extends Html
     }
 
     // return ( name, value )
+
+    /**
+     * @return array
+     */
     public function &get_gticket_token()
     {
         global $xoopsGTicket;
@@ -1078,6 +1455,10 @@ class Form extends Html
         return $arr;
     }
 
+    /**
+     * @param bool $allow_repost
+     * @return bool
+     */
     public function check_gticket_token($allow_repost = false)
     {
         global $xoopsGTicket;
@@ -1095,121 +1476,193 @@ class Form extends Html
     //---------------------------------------------------------
     // set parameter
     //---------------------------------------------------------
+    /**
+     * @param $value
+     */
     public function set_form_name($value)
     {
         $this->_FORM_NAME = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_action($value)
     {
         $this->_ACTION = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_token_name($value)
     {
         $this->_TOKEN_NAME = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_form_method($value)
     {
         $this->_FORM_METHOD = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_button_sumbit_name($value)
     {
         $this->_BUTTON_SUBMIT_NAME = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_button_cancel_name($value)
     {
         $this->_BUTTON_CANCEL_NAME = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_button_location_name($value)
     {
         $this->_BUTTON_LOCATION_NAME = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_submit_value($value)
     {
         $this->set_button_submit_value($value);
     }
 
+    /**
+     * @param $value
+     */
     public function set_button_submit_value($value)
     {
         $this->_LANG_BUTTON_SUBMIT_VALUE = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_button_cancel_value($value)
     {
         $this->_LANG_BUTTON_CANCEL_VALUE = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_button_location_value($value)
     {
         $this->_LANG_BUTTON_LOCATION_VALUE = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_form_title($value)
     {
         $this->_LANG_FORM_TITLE = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_op_name($value)
     {
         $this->_OP_NAME = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_op_value($value)
     {
         $this->_op_value = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_title_class($value)
     {
         $this->_table_title_class = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_ele_class($value)
     {
         $this->_table_ele_class = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_size($value)
     {
         $this->_SIZE = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_maxlength($value)
     {
         $this->_MAXLENGTH = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_rows($value)
     {
         $this->_ROWS = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_cols($value)
     {
         $this->_text_COLS = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_datas($value)
     {
         $this->_datas = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_sel_token_class($value)
     {
         $this->_SEL_TOKEN_CLASS = $value;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_check_token($val)
     {
         $this->_DEBUG_CHECK_TOKEN = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function _set_style_error($val)
     {
         $this->_STYLE_ERROR = $val;
@@ -1218,21 +1671,34 @@ class Form extends Html
     //---------------------------------------------------------
     // get parameter
     //---------------------------------------------------------
+    /**
+     * @return null |null
+     */
     public function get_form_name()
     {
         return $this->_FORM_NAME;
     }
 
+    /**
+     * @return string
+     */
     public function get_form_title()
     {
         return $this->_LANG_FORM_TITLE;
     }
 
+    /**
+     * @return string
+     */
     public function get_button_submit_value()
     {
         return $this->_LANG_BUTTON_SUBMIT_VALUE;
     }
 
+    /**
+     * @param string $format
+     * @return string|null
+     */
     public function get_token_error($format = '')
     {
         if ($format) {

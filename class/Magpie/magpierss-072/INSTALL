@@ -10,7 +10,7 @@ REQUIREMENTS
     
 QUICK START
 
-    Magpie consists of 4 files (rss_fetch.inc, rss_parser.inc, rss_cache.inc, 
+    Magpie consists of 4 files (rss_fetch.inc, RssParser.inc, rss_cache.inc,
     and rss_utils.inc), and the directory extlib (which contains a modified 
     version of the Snoopy HTTP client)
     
@@ -111,7 +111,7 @@ INSTALLING MAGPIE SERVER WIDE
     
 ** Adding Magpie to Your Include Path **
 
-    Copy the 5 resources (rss_fetch.inc, rss_parser.inc, rss_cache.inc,         
+    Copy the 5 resources (rss_fetch.inc, RssParser.inc, rss_cache.inc,
     rss_utils.inc, and extlib) to a directory named 'magpierss' in your include 
     path.  Now any PHP file on your system can use Magpie with:
     

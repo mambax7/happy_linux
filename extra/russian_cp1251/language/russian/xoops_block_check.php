@@ -9,7 +9,7 @@
 // _CHARSET : cp1251
 // Translator: Houston (Contour Design Studio http://www.cdesign.ru/)
 
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_CHECK', 'Проверить таблицу блоков XOOPS');
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE', 'Удалить таблицу блоков XOOPS');
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE_DESC', 'Выполнить, если обнаружена ошибка');
-define('_HAPPY_LINUX_XOOPS_BLOCK_TABLE_REMOVE_NEXT', 'А потом обновить модуль');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_CHECK', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ XOOPS');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_REMOVE', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ XOOPS');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_REMOVE_DESC', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
+define('_HAPPYLINUX_XOOPS_BLOCK_TABLE_REMOVE_NEXT', 'пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ');
