@@ -269,7 +269,7 @@ class happylinux_locate_factory extends happylinux_locate_base
     }
 
     /**
-     * @return null |null
+     * @return null
      */
     public function get_dirname()
     {
@@ -288,7 +288,7 @@ class happylinux_locate_factory extends happylinux_locate_base
     }
 
     /**
-     * @return null |null
+     * @return null
      */
     public function get_config_country_code()
     {

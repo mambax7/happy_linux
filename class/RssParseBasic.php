@@ -64,6 +64,7 @@ class RssParseBasic extends RssBaseBasic
     public $_feed_version;
     public $_source_encoding;
     public $_encoding;
+    public $_local_encoding;
 
     public $_REPLACE_CHAR = ' ';   // space
 

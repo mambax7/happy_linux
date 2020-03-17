@@ -132,9 +132,10 @@ class Manage extends Error
     // set patameter
     //---------------------------------------------------------
     /**
-     * @param $table
-     * @param $dirname
-     * @param $prefix
+     * @param      $table
+     * @param      $dirname
+     * @param      $prefix
+     * @param null $helper
      */
     public function set_handler($table, $dirname, $prefix, $helper = null)
     {
@@ -146,6 +147,12 @@ class Manage extends Error
         $this->_handler = $helper->getHandler(ucfirst($table), $dirname, $prefix);
     }
 
+    /**
+     * @param      $table
+     * @param      $dirname
+     * @param      $prefix
+     * @param null $helper
+     */
     public function setHandler($table, $dirname, $prefix, $helper = null)
     {
         if (null === $helper) {
@@ -157,9 +164,10 @@ class Manage extends Error
     }
 
     /**
-     * @param $table
-     * @param $dirname
-     * @param $prefix
+     * @param      $table
+     * @param      $dirname
+     * @param      $prefix
+     * @param null $helper
      */
     public function set_formHandler($table, $dirname, $prefix, $helper = null)
     {
@@ -248,7 +256,7 @@ class Manage extends Error
      */
     public function set_style_error($val)
     {
-        $this->_STYLE_EROOR = $val;
+        $this->_STYLE_ERROR = $val;
     }
 
     /**

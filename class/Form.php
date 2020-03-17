@@ -740,37 +740,6 @@ class Form extends Html
         return $text;
     }
 
-    //---------------------------------------------------------
-    // substute
-    //---------------------------------------------------------
-    /**
-     * @param        $value
-     * @param string $default
-     * @return string
-     */
-    public function substute_blank($value, $default = '&nbsp;')
-    {
-        if ('' == $value) {
-            $value = $default;
-        }
-
-        return $value;
-    }
-
-    /**
-     * @param        $value
-     * @param string $default
-     * @return string
-     */
-    public function substute_http($value, $default = 'https://')
-    {
-        if ('' == $value) {
-            $value = $default;
-        }
-
-        return $value;
-    }
-
     //================================================================
     // build object element
     //================================================================
@@ -1633,7 +1602,7 @@ class Form extends Html
      */
     public function set_cols($value)
     {
-        $this->_text_COLS = (int)$value;
+        $this->_COLS = (int)$value;
     }
 
     /**
@@ -1672,7 +1641,7 @@ class Form extends Html
     // get parameter
     //---------------------------------------------------------
     /**
-     * @return null |null
+     * @return null
      */
     public function get_form_name()
     {

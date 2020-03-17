@@ -1629,7 +1629,7 @@ class BuildRss extends BuildCache
 
     /**
      * @param $item
-     * @return |null |null
+     * @return |null |null |null
      */
     public function _get_item_guid($item)
     {
@@ -1645,7 +1645,7 @@ class BuildRss extends BuildCache
 
     /**
      * @param $item
-     * @return |null |null
+     * @return |null |null |null
      */
     public function _get_item_pubdate($item)
     {
@@ -1679,7 +1679,7 @@ class BuildRss extends BuildCache
 
     /**
      * @param $item
-     * @return |null |null
+     * @return |null |null |null
      */
     public function _get_item_media_group($item)
     {
@@ -1832,7 +1832,7 @@ class BuildRss extends BuildCache
     }
 
     /**
-     * @return null |null
+     * @return null
      */
     public function _get_template()
     {

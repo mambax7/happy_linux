@@ -49,6 +49,7 @@ class RssUtility extends Error
     public $_remote_file;
     public $_convert_encoding;
     public $_strings;
+    public $_xml_encoding_local;
 
     // basic config
     public $_sel_priority = HAPPYLINUX_RSS_SEL_ATOM;

@@ -176,7 +176,7 @@ class Keyword
             $ie = $arr['ie'];
         }
 
-        $keyword = Happylinux\ConvertEncoding(urldecode($q), _CHARSET, $ie);
+        $keyword = happylinux_convert_encoding(urldecode($q), _CHARSET, $ie);
 
         return $keyword;
     }
@@ -200,7 +200,7 @@ class Keyword
             $ei = $arr['ei'];
         }
 
-        $keyword = Happylinux\ConvertEncoding(urldecode($p), _CHARSET, $ei);
+        $keyword = happylinux_convert_encoding(urldecode($p), _CHARSET, $ei);
 
         return $keyword;
     }

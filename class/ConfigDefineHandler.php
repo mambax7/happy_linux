@@ -47,9 +47,10 @@ class ConfigDefineHandler
     }
 
     /**
-     * @param $name
-     * @param $dirname
-     * @param $prefix
+     * @param      $name
+     * @param      $dirname
+     * @param      $prefix
+     * @param null|\Xmf\Module\Helper\ $helper
      */
     public function set_config_handler($name, $dirname, $prefix, $helper = null)
     {

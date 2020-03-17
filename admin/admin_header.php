@@ -27,7 +27,6 @@ require  dirname(__DIR__) . '/include/common.php';
 
 $moduleDirName = basename(dirname(__DIR__));
 
-/** @var \XoopsModules\Happylinux\Helper $helper */
 $helper = \XoopsModules\Happylinux\Helper::getInstance();
 
 /** @var \Xmf\Module\Admin $adminObject */

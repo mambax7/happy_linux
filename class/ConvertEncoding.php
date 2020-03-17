@@ -130,7 +130,7 @@ class ConvertEncoding
         } elseif ('utf-8' == $to) {
             $str = $this->convert_to_utf8($str, $from);
         } else {
-            $str = Happylinux\ConvertEncoding($str, $to, $from);
+            $str = happylinux_convert_encoding($str, $to, $from);
         }
 
         return $str;

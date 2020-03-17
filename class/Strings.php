@@ -95,7 +95,7 @@ class Strings
     public $_time_start   = 0;
     public $_time_current = 0;
     public $_is_japanese  = false;
-
+    public $_source_encoding;
     // same language match contorl code
     // ex) BIG-5 GB2312 Ž` C05C B2CD —V B943 904A
     public $_flag_remove_control_code = false;
@@ -959,6 +959,38 @@ class Strings
         }
 
         return false;
+    }
+
+
+    //---------------------------------------------------------
+    // substute
+    //---------------------------------------------------------
+    /**
+     * @param        $value
+     * @param string $default
+     * @return string
+     */
+    public function substute_blank($value, $default = '&nbsp;')
+    {
+        if ('' == $value) {
+            $value = $default;
+        }
+
+        return $value;
+    }
+
+    /**
+     * @param        $value
+     * @param string $default
+     * @return string
+     */
+    public function substute_http($value, $default = 'https://')
+    {
+        if ('' == $value) {
+            $value = $default;
+        }
+
+        return $value;
     }
 
     //=========================================================

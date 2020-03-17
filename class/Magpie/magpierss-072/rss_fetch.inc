@@ -310,7 +310,7 @@ function _response_to_rss($resp)
     $rss = new MagpieRSS($resp->results, MAGPIE_OUTPUT_ENCODING, MAGPIE_INPUT_ENCODING, MAGPIE_DETECT_ENCODING);
 
     // if RSS parsed successfully       
-    if ($rss and !$rss->ERROR) {
+    if ($rss && !$rss->ERROR) {
 
         // find Etag, and Last-Modified
         foreach ($resp->headers as $h) {

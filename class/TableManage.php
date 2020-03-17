@@ -28,6 +28,7 @@ class TableManage extends Error
     public $_form;
     public $_strings;
     public $_system;
+    public $_this_url;
 
     public $_op;
     public $_offset;
@@ -78,6 +79,7 @@ class TableManage extends Error
      * @param $name
      * @param $dirname
      * @param $prefix
+     * @param $helper
      */
     public function set_config_handler($name, $dirname, $prefix, $helper)
     {

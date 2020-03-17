@@ -164,7 +164,7 @@ class LocateFactory extends LocateBase
 
     /**
      * @param null $locate
-     * @return bool|\Happylinux\LocateBase|mixed
+     * @return bool|\LocateBase|mixed
      */
     public static function getInstance($locate = null)
     {
@@ -183,7 +183,7 @@ class LocateFactory extends LocateBase
 
     /**
      * @param null $locate
-     * @return bool|\Happylinux\LocateBase|mixed
+     * @return bool|\LocateBase|mixed
      */
     public function &get_local_instance($locate = null)
     {
@@ -202,7 +202,7 @@ class LocateFactory extends LocateBase
      * @param null   $country_code
      * @param string $prefix
      * @param string $dirname
-     * @return bool|\Happylinux\LocateBase|mixed
+     * @return bool|\LocateBase|mixed
      */
     public function &get_instance($country_code = null, $prefix = 'happylinux', $dirname = 'happylinux')
     {
@@ -272,7 +272,7 @@ class LocateFactory extends LocateBase
     }
 
     /**
-     * @return null |null
+     * @return null
      */
     public function get_dirname()
     {
@@ -291,7 +291,7 @@ class LocateFactory extends LocateBase
     }
 
     /**
-     * @return null |null
+     * @return null
      */
     public function get_config_country_code()
     {

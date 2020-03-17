@@ -115,7 +115,7 @@ class RssParser extends Error
     }
 
     /**
-     * @return null |null
+     * @return null
      */
     public function get_html_text()
     {
@@ -317,7 +317,7 @@ class RssParser extends Error
     // BUG 4419: not detect xml encoding correctly
 
     /**
-     * @return null |null
+     * @return null
      */
     public function get_xml_encoding_orig()
     {
@@ -325,7 +325,7 @@ class RssParser extends Error
     }
 
     /**
-     * @return null |null
+     * @return null
      */
     public function get_xml_data()
     {

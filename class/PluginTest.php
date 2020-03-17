@@ -27,6 +27,7 @@ class PluginTest
     public $_plugin;
     public $_post;
     public $_form;
+    public $_strings;
 
     //---------------------------------------------------------
     // constructor

@@ -251,6 +251,7 @@ class BasicHandler extends Error
      */
     public function &get_cache_object_by_id($id)
     {
+        $false = false;
         $row = &$this->get_cache_row($id);
         if (!is_array($row) || !count($row)) {
             return $false;

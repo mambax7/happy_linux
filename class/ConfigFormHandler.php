@@ -94,9 +94,10 @@ class ConfigFormHandler extends Error
     }
 
     /**
-     * @param $name
-     * @param $dirname
-     * @param $prefix
+     * @param      $name
+     * @param      $dirname
+     * @param      $prefix
+     * @param null $helper
      */
     public function set_handler($name, $dirname, $prefix, $helper = null)
     {

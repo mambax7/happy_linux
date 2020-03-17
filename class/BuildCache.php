@@ -24,7 +24,7 @@ class BuildCache
 {
     // for reserve, not use here
     public $_DIRNAME    = null;
-    public $_tepmlate   = null;
+    public $_template   = null;
     public $_cache_time = 0;
 
     //---------------------------------------------------------

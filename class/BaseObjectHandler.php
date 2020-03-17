@@ -393,7 +393,7 @@ class BaseObjectHandler extends Error
     }
 
     /**
-     * @param \XoopsObject|Happylinux\BaseObject $obj
+     * @param \XoopsObject|BaseObject $obj
      * @param bool         $force
      * @return bool|mixed
      */
@@ -506,7 +506,7 @@ class BaseObjectHandler extends Error
     }
 
     /**
-     * @param \XoopsObject|Happylinux\BaseObject $obj
+     * @param \XoopsObject|BaseObject $obj
      * @param bool         $force
      * @return bool
      */
@@ -1450,7 +1450,7 @@ class BaseObjectHandler extends Error
             $dataType = $obj->mVars[$key]['data_type'];
 
             if (in_array($dataType, $this->_STRING_TYPES)) {
-                $ret[$key] = $this->db->quoteString($value);
+                $ret[$key] = $this->_db->quoteString($value);
             } else {
                 $ret[$key] = $value;
             }

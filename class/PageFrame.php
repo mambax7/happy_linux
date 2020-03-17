@@ -969,6 +969,10 @@ class PageFrame extends Form
         $this->_handler = $this->handler;
     }
 
+    /**
+     * @param      $table_name
+     * @param null $helper
+     */
     public function setHandler($table_name, $helper = null)
     {
         $this->handler = $helper->getHandler(ucfirst($table_name));

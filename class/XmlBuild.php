@@ -203,7 +203,7 @@ class XmlBuild extends XmlBase
     // private
     //=========================================================
     /**
-     * @return null |null
+     * @return null
      */
     public function _get_template()
     {
@@ -211,7 +211,7 @@ class XmlBuild extends XmlBase
     }
 
     /**
-     * @return null |null
+     * @return null
      */
     public function _get_template_xml()
     {

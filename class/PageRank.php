@@ -76,7 +76,10 @@ class PageRank
         // dummy
     }
 
-
+    /**
+     * @param null $dirname
+     * @return static
+     */
     public static function getInstance($dirname = null)
     {
         static $instance;

@@ -272,6 +272,8 @@ if (!class_exists('XoopsGTicket')) {
 
         /**
          * @param string $area
+         * @throws \Exception
+         * @throws \Exception
          */
         public function draw_repost_form($area = '')
         {

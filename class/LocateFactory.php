@@ -162,7 +162,7 @@ class LocateFactory extends LocateBase
     }
 
     /**
-     * @return null |null
+     * @return null
      */
     public function get_dirname()
     {
@@ -181,7 +181,7 @@ class LocateFactory extends LocateBase
     }
 
     /**
-     * @return null |null
+     * @return null
      */
     public function get_config_country_code()
     {

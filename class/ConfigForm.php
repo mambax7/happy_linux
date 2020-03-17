@@ -103,9 +103,10 @@ class ConfigForm extends FormLib
     }
 
     /**
-     * @param $name
-     * @param $dirname
-     * @param $prefix
+     * @param      $name
+     * @param      $dirname
+     * @param      $prefix
+     * @param null $helper
      */
     public function set_config_handler($name, $dirname, $prefix, $helper = null)
     {
