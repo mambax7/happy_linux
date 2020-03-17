@@ -1,4 +1,5 @@
 <?php
+
 // $Id: pagenavi.php,v 1.2 2012/04/08 18:22:28 ohwada Exp $
 
 // 2012-04-02 K.OHWADA
@@ -19,26 +20,30 @@
 //=========================================================
 // class happy_linux_pagenavi
 //=========================================================
+
+/**
+ * Class happy_linux_pagenavi
+ */
 class happy_linux_pagenavi
 {
     public $_MAX_PAGELIST = 10;
-    public $_PAGE_FIRST   = 1;
+    public $_PAGE_FIRST = 1;
 
     // input parameter
     public $_perpage = -1;
-    public $_total   = 0;
+    public $_total = 0;
 
     // GET POST parameter
     public $_page_current = 1;
-    public $_sortid       = 0;
+    public $_sortid = 0;
 
     // local
     public $_start;
     public $_end;
     public $_sortid_default = 0;
-    public $_max_sortid     = 0;
-    public $_flag_sortid    = 0;
-    public $_sort_arr       = array();
+    public $_max_sortid = 0;
+    public $_flag_sortid = 0;
+    public $_sort_arr = [];
 
     //---------------------------------------------------------
     // constructor
@@ -48,11 +53,14 @@ class happy_linux_pagenavi
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_pagenavi();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
@@ -68,6 +76,15 @@ class happy_linux_pagenavi
     // script:
     //   acceptable type: NULL, foo.php, foo.php?, foo.php?bar=abc
     //---------------------------------------------------------
+
+    /**
+     * @param string $script
+     * @param int    $total
+     * @param int    $page
+     * @param int    $perpage
+     * @param int    $sortid
+     * @return string
+     */
     public function build($script = '', $total = -1, $page = -1, $perpage = -1, $sortid = -1)
     {
         if ($total < 0) {
@@ -92,11 +109,11 @@ class happy_linux_pagenavi
             $script = $this->_add_script_sortid($script, $sortid);
         }
 
-        $script      = $this->_add_script_page($script);
+        $script = $this->_add_script_page($script);
         $script_page = $this->_sanitize_html_url($script);
 
         // Page Numbering
-        list($page_current, $page_last, $start) = $this->_calc_page($total, $page, $perpage);
+        [$page_current, $page_last, $start] = $this->_calc_page($total, $page, $perpage);
 
         $prev = $page_current - 1;
         $next = $page_current + 1;
@@ -104,7 +121,7 @@ class happy_linux_pagenavi
         $half = (int)($this->_MAX_PAGELIST / 2);
 
         $start = $this->_PAGE_FIRST;
-        $end   = $page_last;
+        $end = $page_last;
 
         if ($page_last > ($page_current + $half)) {
             $start = $page_current - $half;
@@ -143,7 +160,7 @@ class happy_linux_pagenavi
                 $navi .= "<a href='$script_page$this->_PAGE_FIRST'>[$this->_PAGE_FIRST]</a>&nbsp;";
             }
 
-            for ($i = $start; $i <= $end; ++$i) {
+            for ($i = $start; $i <= $end; $i++) {
                 if ($i == $page_current) {
                     $navi .= "<b>($i)</b>&nbsp;";
                 } else {
@@ -163,6 +180,11 @@ class happy_linux_pagenavi
         return $navi;
     }
 
+    /**
+     * @param int $total
+     * @param int $perpage
+     * @return false|float
+     */
     public function calc_page_last($total = -1, $perpage = -1)
     {
         if ($total < 0) {
@@ -178,6 +200,13 @@ class happy_linux_pagenavi
     //---------------------------------------------------------
     // calc Start
     //---------------------------------------------------------
+
+    /**
+     * @param int $total
+     * @param int $page
+     * @param int $perpage
+     * @return mixed
+     */
     public function calcStart($total = -1, $page = -1, $perpage = -1)
     {
         if ($total < 0) {
@@ -195,6 +224,12 @@ class happy_linux_pagenavi
         return $this->_start;
     }
 
+    /**
+     * @param int $total
+     * @param int $start
+     * @param int $perpage
+     * @return int
+     */
     public function calcEnd($total = -1, $start = -1, $perpage = -1)
     {
         if ($total < 0) {
@@ -214,27 +249,42 @@ class happy_linux_pagenavi
         }
 
         $this->_end = $end;
+
         return $end;
     }
 
     //---------------------------------------------------------
     // GET paramter
     //---------------------------------------------------------
+
+    /**
+     * @return int
+     */
     public function getGetPage()
     {
-        $page                = $this->get_get_int('page', 1);
+        $page = $this->get_get_int('page', 1);
         $this->_page_current = $page;
+
         return $page;
     }
 
+    /**
+     * @return int
+     */
     public function getGetSortid()
     {
-        $sortid        = $this->get_get_int('sortid', $this->_sortid_default);
-        $sortid        = $this->_check_sortid($sortid);
+        $sortid = $this->get_get_int('sortid', $this->_sortid_default);
+        $sortid = $this->_check_sortid($sortid);
         $this->_sortid = $sortid;
+
         return $sortid;
     }
 
+    /**
+     * @param     $key
+     * @param int $default
+     * @return int
+     */
     public function get_get_int($key, $default = 0)
     {
         if (isset($_GET[$key])) {
@@ -249,13 +299,23 @@ class happy_linux_pagenavi
     //---------------------------------------------------------
     // POST paramter
     //---------------------------------------------------------
+
+    /**
+     * @return int
+     */
     public function getPostPage()
     {
-        $page                = $this->get_post_int('page', 1);
+        $page = $this->get_post_int('page', 1);
         $this->_page_current = $page;
+
         return $page;
     }
 
+    /**
+     * @param     $key
+     * @param int $default
+     * @return int
+     */
     public function get_post_int($key, $default = 0)
     {
         if (isset($_POST[$key])) {
@@ -270,11 +330,18 @@ class happy_linux_pagenavi
     //---------------------------------------------------------
     // set and get parameter
     //---------------------------------------------------------
+
+    /**
+     * @param $value
+     */
     public function set_sortid($value)
     {
         $this->_sortid = $this->_check_sortid((int)$value);
     }
 
+    /**
+     * @param $value
+     */
     public function setPerpage($value)
     {
         $value = (int)$value;
@@ -286,6 +353,9 @@ class happy_linux_pagenavi
         }
     }
 
+    /**
+     * @param $value
+     */
     public function setTotal($value)
     {
         $value = (int)$value;
@@ -297,6 +367,9 @@ class happy_linux_pagenavi
         }
     }
 
+    /**
+     * @param $value
+     */
     public function set_sortid_default($value)
     {
         $value = (int)$value;
@@ -310,6 +383,9 @@ class happy_linux_pagenavi
         }
     }
 
+    /**
+     * @param $value
+     */
     public function set_max_sortid($value)
     {
         $value = (int)$value;
@@ -321,11 +397,17 @@ class happy_linux_pagenavi
         }
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_sortid($value)
     {
         $this->_flag_sortid = (int)$value;
     }
 
+    /**
+     * @return int
+     */
     public function get_page_current()
     {
         return $this->_page_current;
@@ -337,29 +419,38 @@ class happy_linux_pagenavi
     public function clear_sort()
     {
         $this->_max_sortid = 0;
-        $this->_sort_arr   = array();
+        $this->_sort_arr = [];
     }
 
+    /**
+     * @param        $title
+     * @param        $sort
+     * @param string $order
+     */
     public function add_sort($title, $sort, $order = 'ASC')
     {
-        if (strtoupper($order) == 'DESC') {
+        if ('DESC' == mb_strtoupper($order)) {
             $order = 'DESC';
         } else {
             $order = 'ASC';
         }
 
-        $this->_sort_arr[$this->_max_sortid] = array(
+        $this->_sort_arr[$this->_max_sortid] = [
             'title' => $title,
-            'sort'  => $sort,
+            'sort' => $sort,
             'order' => $order,
-        );
+        ];
 
         $this->_max_sortid++;
     }
 
+    /**
+     * @param int $sort_id
+     * @return bool|mixed
+     */
     public function get_sort($sort_id = -1)
     {
-        if ($sort_id == -1) {
+        if (-1 == $sort_id) {
             $sort_id = $this->_sortid;
         }
 
@@ -367,15 +458,21 @@ class happy_linux_pagenavi
 
         if ($this->_sort_arr[$sort_id]) {
             $ret = $this->_sort_arr[$sort_id];
+
             return $ret;
         }
 
         return false;
     }
 
-    public function get_sort_value($sort_id = -1, $key)
+    /**
+     * @param $sort_id
+     * @param $key
+     * @return bool|mixed
+     */
+    public function get_sort_value($sort_id, $key)
     {
-        if ($sort_id == -1) {
+        if (-1 == $sort_id) {
             $sort_id = $this->_sortid;
         }
 
@@ -383,6 +480,7 @@ class happy_linux_pagenavi
 
         if ($this->_sort_arr[$sort_id][$key]) {
             $ret = $this->_sort_arr[$sort_id][$key];
+
             return $ret;
         }
 
@@ -404,22 +502,28 @@ class happy_linux_pagenavi
     //   -2: dont add sortid
     //       ex) foo.php
     //---------------------------------------------------------
+
+    /**
+     * @param     $script
+     * @param int $sortid
+     * @return string
+     */
     public function _add_script_sortid($script, $sortid = -1)
     {
-        if ($sortid == -2) {
+        if (-2 == $sortid) {
             return $script;
         }
 
-        if ($sortid == -1) {
+        if (-1 == $sortid) {
             $sortid = $this->_sortid;
         }
 
         $type = $this->_analyze_script_type($script);
 
         // add 'sortid='
-        if ($type == 1) {
+        if (1 == $type) {
             $script_sortid = $script . 'sortid=' . $sortid;
-        } elseif ($type == 2) {
+        } elseif (2 == $type) {
             $script_sortid = $script . '&sortid=' . $sortid;
         } else {
             $script_sortid = $script . '?sortid=' . $sortid;
@@ -431,14 +535,19 @@ class happy_linux_pagenavi
     //---------------------------------------------------------
     // add_script_page
     //---------------------------------------------------------
+
+    /**
+     * @param $script
+     * @return string
+     */
     public function _add_script_page($script)
     {
         $type = $this->_analyze_script_type($script);
 
         // add 'page='
-        if ($type == 1) {
+        if (1 == $type) {
             $script_page = $script . 'page=';
-        } elseif ($type == 2) {
+        } elseif (2 == $type) {
             $script_page = $script . '&page=';
         } else {
             $script_page = $script . '?page=';
@@ -455,46 +564,61 @@ class happy_linux_pagenavi
     //   type 1: foo.php?
     //   type 2: foo.php?bar=abc
     //---------------------------------------------------------
+
+    /**
+     * @param $script
+     * @return int
+     */
     public function _analyze_script_type($script)
     {
-        $type = 0;  // foo.php
+        $type = 0;    // foo.php
 
         // set script_type, if ? in script
         if (preg_match('/\?/', $script)) {
             $script_arr = explode('?', $script);
 
             if ($script_arr[1]) {
-                $type = 2;  // foo.php?bar=abc
+                $type = 2;    // foo.php?bar=abc
             } else {
-                $type = 1;  // foo.php?
+                $type = 1;    // foo.php?
             }
         }
 
         return $type;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function _sanitize_html_url($str)
     {
         $str = $this->_deny_javascript($str);
         $str = preg_replace('/&amp;/i', '&', $str);
         $str = htmlspecialchars($str, ENT_QUOTES);
+
         return $str;
     }
 
     // Checks if Javascript are included in string
+
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function _deny_javascript($str)
     {
         $str = preg_replace('/[\x00-\x1F]/', '', $str);
         $str = preg_replace('/[\x7F]/', '', $str);
 
         if (preg_match('/javascript:/si', $str)) {
-            return '';  // include Javascript
+            return '';    // include Javascript
         }
         if (preg_match('/about:/si', $str)) {
-            return '';  // include about
+            return '';    // include about
         }
         if (preg_match('/vbscript:/si', $str)) {
-            return '';  // include vbscript
+            return '';    // include vbscript
         }
 
         return $str;
@@ -503,14 +627,21 @@ class happy_linux_pagenavi
     //---------------------------------------------------------
     // calculation
     //---------------------------------------------------------
+
+    /**
+     * @param $total
+     * @param $page
+     * @param $perpage
+     * @return array|int[]
+     */
     public function _calc_page($total, $page, $perpage)
     {
         $current = 0;
-        $last    = 0;
-        $start   = 0;;
+        $last = 0;
+        $start = 0;
 
         if ($perpage <= 0) {
-            return array($current, $last, $start);
+            return [$current, $last, $start];
         }
 
         $last = $this->_calc_last($total, $perpage);
@@ -527,21 +658,32 @@ class happy_linux_pagenavi
             $current = $page;
         }
 
-        $start        = ($current - 1) * $perpage;
+        $start = ($current - 1) * $perpage;
         $this->_start = $start;
 
-        return array($current, $last, $start);
+        return [$current, $last, $start];
     }
 
+    /**
+     * @param $total
+     * @param $perpage
+     * @return false|float
+     */
     public function _calc_last($total, $perpage)
     {
         $last = ceil($total / $perpage);
+
         return $last;
     }
 
     //---------------------------------------------------------
     // sortid
     //---------------------------------------------------------
+
+    /**
+     * @param $id
+     * @return int
+     */
     public function _check_sortid($id)
     {
         $id = (int)$id;

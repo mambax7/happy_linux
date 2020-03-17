@@ -1,5 +1,8 @@
 <?php
-// $Id: admin.php,v 1.2 2012/03/17 13:09:23 ohwada Exp $
+// $Id: admin.php,v 1.3 2012/10/14 01:03:42 ohwada Exp $
+
+// 2012-10-14 K.OHWADA
+// XOOPS Cube 2.1 / 2.2
 
 // 2012-03-01 K.OHWADA
 // XOOPS_CUBE_LEGACY
@@ -22,12 +25,18 @@
 //=========================================================
 // class happy_linux_admin
 //=========================================================
+
+/**
+ * Class happy_linux_admin
+ */
 class happy_linux_admin
 {
     public $_TIME = 10;    // sec
 
     // BUG: typo happy_liunx -> happy_linux
     public $_FILE_PRELOAD = 'modules/happy_linux/preload/admin.php';
+
+    public $_NAME_XC21 = 'XOOPS Cube 2.1 / 2.2';
 
     //---------------------------------------------------------
     // constructor
@@ -37,12 +46,16 @@ class happy_linux_admin
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_admin();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
@@ -64,12 +77,10 @@ class happy_linux_admin
                 $msg = 'XOOPS Cube 2.1';
                 $url = $url_21;
                 break;
-
             case 'xoops_22':
                 $msg = 'XOOPS 2.2';
                 $url = $url_20;
                 break;
-
             case 'xoops_20':
             default:
                 $msg = 'XOOPS 2.0';
@@ -83,7 +94,7 @@ class happy_linux_admin
 
         echo "<ul>\n";
         echo '<li><a href="' . $url_20 . '">XOOPS 2.0 / 2.2</a></li>' . "\n";
-        echo '<li><a href="' . $url_21 . '">XOOPS Cube 2.1</a></li>' . "\n";
+        echo '<li><a href="' . $url_21 . '">' . $this->_NAME_XC21 . '</a></li>' . "\n";
         echo "</ul>\n";
 
         $this->_print_js($url, $this->_TIME * 1000);
@@ -91,7 +102,7 @@ class happy_linux_admin
 
     public function print_templates()
     {
-        $dirname      = $this->_get_dirname();
+        $dirname = $this->_get_dirname();
         $template_set = $this->_get_template_set();
 
         $url_20 = XOOPS_URL . '/modules/system/admin.php?fct=tplsets&op=listtpl&tplset=' . $template_set . '&moddir=' . $dirname;
@@ -104,11 +115,9 @@ class happy_linux_admin
             case 'xoops_cube_21':
                 $url = $url_21;
                 break;
-
             case 'xoops_22':
                 $url = $url_20;
                 break;
-
             case 'xoops_20':
             default:
                 $url = $url_20;
@@ -121,7 +130,7 @@ class happy_linux_admin
 
         echo "<ul>\n";
         echo '<li><a href="' . $url_20 . '">XOOPS 2.0 / 2.2 </a></li>' . "\n";
-        echo '<li><a href="' . $url_21 . '">XOOPS Cube 2.1</a></li>' . "\n";
+        echo '<li><a href="' . $url_21 . '">' . $this->_NAME_XC21 . '</a></li>' . "\n";
         echo "</ul>\n";
 
         $this->_print_js($url, $this->_TIME * 1000);
@@ -140,11 +149,9 @@ class happy_linux_admin
             case 'xoops_cube_21':
                 $url = $url_21;
                 break;
-
             case 'xoops_20':
                 $url = $url_20;
                 break;
-
             case 'xoops_22':
             default:
                 $url = $url_22;
@@ -158,18 +165,21 @@ class happy_linux_admin
         echo "<ul>\n";
         echo '<li><a href="' . $url_20 . '">XOOPS 2.0</a> myblocksadmin </li>' . "\n";
         echo '<li><a href="' . $url_22 . '">XOOPS 2.0 / 2.2</a></li>' . "\n";
-        echo '<li><a href="' . $url_21 . '">XOOPS Cube 2.1</a></li>' . "\n";
+        echo '<li><a href="' . $url_21 . '">' . $this->_NAME_XC21 . '</a></li>' . "\n";
         echo "</ul>\n";
 
         $this->_print_js($url, $this->_TIME * 1000);
     }
 
+    /**
+     * @param bool $flag
+     */
     public function print_modules($flag = false)
     {
-        $dirname  = $this->_get_dirname();
-        $url_20   = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin';
+        $dirname = $this->_get_dirname();
+        $url_20 = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin';
         $url_u_20 = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&op=update&module=' . $dirname;
-        $url_21   = XOOPS_URL . '/modules/legacy/admin/index.php?action=ModuleList';
+        $url_21 = XOOPS_URL . '/modules/legacy/admin/index.php?action=ModuleList';
         $url_u_21 = XOOPS_URL . '/modules/legacy/admin/index.php?action=ModuleUpdate&dirname=' . $dirname;
 
         $this->_preload_file();
@@ -179,7 +189,6 @@ class happy_linux_admin
             case 'xoops_cube_21':
                 $url = $url_21;
                 break;
-
             case 'xoops_20':
             case 'xoops_22':
             default:
@@ -193,13 +202,13 @@ class happy_linux_admin
 
         echo "<ul>\n";
         echo '<li><a href="' . $url_20 . '">XOOPS 2.0 / 2.2</a></li>' . "\n";
-        echo '<li><a href="' . $url_21 . '">XOOPS Cube 2.1</a></li>' . "\n";
-        echo "</ul><br />\n";
+        echo '<li><a href="' . $url_21 . '">' . $this->_NAME_XC21 . '</a></li>' . "\n";
+        echo "</ul><br>\n";
 
-        echo '<b>' . _HAPPY_LINUX_AM_MODULE_UPDATE . "</b><br />\n";
+        echo '<b>' . _HAPPY_LINUX_AM_MODULE_UPDATE . "</b><br>\n";
         echo "<ul>\n";
         echo '<li><a href="' . $url_u_20 . '">XOOPS 2.0 / 2.2</a></li>' . "\n";
-        echo '<li><a href="' . $url_u_21 . '">XOOPS Cube 2.1</a></li>' . "\n";
+        echo '<li><a href="' . $url_u_21 . '">' . $this->_NAME_XC21 . '</a></li>' . "\n";
         echo "</ul>\n";
 
         $this->_print_js($url, $this->_TIME * 1000);
@@ -208,63 +217,77 @@ class happy_linux_admin
     //---------------------------------------------------------
     // private
     //---------------------------------------------------------
+
+    /**
+     * @param $title
+     */
     public function _print_title($title)
     {
         echo '<h4>' . $title . "</h4>\n";
     }
 
+    /**
+     * @param $ver
+     */
     public function _print_judge($ver)
     {
         $name = $this->_get_name($ver);
         echo sprintf(_HAPPY_LINUX_AM_JUDGE, $name);
-        echo "<br /><br />\n";
+        echo "<br><br>\n";
     }
 
+    /**
+     * @param $time
+     */
     public function _print_jump($time)
     {
         echo sprintf(_HAPPY_LINUX_AM_JUMP, $time);
-        echo "<br />\n";
+        echo "<br>\n";
         echo _HAPPY_LINUX_AM_JUMP_IFNO1;
-        echo "<br />\n";
+        echo "<br>\n";
         echo sprintf(_HAPPY_LINUX_AM_JUMP_IFNO2, $time);
-        echo "<br /><br />\n";
+        echo "<br><br>\n";
     }
 
+    /**
+     * @param $url
+     * @param $time
+     */
     public function _print_js($url, $time)
     {
         ?>
         <script type="text/javascript">
             //<![CDATA[
             function happy_linux_init() {
-                setTimeout('happy_linux_jump()', <?php echo $time;
-                    ?>);
+                setTimeout('happy_linux_jump()', <?php echo $time; ?>);
             }
+
             function happy_linux_jump() {
-                window.location = '<?php echo $url;
-                    ?>';
+                window.location = '<?php echo $url; ?>';
             }
+
             window.onload = happy_linux_init;
             //]]>
         </script>
         <?php
-
     }
 
+    /**
+     * @param $ver
+     * @return string
+     */
     public function _get_name($ver)
     {
         switch ($ver) {
             case 'xoops_cube_21':
-                $name = 'XOOPS Cube 2.1';
+                $name = $this->_NAME_XC21;
                 break;
-
             case 'xoops_22':
                 $name = 'XOOPS 2.2';
                 break;
-
             case 'xoops_20':
                 $name = 'XOOPS 2.0';
                 break;
-
             default:
                 $name = 'Unknown';
                 break;
@@ -273,6 +296,9 @@ class happy_linux_admin
         return $name;
     }
 
+    /**
+     * @return string
+     */
     public function _preload_file()
     {
         if (file_exists(XOOPS_ROOT_PATH . '/' . $this->_FILE_PRELOAD)) {
@@ -288,6 +314,9 @@ class happy_linux_admin
         }
     }
 
+    /**
+     * @return string
+     */
     public function _judge_version()
     {
         if ($this->_is_version_xc_21() && $this->_is_active_legacy_module()) {
@@ -299,74 +328,110 @@ class happy_linux_admin
         } else {
             $ver = 'unknown';
         }
+
         return $ver;
     }
 
+    /**
+     * @return bool
+     */
     public function _is_version_xc_21()
     {
         // XOOPS Cube Legacy 2.1
         if (defined('XOOPS_CUBE_LEGACY')) {
-            $this->_TIME = 1;   // 1 sec
+            $this->_TIME = 1;    // 1 sec
             return true;
         }
         if (preg_match("/XOOPS[\s+]Cube.*[\s+]2\.1/i", XOOPS_VERSION)) {
             return true;
         }
+
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function _is_version_xoops_22()
     {
         // XOOPS 2.2
         if (preg_match("/XOOPS[\s+]2\.2/i", XOOPS_VERSION)) {
             return true;
         }
+
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function _is_version_xoops_20()
     {
         // XOOPS 2.0
         if (preg_match("/XOOPS[\s+]2\.0/i", XOOPS_VERSION)) {
             return true;
         }
+
         return false;
     }
 
+    /**
+     * @return mixed
+     */
     public function _get_mid()
     {
         global $xoopsModule;
+
         return $xoopsModule->getVar('mid');
     }
 
+    /**
+     * @return mixed
+     */
     public function _get_dirname()
     {
         global $xoopsModule;
+
         return $xoopsModule->getVar('dirname');
     }
 
+    /**
+     * @return mixed
+     */
     public function _get_template_set()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['template_set'];
     }
 
+    /**
+     * @return bool
+     */
     public function _is_active_legacy_module()
     {
         return $this->_is_active_module_by_dirname('legacy');
     }
 
+    /**
+     * @param $dirname
+     * @return bool
+     */
     public function _is_active_module_by_dirname($dirname)
     {
-        $act            = false;
+        $act = false;
         $module_handler = xoops_getHandler('module');
-        $module         = $module_handler->getByDirname($dirname);
+        $module = $module_handler->getByDirname($dirname);
         if (is_object($module)) {
             $act = $module->getVar('isactive');
         }
+
         return $act;
     }
 
+    /**
+     * @return bool
+     */
     public function _method_exists_xoops_block_get_by_module()
     {
         include_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
@@ -377,6 +442,7 @@ class happy_linux_admin
         if (method_exists($block, 'getByModule')) {
             return true;
         }
+
         return false;
     }
 

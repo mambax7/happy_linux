@@ -1,5 +1,6 @@
 <?php
-// $Id: global.php,v 1.2 2008/01/18 10:31:09 ohwada Exp $
+
+// $Id: global.php,v 1.1 2010/11/07 14:59:14 ohwada Exp $
 
 // =========================================================
 // Happy Linux Framework Module

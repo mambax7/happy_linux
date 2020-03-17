@@ -1,5 +1,6 @@
 <?php
-// $Id: module_install.php,v 1.2 2007/11/16 15:17:13 ohwada Exp $
+
+// $Id: module_install.php,v 1.1 2010/11/07 14:59:13 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module

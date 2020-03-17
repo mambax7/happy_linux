@@ -1,5 +1,6 @@
 <?php
-// $Id: language.php,v 1.9 2008/02/26 15:30:05 ohwada Exp $
+
+// $Id: language.php,v 1.1 2010/11/07 14:59:13 ohwada Exp $
 
 // 2008-02-17 K.OHWADA
 // plugin.php
@@ -39,6 +40,9 @@
 //---------------------------------------------------------
 // function happy_linux_include_lang
 //---------------------------------------------------------
+/**
+ * @param $file
+ */
 function happy_linux_include_lang($file)
 {
     global $xoopsConfig;

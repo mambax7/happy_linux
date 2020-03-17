@@ -1,5 +1,6 @@
 <?php
-// $Id: plugin.php,v 1.1 2008/02/26 15:35:43 ohwada Exp $
+
+// $Id: plugin.php,v 1.1 2010/11/07 14:59:15 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module

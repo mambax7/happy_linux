@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Project:     MagpieRSS: a simple RSS integration tool
  * File:        rss_cache.inc, a simple, rolling(no GC), cache 
@@ -17,13 +16,21 @@
  *
  */
 
+/**
+ * Class RSSCache
+ */
 class RSSCache
 {
     public $BASE_CACHE = './cache';    // where the cache files are stored
     public $MAX_AGE    = 3600;         // when are files stale, default one hour
     public $ERROR      = '';           // accumulate error messages
 
-    function __construct($base = '', $age = '')
+    /**
+     * RSSCache constructor.
+     * @param string $base
+     * @param string $age
+     */
+    public function __construct($base = '', $age = '')
     {
         if ($base) {
             $this->BASE_CACHE = $base;
@@ -38,7 +45,9 @@ class RSSCache
 
             // if make failed 
             if (!$status) {
-                $this->error("Cache couldn't make dir '" . $this->BASE_CACHE . "'.");
+                $this->error(
+                    "Cache couldn't make dir '" . $this->BASE_CACHE . "'."
+                );
             }
         }
     }
@@ -47,8 +56,13 @@ class RSSCache
         Function:   set
         Purpose:    add an item to the cache, keyed on url
         Input:      url from wich the rss file was fetched
-        Output:     true on sucess  
+        Output:     true on sucess
     \*=======================================================================*/
+    /**
+     * @param $url
+     * @param $rss
+     * @return int|string
+     */
     public function set($url, $rss)
     {
         $this->ERROR = '';
@@ -56,7 +70,9 @@ class RSSCache
         $fp          = @fopen($cache_file, 'w');
 
         if (!$fp) {
-            $this->error("Cache unable to open file for writing: $cache_file");
+            $this->error(
+                "Cache unable to open file for writing: $cache_file"
+            );
             return 0;
         }
 
@@ -71,21 +87,29 @@ class RSSCache
         Function:   get
         Purpose:    fetch an item from the cache
         Input:      url from wich the rss file was fetched
-        Output:     cached object on HIT, false on MISS 
+        Output:     cached object on HIT, false on MISS
     \*=======================================================================*/
+    /**
+     * @param $url
+     * @return int|mixed
+     */
     public function get($url)
     {
         $this->ERROR = '';
         $cache_file  = $this->file_name($url);
 
         if (!file_exists($cache_file)) {
-            $this->debug("Cache doesn't contain: $url (cache file: $cache_file)");
+            $this->debug(
+                "Cache doesn't contain: $url (cache file: $cache_file)"
+            );
             return 0;
         }
 
         $fp = @fopen($cache_file, 'r');
         if (!$fp) {
-            $this->error("Failed to open cache file for reading: $cache_file");
+            $this->error(
+                "Failed to open cache file for reading: $cache_file"
+            );
             return 0;
         }
 
@@ -104,8 +128,12 @@ class RSSCache
         Purpose:    check a url for membership in the cache
                     and whether the object is older then MAX_AGE (ie. STALE)
         Input:      url from wich the rss file was fetched
-        Output:     cached object on HIT, false on MISS 
+        Output:     cached object on HIT, false on MISS
     \*=======================================================================*/
+    /**
+     * @param $url
+     * @return string
+     */
     public function check_cache($url)
     {
         $this->ERROR = '';
@@ -129,7 +157,11 @@ class RSSCache
         }
     }
 
-    function cache_age($cache_key)
+    /**
+     * @param $cache_key
+     * @return false|int
+     */
+    public function cache_age($cache_key)
     {
         $filename = $this->file_name($url);
         if (file_exists($filename)) {
@@ -144,6 +176,10 @@ class RSSCache
     /*=======================================================================*\
         Function:   serialize
     \*=======================================================================*/
+    /**
+     * @param $rss
+     * @return string
+     */
     public function serialize($rss)
     {
         return serialize($rss);
@@ -152,6 +188,10 @@ class RSSCache
     /*=======================================================================*\
         Function:   unserialize
     \*=======================================================================*/
+    /**
+     * @param $data
+     * @return mixed
+     */
     public function unserialize($data)
     {
         return unserialize($data);
@@ -163,16 +203,24 @@ class RSSCache
         Input:      url from wich the rss file was fetched
         Output:     a file name
     \*=======================================================================*/
+    /**
+     * @param $url
+     * @return string
+     */
     public function file_name($url)
     {
         $filename = md5($url);
-        return implode(DIRECTORY_SEPARATOR, array($this->BASE_CACHE, $filename));
+        return implode(DIRECTORY_SEPARATOR, [$this->BASE_CACHE, $filename]);
     }
 
     /*=======================================================================*\
         Function:   error
         Purpose:    register error
     \*=======================================================================*/
+    /**
+     * @param     $errormsg
+     * @param int $lvl
+     */
     public function error($errormsg, $lvl = E_USER_WARNING)
     {
         // append PHP's error message if track_errors enabled
@@ -187,6 +235,10 @@ class RSSCache
         }
     }
 
+    /**
+     * @param     $debugmsg
+     * @param int $lvl
+     */
     public function debug($debugmsg, $lvl = E_USER_NOTICE)
     {
         if (MAGPIE_DEBUG) {
@@ -196,4 +248,4 @@ class RSSCache
 
 }
 
-
+?>

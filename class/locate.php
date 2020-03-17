@@ -1,5 +1,6 @@
 <?php
-// $Id: locate.php,v 1.8 2007/11/15 11:08:43 ohwada Exp $
+
+// $Id: locate.php,v 1.1 2010/11/07 14:59:23 ohwada Exp $
 
 // 2007-11-11 K.OHWADA
 // set_config_country_conty_code()
@@ -28,25 +29,36 @@
 //=========================================================
 // class happy_linux_locate_base
 //=========================================================
+
+/**
+ * Class happy_linux_locate_base
+ */
 class happy_linux_locate_base
 {
-    public $_DEFAULT_COUNTRY_CODE = 'us';  // USA
+    public $_DEFAULT_COUNTRY_CODE = 'us';    // USA
 
-    public $_vars = array();
+    public $_vars = [];
 
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
     public function __construct()
     {
-        $this->_vars = array(
-            'happy_linux_url' => 'http://linux2.ohwada.net/'
-        );
+        $this->_vars = [
+            'happy_linux_url' => 'http://linux2.ohwada.net/',
+        ];
     }
 
     //---------------------------------------------------------
     // function
     //---------------------------------------------------------
+
+    /**
+     * @param      $query
+     * @param null $google_url
+     * @param null $lang
+     * @return string
+     */
     public function build_google_search_url($query, $google_url = null, $lang = null)
     {
         if (empty($google_url)) {
@@ -59,23 +71,36 @@ class happy_linux_locate_base
 
         $query = happy_linux_convert_to_utf8($query);
         $query = urlencode($query);
-        $url   = $google_url . 'search?hl=' . $lang . '&q=' . $query;
+        $url = $google_url . 'search?hl=' . $lang . '&q=' . $query;
+
         return $url;
     }
 
     //---------------------------------------------------------
     // get value
     //---------------------------------------------------------
+
+    /**
+     * @return string
+     */
     public function get_default_contry_code()
     {
         return $this->_DEFAULT_COUNTRY_CODE;
     }
 
+    /**
+     * @return array|string[]
+     */
     public function &get_vars()
     {
         return $this->_vars;
     }
 
+    /**
+     * @param      $name
+     * @param null $format
+     * @return bool|mixed|string
+     */
     public function get_var($name, $format = null)
     {
         $val = false;
@@ -85,9 +110,13 @@ class happy_linux_locate_base
                 $val = htmlspecialchars($val, ENT_QUOTES);
             }
         }
+
         return $val;
     }
 
+    /**
+     * @param $arr
+     */
     public function array_merge($arr)
     {
         // overwrite previus value
@@ -97,9 +126,14 @@ class happy_linux_locate_base
     //---------------------------------------------------------
     // default value
     //---------------------------------------------------------
+
+    /**
+     * @return string
+     */
     public function get_us_ping_servers()
     {
         $list = "http://rpc.weblogs.com/RPC2\n";
+
         return $list;
     }
 
@@ -109,11 +143,15 @@ class happy_linux_locate_base
 //=========================================================
 // class happy_linux_locate_factory
 //=========================================================
+
+/**
+ * Class happy_linux_locate_factory
+ */
 class happy_linux_locate_factory extends happy_linux_locate_base
 {
     public $_DIRNAME = null;
 
-    //  var $_config_handler = null;
+    //	var $_config_handler = null;
 
     public $_config_country_code = null;
 
@@ -125,56 +163,82 @@ class happy_linux_locate_factory extends happy_linux_locate_base
         parent::__construct();
     }
 
+    /**
+     * @param null $locate
+     * @return bool|\happy_linux_locate_base|mixed
+     */
     public static function getInstance($locate = null)
     {
         static $instance;
         if (!isset($instance)) {
             // Assigning the return value of new by reference is deprecated
-            $factory = new happy_linux_locate_factory();
+            $factory = new self();
 
-            $instance =& $factory->get_local_instance($locate);
+            $instance = &$factory->get_local_instance($locate);
         }
+
         return $instance;
     }
 
     // BUG: singleton done not work correctly
+
+    /**
+     * @param null $locate
+     * @return bool|\happy_linux_locate_base|mixed
+     */
     public function &get_local_instance($locate = null)
     {
         if (empty($locate)) {
             $locate = $this->get_language_country_code();
         }
-        $local =& $this->get_instance($locate);
+        $local = &$this->get_instance($locate);
+
         return $local;
     }
 
     //---------------------------------------------------------
     // get_instance
     //---------------------------------------------------------
+
+    /**
+     * @param null   $country_code
+     * @param string $prefix
+     * @param string $dirname
+     * @return bool|\happy_linux_locate_base|mixed
+     */
     public function &get_instance($country_code = null, $prefix = 'happy_linux', $dirname = 'happy_linux')
     {
         if ($country_code) {
-            $instance =& $this->get_instance_by_country_code($country_code, $prefix, $dirname);
+            $instance = &$this->get_instance_by_country_code($country_code, $prefix, $dirname);
             if ($instance) {
                 $this->_country_code = $country_code;
+
                 return $instance;
             }
         }
 
-        $instance =& $this->get_instance_by_country_code($this->get_default_contry_code(), $prefix, $dirname);
+        $instance = &$this->get_instance_by_country_code($this->get_default_contry_code(), $prefix, $dirname);
         if ($instance) {
             return $instance;
         }
 
         // Assigning the return value of new by reference is deprecated
         $instance = new happy_linux_locate_base();
+
         return $instance;
     }
 
+    /**
+     * @param        $country_code
+     * @param string $prefix
+     * @param string $dirname
+     * @return bool|mixed
+     */
     public function &get_instance_by_country_code($country_code, $prefix = 'happy_linux', $dirname = 'happy_linux')
     {
         $instance = false;
-        $file     = XOOPS_ROOT_PATH . '/modules/' . $dirname . '/locate/' . $country_code . '/local.php';
-        $class    = $prefix . '_locate_' . $country_code;
+        $file = XOOPS_ROOT_PATH . '/modules/' . $dirname . '/locate/' . $country_code . '/local.php';
+        $class = $prefix . '_locate_' . $country_code;
 
         // BUG: singleton done not work correctly
         // if include file alreary
@@ -198,14 +262,20 @@ class happy_linux_locate_factory extends happy_linux_locate_base
     //---------------------------------------------------------
     //function set_config_handler( &$handler )
     //{
-    //  $this->_config_handler =& $handler;
+    //	$this->_config_handler =& $handler;
     //}
 
+    /**
+     * @param $dirname
+     */
     public function set_dirname($dirname)
     {
         $this->_DIRNAME = $dirname;
     }
 
+    /**
+     * @return |null
+     */
     public function get_dirname()
     {
         return $this->_DIRNAME;
@@ -214,11 +284,18 @@ class happy_linux_locate_factory extends happy_linux_locate_base
     //---------------------------------------------------------
     // set & get country code
     //---------------------------------------------------------
+
+    /**
+     * @param $val
+     */
     public function set_config_country_code($val)
     {
         $this->_config_country_code = $val;
     }
 
+    /**
+     * @return |null
+     */
     public function get_config_country_code()
     {
         return $this->_config_country_code;
@@ -227,10 +304,15 @@ class happy_linux_locate_factory extends happy_linux_locate_base
     //---------------------------------------------------------
     // happy_linux_language_factory
     //---------------------------------------------------------
+
+    /**
+     * @return string
+     */
     public function get_language_country_code()
     {
         $factory = happy_linux_language_factory::getInstance();
-        $code    = $factory->get_country_code();
+        $code = $factory->get_country_code();
+
         return $code;
     }
 
@@ -240,8 +322,13 @@ class happy_linux_locate_factory extends happy_linux_locate_base
 //=========================================================
 // function
 //=========================================================
+/**
+ * @param string $format
+ * @return bool|mixed|string
+ */
 function get_happy_linux_url($format = 's')
 {
     $locate = happy_linux_locate_factory::getInstance();
+
     return $locate->get_var('happy_linux_url', $format);
 }

@@ -1,5 +1,6 @@
 <?php
-// $Id: charset.php,v 1.1 2007/11/02 13:20:06 ohwada Exp $
+
+// $Id: charset.php,v 1.1 2010/11/07 14:59:14 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
@@ -17,4 +18,3 @@
 // define('HAPPY_LINUX_MB_LANGUAGE',   'fa');
 // define('HAPPY_LINUX_MB_ENCODING',   'utf-8');
 // define('HAPPY_LINUX_MYSQL_CHARSET', 'latin1');
-;

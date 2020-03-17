@@ -1,5 +1,6 @@
 <?php
-// $Id: xoops_database_php5.php,v 1.1 2007/09/23 08:27:34 ohwada Exp $
+
+// $Id: xoops_database_php5.php,v 1.1 2010/11/07 14:59:21 ohwada Exp $
 
 // 2007-09-20 K.OHWADA
 // PHP5.2
@@ -15,6 +16,10 @@
 // substitute for class XOOPS Database
 // this class work only for PHP 5
 //=========================================================
+
+/**
+ * Class Database
+ */
 class Database
 {
     private static $_singleton = null;
@@ -27,29 +32,38 @@ class Database
         // dummy
     }
 
+    /**
+     * @return \mysql_database|null
+     */
     public static function getInstance()
     {
-        if (Database::$_singleton == null) {
+        if (null == self::$_singleton) {
             $singleton = new mysql_database();
             if (!$singleton->connect()) {
-                echo "<font color='red'>Unable to connect to database.</font><br />\n";
+                echo "<font color='red'>Unable to connect to database.</font><br>\n";
                 die();
             }
-            Database::$_singleton = $singleton;
+            self::$_singleton = $singleton;
         }
-        return Database::$_singleton;
+
+        return self::$_singleton;
     }
 
     //---------------------------------------------------------
     // function
     //---------------------------------------------------------
+
+    /**
+     * @param string $tablename
+     * @return string
+     */
     public function prefix($tablename = '')
     {
-        if ($tablename != '') {
+        if ('' != $tablename) {
             return XOOPS_DB_PREFIX . '_' . $tablename;
-        } else {
-            return XOOPS_DB_PREFIX;
         }
+
+        return XOOPS_DB_PREFIX;
     }
 
     //---------------------------------------------------------

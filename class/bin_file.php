@@ -1,5 +1,6 @@
 <?php
-// $Id: bin_file.php,v 1.1 2007/06/17 03:20:40 ohwada Exp $
+
+// $Id: bin_file.php,v 1.1 2010/11/07 14:59:20 ohwada Exp $
 
 // 2007-06-10 K.OHWADA
 // divid from bin_base
@@ -11,14 +12,16 @@
 
 // === class begin ===
 if (!class_exists('happy_linux_bin_file')) {
-
     //=========================================================
     // class happy_linux_bin_file
     // this class is used by command line
     //=========================================================
+
+    /**
+     * Class happy_linux_bin_file
+     */
     class happy_linux_bin_file extends happy_linux_file
     {
-
         //---------------------------------------------------------
         // constructor
         //---------------------------------------------------------
@@ -27,26 +30,40 @@ if (!class_exists('happy_linux_bin_file')) {
             parent::__construct();
         }
 
+        /**
+         * @return \happy_linux_bin_file|\happy_linux_file|static
+         */
         public static function getInstance()
         {
             static $instance;
-            if (!isset($instance)) {
-                $instance = new happy_linux_bin_file();
+            if (null === $instance) {
+                $instance = new static();
             }
+
             return $instance;
         }
 
         //---------------------------------------------------------
         // bin
         //---------------------------------------------------------
+
+        /**
+         * @param        $filename
+         * @param string $mode
+         * @return bool
+         */
         public function open_bin($filename, $mode = 'w')
         {
             if ($this->_flag_write) {
                 return $this->fopen($filename, $mode);
             }
+
             return true;    // no action
         }
 
+        /**
+         * @param $flag_chmod
+         */
         public function close_bin($flag_chmod)
         {
             if ($this->_flag_write) {
@@ -54,6 +71,9 @@ if (!class_exists('happy_linux_bin_file')) {
             }
         }
 
+        /**
+         * @param $data
+         */
         public function write_bin($data)
         {
             if ($this->_flag_write) {
@@ -63,6 +83,5 @@ if (!class_exists('happy_linux_bin_file')) {
 
         // --- class end ---
     }
-
     // === class end ===
 }

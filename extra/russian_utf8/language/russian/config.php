@@ -1,4 +1,5 @@
 <?php
+
 // $Id: config.php,v 1.1 2012/04/08 18:22:28 ohwada Exp $
 
 // 2007-11-24
@@ -51,4 +52,4 @@ define('_HAPPY_LINUX_CONF_TABLE_MANAGE', 'Управление таблицей 
 define('_HAPPY_LINUX_CONF_TABLE_CHECK', 'Проверить таблицу %s');
 define('_HAPPY_LINUX_CONF_TABLE_REINSTALL', 'Рекомендуется переустановить, если обнаружена ошибка');
 define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW', 'Обновление конфигурации таблицы');
-define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Выполнить, если обнаружена ошибка. <br />Существующие значения аннулируются. <br />Установите значения после выполнения. ');
+define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Выполнить, если обнаружена ошибка. <br>Существующие значения аннулируются. <br>Установите значения после выполнения. ');

@@ -1,5 +1,6 @@
 <?php
-// $Id: modinfo.php,v 1.2 2007/11/12 12:28:49 ohwada Exp $
+
+// $Id: modinfo.php,v 1.1 2010/11/07 14:59:15 ohwada Exp $
 
 // 2007-11-01 K.OHWADA
 // _MI_HAPPY_LINUX_ADMENU1

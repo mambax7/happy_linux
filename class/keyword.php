@@ -1,5 +1,6 @@
 <?php
-// $Id: keyword.php,v 1.3 2008/02/05 00:42:12 ohwada Exp $
+
+// $Id: keyword.php,v 1.1 2010/11/07 14:59:21 ohwada Exp $
 
 // 2008-02-03 K.OHWADA
 // EUC-JP in google
@@ -12,9 +13,12 @@
 //=========================================================
 // class happy_linux_keyword
 //=========================================================
+
+/**
+ * Class happy_linux_keyword
+ */
 class happy_linux_keyword
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -23,66 +27,98 @@ class happy_linux_keyword
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_keyword();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
     //---------------------------------------------------------
     // get keyword
     //---------------------------------------------------------
+
+    /**
+     * @return array|null
+     */
     public function &get_keyword_array_by_request()
     {
         // GET param
-        $arr =& $this->get_keyword_array_from_get();
+        $arr = &$this->get_keyword_array_from_get();
         if (is_array($arr) && count($arr)) {
             return $arr;
         }
 
         // server referer
-        $arr =& $this->get_keyword_array_from_referer();
+        $arr = &$this->get_keyword_array_from_referer();
+
         return $arr;
     }
 
     //---------------------------------------------------------
     // get keyword from GET param
     //---------------------------------------------------------
+
+    /**
+     * @return array|null
+     */
     public function &get_keyword_array_from_get()
     {
         return $this->convert_str_to_array($this->get_keywords_from_get());
     }
 
+    /**
+     * @return string
+     */
     public function get_keywords_from_get()
     {
         return urldecode($this->get_text_from_get('keywords'));
     }
 
+    /**
+     * @return string|null
+     */
     public function get_query_from_get()
     {
         return $this->get_text_from_get('query');
     }
 
+    /**
+     * @param      $key
+     * @param null $default
+     * @return string|null
+     */
     public function get_text_from_get($key, $default = null)
     {
         $val = $default;
         if (isset($_GET[$key])) {
             $val = trim($this->strip_control($this->strip_slashes_gpc($_GET[$key])));
         }
+
         return $val;
     }
 
     //---------------------------------------------------------
     // get keyword from referer
     //---------------------------------------------------------
+
+    /**
+     * @return array|null
+     */
     public function &get_keyword_array_from_referer()
     {
         return $this->convert_str_to_array($this->get_keyword_from_referer());
     }
 
+    /**
+     * @return bool|string
+     */
     public function get_keyword_from_referer()
     {
         if (isset($_SERVER['HTTP_REFERER'])) {
@@ -120,7 +156,12 @@ class happy_linux_keyword
 
     // http://www.google.com/search?hl=en&q=xoops&btnG=Google+Search
     // http://www.google.co.jp/search?hl=ja&q=%E3%81%AF%E3%81%A3%E3%81%B4%E3%81%83&lr=&btnG=Google+%E6%A4%9C%E7%B4%A2
-    public function _get_keyword_from_google(&$arr)
+
+    /**
+     * @param $arr
+     * @return bool|string
+     */
+    public function _get_keyword_from_google($arr)
     {
         if (isset($arr['q'])) {
             $q = $arr['q'];
@@ -137,12 +178,18 @@ class happy_linux_keyword
         }
 
         $keyword = happy_linux_convert_encoding(urldecode($q), _CHARSET, $ie);
+
         return $keyword;
     }
 
     // http://search.yahoo.com/search?p=xoops&fr=yfp-t-501&toggle=1&cop=mss&ei=UTF-8
     // http://search.yahoo.co.jp/search?p=%A4%CF%A4%C3%A4%D4%A4%A3&x=14&y=13&fr=top_v2&tid=top_v2&ei=euc-jp&search.x=1
-    public function _get_keyword_from_yahoo(&$arr)
+
+    /**
+     * @param $arr
+     * @return bool|string
+     */
+    public function _get_keyword_from_yahoo($arr)
     {
         if (isset($arr['p'])) {
             $p = $arr['p'];
@@ -156,22 +203,34 @@ class happy_linux_keyword
         }
 
         $keyword = happy_linux_convert_encoding(urldecode($p), _CHARSET, $ei);
+
         return $keyword;
     }
 
     //---------------------------------------------------------
     // utility
     //---------------------------------------------------------
-    public function urlencode_from_array(&$arr, $glue = ' ')
+
+    /**
+     * @param        $arr
+     * @param string $glue
+     * @return string
+     */
+    public function urlencode_from_array($arr, $glue = ' ')
     {
         return urlencode($this->convert_array_to_str($arr, $glue));
     }
 
+    /**
+     * @param        $str
+     * @param string $pattern
+     * @return array|null
+     */
     public function &convert_str_to_array($str, $pattern = ' ')
     {
         $arr = null;
 
-        if ($str === '') {
+        if ('' === $str) {
             return $arr;
         }
 
@@ -179,7 +238,7 @@ class happy_linux_keyword
 
         foreach ($str_arr as $value) {
             $value = trim($value);
-            if ($value != '') {
+            if ('' != $value) {
                 $arr[] = $value;
             }
         }
@@ -187,23 +246,39 @@ class happy_linux_keyword
         return $arr;
     }
 
-    public function convert_array_to_str(&$arr, $glue = ' ')
+    /**
+     * @param        $arr
+     * @param string $glue
+     * @return string|null
+     */
+    public function convert_array_to_str($arr, $glue = ' ')
     {
         $val = null;
         if (is_array($arr) && count($arr)) {
             $val = implode($glue, $arr);
         }
+
         return $val;
     }
 
+    /**
+     * @param $str
+     * @return array|string
+     */
     public function strip_slashes_gpc($str)
     {
         if (get_magic_quotes_gpc() && !is_array($str)) {
             $str = stripslashes($str);
         }
+
         return $str;
     }
 
+    /**
+     * @param        $str
+     * @param string $replace
+     * @return string|string[]|null
+     */
     public function strip_control($str, $replace = '')
     {
         return happy_linux_str_replace_control_code($str, $replace);

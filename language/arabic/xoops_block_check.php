@@ -1,5 +1,6 @@
 <?php
-// $Id: xoops_block_check.php,v 1.1 2008/02/24 02:14:19 ohwada Exp $
+
+// $Id: xoops_block_check.php,v 1.1 2010/11/07 14:59:14 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module

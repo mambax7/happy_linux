@@ -1,5 +1,6 @@
 <?php
-// $Id: config_file.php,v 1.2 2006/10/05 10:40:36 ohwada Exp $
+
+// $Id: config_file.php,v 1.1 2010/11/07 14:59:20 ohwada Exp $
 
 // 2006-10-01 K.OHWADA
 // use _LANGCODE
@@ -13,6 +14,9 @@
 // 2006-07-10 K.OHWADA
 //=========================================================
 
+/**
+ * Class happy_linux_config_file
+ */
 class happy_linux_config_file
 {
     public $_fp;
@@ -25,11 +29,14 @@ class happy_linux_config_file
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_config_file();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
@@ -38,6 +45,10 @@ class happy_linux_config_file
     //---------------------------------------------------------
     // function
     //---------------------------------------------------------
+
+    /**
+     * @param $file
+     */
     public function _save_config($file)
     {
         $this->_fopen($file);
@@ -49,9 +60,12 @@ class happy_linux_config_file
         $this->_fclose();
     }
 
+    /**
+     * @param $file
+     */
     public function _fopen($file)
     {
-        $this->_fp = fopen($file, 'w');
+        $this->_fp = fopen($file, 'wb');
     }
 
     public function _fclose()
@@ -77,6 +91,10 @@ class happy_linux_config_file
         fwrite($this->_fp, "\n");
     }
 
+    /**
+     * @param        $key
+     * @param string $value
+     */
     public function _write_constant($key, $value = '')
     {
         if (empty($value)) {
@@ -87,6 +105,10 @@ class happy_linux_config_file
         fwrite($this->_fp, "$data \n");
     }
 
+    /**
+     * @param $key
+     * @param $value
+     */
     public function _write_variable($key, $value)
     {
         $data = "$key = '$value';";

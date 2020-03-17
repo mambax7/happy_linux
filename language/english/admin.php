@@ -1,5 +1,6 @@
 <?php
-// $Id: admin.php,v 1.6 2007/11/12 12:28:48 ohwada Exp $
+
+// $Id: admin.php,v 1.1 2010/11/07 14:59:15 ohwada Exp $
 
 // 2007-11-01
 // _HAPPY_LINUX_AM_MODULE
@@ -43,4 +44,4 @@ define('_HAPPY_LINUX_AM_SERVER_ENV', 'Server Environmnet Variables');
 define('_HAPPY_LINUX_AM_DIR_NOT_WRITABLE', 'This directory is not writeable');
 define('_HAPPY_LINUX_AM_MEMORY_LIMIT_TOO_SMALL', 'memory_limit is too small');
 define('_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'Weblinks module requires more memory about %s MB');
-define('_HAPPY_LINUX_AM_MEMORY_DESC', 'This value is one standard.<br />Depending on the server environment, it is sometimes more or less.');
+define('_HAPPY_LINUX_AM_MEMORY_DESC', 'This value is one standard.<br>Depending on the server environment, it is sometimes more or less.');

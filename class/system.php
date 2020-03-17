@@ -1,5 +1,6 @@
 <?php
-// $Id: system.php,v 1.14 2008/01/30 08:33:13 ohwada Exp $
+
+// $Id: system.php,v 1.1 2010/11/07 14:59:20 ohwada Exp $
 
 // 2008-01-20 K.OHWADA
 // get_template_vars()
@@ -45,6 +46,10 @@
 //=========================================================
 // class happy_linux_system
 //=========================================================
+
+/**
+ * Class happy_linux_system
+ */
 class happy_linux_system
 {
     public $_user_uid_list;
@@ -58,11 +63,14 @@ class happy_linux_system
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_system();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
@@ -71,17 +79,28 @@ class happy_linux_system
     //--------------------------------------------------------
     // xoops constant
     //--------------------------------------------------------
+
+    /**
+     * @return string
+     */
     public function get_siteurl()
     {
         $url = XOOPS_URL . '/';
+
         return $url;
     }
 
+    /**
+     * @return mixed
+     */
     public function get_langcode()
     {
         return _LANGCODE;
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xoops_version()
     {
         return XOOPS_VERSION;
@@ -90,52 +109,86 @@ class happy_linux_system
     //--------------------------------------------------------
     // xoops config
     //--------------------------------------------------------
+
+    /**
+     * @return mixed
+     */
     public function get_sitename()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['sitename'];
     }
 
+    /**
+     * @return mixed
+     */
     public function get_slogan()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['slogan'];
     }
 
+    /**
+     * @return mixed
+     */
     public function get_adminmail()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['adminmail'];
     }
 
+    /**
+     * @return mixed
+     */
     public function get_anonymous()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['anonymous'];
     }
 
+    /**
+     * @return mixed
+     */
     public function get_language()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['language'];
     }
 
+    /**
+     * @param $lang
+     * @return bool
+     */
     public function is_language($lang)
     {
         if ($this->get_language() == $lang) {
             return true;
         }
+
         return false;
     }
 
-    public function in_array_language(&$arr)
+    /**
+     * @param $arr
+     * @return bool
+     */
+    public function in_array_language($arr)
     {
         if (in_array($this->get_language(), $arr)) {
             return true;
         }
+
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function is_japanese()
     {
         include_once XOOPS_ROOT_PATH . '/modules/happy_linux/language/lang_name_ja.php';
@@ -146,95 +199,129 @@ class happy_linux_system
     //--------------------------------------------------------
     // xoops user
     //--------------------------------------------------------
+
+    /**
+     * @param $uid
+     * @return bool
+     */
     public function is_owner($uid)
     {
         $uid = (int)$uid;
 
-        if (($uid != 0) && ($uid == $this->get_uid())) {
+        if ((0 != $uid) && ($uid == $this->get_uid())) {
             return true;
         }
 
         return false;
     }
 
+    /**
+     * @return mixed
+     */
     public function get_uid()
     {
         $user = $this->get_user_param();
+
         return $user['uid'];
     }
 
+    /**
+     * @return mixed
+     */
     public function get_uname()
     {
         $user = $this->get_user_param();
+
         return $user['uname'];
     }
 
+    /**
+     * @return mixed
+     */
     public function get_email()
     {
         $user = $this->get_user_param();
+
         return $user['email'];
     }
 
+    /**
+     * @return array
+     */
     public function &get_user_param()
     {
         global $xoopsUser;
 
-        $uid      = 0;
-        $uname    = '';
-        $email    = '';
-        $url      = '';
-        $groups   = '';
+        $uid = 0;
+        $uname = '';
+        $email = '';
+        $url = '';
+        $groups = '';
         $isactive = false;
 
         if (is_object($xoopsUser)) {
-            $uid      = $xoopsUser->getVar('uid');
-            $uname    = $xoopsUser->getVar('uname');
-            $email    = $xoopsUser->getVar('email');
-            $url      = $xoopsUser->getVar('url');
-            $groups   = $xoopsUser->getGroups();
+            $uid = $xoopsUser->getVar('uid');
+            $uname = $xoopsUser->getVar('uname');
+            $email = $xoopsUser->getVar('email');
+            $url = $xoopsUser->getVar('url');
+            $groups = $xoopsUser->getGroups();
             $isactive = $xoopsUser->isActive();
         }
 
-        $arr = array(
-            'uid'      => $uid,
-            'uname'    => $uname,
-            'email'    => $email,
-            'url'      => $url,
-            'groups'   => $groups,
+        $arr = [
+            'uid' => $uid,
+            'uname' => $uname,
+            'email' => $email,
+            'url' => $url,
+            'groups' => $groups,
             'isactive' => $isactive,
-        );
+        ];
 
         return $arr;
     }
 
+    /**
+     * @return bool
+     */
     public function is_user()
     {
         global $xoopsUser;
         if (is_object($xoopsUser)) {
             return true;
         }
+
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function is_guest()
     {
         if (!$this->is_user()) {
             return true;
         }
+
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public function is_module_admin()
     {
         global $xoopsUser, $xoopsModule;
 
         if (is_object($xoopsUser) && $xoopsUser->isAdmin($xoopsModule->mid())) {
-            return true;;
+            return true;
         }
 
         return false;
     }
 
+    /**
+     * @return array
+     */
     public function &get_user_groups()
     {
         global $xoopsUser;
@@ -243,92 +330,147 @@ class happy_linux_system
         } else {
             $groups = $this->get_user_groups_anonymous();
         }
+
         return $groups;
     }
 
+    /**
+     * @return array
+     */
     public function &get_user_groups_anonymous()
     {
-        $groups = array(XOOPS_GROUP_ANONYMOUS);
+        $groups = [XOOPS_GROUP_ANONYMOUS];
+
         return $groups;
     }
 
     //--------------------------------------------------------
     // xoops module
     //--------------------------------------------------------
+
+    /**
+     * @return mixed
+     */
     public function get_mid()
     {
         global $xoopsModule;
         $mid = $xoopsModule->getVar('mid');
+
         return $mid;
     }
 
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function get_module_name($format = 's')
     {
         global $xoopsModule;
+
         return $xoopsModule->getVar('name', $format);
     }
 
+    /**
+     * @param $dirname
+     * @return bool
+     */
     public function get_mid_by_dirname($dirname)
     {
-        $mid    = false;
-        $module =& $this->get_module_by_dirname($dirname);
+        $mid = false;
+        $module = &$this->get_module_by_dirname($dirname);
         if (is_object($module)) {
             $mid = $module->getVar('mid');
         }
+
         return $mid;
     }
 
+    /**
+     * @param        $dirname
+     * @param string $format
+     * @return bool
+     */
     public function get_module_name_by_dirname($dirname, $format = 's')
     {
-        $name   = false;
-        $module = $this->get_module_by_dirname($dirname);
+        $name = false;
+        $module = &$this->get_module_by_dirname($dirname);
         if (is_object($module)) {
             $name = $module->getVar('name', $format = 's');
         }
+
         return $name;
     }
 
+    /**
+     * @param $dirname
+     * @return bool
+     */
     public function is_active_module_by_dirname($dirname)
     {
-        $act    = false;
-        $module =& $this->get_module_by_dirname($dirname);
+        $act = false;
+        $module = &$this->get_module_by_dirname($dirname);
         if (is_object($module)) {
             $act = $module->getVar('isactive');
         }
+
         return $act;
     }
 
-    public function get_module_by_dirname($dirname)
+    /**
+     * @param $dirname
+     * @return mixed
+     */
+    public function &get_module_by_dirname($dirname)
     {
         $module_handler = xoops_getHandler('module');
-        $module         = $module_handler->getByDirname($dirname);
+        $module = $module_handler->getByDirname($dirname);
+
         return $module;
     }
 
+    /**
+     * @param null $criteria
+     * @param bool $id_as_key
+     * @return mixed
+     */
     public function &get_module_objects($criteria = null, $id_as_key = false)
     {
         $module_handler = xoops_getHandler('module');
-        $objs           = $module_handler->getObjects($criteria, $id_as_key);
+        $objs = $module_handler->getObjects($criteria, $id_as_key);
+
         return $objs;
     }
 
-    public function get_module_by_mid($mid)
+    /**
+     * @param $mid
+     * @return mixed
+     */
+    public function &get_module_by_mid($mid)
     {
         $module_handler = xoops_getHandler('module');
-        $obj            = $module_handler->get($mid);
+        $obj = $module_handler->get($mid);
+
         return $obj;
     }
 
     // XC 2.1
+
+    /**
+     * @return bool
+     */
     public function is_active_legacy_module()
     {
         return $this->is_active_module_by_dirname('legacy');
     }
 
+    /**
+     * @param null $param
+     * @return array
+     */
     public function &get_module_list($param = null)
     {
-        $isactive       = isset($param['isactive']) ? $param['isactive'] : true;
-        $file           = isset($param['file']) ? $param['file'] : null;
+        $isactive = isset($param['isactive']) ? $param['isactive'] : true;
+        $file = isset($param['file']) ? $param['file'] : null;
         $dirname_except = isset($param['dirname_except']) ? $param['dirname_except'] : null;
 
         $module_handler = xoops_getHandler('module');
@@ -341,10 +483,10 @@ class happy_linux_system
 
         $objs = $module_handler->getObjects($criteria);
 
-        $arr = array();
+        $arr = [];
 
         foreach ($objs as $obj) {
-            $mod_id      = $obj->getVar('mid');
+            $mod_id = $obj->getVar('mid');
             $mod_dirname = $obj->getVar('dirname');
 
             if ($file) {
@@ -366,22 +508,27 @@ class happy_linux_system
         return $arr;
     }
 
-    public function &get_dirname_list(&$mod_objs, $param = null)
+    /**
+     * @param      $mod_objs
+     * @param null $param
+     * @return array
+     */
+    public function &get_dirname_list($mod_objs, $param = null)
     {
         // none_key must be string, not integer 0
         // 0 match any stings
 
-        $none_flag       = isset($param['none_flag']) ? $param['none_flag'] : false;
-        $none_key        = isset($param['none_key']) ? $param['none_key'] : '-';
-        $none_value      = isset($param['none_value']) ? $param['none_value'] : '---';
+        $none_flag = isset($param['none_flag']) ? $param['none_flag'] : false;
+        $none_key = isset($param['none_key']) ? $param['none_key'] : '-';
+        $none_value = isset($param['none_value']) ? $param['none_value'] : '---';
         $dirname_default = isset($param['dirname_default']) ? $param['dirname_default'] : null;
-        $flag_dirname    = isset($param['flag_dirname']) ? $param['flag_dirname'] : true;
-        $flag_name       = isset($param['flag_name']) ? $param['flag_name'] : true;
-        $flag_sanitize   = isset($param['flag_sanitize']) ? $param['flag_sanitize'] : true;
-        $sort_asort      = isset($param['sort_asort']) ? $param['sort_asort'] : true;
-        $sort_flip       = isset($param['sort_flip']) ? $param['sort_flip'] : true;
+        $flag_dirname = isset($param['flag_dirname']) ? $param['flag_dirname'] : true;
+        $flag_name = isset($param['flag_name']) ? $param['flag_name'] : true;
+        $flag_sanitize = isset($param['flag_sanitize']) ? $param['flag_sanitize'] : true;
+        $sort_asort = isset($param['sort_asort']) ? $param['sort_asort'] : true;
+        $sort_flip = isset($param['sort_flip']) ? $param['sort_flip'] : true;
 
-        $arr = array();
+        $arr = [];
 
         if ($none_flag) {
             $arr[$none_key] = $none_value;
@@ -389,7 +536,7 @@ class happy_linux_system
 
         foreach ($mod_objs as $obj) {
             $mod_dirname = $obj->getVar('dirname');
-            $mod_name    = $obj->getVar('name');
+            $mod_name = $obj->getVar('name');
 
             $val = '';
             if ($flag_dirname) {
@@ -443,100 +590,121 @@ class happy_linux_system
     // xoops user handler
     //--------------------------------------------------------
     // name for "anonymous" if not found
+
+    /**
+     * @param     $uid
+     * @param int $usereal
+     * @return mixed
+     */
     public function get_uname_by_uid($uid, $usereal = 0)
     {
         $uname = XoopsUser::getUnameFromId($uid, $usereal);
+
         return $uname;
     }
 
+    /**
+     * @param $uid
+     * @return mixed|string
+     */
     public function get_email_by_uid($uid)
     {
         $arr = $this->get_user_by_uid($uid);
 
         if (isset($arr['email'])) {
             $email = $arr['email'];
+
             return $email;
         }
 
         return '';
     }
 
-    public function get_user_by_uid($uid)
+    /**
+     * @param $uid
+     * @return array
+     */
+    public function &get_user_by_uid($uid)
     {
         $uid = (int)$uid;
-        $ret = array(
-            'uid'      => $uid,
-            'uname'    => '',
-            'name'     => '',
-            'email'    => '',
-            'groups'   => '',
-            'isactive' => false
-        );
+        $ret = [
+            'uid' => $uid,
+            'uname' => '',
+            'name' => '',
+            'email' => '',
+            'groups' => '',
+            'isactive' => false,
+        ];
 
         if ($uid <= 0) {
             return $ret;
         }
 
         $user_handler = xoops_getHandler('user');
-        $obj          = $user_handler->get($uid);
+        $obj = $user_handler->get($uid);
 
         if (!is_object($obj)) {
             return $ret;
         }
 
-        $ret = array(
-            'uid'      => $uid,
-            'uname'    => $obj->getVar('uname'),
-            'name'     => $obj->getVar('name'),
-            'email'    => $obj->getVar('email'),
-            'url'      => $obj->getVar('url'),
-            'groups'   => $obj->getGroups(),
+        $ret = [
+            'uid' => $uid,
+            'uname' => $obj->getVar('uname'),
+            'name' => $obj->getVar('name'),
+            'email' => $obj->getVar('email'),
+            'url' => $obj->getVar('url'),
+            'groups' => $obj->getGroups(),
             'isactive' => $obj->isActive(),
-        );
+        ];
 
         return $ret;
     }
 
+    /**
+     * @param int $limit
+     * @param int $start
+     * @return array|bool
+     */
     public function &get_user_list($limit = 0, $start = 0)
     {
         $false = false;
 
-        $this->_user_uid_list = array();
-        $this->_user_list     = array();
+        $this->_user_uid_list = [];
+        $this->_user_list = [];
 
-        $limit    = (int)$limit;
-        $start    = (int)$start;
+        $limit = (int)$limit;
+        $start = (int)$start;
         $criteria = new CriteriaCompo();
         $criteria->setStart($start);
         $criteria->setLimit($limit);
 
         $user_handler = xoops_getHandler('user');
-        $objs         = $user_handler->getObjects($criteria);
+        $objs = $user_handler->getObjects($criteria);
 
-        if (count($objs) == 0) {
+        if (0 == count($objs)) {
             return $false;
         }
 
         foreach ($objs as $obj) {
-            $uid      = $obj->getVar('uid');
-            $uname    = $obj->getVar('uname');
-            $name     = $obj->getVar('name');
-            $email    = $obj->getVar('email');
-            $groups   = $obj->getGroups();
+            $uid = $obj->getVar('uid');
+            $uname = $obj->getVar('uname');
+            $name = $obj->getVar('name');
+            $email = $obj->getVar('email');
+            $groups = $obj->getGroups();
             $isactive = $obj->isActive();
 
-            $this->_user_uid_list[]             = $uid;
-            $this->_user_list[$uid]['uname']    = $uname;
-            $this->_user_list[$uid]['name']     = $name;
-            $this->_user_list[$uid]['email']    = $email;
-            $this->_user_list[$uid]['groups']   = $groups;
+            $this->_user_uid_list[] = $uid;
+            $this->_user_list[$uid]['uname'] = $uname;
+            $this->_user_list[$uid]['name'] = $name;
+            $this->_user_list[$uid]['email'] = $email;
+            $this->_user_list[$uid]['groups'] = $groups;
             $this->_user_list[$uid]['isactive'] = $isactive;
         }
 
-        $this->_user_list[0]['uname']    = $this->get_anonymous();
-        $this->_user_list[0]['name']     = '';
-        $this->_user_list[0]['email']    = '';
-        $this->_user_list[0]['groups']   = '';
+        $this->_user_list[0]['uname'] = $this->get_anonymous();
+        $this->_user_list[0]['name'] = '';
+        $this->_user_list[0]['email'] = '';
+        $this->_user_list[0]['groups'] = '';
         $this->_user_list[0]['isactive'] = false;
 
         return $this->_user_list;
@@ -547,6 +715,10 @@ class happy_linux_system
         return $this->_user_uid_list;
     }
 
+    /**
+     * @param $uname
+     * @return array|bool
+     */
     public function &get_user_by_uname($uname)
     {
         $false = false;
@@ -555,21 +727,21 @@ class happy_linux_system
         $criteria->add(new criteria('uname', $uname, '='));
 
         $user_handler = xoops_getHandler('user');
-        $objs         = $user_handler->getObjects($criteria);
+        $objs = $user_handler->getObjects($criteria);
 
         // system error if twe or more
-        if (!is_array($objs) || (count($objs) != 1)) {
+        if (!is_array($objs) || (1 != count($objs))) {
             return $false;
         }
 
-        $arr = array(
-            'uid'      => $objs[0]->getVar('uid'),
-            'uname'    => $objs[0]->getVar('uname'),
-            'name'     => $objs[0]->getVar('name'),
-            'email'    => $objs[0]->getVar('email'),
-            'groups'   => $objs[0]->getGroups(),
+        $arr = [
+            'uid' => $objs[0]->getVar('uid'),
+            'uname' => $objs[0]->getVar('uname'),
+            'name' => $objs[0]->getVar('name'),
+            'email' => $objs[0]->getVar('email'),
+            'groups' => $objs[0]->getGroups(),
             'isactive' => $objs[0]->isActive(),
-        );
+        ];
 
         return $arr;
     }
@@ -577,10 +749,15 @@ class happy_linux_system
     //--------------------------------------------------------
     // xoops member handler
     //--------------------------------------------------------
+
+    /**
+     * @return mixed
+     */
     public function &get_group_list()
     {
         $member_handler = xoops_getHandler('member');
-        $list           =& $member_handler->getGroupList();
+        $list = &$member_handler->getGroupList();
+
         return $list;
     }
 
@@ -588,68 +765,108 @@ class happy_linux_system
     // xoops groupperm handler
     // default: read permission
     //--------------------------------------------------------
+
+    /**
+     * @param string $gperm_name
+     * @param int    $gperm_modid
+     * @param null   $gperm_groupid
+     * @return mixed
+     */
     public function &get_groupperm_mid_list($gperm_name = 'module_read', $gperm_modid = 1, $gperm_groupid = null)
     {
         if (empty($gperm_groupid)) {
-            $gperm_groupid =& $this->get_user_groups();
+            $gperm_groupid = &$this->get_user_groups();
         }
 
         $groupperm_handler = xoops_getHandler('groupperm');
-        $list              = $groupperm_handler->getItemIds($gperm_name, $gperm_groupid, $gperm_modid);
+        $list = $groupperm_handler->getItemIds($gperm_name, $gperm_groupid, $gperm_modid);
+
         return $list;
     }
 
+    /**
+     * @param     $gperm_name
+     * @param     $gperm_itemid
+     * @param     $gperm_groupid
+     * @param int $gperm_modid
+     * @return bool
+     */
     public function check_groupperm_right($gperm_name, $gperm_itemid, $gperm_groupid, $gperm_modid = 1)
     {
         $groupperm_handler = xoops_getHandler('groupperm');
         if ($groupperm_handler->checkRight($gperm_name, $gperm_itemid, $gperm_groupid, $gperm_modid)) {
             return true;
         }
+
         return false;
     }
 
     //--------------------------------------------------------
     // xoops config handler
     //--------------------------------------------------------
+
+    /**
+     * @return bool
+     */
     public function check_config_search_enable_search()
     {
-        $config_handler    = xoops_getHandler('config');
-        $xoopsConfigSearch = $config_handler->getConfigsByCat(XOOPS_CONF_SEARCH);
-        if ($xoopsConfigSearch['enable_search'] == 1) {
+        $config_handler = xoops_getHandler('config');
+        $xoopsConfigSearch = &$config_handler->getConfigsByCat(XOOPS_CONF_SEARCH);
+        if (1 == $xoopsConfigSearch['enable_search']) {
             return true;
         }
+
         return false;
     }
 
+    /**
+     * @return mixed
+     */
     public function get_config_search_keyword_min()
     {
-        $config_handler    = xoops_getHandler('config');
-        $xoopsConfigSearch = $config_handler->getConfigsByCat(XOOPS_CONF_SEARCH);
-        $keyword_min       = $xoopsConfigSearch['keyword_min'];
+        $config_handler = xoops_getHandler('config');
+        $xoopsConfigSearch = &$config_handler->getConfigsByCat(XOOPS_CONF_SEARCH);
+        $keyword_min = $xoopsConfigSearch['keyword_min'];
+
         return $keyword_min;
     }
 
+    /**
+     * @param $mid
+     * @return mixed
+     */
     public function &get_module_config_by_mid($mid)
     {
         $config_handler = xoops_getHandler('config');
-        $config         = $config_handler->getConfigsByCat(0, $mid);
+        $config = &$config_handler->getConfigsByCat(0, $mid);
+
         return $config;
     }
 
     //--------------------------------------------------------
     // XoopsLists
     //--------------------------------------------------------
+
+    /**
+     * @param $dir
+     * @return mixed
+     */
     public function &get_img_list_as_array($dir)
     {
         include_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 
-        $arr =& XoopsLists::getImgListAsArray($dir);
+        $arr = XoopsLists::getImgListAsArray($dir);
+
         return $arr;
     }
 
     //--------------------------------------------------------
     // xoops system
     //--------------------------------------------------------
+
+    /**
+     * @return string
+     */
     public function get_xoops_system()
     {
         $ver = 'xoops_20';
@@ -660,51 +877,63 @@ class happy_linux_system
         elseif (preg_match("/XOOPS[\s+]2.2/i", $this->get_xoops_version())) {
             $ver = 'xoops_22';
         }
+
         return $ver;
     }
 
+    /**
+     * @return array
+     */
     public function get_block_admin()
     {
         switch ($this->get_xoops_system()) {
             // XC 2.1 legacy
             case 'xc_21':
                 $title = _HAPPY_LINUX_AM_BLOCK;
-                $url   = XOOPS_URL . '/modules/legacy/admin/index.php?action=BlockList';
+                $url = XOOPS_URL . '/modules/legacy/admin/index.php?action=BlockList';
                 break;
-
             // xoops 2.2
             case 'xoops_22':
                 $title = _HAPPY_LINUX_AM_BLOCK;
-                $url   = XOOPS_URL . '/modules/system/admin.php?fct=blocksadmin';
+                $url = XOOPS_URL . '/modules/system/admin.php?fct=blocksadmin';
                 break;
-
             // xoops 2.0
             case 'xoops_20':
             default:
                 $title = _HAPPY_LINUX_AM_GROUP_BLOCK;
-                $url   = 'myblocksadmin.php';
+                $url = 'myblocksadmin.php';
                 break;
         }
 
-        return array($title, $url);
+        return [$title, $url];
     }
 
     //--------------------------------------------------------
     // xoops template
     //--------------------------------------------------------
+
+    /**
+     * @param null $varname
+     * @return bool
+     */
     public function get_template_vars($varname = null)
     {
         global $xoopsTpl;
         if (is_object($xoopsTpl)) {
             if ($varname) {
                 return $xoopsTpl->get_template_vars($varname);
-            } else {
-                return $xoopsTpl->get_template_vars();
             }
+
+            return $xoopsTpl->get_template_vars();
         }
+
         return false;
     }
 
+    /**
+     * @param      $varname
+     * @param null $var
+     */
     public function assign_template($varname, $var = null)
     {
         global $xoopsTpl;
@@ -717,6 +946,11 @@ class happy_linux_system
         }
     }
 
+    /**
+     * @param        $varname
+     * @param        $var
+     * @param string $glue
+     */
     public function add_template($varname, $var, $glue = '')
     {
         $this->assign_template($varname, $this->get_template_vars($varname) . $glue . $var);
@@ -727,17 +961,26 @@ class happy_linux_system
     // this function is deprecated
     // because XC21 dont support XOOPS_CONF_METAFOOTER
     //========================================================
+
+    /**
+     * @return mixed
+     */
     public function get_meta_author()
     {
-        $config_handler        = xoops_getHandler('config');
-        $xoopsConfigMetaFooter = $config_handler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
+        $config_handler = xoops_getHandler('config');
+        $xoopsConfigMetaFooter = &$config_handler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
+
         return $xoopsConfigMetaFooter['meta_author'];
     }
 
+    /**
+     * @return mixed
+     */
     public function get_meta_description()
     {
-        $config_handler        = xoops_getHandler('config');
-        $xoopsConfigMetaFooter = $config_handler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
+        $config_handler = xoops_getHandler('config');
+        $xoopsConfigMetaFooter = &$config_handler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
+
         return $xoopsConfigMetaFooter['meta_description'];
     }
 

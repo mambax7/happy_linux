@@ -1,5 +1,6 @@
 <?php
-// $Id: config_base_handler.php,v 1.6 2007/11/26 02:49:28 ohwada Exp $
+
+// $Id: config_base_handler.php,v 1.82 2010/11/07 14:59:23 ohwada Exp $
 
 // 2007-11-24 K.OHWADA
 // move get_first_obj_from_objs() to object_handler.php
@@ -30,9 +31,11 @@
 // modify form system XoopsConfigItem
 //================================================================
 
+/**
+ * Class happy_linux_config_base
+ */
 class happy_linux_config_base extends happy_linux_object
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -54,6 +57,11 @@ class happy_linux_config_base extends happy_linux_object
     //---------------------------------------------------------
     // set value
     //---------------------------------------------------------
+
+    /**
+     * @param      $value
+     * @param bool $force_slash
+     */
     public function setConfValueForInput(&$value, $force_slash = false)
     {
         // BUG 4378: dont strip slashes in conf_value when magic_quotes_gpc is on
@@ -61,30 +69,24 @@ class happy_linux_config_base extends happy_linux_object
             case 'bool':
                 $this->setBool('conf_value', $value);
                 break;
-
             case 'int':
                 $this->setInt('conf_value', $value);
                 break;
-
             case 'float':
                 $this->setFloat('conf_value', $value);
                 break;
-
             case 'text':
                 $this->setVarTxtbox('conf_value', $value, $force_slash);
                 break;
-
             case 'textarea':
                 $this->setVarTxtarea('conf_value', $value, $force_slash);
                 break;
-
             case 'array':
                 if (!is_array($value)) {
                     $value = explode('|', trim($value));
                 }
                 $this->setVarArray('conf_value', $value);
                 break;
-
             case 'other':
             default:
                 $this->setAsIs('conf_value', $value);
@@ -95,46 +97,50 @@ class happy_linux_config_base extends happy_linux_object
     //---------------------------------------------------------
     // get value
     //---------------------------------------------------------
+
+    /**
+     * @param string $format
+     * @return float|int|mixed|string|string[]|null
+     */
     public function &getConfValueForOutput($format = 's')
     {
         switch ($this->get('conf_valuetype')) {
             case 'bool':
-                $value =& $this->getVarBool('conf_value');
+                $value = &$this->getVarBool('conf_value');
                 break;
-
             case 'int':
-                $value =& $this->getVarInt('conf_value');
+                $value = &$this->getVarInt('conf_value');
                 break;
-
             case 'float':
-                $value =& $this->getVarFloat('conf_value');
+                $value = &$this->getVarFloat('conf_value');
                 break;
-
             case 'text':
-                $value =& $this->getVarTxtbox('conf_value', $format);
+                $value = &$this->getVarTxtbox('conf_value', $format);
                 break;
-
             case 'textarea':
-                $value =& $this->getVarTxtarea('conf_value', $format);
+                $value = &$this->getVarTxtarea('conf_value', $format);
                 break;
-
             case 'array':
-                $value =& $this->getVarArray('conf_value');
+                $value = &$this->getVarArray('conf_value');
                 break;
-
             case 'other':
             default:
-                $value =& $this->getVarAsIs('conf_value');
+                $value = &$this->getVarAsIs('conf_value');
                 break;
         }
 
         return $value;
     }
 
+    /**
+     * @param string $format
+     * @return array
+     */
     public function getConfVarAll($format = 's')
     {
-        $ret                 = $this->getVarAll($format);
+        $ret = $this->getVarAll($format);
         $ret['value_output'] = $this->getConfValueForOutput($format);
+
         return $ret;
     }
 
@@ -144,14 +150,26 @@ class happy_linux_config_base extends happy_linux_object
 //=========================================================
 // class config handler
 //=========================================================
+
+/**
+ * Class happy_linux_config_base_handler
+ */
 class happy_linux_config_base_handler extends happy_linux_object_handler
 {
-    public $_cached_by_confid = array();
-    public $_cached_by_name   = array();
+    public $_cached_by_confid = [];
+    public $_cached_by_name = [];
 
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
+
+    /**
+     * happy_linux_config_base_handler constructor.
+     * @param $dirname
+     * @param $table_name
+     * @param $id_name
+     * @param $class_name
+     */
     public function __construct($dirname, $table_name, $id_name, $class_name)
     {
         parent::__construct($dirname, $table_name, $id_name, $class_name);
@@ -160,7 +178,12 @@ class happy_linux_config_base_handler extends happy_linux_object_handler
     //---------------------------------------------------------
     // basic function
     //---------------------------------------------------------
-    public function _build_insert_sql(&$obj)
+
+    /**
+     * @param $obj
+     * @return string|void
+     */
+    public function _build_insert_sql($obj)
     {
         foreach ($obj->gets() as $k => $v) {
             ${$k} = $v;
@@ -189,7 +212,11 @@ class happy_linux_config_base_handler extends happy_linux_object_handler
         return $sql;
     }
 
-    public function _build_update_sql(&$obj)
+    /**
+     * @param $obj
+     * @return string|void
+     */
+    public function _build_update_sql($obj)
     {
         foreach ($obj->gets() as $k => $v) {
             ${$k} = $v;
@@ -213,13 +240,13 @@ class happy_linux_config_base_handler extends happy_linux_object_handler
     //---------------------------------------------------------
     public function load()
     {
-        $this->_cached_by_confid = array();
-        $this->_cached_by_name   = array();
+        $this->_cached_by_confid = [];
+        $this->_cached_by_name = [];
 
         $objs = $this->getObjects();
 
         foreach ($objs as $obj) {
-            $arr                                      = $obj->getConfVarAll('s');
+            $arr = $obj->getConfVarAll('s');
             $this->_cached_by_confid[$arr['conf_id']] = $arr;
             $this->_cached_by_name[$arr['conf_name']] = $arr;
         }
@@ -228,45 +255,74 @@ class happy_linux_config_base_handler extends happy_linux_object_handler
     //---------------------------------------------------------
     // get_cache
     //---------------------------------------------------------
+
+    /**
+     * @param $id
+     * @return bool|mixed
+     */
     public function get_cache_by_confid($id)
     {
         $ret = false;
         if (isset($this->_cached_by_confid[$id])) {
             $ret = $this->_cached_by_confid[$id];
         }
+
         return $ret;
     }
 
+    /**
+     * @param $id
+     * @param $key
+     * @return bool|mixed
+     */
     public function get_cache_by_confid_key($id, $key)
     {
         $ret = false;
         if (isset($this->_cached_by_confid[$id][$key])) {
             $ret = $this->_cached_by_confid[$id][$key];
         }
+
         return $ret;
     }
 
+    /**
+     * @param $name
+     * @return bool|mixed
+     */
     public function get_cache_by_name($name)
     {
         $ret = false;
         if (isset($this->_cached_by_name[$name])) {
             $ret = $this->_cached_by_name[$name];
         }
+
         return $ret;
     }
 
+    /**
+     * @param $name
+     * @param $key
+     * @return bool|mixed
+     */
     public function get_cache_by_name_key($name, $key)
     {
         $ret = false;
         if (isset($this->_cached_by_name[$name][$key])) {
             $ret = $this->_cached_by_name[$name][$key];
         }
+
         return $ret;
     }
 
     //---------------------------------------------------------
     // update
     //---------------------------------------------------------
+
+    /**
+     * @param $id
+     * @param $value
+     * @return bool
+     */
     public function update_by_confid($id, $value)
     {
         $id = (int)$id;
@@ -274,64 +330,94 @@ class happy_linux_config_base_handler extends happy_linux_object_handler
             return false;
         }
 
-        $obj =& $this->get_by_confid($id);
+        $obj = $this->get_by_confid($id);
         if (!is_object($obj)) {
             return false;
         }
 
         $obj->setConfValueForInput($value, true);
         $ret = $this->update($obj);
+
         return $ret;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return bool
+     */
     public function update_by_name($name, $value)
     {
-        $obj =& $this->get_by_name($name);
+        $obj = $this->get_by_name($name);
         if (!is_object($obj)) {
             return false;
         }
 
         $obj->setConfValueForInput($value, true);
         $ret = $this->update($obj);
+
         return $ret;
     }
 
     //---------------------------------------------------------
     // get
     //---------------------------------------------------------
+
+    /**
+     * @param $id
+     * @return bool|mixed
+     */
     public function &get_by_confid($id)
     {
         return $this->get_one_by_key_value('conf_id', (int)$id);
     }
 
+    /**
+     * @param $name
+     * @return bool|mixed
+     */
     public function &get_by_name($name)
     {
         return $this->get_one_by_key_value('conf_name', $name);
     }
 
+    /**
+     * @param $id
+     * @return bool
+     */
     public function get_value_by_confid($id)
     {
         $val = false;
-        $obj =& $this->get_by_confid($id);
+        $obj = $this->get_by_confid($id);
         if (is_object($obj)) {
             $val = $obj->get('conf_value');
         }
+
         return $val;
     }
 
+    /**
+     * @param $name
+     * @return bool
+     */
     public function get_value_by_name($name)
     {
         $val = false;
-        $obj =& $this->get_by_name($name);
+        $obj = $this->get_by_name($name);
         if (is_object($obj)) {
             $val = $obj->get('conf_value');
         }
+
         return $val;
     }
 
     //---------------------------------------------------------
     // create_table
     //---------------------------------------------------------
+
+    /**
+     * @return bool
+     */
     public function create_table()
     {
         // BUG : cannot create table in MySQL 3.23
@@ -349,10 +435,11 @@ CREATE TABLE ' . $this->_table . " (
   aux_text_2 varchar(255) default '',
   PRIMARY KEY (id),
   KEY conf_id (conf_id)
-) TYPE=MyISAM
+) ENGINE=MyISAM
 ";
 
         $ret = $this->query($sql);
+
         return $ret;
     }
 

@@ -1,5 +1,6 @@
 <?php
-// $Id: config.php,v 1.1 2008/01/18 10:31:09 ohwada Exp $
+
+// $Id: config.php,v 1.1 2010/11/07 14:59:14 ohwada Exp $
 
 // =========================================================
 // Happy Linux Framework Module
@@ -38,4 +39,4 @@ define('_HAPPY_LINUX_CONF_TABLE_MANAGE', 'DB Table Management');
 define('_HAPPY_LINUX_CONF_TABLE_CHECK', 'Check %s Table');
 define('_HAPPY_LINUX_CONF_TABLE_REINSTALL', 'Recommend to re-install if detected error');
 define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW', 'Renewal Config Table');
-define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Execute if detected error. <br />The present values are repealed. <br />Set values after execution. ');
+define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Execute if detected error. <br>The present values are repealed. <br>Set values after execution. ');

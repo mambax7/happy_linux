@@ -1,5 +1,6 @@
 <?php
-// $Id: magpie_cache.php,v 1.1 2007/05/15 04:56:01 ohwada Exp $
+
+// $Id: magpie_cache.php,v 1.1 2010/11/07 14:59:24 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
@@ -25,14 +26,23 @@
  */
 
 //class RSSCache {
+
+/**
+ * Class happy_linux_magpie_cache
+ */
 class happy_linux_magpie_cache
 {
-
     public $BASE_CACHE = './cache';    // where the cache files are stored
-    public $MAX_AGE    = 3600;         // when are files stale, default one hour
-    public $ERROR      = '';           // accumulate error messages
+    public $MAX_AGE = 3600;         // when are files stale, default one hour
+    public $ERROR = '';           // accumulate error messages
 
     //  function RSSCache ($base='', $age='') {
+
+    /**
+     * happy_linux_magpie_cache constructor.
+     * @param string $base
+     * @param string $age
+     */
     public function __construct($base = '', $age = '')
     {
         if ($base) {
@@ -48,7 +58,9 @@ class happy_linux_magpie_cache
 
             // if make failed
             if (!$status) {
-                $this->error("Cache couldn't make dir '" . $this->BASE_CACHE . "'.");
+                $this->error(
+                    "Cache couldn't make dir '" . $this->BASE_CACHE . "'."
+                );
             }
         }
     }
@@ -59,14 +71,23 @@ class happy_linux_magpie_cache
         Input:      url from wich the rss file was fetched
         Output:     true on sucess
     \*=======================================================================*/
+
+    /**
+     * @param $url
+     * @param $rss
+     * @return int|string
+     */
     public function set($url, $rss)
     {
         $this->ERROR = '';
-        $cache_file  = $this->file_name($url);
-        $fp          = @fopen($cache_file, 'w');
+        $cache_file = $this->file_name($url);
+        $fp = @fopen($cache_file, 'wb');
 
         if (!$fp) {
-            $this->error("Cache unable to open file for writing: $cache_file");
+            $this->error(
+                "Cache unable to open file for writing: $cache_file"
+            );
+
             return 0;
         }
 
@@ -83,25 +104,36 @@ class happy_linux_magpie_cache
         Input:      url from wich the rss file was fetched
         Output:     cached object on HIT, false on MISS
     \*=======================================================================*/
+
+    /**
+     * @param $url
+     * @return int|mixed
+     */
     public function get($url)
     {
         $this->ERROR = '';
-        $cache_file  = $this->file_name($url);
+        $cache_file = $this->file_name($url);
 
         if (!file_exists($cache_file)) {
-            $this->debug("Cache doesn't contain: $url (cache file: $cache_file)");
+            $this->debug(
+                "Cache doesn't contain: $url (cache file: $cache_file)"
+            );
+
             return 0;
         }
 
-        $fp = @fopen($cache_file, 'r');
+        $fp = @fopen($cache_file, 'rb');
         if (!$fp) {
-            $this->error("Failed to open cache file for reading: $cache_file");
+            $this->error(
+                "Failed to open cache file for reading: $cache_file"
+            );
+
             return 0;
         }
 
         if ($filesize = filesize($cache_file)) {
             $data = fread($fp, filesize($cache_file));
-            $rss  = $this->unserialize($data);
+            $rss = $this->unserialize($data);
 
             return $rss;
         }
@@ -116,44 +148,57 @@ class happy_linux_magpie_cache
         Input:      url from wich the rss file was fetched
         Output:     cached object on HIT, false on MISS
     \*=======================================================================*/
+
+    /**
+     * @param $url
+     * @return string
+     */
     public function check_cache($url)
     {
         $this->ERROR = '';
-        $filename    = $this->file_name($url);
+        $filename = $this->file_name($url);
 
         if (file_exists($filename)) {
             // find how long ago the file was added to the cache
             // and whether that is longer then MAX_AGE
             $mtime = filemtime($filename);
-            $age   = time() - $mtime;
+            $age = time() - $mtime;
             if ($this->MAX_AGE > $age) {
                 // object exists and is current
                 return 'HIT';
-            } else {
-                // object exists but is old
-                return 'STALE';
             }
-        } else {
-            // object does not exist
-            return 'MISS';
+            // object exists but is old
+            return 'STALE';
         }
+        // object does not exist
+        return 'MISS';
     }
 
+    /**
+     * @param $cache_key
+     * @return false|int
+     */
     public function cache_age($cache_key)
     {
         $filename = $this->file_name($url);
         if (file_exists($filename)) {
             $mtime = filemtime($filename);
-            $age   = time() - $mtime;
+            $age = time() - $mtime;
+
             return $age;
-        } else {
-            return -1;
         }
+
+        return -1;
     }
 
     /*=======================================================================*\
         Function:   serialize
     \*=======================================================================*/
+
+    /**
+     * @param $rss
+     * @return string
+     */
     public function serialize($rss)
     {
         return serialize($rss);
@@ -162,6 +207,11 @@ class happy_linux_magpie_cache
     /*=======================================================================*\
         Function:   unserialize
     \*=======================================================================*/
+
+    /**
+     * @param $data
+     * @return mixed
+     */
     public function unserialize($data)
     {
         return unserialize($data);
@@ -173,16 +223,27 @@ class happy_linux_magpie_cache
         Input:      url from wich the rss file was fetched
         Output:     a file name
     \*=======================================================================*/
+
+    /**
+     * @param $url
+     * @return string
+     */
     public function file_name($url)
     {
         $filename = md5($url);
-        return implode(DIRECTORY_SEPARATOR, array($this->BASE_CACHE, $filename));
+
+        return implode(DIRECTORY_SEPARATOR, [$this->BASE_CACHE, $filename]);
     }
 
     /*=======================================================================*\
         Function:   error
         Purpose:    register error
     \*=======================================================================*/
+
+    /**
+     * @param     $errormsg
+     * @param int $lvl
+     */
     public function error($errormsg, $lvl = E_USER_WARNING)
     {
         // append PHP's error message if track_errors enabled
@@ -197,6 +258,10 @@ class happy_linux_magpie_cache
         }
     }
 
+    /**
+     * @param     $debugmsg
+     * @param int $lvl
+     */
     public function debug($debugmsg, $lvl = E_USER_NOTICE)
     {
         if (MAGPIE_DEBUG) {

@@ -1,5 +1,6 @@
 <?php
-// $Id: _charset.php,v 1.1 2007/08/08 03:11:19 ohwada Exp $
+
+// $Id: _charset.php,v 1.1 2010/11/07 14:59:16 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module

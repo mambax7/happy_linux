@@ -1,5 +1,6 @@
 <?php
-// $Id: manage.php,v 1.11 2008/01/31 14:07:05 ohwada Exp $
+
+// $Id: manage.php,v 1.1 2010/11/07 14:59:21 ohwada Exp $
 
 // 2008-01-30 K.OHWADA
 // Assigning the return value of new by reference is deprecated
@@ -27,6 +28,9 @@
 
 include_once XOOPS_ROOT_PATH . '/modules/happy_linux/include/memory.php';
 
+/**
+ * Class happy_linux_manage
+ */
 class happy_linux_manage extends happy_linux_error
 {
     // constant
@@ -36,29 +40,29 @@ class happy_linux_manage extends happy_linux_error
     public $_CHECK_RESULT_ADD_TABLE = false;
     public $_CHECK_RESULT_MOD_TABLE = false;
     public $_CHECK_RESULT_DEL_TABLE = false;
-    public $_CHECK_RESULT_MOD_ALL   = false;
-    public $_CHECK_RESULT_DEL_ALL   = false;
+    public $_CHECK_RESULT_MOD_ALL = false;
+    public $_CHECK_RESULT_DEL_ALL = false;
 
     public $_DEBUG_CHECK_TOKEN = true;
-    public $_DEBUG_INSERT      = true;
-    public $_DEBUG_UPDATE      = true;
-    public $_DEBUG_DELETE      = true;
-    public $_DEBUG_NEWID       = 9999;
+    public $_DEBUG_INSERT = true;
+    public $_DEBUG_UPDATE = true;
+    public $_DEBUG_DELETE = true;
+    public $_DEBUG_NEWID = 9999;
     public $_FLAG_EXECUTE_TIME = false;
 
     // laguage
-    public $_LANG_TITLE_ADD     = _HAPPY_LINUX_ADD_RECORD;
-    public $_LANG_TITLE_MOD     = _HAPPY_LINUX_MOD_RECORD;
-    public $_LANG_TITLE_DEL     = _HAPPY_LINUX_DEL_RECORD;
-    public $_LANG_MSG_ADD       = _HAPPY_LINUX_ADD_RECORD_SUCCEEED;
-    public $_LANG_MSG_MOD       = _HAPPY_LINUX_MOD_RECORD_SUCCEEED;
-    public $_LANG_MSG_DEL       = _HAPPY_LINUX_DEL_RECORD_SUCCEEED;
-    public $_LANG_FAIL_ADD      = _HAPPY_LINUX_ADD_RECORD_FAILD;
-    public $_LANG_FAIL_MOD      = _HAPPY_LINUX_MOD_RECORD_FAILD;
-    public $_LANG_FAIL_DEL      = _HAPPY_LINUX_DEL_RECORD_FAILD;
+    public $_LANG_TITLE_ADD = _HAPPY_LINUX_ADD_RECORD;
+    public $_LANG_TITLE_MOD = _HAPPY_LINUX_MOD_RECORD;
+    public $_LANG_TITLE_DEL = _HAPPY_LINUX_DEL_RECORD;
+    public $_LANG_MSG_ADD = _HAPPY_LINUX_ADD_RECORD_SUCCEEED;
+    public $_LANG_MSG_MOD = _HAPPY_LINUX_MOD_RECORD_SUCCEEED;
+    public $_LANG_MSG_DEL = _HAPPY_LINUX_DEL_RECORD_SUCCEEED;
+    public $_LANG_FAIL_ADD = _HAPPY_LINUX_ADD_RECORD_FAILD;
+    public $_LANG_FAIL_MOD = _HAPPY_LINUX_MOD_RECORD_FAILD;
+    public $_LANG_FAIL_DEL = _HAPPY_LINUX_DEL_RECORD_FAILD;
     public $_LANG_ERR_NO_RECORD = _HAPPY_LINUX_NO_RECORD;
-    public $_LANG_ERR_FILL      = _HAPPY_LINUX_ERR_FILL;
-    public $_LANG_ERR_ILLEGAL   = _HAPPY_LINUX_ERR_ILLEGAL;
+    public $_LANG_ERR_FILL = _HAPPY_LINUX_ERR_FILL;
+    public $_LANG_ERR_ILLEGAL = _HAPPY_LINUX_ERR_ILLEGAL;
 
     // class
     public $_post;
@@ -81,10 +85,10 @@ class happy_linux_manage extends happy_linux_error
     public $_flag_cp_header = false;
     public $_id;
     public $_list_id;
-    public $_newid          = 0;
-    public $_modid          = 0;
-    public $_error_title    = null;
-    public $_error_extra    = null;
+    public $_newid = 0;
+    public $_modid = 0;
+    public $_error_title = null;
+    public $_error_extra = null;
 
     // token
     public $_token_error = null;
@@ -92,6 +96,11 @@ class happy_linux_manage extends happy_linux_error
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
+
+    /**
+     * happy_linux_manage constructor.
+     * @param $dirname
+     */
     public function __construct($dirname)
     {
         parent::__construct();
@@ -99,15 +108,18 @@ class happy_linux_manage extends happy_linux_error
         $this->_DIRNAME = $dirname;
 
         // class
-        $this->_post   = happy_linux_post::getInstance();
+        $this->_post = happy_linux_post::getInstance();
         $this->_system = happy_linux_system::getInstance();
     }
 
+    /**
+     * @return \happy_linux_manage|static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_manage();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
@@ -116,37 +128,64 @@ class happy_linux_manage extends happy_linux_error
     //---------------------------------------------------------
     // set patameter
     //---------------------------------------------------------
+
+    /**
+     * @param $table
+     * @param $dirname
+     * @param $prefix
+     */
     public function set_handler($table, $dirname, $prefix)
     {
         $this->_handler = happy_linux_get_handler($table, $dirname, $prefix);
     }
 
+    /**
+     * @param $table
+     * @param $dirname
+     * @param $prefix
+     */
     public function set_form_handler($table, $dirname, $prefix)
     {
         $this->_form = happy_linux_get_handler($table, $dirname, $prefix);
     }
 
+    /**
+     * @param $form
+     */
     public function set_form_class($form)
     {
         // Assigning the return value of new by reference is deprecated
         $this->_form = new $form();
     }
 
+    /**
+     * @param $id
+     */
     public function set_id_name($id)
     {
         $this->_id_name = $id;
     }
 
+    /**
+     * @param $val
+     */
     public function set_list_id_name($val)
     {
         $this->_list_id_name = $val;
     }
 
+    /**
+     * @param $script
+     */
     public function set_script($script)
     {
         $this->_script = $script;
     }
 
+    /**
+     * @param $script0
+     * @param $script1
+     */
     public function set_redirect($script0, $script1)
     {
         $this->set_redirect_asc($script0);
@@ -155,61 +194,99 @@ class happy_linux_manage extends happy_linux_error
         $this->set_redirect_del_all($script0);
     }
 
+    /**
+     * @param $script
+     */
     public function set_redirect_asc($script)
     {
         $this->_redirect_asc = $script;
     }
 
+    /**
+     * @param $script
+     */
     public function set_redirect_desc($script)
     {
         $this->_redirect_desc = $script;
     }
 
+    /**
+     * @param $script
+     */
     public function set_redirect_mod_all($script)
     {
         $this->_redirect_mod_all = $script;
     }
 
+    /**
+     * @param $script
+     */
     public function set_redirect_del_all($script)
     {
         $this->_redirect_del_all = $script;
     }
 
+    /**
+     * @param $val
+     */
     public function set_style_error($val)
     {
         $this->_STYLE_EROOR = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_module_dirname($val)
     {
         $this->_MODULE_DIRNAME = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_check_token($val)
     {
         $this->_DEBUG_CHECK_TOKEN = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_insert($val)
     {
         $this->_DEBUG_INSERT = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_update($val)
     {
         $this->_DEBUG_UPDATE = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_debug_delete($val)
     {
         $this->_DEBUG_DELETE = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_flag_execute_time($val)
     {
         $this->_FLAG_EXECUTE_TIME = (bool)$val;
     }
 
+    /**
+     * @param $add
+     * @param $mod
+     * @param $del
+     */
     public function set_title($add, $mod, $del)
     {
         if ($add) {
@@ -225,21 +302,33 @@ class happy_linux_manage extends happy_linux_error
         }
     }
 
+    /**
+     * @param $val
+     */
     public function set_err_no_record($val)
     {
         $this->_LANG_ERR_NO_RECORD = $val;
     }
 
+    /**
+     * @return string
+     */
     public function get_title_add()
     {
         return $this->_LANG_TITLE_ADD;
     }
 
+    /**
+     * @return string
+     */
     public function get_title_mod()
     {
         return $this->_LANG_TITLE_MOD;
     }
 
+    /**
+     * @return string
+     */
     public function get_title_del()
     {
         return $this->_LANG_TITLE_DEL;
@@ -248,6 +337,10 @@ class happy_linux_manage extends happy_linux_error
     //---------------------------------------------------------
     // POST GET parameter
     //---------------------------------------------------------
+
+    /**
+     * @return mixed|string
+     */
     public function _main_get_op()
     {
         $op = '';
@@ -258,18 +351,27 @@ class happy_linux_manage extends happy_linux_error
         } elseif (isset($_GET['op'])) {
             $op = $_GET['op'];
         }
+
         return $op;
     }
 
+    /**
+     * @return int
+     */
     public function _get_post_get_id()
     {
         $this->_id = $this->_post->get_post_get_int($this->_id_name);
+
         return $this->_id;
     }
 
+    /**
+     * @return mixed|string
+     */
     public function _get_post_list_id()
     {
         $this->_list_id = $this->_post->get_post($this->_list_id_name);
+
         return $this->_list_id;
     }
 
@@ -283,33 +385,30 @@ class happy_linux_manage extends happy_linux_error
         $this->_print_cp_footer();
     }
 
+    /**
+     * @param $op
+     */
     public function _main_switch($op)
     {
         switch ($op) {
             case 'add_table':
                 $this->_main_add_table();
                 break;
-
             case 'mod_form':
                 $this->_main_mod_form();
                 break;
-
             case 'mod_table':
                 $this->_main_mod_table();
                 break;
-
             case 'del_table':
                 $this->_main_del_table();
                 break;
-
             case 'mod_all':
                 $this->_main_mod_all();
                 break;
-
             case 'del_all':
                 $this->_main_del_all();
                 break;
-
             case 'add_form':
             default:
                 $this->_main_add_form();
@@ -330,16 +429,24 @@ class happy_linux_manage extends happy_linux_error
         $this->_print_cp_footer();
     }
 
+    /**
+     * @return bool
+     */
     public function _print_add_form()
     {
-        $obj =& $this->_handler->create();
+        $obj = $this->_handler->create();
         $this->_form->_show_add($obj);
+
         return true;
     }
 
     //---------------------------------------------------------
     // main_add_table()
     //---------------------------------------------------------
+
+    /**
+     * @param bool $check_flag
+     */
     public function _main_add_table($check_flag = false)
     {
         if ($check_flag) {
@@ -356,27 +463,32 @@ class happy_linux_manage extends happy_linux_error
             $msg .= $this->_build_comment('add record');    // for test form
             redirect_header($this->_redirect_desc, 1, $msg);
             exit();
-        } else {
-            $this->_print_add_db_error();
-            exit();
         }
+        $this->_print_add_db_error();
+        exit();
     }
 
+    /**
+     * @return bool
+     */
     public function _exec_add_table()
     {
         if ($this->_DEBUG_INSERT) {
-            $obj =& $this->_handler->create();
+            $obj = $this->_handler->create();
             $obj->_set_vars_insert();
             $newid = $this->_handler->insert($obj);
             if (!$newid) {
                 $this->_set_errors($this->_LANG_FAIL_ADD);
                 $this->_set_errors($this->_handler->getErrors());
+
                 return false;
             }
             $this->_newid = $newid;
+
             return true;
         }
         $this->_newid = $this - _DEBUG_NEWID;
+
         return true;
     }
 
@@ -401,7 +513,7 @@ class happy_linux_manage extends happy_linux_error
 
     public function _print_add_preview_form()
     {
-        $obj =& $this->_handler->create();
+        $obj = $this->_handler->create();
 
         // set values just as enter
         $obj->assignVars($_POST);
@@ -410,6 +522,10 @@ class happy_linux_manage extends happy_linux_error
     }
 
     // override this function
+
+    /**
+     * @return bool
+     */
     public function _check_add_table()
     {
         return $this->_CHECK_RESULT_ADD_TABLE;
@@ -436,9 +552,13 @@ class happy_linux_manage extends happy_linux_error
         $this->_print_cp_footer();
     }
 
+    /**
+     * @return bool
+     */
     public function _print_mod_form()
     {
         $this->_form->_show_mod($this->_obj);
+
         return true;
     }
 
@@ -450,6 +570,10 @@ class happy_linux_manage extends happy_linux_error
     //---------------------------------------------------------
     // main_mod_table()
     //---------------------------------------------------------
+
+    /**
+     * @param bool $check_flag
+     */
     public function _main_mod_table($check_flag = false)
     {
         if ($check_flag) {
@@ -471,12 +595,14 @@ class happy_linux_manage extends happy_linux_error
             $msg .= $this->_build_comment('mod record');    // for test form
             redirect_header($this->_redirect_asc, 1, $msg);
             exit();
-        } else {
-            $this->_print_mod_db_error();
-            exit();
         }
+        $this->_print_mod_db_error();
+        exit();
     }
 
+    /**
+     * @return bool
+     */
     public function _exec_mod_table()
     {
         $this->_modid = $this->_get_post_get_id();
@@ -485,9 +611,11 @@ class happy_linux_manage extends happy_linux_error
             if (!$this->_handler->update($this->_obj)) {
                 $this->_set_errors($this->_LANG_FAIL_MOD);
                 $this->_set_errors($this->_handler->getErrors());
+
                 return false;
             }
         }
+
         return true;
     }
 
@@ -510,16 +638,24 @@ class happy_linux_manage extends happy_linux_error
         $this->_print_cp_footer();
     }
 
+    /**
+     * @return bool
+     */
     public function _print_mod_preview_form()
     {
         // set values just as enter
         $this->_obj->assignVars($_POST);
 
         $this->_form->_show_mod_preview($this->_obj);
+
         return true;
     }
 
     // override this function
+
+    /**
+     * @return bool
+     */
     public function _check_mod_table()
     {
         return $this->_CHECK_RESULT_MOD_TABLE;
@@ -528,6 +664,10 @@ class happy_linux_manage extends happy_linux_error
     //---------------------------------------------------------
     // main_del_table()
     //---------------------------------------------------------
+
+    /**
+     * @param bool $check_flag
+     */
     public function _main_del_table($check_flag = false)
     {
         if ($check_flag) {
@@ -554,24 +694,31 @@ class happy_linux_manage extends happy_linux_error
             $msg .= $this->_build_comment('del record');    // for test form
             redirect_header($this->_redirect_asc, 1, $msg);
             exit();
-        } else {
-            $this->_print_del_db_error();
-            exit();
         }
+        $this->_print_del_db_error();
+        exit();
     }
 
+    /**
+     * @return bool
+     */
     public function _exec_del_table()
     {
         if ($this->_DEBUG_DELETE) {
             if (!$this->_handler->delete($this->_obj)) {
                 $this->_set_errors($this->_LANG_FAIL_DEL);
                 $this->_set_errors($this->_handler->getErrors());
+
                 return false;
             }
         }
+
         return true;
     }
 
+    /**
+     * @return array|string
+     */
     public function _get_del_error()
     {
         return $this->getErrors(1);
@@ -586,6 +733,10 @@ class happy_linux_manage extends happy_linux_error
     }
 
     // override this function
+
+    /**
+     * @return bool
+     */
     public function _check_del_table()
     {
         return $this->_CHECK_RESULT_DEL_TABLE;
@@ -594,6 +745,10 @@ class happy_linux_manage extends happy_linux_error
     //---------------------------------------------------------
     // main_mod_all
     //---------------------------------------------------------
+
+    /**
+     * @param bool $check_flag
+     */
     public function _main_mod_all($check_flag = false)
     {
         if ($check_flag) {
@@ -615,22 +770,24 @@ class happy_linux_manage extends happy_linux_error
         if ($this->_exec_mod_all()) {
             redirect_header($this->_redirect_mod_all, 1, $this->_LANG_MSG_MOD);
             exit();
-        } else {
-            $this->_print_mod_all_db_error();
-            exit();
         }
+        $this->_print_mod_all_db_error();
+        exit();
     }
 
+    /**
+     * @return bool
+     */
     public function _exec_mod_all()
     {
         $id_arr = $this->_get_post_list_id();
-        if (!is_array($id_arr) || (count($id_arr) == 0)) {
+        if (!is_array($id_arr) || (0 == count($id_arr))) {
             return true;
         }
 
         foreach ($id_arr as $id) {
-            $this->_id  = $id;
-            $this->_obj =& $this->_handler->get($id);
+            $this->_id = $id;
+            $this->_obj = $this->_handler->get($id);
 
             if (!is_object($this->_obj)) {
                 continue;
@@ -644,13 +801,16 @@ class happy_linux_manage extends happy_linux_error
 
     public function _exec_mod_all_each()
     {
-        $obj =& $this->_get_obj_mod_all();
+        $obj = $this->_get_obj_mod_all();
         if (!$this->_handler->update($obj)) {
             $this->_set_errors($this->_id . ': ' . $this->_LANG_FAIL_DEL);
             $this->_set_errors($this->_handler->getErrors());
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function &_get_obj_mod_all()
     {
         return $this->_obj;
@@ -664,6 +824,9 @@ class happy_linux_manage extends happy_linux_error
         $this->_print_cp_footer();
     }
 
+    /**
+     * @return array|string
+     */
     public function _get_mod_all_error()
     {
         return $this->getErrors(1);
@@ -678,6 +841,10 @@ class happy_linux_manage extends happy_linux_error
     }
 
     // override this function
+
+    /**
+     * @return bool
+     */
     public function _check_mod_all()
     {
         return $this->_CHECK_RESULT_MOD_ALL;
@@ -686,6 +853,10 @@ class happy_linux_manage extends happy_linux_error
     //---------------------------------------------------------
     // main_del_all
     //---------------------------------------------------------
+
+    /**
+     * @param bool $check_flag
+     */
     public function _main_del_all($check_flag = false)
     {
         if ($check_flag) {
@@ -707,22 +878,24 @@ class happy_linux_manage extends happy_linux_error
         if ($this->_exec_del_all()) {
             redirect_header($this->_redirect_del_all, 1, $this->_LANG_MSG_DEL);
             exit();
-        } else {
-            $this->_print_del_all_db_error();
-            exit();
         }
+        $this->_print_del_all_db_error();
+        exit();
     }
 
+    /**
+     * @return bool
+     */
     public function _exec_del_all()
     {
         $id_arr = $this->_get_post_list_id();
-        if (!is_array($id_arr) || (count($id_arr) == 0)) {
+        if (!is_array($id_arr) || (0 == count($id_arr))) {
             return true;
         }
 
         foreach ($id_arr as $id) {
-            $this->_id  = $id;
-            $this->_obj =& $this->_handler->get($id);
+            $this->_id = $id;
+            $this->_obj = $this->_handler->get($id);
 
             if (!is_object($this->_obj)) {
                 continue;
@@ -750,6 +923,9 @@ class happy_linux_manage extends happy_linux_error
         $this->_print_cp_footer();
     }
 
+    /**
+     * @return array|string
+     */
     public function _get_del_all_error()
     {
         return $this->getErrors(1);
@@ -764,6 +940,10 @@ class happy_linux_manage extends happy_linux_error
     }
 
     // override this function
+
+    /**
+     * @return bool
+     */
     public function _check_del_all()
     {
         return $this->_CHECK_RESULT_DEL_ALL;
@@ -779,9 +959,12 @@ class happy_linux_manage extends happy_linux_error
             xoops_cp_header();
         }
 
-        $this->_flag_cp_header = true;  // already
+        $this->_flag_cp_header = true;    // already
     }
 
+    /**
+     * @param bool $flag
+     */
     public function _print_cp_footer($flag = false)
     {
         $this->_print_execute_time($flag);
@@ -789,47 +972,63 @@ class happy_linux_manage extends happy_linux_error
         exit();
     }
 
+    /**
+     * @param bool $flag
+     */
     public function _print_execute_time($flag = false)
     {
         if ($flag || $this->_FLAG_EXECUTE_TIME) {
             $time = happy_linux_time::getInstance();
-            echo "<br /><hr />\n";
-            echo $time->build_elapse_time() . "<br />\n";
-            echo happy_linux_build_memory_usage_mb() . "<br />\n";
+            echo "<br><hr />\n";
+            echo $time->build_elapse_time() . "<br>\n";
+            echo happy_linux_build_memory_usage_mb() . "<br>\n";
         }
     }
 
+    /**
+     * @param        $title
+     * @param string $op
+     * @param string $name
+     */
     public function _print_bread_op($title, $op = '', $name = '')
     {
         $query = $this->_build_script_query($op);
         $this->_print_bread_query($title, $query, $name);
     }
 
+    /**
+     * @param        $name1
+     * @param string $query1
+     * @param string $name2
+     */
     public function _print_bread_query($name1, $query1 = '', $name2 = '')
     {
-        $arr = array(
-            array(
+        $arr = [
+            [
                 'name' => $this->_system->get_module_name(),
-                'url'  => 'index.php',
-            ),
-        );
+                'url' => 'index.php',
+            ],
+        ];
 
         if ($name1) {
-            $arr[] = array(
+            $arr[] = [
                 'name' => $name1,
-                'url'  => $this->_build_script_by_query($query1),
-            );
+                'url' => $this->_build_script_by_query($query1),
+            ];
         }
 
         if ($name2) {
-            $arr[] = array(
+            $arr[] = [
                 'name' => $name2,
-            );
+            ];
         }
 
         echo $this->_form->build_html_bread_crumb($arr);
     }
 
+    /**
+     * @return string
+     */
     public function _build_script_mod_form()
     {
         if ($this->_script) {
@@ -837,36 +1036,52 @@ class happy_linux_manage extends happy_linux_error
         } else {
             $url = $this->_redirect_asc;
         }
+
         return $url;
     }
 
+    /**
+     * @param string $op
+     * @return string
+     */
     public function _build_script_by_op($op = '')
     {
         $query = $this->_build_script_query($op);
-        $url   = $this->_build_script_by_query($query);
+        $url = $this->_build_script_by_query($query);
+
         return $url;
     }
 
+    /**
+     * @param string $query
+     * @return string
+     */
     public function _build_script_by_query($query = '')
     {
         $url = '';
         if ($this->_script) {
             $url = $this->_script . $query;
         }
+
         return $url;
     }
 
+    /**
+     * @param string $op
+     * @return string
+     */
     public function _build_script_query($op = '')
     {
         $query = '';
         if ($op) {
             $query = '?op=' . $op;
-            $id    = $this->_post->get_post_get_int($this->_id_name);
+            $id = $this->_post->get_post_get_int($this->_id_name);
 
             if ($this->_id_name && $id) {
                 $query .= '&amp;' . $this->_id_name . '=' . $id;
             }
         }
+
         return $query;
     }
 
@@ -875,6 +1090,9 @@ class happy_linux_manage extends happy_linux_error
         // dummy
     }
 
+    /**
+     * @param $title
+     */
     public function _print_title($title)
     {
         if ($title) {
@@ -885,37 +1103,53 @@ class happy_linux_manage extends happy_linux_error
     //---------------------------------------------------------
     // error
     //---------------------------------------------------------
+
+    /**
+     * @param $value
+     */
     public function _set_error_title($value)
     {
         $this->_error_title = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function _set_error_extra($value)
     {
         $this->_error_extra = $value;
     }
 
+    /**
+     * @param string $format
+     */
     public function _print_token_error($format = '')
     {
         if (!$this->_flag_token) {
             xoops_error('Token Error');
-            echo "<br />\n";
+            echo "<br>\n";
             echo $this->_form->get_token_error($format);
-            echo "<br />\n";
+            echo "<br>\n";
         }
     }
 
+    /**
+     * @param string $format
+     */
     public function _print_db_error($format = '')
     {
         xoops_error('DB Error');
         $this->_print_error($format);
     }
 
-    public function _print_error($format = '', $flag_sanitize = true)
+    /**
+     * @param string $format
+     */
+    public function _print_error($msg, $flag_sanitize = true)
     {
         if ($this->_error_title) {
             xoops_error($this->_error_title);
-            echo "<br />\n";
+            echo "<br>\n";
         }
 
         if ($format) {
@@ -923,35 +1157,51 @@ class happy_linux_manage extends happy_linux_error
         } else {
             echo $this->_get_errors(1);
         }
-        echo "<br />\n";
+        echo "<br>\n";
     }
 
+    /**
+     * @param string $format
+     * @return string
+     */
     public function _get_errors($format = 'n')
     {
         $err = $this->getErrors($format);
         $err .= $this->_error_extra;
+
         return $err;
     }
 
     public function _print_no_record()
     {
-        echo "<br />\n";
+        echo "<br>\n";
         echo $this->_form->build_html_blue($this->_LANG_ERR_NO_RECORD);
-        echo "<br />\n";
+        echo "<br>\n";
     }
 
     //---------------------------------------------------------
     // check POST param & set error
     //---------------------------------------------------------
+
+    /**
+     * @param $str
+     * @return string
+     */
     public function _build_comment($str)
     {
         $text = ' <!-- ' . $this->_MODULE_DIRNAME . ' : ' . $str . ' -->' . "\n";
+
         return $text;
     }
 
     //---------------------------------------------------------
     // check POST param & set error
     //---------------------------------------------------------
+
+    /**
+     * @param $key
+     * @param $name
+     */
     public function _check_fill_by_post($key, $name)
     {
         if (!$this->_post->is_post_fill($key)) {
@@ -960,6 +1210,11 @@ class happy_linux_manage extends happy_linux_error
         }
     }
 
+    /**
+     * @param      $key
+     * @param      $name
+     * @param bool $flag_fill
+     */
     public function _check_url_by_post($key, $name, $flag_fill = true)
     {
         if ($flag_fill) {
@@ -978,31 +1233,43 @@ class happy_linux_manage extends happy_linux_error
     //---------------------------------------------------------
     // handler
     //---------------------------------------------------------
+
+    /**
+     * @return mixed
+     */
     public function _get_obj()
     {
-        $id  = $this->_get_post_get_id();
+        $id = $this->_get_post_get_id();
         $obj = $this->_handler->get($id);
         if (is_object($obj)) {
-            $this->_obj =& $obj;
+            $this->_obj = &$obj;
         }
+
         return $obj;
     }
 
     //---------------------------------------------------------
     // check_token
     //---------------------------------------------------------
+
+    /**
+     * @return bool
+     */
     public function _check_token()
     {
         if ($this->_DEBUG_CHECK_TOKEN) {
             $this->_flag_token = false;
             if ($this->_form->check_token()) {
-                $this->_flag_token  = true;
+                $this->_flag_token = true;
                 $this->_token_error = $this->_form->get_token_error();
+
                 return true;
             }
+
             return false;
         }
         $this->_flag_token = true;
+
         return true;
     }
 

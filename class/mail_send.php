@@ -1,5 +1,6 @@
 <?php
-// $Id: mail_send.php,v 1.1 2007/09/15 06:47:26 ohwada Exp $
+
+// $Id: mail_send.php,v 1.1 2010/11/07 14:59:23 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
@@ -9,6 +10,10 @@
 //=========================================================
 // class happy_linux_mail_send
 //=========================================================
+
+/**
+ * Class happy_linux_mail_send
+ */
 class happy_linux_mail_send extends happy_linux_error
 {
     public $_post;
@@ -25,52 +30,66 @@ class happy_linux_mail_send extends happy_linux_error
         $this->_post = happy_linux_post::getInstance();
     }
 
+    /**
+     * @return \happy_linux_mail_send|static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_mail_send();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
     //---------------------------------------------------------
     // send email
     //---------------------------------------------------------
+
+    /**
+     * @param bool $debug
+     * @return bool
+     */
     public function send_email_by_post($debug = false)
     {
-        $param = array(
-            'to_emails'  => $this->_post->get_post_text('to_email'),
-            'from_name'  => $this->_post->get_post_text('from_name'),
+        $param = [
+            'to_emails' => $this->_post->get_post_text('to_email'),
+            'from_name' => $this->_post->get_post_text('from_name'),
             'from_email' => $this->_post->get_post_text('from_email'),
-            'subject'    => $this->_post->get_post_text('subject'),
-            'body'       => $this->_post->get_post_text('body'),
-            'debug'      => $debug,
-        );
+            'subject' => $this->_post->get_post_text('subject'),
+            'body' => $this->_post->get_post_text('body'),
+            'debug' => $debug,
+        ];
 
         return $this->send($param);
     }
 
+    /**
+     * @param $param
+     * @return bool
+     */
     public function send($param)
     {
-        $to_emails  = isset($param['to_emails']) ? $param['to_emails'] : null;
-        $users      = isset($param['users']) ? $param['users'] : null;
-        $subject    = isset($param['subject']) ? $param['subject'] : null;
-        $body       = isset($param['body']) ? $param['body'] : null;
-        $tags       = isset($param['tags']) ? $param['tags'] : null;
-        $debug      = isset($param['debug']) ? $param['debug'] : false;
-        $from_name  = isset($param['from_name']) ? $param['from_name'] : $this->get_xoops_sitename();
+        $to_emails = isset($param['to_emails']) ? $param['to_emails'] : null;
+        $users = isset($param['users']) ? $param['users'] : null;
+        $subject = isset($param['subject']) ? $param['subject'] : null;
+        $body = isset($param['body']) ? $param['body'] : null;
+        $tags = isset($param['tags']) ? $param['tags'] : null;
+        $debug = isset($param['debug']) ? $param['debug'] : false;
+        $from_name = isset($param['from_name']) ? $param['from_name'] : $this->get_xoops_sitename();
         $from_email = isset($param['from_email']) ? $param['from_email'] : $this->get_xoops_adminmail();
 
         if (empty($to_emails) && empty($users)) {
             $this->_set_errors($this->_LANG_ERR_NO_TO_EMAIL);
+
             return false;
         }
 
         $this->clear_errors_logs();
 
         // mail start
-        $mailer =& getMailer();
+        $mailer = getMailer();
         $mailer->reset();
         $mailer->setFromName($from_name);
         $mailer->setFromEmail($from_email);
@@ -93,25 +112,36 @@ class happy_linux_mail_send extends happy_linux_error
         $ret = $mailer->send($debug);
         if (!$ret) {
             $this->_set_errors($mailer->getErrors(false));
+
             return false;
         }
 
         $this->_set_log($mailer->getSuccess(false));
+
         return true;
     }
 
     //---------------------------------------------------------
     // get system param
     //---------------------------------------------------------
+
+    /**
+     * @return mixed
+     */
     public function get_xoops_sitename()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['sitename'];
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xoops_adminmail()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['adminmail'];
     }
 

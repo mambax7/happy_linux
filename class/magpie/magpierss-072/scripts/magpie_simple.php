@@ -10,7 +10,7 @@ if ($url) {
     echo 'Channel: ' . $rss->channel['title'] . '<p>';
     echo '<ul>';
     foreach ($rss->items as $item) {
-        $href  = $item['link'];
+        $href = $item['link'];
         $title = $item['title'];
         echo "<li><a href=$href>$title</a></li>";
     }
@@ -25,6 +25,5 @@ if ($url) {
 
 <p>
 <h2>Security Note:</h2>
-This is a simple <b>example</b> script.  If this was a
-<b>real</b> script we probably wouldn't allow  strangers to submit random URLs, and we certainly wouldn't simply echo anything passed in the URL.  Additionally its a bad idea to leave this example script lying around.
+This is a simple <b>example</b> script.  If this was a <b>real</b> script we probably wouldn't allow  strangers to submit random URLs, and we certainly wouldn't simply echo anything passed in the URL.  Additionally its a bad idea to leave this example script lying around.
 </p>

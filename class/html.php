@@ -1,5 +1,6 @@
 <?php
-// $Id: html.php,v 1.13 2008/02/28 13:12:48 ohwada Exp $
+
+// $Id: html.php,v 1.1 2010/11/07 14:59:20 ohwada Exp $
 
 // 2008-02-24 K.OHWADA
 // build_html_input_text_without_maxlenghth()
@@ -37,13 +38,17 @@
 //=========================================================
 // class happy_linux_html
 //=========================================================
+
+/**
+ * Class happy_linux_html
+ */
 class happy_linux_html extends happy_linux_strings
 {
     public $_DEBUG_PRINT = false;
 
     // base on W3C
     public $_SELECTED = 'selected="selected"';
-    public $_CHECKED  = 'checked="checked"';
+    public $_CHECKED = 'checked="checked"';
 
     //---------------------------------------------------------
     // constructor
@@ -53,12 +58,16 @@ class happy_linux_html extends happy_linux_strings
         parent::__construct();
     }
 
+    /**
+     * @return \happy_linux_html|static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_html();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
@@ -68,6 +77,15 @@ class happy_linux_html extends happy_linux_strings
     //---------------------------------------------------------
     // form tag
     //---------------------------------------------------------
+
+    /**
+     * @param string $name
+     * @param string $action
+     * @param string $enctype
+     * @param string $method
+     * @param string $extra
+     * @return string
+     */
     public function build_html_form_tag_begin($name = '', $action = '', $enctype = '', $method = 'post', $extra = '')
     {
         $text = '<form ';
@@ -90,106 +108,198 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= $extra . " >\n";
+
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_form_tag_end()
     {
         $text = "</form>\n";
+
         return $text;
     }
 
     //---------------------------------------------------------
     // input tag
     //---------------------------------------------------------
+
+    /**
+     * @param        $name
+     * @param        $value
+     * @param int    $size
+     * @param int    $maxlength
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_text($name, $value, $size = 50, $maxlength = 255, $extra = '')
     {
         $text = '<input type="text" name="' . $name . '" id="' . $name . '" value="' . $value . '" size="' . $size . '" maxlength="' . $maxlength . '" ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param int    $size
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_text_without_maxlenghth($name, $value, $size = 50, $extra = '')
     {
         $text = '<input type="text" name="' . $name . '" id="' . $name . '" value="' . $value . '" size="' . $size . '" ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param int    $size
+     * @param int    $maxlength
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_password($name, $value, $size = 50, $maxlength = 255, $extra = '')
     {
         $text = '<input type="password" name="' . $name . '" id="' . $name . '" value="' . $value . '" size="' . $size . '" maxlength="' . $maxlength . '" ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_file($name, $value, $extra = '')
     {
         $text = '<input type="file" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
+    /**
+     * @param $value
+     * @return string
+     */
     public function build_html_input_hidden_max_file_size($value)
     {
         $text = '<input type="hidden" name="MAX_FILE_SIZE" value="' . $value . '" />' . "\n";
+
         return $text;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return string
+     */
     public function build_html_input_hidden($name, $value)
     {
         $text = '<input type="hidden" name="' . $name . '" id="' . $name . '" value="' . $value . '" />' . "\n";
+
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_submit($name, $value, $extra = '')
     {
         $text = '<input type="submit" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_button($name, $value, $extra = '')
     {
         $text = '<input type="button" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return string
+     */
     public function build_html_input_button_cancel($name, $value)
     {
         $extra = ' onclick="javascript:history.go(-1)" ';
-        $text  = $this->build_html_input_button($name, $value, $extra);
+        $text = $this->build_html_input_button($name, $value, $extra);
+
         return $text;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return string
+     */
     public function build_html_input_button_close($name, $value)
     {
         $extra = ' onclick="javascript:window.close()" ';
-        $text  = $this->build_html_input_button($name, $value, $extra);
+        $text = $this->build_html_input_button($name, $value, $extra);
+
         return $text;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @param $url
+     * @return string
+     */
     public function build_html_input_button_location($name, $value, $url)
     {
         $location = "window.location='" . $url . "'";
-        $extra    = ' onclick="' . $location . '" ';
-        $text     = $this->build_html_input_button($name, $value, $extra);
+        $extra = ' onclick="' . $location . '" ';
+        $text = $this->build_html_input_button($name, $value, $extra);
+
         return $text;
     }
 
     //---------------------------------------------------------
     // input radio tag
     //---------------------------------------------------------
+
+    /**
+     * @param        $name
+     * @param        $value
+     * @param        $options
+     * @param string $del
+     * @param bool   $flag_sani
+     * @return string
+     */
     public function build_html_input_radio_select($name, $value, $options, $del = '', $flag_sani = true)
     {
         if ($this->_DEBUG_PRINT) {
-            echo "build_html_input_radio_select($name, $value, $options, $del) <br />";
+            echo "build_html_input_radio_select($name, $value, $options, $del) <br>";
             print_r($options);
-            echo "<br />\n";
+            echo "<br>\n";
         }
 
         $text = '';
 
         foreach ($options as $opt_name => $opt_val) {
-            $opt_val_show  = $opt_val;
+            $opt_val_show = $opt_val;
             $opt_name_show = $opt_name;
             if ($flag_sani) {
-                $opt_val_show  = $this->sanitize_text($opt_val);
+                $opt_val_show = $this->sanitize_text($opt_val);
                 $opt_name_show = $this->sanitize_text($opt_name);
             }
 
@@ -206,26 +316,47 @@ class happy_linux_html extends happy_linux_strings
     }
 
     // base on W3C: not use id
+
+    /**
+     * @param        $name
+     * @param        $value
+     * @param string $checked
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_radio($name, $value, $checked = '', $extra = '')
     {
         $text = '<input type="radio" name="' . $name . '" value="' . $value . '" ' . $checked . ' ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
+    /**
+     * @param $val1
+     * @param $val2
+     * @return string
+     */
     public function build_html_checked($val1, $val2)
     {
         if (isset($val1) && ($val1 == $val2)) {
             return $this->_CHECKED;
         }
+
         return '';
     }
 
+    /**
+     * @param $val_arr1
+     * @param $val2
+     * @return string
+     */
     public function build_html_checked_multi($val_arr1, $val2)
     {
         if (is_array($val_arr1)) {
             if (count($val_arr1) && in_array($val2, $val_arr1)) {
                 return $this->_CHECKED;
             }
+
             return '';
         }
 
@@ -235,19 +366,27 @@ class happy_linux_html extends happy_linux_strings
     //---------------------------------------------------------
     // input checkbox tag
     //---------------------------------------------------------
+
+    /**
+     * @param        $name
+     * @param        $value
+     * @param        $options
+     * @param string $del
+     * @return string
+     */
     public function build_html_input_checkbox_select($name, $value, $options, $del = '')
     {
         if ($this->_DEBUG_PRINT) {
-            echo "build_html_input_checkbox_select($name, $value, $options, $del) <br />";
+            echo "build_html_input_checkbox_select($name, $value, $options, $del) <br>";
             print_r($options);
-            echo "<br />\n";
+            echo "<br>\n";
         }
 
         $text = '';
 
         foreach ($options as $opt_name => $opt_val) {
-            $checked       = $this->build_html_checked($value, $opt_val);
-            $opt_val_show  = $this->sanitize_text($opt_val);
+            $checked = $this->build_html_checked($value, $opt_val);
+            $opt_val_show = $this->sanitize_text($opt_val);
             $opt_name_show = $this->sanitize_text($opt_name);
             $text .= $this->build_html_input_checkbox($name, $opt_val_show, $checked);
             $text .= ' ';
@@ -259,24 +398,31 @@ class happy_linux_html extends happy_linux_strings
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value_arr
+     * @param        $options
+     * @param string $del
+     * @return string
+     */
     public function build_html_input_checkbox_select_multi($name, $value_arr, $options, $del = '')
     {
         if ($this->_DEBUG_PRINT) {
-            echo "build_html_input_checkbox_select_multi($name, $value, $options, $del) <br />";
+            echo "build_html_input_checkbox_select_multi($name, $value, $options, $del) <br>";
             print_r($value_arr);
             print_r($options);
-            echo "<br />\n";
+            echo "<br>\n";
         }
 
         $text = '';
 
         if (!is_array($value_arr)) {
-            $value_arr = array($value_arr);
+            $value_arr = [$value_arr];
         }
 
         foreach ($options as $opt_name => $opt_val) {
-            $checked       = $this->build_html_checked_multi($value_arr, $opt_val);
-            $opt_val_show  = $this->sanitize_text($opt_val);
+            $checked = $this->build_html_checked_multi($value_arr, $opt_val);
+            $opt_val_show = $this->sanitize_text($opt_val);
             $opt_name_show = $this->sanitize_text($opt_name);
             $text .= $this->build_html_input_checkbox($name, $opt_val_show, $checked);
             $text .= ' ';
@@ -288,38 +434,78 @@ class happy_linux_html extends happy_linux_strings
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value
+     * @param string $checked
+     * @param string $extra
+     * @return string
+     */
     public function build_html_input_checkbox($name, $value, $checked = '', $extra = '')
     {
         $text = '<input type="checkbox" name="' . $name . '" id="' . $name . '" value="' . $value . '" ' . $checked . ' ' . $extra . ' />' . "\n";
+
         return $text;
     }
 
     //---------------------------------------------------------
     // textarea tag
     //---------------------------------------------------------
+
+    /**
+     * @param        $name
+     * @param        $value
+     * @param int    $rows
+     * @param int    $cols
+     * @param string $extra
+     * @return string
+     */
     public function build_html_textarea($name, $value, $rows = 5, $cols = 50, $extra = '')
     {
         $text = $this->build_html_textarea_tag_begin($name, $rows, $cols);
         $text .= $value;
         $text .= $this->build_html_textarea_tag_end();
+
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param int    $rows
+     * @param int    $cols
+     * @param string $extra
+     * @return string
+     */
     public function build_html_textarea_tag_begin($name, $rows = 5, $cols = 50, $extra = '')
     {
         $text = '<textarea name="' . $name . '" id="' . $name . '" rows="' . $rows . '" cols="' . $cols . '" ' . $extra . ' >' . "\n";
+
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_textarea_tag_end()
     {
         $text = "</textarea>\n";
+
         return $text;
     }
 
     //---------------------------------------------------------
     // select tag
     //---------------------------------------------------------
+
+    /**
+     * @param        $name
+     * @param        $value
+     * @param        $options
+     * @param int    $none
+     * @param string $none_name
+     * @param string $none_value
+     * @return string
+     */
     public function build_html_select($name, $value, $options, $none = 0, $none_name = '---', $none_value = '')
     {
         $text = $this->build_html_select_tag_begin($name);
@@ -329,13 +515,24 @@ class happy_linux_html extends happy_linux_strings
         }
 
         foreach ($options as $opt_name => $opt_val) {
-            $text .= $this->build_html_option_selected($opt_name, $opt_val, array($value));
+            $text .= $this->build_html_option_selected($opt_name, $opt_val, [$value]);
         }
 
         $text .= $this->build_html_select_tag_end();
+
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param        $value_arr
+     * @param        $opt_arr
+     * @param int    $size
+     * @param int    $none
+     * @param string $none_name
+     * @param string $none_value
+     * @return string
+     */
     public function build_html_select_multiple($name, $value_arr, $opt_arr, $size = 4, $none = 0, $none_name = '---', $none_value = '')
     {
         $text = $this->build_html_select_tag_begin($name, $size, true);
@@ -349,9 +546,17 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= $this->build_html_select_tag_end();
+
         return $text;
     }
 
+    /**
+     * @param        $name
+     * @param string $size
+     * @param bool   $flag_multiple
+     * @param string $extra
+     * @return string
+     */
     public function build_html_select_tag_begin($name, $size = '', $flag_multiple = false, $extra = '')
     {
         $text = '<select ';
@@ -373,18 +578,30 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= $extra . " >\n";
+
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_select_tag_end()
     {
         $text = "</select>\n";
+
         return $text;
     }
 
     //---------------------------------------------------------
     // option tag
     //---------------------------------------------------------
+
+    /**
+     * @param $opt_name
+     * @param $opt_val
+     * @param $value_arr
+     * @return string
+     */
     public function build_html_option_selected($opt_name, $opt_val, $value_arr)
     {
         $flag = false;
@@ -396,50 +613,88 @@ class happy_linux_html extends happy_linux_strings
             }
         }
         $text = $this->build_html_option($opt_name, $opt_val, $flag);
+
         return $text;
     }
 
+    /**
+     * @param      $name
+     * @param      $value
+     * @param bool $flag_selected
+     * @return string
+     */
     public function build_html_option($name, $value, $flag_selected = false)
     {
         $text = $this->build_html_option_tag_begin($value, $flag_selected);
         $text .= $name;
         $text .= $this->build_html_option_tag_end();
+
         return $text;
     }
 
+    /**
+     * @param      $value
+     * @param bool $flag_selected
+     * @return string
+     */
     public function build_html_option_tag_begin($value, $flag_selected = false)
     {
         $selected = $this->build_html_selected_by_flag($flag_selected);
 
         $text = '<option value="' . $value . '" ' . $selected . ' > ';
+
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_option_tag_end()
     {
         $text = "</option>\n";
+
         return $text;
     }
 
+    /**
+     * @param $val1
+     * @param $val2
+     * @return string
+     */
     public function build_html_selected($val1, $val2)
     {
         if (isset($val1) && ($val1 == $val2)) {
             return $this->_SELECTED;
         }
+
         return '';
     }
 
+    /**
+     * @param $flag
+     * @return string
+     */
     public function build_html_selected_by_flag($flag)
     {
         if ($flag) {
             return $this->_SELECTED;
         }
+
         return '';
     }
 
     //---------------------------------------------------------
     // table tag
     //---------------------------------------------------------
+
+    /**
+     * @param string $width
+     * @param string $height
+     * @param string $cellpadding
+     * @param string $cellspacing
+     * @param string $class
+     * @return string
+     */
     public function build_html_table_tag_begin($width = '', $height = '', $cellpadding = '', $cellspacing = '', $class = '')
     {
         $text = '<table ';
@@ -465,9 +720,14 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
+    /**
+     * @param string $class
+     * @return string
+     */
     public function build_html_table_tag_class($class = '')
     {
         $text = '<table ';
@@ -477,18 +737,30 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_table_tag_end()
     {
         $text = "</table>\n";
+
         return $text;
     }
 
     //---------------------------------------------------------
     // tr tag
     //---------------------------------------------------------
+
+    /**
+     * @param string $align
+     * @param string $valign
+     * @param string $class
+     * @return string
+     */
     public function build_html_tr_tag_begin($align = '', $valign = '', $class = '')
     {
         $text = '<tr ';
@@ -506,9 +778,14 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
+    /**
+     * @param string $class
+     * @return string
+     */
     public function build_html_tr_tag_class($class = '')
     {
         $text = '<tr ';
@@ -518,18 +795,32 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_tr_tag_end()
     {
         $text = "</tr>\n";
+
         return $text;
     }
 
     //---------------------------------------------------------
     // th tag
     //---------------------------------------------------------
+
+    /**
+     * @param string $align
+     * @param string $valign
+     * @param string $colspan
+     * @param string $rowspan
+     * @param string $class
+     * @return string
+     */
     public function build_html_th_tag_begin($align = '', $valign = '', $colspan = '', $rowspan = '', $class = '')
     {
         $text = '<th ';
@@ -555,9 +846,14 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
+    /**
+     * @param string $class
+     * @return string
+     */
     public function build_html_th_tag_class($class = '')
     {
         $text = '<th ';
@@ -567,18 +863,32 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_th_tag_end()
     {
         $text = "</th>\n";
+
         return $text;
     }
 
     //---------------------------------------------------------
     // td tag
     //---------------------------------------------------------
+
+    /**
+     * @param string $align
+     * @param string $valign
+     * @param string $colspan
+     * @param string $rowspan
+     * @param string $class
+     * @return string
+     */
     public function build_html_td_tag_begin($align = '', $valign = '', $colspan = '', $rowspan = '', $class = '')
     {
         $text = '<td ';
@@ -604,9 +914,14 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
+    /**
+     * @param string $class
+     * @return string
+     */
     public function build_html_td_tag_class($class = '')
     {
         $text = '<td ';
@@ -616,30 +931,44 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_td_tag_end()
     {
         $text = "</td>\n";
+
         return $text;
     }
 
     //---------------------------------------------------------
     // img tag
     //---------------------------------------------------------
+
+    /**
+     * @param        $src
+     * @param int    $width
+     * @param int    $height
+     * @param int    $border
+     * @param string $alt
+     * @return bool|string
+     */
     public function build_html_img_tag($src, $width = 0, $height = 0, $border = 0, $alt = 'image')
     {
-        if (empty($src) || ($src == 'http://') || ($src == 'https://')) {
+        if (empty($src) || ('http://' == $src) || ('https://' == $src)) {
             return false;
         }
 
         // sanitize
-        $width  = (int)$width;
+        $width = (int)$width;
         $height = (int)$height;
         $border = (int)$border;
-        $src    = $this->sanitize_url($src);
-        $alt    = $this->sanitize_text($alt);
+        $src = $this->sanitize_url($src);
+        $alt = $this->sanitize_text($alt);
 
         $text = '<img ';
         $text .= 'src="' . $src . '" ';
@@ -662,6 +991,12 @@ class happy_linux_html extends happy_linux_strings
     //---------------------------------------------------------
     // a tag
     //---------------------------------------------------------
+
+    /**
+     * @param        $href
+     * @param string $target
+     * @return string
+     */
     public function build_html_a_tag_begin($href, $target = '')
     {
         $text = '<a ';
@@ -672,19 +1007,31 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $text .= " >\n";
+
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_a_tag_end()
     {
         $text = "</a>\n";
+
         return $text;
     }
 
+    /**
+     * @param        $url
+     * @param string $name
+     * @param string $target
+     * @param bool   $flag_name_sanitize
+     * @return string|string[]
+     */
     public function build_html_a_href_name($url, $name = '', $target = '', $flag_name_sanitize = true)
     {
         // sanitize
-        $url    = $this->sanitize_url($url);
+        $url = $this->sanitize_url($url);
         $target = $this->sanitize_text($target);
 
         if ($flag_name_sanitize) {
@@ -708,16 +1055,30 @@ class happy_linux_html extends happy_linux_strings
         return $text;
     }
 
+    /**
+     * @param        $url
+     * @param string $name
+     * @param string $target
+     * @param bool   $flag_name_sanitize
+     * @return string|string[]
+     */
     public function build_html_a_href_email($url, $name = '', $target = '', $flag_name_sanitize = true)
     {
         $mailto = 'mailto:' . $url;
-        $text   = $this->build_html_a_href_name($mailto, $name, $target, $flag_name_sanitize);
+        $text = $this->build_html_a_href_name($mailto, $name, $target, $flag_name_sanitize);
+
         return $text;
     }
 
     //-------------------------------------------------------------------
     // span tag
     //-------------------------------------------------------------------
+
+    /**
+     * @param $val
+     * @param $style
+     * @return string
+     */
     public function build_html_span_tag_with_style($val, $style)
     {
         if ($style) {
@@ -727,9 +1088,15 @@ class happy_linux_html extends happy_linux_strings
         } else {
             $text = $val;
         }
+
         return $text;
     }
 
+    /**
+     * @param $val
+     * @param $class
+     * @return string
+     */
     public function build_html_span_tag_with_class($val, $class)
     {
         if ($class) {
@@ -739,12 +1106,19 @@ class happy_linux_html extends happy_linux_strings
         } else {
             $text = $val;
         }
+
         return $text;
     }
 
     //-------------------------------------------------------------------
     // div tag
     //-------------------------------------------------------------------
+
+    /**
+     * @param $val
+     * @param $style
+     * @return string
+     */
     public function build_html_div_tag_with_style($val, $style)
     {
         if ($style) {
@@ -754,9 +1128,15 @@ class happy_linux_html extends happy_linux_strings
         } else {
             $text = $val;
         }
+
         return $text;
     }
 
+    /**
+     * @param $val
+     * @param $class
+     * @return string
+     */
     public function build_html_div_tag_with_class($val, $class)
     {
         if ($class) {
@@ -766,12 +1146,20 @@ class happy_linux_html extends happy_linux_strings
         } else {
             $text = $val;
         }
+
         return $text;
     }
 
     //-------------------------------------------------------------------
     // style
     //-------------------------------------------------------------------
+
+    /**
+     * @param string $color
+     * @param string $background_color
+     * @param string $font_weight
+     * @return string
+     */
     public function build_html_span_style($color = '', $background_color = '', $font_weight = '')
     {
         $text = '';
@@ -794,77 +1182,133 @@ class happy_linux_html extends happy_linux_strings
     //-------------------------------------------------------------------
     // highlight
     //-------------------------------------------------------------------
+
+    /**
+     * @param        $value
+     * @param string $background_color
+     * @param string $font_weight
+     * @return string
+     */
     public function build_html_red($value, $background_color = '', $font_weight = '')
     {
         $text = $this->build_html_highlight($value, '#ff0000', $background_color, $font_weight);
+
         return $text;
     }
 
+    /**
+     * @param        $value
+     * @param string $background_color
+     * @param string $font_weight
+     * @return string
+     */
     public function build_html_green($value, $background_color = '', $font_weight = '')
     {
         $text = $this->build_html_highlight($value, '#00ff00', $background_color, $font_weight);
+
         return $text;
     }
 
+    /**
+     * @param        $value
+     * @param string $background_color
+     * @param string $font_weight
+     * @return string
+     */
     public function build_html_blue($value, $background_color = '', $font_weight = '')
     {
         $text = $this->build_html_highlight($value, '#0000ff', $background_color, $font_weight);
+
         return $text;
     }
 
+    /**
+     * @param        $value
+     * @param string $color
+     * @param string $background_color
+     * @param string $font_weight
+     * @return string
+     */
     public function build_html_highlight($value, $color = '#ff0000', $background_color = '', $font_weight = 'bold')
     {
         $style = $this->build_html_span_style($color, $background_color, $font_weight);
-        $text  = $this->build_html_span_tag_with_style($value, $style);
+        $text = $this->build_html_span_tag_with_style($value, $style);
+
         return $text;
     }
 
+    /**
+     * @param        $num
+     * @param int    $limit_under
+     * @param string $color
+     * @param string $background_color
+     * @param string $font_weight
+     * @return string
+     */
     public function build_html_highlight_number($num, $limit_under = 0, $color = '#ff0000', $background_color = '', $font_weight = 'bold')
     {
         if ($num > $limit_under) {
             $num = $this->build_html_highlight($num, $color, $background_color, $font_weight);
         }
+
         return $num;
     }
 
     //-------------------------------------------------------------------
     // stylesheet
     //-------------------------------------------------------------------
+
+    /**
+     * @param $url
+     * @return string
+     */
     public function build_html_link_stylesheet($url)
     {
         $text = '<link rel="stylesheet" type="text/css" href="' . $url . '" />' . "\n";
+
         return $text;
     }
 
     //-------------------------------------------------------------------
     // comment
     //-------------------------------------------------------------------
+
+    /**
+     * @param $str
+     * @return string
+     */
     public function build_html_comment($str)
     {
         $text = ' <!-- ' . $str . ' -->' . "\n";
+
         return $text;
     }
 
     //-------------------------------------------------------------------
     // bread_crumb
     //-------------------------------------------------------------------
+
+    /**
+     * @param $paths
+     * @return string
+     */
     public function build_html_bread_crumb($paths)
     {
-        $arr = array();
+        $arr = [];
         foreach ($paths as $path) {
             if (isset($path['url']) && isset($path['name']) && $path['url'] && $path['name']) {
-                $url   = $this->sanitize_url($path['url']);
-                $name  = $this->sanitize_text($path['name']);
+                $url = $this->sanitize_url($path['url']);
+                $name = $this->sanitize_text($path['name']);
                 $arr[] = '<a href="' . $url . '">' . $name . '</a>';
             } elseif (isset($path['name']) && $path['name']) {
-                $name  = $this->sanitize_text($path['name']);
+                $name = $this->sanitize_text($path['name']);
                 $arr[] = '<b>' . $name . '</b>';
             }
         }
 
         $text = ' ';
         $text .= implode(' &gt;&gt; ', $arr);
-        $text .= " <br />\n";
+        $text .= " <br>\n";
 
         return $text;
     }
@@ -872,6 +1316,16 @@ class happy_linux_html extends happy_linux_strings
     //-------------------------------------------------------------------
     // menu
     //-------------------------------------------------------------------
+
+    /**
+     * @param        $menu_arr
+     * @param int    $MAX_COL
+     * @param string $width
+     * @param string $outer
+     * @param string $even
+     * @param string $odd
+     * @return string
+     */
     public function build_html_menu_table($menu_arr, $MAX_COL = 5, $width = '', $outer = 'outer', $even = 'even', $odd = 'odd')
     {
         if (empty($width)) {
@@ -882,16 +1336,16 @@ class happy_linux_html extends happy_linux_strings
             $width .= '%';
         }
 
-        $col_count  = 0;
+        $col_count = 0;
         $line_count = 0;
-        $class      = $odd;
+        $class = $odd;
 
         $text = '<table class="' . $outer . '" cellpadding="4" cellspacing="1" >' . "\n";
 
         foreach ($menu_arr as $name => $url) {
             // column begin
-            if ($col_count == 0) {
-                if ($line_count % 2 == 0) {
+            if (0 == $col_count) {
+                if (0 == $line_count % 2) {
                     $class = $odd;
                 } else {
                     $class = $even;
@@ -911,12 +1365,12 @@ class happy_linux_html extends happy_linux_strings
 
             $text .= "</td>\n";
 
-            ++$col_count;
+            $col_count++;
 
             // column end
             if ($col_count >= $MAX_COL) {
                 $col_count = 0;
-                ++$line_count;
+                $line_count++;
 
                 $text .= "</tr>\n";
             }
@@ -928,7 +1382,7 @@ class happy_linux_html extends happy_linux_strings
             while ($col_count < $MAX_COL) {
                 $class = ($class == $even) ? $odd : $even;
                 $text .= '<td class="' . $class . '">&nbsp;</td>';
-                ++$col_count;
+                $col_count++;
 
                 // column end
                 if ($col_count >= $MAX_COL) {
@@ -937,56 +1391,99 @@ class happy_linux_html extends happy_linux_strings
             }
         }
 
-        $text .= "</table><br />\n";
+        $text .= "</table><br>\n";
+
         return $text;
     }
 
     //================================================================
     // build XOOPS element
     //================================================================
+
+    /**
+     * @param int    $width
+     * @param int    $height
+     * @param int    $border
+     * @param string $alt
+     * @return bool|string
+     */
     public function build_xoops_img_email_logo($width = 0, $height = 0, $border = 0, $alt = 'email')
     {
-        $url  = XOOPS_URL . '/images/icons/email.gif';
+        $url = XOOPS_URL . '/images/icons/email.gif';
         $text = $this->build_html_img_tag($url, $width, $height, $border, $alt);
+
         return $text;
     }
 
+    /**
+     * @param int    $width
+     * @param int    $height
+     * @param int    $border
+     * @param string $alt
+     * @return bool|string
+     */
     public function build_xoops_img_www_logo($width = 0, $height = 0, $border = 0, $alt = 'www')
     {
-        $url  = XOOPS_URL . '/images/icons/www.gif';
+        $url = XOOPS_URL . '/images/icons/www.gif';
         $text = $this->build_html_img_tag($url, $width, $height, $border, $alt);
+
         return $text;
     }
 
+    /**
+     * @param int    $width
+     * @param int    $height
+     * @param int    $border
+     * @param string $alt
+     * @return bool|string
+     */
     public function build_xoops_img_pm_logo($width = 0, $height = 0, $border = 0, $alt = 'pm')
     {
-        $url  = XOOPS_URL . '/images/icons/pm.gif';
+        $url = XOOPS_URL . '/images/icons/pm.gif';
         $text = $this->build_html_img_tag($url, $width, $height, $border, $alt);
+
         return $text;
     }
 
+    /**
+     * @param        $email
+     * @param string $target
+     * @return string|string[]
+     */
     public function build_xoops_mailto_with_logo($email, $target = '')
     {
         if (empty($email)) {
             return '';
         }
 
-        $img  = $this->build_xoops_img_email_logo();
+        $img = $this->build_xoops_img_email_logo();
         $text = $this->build_html_a_href_email($email, $img, $target, false);
+
         return $text;
     }
 
+    /**
+     * @param        $url
+     * @param string $target
+     * @return string|string[]
+     */
     public function build_xoops_url_with_logo($url, $target = '_blank')
     {
         if (empty($url)) {
             return '';
         }
 
-        $img  = $this->build_xoops_img_www_logo();
+        $img = $this->build_xoops_img_www_logo();
         $text = $this->build_html_a_href_name($url, $img, $target, false);
+
         return $text;
     }
 
+    /**
+     * @param        $uid
+     * @param string $target
+     * @return string|string[]
+     */
     public function build_xoops_pm_with_logo($uid, $target = '_blank')
     {
         $uid = (int)$uid;
@@ -994,13 +1491,19 @@ class happy_linux_html extends happy_linux_strings
             return '';
         }
 
-        $img    = $this->build_xoops_img_pm_logo();
+        $img = $this->build_xoops_img_pm_logo();
         $url_pm = XOOPS_URL . '/pmlite.php?send2=1&amp;to_userid=' . $uid;
-        $url    = $this->build_xoops_openWithSelfMain($url_pm, 'pmlite', 450, 370);
-        $text   = $this->build_html_a_href_name($url, $img, $target, false);
+        $url = $this->build_xoops_openWithSelfMain($url_pm, 'pmlite', 450, 370);
+        $text = $this->build_html_a_href_name($url, $img, $target, false);
+
         return $text;
     }
 
+    /**
+     * @param $uid
+     * @param $uname
+     * @return string|string[]
+     */
     public function build_xoops_url_userinfo($uid, $uname)
     {
         $uid = (int)$uid;
@@ -1009,13 +1512,22 @@ class happy_linux_html extends happy_linux_strings
         }
 
         $userinfo_url = XOOPS_URL . '/userinfo.php?uid=' . $uid;
-        $submitter    = $this->build_html_a_href_name($userinfo_url, $uname);
+        $submitter = $this->build_html_a_href_name($userinfo_url, $uname);
+
         return $submitter;
     }
 
+    /**
+     * @param     $url
+     * @param     $name
+     * @param int $width
+     * @param int $height
+     * @return string
+     */
     public function build_xoops_openWithSelfMain($url, $name, $width = 450, $height = 400)
     {
         $text = "javascript:openWithSelfMain('$url', '$name', $width, $height)";
+
         return $text;
     }
 

@@ -1,0 +1,13 @@
+$Id: constant.txt,v 1.1 2010/11/07 14:59:11 ohwada Exp $
+
+=================================================
+Happy Linux Framework Module
+allocate constants
+=================================================
+
+return code
+10-19: remote_file.php
+20-29: remote_image.php
+30-39: search.php
+40-49: rss_utility.php
+50-59: rss_parser.php

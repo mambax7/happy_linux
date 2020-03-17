@@ -1,5 +1,6 @@
 <?php
-// $Id: main.php,v 1.1 2007/09/29 12:32:40 ohwada Exp $
+
+// $Id: main.php,v 1.1 2010/11/07 14:59:13 ohwada Exp $
 
 // 2006-09-01 K.OHWADA
 // _HAPPY_LINUX_SEARCH_CANDICATE

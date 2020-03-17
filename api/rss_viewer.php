@@ -1,5 +1,6 @@
 <?php
-// $Id: rss_viewer.php,v 1.4 2008/01/30 08:38:35 ohwada Exp $
+
+// $Id: rss_viewer.php,v 1.1 2010/11/07 14:59:13 ohwada Exp $
 
 // 2008-01-20 K.OHWADA
 // rss_view_item.php

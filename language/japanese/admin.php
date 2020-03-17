@@ -1,5 +1,6 @@
 <?php
-// $Id: admin.php,v 1.6 2007/11/12 12:28:49 ohwada Exp $
+
+// $Id: admin.php,v 1.1 2010/11/07 14:59:15 ohwada Exp $
 
 // 2007-11-01
 // _HAPPY_LINUX_AM_MODULE
@@ -16,32 +17,32 @@
 //=========================================================
 // Happy Linux Framework Module
 // 2006-07-10 K.OHWADA
-// Í­Êþ¼«±óÊýÍè
+// Í­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //=========================================================
 
 // 2007-05-12
-define('_HAPPY_LINUX_AM_GROUP', '¥°¥ë¡¼¥×´ÉÍý');
-define('_HAPPY_LINUX_AM_GROUP_DESC', '¤³¤Î¥â¥¸¥å¡¼¥ë¤Î¥°¥ë¡¼¥×¡¦¥¢¥¯¥»¥¹¸¢');
-define('_HAPPY_LINUX_AM_BLOCK', '¥Ö¥í¥Ã¥¯´ÉÍý');
-define('_HAPPY_LINUX_AM_BLOCK_DESC', '¤³¤Î¥â¥¸¥å¡¼¥ë¤Î¥Ö¥í¥Ã¥¯¤Î´ÉÍý');
-define('_HAPPY_LINUX_AM_GROUP_BLOCK', '¥°¥ë¡¼¥×/¥Ö¥í¥Ã¥¯´ÉÍý');
-define('_HAPPY_LINUX_AM_GROUP_BLOCK_DESC', '¤³¤Î¥â¥¸¥å¡¼¥ë¤Î¥¢¥¯¥»¥¹¸¢¤È¥Ö¥í¥Ã¥¯¤Î´ÉÍý');
-define('_HAPPY_LINUX_AM_TEMPLATE', '¥Æ¥ó¥×¥ì¡¼¥È´ÉÍý');
-define('_HAPPY_LINUX_AM_TEMPLATE_DESC', '¤³¤Î¥â¥¸¥å¡¼¥ë¤Î¥Æ¥ó¥×¥ì¡¼¥È¤ò´ÉÍý');
+define('_HAPPY_LINUX_AM_GROUP', 'ï¿½ï¿½ï¿½ë¡¼ï¿½×´ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_GROUP_DESC', 'ï¿½ï¿½ï¿½Î¥â¥¸ï¿½å¡¼ï¿½ï¿½Î¥ï¿½ï¿½ë¡¼ï¿½×¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_BLOCK', 'ï¿½Ö¥ï¿½Ã¥ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_BLOCK_DESC', 'ï¿½ï¿½ï¿½Î¥â¥¸ï¿½å¡¼ï¿½ï¿½Î¥Ö¥ï¿½Ã¥ï¿½ï¿½Î´ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_GROUP_BLOCK', 'ï¿½ï¿½ï¿½ë¡¼ï¿½ï¿½/ï¿½Ö¥ï¿½Ã¥ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_GROUP_BLOCK_DESC', 'ï¿½ï¿½ï¿½Î¥â¥¸ï¿½å¡¼ï¿½ï¿½Î¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥Ö¥ï¿½Ã¥ï¿½ï¿½Î´ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_TEMPLATE', 'ï¿½Æ¥ï¿½×¥ì¡¼ï¿½È´ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_TEMPLATE_DESC', 'ï¿½ï¿½ï¿½Î¥â¥¸ï¿½å¡¼ï¿½ï¿½Î¥Æ¥ï¿½×¥ì¡¼ï¿½È¤ï¿½ï¿½ï¿½ï¿½');
 
 // 2007-06-02
-define('_HAPPY_LINUX_AM_JUDGE', '¥×¥í¥°¥é¥à¤Ï <b>%s</b> ¤ÈÈ½Äê¤·¤Þ¤·¤¿');
-define('_HAPPY_LINUX_AM_JUMP', '<b>%s</b> ÉÃ¸å¤Ë¼«Æ°Åª¤Ë°ÜÆ°¤·¤Þ¤¹');
-define('_HAPPY_LINUX_AM_JUMP_IFNO1', 'È½Äê¤¬´Ö°ã¤Ã¤Æ¤¤¤¿¤ê¡¢¥Ú¡¼¥¸¤¬°ÜÆ°¤·¤Ê¤¤¾ì¹ç¤Ï ²¼µ­¤ò¥¯¥ê¥Ã¥¯¤·¤Æ¤¯¤À¤µ¤¤');
-define('_HAPPY_LINUX_AM_JUMP_IFNO2', '%s ÉÃ¤¬Ä¹¤¤¤È´¶¤¸¤¿¤é¡¢<i>modules/happy_linux/preload/admin.php</i> ¤òÀßÄê¤¹¤ë¤ÈÁá¤¯¤Ê¤ê¤Þ¤¹');
+define('_HAPPY_LINUX_AM_JUDGE', 'ï¿½×¥ï¿½ï¿½ï¿½ï¿½ï¿½ <b>%s</b> ï¿½ï¿½È½ï¿½ê¤·ï¿½Þ¤ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_JUMP', '<b>%s</b> ï¿½Ã¸ï¿½Ë¼ï¿½Æ°Åªï¿½Ë°ï¿½Æ°ï¿½ï¿½ï¿½Þ¤ï¿½');
+define('_HAPPY_LINUX_AM_JUMP_IFNO1', 'È½ï¿½ê¤¬ï¿½Ö°ï¿½Ã¤Æ¤ï¿½ï¿½ï¿½ï¿½ê¡¢ï¿½Ú¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ò¥¯¥ï¿½Ã¥ï¿½ï¿½ï¿½ï¿½Æ¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_JUMP_IFNO2', '%s ï¿½Ã¤ï¿½Ä¹ï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¡¢<i>modules/happy_linux/preload/admin.php</i> ï¿½ï¿½ï¿½ï¿½ï¿½ê¤¹ï¿½ï¿½ï¿½ï¿½á¤¯ï¿½Ê¤ï¿½Þ¤ï¿½');
 
 // 2007-11-01
-define('_HAPPY_LINUX_AM_MODULE', '¥â¥¸¥å¡¼¥ë´ÉÍý');
-define('_HAPPY_LINUX_AM_MODULE_DESC', '¥â¥¸¥å¡¼¥ë¤Î°ìÍ÷¤òÉ½¼¨¤¹¤ë');
-define('_HAPPY_LINUX_AM_MODULE_UPDATE', '¥â¥¸¥å¡¼¥ë¡¦¥¢¥Ã¥×¥Ç¡¼¥È');
+define('_HAPPY_LINUX_AM_MODULE', 'ï¿½â¥¸ï¿½å¡¼ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_MODULE_DESC', 'ï¿½â¥¸ï¿½å¡¼ï¿½ï¿½Î°ï¿½ï¿½ï¿½ï¿½ï¿½É½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_MODULE_UPDATE', 'ï¿½â¥¸ï¿½å¡¼ï¿½ë¡¦ï¿½ï¿½ï¿½Ã¥×¥Ç¡ï¿½ï¿½ï¿½');
 
-define('_HAPPY_LINUX_AM_SERVER_ENV', '¥µ¡¼¥Ð¡¼´Ä¶­ÊÑ¿ô');
-define('_HAPPY_LINUX_AM_DIR_NOT_WRITABLE', '¤³¤Î¥Ç¥£¥ì¥¯¥È¥ê¤Ï½ñ¹þ¤ßµö²Ä¤¬¤Ê¤¤');
-define('_HAPPY_LINUX_AM_MEMORY_LIMIT_TOO_SMALL', 'memory_limit ¤¬¾¯¤Ê¤¤');
-define('_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'Weblinks ¥â¥¸¥å¡¼¥ë¤ò¼Â¹Ô¤¹¤ë¤Ë¤Ï ¤¢¤È %s MB É¬Í×¤Ç¤¹');
-define('_HAPPY_LINUX_AM_MEMORY_DESC', '¤³¤Î¿ôÃÍ¤Ï¤Ò¤È¤Ä¤ÎÌÜ°Â¤Ç¤¹¡£<br />¥µ¡¼¥Ð¡¼´Ä¶­¤Ë¤è¤Ã¤Æ¤Ï¡¢¤â¤Ã¤ÈÂ¿¤¤¾ì¹ç¤â¡¢¤â¤Ã¤È¾¯¤Ê¤¤¾ì¹ç¤â¤¢¤ê¤Þ¤¹¡£');
+define('_HAPPY_LINUX_AM_SERVER_ENV', 'ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ä¶ï¿½ï¿½Ñ¿ï¿½');
+define('_HAPPY_LINUX_AM_DIR_NOT_WRITABLE', 'ï¿½ï¿½ï¿½Î¥Ç¥ï¿½ï¿½ì¥¯ï¿½È¥ï¿½Ï½ï¿½ï¿½ï¿½ßµï¿½ï¿½Ä¤ï¿½ï¿½Ê¤ï¿½');
+define('_HAPPY_LINUX_AM_MEMORY_LIMIT_TOO_SMALL', 'memory_limit ï¿½ï¿½ï¿½ï¿½ï¿½Ê¤ï¿½');
+define('_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'Weblinks ï¿½â¥¸ï¿½å¡¼ï¿½ï¿½ï¿½Â¹Ô¤ï¿½ï¿½ï¿½Ë¤ï¿½ ï¿½ï¿½ï¿½ï¿½ %s MB É¬ï¿½×¤Ç¤ï¿½');
+define('_HAPPY_LINUX_AM_MEMORY_DESC', 'ï¿½ï¿½ï¿½Î¿ï¿½ï¿½Í¤Ï¤Ò¤È¤Ä¤ï¿½ï¿½Ü°Â¤Ç¤ï¿½ï¿½ï¿½<br>ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½Ä¶ï¿½ï¿½Ë¤ï¿½Ã¤Æ¤Ï¡ï¿½ï¿½ï¿½Ã¤ï¿½Â¿ï¿½ï¿½ï¿½ï¿½ï¿½â¡¢ï¿½ï¿½Ã¤È¾ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½ï¿½â¤¢ï¿½ï¿½Þ¤ï¿½ï¿½ï¿½');

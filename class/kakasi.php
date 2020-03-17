@@ -1,5 +1,6 @@
 <?php
-// $Id: kakasi.php,v 1.5 2007/10/13 06:48:19 ohwada Exp $
+
+// $Id: kakasi.php,v 1.1 2010/11/07 14:59:20 ohwada Exp $
 
 // 2007-10-10 K.OHWADA
 // not use happy_linux_dir
@@ -37,18 +38,21 @@ include_once XOOPS_ROOT_PATH . '/modules/happy_linux/class/dir.php';
 // E: kigou (except the above)
 //---------------------------------------------------------
 
+/**
+ * Class happy_linux_kakasi
+ */
 class happy_linux_kakasi
 {
     public $_kakasi_path = '/usr/local/bin/kakasi';
-    public $_mode_excute = 0;  // file mode
+    public $_mode_excute = 0;    // file mode
 
     public $_encoding = 'euc';
-    public $_dicts    = array();
+    public $_dicts = [];
 
-    public $_words     = '';
-    public $_errors    = '';
+    public $_words = '';
+    public $_errors = '';
     public $_cmd_error = '';
-    public $_dir_work  = null;
+    public $_dir_work = null;
 
     //---------------------------------------------------------
     // constructor
@@ -59,19 +63,29 @@ class happy_linux_kakasi
         $this->_dir_work = XOOPS_ROOT_PATH . '/modules/happy_linux/cache';
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_kakasi();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
     //---------------------------------------------------------
     // public
     //---------------------------------------------------------
-    public function execute(&$str, $opt)
+
+    /**
+     * @param $str
+     * @param $opt
+     * @return bool
+     */
+    public function execute($str, $opt)
     {
         if (!$this->is_executable_kakasi()) {
             return false;
@@ -85,21 +99,28 @@ class happy_linux_kakasi
     }
 
     // this method works well in MS-Windows
-    public function execute_file(&$str, $opt)
+
+    /**
+     * @param $str
+     * @param $opt
+     * @return bool
+     */
+    public function execute_file($str, $opt)
     {
-        $this->_words     = '';
-        $this->_errors    = '';
+        $this->_words = '';
+        $this->_errors = '';
         $this->_cmd_error = '';
 
-        $file_in  = tempnam($this->_dir_work, 'kki');
+        $file_in = tempnam($this->_dir_work, 'kki');
         $file_out = tempnam($this->_dir_work, 'kko');
 
         $cmd = $this->_kakasi_path . ' ' . $opt;
 
         // set content
-        $fp_in = fopen($file_in, 'w');
+        $fp_in = fopen($file_in, 'wb');
         if (!$fp_in) {
             $this->_cmd_error = 'cannot open file: ' . $file_in;
+
             return false;
         }
 
@@ -110,9 +131,10 @@ class happy_linux_kakasi
         exec("$cmd < $file_in > $file_out");
 
         // get parsing words
-        $fp_out = fopen($file_out, 'r');
+        $fp_out = fopen($file_out, 'rb');
         if (!$fp_out) {
             $this->_cmd_error = 'cannot open file: ' . $file_out;
+
             return false;
         }
         while ($w = fgets($fp_out)) {
@@ -128,25 +150,32 @@ class happy_linux_kakasi
 
     // this method is more efficient than using file
     // but, doesn't work in MS-Windows
-    public function execute_pipe(&$str, $opt)
+
+    /**
+     * @param $str
+     * @param $opt
+     * @return bool
+     */
+    public function execute_pipe($str, $opt)
     {
-        $this->_words     = '';
-        $this->_errors    = '';
+        $this->_words = '';
+        $this->_errors = '';
         $this->_cmd_error = '';
 
         $cmd = $this->_kakasi_path . ' ' . $opt;
 
-        $descriptorspec = array(
-            0 => array('pipe', 'r'),  // stdin
-            1 => array('pipe', 'w'),  // stdout
-            2 => array('pipe', 'w'),  // stderr
-        );
+        $descriptorspec = [
+            0 => ['pipe', 'r'],  // stdin
+            1 => ['pipe', 'w'],  // stdout
+            2 => ['pipe', 'w'],  // stderr
+        ];
 
-        $pipes = array();
+        $pipes = [];
 
         $rp = proc_open($cmd, $descriptorspec, $pipes);
         if (!is_resource($rp)) {
             $this->_cmd_error = 'cannot excute command: ' . $opt;
+
             return false;
         }
 
@@ -167,9 +196,14 @@ class happy_linux_kakasi
         fclose($pipes[2]);
 
         proc_close($rp);
+
         return true;
     }
 
+    /**
+     * @param null $path
+     * @return bool
+     */
     public function is_executable_kakasi($path = null)
     {
         if (empty($path)) {
@@ -179,70 +213,105 @@ class happy_linux_kakasi
         if (file_exists($path)) {
             if (function_exists('is_executable')) {
                 return is_executable($path);
-            } else {
-                return true;    // WIN or PHP 4
             }
+
+            return true;    // WIN or PHP 4
         }
+
         return false;
     }
 
+    /**
+     * @return string
+     */
     public function get_opt()
     {
         $opt = $this->get_opt_encoding() . ' ' . $this->get_opt_dicts();
+
         return $opt;
     }
 
+    /**
+     * @return string
+     */
     public function get_opt_dicts()
     {
         $opt = '';
         if ($this->_dicts) {
             $opt = ' ' . implode(', ', $this->_dicts);
         }
+
         return $opt;
     }
 
+    /**
+     * @return string
+     */
     public function get_opt_encoding()
     {
         $opt = '';
         if ($this->_encoding) {
             $opt = ' -i' . $this->_encoding;
         }
+
         return $opt;
     }
 
     //---------------------------------------------------------
     // set and get property
     //---------------------------------------------------------
+
+    /**
+     * @param $val
+     */
     public function set_kakasi_path($val)
     {
         $this->_kakasi_path = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_mode_execute($val)
     {
         $this->_mode_excute = (int)$val;
     }
 
+    /**
+     * @param $value
+     */
     public function set_dir_work($value)
     {
         $this->_dir_work = $value;
     }
 
+    /**
+     * @return string
+     */
     public function get_words()
     {
         return $this->_words;
     }
 
+    /**
+     * @return string
+     */
     public function get_errors()
     {
         return $this->_errors;
     }
 
+    /**
+     * @return string
+     */
     public function get_cmd_error()
     {
         return $this->_cmd_error;
     }
 
+    /**
+     * @return string|null
+     */
     public function get_dir_work()
     {
         return $this->_dir_work;

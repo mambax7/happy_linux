@@ -1,5 +1,6 @@
 <?php
-// $Id: locate.php,v 1.1 2007/07/08 01:12:30 ohwada Exp $
+
+// $Id: locate.php,v 1.1 2010/11/07 14:59:14 ohwada Exp $
 
 // 2006-10-01 K.OHWADA
 // this is new file

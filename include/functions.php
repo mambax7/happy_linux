@@ -1,5 +1,6 @@
 <?php
-// $Id: functions.php,v 1.4 2007/11/11 02:39:22 ohwada Exp $
+
+// $Id: functions.php,v 1.1 2010/11/07 14:59:12 ohwada Exp $
 
 // 2007-11-01 K.OHWADA
 // happy_linux_get_singleton()
@@ -16,13 +17,17 @@
 // 2006-07-10 K.OHWADA
 //=========================================================
 
+/**
+ * @param $name
+ * @return bool|mixed
+ */
 function &happy_linux_get_singleton($name)
 {
     static $singletons;
 
     if (!isset($singletons[$name])) {
         $class = 'happy_linux_' . $name;
-        $file  = XOOPS_ROOT_PATH . '/modules/happy_linux/class/' . $name . '.php';
+        $file = XOOPS_ROOT_PATH . '/modules/happy_linux/class/' . $name . '.php';
 
         if (file_exists($file)) {
             include_once $file;
@@ -34,19 +39,26 @@ function &happy_linux_get_singleton($name)
     }
 
     if (isset($singletons[$name])) {
-        $single =& $singletons[$name];
+        $single = &$singletons[$name];
+
         return $single;
-    } else {
-        if (happy_linux_is_admin() && function_exists('debug_print_backtrace')) {
-            echo "happy_linux_get_singleton <br />\n";
-            debug_print_backtrace();
-        }
+    }
+    if (happy_linux_is_admin() && function_exists('debug_print_backtrace')) {
+        echo "happy_linux_get_singleton <br>\n";
+        debug_print_backtrace();
     }
 
     $false = false;
+
     return $false;
 }
 
+/**
+ * @param null   $name
+ * @param null   $module_dir
+ * @param string $prefix
+ * @return bool|mixed
+ */
 function &happy_linux_get_handler($name = null, $module_dir = null, $prefix = 'happy_linux')
 {
     static $handlers;
@@ -67,7 +79,7 @@ function &happy_linux_get_handler($name = null, $module_dir = null, $prefix = 'h
 
     if (!isset($handlers[$module_dir][$name])) {
         $class = $prefix . '_' . $name . '_handler';
-        $file  = XOOPS_ROOT_PATH . '/modules/' . $module_dir . '/class/' . $class . '.php';
+        $file = XOOPS_ROOT_PATH . '/modules/' . $module_dir . '/class/' . $class . '.php';
 
         if (file_exists($file)) {
             include_once $file;
@@ -79,29 +91,34 @@ function &happy_linux_get_handler($name = null, $module_dir = null, $prefix = 'h
     }
 
     if (isset($handlers[$module_dir][$name])) {
-        $han =& $handlers[$module_dir][$name];
-        return $han;
-    } else {
-        if (happy_linux_is_admin()) {
-            if (function_exists('debug_print_backtrace')) {
-                echo "happy_linux_get_handler <br />\n";
-                debug_print_backtrace();
-            }
+        $han = &$handlers[$module_dir][$name];
 
-            $msg = 'Handler does not exist<br />Module: ' . $module_dir . '<br />Name: ' . $name . '<br />Prefix: ' . $prefix . '<br />';
-            trigger_error($msg, E_USER_ERROR);
+        return $han;
+    }
+    if (happy_linux_is_admin()) {
+        if (function_exists('debug_print_backtrace')) {
+            echo "happy_linux_get_handler <br>\n";
+            debug_print_backtrace();
         }
+
+        $msg = 'Handler does not exist<br>Module: ' . $module_dir . '<br>Name: ' . $name . '<br>Prefix: ' . $prefix . '<br>';
+        trigger_error($msg, E_USER_ERROR);
     }
 
     $false = false;
+
     return $false;
 }
 
+/**
+ * @return bool
+ */
 function happy_linux_is_admin()
 {
     global $xoopsUser;
     if (is_object($xoopsUser) && $xoopsUser->isAdmin()) {
-        return true;;
+        return true;
     }
+
     return false;
 }

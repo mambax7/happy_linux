@@ -1,5 +1,6 @@
 <?php
-// $Id: locate.php,v 1.1 2007/11/15 11:08:43 ohwada Exp $
+
+// $Id: locate.php,v 1.1 2010/11/07 14:59:13 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module

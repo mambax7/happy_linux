@@ -1,5 +1,6 @@
 <?php
-// $Id: language_local.php,v 1.1 2007/09/29 12:32:40 ohwada Exp $
+
+// $Id: language_local.php,v 1.1 2010/11/07 14:59:13 ohwada Exp $
 
 // 2006-10-05 K.OHWADA
 // happy_linux_language_base
@@ -17,9 +18,12 @@
 // class happy_linux_language_local
 // dummy class for English
 //=========================================================
+
+/**
+ * Class happy_linux_language_local
+ */
 class happy_linux_language_local extends happy_linux_language_base
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -31,6 +35,10 @@ class happy_linux_language_local extends happy_linux_language_base
     //---------------------------------------------------------
     // country code
     //---------------------------------------------------------
+
+    /**
+     * @return string
+     */
     public function get_country_code()
     {
         return 'us';    // USA

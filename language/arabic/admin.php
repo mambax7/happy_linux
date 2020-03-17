@@ -1,5 +1,6 @@
 <?php
-// $Id: admin.php,v 1.2 2008/02/24 02:14:18 ohwada Exp $
+
+// $Id: admin.php,v 1.1 2010/11/07 14:59:14 ohwada Exp $
 
 // 2007-11-01
 // _HAPPY_LINUX_AM_MODULE
@@ -19,28 +20,28 @@
 //=========================================================
 
 // 2007-05-12
-define('_HAPPY_LINUX_AM_GROUP', 'ÎíÇÑÇÊ ÇáãÌãæÚÇÊ');
-define('_HAPPY_LINUX_AM_GROUP_DESC', 'ÅÏÇÑÉ ÏÎæá ÇáÊÕÇÑíÍ ááÈÑäÇãÌ');
-define('_HAPPY_LINUX_AM_BLOCK', 'ÎíÇÑÇÊ ÇáÈáæß');
-define('_HAPPY_LINUX_AM_BLOCK_DESC', 'ÅÏÇÑÉ ÏÎæá ÇáÊÕÇÑíÍ ááÈáæß');
-define('_HAPPY_LINUX_AM_GROUP_BLOCK', 'ÇáãÌãæÚÉ / ÇáÈáæß ÇÏÇÑÉ');
-define('_HAPPY_LINUX_AM_GROUP_BLOCK_DESC', 'ÅÏÇÑÉ ÏÎæá ÇáÊÕÇÑíÍ ááÈÑäÇãÌ æÇáÈáæß');
-define('_HAPPY_LINUX_AM_TEMPLATE', 'ÎíÇÑÇÊ ÇáÞæÇáÈ');
-define('_HAPPY_LINUX_AM_TEMPLATE_DESC', 'ÅÏÇÑÉ ÇáÞæÇáÈ');
+define('_HAPPY_LINUX_AM_GROUP', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_GROUP_DESC', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_BLOCK', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_BLOCK_DESC', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_GROUP_BLOCK', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ / ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_GROUP_BLOCK_DESC', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_TEMPLATE', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_TEMPLATE_DESC', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
 
 // 2007-06-02
 define('_HAPPY_LINUX_AM_JUDGE', 'This program judegs <b>%s</b>');
-define('_HAPPY_LINUX_AM_JUMP', 'ÓæÝ íÊã ÊÍæíáß ÈÚÏ <b>%s</b> ËÇäíÉ');
-define('_HAPPY_LINUX_AM_JUMP_IFNO1', 'ÑÌÇÁ ÅäÞÑ ÇáãÊÇÈÚÉ¡ ÅÐÇ áã íÊã ÊÍæíáß.');
+define('_HAPPY_LINUX_AM_JUMP', 'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ <b>%s</b> ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_JUMP_IFNO1', 'ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¡ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.');
 define('_HAPPY_LINUX_AM_JUMP_IFNO2', 'Please set <i>modules/happy_linux/preload/admin.php</i>, when fell %s seconds is long');
 
 // 2007-11-01
-define('_HAPPY_LINUX_AM_MODULE', 'ÅÏÇÑÉ ÇáÈÑÇãÌ');
-define('_HAPPY_LINUX_AM_MODULE_DESC', 'ÚÑÖ ÞÇÆãÉ ÇáÈÑÇãÌ');
-define('_HAPPY_LINUX_AM_MODULE_UPDATE', 'ÊÍÏíË ÇáÈÑäÇãÌ');
+define('_HAPPY_LINUX_AM_MODULE', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_MODULE_DESC', 'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_MODULE_UPDATE', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
 
-define('_HAPPY_LINUX_AM_SERVER_ENV', 'ãÊÛíøÑÇÊ ÈíÆÉ ÎÇÏã');
-define('_HAPPY_LINUX_AM_DIR_NOT_WRITABLE', 'åÐÇ ÇáãÓÇÑ áÇ íÕáÍ ááßÊÇÈÉ ÚáíÉ');
-define('_HAPPY_LINUX_AM_MEMORY_LIMIT_TOO_SMALL', 'ãÓÇÍÉ ÇáÐÇßÑÉ ÕÛíÑ');
-define('_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'ÇáÈÑäÇãÌ íÍÊÇÌ Åáì ÐßÑÉ ÊÞÑíÈÇ %s MB');
-define('_HAPPY_LINUX_AM_MEMORY_DESC', 'This value is one standard.<br />Depending on the server environment, it is sometimes more or less.');
+define('_HAPPY_LINUX_AM_SERVER_ENV', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_DIR_NOT_WRITABLE', 'ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_MEMORY_LIMIT_TOO_SMALL', 'ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½');
+define('_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ %s MB');
+define('_HAPPY_LINUX_AM_MEMORY_DESC', 'This value is one standard.<br>Depending on the server environment, it is sometimes more or less.');

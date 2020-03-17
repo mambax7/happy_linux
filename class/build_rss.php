@@ -1,5 +1,5 @@
 <?php
-// $Id: build_rss.php,v 1.19 2009/02/25 08:57:04 ohwada Exp $
+// $Id: build_rss.php,v 1.1 2010/11/07 14:59:18 ohwada Exp $
 
 // 2009-02-20 K.OHWADA
 // media_content_medium
@@ -57,23 +57,26 @@
 //=========================================================
 // class builder base
 //=========================================================
+
+/**
+ * Class happy_linux_build_rss
+ */
 class happy_linux_build_rss extends happy_linux_build_cache
 {
-
     // constant
     public $_CACHE_ID_GUEST = HAPPY_LINUX_RSS_CACHE_ID_GUEST;
-    public $_CACHE_ID_USER  = HAPPY_LINUX_RSS_CACHE_ID_USER;
+    public $_CACHE_ID_USER = HAPPY_LINUX_RSS_CACHE_ID_USER;
 
-    public $_MODULE_ID_DEFUALT   = 1;
-    public $_HEADER_BUILD        = 'Content-Type:text/xml;  charset=utf-8';
-    public $_HEADER_VIEW         = 'Content-Type:text/html; charset=utf-8';
-    public $_RSS_DOCS            = 'http://backend.userland.com/rss/';
-    public $_MAX_ITEMS           = 20;
-    public $_CACHE_TIME_ONE_HOUR = 3600;   // one hour
+    public $_MODULE_ID_DEFUALT = 1;
+    public $_HEADER_BUILD = 'Content-Type:text/xml;  charset=utf-8';
+    public $_HEADER_VIEW = 'Content-Type:text/html; charset=utf-8';
+    public $_RSS_DOCS = 'http://backend.userland.com/rss/';
+    public $_MAX_ITEMS = 20;
+    public $_CACHE_TIME_ONE_HOUR = 3600;    // one hour
 
     // replace control code
     public $_FLAG_REPLACE_CONTROL_CODE = true;
-    public $_REPLACE_CHAR              = ' ';   // space
+    public $_REPLACE_CHAR = ' ';    // space
 
     // class instance
     public $_default;
@@ -100,24 +103,24 @@ class happy_linux_build_rss extends happy_linux_build_cache
     public $_site_author_email;
     public $_site_author_uri;
 
-    public $_site_image_url    = '';
-    public $_site_image_link   = '';
-    public $_site_image_title  = '';
-    public $_site_image_width  = '';
+    public $_site_image_url = '';
+    public $_site_image_link = '';
+    public $_site_image_title = '';
+    public $_site_image_width = '';
     public $_site_image_height = '';
 
     // set param
-    public $_channel               = array();
-    public $_items                 = array();
-    public $_view_title            = 'view cache';
-    public $_view_goto_title       = 'goto index';
-    public $_view_goto_url         = null;
+    public $_channel = [];
+    public $_items = [];
+    public $_view_title = 'view cache';
+    public $_view_goto_title = 'goto index';
+    public $_view_goto_url = null;
     public $_flag_default_timezone = false;
 
     public $_cache_time_guest = 0;
-    public $_cache_time_user  = 0;
+    public $_cache_time_user = 0;
     public $_flag_force_guest = false;
-    public $_flag_force_user  = false;
+    public $_flag_force_user = false;
 
     public $_media_group_default = null;
 
@@ -125,18 +128,18 @@ class happy_linux_build_rss extends happy_linux_build_cache
     public $_count_line = 1;
 
     // override
-    public $_GENERATOR      = 'XOOPS Happy Linux';
-    public $_GENERATOR_URI  = 'http://linux2.ohwada.net/';
-    public $_CATEGORY       = 'Happy Linux';
-    public $_TITLE_RDF      = 'RDF Feeds';
-    public $_TITLE_RSS      = 'RSS Feeds';
-    public $_TITLE_ATOM     = 'ATOM Feeds';
-    public $_TITLE_OTHER    = 'Feeds';
-    public $_TEMPLATE_RDF   = null;
-    public $_TEMPLATE_RSS   = null;
-    public $_TEMPLATE_ATOM  = null;
+    public $_GENERATOR = 'XOOPS Happy Linux';
+    public $_GENERATOR_URI = 'http://linux2.ohwada.net/';
+    public $_CATEGORY = 'Happy Linux';
+    public $_TITLE_RDF = 'RDF Feeds';
+    public $_TITLE_RSS = 'RSS Feeds';
+    public $_TITLE_ATOM = 'ATOM Feeds';
+    public $_TITLE_OTHER = 'Feeds';
+    public $_TEMPLATE_RDF = null;
+    public $_TEMPLATE_RSS = null;
+    public $_TEMPLATE_ATOM = null;
     public $_TEMPLATE_OTHER = null;
-    public $_MODE_BUILD     = 'other';
+    public $_MODE_BUILD = 'other';
 
     //---------------------------------------------------------
     // constructor
@@ -147,19 +150,23 @@ class happy_linux_build_rss extends happy_linux_build_cache
 
         // class instance
         $this->_default = happy_linux_rss_default::getInstance();
-        $this->_system  = happy_linux_system::getInstance();
+        $this->_system = happy_linux_system::getInstance();
         $this->_strings = happy_linux_strings::getInstance();
         $this->_convert = happy_linux_convert_encoding::getInstance();
-        $this->_image   = happy_linux_image_size::getInstance();
-        $this->_date    = happy_linux_date::getInstance();
+        $this->_image = happy_linux_image_size::getInstance();
+        $this->_date = happy_linux_date::getInstance();
     }
 
+    /**
+     * @return \happy_linux_build_rss|static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_build_rss();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
@@ -172,12 +179,12 @@ class happy_linux_build_rss extends happy_linux_build_cache
         happy_linux_http_output('pass');
         header($this->_HEADER_BUILD);
 
-        $cache_id   = $this->_CACHE_ID_GUEST;
+        $cache_id = $this->_CACHE_ID_GUEST;
         $cache_time = $this->_cache_time_guest;
         $flag_force = $this->_flag_force_guest;
 
         if ($this->_system->is_user()) {
-            $cache_id   = $this->_CACHE_ID_USER;
+            $cache_id = $this->_CACHE_ID_USER;
             $cache_time = $this->_cache_time_user;
             $flag_force = $this->_flag_force_user;
         }
@@ -189,46 +196,40 @@ class happy_linux_build_rss extends happy_linux_build_cache
     {
         $template = $this->_get_template();
         if (empty($template)) {
-            echo '<span style="color: #ff0000;">No Template</span><br />' . "\n";
+            echo '<span style="color: #ff0000;">No Template</span><br>' . "\n";
+
             return;
         }
 
         // header
         header($this->_HEADER_VIEW);
 
-        $xml   = $this->build_cache($this->_get_template(), 0, true);
-        $body  = htmlspecialchars($xml, ENT_QUOTES);
+        $xml = $this->build_cache($this->_get_template(), 0, true);
+        $body = htmlspecialchars($xml, ENT_QUOTES);
         $title = $this->_get_title();
 
         $goto = '';
         if ($this->_view_goto_url && $this->_view_goto_title) {
             $goto = '<a href="' . $this->_view_goto_url . '">';
             $goto .= $this->_utf8($this->_view_goto_title) . "</a>\n";
-        }
-
-        ?>
+        } ?>
         <html>
         <head>
             <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-            <title><?php echo $title;
-                ?></title>
+            <title><?php echo $title; ?></title>
         </head>
         <body>
-        <h3><?php echo $title;
-            ?></h3>
+        <h3><?php echo $title; ?></h3>
         This is debug mode <br/> <br/>
-        <hr/>
+        <hr>
         <pre>
-<?php echo $body;
-?>
+<?php echo $body; ?>
 </pre>
-        <hr/>
-        <?php echo $goto;
-        ?>
+        <hr>
+        <?php echo $goto; ?>
         </body>
         </html>
         <?php
-
     }
 
     public function rebuild_rss()
@@ -255,6 +256,12 @@ class happy_linux_build_rss extends happy_linux_build_cache
     //---------------------------------------------------------
     // utlity
     //---------------------------------------------------------
+
+    /**
+     * @param null $author
+     * @param null $year
+     * @return string
+     */
     public function build_site_copyright($author = null, $year = null)
     {
         if (empty($author)) {
@@ -264,9 +271,17 @@ class happy_linux_build_rss extends happy_linux_build_cache
             $year = $this->get_default_site_year();
         }
         $val = 'Copyright (c) ' . $year . ', ' . $author;
+
         return $val;
     }
 
+    /**
+     * @param null $mid
+     * @param null $aid
+     * @param null $site_tag
+     * @param null $year
+     * @return string
+     */
     public function build_entry_id($mid = null, $aid = null, $site_tag = null, $year = null)
     {
         if (empty($mid)) {
@@ -281,53 +296,83 @@ class happy_linux_build_rss extends happy_linux_build_cache
         if (empty($year)) {
             $year = $this->_site_year;
         }
-        $val = "tag:$site_tag,$year://1.$mid.$aid";;
+        $val = "tag:$site_tag,$year://1.$mid.$aid";
+
         return $val;
     }
 
     //---------------------------------------------------------
     // site information
     //---------------------------------------------------------
+
+    /**
+     * @return string
+     */
     public function get_default_site_url()
     {
         return $this->_default->get_default_site_url();
     }
 
+    /**
+     * @return mixed
+     */
     public function get_default_site_name()
     {
         return $this->_default->get_default_site_name();
     }
 
+    /**
+     * @return mixed
+     */
     public function get_default_site_desc()
     {
         return $this->_default->get_default_site_desc();
     }
 
+    /**
+     * @return bool|mixed
+     */
     public function get_default_site_tag()
     {
         return $this->_default->get_default_site_tag();
     }
 
+    /**
+     * @return string
+     */
     public function get_default_site_link_self()
     {
         return $this->_default->get_default_site_link_self();
     }
 
+    /**
+     * @return mixed|string
+     */
     public function get_default_site_author_name()
     {
         return $this->_default->get_default_site_author_name();
     }
 
+    /**
+     * @return mixed
+     */
     public function get_default_site_author_email()
     {
         return $this->_default->get_default_site_author_email();
     }
 
+    /**
+     * @return string
+     */
     public function get_default_site_author_uri()
     {
         return $this->_default->get_default_site_author_uri();
     }
 
+    /**
+     * @param $url
+     * @return bool|mixed
+     */
     public function parse_site_tag($url)
     {
         return $this->_default->parse_site_tag($url);
@@ -336,31 +381,53 @@ class happy_linux_build_rss extends happy_linux_build_cache
     //---------------------------------------------------------
     // site image
     //---------------------------------------------------------
+
+    /**
+     * @return string
+     */
     public function get_default_site_image_logo()
     {
         return $this->_default->get_default_site_image_logo();
     }
 
+    /**
+     * @return int
+     */
     public function get_site_image_width_max()
     {
         return $this->_default->get_site_image_width_max();
     }
 
+    /**
+     * @return int
+     */
     public function get_site_image_height_max()
     {
         return $this->_default->get_site_image_height_max();
     }
 
+    /**
+     * @param $logo
+     * @return array
+     */
     public function get_site_image_size($logo)
     {
         return $this->_default->get_site_image_size($logo);
     }
 
+    /**
+     * @param $width
+     * @return int
+     */
     public function check_site_image_width($width)
     {
         return $this->_default->check_site_image_width($width);
     }
 
+    /**
+     * @param $height
+     * @return int
+     */
     public function check_site_image_height($height)
     {
         return $this->_default->check_site_image_height($height);
@@ -369,111 +436,178 @@ class happy_linux_build_rss extends happy_linux_build_cache
     // --------------------------------------------------------
     // set param
     // --------------------------------------------------------
+
+    /**
+     * @param $value
+     */
     public function set_site_url($value)
     {
         $this->_site_url = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_name($value)
     {
         $this->_site_name = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_desc($value)
     {
         $this->_site_desc = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_tag($value)
     {
         $this->_site_tag = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_year($value)
     {
         $this->_site_year = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_copyright($value)
     {
         $this->_site_copyright = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_link_self($value)
     {
         $this->_site_link_self = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_author_name($value)
     {
         $this->_site_author_name = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_author_email($value)
     {
         $this->_site_author_email = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_author_uri($value)
     {
         $this->_site_author_uri = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_image_url($value)
     {
         $this->_site_image_url = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_image_link($value)
     {
         $this->_site_image_link = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_image_title($value)
     {
         $this->_site_image_title = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_image_width($value)
     {
         $this->_site_image_width = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_site_image_height($value)
     {
         $this->_site_image_height = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_max_summary($value)
     {
         $this->_max_summary = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_channel($value)
     {
         $this->_channel = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_items($value)
     {
         $this->_items = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_view_title($value)
     {
         $this->_view_title = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_view_goto_title($value)
     {
         $this->_view_goto_title = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_view_goto_url($value)
     {
         $this->_view_goto_url = $value;
     }
 
+    /**
+     * @param $val
+     */
     public function set_mode($val)
     {
         switch ($val) {
@@ -482,148 +616,231 @@ class happy_linux_build_rss extends happy_linux_build_cache
             case 'rss':
                 $this->_MODE_BUILD = $val;
                 break;
-
             default:
                 $this->_MODE_BUILD = 'other';
                 break;
         }
     }
 
+    /**
+     * @param $value
+     */
     public function set_header_build($value)
     {
         $this->_HEADER_BUILD = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_generator($value)
     {
         $this->_GENERATOR = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_generator_uri($value)
     {
         $this->_GENERATOR_URI = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_category($value)
     {
         $this->_CATEGORY = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_template_rdf($value)
     {
         $this->_TEMPLATE_RDF = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_template_rss($value)
     {
         $this->_TEMPLATE_RSS = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_template_atom($value)
     {
         $this->_TEMPLATE_ATOM = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_template_other($value)
     {
         $this->_TEMPLATE_OTHER = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_rdf_template($value)
     {
         $this->_TEMPLATE_RDF = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_rss_template($value)
     {
         $this->_TEMPLATE_RSS = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_atom_template($value)
     {
         $this->_TEMPLATE_ATOM = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_other_template($value)
     {
         $this->_TEMPLATE_OTHER = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_title_rdf($value)
     {
         $this->_TITLE_RDF = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_title_rss($value)
     {
         $this->_TITLE_RSS = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_title_atom($value)
     {
         $this->_TITLE_ATOM = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_title_other($value)
     {
         $this->_TITLE_OTHER = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_rdf_title($value)
     {
         $this->_TITLE_RDF = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_rss_title($value)
     {
         $this->_TITLE_RSS = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_atom_title($value)
     {
         $this->_TITLE_ATOM = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_other_title($value)
     {
         $this->_TITLE_OTHER = $value;
     }
 
+    /**
+     * @param $val
+     */
     public function set_flag_default_timezone($val)
     {
         $this->_flag_default_timezone = (bool)$val;
     }
 
+    /**
+     * @param $value
+     */
     public function set_cache_time_guest($value)
     {
         $this->_cache_time_guest = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_cache_time_user($value)
     {
         $this->_cache_time_user = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_force_guest($value)
     {
         $this->_flag_force_guest = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_force_user($value)
     {
         $this->_flag_force_user = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_cache_id_guest($value)
     {
         $this->_CACHE_ID_GUEST = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_cache_id_user($value)
     {
         $this->_CACHE_ID_USER = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_media_group_default($value)
     {
         $this->_media_group_default = $value;
@@ -653,32 +870,40 @@ class happy_linux_build_rss extends happy_linux_build_cache
         $this->set_site_copyright($this->build_site_copyright());
     }
 
+    /**
+     * @return string
+     */
     public function _get_title()
     {
         switch ($this->_MODE_BUILD) {
             case 'rss':
                 $ret = $this->_TITLE_RSS;
                 break;
-
             case 'rdf':
                 $ret = $this->_TITLE_RDF;
                 break;
-
             case 'atom':
                 $ret = $this->_TITLE_ATOM;
                 break;
-
             case 'other':
             default:
                 $ret = $this->_TITLE_OTHER;
                 break;
         }
+
         return $ret;
     }
 
     // --------------------------------------------------------
     // meke title
     // --------------------------------------------------------
+
+    /**
+     * @param     $title
+     * @param int $flag_char
+     * @param int $flag_numeric
+     * @return string|string[]|null
+     */
     public function _build_xml_title($title, $flag_char = 1, $flag_numeric = 1)
     {
         if ($flag_char) {
@@ -697,6 +922,13 @@ class happy_linux_build_rss extends happy_linux_build_cache
     // --------------------------------------------------------
     // meke content
     // --------------------------------------------------------
+
+    /**
+     * @param     $content
+     * @param int $flag_control
+     * @param int $flag_undo
+     * @return string|string[]|null
+     */
     public function _build_xml_content($content, $flag_control = 1, $flag_undo = 1)
     {
         if ($flag_control) {
@@ -713,15 +945,33 @@ class happy_linux_build_rss extends happy_linux_build_cache
         return $cont;
     }
 
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _convert_cdata($text)
     {
         $text = preg_replace('/]]>/', ']]&gt;', $text);
+
         return $text;
     }
 
     // --------------------------------------------------------
     // meke summary
     // --------------------------------------------------------
+
+    /**
+     * @param     $sum
+     * @param int $flag_char
+     * @param int $flag_numeric
+     * @param int $flag_control
+     * @param int $flag_undo
+     * @param int $flag_return
+     * @param int $flag_tab
+     * @param int $flag_style
+     * @param int $flag_space
+     * @return string|string[]|null
+     */
     public function _build_xml_summary($sum, $flag_char = 1, $flag_numeric = 1, $flag_control = 1, $flag_undo = 1, $flag_return = 1, $flag_tab = 1, $flag_style = 1, $flag_space = 1)
     {
         if ($flag_char) {
@@ -768,43 +1018,69 @@ class happy_linux_build_rss extends happy_linux_build_cache
     // htmlspecialchars
     // http://www.w3.org/TR/REC-xml/#dt-markup
     // http://www.fxis.co.jp/xmlcafe/tmp/rec-xml.html#dt-markup
-    //   &  -> &amp;    // without html entity
+    //   &  -> &amp;	// without html entity
     //   <  -> &lt;
     //   >  -> &gt;
     //   "  -> &quot;
     //   '  -> &apos;
     // --------------------------------------------------------
+
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _xml($text)
     {
         $ret = $this->_xml_htmlspecialchars_strict($text);
+
         return $ret;
     }
 
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _xml_url($text)
     {
         $ret = $this->_xml_htmlspecialchars_url($text);
+
         return $ret;
     }
 
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _xml_htmlspecialchars($text)
     {
-        $text = htmlspecialchars($text);
+        $text = htmlspecialchars($text, ENT_QUOTES | ENT_HTML5);
         $text = preg_replace("/'/", '&apos;', $text);
+
         return $text;
     }
 
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _xml_htmlspecialchars_strict($text)
     {
         $text = $this->_strip_html_entity_char($text);
         $text = $this->_xml_htmlspecialchars($text);
+
         return $text;
     }
 
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _xml_htmlspecialchars_url($text)
     {
         $text = preg_replace('/&amp;/sU', '&', $text);
         $text = $this->_strip_html_entity_char($text);
         $text = $this->_xml_htmlspecialchars($text);
+
         return $text;
     }
 
@@ -817,6 +1093,11 @@ class happy_linux_build_rss extends happy_linux_build_cache
     //   &amp;  -> &
     //   &amp;nbsp; -> &nbsp;
     // --------------------------------------------------------
+
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _undo_html_special_chars($text)
     {
         $text = preg_replace('/&gt;/i', '>', $text);
@@ -824,6 +1105,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
         $text = preg_replace('/&quot;/i', '"', $text);
         $text = preg_replace('/&#039;/i', "'", $text);
         $text = preg_replace('/&amp;nbsp;/i', '&nbsp;', $text);
+
         return $text;
     }
 
@@ -831,9 +1113,15 @@ class happy_linux_build_rss extends happy_linux_build_cache
     // undo html entities
     //   &amp;abc;  -> &abc;
     // --------------------------------------------------------
+
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _undo_html_entity_char($text)
     {
         $ret = preg_replace('/&amp;([0-9a-zA-z]+);/sU', '&\\1;', $text);
+
         return $ret;
     }
 
@@ -841,9 +1129,15 @@ class happy_linux_build_rss extends happy_linux_build_cache
     // undo html entities
     //   &amp;#123; -> &#123;
     // --------------------------------------------------------
+
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _undo_html_entity_numeric($text)
     {
         $ret = preg_replace('/&amp;#([0-9a-fA-F]+);/sU', '&#\\1;', $text);
+
         return $ret;
     }
 
@@ -851,9 +1145,15 @@ class happy_linux_build_rss extends happy_linux_build_cache
     // strip html entities
     //   &abc; -> ' '
     // --------------------------------------------------------
+
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _strip_html_entity_char($text)
     {
         $ret = preg_replace('/&[0-9a-zA-z]+;/sU', ' ', $text);
+
         return $ret;
     }
 
@@ -861,21 +1161,33 @@ class happy_linux_build_rss extends happy_linux_build_cache
     // strip html entities
     //   &#123; -> ' '
     // --------------------------------------------------------
+
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _strip_html_entity_numeric($text)
     {
         $ret = preg_replace('/&amp;#([0-9a-fA-F]+);/sU', '&#\\1;', $text);
+
         return $ret;
     }
 
     //-----------------------------------------------
     // use convert class
     //-----------------------------------------------
+
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function _utf8($str)
     {
         $str = happy_linux_convert_to_utf8($str, _CHARSET);
         if ($this->_FLAG_REPLACE_CONTROL_CODE) {
             $str = $this->_strings->replace_control($str, $this->_REPLACE_CHAR);
         }
+
         return $str;
     }
 
@@ -893,28 +1205,32 @@ class happy_linux_build_rss extends happy_linux_build_cache
     //   - title
     //   - link
     //---------------------------------------------------------
+
+    /**
+     * @param $tpl
+     */
     public function _assign_rdf(&$tpl)
     {
-        $channel_list = array(
+        $channel_list = [
             'title',
             'link',
             'description',
             'dc_language',
-            'dc_date'
-        );
+            'dc_date',
+        ];
 
-        $item_list = array(
+        $item_list = [
             'link',
             'title',
             'description',
             'dc_subject',
             'dc_creator',
             'dc_date',
-            'content_encoded'
-        );
+            'content_encoded',
+        ];
 
-        $channel =& $this->_build_rdf_channel();
-        $items   =& $this->_build_rdf_items();
+        $channel = &$this->_build_rdf_channel();
+        $items = &$this->_build_rdf_items();
 
         $tpl->assign('xml_lang', $this->_utf8($channel['xml_lang']));
 
@@ -922,17 +1238,24 @@ class happy_linux_build_rss extends happy_linux_build_cache
         $this->_assign_items($tpl, $item_list, $items, 'items');
     }
 
+    /**
+     * @return array
+     */
     public function &_build_rdf_channel()
     {
-        $ret =& $this->_build_common_channel();
+        $ret = &$this->_build_common_channel();
+
         return $ret;
     }
 
+    /**
+     * @return array
+     */
     public function &_build_rdf_items()
     {
-        $arr               = array();
+        $arr = [];
         $this->_count_line = 1;
-        $items             =& $this->_get_items();
+        $items = &$this->_get_items();
 
         if (is_array($items) && count($items)) {
             foreach ($items as $item) {
@@ -944,9 +1267,14 @@ class happy_linux_build_rss extends happy_linux_build_cache
         return $arr;
     }
 
+    /**
+     * @param $item
+     * @return mixed
+     */
     public function &_build_rdf_item_default(&$item)
     {
-        $ret =& $this->_build_common_item($item);
+        $ret = &$this->_build_common_item($item);
+
         return $ret;
     }
 
@@ -962,9 +1290,13 @@ class happy_linux_build_rss extends happy_linux_build_cache
     //   - link
     //   - description
     //---------------------------------------------------------
+
+    /**
+     * @param $tpl
+     */
     public function _assign_rss(&$tpl)
     {
-        $channel_list = array(
+        $channel_list = [
             'title',
             'link',
             'docs',
@@ -977,18 +1309,18 @@ class happy_linux_build_rss extends happy_linux_build_cache
             'pubdate',
             'description',
             'managingeditor',
-            'atom_link'
-        );
+            'atom_link',
+        ];
 
-        $image_list = array(
+        $image_list = [
             'url',
             'width',
             'height',
             'title',
-            'link'
-        );
+            'link',
+        ];
 
-        $item_list = array(
+        $item_list = [
             'link',
             'guid',
             'title',
@@ -1020,20 +1352,23 @@ class happy_linux_build_rss extends happy_linux_build_cache
             'media_thumbnail_medium_width',
             'media_thumbnail_large_url',
             'media_thumbnail_large_height',
-            'media_large_thumbnail_width'
-        );
+            'media_large_thumbnail_width',
+        ];
 
-        $channel =& $this->_build_rss_channel();
-        $items   =& $this->_build_rss_items();
+        $channel = &$this->_build_rss_channel();
+        $items = &$this->_build_rss_items();
 
         $this->_assign_channel($tpl, $channel_list, $channel);
         $this->_assign_image($tpl, $image_list, $channel, 'channel');
         $this->_assign_items($tpl, $item_list, $items, 'items');
     }
 
+    /**
+     * @return array
+     */
     public function &_build_rss_channel()
     {
-        $channel =& $this->_build_common_channel();
+        $channel = &$this->_build_common_channel();
 
         $channel['pubdate'] = $channel['date_rfc822'];
 
@@ -1048,11 +1383,14 @@ class happy_linux_build_rss extends happy_linux_build_cache
         return $channel;
     }
 
+    /**
+     * @return array
+     */
     public function &_build_rss_items()
     {
-        $arr               = array();
+        $arr = [];
         $this->_count_line = 1;
-        $items             =& $this->_get_items();
+        $items = &$this->_get_items();
 
         if (is_array($items) && count($items)) {
             foreach ($items as $item) {
@@ -1064,14 +1402,18 @@ class happy_linux_build_rss extends happy_linux_build_cache
         return $arr;
     }
 
+    /**
+     * @param $item
+     * @return mixed
+     */
     public function &_build_rss_item_default(&$item)
     {
-        $arr =& $this->_build_common_item($item);
+        $arr = &$this->_build_common_item($item);
 
-        $arr['guid']         = $this->_get_item_guid($arr);
-        $arr['pubdate']      = $this->_get_item_pubdate($arr);
+        $arr['guid'] = $this->_get_item_guid($arr);
+        $arr['pubdate'] = $this->_get_item_pubdate($arr);
         $arr['georss_point'] = $this->_get_item_georss_point($arr);
-        $arr['media_group']  = $this->_get_item_media_group($arr);
+        $arr['media_group'] = $this->_get_item_media_group($arr);
 
         return $arr;
     }
@@ -1091,9 +1433,13 @@ class happy_linux_build_rss extends happy_linux_build_cache
     //   - author name
     //   - summary or content
     //---------------------------------------------------------
+
+    /**
+     * @param $tpl
+     */
     public function _assign_atom(&$tpl)
     {
-        $channel_list = array(
+        $channel_list = [
             'title',
             'link_alt',
             'link_self',
@@ -1104,10 +1450,10 @@ class happy_linux_build_rss extends happy_linux_build_cache
             'generator_uri',
             'author_name',
             'author_uri',
-            'author_email'
-        );
+            'author_email',
+        ];
 
-        $item_list = array(
+        $item_list = [
             'link',
             'id',
             'title',
@@ -1118,11 +1464,11 @@ class happy_linux_build_rss extends happy_linux_build_cache
             'published',
             'author_name',
             'author_uri',
-            'author_email'
-        );
+            'author_email',
+        ];
 
-        $channel =& $this->_build_atom_channel();
-        $entrys  =& $this->_build_atom_entrys();
+        $channel = &$this->_build_atom_channel();
+        $entrys = &$this->_build_atom_entrys();
 
         $tpl->assign('xml_lang', $this->_utf8($channel['xml_lang']));
 
@@ -1130,12 +1476,15 @@ class happy_linux_build_rss extends happy_linux_build_cache
         $this->_assign_items($tpl, $item_list, $entrys, 'entrys');
     }
 
+    /**
+     * @return array
+     */
     public function &_build_atom_channel()
     {
-        $channel =& $this->_build_common_channel();
+        $channel = &$this->_build_common_channel();
 
         // atom id
-        $site_id       = 'tag:' . $this->_site_tag . ',' . $this->_site_year . '://1';
+        $site_id = 'tag:' . $this->_site_tag . ',' . $this->_site_year . '://1';
         $channel['id'] = $this->_xml($site_id);
 
         // date
@@ -1144,11 +1493,14 @@ class happy_linux_build_rss extends happy_linux_build_cache
         return $channel;
     }
 
+    /**
+     * @return array
+     */
     public function &_build_atom_entrys()
     {
-        $arr               = array();
+        $arr = [];
         $this->_count_line = 1;
-        $items             =& $this->_get_items();
+        $items = &$this->_get_items();
 
         if (is_array($items) && count($items)) {
             foreach ($items as $entry) {
@@ -1160,9 +1512,13 @@ class happy_linux_build_rss extends happy_linux_build_cache
         return $arr;
     }
 
+    /**
+     * @param $entry
+     * @return mixed
+     */
     public function &_build_atom_entry_default(&$entry)
     {
-        $arr =& $this->_build_common_item($entry);
+        $arr = &$this->_build_common_item($entry);
 
         // title
         $arr['title'] = $this->_build_xml_title($entry['title'], 0, 0);
@@ -1174,8 +1530,8 @@ class happy_linux_build_rss extends happy_linux_build_cache
 
         // must author_name
         if (empty($arr['author_name'])) {
-            $arr['author_name']  = $this->_xml($this->_site_author_name);
-            $arr['author_uri']   = '';
+            $arr['author_name'] = $this->_xml($this->_site_author_name);
+            $arr['author_uri'] = '';
             $arr['author_email'] = '';
         }
 
@@ -1187,7 +1543,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
         }
 
         // date
-        $arr['updated']   = $arr['updated_iso8601'];
+        $arr['updated'] = $arr['updated_iso8601'];
         $arr['published'] = $arr['published_iso8601'];
 
         return $arr;
@@ -1197,58 +1553,62 @@ class happy_linux_build_rss extends happy_linux_build_cache
     // common
     //---------------------------------------------------------
     // BUG 4697: Notice [PHP]: Only variables should be assigned by reference
+
+    /**
+     * @return array
+     */
     public function &_build_common_channel()
     {
-        $site_url_xml          = $this->_xml_url($this->_site_url);
+        $site_url_xml = $this->_xml_url($this->_site_url);
         $site_author_email_xml = $this->_xml($this->_site_author_email);
-        $site_copyright_xml    = $this->_xml($this->_site_copyright);
-        $language_xml          = $this->_xml(_LANGCODE);
+        $site_copyright_xml = $this->_xml($this->_site_copyright);
+        $language_xml = $this->_xml(_LANGCODE);
 
-        $time             = time();
-        $date_rfc822_xml  = $this->_xml($this->_date_rfc822($time));
+        $time = time();
+        $date_rfc822_xml = $this->_xml($this->_date_rfc822($time));
         $date_iso8601_xml = $this->_xml($this->_date_iso8601($time));
 
         $site_link_self_xml = $this->_xml_url($this->_site_link_self);
-        $site_email_xml     = $this->_xml($this->_build_site_email());
+        $site_email_xml = $this->_xml($this->_build_site_email());
 
-        $ret = array(
+        $ret = [
             //url
-            'link'           => $site_url_xml,
-            'link_alt'       => $site_url_xml,
-            'author_uri'     => $site_url_xml,
-            'link_self'      => $site_link_self_xml,
-            'atom_link'      => $site_link_self_xml,
-            'image_url'      => $this->_xml_url($this->_site_image_url),
-            'image_link'     => $this->_xml_url($this->_site_image_link),
+            'link' => $site_url_xml,
+            'link_alt' => $site_url_xml,
+            'author_uri' => $site_url_xml,
+            'link_self' => $site_link_self_xml,
+            'atom_link' => $site_link_self_xml,
+            'image_url' => $this->_xml_url($this->_site_image_url),
+            'image_link' => $this->_xml_url($this->_site_image_link),
 
             // text
-            'generator_uri'  => $this->_xml_url($this->_GENERATOR_URI),
-            'language'       => $language_xml,
-            'copyright'      => $site_copyright_xml,
-            'rights'         => $site_copyright_xml,
-            'author_email'   => $site_author_email_xml,
-            'webmaster'      => $site_email_xml,
+            'generator_uri' => $this->_xml_url($this->_GENERATOR_URI),
+            'language' => $language_xml,
+            'copyright' => $site_copyright_xml,
+            'rights' => $site_copyright_xml,
+            'author_email' => $site_author_email_xml,
+            'webmaster' => $site_email_xml,
             'managingeditor' => $site_email_xml,
-            'title'          => $this->_xml($this->_site_name),
-            'description'    => $this->_xml($this->_site_desc),
-            'generator'      => $this->_xml($this->_GENERATOR),
-            'category'       => $this->_xml($this->_CATEGORY),
-            'docs'           => $this->_xml($this->_RSS_DOCS),
-            'author_name'    => $this->_xml($this->_site_author_name),
-            'author_uri'     => $this->_xml($this->_site_author_uri),
-            'image_width'    => $this->_xml($this->_site_image_width),
-            'image_height'   => $this->_xml($this->_site_image_height),
-            'image_title'    => $this->_xml($this->_site_image_title),
+            'title' => $this->_xml($this->_site_name),
+            'description' => $this->_xml($this->_site_desc),
+            'generator' => $this->_xml($this->_GENERATOR),
+            'category' => $this->_xml($this->_CATEGORY),
+            'docs' => $this->_xml($this->_RSS_DOCS),
+            'author_name' => $this->_xml($this->_site_author_name),
+            'author_uri' => $this->_xml($this->_site_author_uri),
+            'image_width' => $this->_xml($this->_site_image_width),
+            'image_height' => $this->_xml($this->_site_image_height),
+            'image_title' => $this->_xml($this->_site_image_title),
 
             // time
-            'date_unix'      => $time,
-            'date_rfc822'    => $date_rfc822_xml,
-            'date_iso8601'   => $date_iso8601_xml,
+            'date_unix' => $time,
+            'date_rfc822' => $date_rfc822_xml,
+            'date_iso8601' => $date_iso8601_xml,
 
-            'xml_lang'    => $language_xml,
+            'xml_lang' => $language_xml,
             'dc_language' => $language_xml,
-            'dc_date'     => $date_iso8601_xml,
-        );
+            'dc_date' => $date_iso8601_xml,
+        ];
 
         return $ret;
     }
@@ -1257,21 +1617,35 @@ class happy_linux_build_rss extends happy_linux_build_cache
     // <webMaster>luksa@dallas.example.com (Frank Luksa)</webMaster>
     // <managingEditor>luksa@dallas.example.com (Frank Luksa)</managingEditor>
     //---------------------------------------------------------
+
+    /**
+     * @return string
+     */
     public function _build_site_email()
     {
         $text = $this->_site_author_email . ' (' . $this->_site_author_name . ')';
+
         return $text;
     }
 
+    /**
+     * @param $items
+     * @return bool
+     */
     public function _get_last_updated_unix($items)
     {
         $time = false;
         if (isset($items[0]['updated_unix'])) {
             $time = $items[0]['updated_unix'];
         }
+
         return $time;
     }
 
+    /**
+     * @param $item
+     * @return |null |null |null
+     */
     public function _get_item_guid($item)
     {
         $val = null;
@@ -1280,9 +1654,14 @@ class happy_linux_build_rss extends happy_linux_build_cache
         } elseif (isset($item['link'])) {
             $val = $item['link'];
         }
+
         return $val;
     }
 
+    /**
+     * @param $item
+     * @return |null |null |null
+     */
     public function _get_item_pubdate($item)
     {
         $val = null;
@@ -1291,37 +1670,52 @@ class happy_linux_build_rss extends happy_linux_build_cache
         } elseif (isset($item['date_rfc822'])) {
             $val = $item['date_rfc822'];
         }
+
         return $val;
     }
 
+    /**
+     * @param $item
+     * @return string|null
+     */
     public function _get_item_georss_point($item)
     {
         $val = null;
         if (isset($item['georss_point']) && $item['georss_point']) {
             $val = $item['georss_point'];
-        } elseif (isset($item['geo_lat']) && ($item['geo_lat'] != '')
+        } elseif (isset($item['geo_lat']) && ('' != $item['geo_lat'])
                   && isset($item['geo_long'])
-                  && ($item['geo_long'] != '')
-        ) {
+                  && ('' != $item['geo_long'])) {
             $val = $item['geo_lat'] . ' ' . $item['geo_long'];
         }
+
         return $val;
     }
 
+    /**
+     * @param $item
+     * @return |null |null |null
+     */
     public function _get_item_media_group($item)
     {
         $val = null;
         if (isset($item['media_group']) && $item['media_group']) {
             $val = $item['media_group'];
         } elseif ((isset($item['media_content_url']) && $item['media_content_url'])
-                  || (isset($item['media_thumbnail_url']) && $item['media_thumbnail_url'])
-        ) {
+                  || (isset($item['media_thumbnail_url']) && $item['media_thumbnail_url'])) {
             $val = $this->_media_group_default;
         }
+
         return $val;
     }
 
-    public function _assign_channel(&$tpl, &$list, &$channel, $prefix = 'channel')
+    /**
+     * @param        $tpl
+     * @param        $list
+     * @param        $channel
+     * @param string $prefix
+     */
+    public function _assign_channel($tpl, $list, $channel, $prefix = 'channel')
     {
         foreach ($list as $name) {
             if (isset($channel[$name])) {
@@ -1331,7 +1725,12 @@ class happy_linux_build_rss extends happy_linux_build_cache
         }
     }
 
-    public function _assign_image(&$tpl, &$list, &$channel)
+    /**
+     * @param $tpl
+     * @param $list
+     * @param $channel
+     */
+    public function _assign_image($tpl, $list, $channel)
     {
         foreach ($list as $name) {
             $key = 'image_' . $name;
@@ -1341,21 +1740,34 @@ class happy_linux_build_rss extends happy_linux_build_cache
         }
     }
 
-    public function _assign_items(&$tpl, &$list, &$items, $tpl_key = 'items')
+    /**
+     * @param        $tpl
+     * @param        $list
+     * @param        $items
+     * @param string $tpl_key
+     */
+    public function _assign_items(&$tpl, $list, $items, $tpl_key = 'items')
     {
         foreach ($items as $item) {
             $tpl->append($tpl_key, $this->_utf8_item($tpl, $list, $item));
         }
     }
 
-    public function _utf8_item(&$tpl, &$list, &$item)
+    /**
+     * @param $tpl
+     * @param $list
+     * @param $item
+     * @return array
+     */
+    public function _utf8_item(&$tpl, $list, $item)
     {
-        $arr = array();
+        $arr = [];
         foreach ($list as $name) {
             if (isset($item[$name])) {
                 $arr[$name] = $this->_utf8($item[$name]);
             }
         }
+
         return $arr;
     }
 
@@ -1369,22 +1781,38 @@ class happy_linux_build_rss extends happy_linux_build_cache
         }
     }
 
+    /**
+     * @param $time
+     * @return false|string
+     */
     public function _date_rfc822($time)
     {
         return $this->_date->date_rfc822_user($time);
     }
 
+    /**
+     * @param $time
+     * @return string
+     */
     public function _date_iso8601($time)
     {
         return $this->_date->date_iso8601_user($time);
     }
 
     // for lower compatible: caller whatsnew
+
+    /**
+     * @param $time
+     * @return string
+     */
     public function _iso8601_date($time)
     {
         return $this->_date_iso8601($time);
     }
 
+    /**
+     * @return false|string
+     */
     public function get_default_site_year()
     {
         return $this->_date->date_year_user();
@@ -1393,6 +1821,10 @@ class happy_linux_build_rss extends happy_linux_build_cache
     //=========================================================
     // override into build_cache
     //=========================================================
+
+    /**
+     * @param $tpl
+     */
     public function _assign_cache(&$tpl)
     {
         $this->_init_rss();
@@ -1402,15 +1834,12 @@ class happy_linux_build_rss extends happy_linux_build_cache
             case 'rdf':
                 $this->_assign_rdf($tpl);
                 break;
-
             case 'atom':
                 $this->_assign_atom($tpl);
                 break;
-
             case 'rss':
                 $this->_assign_rss($tpl);
                 break;
-
             case 'other':
             default:
                 $this->_assign_other($tpl);
@@ -1418,32 +1847,37 @@ class happy_linux_build_rss extends happy_linux_build_cache
         }
     }
 
+    /**
+     * @return |null
+     */
     public function _get_template()
     {
         switch ($this->_MODE_BUILD) {
             case 'rdf':
                 $ret = $this->_TEMPLATE_RDF;
                 break;
-
             case 'atom':
                 $ret = $this->_TEMPLATE_ATOM;
                 break;
-
             case 'rss':
                 $ret = $this->_TEMPLATE_RSS;
                 break;
-
-            case 'other';
+            case 'other':
             default:
                 $ret = $this->_TEMPLATE_OTHER;
                 break;
         }
+
         return $ret;
     }
 
     //=========================================================
     // override for caller
     //=========================================================
+
+    /**
+     * @param $tpl
+     */
     public function _assign_other(&$tpl)
     {
         // dummy
@@ -1454,36 +1888,61 @@ class happy_linux_build_rss extends happy_linux_build_cache
         // dummy
     }
 
+    /**
+     * @return array
+     */
     public function &_get_channel()
     {
         return $this->_channel;
     }
 
+    /**
+     * @return array
+     */
     public function &_get_items()
     {
         return $this->_items;
     }
 
+    /**
+     * @param $item
+     * @return mixed
+     */
     public function &_build_common_item(&$item)
     {
         return $item;
     }
 
+    /**
+     * @param $item
+     * @return mixed
+     */
     public function &_build_rdf_item(&$item)
     {
-        $ret =& $this->_build_rdf_item_default($item);
+        $ret = &$this->_build_rdf_item_default($item);
+
         return $ret;
     }
 
+    /**
+     * @param $item
+     * @return mixed
+     */
     public function &_build_rss_item(&$item)
     {
-        $ret =& $this->_build_rss_item_default($item);
+        $ret = &$this->_build_rss_item_default($item);
+
         return $ret;
     }
 
+    /**
+     * @param $entry
+     * @return mixed
+     */
     public function &_build_atom_entry(&$entry)
     {
-        $ret =& $this->_build_atom_entry_default($entry);
+        $ret = &$this->_build_atom_entry_default($entry);
+
         return $ret;
     }
 

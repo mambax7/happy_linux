@@ -1,5 +1,6 @@
 <?php
-// $Id: search.php,v 1.1 2007/07/28 11:48:42 ohwada Exp $
+
+// $Id: search.php,v 1.1 2010/11/07 14:59:14 ohwada Exp $
 
 // 2006-10-15 K.OHWADA
 // _HAPPY_LINUX_SEARCH_GOOGLE

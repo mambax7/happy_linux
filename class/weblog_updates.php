@@ -1,5 +1,6 @@
 <?php
-// $Id: weblog_updates.php,v 1.4 2008/02/05 00:42:12 ohwada Exp $
+
+// $Id: weblog_updates.php,v 1.1 2010/11/07 14:59:22 ohwada Exp $
 
 // 2008-02-03 K.OHWADA
 // set_timeout_connect()
@@ -17,9 +18,12 @@
 // 2007-05-12 K.OHWADA
 //=========================================================
 
+/**
+ * Class happy_linux_weblog_updates
+ */
 class happy_linux_weblog_updates
 {
-    public $_HTTP_METHOD  = 'POST';
+    public $_HTTP_METHOD = 'POST';
     public $_CONTENT_TYPE = 'text/xml';
 
     // class
@@ -54,11 +58,14 @@ class happy_linux_weblog_updates
         $this->reset_debug();
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_weblog_updates();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
@@ -67,18 +74,22 @@ class happy_linux_weblog_updates
     //---------------------------------------------------------
     // main function
     //---------------------------------------------------------
+
+    /**
+     * @param $param
+     */
     public function send_pings_by_param($param)
     {
-        $site_name    = $param['site_name'];
-        $site_url     = $param['site_url'];
+        $site_name = $param['site_name'];
+        $site_url = $param['site_url'];
         $ping_servers = $param['ping_servers'];
 
         $print_level = isset($param['print_level']) ? (int)$param['print_level'] : 0;
-        $log_level   = isset($param['log_level']) ? (int)$param['log_level'] : 0;
-        $log_file    = isset($param['log_file']) ? $param['log_file'] : null;
+        $log_level = isset($param['log_level']) ? (int)$param['log_level'] : 0;
+        $log_file = isset($param['log_file']) ? $param['log_file'] : null;
 
         $timeout_connect = isset($param['timeout_connect']) ? (int)$param['timeout_connect'] : 0;
-        $timeout_read    = isset($param['timeout_read']) ? (int)$param['timeout_read'] : 0;
+        $timeout_read = isset($param['timeout_read']) ? (int)$param['timeout_read'] : 0;
 
         $flag_use_log = false;
 
@@ -86,11 +97,11 @@ class happy_linux_weblog_updates
 
         if (($log_level > 0) && $log_file) {
             $flag_use_log = true;
-            $fp           = fopen($log_file, 'a');
+            $fp = fopen($log_file, 'ab');
             fwrite($fp, "$today \n");
         }
 
-        $ping_arr = explode("\n", $ping_servers);
+        $ping_arr = split("\n", $ping_servers);
 
         $this->set_timeout_connect($timeout_connect);
         $this->set_timeout_read($timeout_read);
@@ -115,7 +126,7 @@ class happy_linux_weblog_updates
 
             if ($print_level >= 1) {
                 echo $msg;
-                echo "<br /><br />\n";
+                echo "<br><br>\n";
             }
 
             if ($flag_use_log) {
@@ -137,10 +148,15 @@ class happy_linux_weblog_updates
     // $name : my web site ( EUC-JP avalable )
     // $url  : my url
     //---------------------------------------------------------
+
+    /**
+     * @param $name
+     * @param $url
+     */
     public function set_blog_data($name, $url)
     {
         $this->blog_name = $name;
-        $this->blog_url  = $url;
+        $this->blog_url = $url;
     }
 
     //---------------------------------------------------------
@@ -148,34 +164,42 @@ class happy_linux_weblog_updates
     // $url  : server url
     // $code : return code
     //---------------------------------------------------------
+
+    /**
+     * @param $url
+     * @return bool
+     */
     public function send_ping($url)
     {
-        $this->url  = $url;
+        $this->url = $url;
         $this->code = 1;    // NG
 
         if (empty($url)) {
             $this->error = 'no server url';
+
             return false;
         }
 
         if (empty($this->blog_name)) {
             $this->error = 'no blog name';
+
             return false;
         }
 
         if (empty($this->blog_url)) {
             $this->error = 'no blog url';
+
             return false;
         }
 
         // make message
-        $payload      = $this->build_payload();
+        $payload = $this->build_payload();
         $payload_utf8 = happy_linux_convert_to_utf8($payload);
 
         // print message
         if ($this->flag_debug) {
-            $msg_url     = htmlspecialchars($url);
-            $msg_payload = htmlspecialchars($payload);
+            $msg_url = htmlspecialchars($url, ENT_QUOTES | ENT_HTML5);
+            $msg_payload = htmlspecialchars($payload, ENT_QUOTES | ENT_HTML5);
             echo '<pre>';
             echo "---SEND--- \n";
             echo $msg_url;
@@ -189,8 +213,8 @@ class happy_linux_weblog_updates
 
         // print message
         if ($this->flag_debug) {
-            $msg_code    = htmlspecialchars($this->response_code);
-            $msg_results = htmlspecialchars($this->results);
+            $msg_code = htmlspecialchars($this->response_code, ENT_QUOTES | ENT_HTML5);
+            $msg_results = htmlspecialchars($this->results, ENT_QUOTES | ENT_HTML5);
             print '<pre>';
             print "---RESPONSE--- \n";
             echo $msg_code;
@@ -200,7 +224,7 @@ class happy_linux_weblog_updates
         }
 
         if ($ret) {
-            list($this->code, $this->reason) = $this->parse_response($this->results);
+            [$this->code, $this->reason] = $this->parse_response($this->results);
         }
 
         return $ret;
@@ -209,16 +233,22 @@ class happy_linux_weblog_updates
     //---------------------------------------------------------
     //  snoopy class
     //---------------------------------------------------------
+
+    /**
+     * @param $url
+     * @param $payload
+     * @return bool
+     */
     public function http_request($url, $payload)
     {
-        $this->status        = 0;
-        $this->error         = '';
+        $this->status = 0;
+        $this->error = '';
         $this->response_code = '';
-        $this->results       = '';
+        $this->results = '';
 
-        $this->_snoopy->port          = 80;
-        $this->_snoopy->status        = 0;
-        $this->_snoopy->results       = '';
+        $this->_snoopy->port = 80;
+        $this->_snoopy->status = 0;
+        $this->_snoopy->results = '';
         $this->_snoopy->response_code = '';
 
         $URI_PARTS = parse_url($url);
@@ -226,6 +256,7 @@ class happy_linux_weblog_updates
             $this->_snoopy->host = $URI_PARTS['host'];
         } else {
             $this->error = 'no host in url';
+
             return false;
         }
         if (!empty($URI_PARTS['port'])) {
@@ -241,18 +272,21 @@ class happy_linux_weblog_updates
         $this->_snoopy->_disconnect($fp);
 
         if (!$ret) {
-            $this->status        = $this->_snoopy->status;
-            $this->error         = $this->_snoopy->error;
+            $this->status = $this->_snoopy->status;
+            $this->error = $this->_snoopy->error;
             $this->response_code = $this->_snoopy->response_code;
+
             return false;
-        } else {
-            $this->response_code = $this->_snoopy->response_code;
-            $this->results       = $this->_snoopy->results;
         }
+        $this->response_code = $this->_snoopy->response_code;
+        $this->results = $this->_snoopy->results;
 
         return true;
     }
 
+    /**
+     * @param $time
+     */
     public function set_timeout_connect($time)
     {
         if ((int)$time > 0) {
@@ -260,6 +294,9 @@ class happy_linux_weblog_updates
         }
     }
 
+    /**
+     * @param $time
+     */
     public function set_timeout_read($time)
     {
         if ((int)$time > 0) {
@@ -270,6 +307,10 @@ class happy_linux_weblog_updates
     //---------------------------------------------------------
     //  build_payload
     //---------------------------------------------------------
+
+    /**
+     * @return string
+     */
     public function build_payload()
     {
         $payload = <<<END_OF_TEXT
@@ -333,9 +374,14 @@ END_OF_TEXT;
     //   </fault>
     // </methodResponse>
     //---------------------------------------------------------
+
+    /**
+     * @param $response
+     * @return array
+     */
     public function parse_response($response)
     {
-        $error   = 1;
+        $error = 1;
         $message = 'no message';
 
         $member_arr = $this->parse_xml($response);
@@ -352,25 +398,30 @@ END_OF_TEXT;
         }
 
         if (isset($member_arr['flerror'])) {
-            $error   = $member_arr['flerror'];
+            $error = $member_arr['flerror'];
             $message = $member_arr['message'];
         } elseif (isset($member_arr['faultCode'])) {
-            $error   = $member_arr['faultCode'];
+            $error = $member_arr['faultCode'];
             $message = $member_arr['faultString'];
         }
 
-        return array($error, $message);
+        return [$error, $message];
     }
 
     //---------------------------------------------------------
     //   parse xml
     //---------------------------------------------------------
+
+    /**
+     * @param $xml
+     * @return array
+     */
     public function parse_xml($xml)
     {
         preg_match_all('/<member>(.*?)<\/member>/is', $xml, $match1);
         $arr = $match1[1];
 
-        $member_arr = array();
+        $member_arr = [];
 
         foreach ($arr as $member) {
             if (preg_match('/<name>(.*)<\/name>/is', $member, $match2)) {
@@ -405,19 +456,24 @@ END_OF_TEXT;
     // $list : result list
     // $msg  : result message
     //---------------------------------------------------------
+
+    /**
+     * @return string
+     */
     public function make_result()
     {
-        if ($this->code == 0) {
-            $msg = 'ping send - ' . $this->url . " - OK <br />\n";
+        if (0 == $this->code) {
+            $msg = 'ping send - ' . $this->url . " - OK <br>\n";
         } else {
-            $msg = '<span style="color:#ff0000;">ping send - ' . $this->url . " - NG </span><br />\n";
+            $msg = '<span style="color:#ff0000;">ping send - ' . $this->url . " - NG </span><br>\n";
             if ($this->error) {
-                $msg .= $this->error . "<br />\n";
+                $msg .= $this->error . "<br>\n";
             }
             if ($this->reason) {
-                $msg .= $this->reason . "<br />\n";
+                $msg .= $this->reason . "<br>\n";
             }
         }
+
         return $msg;
     }
 

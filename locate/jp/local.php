@@ -1,5 +1,6 @@
 <?php
-// $Id: local.php,v 1.3 2007/05/15 04:53:48 ohwada Exp $
+
+// $Id: local.php,v 1.1 2010/11/07 14:59:12 ohwada Exp $
 
 // 2007-05-12 K.OHWADA
 // get_ping_servers()
@@ -16,9 +17,12 @@
 // class happy_linux_locate_jp
 // Japan (JP)
 //=========================================================
+
+/**
+ * Class happy_linux_locate_jp
+ */
 class happy_linux_locate_jp extends happy_linux_locate_base
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -32,25 +36,28 @@ class happy_linux_locate_jp extends happy_linux_locate_base
             $gm_location = 'Akashi Muncipal Planetaruim: Akashi, Japan';
         }
 
-        $arr = array(
+        $arr = [
             'happy_linux_url' => 'http://linux.ohwada.jp/',
-            'country_code'    => 'jp',
-            'country_name'    => 'Japan',
-            'yahoo_url'       => 'http://www.yahoo.co.jp/',
-            'yahoo_map_url'   => 'http://map.yahoo.co.jp/',
-            'google_url'      => 'http://www.google.co.jp/',
-            'google_map_url'  => 'http://maps.google.co.jp/',
-            'gm_server'       => 'http://maps.google.co.jp/',
-            'gm_location'     => $gm_location,
-            'gm_latitude'     => '34.64933466571561',
-            'gm_longitude'    => '135.0',
-            'gm_zoom'         => '6',
-            'ping_servers'    => $this->get_ping_servers(),
-        );
+            'country_code' => 'jp',
+            'country_name' => 'Japan',
+            'yahoo_url' => 'http://www.yahoo.co.jp/',
+            'yahoo_map_url' => 'http://map.yahoo.co.jp/',
+            'google_url' => 'http://www.google.co.jp/',
+            'google_map_url' => 'http://maps.google.co.jp/',
+            'gm_server' => 'http://maps.google.co.jp/',
+            'gm_location' => $gm_location,
+            'gm_latitude' => '34.64933466571561',
+            'gm_longitude' => '135.0',
+            'gm_zoom' => '6',
+            'ping_servers' => $this->get_ping_servers(),
+        ];
 
         $this->array_merge($arr);
     }
 
+    /**
+     * @return string
+     */
     public function get_ping_servers()
     {
         // remove cocolog-nifty, becuase service is over

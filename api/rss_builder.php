@@ -1,5 +1,6 @@
 <?php
-// $Id: rss_builder.php,v 1.6 2008/01/18 13:10:01 ohwada Exp $
+
+// $Id: rss_builder.php,v 1.1 2010/11/07 14:59:13 ohwada Exp $
 
 // 2007-11-11 K.OHWADA
 // build_cache.php date.php

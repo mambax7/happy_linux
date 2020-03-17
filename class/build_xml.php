@@ -1,5 +1,6 @@
 <?php
-// $Id: build_xml.php,v 1.1 2008/02/26 15:35:42 ohwada Exp $
+
+// $Id: build_xml.php,v 1.1 2010/11/07 14:59:22 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
@@ -14,11 +15,15 @@
 //=========================================================
 // class happy_linux_xml_base
 //=========================================================
+
+/**
+ * Class happy_linux_xml_base
+ */
 class happy_linux_xml_base
 {
     // replace control code
     public $_FLAG_REPLACE_CONTROL_CODE = true;
-    public $_REPLACE_CHAR              = ' ';  // space
+    public $_REPLACE_CHAR = ' ';    // space
 
     //---------------------------------------------------------
     // constructor
@@ -28,12 +33,16 @@ class happy_linux_xml_base
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_xml_base();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
@@ -41,44 +50,74 @@ class happy_linux_xml_base
     // htmlspecialchars
     // http://www.w3.org/TR/REC-xml/#dt-markup
     // http://www.fxis.co.jp/xmlcafe/tmp/rec-xml.html#dt-markup
-    //   &  -> &amp;    // without html entity
+    //   &  -> &amp;	// without html entity
     //   <  -> &lt;
     //   >  -> &gt;
     //   "  -> &quot;
     //   '  -> &apos;
     // --------------------------------------------------------
+
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function xml_text($str)
     {
         return $this->xml_htmlspecialchars_strict($str);
     }
 
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function xml_url($str)
     {
         return $this->xml_htmlspecialchars_url($str);
     }
 
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function xml_htmlspecialchars($str)
     {
-        $str = htmlspecialchars($str);
+        $str = htmlspecialchars($str, ENT_QUOTES | ENT_HTML5);
         $str = preg_replace("/'/", '&apos;', $str);
+
         return $str;
     }
 
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function xml_htmlspecialchars_strict($str)
     {
         $str = $this->xml_strip_html_entity_char($str);
         $str = $this->xml_htmlspecialchars($str);
+
         return $str;
     }
 
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function xml_htmlspecialchars_url($str)
     {
         $str = preg_replace('/&amp;/sU', '&', $str);
         $str = $this->xml_strip_html_entity_char($str);
         $str = $this->xml_htmlspecialchars($str);
+
         return $str;
     }
 
+    /**
+     * @param      $str
+     * @param bool $flag_control
+     * @param bool $flag_undo
+     * @return string|string[]|null
+     */
     public function xml_cdata($str, $flag_control = true, $flag_undo = true)
     {
         if ($flag_control) {
@@ -95,6 +134,10 @@ class happy_linux_xml_base
         return $str;
     }
 
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function xml_convert_cdata($str)
     {
         return preg_replace('/]]>/', ']]&gt;', $str);
@@ -109,6 +152,11 @@ class happy_linux_xml_base
     //   &amp;  -> &
     //   &amp;nbsp; -> &nbsp;
     // --------------------------------------------------------
+
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function xml_undo_html_special_chars($str)
     {
         $str = preg_replace('/&gt;/i', '>', $str);
@@ -116,6 +164,7 @@ class happy_linux_xml_base
         $str = preg_replace('/&quot;/i', '"', $str);
         $str = preg_replace('/&#039;/i', "'", $str);
         $str = preg_replace('/&amp;nbsp;/i', '&nbsp;', $str);
+
         return $str;
     }
 
@@ -123,6 +172,11 @@ class happy_linux_xml_base
     // undo html entities
     //   &amp;abc;  -> &abc;
     // --------------------------------------------------------
+
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function xml_undo_html_entity_char($str)
     {
         return preg_replace('/&amp;([0-9a-zA-z]+);/sU', '&\\1;', $str);
@@ -132,6 +186,11 @@ class happy_linux_xml_base
     // undo html entities
     //   &amp;#123; -> &#123;
     // --------------------------------------------------------
+
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function xml_undo_html_entity_numeric($str)
     {
         return preg_replace('/&amp;#([0-9a-fA-F]+);/sU', '&#\\1;', $str);
@@ -141,6 +200,11 @@ class happy_linux_xml_base
     // strip html entities
     //   &abc; -> ' '
     // --------------------------------------------------------
+
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function xml_strip_html_entity_char($str)
     {
         return preg_replace('/&[0-9a-zA-z]+;/sU', ' ', $str);
@@ -150,6 +214,11 @@ class happy_linux_xml_base
     // strip html entities
     //   &#123; -> ' '
     // --------------------------------------------------------
+
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function xml_strip_html_entity_numeric($str)
     {
         return preg_replace('/&amp;#([0-9a-fA-F]+);/sU', '&#\\1;', $str);
@@ -158,32 +227,49 @@ class happy_linux_xml_base
     //-----------------------------------------------
     // convert to utf
     //-----------------------------------------------
+
+    /**
+     * @param $str
+     * @return string|string[]|null
+     */
     public function xml_utf8($str)
     {
         $str = happy_linux_convert_to_utf8($str, _CHARSET);
         if ($this->_FLAG_REPLACE_CONTROL_CODE) {
             $str = happy_linux_str_replace_control_code($str, $this->_REPLACE_CHAR);
         }
+
         return $str;
     }
 
     //--------------------------------------------------------
     // xoops param
     //--------------------------------------------------------
+
+    /**
+     * @return mixed
+     */
     public function get_xoops_sitename()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['sitename'];
     }
 
+    /**
+     * @param        $dirname
+     * @param string $format
+     * @return bool
+     */
     public function get_xoops_module_name($dirname, $format = 'n')
     {
-        $name           = false;
+        $name = false;
         $module_handler = xoops_getHandler('module');
-        $obj            = $module_handler->getByDirname($dirname);
+        $obj = $module_handler->getByDirname($dirname);
         if (is_object($obj)) {
             $name = $obj->getVar('name', $format);
         }
+
         return $name;
     }
 
@@ -193,9 +279,13 @@ class happy_linux_xml_base
 //=========================================================
 // class happy_linux_xml_single_object
 //=========================================================
+
+/**
+ * Class happy_linux_xml_single_object
+ */
 class happy_linux_xml_single_object extends happy_linux_xml_base
 {
-    public $_vars    = array();
+    public $_vars = [];
     public $_TPL_KEY = 'single';
 
     //---------------------------------------------------------
@@ -211,9 +301,12 @@ class happy_linux_xml_single_object extends happy_linux_xml_base
     //---------------------------------------------------------
     public function clear_vars()
     {
-        $this->_vars = array();
+        $this->_vars = [];
     }
 
+    /**
+     * @param $val
+     */
     public function set_vars($val)
     {
         if (is_array($val) && count($val)) {
@@ -221,30 +314,48 @@ class happy_linux_xml_single_object extends happy_linux_xml_base
         }
     }
 
+    /**
+     * @return array
+     */
     public function get_vars()
     {
         return $this->_vars;
     }
 
+    /**
+     * @param $key
+     * @param $val
+     */
     public function set($key, $val)
     {
         $this->_vars[$key] = $val;
     }
 
+    /**
+     * @param $key
+     * @return bool|mixed
+     */
     public function get($key)
     {
         $ret = false;
         if (isset($this->_vars[$key])) {
-            $ret =& $this->_vars[$key];
+            $ret = &$this->_vars[$key];
         }
+
         return $ret;
     }
 
+    /**
+     * @param $val
+     */
     public function set_tpl_key($val)
     {
         $this->_TPL_KEY = $val;
     }
 
+    /**
+     * @return string
+     */
     public function get_tpl_key()
     {
         return $this->_TPL_KEY;
@@ -255,26 +366,35 @@ class happy_linux_xml_single_object extends happy_linux_xml_base
     //---------------------------------------------------------
     public function build()
     {
-        $arr  = array();
+        $arr = [];
         $vars = $this->get_vars();
         if (is_array($vars) && count($vars)) {
             $this->set_vars($this->_build($vars));
         }
     }
 
-    public function _build(&$arr)
+    /**
+     * @param $arr
+     * @return array
+     */
+    public function _build($arr)
     {
         return $this->_build_text($arr);
     }
 
-    public function _build_text(&$arr)
+    /**
+     * @param $arr
+     * @return array
+     */
+    public function _build_text($arr)
     {
-        $ret = array();
+        $ret = [];
         foreach ($arr as $k => $v) {
             if (!is_array($v)) {
                 $ret[$k] = $this->xml_text($v);
             }
         }
+
         return $ret;
     }
 
@@ -283,43 +403,65 @@ class happy_linux_xml_single_object extends happy_linux_xml_base
     //---------------------------------------------------------
     public function to_utf8()
     {
-        $arr  = array();
+        $arr = [];
         $vars = $this->get_vars();
         if (is_array($vars) && count($vars)) {
             $this->set_vars($this->_to_utf8($vars));
         }
     }
 
-    public function _to_utf8(&$arr)
+    /**
+     * @param $arr
+     * @return array
+     */
+    public function _to_utf8($arr)
     {
-        $ret = array();
+        $ret = [];
         foreach ($arr as $k => $v) {
             if (!is_array($v)) {
                 $ret[$k] = $this->xml_utf8($v);
             }
         }
+
         return $ret;
     }
 
     //---------------------------------------------------------
     // assign
     //---------------------------------------------------------
-    public function assign(&$tpl)
+
+    /**
+     * @param $tpl
+     */
+    public function assign($tpl)
     {
         $this->_assign($tpl, $this->_TPL_KEY, $this->get_vars());
     }
 
-    public function append(&$tpl)
+    /**
+     * @param $tpl
+     */
+    public function append($tpl)
     {
         $this->_append($tpl, $this->_TPL_KEY, $this->get_vars());
     }
 
-    public function _assign(&$tpl, $key, $val)
+    /**
+     * @param $tpl
+     * @param $key
+     * @param $val
+     */
+    public function _assign($tpl, $key, $val)
     {
         $tpl->assign($key, $val);
     }
 
-    public function _append(&$tpl, $key, $val)
+    /**
+     * @param $tpl
+     * @param $key
+     * @param $val
+     */
+    public function _append($tpl, $key, $val)
     {
         $tpl->append($key, $val);
     }
@@ -330,6 +472,10 @@ class happy_linux_xml_single_object extends happy_linux_xml_base
 //=========================================================
 // class happy_linux_xml_iterate_object
 //=========================================================
+
+/**
+ * Class happy_linux_xml_iterate_object
+ */
 class happy_linux_xml_iterate_object extends happy_linux_xml_single_object
 {
     public $_TPL_KEY = 'iterate';
@@ -349,7 +495,7 @@ class happy_linux_xml_iterate_object extends happy_linux_xml_single_object
     {
         $vars = $this->get_vars();
         if (is_array($vars) && count($vars)) {
-            $arr = array();
+            $arr = [];
             foreach ($vars as $var) {
                 $arr[] = $this->_build($var);
             }
@@ -364,7 +510,7 @@ class happy_linux_xml_iterate_object extends happy_linux_xml_single_object
     {
         $vars = $this->get_vars();
         if (is_array($vars) && count($vars)) {
-            $arr = array();
+            $arr = [];
             foreach ($vars as $var) {
                 $arr[] = $this->_to_utf8($var);
             }
@@ -375,10 +521,14 @@ class happy_linux_xml_iterate_object extends happy_linux_xml_single_object
     //---------------------------------------------------------
     // append
     //---------------------------------------------------------
-    public function append_iterate(&$tpl)
+
+    /**
+     * @param $tpl
+     */
+    public function append_iterate($tpl)
     {
         $tpl_key = $this->get_tpl_key();
-        $vars    = $this->get_vars();
+        $vars = $this->get_vars();
 
         if (is_array($vars) && count($vars)) {
             foreach ($vars as $var) {
@@ -393,22 +543,26 @@ class happy_linux_xml_iterate_object extends happy_linux_xml_single_object
 //=========================================================
 // class happy_linux_build_xml
 //=========================================================
+
+/**
+ * Class happy_linux_build_xml
+ */
 class happy_linux_build_xml extends happy_linux_xml_base
 {
     public $_CONTENT_TYPE_HTML = 'Content-Type:text/html; charset=utf-8';
-    public $_CONTENT_TYPE_XML  = 'Content-Type:text/xml;  charset=utf-8';
+    public $_CONTENT_TYPE_XML = 'Content-Type:text/xml;  charset=utf-8';
 
     // override
     public $_TEMPLATE_XML = null;
 
     // set param
-    public $_view_title      = 'View XML';
+    public $_view_title = 'View XML';
     public $_view_goto_title = 'goto index';
-    public $_view_goto_url   = null;
+    public $_view_goto_url = null;
 
-    //  object ( dummy )
-    //  var $_obj_single  = null;
-    //  var $_obj_iterate = null;
+    //	object ( dummy )
+    //	var $_obj_single  = null;
+    //	var $_obj_iterate = null;
 
     //---------------------------------------------------------
     // constructor
@@ -418,12 +572,16 @@ class happy_linux_build_xml extends happy_linux_xml_base
         parent::__construct();
     }
 
+    /**
+     * @return \happy_linux_build_xml|static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_build_xml();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
@@ -446,7 +604,7 @@ class happy_linux_build_xml extends happy_linux_xml_base
 
         $template = $this->_get_template();
         if ($template) {
-            $xml  = $this->_build_template($template);
+            $xml = $this->_build_template($template);
             $body = htmlspecialchars($xml, ENT_QUOTES);
         } else {
             $body = $this->build_highlight('No Template');
@@ -457,11 +615,16 @@ class happy_linux_build_xml extends happy_linux_xml_base
         echo '<pre>';
         echo $body;
         echo '</pre>';
-        echo "<br />\n";
+        echo "<br>\n";
 
         echo $this->build_html_footer();
     }
 
+    /**
+     * @param null $title
+     * @param bool $flag
+     * @return string
+     */
     public function build_html_header($title = null, $flag = true)
     {
         if (empty($title)) {
@@ -475,13 +638,16 @@ class happy_linux_build_xml extends happy_linux_xml_base
         $text .= '<body>' . "\n";
         $text .= '<h3>' . $title . '</h3>' . "\n";
         if ($flag) {
-            $text .= 'This is debug mode <br /><br />' . "\n";
+            $text .= 'This is debug mode <br><br>' . "\n";
         }
         $text .= '<hr />' . "\n";
 
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_html_footer()
     {
         $lang_close = $this->xml_utf8(_CLOSE);
@@ -494,7 +660,7 @@ class happy_linux_build_xml extends happy_linux_xml_base
 
         $text = '<hr />' . "\n";
         $text .= $goto;
-        $text .= '<br />' . "\n";
+        $text .= '<br>' . "\n";
         $text .= '<div style="text-align:center;">' . "\n";
         $text .= '<input value="' . $lang_close . '" type="button" onclick="javascript:window.close();" />' . "\n";
         $text .= '</div>' . "\n";
@@ -503,35 +669,56 @@ class happy_linux_build_xml extends happy_linux_xml_base
         return $text;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function build_highlight($str)
     {
-        $text = '<span style="color: #ff0000;">' . $str . '</span><br />' . "\n";
+        $text = '<span style="color: #ff0000;">' . $str . '</span><br>' . "\n";
+
         return $text;
     }
 
     // --------------------------------------------------------
     // set param
     // --------------------------------------------------------
+
+    /**
+     * @param $val
+     */
     public function set_template($val)
     {
         $this->set_template_xml($val);
     }
 
+    /**
+     * @param $val
+     */
     public function set_template_xml($val)
     {
         $this->_TEMPLATE_XML = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_view_title($val)
     {
         $this->_view_title = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_view_goto_title($val)
     {
         $this->_view_goto_title = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_view_goto_url($val)
     {
         $this->_view_goto_url = $val;
@@ -540,11 +727,18 @@ class happy_linux_build_xml extends happy_linux_xml_base
     //=========================================================
     // private
     //=========================================================
+
+    /**
+     * @return |null
+     */
     public function _get_template()
     {
         return $this->_get_template_xml();
     }
 
+    /**
+     * @return |null
+     */
     public function _get_template_xml()
     {
         return $this->_TEMPLATE_XML;
@@ -555,34 +749,43 @@ class happy_linux_build_xml extends happy_linux_xml_base
     //=========================================================
     public function _init_obj()
     {
-        //  dummy
-        //  $this->_obj_single  = new happy_linux_xml_single_object();
-        //  $this->_obj_iterate = new happy_linux_xml_iterate_object();
+        //	dummy
+        //	$this->_obj_single  = new happy_linux_xml_single_object();
+        //	$this->_obj_iterate = new happy_linux_xml_iterate_object();
     }
 
+    /**
+     * @param $val
+     */
     public function _set_single($val)
     {
-        //  dummy
-        //  $this->_obj_single->set_vars( $val );
+        //	dummy
+        //	$this->_obj_single->set_vars( $val );
     }
 
+    /**
+     * @param $val
+     */
     public function _set_iterate($val)
     {
-        //  dummy
-        //  $this->_obj_iterate->set_vars( $val );
+        //	dummy
+        //	$this->_obj_iterate->set_vars( $val );
     }
 
+    /**
+     * @param $template
+     */
     public function _build_template($template)
     {
-        //  dummy
-        //  $this->_obj_single->build();
-        //  $this->_obj_single->to_utf8();
-        //  $this->_obj_iterate->build_iterate();
-        //  $this->_obj_iterate->to_utf8_iterate();
-        //  $tpl = new XoopsTpl();
-        //  $this->_obj_single->assign( $tpl );
-        //  $this->_obj_iterate->append_iterate( $tpl );
-        //  return $tpl->fetch( $template );
+        //	dummy
+        //	$this->_obj_single->build();
+        //	$this->_obj_single->to_utf8();
+        //	$this->_obj_iterate->build_iterate();
+        //	$this->_obj_iterate->to_utf8_iterate();
+        //	$tpl = new XoopsTpl();
+        //	$this->_obj_single->assign( $tpl );
+        //	$this->_obj_iterate->append_iterate( $tpl );
+        //	return $tpl->fetch( $template );
     }
 
     // --- class end ---

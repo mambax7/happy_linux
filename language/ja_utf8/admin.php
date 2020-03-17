@@ -1,5 +1,6 @@
 <?php
-// $Id: admin.php,v 1.3 2007/11/12 12:28:49 ohwada Exp $
+
+// $Id: admin.php,v 1.1 2010/11/07 14:59:14 ohwada Exp $
 
 // 2007-11-01
 // _HAPPY_LINUX_AM_MODULE
@@ -44,4 +45,4 @@ define('_HAPPY_LINUX_AM_SERVER_ENV', 'サーバー環境変数');
 define('_HAPPY_LINUX_AM_DIR_NOT_WRITABLE', 'このディレクトリは書込み許可がない');
 define('_HAPPY_LINUX_AM_MEMORY_LIMIT_TOO_SMALL', 'memory_limit が少ない');
 define('_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'Weblinks モジュールを実行するには あと %s MB 必要です');
-define('_HAPPY_LINUX_AM_MEMORY_DESC', 'この数値はひとつの目安です。<br />サーバー環境によっては、もっと多い場合も、もっと少ない場合もあります。');
+define('_HAPPY_LINUX_AM_MEMORY_DESC', 'この数値はひとつの目安です。<br>サーバー環境によっては、もっと多い場合も、もっと少ない場合もあります。');

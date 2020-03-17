@@ -1,5 +1,6 @@
 <?php
-// $Id: search.php,v 1.10 2007/07/04 10:53:22 ohwada Exp $
+
+// $Id: search.php,v 1.1 2010/11/07 14:59:18 ohwada Exp $
 
 // 2007-06-23 K.OHWADA
 // add default in get_post_get_action()
@@ -40,6 +41,10 @@ define('HAPPY_LINUX_SEARCH_HANKAKU_KANA', '/\x8E[\xA6-\xDF]/');
 //=========================================================
 // class happy_linux_search
 //=========================================================
+
+/**
+ * Class happy_linux_search
+ */
 class happy_linux_search
 {
     // class
@@ -58,8 +63,8 @@ class happy_linux_search
     public $_post_showcontext;
 
     // input param
-    public $_min_keyword         = 5;
-    public $_flag_cabdicate      = true;
+    public $_min_keyword = 5;
+    public $_flag_cabdicate = true;
     public $_flag_cabdicate_once = false;
 
     // result
@@ -93,15 +98,18 @@ class happy_linux_search
     public function __construct()
     {
         $this->_strings = happy_linux_strings::getInstance();
-        $this->_post    = happy_linux_post::getInstance();
-        $this->_system  = happy_linux_system::getInstance();
+        $this->_post = happy_linux_post::getInstance();
+        $this->_system = happy_linux_system::getInstance();
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_search();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
@@ -110,92 +118,141 @@ class happy_linux_search
     //---------------------------------------------------------
     // get $_POST & $_GET
     //---------------------------------------------------------
+
+    /**
+     * @param string $default
+     * @return string|string[]|null
+     */
     public function get_post_get_action($default = 'search')
     {
         $action = $this->_post->get_post_get_text('action');
 
         switch ($action) {
-            case 'search';
+            case 'search':
             case 'results':
             case 'showall':
             case 'showallbyuser':
                 $ret = $action;
                 break;
-
             default:
                 $ret = $default;
                 break;
         }
 
         $this->_post_action = $ret;
+
         return $ret;
     }
 
+    /**
+     * @param string $default
+     * @return string|string[]|null
+     */
     public function get_post_get_andor($default = 'AND')
     {
         $andor = $this->_post->get_post_get_text('andor');
 
         switch ($andor) {
-            case 'AND';
-            case 'OR';
-            case 'exact';
+            case 'AND':
+            case 'OR':
+            case 'exact':
                 $ret = $andor;
                 break;
-
             default:
                 $ret = $default;
                 break;
         }
 
         $this->_post_andor = $ret;
+
         return $ret;
     }
 
+    /**
+     * @return string
+     */
     public function get_post_get_query()
     {
         $this->_post_query = trim($this->_post->get_post_get_text('query'));
+
         return $this->_post_query;
     }
 
+    /**
+     * @return int
+     */
     public function get_post_get_uid()
     {
         $this->_post_uid = $this->_post->get_post_get_int('uid');
+
         return $this->_post_uid;
     }
 
+    /**
+     * @return int
+     */
     public function get_post_get_mid()
     {
         $this->_post_mid = $this->_post->get_post_get_int('mid');
+
         return $this->_post_mid;
     }
 
+    /**
+     * @return int
+     */
     public function get_post_get_start()
     {
         $this->_post_start = $this->_post->get_post_get_int('start');
+
         return $this->_post_start;
     }
 
+    /**
+     * @return array|bool|null
+     */
     public function get_post_get_mids()
     {
         $this->_post_mids = $this->_post->get_post_get_array_int('mids');
+
         return $this->_post_mids;
     }
 
+    /**
+     * @param int $default
+     * @return int
+     */
     public function get_post_get_showcontext($default = 1)
     {
         $this->_post_showcontext = $this->_post->get_post_get_int('showcontext', $default);
+
         return $this->_post_showcontext;
     }
 
     //--------------------------------------------------------
     // parse query
     //--------------------------------------------------------
+
+    /**
+     * @return bool
+     */
     public function parse_query_default()
     {
-        $ret = $this->parse_query($this->_post_query, $this->_post_andor, false);
+        $ret = $this->parse_query(
+            $this->_post_query,
+            $this->_post_andor,
+            false
+        );
+
         return $ret;
     }
 
+    /**
+     * @param string $query
+     * @param string $andor
+     * @param bool   $gpc
+     * @return bool
+     */
     public function parse_query($query = '', $andor = '', $gpc = true)
     {
         if ($query && $gpc) {
@@ -208,35 +265,35 @@ class happy_linux_search
             $andor = $this->_post_andor;
         }
 
-        $this->_query                   = $query;
-        $this->_query_array             = array();
-        $this->_ignore_array            = array();
-        $this->_candidate_array         = array();
-        $this->_candidate_keyword_array = array();
-        $this->_merged_query_array      = array();
-        $this->_mode_andor              = '';
-        $this->_sel_and                 = '';
-        $this->_sel_or                  = '';
-        $this->_sel_exact               = '';
+        $this->_query = $query;
+        $this->_query_array = [];
+        $this->_ignore_array = [];
+        $this->_candidate_array = [];
+        $this->_candidate_keyword_array = [];
+        $this->_merged_query_array = [];
+        $this->_mode_andor = '';
+        $this->_sel_and = '';
+        $this->_sel_or = '';
+        $this->_sel_exact = '';
 
         $this->_is_japanese = $this->_system->is_japanese();
 
-        if ($query == '') {
+        if ('' == $query) {
             return false;
         }
 
-        if (($andor != 'OR') && ($andor != 'exact') && ($andor != 'AND')) {
+        if (('OR' != $andor) && ('exact' != $andor) && ('AND' != $andor)) {
             $andor = 'AND';
         }
 
-        if ($andor != 'exact') {
-            $query_han      = $this->_convert_space_zen_to_han($query);
+        if ('exact' != $andor) {
+            $query_han = $this->_convert_space_zen_to_han($query);
             $query_temp_arr = preg_split('/[\s,]+/', $query_han);
 
             foreach ($query_temp_arr as $q) {
                 $q = trim($q);
 
-                if (strlen($q) >= $this->_min_keyword) {
+                if (mb_strlen($q) >= $this->_min_keyword) {
                     $this->_query_array[] = $q;
                     $this->_build_candidate($q);
                 } else {
@@ -244,19 +301,19 @@ class happy_linux_search
                 }
             }
 
-            if ($andor == 'OR') {
+            if ('OR' == $andor) {
                 $this->_sel_or = 'selected';
             } else {
                 $this->_sel_and = 'selected';
             }
         } else {
-            $this->_query_array = array($query);
-            $this->_sel_exact   = 'selected';
+            $this->_query_array = [$query];
+            $this->_sel_exact = 'selected';
         }
 
         $this->_mode_andor = $andor;
 
-        if (count($this->_query_array) == 0) {
+        if (0 == count($this->_query_array)) {
             return false;
         }
 
@@ -268,6 +325,13 @@ class happy_linux_search
     //--------------------------------------------------------
     // build query
     //--------------------------------------------------------
+
+    /**
+     * @param string $query_array
+     * @param string $candidate_keyword_array
+     * @param string $andor
+     * @return int
+     */
     public function check_build_sql_query_array($query_array = '', $candidate_keyword_array = '', $andor = '')
     {
         if (empty($candidate_keyword_array)) {
@@ -282,32 +346,47 @@ class happy_linux_search
             $andor = $this->_mode_andor;
         }
 
-        $this->_sql_andor       = $andor;
+        $this->_sql_andor = $andor;
         $this->_sql_query_array = $query_array;
 
         if (is_array($candidate_keyword_array) && (count($candidate_keyword_array) > 0)) {
-            if ((count($query_array) == 1) || ($andor == 'OR')) {
+            if ((1 == count($query_array)) || ('OR' == $andor)) {
                 $this->_build_sql_query_array($candidate_keyword_array, $query_array, $andor);
+
                 return HAPPY_LINUX_SEARCH_CODE_SQL_MERGE;
-            } else {
-                return HAPPY_LINUX_SEARCH_CODE_SQL_CAN;
             }
+
+            return HAPPY_LINUX_SEARCH_CODE_SQL_CAN;
         }
+
         return HAPPY_LINUX_SEARCH_CODE_SQL_NO_CAN;
     }
 
+    /**
+     * @param $query_array
+     * @param $candidate_keyword_array
+     * @param $andor
+     */
     public function _build_sql_query_array($query_array, $candidate_keyword_array, $andor)
     {
-        $this->_sql_andor       = 'OR';
+        $this->_sql_andor = 'OR';
         $this->_sql_query_array = $this->_strings->merge_unique_array($query_array, $candidate_keyword_array);
     }
 
     //--------------------------------------------------------
     // build sql
     //--------------------------------------------------------
+
+    /**
+     * @param        $field_name
+     * @param        $query_array1
+     * @param null   $query_array2
+     * @param string $andor
+     * @return string
+     */
     public function build_single_double_where($field_name, $query_array1, $query_array2 = null, $andor = 'AND')
     {
-        $where  = '';
+        $where = '';
         $where1 = '';
         $where2 = '';
 
@@ -330,10 +409,16 @@ class happy_linux_search
         return $where;
     }
 
+    /**
+     * @param        $field_name_array
+     * @param        $query_array
+     * @param string $andor
+     * @return string
+     */
     public function build_multi_where($field_name_array, $query_array, $andor = 'AND')
     {
         $where = '';
-        $arr   = array();
+        $arr = [];
 
         if (is_array($field_name_array) && (count($field_name_array) > 0)) {
             foreach ($field_name_array as $name) {
@@ -350,6 +435,12 @@ class happy_linux_search
         return $where;
     }
 
+    /**
+     * @param        $field_name
+     * @param        $query_array
+     * @param string $andor
+     * @return string
+     */
     public function build_single_where($field_name, $query_array, $andor = 'AND')
     {
         $where = '';
@@ -361,7 +452,7 @@ class happy_linux_search
                 $q = addslashes($query_array[0]);
                 $where .= ' ( ' . $field_name . " LIKE '%" . $q . "%' ";
 
-                for ($i = 1; $i < $count; ++$i) {
+                for ($i = 1; $i < $count; $i++) {
                     $q = addslashes($query_array[$i]);
                     $where .= $andor . ' ';
                     $where .= $field_name . " LIKE '%" . $q . "%' ";
@@ -377,26 +468,42 @@ class happy_linux_search
     //--------------------------------------------------------
     // set param
     //--------------------------------------------------------
+
+    /**
+     * @param $value
+     */
     public function set_min_keyword($value)
     {
         $this->_min_keyword = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_cabdicate($value)
     {
         $this->_flag_cabdicate = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_cabdicate_once($value)
     {
         $this->_flag_cabdicate_once = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_lang_zenkaku($value)
     {
         $this->_LANG_ZENKAKU = $value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_lang_hankaku($value)
     {
         $this->_LANG_HANKAKU = $value;
@@ -405,46 +512,77 @@ class happy_linux_search
     //--------------------------------------------------------
     // get query
     //--------------------------------------------------------
+
+    /**
+     * @param null $format
+     * @return string
+     */
     public function get_query($format = null)
     {
         $ret = $this->_post_query;
-        if ($format == 's') {
+        if ('s' == $format) {
             $ret = htmlspecialchars($ret, ENT_QUOTES);
         }
+
         return $ret;
     }
 
+    /**
+     * @param string $glue
+     * @param string $format
+     * @return bool|string
+     */
     public function get_query_for_form($glue = ' ', $format = 's')
     {
         $ret = $this->implode_query_array($this->_query_array, $glue, $format);
+
         return $ret;
     }
 
+    /**
+     * @param string $glue
+     * @param null   $format
+     * @return bool|string
+     */
     public function get_query_for_google($glue = '+', $format = null)
     {
         $ret = $this->implode_query_array($this->_query_array, $glue, $format);
+
         return $ret;
     }
 
+    /**
+     * @return bool|string
+     */
     public function get_query_urlencode()
     {
         $ret = $this->urlencode_implode_array($this->_query_array);
+
         return $ret;
     }
 
+    /**
+     * @return bool|string
+     */
     public function get_query_utf8_urlencode()
     {
         $ret = $this->urlencode_utf8_implode_array($this->_query_array);
+
         return $ret;
     }
 
+    /**
+     * @param string $format
+     * @return array|bool|string|string[]|null
+     */
     public function &get_query_array($format = 's')
     {
         if ($format) {
-            $arr =& $this->_strings->sanitize_array_text($this->_query_array);
+            $arr = &$this->_strings->sanitize_array_text($this->_query_array);
         } else {
-            $arr =& $this->_query_array;
+            $arr = &$this->_query_array;
         }
+
         return $arr;
     }
 
@@ -453,32 +591,57 @@ class happy_linux_search
         return $this->_merged_query_array;
     }
 
+    /**
+     * @return bool|string
+     */
     public function get_merged_urlencode()
     {
         $ret = $this->urlencode_implode_array($this->_merged_query_array);
+
         return $ret;
     }
 
+    /**
+     * @return bool|string
+     */
     public function get_merged_utf8_urlencode()
     {
         $ret = $this->urlencode_utf8_implode_array($this->_merged_query_array);
+
         return $ret;
     }
 
+    /**
+     * @param        $arr
+     * @param string $glue
+     * @param null   $format
+     * @return bool|string
+     */
     public function implode_query_array($arr, $glue = ' ', $format = null)
     {
         $ret = $this->_strings->implode_array($glue, $arr);
-        if ($format == 's') {
+        if ('s' == $format) {
             $ret = htmlspecialchars($ret, ENT_QUOTES);
         }
+
         return $ret;
     }
 
+    /**
+     * @param        $arr
+     * @param string $glue
+     * @return bool|string
+     */
     public function urlencode_implode_array($arr, $glue = ' ')
     {
         return $this->_strings->urlencode_from_array($arr, $glue);
     }
 
+    /**
+     * @param        $arr
+     * @param string $glue
+     * @return bool|string
+     */
     public function urlencode_utf8_implode_array($arr, $glue = ' ')
     {
         return $this->_strings->utf8_urlencode_from_array($arr, $glue);
@@ -487,15 +650,24 @@ class happy_linux_search
     //--------------------------------------------------------
     // get param
     //--------------------------------------------------------
+
+    /**
+     * @param null $format
+     * @return string
+     */
     public function get_action($format = null)
     {
         $ret = $this->_post_action;
-        if ($format == 's') {
+        if ('s' == $format) {
             $ret = htmlspecialchars($ret, ENT_QUOTES);
         }
+
         return $ret;
     }
 
+    /**
+     * @return int
+     */
     public function get_start()
     {
         return (int)$this->_post_start;
@@ -521,53 +693,76 @@ class happy_linux_search
         return $this->_sel_exact;
     }
 
+    /**
+     * @param string $format
+     * @return array|bool|string|string[]|null
+     */
     public function &get_ignore_array($format = 's')
     {
         if ($format) {
-            $arr =& $this->_strings->sanitize_array_text($this->_ignore_array);
+            $arr = &$this->_strings->sanitize_array_text($this->_ignore_array);
         } else {
-            $arr =& $this->_ignore_array;
+            $arr = &$this->_ignore_array;
         }
+
         return $arr;
     }
 
+    /**
+     * @param string $format
+     * @return array|bool|string|string[]|null
+     */
     public function &get_candidate_array($format = 's')
     {
         if ($format) {
-            $arr =& $this->_strings->sanitize_array_text($this->_candidate_array);
+            $arr = &$this->_strings->sanitize_array_text($this->_candidate_array);
         } else {
-            $arr =& $this->_candidate_array;
+            $arr = &$this->_candidate_array;
         }
+
         return $arr;
     }
 
     public function &get_candidate_keyword_array()
     {
-        $arr =& $this->_candidate_keyword_array;
+        $arr = &$this->_candidate_keyword_array;
+
         return $arr;
     }
 
+    /**
+     * @return bool|int
+     */
     public function get_count_query_array()
     {
         if (is_array($this->_query_array)) {
             return count($this->_query_array);
         }
+
         return false;
     }
 
+    /**
+     * @return bool|int
+     */
     public function get_count_ignore_array()
     {
         if (is_array($this->_ignore_array)) {
             return count($this->_ignore_array);
         }
+
         return false;
     }
 
+    /**
+     * @return bool|int
+     */
     public function get_count_candidate_array()
     {
         if (is_array($this->_candidate_array)) {
             return count($this->_candidate_array);
         }
+
         return false;
     }
 
@@ -581,11 +776,17 @@ class happy_linux_search
         return $this->_sql_query_array;
     }
 
+    /**
+     * @return string
+     */
     public function get_lang_ignoredwors()
     {
         return sprintf(_SR_IGNOREDWORDS, $this->_min_keyword);
     }
 
+    /**
+     * @return string
+     */
     public function get_lang_keytooshort()
     {
         return sprintf(_SR_KEYTOOSHORT, $this->_min_keyword, ceil($this->_min_keyword / 2));
@@ -594,11 +795,18 @@ class happy_linux_search
     //--------------------------------------------------------
     // XOOPS system parameter
     //--------------------------------------------------------
+
+    /**
+     * @return bool
+     */
     public function check_xoops_enable_search()
     {
         return $this->_system->check_config_search_enable_search();
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xoops_keyword_min()
     {
         return $this->_system->get_config_search_keyword_min();
@@ -612,6 +820,11 @@ class happy_linux_search
     // convert for Japanese EUC-JP
     // porting from suin's search <http://suin.jp/>
     //--------------------------------------------------------
+
+    /**
+     * @param $str
+     * @return string
+     */
     public function _convert_space_zen_to_han($str)
     {
         if (!$this->_is_japanese || !function_exists('mb_convert_kana')) {
@@ -621,6 +834,9 @@ class happy_linux_search
         return mb_convert_kana($str, 's');
     }
 
+    /**
+     * @param $q
+     */
     public function _build_candidate($q)
     {
         if (!$this->_flag_cabdicate) {
@@ -695,7 +911,7 @@ class happy_linux_search
 
         // option h: Convert "zen-kaku hira-kana" to "han-kaku kata-kana"
         // option C: Convert "zen-kaku hira-kana" to "zen-kaku kata-kana"
-        $keyword_h  = mb_convert_kana($q, 'h');
+        $keyword_h = mb_convert_kana($q, 'h');
         $keyword_cc = mb_convert_kana($q, 'C');
 
         if ($q != $keyword_h) {
@@ -715,9 +931,14 @@ class happy_linux_search
         }
     }
 
+    /**
+     * @param $q
+     * @param $keyword
+     * @param $type
+     */
     public function _set_candidate_array($q, $keyword, $type)
     {
-        if (strlen($keyword) < $this->_min_keyword) {
+        if (mb_strlen($keyword) < $this->_min_keyword) {
             return;
         }
 
@@ -727,18 +948,18 @@ class happy_linux_search
 
         $this->_candidate_keyword_array[] = $keyword;
 
-        if ($type == HAPPY_LINUX_SEARCH_CODE_ZENKAKU) {
-            $this->_candidate_array[] = array(
+        if (HAPPY_LINUX_SEARCH_CODE_ZENKAKU == $type) {
+            $this->_candidate_array[] = [
                 'keyword' => $keyword,
-                'type'    => HAPPY_LINUX_SEARCH_CODE_ZENKAKU,
-                'lang'    => $this->_LANG_ZENKAKU,
-            );
+                'type' => HAPPY_LINUX_SEARCH_CODE_ZENKAKU,
+                'lang' => $this->_LANG_ZENKAKU,
+            ];
         } else {
-            $this->_candidate_array[] = array(
+            $this->_candidate_array[] = [
                 'keyword' => $keyword,
-                'type'    => HAPPY_LINUX_SEARCH_CODE_HANKAKU,
-                'lang'    => $this->_LANG_HANKAKU,
-            );
+                'type' => HAPPY_LINUX_SEARCH_CODE_HANKAKU,
+                'lang' => $this->_LANG_HANKAKU,
+            ];
         }
     }
 

@@ -1,5 +1,6 @@
 <?php
-// $Id: browser.php,v 1.1 2007/11/15 11:08:43 ohwada Exp $
+
+// $Id: browser.php,v 1.1 2010/11/07 14:59:18 ohwada Exp $
 
 // 2007-11-11 K.OHWADA
 // change file name server.php to browser.php
@@ -12,11 +13,15 @@
 //=========================================================
 // class happy_linux_browser
 //=========================================================
+
+/**
+ * Class happy_linux_browser
+ */
 class happy_linux_browser
 {
     public $_http_user_agent = null;
-    public $_os              = null;
-    public $_browser         = null;
+    public $_os = null;
+    public $_browser = null;
 
     //---------------------------------------------------------
     // constructor
@@ -26,11 +31,14 @@ class happy_linux_browser
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_browser();
+        if (null === $instance) {
+            $instance = new static();
         }
 
         return $instance;
@@ -45,7 +53,7 @@ class happy_linux_browser
 
         if (empty($agent)) {
             return;
-        }   // undefined
+        }    // undefined
 
         // presume OS
         if (preg_match('/Win/i', $agent)) {
@@ -80,18 +88,25 @@ class happy_linux_browser
         }
 
         $this->_http_user_agent = $agent;
-        $this->_os              = $os;
-        $this->_browser         = $browser;
+        $this->_os = $os;
+        $this->_browser = $browser;
     }
 
     //---------------------------------------------------------
     // get param
     //---------------------------------------------------------
+
+    /**
+     * @return null
+     */
     public function get_os()
     {
         return $this->_os;
     }
 
+    /**
+     * @return null
+     */
     public function get_browser()
     {
         return $this->_browser;

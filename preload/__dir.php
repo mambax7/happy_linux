@@ -1,5 +1,6 @@
 <?php
-// $Id: __dir.php,v 1.1 2007/09/23 05:09:21 ohwada Exp $
+
+// $Id: __dir.php,v 1.1 2010/11/07 14:59:16 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
@@ -14,5 +15,4 @@
 define('HAPPY_LINUX_DIR_TMP', '');
 
 // specify '/var/tmp'
-//  define('HAPPY_LINUX_DIR_TMP', '/var/tmp');
-;
+//	define('HAPPY_LINUX_DIR_TMP', '/var/tmp');

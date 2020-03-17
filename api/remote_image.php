@@ -1,5 +1,6 @@
 <?php
-// $Id: remote_image.php,v 1.1 2007/11/12 13:00:22 ohwada Exp $
+
+// $Id: remote_image.php,v 1.1 2010/11/07 14:59:13 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module

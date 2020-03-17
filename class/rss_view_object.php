@@ -1,4 +1,5 @@
 <?php
+
 // $Id: rss_view_object.php,v 1.2 2010/11/07 19:26:32 ohwada Exp $
 
 // 2010-11-07 K.OHWADA
@@ -39,28 +40,32 @@
 //=========================================================
 // class happy_linux_rss_view
 //=========================================================
+
+/**
+ * Class happy_linux_rss_view
+ */
 class happy_linux_rss_view extends happy_linux_rss_base
 {
     // set param
-    public $_flag_title_html   = false;
+    public $_flag_title_html = false;
     public $_flag_content_html = false;
-    public $_max_summary       = 250;
-    public $_max_title         = -1;   // unlimited
-    public $_max_content       = -1;   // unlimited
-    public $_flag_highlight    = false;
-    public $_keyword_array     = null;
-    public $_is_japanese       = false;
+    public $_max_summary = 250;
+    public $_max_title = -1;    // unlimited
+    public $_max_content = -1;    // unlimited
+    public $_flag_highlight = false;
+    public $_keyword_array = null;
+    public $_is_japanese = false;
 
-    public $_mode_content_script     = 2; // remove
-    public $_mode_content_style      = 2;
-    public $_mode_content_link       = 2;
-    public $_mode_content_comment    = 2;
-    public $_mode_content_cdata      = 2;
-    public $_mode_content_onmouse    = 1;  // replace
+    public $_mode_content_script = 2;    // remove
+    public $_mode_content_style = 2;
+    public $_mode_content_link = 2;
+    public $_mode_content_comment = 2;
+    public $_mode_content_cdata = 2;
+    public $_mode_content_onmouse = 1;    // replace
     public $_mode_content_attr_style = 1;
     public $_mode_content_javascript = 1;
-    public $_flag_content_tags       = false;
-    public $_content_tags            = null;
+    public $_flag_content_tags = false;
+    public $_content_tags = null;
 
     //---------------------------------------------------------
     // constructor
@@ -135,29 +140,32 @@ class happy_linux_rss_view extends happy_linux_rss_base
         }
     }
 
+    /**
+     * @return array
+     */
     public function &_get_sanitize_param()
     {
-        $arr = array(
-            'flag_title_html'   => $this->_flag_title_html,
-            'max_title'         => $this->_max_title,
+        $arr = [
+            'flag_title_html' => $this->_flag_title_html,
+            'max_title' => $this->_max_title,
             'flag_content_html' => $this->_flag_content_html,
-            'max_content'       => $this->_max_content,
-            'max_summary'       => $this->_max_summary,
-            'keyword_array'     => $this->_keyword_array,
-            'flag_highlight'    => $this->_flag_highlight,
-            'is_japanese'       => $this->_is_japanese,
+            'max_content' => $this->_max_content,
+            'max_summary' => $this->_max_summary,
+            'keyword_array' => $this->_keyword_array,
+            'flag_highlight' => $this->_flag_highlight,
+            'is_japanese' => $this->_is_japanese,
 
-            'mode_content_script'     => $this->_mode_content_script,
-            'mode_content_style'      => $this->_mode_content_style,
-            'mode_content_link'       => $this->_mode_content_link,
-            'mode_content_comment'    => $this->_mode_content_comment,
-            'mode_content_cdata'      => $this->_mode_content_cdata,
-            'mode_content_onmouse'    => $this->_mode_content_onmouse,
+            'mode_content_script' => $this->_mode_content_script,
+            'mode_content_style' => $this->_mode_content_style,
+            'mode_content_link' => $this->_mode_content_link,
+            'mode_content_comment' => $this->_mode_content_comment,
+            'mode_content_cdata' => $this->_mode_content_cdata,
+            'mode_content_onmouse' => $this->_mode_content_onmouse,
             'mode_content_attr_style' => $this->_mode_content_attr_style,
             'mode_content_javascript' => $this->_mode_content_javascript,
-            'flag_content_tags'       => $this->_flag_content_tags,
-            'content_tags'            => $this->_content_tags,
-        );
+            'flag_content_tags' => $this->_flag_content_tags,
+            'content_tags' => $this->_content_tags,
+        ];
 
         return $arr;
     }
@@ -165,41 +173,66 @@ class happy_linux_rss_view extends happy_linux_rss_base
     //---------------------------------------------------------
     // set and get property
     //---------------------------------------------------------
+
+    /**
+     * @param $value
+     */
     public function set_title_html($value)
     {
         $this->_flag_title_html = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_content_html($value)
     {
         $this->_flag_content_html = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_max_title($value)
     {
         $this->_max_title = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_max_summary($value)
     {
         $this->_max_summary = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_max_content($value)
     {
         $this->_max_content = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_is_japanese($value)
     {
         $this->_is_japanese = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_highlight($value)
     {
         $this->_flag_highlight = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_keyword_array($value)
     {
         if (is_array($value)) {
@@ -207,51 +240,81 @@ class happy_linux_rss_view extends happy_linux_rss_base
         }
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_script($value)
     {
         $this->_mode_content_script = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_style($value)
     {
         $this->_mode_content_style = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_link($value)
     {
         $this->_mode_content_link = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_comment($value)
     {
         $this->_mode_content_comment = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_cdata($value)
     {
         $this->_mode_content_cdata = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_onmouse($value)
     {
         $this->_mode_content_onmouse = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_attr_style($value)
     {
         $this->_mode_content_attr_style = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_mode_content_javascript($value)
     {
         $this->_mode_content_javascript = (int)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_flag_content_tags($value)
     {
         $this->_flag_content_tags = (bool)$value;
     }
 
+    /**
+     * @param $value
+     */
     public function set_content_tags($value)
     {
         $this->_content_tags = $value;
@@ -261,34 +324,55 @@ class happy_linux_rss_view extends happy_linux_rss_base
     // create
     // overload this function
     //---------------------------------------------------------
+
+    /**
+     * @return \happy_linux_rss_base_basic|\happy_linux_rss_view_channel
+     */
     public function &create_channel()
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_view_channel();
+
         return $obj;
     }
 
+    /**
+     * @return \happy_linux_rss_base_basic|\happy_linux_rss_view_image
+     */
     public function &create_image()
     {
         $obj = new happy_linux_rss_view_image();
+
         return $obj;
     }
 
+    /**
+     * @return \happy_linux_rss_base_basic|\happy_linux_rss_view_textinput
+     */
     public function &create_textinput()
     {
         $obj = new happy_linux_rss_view_textinput();
+
         return $obj;
     }
 
+    /**
+     * @return \happy_linux_rss_base_basic|\happy_linux_rss_view_items
+     */
     public function &create_items()
     {
         $obj = new happy_linux_rss_view_items();
+
         return $obj;
     }
 
+    /**
+     * @return \happy_linux_rss_base_basic|\happy_linux_rss_view_item_single
+     */
     public function &create_single_item()
     {
         $obj = new happy_linux_rss_view_item_single();
+
         return $obj;
     }
 
@@ -298,6 +382,10 @@ class happy_linux_rss_view extends happy_linux_rss_base
 //=========================================================
 // class happy_linux_rss_view_basic
 //=========================================================
+
+/**
+ * Class happy_linux_rss_view_basic
+ */
 class happy_linux_rss_view_basic extends happy_linux_rss_base_basic
 {
     // constant
@@ -314,6 +402,11 @@ class happy_linux_rss_view_basic extends happy_linux_rss_base_basic
     //---------------------------------------------------------
     // build
     //---------------------------------------------------------
+
+    /**
+     * @param $key
+     * @param $time_unix
+     */
     public function _set_unixtime($key, $time_unix)
     {
         if ($time_unix) {
@@ -329,6 +422,11 @@ class happy_linux_rss_view_basic extends happy_linux_rss_base_basic
     // some feed have no title
     // subsutute by ---
     //---------------------------------------------------------
+
+    /**
+     * @param $key
+     * @return bool|mixed|string
+     */
     public function _substitute_title($key)
     {
         if ($this->is_set($key)) {
@@ -346,6 +444,11 @@ class happy_linux_rss_view_basic extends happy_linux_rss_base_basic
     // some feed have no link
     // subsutute by null
     //---------------------------------------------------------
+
+    /**
+     * @param $key
+     * @return bool|mixed|null
+     */
     public function _substitute_link($key)
     {
         if ($this->is_set($key)) {
@@ -354,14 +457,20 @@ class happy_linux_rss_view_basic extends happy_linux_rss_base_basic
                 return $val;
             }
         }
+
         return null;
     }
 
+    /**
+     * @param $str
+     * @return bool
+     */
     public function _check_http_start($str)
     {
         if (preg_match('|^https?://|', $str)) {
             return true;    // include HTTP
         }
+
         return false;
     }
 
@@ -373,11 +482,17 @@ class happy_linux_rss_view_basic extends happy_linux_rss_base_basic
         // no action
     }
 
+    /**
+     * @param $text
+     * @param $flag
+     * @param $max
+     * @return string|string[]|null
+     */
     public function _sanitize_allow_html($text, $flag, $max)
     {
         // allow HTML tag & under max content
         if ($flag) {
-            if (($max < 0) || (strlen($text) <= $max)) {
+            if (($max < 0) || (mb_strlen($text) <= $max)) {
                 $ret = $this->_strings->replace_javascript($text);
 
                 if (!$this->_strings->check_javascript($ret)) {
@@ -387,35 +502,57 @@ class happy_linux_rss_view_basic extends happy_linux_rss_base_basic
         }
 
         $ret = $this->_sanitize_summary($text, $max);
+
         return $ret;
     }
-
-
 
     //---------------------------------------------------------
     // use string class
     //---------------------------------------------------------
+
+    /**
+     * @param $arr
+     * @return array|bool|string|string[]|null
+     */
     public function &_sanitize_block($arr)
     {
-        $ret =& $this->_strings->sanitize_array_text($arr);
+        $ret = &$this->_strings->sanitize_array_text($arr);
+
         return $ret;
     }
 
+    /**
+     * @param $text
+     * @return string
+     */
     public function _sanitize_html_url($text)
     {
         $ret = $this->_strings->sanitize_url($text);
+
         return $ret;
     }
 
+    /**
+     * @param $text
+     * @return string|string[]|null
+     */
     public function _sanitize_html_text($text)
     {
         $ret = $this->_strings->sanitize_text($text);
+
         return $ret;
     }
 
+    /**
+     * @param      $text
+     * @param      $max
+     * @param null $keyword_array
+     * @return string|string[]|null
+     */
     public function _sanitize_summary($text, $max, $keyword_array = null)
     {
         $ret = $this->_strings->build_summary($text, $max, $keyword_array, 's');
+
         return $ret;
     }
 
@@ -425,20 +562,24 @@ class happy_linux_rss_view_basic extends happy_linux_rss_base_basic
 //=========================================================
 // class happy_linux_rss_view_channel
 //=========================================================
+
+/**
+ * Class happy_linux_rss_view_channel
+ */
 class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
 {
     // RSS
-    public $DATE_RFC822_LIST = array('pubdate', 'lastbuilddate');
+    public $DATE_RFC822_LIST = ['pubdate', 'lastbuilddate'];
 
-    public $DATE_W3C_LIST = array(
+    public $DATE_W3C_LIST = [
         // ATOM 1.0
         'published',
         'updated',
         // ATOM 0.3
         'modified',
         'issued',
-        'created'
-    );
+        'created',
+    ];
 
     //---------------------------------------------------------
     // constructor
@@ -483,6 +624,10 @@ class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
     // for rssc_headline xoopsheadline
     // $format_date: l=long, r=rfc822
     //---------------------------------------------------------
+
+    /**
+     * @param string $format_date
+     */
     public function format_for_rss($format_date = 'l')
     {
         $date_unix = 0;
@@ -499,7 +644,7 @@ class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
         }
 
         if ($date_unix) {
-            $date_long   = formatTimestamp($date_unix, 'l');
+            $date_long = formatTimestamp($date_unix, 'l');
             $date_rfc822 = date('r', $date_unix);
         }
 
@@ -507,11 +652,11 @@ class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
             $pubdate_unix = $this->get_unixtime_rfc822($this->get_rss_var('pubdate'));
             $pubdate_long = formatTimestamp($pubdate_unix, 'l');
 
-            if ($format_date == 'l') {
+            if ('l' == $format_date) {
                 $this->set('pubdate', $pubdate_long);
             }
         } elseif ($date_unix) {
-            if ($format_date == 'l') {
+            if ('l' == $format_date) {
                 $this->set('pubdate', $date_long);
             } else {
                 $this->set('pubdate', $date_rfc822);
@@ -522,11 +667,11 @@ class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
             $lastbuilddate_unix = $this->get_unixtime_rfc822($this->get_rss_var('lastbuilddate'));
             $lastbuilddate_long = formatTimestamp($lastbuilddate_unix, 'l');
 
-            if ($format_date == 'l') {
+            if ('l' == $format_date) {
                 $this->set('lastbuilddate', $lastbuilddate_long);
             }
         } elseif ($date_unix) {
-            if ($format_date == 'l') {
+            if ('l' == $format_date) {
                 $this->set('lastbuilddate', $date_long);
             } else {
                 $this->set('lastbuilddate', $date_rfc822);
@@ -577,7 +722,7 @@ class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
     //---------------------------------------------------------
     public function sanitize()
     {
-        $arr = array();
+        $arr = [];
 
         foreach ($this->get_vars() as $k => $v) {
             switch ($k) {
@@ -589,7 +734,6 @@ class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
                 case 'contributor_url':
                     $val = $this->_sanitize_html_url($v);
                     break;
-
                 default:
                     $val = $this->_sanitize_block($v);
                     break;
@@ -607,9 +751,12 @@ class happy_linux_rss_view_channel extends happy_linux_rss_view_basic
 //=========================================================
 // class happy_linux_rss_view_image
 //=========================================================
+
+/**
+ * Class happy_linux_rss_view_image
+ */
 class happy_linux_rss_view_image extends happy_linux_rss_view_basic
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -623,7 +770,7 @@ class happy_linux_rss_view_image extends happy_linux_rss_view_basic
     //---------------------------------------------------------
     public function sanitize()
     {
-        $arr = array();
+        $arr = [];
 
         foreach ($this->get_vars() as $k => $v) {
             switch ($k) {
@@ -631,12 +778,10 @@ class happy_linux_rss_view_image extends happy_linux_rss_view_basic
                 case 'url':
                     $val = $this->_sanitize_html_url($v);
                     break;
-
                 case 'width':
                 case 'height':
                     $val = (int)$v;
                     break;
-
                 default:
                     $val = $this->_sanitize_html_text($v);
                     break;
@@ -658,9 +803,12 @@ class happy_linux_rss_view_image extends happy_linux_rss_view_basic
 //=========================================================
 // class happy_linux_rss_view_textinput
 //=========================================================
+
+/**
+ * Class happy_linux_rss_view_textinput
+ */
 class happy_linux_rss_view_textinput extends happy_linux_rss_view_basic
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -674,14 +822,13 @@ class happy_linux_rss_view_textinput extends happy_linux_rss_view_basic
     //---------------------------------------------------------
     public function sanitize()
     {
-        $arr = array();
+        $arr = [];
 
         foreach ($this->get_vars() as $k => $v) {
             switch ($k) {
                 case 'link':
                     $val = $this->_sanitize_html_url($v);
                     break;
-
                 default:
                     $val = $this->_sanitize_html_text($v);
                     break;
@@ -703,9 +850,12 @@ class happy_linux_rss_view_textinput extends happy_linux_rss_view_basic
 //=========================================================
 // class happy_linux_rss_view_items
 //=========================================================
+
+/**
+ * Class happy_linux_rss_view_items
+ */
 class happy_linux_rss_view_items extends happy_linux_rss_base_items
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -734,6 +884,10 @@ class happy_linux_rss_view_items extends happy_linux_rss_base_items
     //---------------------------------------------------------
     // for rssc_headline xoopsheadline
     //---------------------------------------------------------
+
+    /**
+     * @param string $format_date
+     */
     public function format_for_rss($format_date = 'l')
     {
         foreach ($this->_item_objs as $i => $obj) {
@@ -744,6 +898,10 @@ class happy_linux_rss_view_items extends happy_linux_rss_base_items
     //---------------------------------------------------------
     // sanitize
     //---------------------------------------------------------
+
+    /**
+     * @param $param
+     */
     public function sanitize(&$param)
     {
         foreach ($this->_item_objs as $i => $obj) {
@@ -755,10 +913,15 @@ class happy_linux_rss_view_items extends happy_linux_rss_base_items
     // create
     // overload this function
     //---------------------------------------------------------
+
+    /**
+     * @return \happy_linux_rss_base_basic|\happy_linux_rss_view_item_single
+     */
     public function &create_item_single()
     {
         // Assigning the return value of new by reference is deprecated
         $obj = new happy_linux_rss_view_item_single();
+
         return $obj;
     }
 
@@ -768,20 +931,24 @@ class happy_linux_rss_view_items extends happy_linux_rss_base_items
 //=========================================================
 // class happy_linux_rss_view_item_single
 //=========================================================
+
+/**
+ * Class happy_linux_rss_view_item_single
+ */
 class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
 {
     // RSS
-    public $DATE_RFC822_LIST = array('pubdate');
+    public $DATE_RFC822_LIST = ['pubdate'];
 
-    public $DATE_W3C_LIST = array(
+    public $DATE_W3C_LIST = [
         // ATOM 1.0
         'published',
         'updated',
         // ATOM 0.3
         'modified',
         'issued',
-        'created'
-    );
+        'created',
+    ];
 
     public $_view_item = null;
 
@@ -802,6 +969,10 @@ class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
     // non restrict feed_type
     // caller build, format_from_parse, format_from_db
     //-------------------------------------------------
+
+    /**
+     * @return bool|mixed
+     */
     public function _build_content_for_format()
     {
         $val = false;
@@ -831,6 +1002,9 @@ class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
         return $val;
     }
 
+    /**
+     * @return bool|mixed|string
+     */
     public function _build_id_for_format()
     {
         $val = '';
@@ -911,7 +1085,7 @@ class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
 
     public function _format_enclosure()
     {
-        list($enc_url, $enc_type, $enc_length) = $this->_get_enclosure_list();
+        [$enc_url, $enc_type, $enc_length] = $this->_get_enclosure_list();
         $this->set('enclosure_url', $enc_url);
         $this->set('enclosure_type', $enc_type);
         $this->set('enclosure_length', $enc_length);
@@ -921,10 +1095,14 @@ class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
     // for rssc_headline xoopsheadline
     // $format_date: l=long, r=rfc822
     //---------------------------------------------------------
+
+    /**
+     * @param string $format_date
+     */
     public function format_for_rss($format_date = 'l')
     {
         if ($this->is_set('pubdate')) {
-            if ($format_date == 'l') {
+            if ('l' == $format_date) {
                 $pubdate_unix = $this->get_unixtime_rfc822($this->get_rss_var('pubdate'));
                 $pubdate_long = formatTimestamp($pubdate, 'l');
                 $this->set('pubdate', $pubdate_long);
@@ -932,7 +1110,7 @@ class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
         } elseif ($this->is_set('published_unix')) {
             $published_unix = $this->get_rss_var('published_unix');
 
-            if ($format_date == 'l') {
+            if ('l' == $format_date) {
                 $published_long = formatTimestamp($published_unix, 'l');
                 $this->set('pubdate', $published_long);
             } else {
@@ -949,13 +1127,17 @@ class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
     //---------------------------------------------------------
     // view sanitize
     //---------------------------------------------------------
-    public function sanitize(&$param)
+
+    /**
+     * @param $param
+     */
+    public function sanitize($param=null)
     {
         $this->_view_item->set_param($param);
 
         $this->set_is_japanese($param['is_japanese']);
 
-        $arr = array();
+        $arr = [];
 
         foreach ($this->get_vars() as $k => $v) {
             switch ($k) {
@@ -966,17 +1148,13 @@ class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
                 case 'contributor_url':
                 case 'enclosure_url':
                 case 'guid_url':
-
                     // BUG: not sanitize site_url
-                case 'site_url':    // for RSSC
-
+                case 'site_url':
                     $val = $this->_sanitize_html_url($v);
                     break;
-
                 case 'title':
                     $val = $this->_view_item->sanitize_title($v);
                     break;
-
                 case 'content':
                     $v1 = $v;
                     if (is_array($v) && isset($v['encoded'])) {
@@ -984,18 +1162,15 @@ class happy_linux_rss_view_item_single extends happy_linux_rss_view_basic
                     }
                     $val = $this->_view_item->sanitize_content($v1);
                     break;
-
                 case 'summary':
                     $val = $this->_view_item->sanitize_summary($v);
                     break;
-
                 case 'raws':
                 case 'item_orig':
                     $val = '';
                     break;
-
                 default:
-                    //          echo "$k |$v| <br>\n";
+                    //			echo "$k |$v| <br>\n";
                     $val = $this->_sanitize_block($v);
                     break;
             }

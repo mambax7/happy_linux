@@ -1,5 +1,6 @@
 <?php
-// $Id: xoops_database.php,v 1.3 2007/09/23 08:26:54 ohwada Exp $
+
+// $Id: xoops_database.php,v 1.1 2010/11/07 14:59:19 ohwada Exp $
 
 // 2007-09-20 K.OHWADA
 // Assigning the return value of new by reference is deprecated
@@ -19,17 +20,23 @@
 // this class work for PHP 4
 // in PHP 5, occur stric error
 //=========================================================
-class database
-{
 
+/**
+ * Class Database
+ */
+class Database
+{
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
-    public function Database()
+    public function __construct()
     {
         // dummy
     }
 
+    /**
+     * @return \mysql_database
+     */
     public static function getInstance()
     {
         static $instance;
@@ -37,23 +44,29 @@ class database
             // Assigning the return value of new by reference is deprecated
             $instance = new mysql_database();
             if (!$instance->connect()) {
-                echo "<font color='red'>Unable to connect to database.</font><br />\n";
+                echo "<font color='red'>Unable to connect to database.</font><br>\n";
                 die();
             }
         }
+
         return $instance;
     }
 
     //---------------------------------------------------------
     // function
     //---------------------------------------------------------
+
+    /**
+     * @param string $tablename
+     * @return string
+     */
     public function prefix($tablename = '')
     {
-        if ($tablename != '') {
+        if ('' != $tablename) {
             return XOOPS_DB_PREFIX . '_' . $tablename;
-        } else {
-            return XOOPS_DB_PREFIX;
         }
+
+        return XOOPS_DB_PREFIX;
     }
 
     //---------------------------------------------------------

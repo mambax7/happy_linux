@@ -1,4 +1,4 @@
-$Id: readme.txt,v 1.4 2007/09/23 05:07:25 ohwada Exp $
+$Id: readme.txt,v 1.1 2010/11/07 14:59:16 ohwada Exp $
 
 2007-09-20 K.OHWADA
 added dir.php

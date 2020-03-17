@@ -35,6 +35,9 @@ echo '</pre>';
 # just some quick and ugly php to generate html
 #
 #
+/**
+ * @param $rss
+ */
 function slashbox($rss)
 {
     echo '<table cellpadding=2 cellspacing=0><tr>';
@@ -43,7 +46,7 @@ function slashbox($rss)
     # get the channel title and link properties off of the rss object
     #
     $title = $rss->channel['title'];
-    $link  = $rss->channel['link'];
+    $link = $rss->channel['link'];
 
     echo "<a href=$link><font color=#FFFFFF><b>$title</b></font></a>";
     echo '</td></tr>';

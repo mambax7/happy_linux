@@ -1,5 +1,6 @@
 <?php
-// $Id: remote_image.php,v 1.8 2007/11/02 11:14:12 ohwada Exp $
+
+// $Id: remote_image.php,v 1.1 2010/11/07 14:59:20 ohwada Exp $
 
 // 2007-10-10 K.OHWADA
 // not use happy_linux_dir
@@ -37,6 +38,10 @@ define('HAPPY_LINUX_REMOTE_CODE_NOT_WRITABLE', 21);
 // class  happy_linux_remote_image
 // requre happy_linux_dir
 //=========================================================
+
+/**
+ * Class happy_linux_remote_image
+ */
 class happy_linux_remote_image extends happy_linux_remote_file
 {
     public $_dir_work = null;
@@ -52,12 +57,16 @@ class happy_linux_remote_image extends happy_linux_remote_file
         $this->_dir_work = XOOPS_ROOT_PATH . '/modules/happy_linux/cache';
     }
 
+    /**
+     * @return \happy_linux_remote_file|\happy_linux_remote_image|static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_remote_image();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
@@ -69,6 +78,10 @@ class happy_linux_remote_image extends happy_linux_remote_file
     // return is same as getimagesize()
     // array of width, height, type, attr
     //---------------------------------------------------------
+    /**
+     * @param $url
+     * @return array|bool|false
+     */
     public function &get_image_size($url)
     {
         $false = false;
@@ -76,21 +89,21 @@ class happy_linux_remote_image extends happy_linux_remote_file
         $this->_clear_errors();
 
         // add check http://
-        if (empty($url) || ($url == 'http://') || ($url == 'https://')) {
+        if (empty($url) || ('http://' == $url) || ('https://' == $url)) {
             $this->_set_error_code(HAPPY_LINUX_REMOTE_CODE_EMPTY_URL);
             $this->_set_errors('remote url is empty');
+
             return $false;
         }
 
         // BUG 4379: Undefined property: _flag_allow_url_fopen
         switch ($this->_remote_mode) {
             case 1:
-                $size =& $this->_get_image_size_remote($url);
+                $size = &$this->_get_image_size_remote($url);
                 break;
-
             case 0:
             default:
-                $size =& $this->_get_image_size_local($url);
+                $size = &$this->_get_image_size_local($url);
                 break;
         }
 
@@ -100,11 +113,17 @@ class happy_linux_remote_image extends happy_linux_remote_file
     //---------------------------------------------------------
     // set and get property
     //---------------------------------------------------------
+    /**
+     * @param $value
+     */
     public function set_dir_work($value)
     {
         $this->_dir_work = $value;
     }
 
+    /**
+     * @return string|null
+     */
     public function get_dir_work()
     {
         return $this->_dir_work;
@@ -113,12 +132,21 @@ class happy_linux_remote_image extends happy_linux_remote_file
     //=========================================================
     // private
     //=========================================================
+    /**
+     * @param $url
+     * @return array|false
+     */
     public function &_get_image_size_local($url)
     {
         $size = getimagesize($url);
+
         return $size;
     }
 
+    /**
+     * @param $url
+     * @return array|bool|false
+     */
     public function &_get_image_size_remote($url)
     {
         $false = false;
@@ -126,6 +154,7 @@ class happy_linux_remote_image extends happy_linux_remote_file
         if (!is_writable($this->_dir_work)) {
             $this->_set_error_code(HAPPY_LINUX_ERR_REMOTE_NOT_WRITABLE);
             $this->_set_errors('work directory is not writable : ' . $this->_dir_work);
+
             return $false;
         }
 

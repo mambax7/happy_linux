@@ -1,5 +1,6 @@
 <?php
-// $Id: admin_menu.php,v 1.4 2009/01/05 17:50:39 ohwada Exp $
+
+// $Id: admin_menu.php,v 1.1 2010/11/07 14:59:17 ohwada Exp $
 
 // 2008-12-20 K.OHWADA
 // extra in print_form_upgrade()
@@ -15,12 +16,16 @@
 //=========================================================
 // class happy_linux_admin_menu
 //=========================================================
+
+/**
+ * Class happy_linux_admin_menu
+ */
 class happy_linux_admin_menu
 {
     public $_STYLE_HIGHLIGHT = 'color:#ff0000; font_weight:bold;';
-    public $_STYLE_DIV       = 'background-color: #dde1de; border: 1px solid #808080; margin: 5px; padding: 10px 10px 5px 10px; width: 90%;';
-    public $_STYLE_SPAN      = 'font-size: 120%; font-weight: bold; color: #000000;';
-    public $_STYLE_ERROR     = 'color: #ff0000; background-color: #ffffe0; border: #808080 1px dotted; padding: 3px 3px 3px 3px;';
+    public $_STYLE_DIV = 'background-color: #dde1de; border: 1px solid #808080; margin: 5px; padding: 10px 10px 5px 10px; width: 90%;';
+    public $_STYLE_SPAN = 'font-size: 120%; font-weight: bold; color: #000000;';
+    public $_STYLE_ERROR = 'color: #ff0000; background-color: #ffffe0; border: #808080 1px dotted; padding: 3px 3px 3px 3px;';
 
     public $_token_error = null;
 
@@ -32,40 +37,58 @@ class happy_linux_admin_menu
         // dummy
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_admin_menu();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
     //---------------------------------------------------------
     // menu
     //---------------------------------------------------------
+
+    /**
+     * @param      $dirname
+     * @param null $desc
+     * @return string
+     */
     public function build_header($dirname, $desc = null)
     {
         $text = '<h3>' . $dirname . ' : ' . $this->get_xoops_module_name() . "</h3>\n";
         if ($desc) {
-            $text .= $desc . "<br /><br />\n";
+            $text .= $desc . "<br><br>\n";
         }
+
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_footer()
     {
-        $text = "<br /><hr />\n";
+        $text = "<br><hr />\n";
         if (class_exists('happy_linux_time')) {
             $time = happy_linux_time::getInstance();
-            $text .= $time->build_elapse_time() . "<br />\n";
+            $text .= $time->build_elapse_time() . "<br>\n";
         }
         if (function_exists('happy_linux_build_memory_usage_mb')) {
-            $text .= happy_linux_build_memory_usage_mb() . "<br />\n";
+            $text .= happy_linux_build_memory_usage_mb() . "<br>\n";
         }
+
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_powerdby()
     {
         $url = 'http://linux2.ohwada.net/';
@@ -79,40 +102,52 @@ class happy_linux_admin_menu
         $text .= '<div align="right"><font size="-1">';
         $text .= '&copy; 2004 - ' . date('Y') . ', Kenichi OHWADA';
         $text .= "</font></div>\n";
+
         return $text;
     }
 
     //-------------------------------------------------------------------
     // bread_crumb
     //-------------------------------------------------------------------
+
+    /**
+     * @param        $name1
+     * @param string $url1
+     * @param string $name2
+     * @return string
+     */
     public function build_admin_bread_crumb($name1, $url1 = '', $name2 = '')
     {
-        $arr = array(
-            array(
+        $arr = [
+            [
                 'name' => $this->get_xoops_module_name(),
-                'url'  => 'index.php',
-            ),
-        );
+                'url' => 'index.php',
+            ],
+        ];
 
         if ($name1) {
-            $arr[] = array(
+            $arr[] = [
                 'name' => $name1,
-                'url'  => $url1,
-            );
+                'url' => $url1,
+            ];
         }
 
         if ($name2) {
-            $arr[] = array(
+            $arr[] = [
                 'name' => $name2,
-            );
+            ];
         }
 
         return $this->build_bread_crumb($arr);
     }
 
+    /**
+     * @param $paths
+     * @return string
+     */
     public function build_bread_crumb($paths)
     {
-        $arr = array();
+        $arr = [];
         foreach ($paths as $path) {
             if (isset($path['url']) && isset($path['name']) && $path['url'] && $path['name']) {
                 $url = '<a href="' . $this->sanitize($path['url']) . '">';
@@ -125,7 +160,7 @@ class happy_linux_admin_menu
 
         $text = ' ';
         $text .= implode(' &gt;&gt; ', $arr);
-        $text .= " <br />\n";
+        $text .= " <br>\n";
 
         return $text;
     }
@@ -133,6 +168,16 @@ class happy_linux_admin_menu
     //-------------------------------------------------------------------
     // menu_table
     //-------------------------------------------------------------------
+
+    /**
+     * @param        $menu_arr
+     * @param int    $MAX_COL
+     * @param string $width
+     * @param string $outer
+     * @param string $even
+     * @param string $odd
+     * @return string
+     */
     public function build_menu_table($menu_arr, $MAX_COL = 5, $width = '', $outer = 'outer', $even = 'even', $odd = 'odd')
     {
         if (empty($width)) {
@@ -143,16 +188,16 @@ class happy_linux_admin_menu
             $width .= '%';
         }
 
-        $col_count  = 0;
+        $col_count = 0;
         $line_count = 0;
-        $class      = $odd;
+        $class = $odd;
 
         $text = '<table class="' . $outer . '" cellpadding="4" cellspacing="1" >' . "\n";
 
         foreach ($menu_arr as $name => $url) {
             // column begin
-            if ($col_count == 0) {
-                if ($line_count % 2 == 0) {
+            if (0 == $col_count) {
+                if (0 == $line_count % 2) {
                     $class = $odd;
                 } else {
                     $class = $even;
@@ -198,7 +243,8 @@ class happy_linux_admin_menu
             }
         }
 
-        $text .= "</table><br />\n";
+        $text .= "</table><br>\n";
+
         return $text;
     }
 
@@ -211,16 +257,25 @@ class happy_linux_admin_menu
         echo $this->build_form('init', _HAPPY_LINUX_FORM_INIT_EXEC);
     }
 
+    /**
+     * @param      $ver
+     * @param null $extra
+     */
     public function print_form_upgrade($ver, $extra = null)
     {
         $msg = sprintf(_HAPPY_LINUX_FORM_VERSION_NOT, $ver);
         if ($extra) {
-            $msg .= "<br />\n" . $extra;
+            $msg .= "<br>\n" . $extra;
         }
         xoops_error($msg);
         echo $this->build_form('upgrade', _HAPPY_LINUX_FORM_UPGRADE_EXEC);
     }
 
+    /**
+     * @param $op
+     * @param $title
+     * @return string
+     */
     public function build_form($op, $title)
     {
         $form_name = $this->build_form_name();
@@ -228,34 +283,46 @@ class happy_linux_admin_menu
         $text = '<div style="' . $this->_STYLE_DIV . '">';
         $text .= '<span style="' . $this->_STYLE_SPAN . '">';
         $text .= $title;
-        $text .= "</span><br /><br />\n";
+        $text .= "</span><br><br>\n";
         $text .= '<form name="' . $form_name . '" id=". $form_name ." action="' . xoops_getenv('PHP_SELF') . '" method="post" >';
         $text .= $this->build_gticket_html();
         $text .= '<input type="hidden" name="op" id="op" value="' . $op . '" />';
         $text .= '<input type="submit" name="submit" id="submit" value="' . _HAPPY_LINUX_EXECUTE . '" />';
         $text .= '</form>';
-        $text .= "</div><br />\n";
+        $text .= "</div><br>\n";
+
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function build_form_name()
     {
-        return 'form_' . rand();
+        return 'form_' . mt_rand();
     }
 
     //---------------------------------------------------------
     // token
     //---------------------------------------------------------
+
+    /**
+     * @return string
+     */
     public function build_gticket_html()
     {
         global $xoopsGTicket;
         $text = '';
         if (is_object($xoopsGTicket)) {
-            $text = $xoopsGTicket->getTicketHtml(rand()) . "\n";
+            $text = $xoopsGTicket->getTicketHtml(mt_rand()) . "\n";
         }
+
         return $text;
     }
 
+    /**
+     * @return bool
+     */
     public function check_token()
     {
         return $this->check_gticket_token();
@@ -264,26 +331,36 @@ class happy_linux_admin_menu
     public function print_xoops_token_error()
     {
         xoops_error('Token Error');
-        echo "<br />\n";
+        echo "<br>\n";
         echo $this->highlight_error($this->_token_error);
-        echo "<br />\n";
+        echo "<br>\n";
     }
 
+    /**
+     * @param bool $allow_repost
+     * @return bool
+     */
     public function check_gticket_token($allow_repost = false)
     {
         global $xoopsGTicket;
         if (is_object($xoopsGTicket)) {
             if (!$xoopsGTicket->check(true, '', $allow_repost)) {
                 $this->_token_error = $xoopsGTicket->getErrors();
+
                 return false;
             }
         }
+
         return true;
     }
 
     //---------------------------------------------------------
     // html
     //---------------------------------------------------------
+
+    /**
+     * @param $val
+     */
     public function highlight_error($val)
     {
         $text = '<div style="' . $this->_STYLE_HIGHLIGHT . '" >';
@@ -291,6 +368,10 @@ class happy_linux_admin_menu
         $text .= "</div>\n";
     }
 
+    /**
+     * @param $num
+     * @return string
+     */
     public function highlight_number($num)
     {
         $text = $num;
@@ -299,9 +380,14 @@ class happy_linux_admin_menu
             $text .= $num;
             $text .= '</span>';
         }
+
         return $text;
     }
 
+    /**
+     * @param $str
+     * @return string
+     */
     public function sanitize($str)
     {
         return htmlspecialchars($str, ENT_QUOTES);
@@ -310,15 +396,25 @@ class happy_linux_admin_menu
     //---------------------------------------------------------
     // xoops param
     //---------------------------------------------------------
+
+    /**
+     * @param string $format
+     * @return mixed
+     */
     public function get_xoops_module_name($format = 's')
     {
         global $xoopsModule;
+
         return $xoopsModule->getVar('name', $format);
     }
 
+    /**
+     * @return mixed
+     */
     public function get_xoops_language()
     {
         global $xoopsConfig;
+
         return $xoopsConfig['language'];
     }
 

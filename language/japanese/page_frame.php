@@ -1,5 +1,6 @@
 <?php
-// $Id: page_frame.php,v 1.1 2006/09/11 07:44:38 ohwada Exp $
+
+// $Id: page_frame.php,v 1.1 2010/11/07 14:59:15 ohwada Exp $
 
 // 2006-09-01 K.OHWADA
 // this is new file

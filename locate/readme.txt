@@ -1,4 +1,4 @@
-$Id: readme.txt,v 1.1 2006/10/05 10:43:28 ohwada Exp $
+$Id: readme.txt,v 1.1 2010/11/07 14:59:12 ohwada Exp $
 
 =================================================
 Happy Linux Framework Module

@@ -1,4 +1,5 @@
 <?php
+
 // $Id: magpie_parse.php,v 1.2 2011/12/29 18:13:10 ohwada Exp $
 
 // 2011-12-29 K.OHWADA
@@ -40,9 +41,7 @@
  * @author           Kellan Elliott-McCrea <kellan@protest.net>
  * @version          0.7a
  * @license          GPL
- *
  */
-
 define('HAPPY_LINUX_MAGPIE_RSS', 'RSS');
 define('HAPPY_LINUX_MAGPIE_ATOM', 'Atom');
 
@@ -52,7 +51,6 @@ define('HAPPY_LINUX_MAGPIE_ATOM', 'Atom');
  * Hybrid parser, and object, takes RSS as a string and returns a simple object.
  *
  * see: rss_fetch.inc for a simpler interface with integrated caching support
- *
  */
 //class MagpieRSS {
 class happy_linux_magpie_parse
@@ -61,64 +59,38 @@ class happy_linux_magpie_parse
 
     public $parser;
 
-    public $current_item = array();  // item currently being parsed
-    public $items        = array();  // collection of parsed items
-    public $channel      = array();  // hash of channel fields
-    public $textinput    = array();
-    public $image        = array();
+    public $current_item = [];  // item currently being parsed
+    public $items = [];  // collection of parsed items
+    public $channel = [];  // hash of channel fields
+    public $textinput = [];
+    public $image = [];
     public $feed_type;
     public $feed_version;
-    public $encoding     = '';       // output encoding of parsed rss
+    public $encoding = '';       // output encoding of parsed rss
 
     //  var $_source_encoding = '';     // only set if we have to parse xml prolog
     public $source_encoding = '';     // only set if we have to parse xml prolog
 
-    public $ERROR   = '';
+    public $ERROR = '';
     public $WARNING = '';
 
     // define some constants
 
-    public $_CONTENT_CONSTRUCTS = array('content', 'summary', 'info', 'title', 'tagline', 'copyright');
-    public $_KNOWN_ENCODINGS    = array('UTF-8', 'US-ASCII', 'ISO-8859-1');
+    public $_CONTENT_CONSTRUCTS = ['content', 'summary', 'info', 'title', 'tagline', 'copyright'];
+    public $_KNOWN_ENCODINGS = ['UTF-8', 'US-ASCII', 'ISO-8859-1'];
 
     // parser variables, useless if you're not a parser, treat as private
-    public $stack             = array(); // parser stack
-    public $inchannel         = false;
-    public $initem            = false;
-    public $incontent         = false; // if in Atom <content mode="xml"> field
-    public $intextinput       = false;
-    public $inimage           = false;
+    public $stack = []; // parser stack
+    public $inchannel = false;
+    public $initem = false;
+    public $incontent = false; // if in Atom <content mode="xml"> field
+    public $intextinput = false;
+    public $inimage = false;
     public $current_namespace = false;
 
     /**
      *  Set up XML parser, parse source, and return populated RSS object..
-     *
-     * @param string $source            string containing the RSS to be parsed
-     *
-     *  NOTE:  Probably a good idea to leave the encoding options alone unless
-     *         you know what you're doing as PHP's character set support is
-     *         a little weird.
-     *
-     *  NOTE:  A lot of this is unnecessary but harmless with PHP5
-     *
-     *
-     * @param string $output_encoding   output the parsed RSS in this character
-     *                                  set defaults to ISO-8859-1 as this is PHP's
-     *                                  default.
-     *
-     *                                  NOTE: might be changed to UTF-8 in future
-     *                                  versions.
-     *
-     * @param string $input_encoding    the character set of the incoming RSS source.
-     *                                  Leave blank and Magpie will try to figure it
-     *                                  out.
-     *
-     *
-     * @param bool   $detect_encoding   if false Magpie won't attempt to detect
-     *                                  source encoding. (caveat emptor)
-     *
      */
-
     public function __construct()
     {
         // dummy
@@ -126,18 +98,40 @@ class happy_linux_magpie_parse
 
     //  function MagpieRSS ($source, $output_encoding='ISO-8859-1',
     //                      $input_encoding=null, $detect_encoding=true)
-    public function magpie_parse($source, $output_encoding = 'ISO-8859-1', $input_encoding = null, $detect_encoding = true)
-    {
+
+    /**
+     * @param        $source
+     * @param string $output_encoding
+     * @param null   $input_encoding
+     * @param bool   $detect_encoding
+     */
+    public function magpie_parse(
+        $source,
+        $output_encoding = 'ISO-8859-1',
+        $input_encoding = null,
+        $detect_encoding = true
+    ) {
         # if PHP xml isn't compiled in, die
         #
         if (!function_exists('xml_parser_create')) {
-            $this->error("Failed to load PHP's XML Extension. " . 'http://www.php.net/manual/en/ref.xml.php', E_USER_ERROR);
+            $this->error(
+                "Failed to load PHP's XML Extension. " . 'http://www.php.net/manual/en/ref.xml.php',
+                E_USER_ERROR
+            );
         }
 
-        list($parser, $source) = $this->create_parser($source, $output_encoding, $input_encoding, $detect_encoding);
+        [$parser, $source] = $this->create_parser(
+            $source,
+            $output_encoding,
+            $input_encoding,
+            $detect_encoding
+        );
 
         if (!is_resource($parser)) {
-            $this->error("Failed to create an instance of PHP's XML parser. " . 'http://www.php.net/manual/en/ref.xml.php', E_USER_ERROR);
+            $this->error(
+                "Failed to create an instance of PHP's XML parser. " . 'http://www.php.net/manual/en/ref.xml.php',
+                E_USER_ERROR
+            );
         }
 
         $this->parser = $parser;
@@ -146,7 +140,11 @@ class happy_linux_magpie_parse
         # setup handlers
         #
         xml_set_object($this->parser, $this);
-        xml_set_element_handler($this->parser, 'feed_start_element', 'feed_end_element');
+        xml_set_element_handler(
+            $this->parser,
+            'feed_start_element',
+            'feed_end_element'
+        );
 
         xml_set_character_data_handler($this->parser, 'feed_cdata');
 
@@ -154,11 +152,11 @@ class happy_linux_magpie_parse
 
         if (!$status) {
             $errorcode = xml_get_error_code($this->parser);
-            if ($errorcode != XML_ERROR_NONE) {
-                $xml_error  = xml_error_string($errorcode);
+            if (XML_ERROR_NONE != $errorcode) {
+                $xml_error = xml_error_string($errorcode);
                 $error_line = xml_get_current_line_number($this->parser);
-                $error_col  = xml_get_current_column_number($this->parser);
-                $errormsg   = "$xml_error at line $error_line, column $error_col";
+                $error_col = xml_get_current_column_number($this->parser);
+                $errormsg = "$xml_error at line $error_line, column $error_col";
 
                 $this->error($errormsg);
             }
@@ -169,17 +167,22 @@ class happy_linux_magpie_parse
         $this->normalize();
     }
 
+    /**
+     * @param $p
+     * @param $element
+     * @param $attrs
+     */
     public function feed_start_element($p, $element, &$attrs)
     {
-        $el    = $element = strtolower($element);
+        $el = $element = mb_strtolower($element);
         $attrs = array_change_key_case($attrs, CASE_LOWER);
 
         // check for a namespace, and split if found
         $ns = false;
-        if (strpos($element, ':')) {
-            list($ns, $el) = explode(':', $element, 2);
+        if (mb_strpos($element, ':')) {
+            [$ns, $el] = split(':', $element, 2);
         }
-        if ($ns and $ns != 'rdf') {
+        if ($ns and 'rdf' != $ns) {
             $this->current_namespace = $ns;
         }
 
@@ -187,17 +190,17 @@ class happy_linux_magpie_parse
         # identify feed from root element
         #
         if (!isset($this->feed_type)) {
-            if ($el == 'rdf') {
-                $this->feed_type    = HAPPY_LINUX_MAGPIE_RSS;
+            if ('rdf' == $el) {
+                $this->feed_type = HAPPY_LINUX_MAGPIE_RSS;
                 $this->feed_version = '1.0';
-            } elseif ($el == 'rss') {
+            } elseif ('rss' == $el) {
                 $this->feed_type = HAPPY_LINUX_MAGPIE_RSS;
 
                 //              $this->feed_version = $attrs['version'];
                 if (isset($attrs['version'])) {
                     $this->feed_version = $attrs['version'];
                 }
-            } elseif ($el == 'feed') {
+            } elseif ('feed' == $el) {
                 $this->feed_type = HAPPY_LINUX_MAGPIE_ATOM;
 
                 //              $this->feed_version = $attrs['version'];
@@ -207,12 +210,13 @@ class happy_linux_magpie_parse
 
                 $this->inchannel = true;
             }
+
             return;
         }
 
-        if ($el == 'channel') {
+        if ('channel' == $el) {
             $this->inchannel = true;
-        } elseif ($el == 'item' or $el == 'entry') {
+        } elseif ('item' == $el or 'entry' == $el) {
             $this->initem = true;
             if (isset($attrs['rdf:about'])) {
                 $this->current_item['about'] = $attrs['rdf:about'];
@@ -221,22 +225,29 @@ class happy_linux_magpie_parse
 
         // if we're in the default namespace of an RSS feed,
         //  record textinput or image fields
-        elseif ($this->feed_type == HAPPY_LINUX_MAGPIE_RSS and $this->current_namespace == '' and $el == 'textinput') {
+        elseif (HAPPY_LINUX_MAGPIE_RSS == $this->feed_type and '' == $this->current_namespace and 'textinput' == $el) {
             $this->intextinput = true;
-        } elseif ($this->feed_type == HAPPY_LINUX_MAGPIE_RSS and $this->current_namespace == '' and $el == 'image') {
+        } elseif (HAPPY_LINUX_MAGPIE_RSS == $this->feed_type and '' == $this->current_namespace and 'image' == $el) {
             $this->inimage = true;
         } # handle atom content constructs
-        elseif ($this->feed_type == HAPPY_LINUX_MAGPIE_ATOM and in_array($el, $this->_CONTENT_CONSTRUCTS)) {
+        elseif (HAPPY_LINUX_MAGPIE_ATOM == $this->feed_type and in_array($el, $this->_CONTENT_CONSTRUCTS)) {
             // avoid clashing w/ RSS mod_content
-            if ($el == 'content') {
+            if ('content' == $el) {
                 $el = 'atom_content';
             }
 
             $this->incontent = $el;
         } // if inside an Atom content construct (e.g. content or summary) field treat tags as text
-        elseif ($this->feed_type == HAPPY_LINUX_MAGPIE_ATOM and $this->incontent) {
+        elseif (HAPPY_LINUX_MAGPIE_ATOM == $this->feed_type and $this->incontent) {
             // if tags are inlined, then flatten
-            $attrs_str = implode(' ', array_map('happy_linux_magpie_map_attrs', array_keys($attrs), array_values($attrs)));
+            $attrs_str = implode(
+                ' ',
+                array_map(
+                    'happy_linux_magpie_map_attrs',
+                    array_keys($attrs),
+                    array_values($attrs)
+                )
+            );
 
             $this->append_content("<$element $attrs_str>");
 
@@ -247,10 +258,10 @@ class happy_linux_magpie_parse
         // Magpie treats link elements of type rel='alternate'
         // as being equivalent to RSS's simple link element.
         //
-        elseif ($this->feed_type == HAPPY_LINUX_MAGPIE_ATOM and $el == 'link') {
+        elseif (HAPPY_LINUX_MAGPIE_ATOM == $this->feed_type and 'link' == $el) {
             // Undefined index: rel
             if (isset($attrs['rel'])) {
-                if ($attrs['rel'] == 'alternate') {
+                if ('alternate' == $attrs['rel']) {
                     $link_el = 'link';
                 } else {
                     $link_el = 'link_' . $attrs['rel'];
@@ -264,16 +275,16 @@ class happy_linux_magpie_parse
         // RSS enclosure
         // some RSS have twe or more enclosure tag
         // http://www.podcastnavi.com/p_edit/index-utf8.xml
-        elseif ($this->feed_type == HAPPY_LINUX_MAGPIE_RSS and $el == 'enclosure') {
+        elseif (HAPPY_LINUX_MAGPIE_RSS == $this->feed_type and 'enclosure' == $el) {
             $this->current_item['enclosure'][] = $attrs;
         } // media_rss
-        elseif (($this->current_namespace == 'media') && ($el == 'content')) {
+        elseif (('media' == $this->current_namespace) && ('content' == $el)) {
             $this->current_item['media']['content'] = $attrs;
         } // some RSS have twe or more thumbnail tag
-        elseif (($this->current_namespace == 'media') && ($el == 'thumbnail')) {
+        elseif (('media' == $this->current_namespace) && ('thumbnail' == $el)) {
             $this->current_item['media']['thumbnail'][] = $attrs;
         } // ATOM 1.0 category
-        elseif ($this->feed_type == HAPPY_LINUX_MAGPIE_ATOM and $el == 'category') {
+        elseif (HAPPY_LINUX_MAGPIE_ATOM == $this->feed_type and 'category' == $el) {
             if (isset($attrs['term'])) {
                 $this->append('category', $attrs['term']);
             }
@@ -283,9 +294,13 @@ class happy_linux_magpie_parse
         }
     }
 
+    /**
+     * @param $p
+     * @param $text
+     */
     public function feed_cdata($p, $text)
     {
-        if ($this->feed_type == HAPPY_LINUX_MAGPIE_ATOM and $this->incontent) {
+        if (HAPPY_LINUX_MAGPIE_ATOM == $this->feed_type and $this->incontent) {
             $this->append_content($text);
         } else {
             $current_el = implode('_', array_reverse($this->stack));
@@ -293,23 +308,27 @@ class happy_linux_magpie_parse
         }
     }
 
+    /**
+     * @param $p
+     * @param $el
+     */
     public function feed_end_element($p, $el)
     {
-        $el = strtolower($el);
+        $el = mb_strtolower($el);
 
-        if ($el == 'item' or $el == 'entry') {
-            $this->items[]      = $this->current_item;
-            $this->current_item = array();
-            $this->initem       = false;
-        } elseif ($this->feed_type == HAPPY_LINUX_MAGPIE_RSS and $this->current_namespace == '' and $el == 'textinput') {
+        if ('item' == $el or 'entry' == $el) {
+            $this->items[] = $this->current_item;
+            $this->current_item = [];
+            $this->initem = false;
+        } elseif (HAPPY_LINUX_MAGPIE_RSS == $this->feed_type and '' == $this->current_namespace and 'textinput' == $el) {
             $this->intextinput = false;
-        } elseif ($this->feed_type == HAPPY_LINUX_MAGPIE_RSS and $this->current_namespace == '' and $el == 'image') {
+        } elseif (HAPPY_LINUX_MAGPIE_RSS == $this->feed_type and '' == $this->current_namespace and 'image' == $el) {
             $this->inimage = false;
-        } elseif ($this->feed_type == HAPPY_LINUX_MAGPIE_ATOM and in_array($el, $this->_CONTENT_CONSTRUCTS)) {
+        } elseif (HAPPY_LINUX_MAGPIE_ATOM == $this->feed_type and in_array($el, $this->_CONTENT_CONSTRUCTS)) {
             $this->incontent = false;
-        } elseif ($el == 'channel' or $el == 'feed') {
+        } elseif ('channel' == $el or 'feed' == $el) {
             $this->inchannel = false;
-        } elseif ($this->feed_type == HAPPY_LINUX_MAGPIE_ATOM and $this->incontent) {
+        } elseif (HAPPY_LINUX_MAGPIE_ATOM == $this->feed_type and $this->incontent) {
             // balance tags properly
             // note:  i don't think this is actually neccessary
             if ($this->stack[0] == $el) {
@@ -326,6 +345,10 @@ class happy_linux_magpie_parse
         $this->current_namespace = false;
     }
 
+    /**
+     * @param        $str1
+     * @param string $str2
+     */
     public function concat(&$str1, $str2 = '')
     {
         if (!isset($str1)) {
@@ -334,6 +357,9 @@ class happy_linux_magpie_parse
         $str1 .= $str2;
     }
 
+    /**
+     * @param $text
+     */
     public function append_content($text)
     {
         if ($this->initem) {
@@ -344,6 +370,11 @@ class happy_linux_magpie_parse
     }
 
     // smart append - field and namespace aware
+
+    /**
+     * @param $el
+     * @param $text
+     */
     public function append($el, $text)
     {
         if (!$el) {
@@ -351,23 +382,47 @@ class happy_linux_magpie_parse
         }
         if ($this->current_namespace) {
             if ($this->initem) {
-                $this->concat($this->current_item[$this->current_namespace][$el], $text);
+                $this->concat(
+                    $this->current_item[$this->current_namespace][$el],
+                    $text
+                );
             } elseif ($this->inchannel) {
-                $this->concat($this->channel[$this->current_namespace][$el], $text);
+                $this->concat(
+                    $this->channel[$this->current_namespace][$el],
+                    $text
+                );
             } elseif ($this->intextinput) {
-                $this->concat($this->textinput[$this->current_namespace][$el], $text);
+                $this->concat(
+                    $this->textinput[$this->current_namespace][$el],
+                    $text
+                );
             } elseif ($this->inimage) {
-                $this->concat($this->image[$this->current_namespace][$el], $text);
+                $this->concat(
+                    $this->image[$this->current_namespace][$el],
+                    $text
+                );
             }
         } else {
             if ($this->initem) {
-                $this->concat($this->current_item[$el], $text);
+                $this->concat(
+                    $this->current_item[$el],
+                    $text
+                );
             } elseif ($this->intextinput) {
-                $this->concat($this->textinput[$el], $text);
+                $this->concat(
+                    $this->textinput[$el],
+                    $text
+                );
             } elseif ($this->inimage) {
-                $this->concat($this->image[$el], $text);
+                $this->concat(
+                    $this->image[$el],
+                    $text
+                );
             } elseif ($this->inchannel) {
-                $this->concat($this->channel[$el], $text);
+                $this->concat(
+                    $this->channel[$el],
+                    $text
+                );
             }
         }
     }
@@ -376,10 +431,9 @@ class happy_linux_magpie_parse
     {
         // if atom populate rss fields
         if ($this->is_atom()) {
-
             //          $this->channel['description'] = $this->channel['tagline'];
 
-            for ($i = 0; $i < count($this->items); ++$i) {
+            for ($i = 0, $iMax = count($this->items); $i < $iMax; $i++) {
                 $item = $this->items[$i];
                 if (isset($item['summary'])) {
                     $item['description'] = $item['summary'];
@@ -400,10 +454,9 @@ class happy_linux_magpie_parse
                 $this->items[$i] = $item;
             }
         } elseif ($this->is_rss()) {
-
             //          $this->channel['tagline'] = $this->channel['description'];
 
-            for ($i = 0; $i < count($this->items); ++$i) {
+            for ($i = 0, $iMax = count($this->items); $i < $iMax; $i++) {
                 $item = $this->items[$i];
                 if (isset($item['description'])) {
                     $item['summary'] = $item['description'];
@@ -431,41 +484,52 @@ class happy_linux_magpie_parse
         }
     }
 
+    /**
+     * @return bool
+     */
     public function is_rss()
     {
-        if ($this->feed_type == HAPPY_LINUX_MAGPIE_RSS) {
+        if (HAPPY_LINUX_MAGPIE_RSS == $this->feed_type) {
             return $this->feed_version;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
+    /**
+     * @return bool
+     */
     public function is_atom()
     {
-        if ($this->feed_type == HAPPY_LINUX_MAGPIE_ATOM) {
+        if (HAPPY_LINUX_MAGPIE_ATOM == $this->feed_type) {
             return $this->feed_version;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
      * return XML parser, and possibly re-encoded source
-     *
+     * @param mixed $source
+     * @param mixed $out_enc
+     * @param mixed $in_enc
+     * @param mixed $detect
+     * @return array
+     * @return array
      */
     public function create_parser($source, $out_enc, $in_enc, $detect)
     {
-        if (substr(phpversion(), 0, 1) == 5) {
+        if (5 == mb_substr(phpversion(), 0, 1)) {
             $parser = $this->php5_create_parser($in_enc, $detect);
         } else {
-            list($parser, $source) = $this->php4_create_parser($source, $in_enc, $detect);
+            [$parser, $source] = $this->php4_create_parser($source, $in_enc, $detect);
         }
         if ($out_enc) {
             $this->encoding = $out_enc;
             xml_parser_set_option($parser, XML_OPTION_TARGET_ENCODING, $out_enc);
         }
 
-        return array($parser, $source);
+        return [$parser, $source];
     }
 
     /**
@@ -475,16 +539,19 @@ class happy_linux_magpie_parse
      * if passed an empty string as the encoding.
      *
      * All hail libxml2!
-     *
+     * @param mixed $in_enc
+     * @param mixed $detect
+     * @return resource
+     * @return resource
      */
     public function php5_create_parser($in_enc, $detect)
     {
         // by default php5 does a fine job of detecting input encodings
         if (!$detect && $in_enc) {
             return xml_parser_create($in_enc);
-        } else {
-            return xml_parser_create('');
         }
+
+        return xml_parser_create('');
     }
 
     /**
@@ -500,17 +567,21 @@ class happy_linux_magpie_parse
      *
      * The following code is based on SJM's work with FoF
      * @see http://minutillo.com/steve/weblog/2004/6/17/php-xml-and-character-encodings-a-tale-of-sadness-rage-and-data-loss
-     *
+     * @param mixed $source
+     * @param mixed $in_enc
+     * @param mixed $detect
+     * @return array
+     * @return array
      */
     public function php4_create_parser($source, $in_enc, $detect)
     {
         if (!$detect) {
-            return array(xml_parser_create($in_enc), $source);
+            return [xml_parser_create($in_enc), $source];
         }
 
         if (!$in_enc) {
             if (preg_match('/<?xml.*encoding=[\'"](.*?)[\'"].*?>/m', $source, $m)) {
-                $in_enc                = strtoupper($m[1]);
+                $in_enc = mb_strtoupper($m[1]);
                 $this->source_encoding = $in_enc;
             } else {
                 $in_enc = 'UTF-8';
@@ -518,7 +589,7 @@ class happy_linux_magpie_parse
         }
 
         if ($this->known_encoding($in_enc)) {
-            return array(xml_parser_create($in_enc), $source);
+            return [xml_parser_create($in_enc), $source];
         }
 
         // the dectected encoding is not one of the simple encodings PHP knows
@@ -530,7 +601,7 @@ class happy_linux_magpie_parse
         if (function_exists('iconv')) {
             $encoded_source = iconv($in_enc, 'UTF-8', $source);
             if ($encoded_source) {
-                return array(xml_parser_create('UTF-8'), $encoded_source);
+                return [xml_parser_create('UTF-8'), $encoded_source];
             }
         }
 
@@ -539,26 +610,37 @@ class happy_linux_magpie_parse
         if (function_exists('mb_convert_encoding')) {
             $encoded_source = mb_convert_encoding($source, 'UTF-8', $in_enc);
             if ($encoded_source) {
-                return array(xml_parser_create('UTF-8'), $encoded_source);
+                return [xml_parser_create('UTF-8'), $encoded_source];
             }
         }
 
         // else
-        $this->error("Feed is in an unsupported character encoding. ($in_enc) " . 'You may see strange artifacts, and mangled characters.', E_USER_NOTICE);
+        $this->error(
+            "Feed is in an unsupported character encoding. ($in_enc) " . 'You may see strange artifacts, and mangled characters.',
+            E_USER_NOTICE
+        );
 
-        return array(xml_parser_create(), $source);
+        return [xml_parser_create(), $source];
     }
 
+    /**
+     * @param $enc
+     * @return bool|string
+     */
     public function known_encoding($enc)
     {
-        $enc = strtoupper($enc);
+        $enc = mb_strtoupper($enc);
         if (in_array($enc, $this->_KNOWN_ENCODINGS)) {
             return $enc;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
+    /**
+     * @param     $errormsg
+     * @param int $lvl
+     */
     public function error($errormsg, $lvl = E_USER_WARNING)
     {
         // append PHP's error message if track_errors enabled
@@ -583,6 +665,11 @@ class happy_linux_magpie_parse
 } // end class RSS
 
 // function map_attrs($k, $v) {
+/**
+ * @param $k
+ * @param $v
+ * @return string
+ */
 function happy_linux_magpie_map_attrs($k, $v)
 {
     return "$k=\"$v\"";
@@ -595,6 +682,11 @@ if (!function_exists('array_change_key_case')) {
     define('CASE_UPPER', 1);
     define('CASE_LOWER', 0);
 
+    /**
+     * @param     $array
+     * @param int $case
+     * @return mixed
+     */
     function array_change_key_case($array, $case = CASE_LOWER)
     {
         if ($case = CASE_LOWER) {
@@ -605,6 +697,7 @@ if (!function_exists('array_change_key_case')) {
         foreach ($array as $key => $value) {
             $output[$cmd($key)] = $value;
         }
+
         return $output;
     }
 }

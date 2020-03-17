@@ -1,10 +1,14 @@
 <?php
-// $Id: dev_functions.php,v 1.1 2006/11/21 03:04:56 ohwada Exp $
+
+// $Id: dev_functions.php,v 1.1 2010/11/07 14:59:16 ohwada Exp $
 
 //================================================================
 // WebLinks Module
 // 2006-09-20 K.OHWADA
 //================================================================
+/**
+ * @param null $title
+ */
 function dev_header($title = null)
 {
     global $xoopsConfig, $xoopsModule;
@@ -23,20 +27,23 @@ function dev_header($title = null)
     echo '<meta http-equiv="content-type" content="text/html; charset=' . _CHARSET . '" />' . "\n";
     echo '<title>' . $title . "</title>\n";
     echo "</head><body>\n";
-    echo "<br />\n";
-    echo '<a href="index.php">' . $title . '</a>' . "<br /><br />\n";
-    echo "<hr /><br />\n";
+    echo "<br>\n";
+    echo '<a href="index.php">' . $title . '</a>' . "<br><br>\n";
+    echo "<hr /><br>\n";
 }
 
 function dev_footer()
 {
-    echo "<br /><hr />\n";
-    echo '- <a href="index.php">goto Dev index</a>' . "<br />\n";
+    echo "<br><hr />\n";
+    echo '- <a href="index.php">goto Dev index</a>' . "<br>\n";
     echo "</head></html>\n";
     exit();
 }
 
+/**
+ * @param $msg
+ */
 function dev_print_error($msg)
 {
-    echo '<span style="color: #ff0000;">' . $msg . "</span><br />\n";
+    echo '<span style="color: #ff0000;">' . $msg . "</span><br>\n";
 }

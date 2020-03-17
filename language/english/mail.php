@@ -1,5 +1,6 @@
 <?php
-// $Id: mail.php,v 1.1 2007/09/15 06:46:41 ohwada Exp $
+
+// $Id: mail.php,v 1.1 2010/11/07 14:59:15 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module

@@ -1,5 +1,6 @@
 <?php
-// $Id: language_local.php,v 1.2 2006/12/22 15:00:01 ohwada Exp $
+
+// $Id: language_local.php,v 1.1 2010/11/07 14:59:14 ohwada Exp $
 
 // 2006-12-17 K.OHWADA
 // change get_country_code()
@@ -20,9 +21,12 @@
 // class happy_linux_language_local
 // dummy class for English
 //=========================================================
+
+/**
+ * Class happy_linux_language_local
+ */
 class happy_linux_language_local extends happy_linux_language_base
 {
-
     //---------------------------------------------------------
     // constructor
     //---------------------------------------------------------
@@ -34,6 +38,10 @@ class happy_linux_language_local extends happy_linux_language_base
     //---------------------------------------------------------
     // country code
     //---------------------------------------------------------
+
+    /**
+     * @return string
+     */
     public function get_country_code()
     {
         return 'ir';    // iran

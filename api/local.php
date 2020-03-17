@@ -1,5 +1,6 @@
 <?php
-// $Id: local.php,v 1.2 2007/11/15 11:08:43 ohwada Exp $
+
+// $Id: local.php,v 1.1 2010/11/07 14:59:13 ohwada Exp $
 
 // 2007-11-11 K.OHWADA
 // browser.php

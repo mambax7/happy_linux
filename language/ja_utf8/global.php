@@ -1,5 +1,6 @@
 <?php
-// $Id: global.php,v 1.4 2007/11/11 02:39:22 ohwada Exp $
+
+// $Id: global.php,v 1.1 2010/11/07 14:59:14 ohwada Exp $
 
 // 2007-11-11
 // _HAPPY_LINUX_FAIL

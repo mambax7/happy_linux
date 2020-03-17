@@ -1,5 +1,6 @@
 <?php
-// $Id: updateblock.inc.php,v 1.1 2007/05/15 04:57:58 ohwada Exp $
+
+// $Id: updateblock.inc.php,v 1.1 2010/11/07 14:59:12 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
@@ -12,25 +13,25 @@ if (!defined('XOOPS_ROOT_PATH')) {
 
 // Keep Block option values when update (by nobunobu)
 global $xoopsDB;
-$query  = 'SELECT mid FROM ' . $xoopsDB->prefix('modules') . " WHERE dirname='" . $modversion['dirname'] . "' ";
+$query = 'SELECT mid FROM ' . $xoopsDB->prefix('modules') . " WHERE dirname='" . $modversion['dirname'] . "' ";
 $result = $xoopsDB->query($query);
-$record = $xoopsDB->fetcharray($result);
+$record = $xoopsDB->fetchArray($result);
 if ($record) {
-    $mid   = $record['mid'];
+    $mid = $record['mid'];
     $count = count($modversion['blocks']);
     /* $sql = "SELECT * FROM ".$xoopsDB->prefix('newblocks')." WHERE mid=".$mid." AND block_type ='D'";
     $fresult = $xoopsDB->query($sql);
     $n_funcnum = $count;
     while ($fblock = $xoopsDB->fetchArray($fresult)) {
         $bnum = 0;
-        for ($i = 1 ; $i <= $count ; ++$i) {
+        for ($i = 1 ; $i <= $count ; $i++) {
             if (($modversion['blocks'][$i]['file'] == $fblock['func_file']) and ($modversion['blocks'][$i]['show_func'] == $fblock['show_func'])) {
                 $bnum = $i;
                 break;
             }
         }
         if($bnum) {
-            ++$n_funcnum;
+            $n_funcnum++;
             $modversion['blocks'][$n_funcnum]['file'] = $fblock['func_file'];
             $modversion['blocks'][$n_funcnum]['name'] = $fblock['name'];
             $modversion['blocks'][$n_funcnum]['description'] = $fblock['name'];
@@ -46,7 +47,7 @@ if ($record) {
                     $local_msgs[] = "Option's values of the cloned block <b>".$fblock['name']."</b> will be kept. (value = <b>".$fblock['options']."</b>)";
                 } else if (count($old_vals) < count($def_vals)){
                     // the number of parameters is increased
-                    for ($j=0; $j < count($old_vals); ++$j) {
+                    for ($j=0; $j < count($old_vals); $j++) {
                         $def_vals[$j] = $old_vals[$j];
                     }
                     $modversion['blocks'][$n_funcnum]['options'] = implode("|",$def_vals);
@@ -62,36 +63,32 @@ if ($record) {
         }
     } */
 
-    $sql     = 'SELECT * FROM ' . $xoopsDB->prefix('newblocks') . ' WHERE mid=' . $mid . " AND block_type <>'D' AND func_num > $count";
+    $sql = 'SELECT * FROM ' . $xoopsDB->prefix('newblocks') . ' WHERE mid=' . $mid . " AND block_type <>'D' AND func_num > $count";
     $fresult = $xoopsDB->query($sql);
     while ($fblock = $xoopsDB->fetchArray($fresult)) {
         $local_msgs[] = 'Non Defined Block <b>' . $fblock['name'] . '</b> will be deleted';
-        $sql          = 'DELETE FROM ' . $xoopsDB->prefix('newblocks') . " WHERE bid='" . $fblock['bid'] . "'";
-        $iret         = $xoopsDB->query($sql);
+        $sql = 'DELETE FROM ' . $xoopsDB->prefix('newblocks') . " WHERE bid='" . $fblock['bid'] . "'";
+        $iret = $xoopsDB->query($sql);
     }
 
-    for ($i = 1; $i <= $count; ++$i) {
-        $sql     = 'SELECT name,options FROM ' . $xoopsDB->prefix('newblocks') . ' WHERE mid=' . $mid . ' AND func_num=' . $i . " AND show_func='" . addslashes($modversion['blocks'][$i]['show_func'])
-                   . "' AND func_file='" . addslashes($modversion['blocks'][$i]['file']) . "'";
+    for ($i = 1; $i <= $count; $i++) {
+        $sql = 'SELECT name,options FROM ' . $xoopsDB->prefix('newblocks') . ' WHERE mid=' . $mid . ' AND func_num=' . $i . " AND show_func='" . addslashes($modversion['blocks'][$i]['show_func']) . "' AND func_file='" . addslashes($modversion['blocks'][$i]['file']) . "'";
         $fresult = $xoopsDB->query($sql);
-        $fblock  = $xoopsDB->fetchArray($fresult);
+        $fblock = $xoopsDB->fetchArray($fresult);
         if ($fblock['options']) {
             $old_vals = explode('|', $fblock['options']);
             $def_vals = explode('|', $modversion['blocks'][$i]['options']);
             if (count($old_vals) == count($def_vals)) {
                 $modversion['blocks'][$i]['options'] = $fblock['options'];
-                $local_msgs[]                        = "Option's values of the block <b>" . $fblock['name'] . '</b> will be kept. (value = <b>' . $fblock['options'] . '</b>)';
+                $local_msgs[] = "Option's values of the block <b>" . $fblock['name'] . '</b> will be kept. (value = <b>' . $fblock['options'] . '</b>)';
             } elseif (count($old_vals) < count($def_vals)) {
-                for ($j = 0; $j < count($old_vals); ++$j) {
+                for ($j = 0, $jMax = count($old_vals); $j < $jMax; $j++) {
                     $def_vals[$j] = $old_vals[$j];
                 }
                 $modversion['blocks'][$i]['options'] = implode('|', $def_vals);
-                $local_msgs[]                        =
-                    "Option's values of the block <b>" . $fblock['name'] . '</b> will be kept and new option(s) are added. (value = <b>' . $modversion['blocks'][$i]['options'] . '</b>)';
+                $local_msgs[] = "Option's values of the block <b>" . $fblock['name'] . '</b> will be kept and new option(s) are added. (value = <b>' . $modversion['blocks'][$i]['options'] . '</b>)';
             } else {
-                $local_msgs[] =
-                    "Option's values of the block <b>" . $fblock['name'] . '</b> will be reset to the default, because of some decrease of options. (value = <b>' . $modversion['blocks'][$i]['options']
-                    . '</b>)';
+                $local_msgs[] = "Option's values of the block <b>" . $fblock['name'] . '</b> will be reset to the default, because of some decrease of options. (value = <b>' . $modversion['blocks'][$i]['options'] . '</b>)';
             }
         }
     }
@@ -99,6 +96,6 @@ if ($record) {
 
 global $msgs, $myblocksadmin_parsed_updateblock;
 if (!empty($msgs) && empty($myblocksadmin_parsed_updateblock)) {
-    $msgs                             = array_merge($msgs, $local_msgs);
+    $msgs = array_merge($msgs, $local_msgs);
     $myblocksadmin_parsed_updateblock = true;
 }

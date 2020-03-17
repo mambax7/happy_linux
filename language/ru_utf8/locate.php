@@ -1,4 +1,5 @@
 <?php
+
 // $Id: locate.php,v 1.1 2012/04/08 18:22:28 ohwada Exp $
 
 // 2006-10-01 K.OHWADA
@@ -14,4 +15,3 @@
 
 // dummy for Russian
 // define('_HAPPY_LINUX_GM_DEFAULT_LOCATION', '');
-;

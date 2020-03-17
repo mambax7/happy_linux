@@ -1,5 +1,6 @@
 <?php
-// $Id: charcode.php,v 1.1 2007/10/13 06:49:35 ohwada Exp $
+
+// $Id: charcode.php,v 1.1 2010/11/07 14:59:15 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
@@ -10,4 +11,3 @@
 // This is for dummy in English.
 // special use for Japanese
 //---------------------------------------------------------
-;

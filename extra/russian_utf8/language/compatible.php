@@ -1,4 +1,5 @@
 <?php
+
 // $Id: compatible.php,v 1.1 2012/04/08 18:22:28 ohwada Exp $
 
 // 2007-11-24 K.OHWADA
@@ -34,7 +35,7 @@ if (!defined('_HAPPY_LINUX_CONF_TABLE_MANAGE')) {
     define('_HAPPY_LINUX_CONF_TABLE_CHECK', 'Проверить таблицу %s');
     define('_HAPPY_LINUX_CONF_TABLE_REINSTALL', 'Рекомендуется переустановить, если обнаружена ошибка');
     define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW', 'Обновление конфигурации таблицы');
-    define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Выполнить, если обнаружена ошибка. <br />Существующие значения аннулируются. <br />Установите значения после выполнения. ');
+    define('_HAPPY_LINUX_CONF_TABLE_CONFIG_RENEW_DESC', 'Выполнить, если обнаружена ошибка. <br>Существующие значения аннулируются. <br>Установите значения после выполнения. ');
 }
 
 //---------------------------------------------------------
@@ -63,7 +64,7 @@ if (!defined('_HAPPY_LINUX_AM_MODULE')) {
     define('_HAPPY_LINUX_AM_DIR_NOT_WRITABLE', 'Эта директория недоступка для записи');
     define('_HAPPY_LINUX_AM_MEMORY_LIMIT_TOO_SMALL', 'memory_limit слишком мал');
     define('_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'Модуль веб-ссылок требует больше памяти, чем %s MB');
-    define('_HAPPY_LINUX_AM_MEMORY_DESC', 'Это значение является одним стандартом.<br />В зависимости от серверной среды, иногда бывает больше или меньше.');
+    define('_HAPPY_LINUX_AM_MEMORY_DESC', 'Это значение является одним стандартом.<br>В зависимости от серверной среды, иногда бывает больше или меньше.');
 }
 
 //---------------------------------------------------------

@@ -1,5 +1,6 @@
 <?php
-// $Id: rss_constant.php,v 1.2 2007/10/22 01:55:01 ohwada Exp $
+
+// $Id: rss_constant.php,v 1.1 2010/11/07 14:59:12 ohwada Exp $
 
 // 2007-10-10 K.OHWADA
 // HAPPY_LINUX_RSS_CACHE_ID_GUEST

@@ -1,5 +1,6 @@
 <?php
-// $Id: test_config_base.php,v 1.1 2006/11/21 03:04:56 ohwada Exp $
+
+// $Id: test_config_base.php,v 1.1 2010/11/07 14:59:16 ohwada Exp $
 
 //================================================================
 // Happy Linux Framework Module
@@ -16,7 +17,7 @@ dev_header();
 echo "<h3>test happy_linux_config_base</h3>\n";
 
 $gpc = get_magic_quotes_gpc();
-echo 'get_magic_quotes_gpc = ' . $gpc . "<br /><br />\n";
+echo 'get_magic_quotes_gpc = ' . $gpc . "<br><br>\n";
 
 test_common('bool', 0, 0);
 test_common('bool', 1, 1);
@@ -53,57 +54,69 @@ test_common('other', 'abc', 'abc');
 test_common('other', "ab \t cd \n ef \0", "ab \t cd \n ef \0");
 test_common('other', 'javascript:', 'javascript:');
 
-test_array('array', 'ab1|ab2', serialize(array('ab1', 'ab2')), array('ab1', 'ab2'));
-test_array('array', array('def'), serialize(array('def')), array('def'));
+test_array('array', 'ab1|ab2', serialize(['ab1', 'ab2']), ['ab1', 'ab2']);
+test_array('array', ['def'], serialize(['def']), ['def']);
 
 if ($gpc) {
-    test_array('array', array("\'ghi\'"), serialize(array("'ghi'")), array("'ghi'"));
+    test_array('array', ["\'ghi\'"], serialize(["'ghi'"]), ["'ghi'"]);
 } else {
-    test_array('array', array("\'ghi\'"), serialize(array("\'ghi\'")), array("\'ghi\'"));
+    test_array('array', ["\'ghi\'"], serialize(["\'ghi\'"]), ["\'ghi\'"]);
 }
 
 dev_footer();
 exit();
 // === main end ==
 
+/**
+ * @param      $key
+ * @param      $set
+ * @param      $get_expect
+ * @param null $getvar_expect
+ */
 function test_common($key, $set, $get_expect, $getvar_expect = null)
 {
     $obj = new happy_linux_config_base();
     $obj->set('conf_valuetype', $key);
     $obj->setConfValueForInput($set);
-    $get    = $obj->get('conf_value');
+    $get = $obj->get('conf_value');
     $getvar = $obj->getConfValueForOutput();
 
-    if ($getvar_expect === null) {
+    if (null === $getvar_expect) {
         $getvar_expect = $get_expect;
     }
 
-    echo "$key : $set : $get : $getvar <br />\n";
+    echo "$key : $set : $get : $getvar <br>\n";
 
     if (($get_expect != $get) || ($getvar_expect != $getvar)) {
         dev_print_error("unmatch $key : $set : $get_expect != $get : $getvar_expect != $getvar");
     }
 }
 
+/**
+ * @param      $key
+ * @param      $set
+ * @param      $get_expect
+ * @param null $getvar_expect
+ */
 function test_array($key, $set, $get_expect, $getvar_expect = null)
 {
     $obj = new happy_linux_config_base();
     $obj->set('conf_valuetype', $key);
     $obj->setConfValueForInput($set);
-    $get    = $obj->get('conf_value');
+    $get = $obj->get('conf_value');
     $getvar = $obj->getConfValueForOutput();
 
-    if ($getvar_expect === null) {
+    if (null === $getvar_expect) {
         $getvar_expect = $get_expect;
     }
 
-    echo "$key : <br />\n";
+    echo "$key : <br>\n";
     print_r($set);
-    echo "<br />\n";
+    echo "<br>\n";
     print_r($get);
-    echo "<br />\n";
+    echo "<br>\n";
     print_r($getvar);
-    echo "<br /><br />\n";
+    echo "<br><br>\n";
 
     if (($get_expect != $get) || ($getvar_expect != $getvar)) {
         dev_print_error("unmatch $key : $set : $get_expect != $get : $getvar_expect != $getvar");

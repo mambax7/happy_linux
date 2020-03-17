@@ -1,5 +1,6 @@
 <?php
-// $Id: myblocksadmin.php,v 1.1 2007/05/15 04:56:01 ohwada Exp $
+
+// $Id: myblocksadmin.php,v 1.1 2010/11/07 14:59:16 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
@@ -40,7 +41,7 @@ error_reporting($error_reporting_level);
 
 $group_defs = file("$xoops_system_path/language/$language/admin/groups.php");
 foreach ($group_defs as $def) {
-    if (strstr($def, '_AM_ACCESSRIGHTS') || strstr($def, '_AM_ACTIVERIGHTS')) {
+    if (mb_strstr($def, '_AM_ACCESSRIGHTS') || mb_strstr($def, '_AM_ACTIVERIGHTS')) {
         eval($def);
     }
 }
@@ -55,21 +56,21 @@ $module_handler = xoops_getHandler('module');
 if (!empty($_GET['dirname'])) {
     $target_module = $module_handler->getByDirname($_GET['dirname']);
 }/* else if( ! empty( $_GET['mid'] ) ) {
-    $target_module = $module_handler->get( intval( $_GET['mid'] ) );
+    $target_module =& $module_handler->get( intval( $_GET['mid'] ) );
 }*/
 
 if (!empty($target_module) && is_object($target_module)) {
     // specified by dirname
-    $target_mid     = $target_module->getVar('mid');
-    $target_mname   = $target_module->getVar('name');
+    $target_mid = $target_module->getVar('mid');
+    $target_mname = $target_module->getVar('name');
     $query4redirect = '?dirname=' . urlencode(strip_tags($_GET['dirname']));
-} elseif (isset($_GET['mid']) && $_GET['mid'] == 0 || $xoopsModule->getVar('dirname') == 'blocksadmin') {
-    $target_mid     = 0;
-    $target_mname   = '';
+} elseif (isset($_GET['mid']) && 0 == $_GET['mid'] || 'blocksadmin' == $xoopsModule->getVar('dirname')) {
+    $target_mid = 0;
+    $target_mname = '';
     $query4redirect = '?mid=0';
 } else {
-    $target_mid     = $xoopsModule->getVar('mid');
-    $target_mname   = $xoopsModule->getVar('name');
+    $target_mid = $xoopsModule->getVar('mid');
+    $target_mname = $xoopsModule->getVar('name');
     $query4redirect = '';
 }
 
@@ -80,71 +81,59 @@ if (!$sysperm_handler->checkRight('system_admin', XOOPS_SYSTEM_BLOCK, $xoopsUser
 }
 
 // get blocks owned by the module
-$block_arr =& XoopsBlock::getByModule($target_mid);
+$block_arr = XoopsBlock::getByModule($target_mid);
 
 function list_blocks()
 {
     global $query4redirect, $block_arr, $xoopsGTicket;
 
     // cachetime options
-    $cachetimes = array(
-        '0'       => _NOCACHE,
-        '30'      => sprintf(_SECONDS, 30),
-        '60'      => _MINUTE,
-        '300'     => sprintf(_MINUTES, 5),
-        '1800'    => sprintf(_MINUTES, 30),
-        '3600'    => _HOUR,
-        '18000'   => sprintf(_HOURS, 5),
-        '86400'   => _DAY,
-        '259200'  => sprintf(_DAYS, 3),
-        '604800'  => _WEEK,
-        '2592000' => _MONTH
-    );
+    $cachetimes = ['0' => _NOCACHE, '30' => sprintf(_SECONDS, 30), '60' => _MINUTE, '300' => sprintf(_MINUTES, 5), '1800' => sprintf(_MINUTES, 30), '3600' => _HOUR, '18000' => sprintf(_HOURS, 5), '86400' => _DAY, '259200' => sprintf(_DAYS, 3), '604800' => _WEEK, '2592000' => _MONTH];
 
     // displaying TH
     echo "
-    <form action='admin.php' name='blockadmin' method='post'>
-        <table width='90%' class='outer' cellpadding='4' cellspacing='1'>
-        <tr valign='middle'>
-            <th>" . _AM_TITLE . "</th>
-            <th align='center' nowrap='nowrap'>" . _AM_SIDE . "</th>
-            <th align='center'>" . _AM_WEIGHT . "</th>
-            <th align='center'>" . _AM_VISIBLEIN . "</th>
-            <th align='center'>" . _AM_BCACHETIME . "</th>
-            <th align='right'>" . _AM_ACTION . "</th>
-        </tr>\n";
+	<form action='admin.php' name='blockadmin' method='post'>
+		<table width='90%' class='outer' cellpadding='4' cellspacing='1'>
+		<tr valign='middle'>
+			<th>" . _AM_TITLE . "</th>
+			<th align='center' nowrap='nowrap'>" . _AM_SIDE . "</th>
+			<th align='center'>" . _AM_WEIGHT . "</th>
+			<th align='center'>" . _AM_VISIBLEIN . "</th>
+			<th align='center'>" . _AM_BCACHETIME . "</th>
+			<th align='right'>" . _AM_ACTION . "</th>
+		</tr>\n";
 
     // blocks displaying loop
-    $class         = 'even';
+    $class = 'even';
     $block_configs = get_block_configs();
     foreach (array_keys($block_arr) as $i) {
         $sseln = $ssel0 = $ssel1 = $ssel2 = $ssel3 = $ssel4 = '';
 
-        $weight     = $block_arr[$i]->getVar('weight');
-        $title      = $block_arr[$i]->getVar('title');
-        $name       = $block_arr[$i]->getVar('name');
+        $weight = $block_arr[$i]->getVar('weight');
+        $title = $block_arr[$i]->getVar('title');
+        $name = $block_arr[$i]->getVar('name');
         $bcachetime = $block_arr[$i]->getVar('bcachetime');
-        $bid        = $block_arr[$i]->getVar('bid');
+        $bid = $block_arr[$i]->getVar('bid');
 
         // visible and side
-        if ($block_arr[$i]->getVar('visible') != 1) {
+        if (1 != $block_arr[$i]->getVar('visible')) {
             $sseln = " checked='checked' style='background-color:#FF0000;'";
         } else {
             switch ($block_arr[$i]->getVar('side')) {
-                default :
-                case XOOPS_SIDEBLOCK_LEFT :
+                default:
+                case XOOPS_SIDEBLOCK_LEFT:
                     $ssel0 = " checked='checked' style='background-color:#00FF00;'";
                     break;
-                case XOOPS_SIDEBLOCK_RIGHT :
+                case XOOPS_SIDEBLOCK_RIGHT:
                     $ssel1 = " checked='checked' style='background-color:#00FF00;'";
                     break;
-                case XOOPS_CENTERBLOCK_LEFT :
+                case XOOPS_CENTERBLOCK_LEFT:
                     $ssel2 = " checked='checked' style='background-color:#00FF00;'";
                     break;
-                case XOOPS_CENTERBLOCK_RIGHT :
+                case XOOPS_CENTERBLOCK_RIGHT:
                     $ssel4 = " checked='checked' style='background-color:#00FF00;'";
                     break;
-                case XOOPS_CENTERBLOCK_CENTER :
+                case XOOPS_CENTERBLOCK_CENTER:
                     $ssel3 = " checked='checked' style='background-color:#00FF00;'";
                     break;
             }
@@ -161,18 +150,18 @@ function list_blocks()
         }
 
         // target modules
-        $db            = XoopsDatabaseFactory::getDatabaseConnection();
-        $result        = $db->query('SELECT module_id FROM ' . $db->prefix('block_module_link') . " WHERE block_id='$bid'");
-        $selected_mids = array();
-        while (list($selected_mid) = $db->fetchRow($result)) {
+        $db = XoopsDatabaseFactory::getDatabaseConnection();
+        $result = $db->query('SELECT module_id FROM ' . $db->prefix('block_module_link') . " WHERE block_id='$bid'");
+        $selected_mids = [];
+        while ([$selected_mid] = $db->fetchRow($result)) {
             $selected_mids[] = (int)$selected_mid;
         }
         $module_handler = xoops_getHandler('module');
-        $criteria       = new CriteriaCompo(new Criteria('hasmain', 1));
+        $criteria = new CriteriaCompo(new Criteria('hasmain', 1));
         $criteria->add(new Criteria('isactive', 1));
-        $module_list     = $module_handler->getList($criteria);
+        $module_list = $module_handler->getList($criteria);
         $module_list[-1] = _AM_TOPPAGE;
-        $module_list[0]  = _AM_ALLPAGES;
+        $module_list[0] = _AM_ALLPAGES;
         ksort($module_list);
         $module_options = '';
         foreach ($module_list as $mid => $mname) {
@@ -184,15 +173,15 @@ function list_blocks()
         }
 
         // delete link if it is cloned block
-        if ($block_arr[$i]->getVar('block_type') == 'D' || $block_arr[$i]->getVar('block_type') == 'C') {
-            $delete_link = "<br />\n<a href='admin.php?fct=blocksadmin&amp;op=delete&amp;bid=$bid'>" . _DELETE . '</a>';
+        if ('D' == $block_arr[$i]->getVar('block_type') || 'C' == $block_arr[$i]->getVar('block_type')) {
+            $delete_link = "<br>\n<a href='admin.php?fct=blocksadmin&amp;op=delete&amp;bid=$bid'>" . _DELETE . '</a>';
         } else {
             $delete_link = '';
         }
 
         // clone link if it is marked as cloneable block
         // $modversion['blocks'][n]['can_clone']
-        if ($block_arr[$i]->getVar('block_type') == 'D' || $block_arr[$i]->getVar('block_type') == 'C') {
+        if ('D' == $block_arr[$i]->getVar('block_type') || 'C' == $block_arr[$i]->getVar('block_type')) {
             $can_clone = true;
         } else {
             $can_clone = false;
@@ -205,83 +194,98 @@ function list_blocks()
             }
         }
         if ($can_clone) {
-            $clone_link = "<br />\n<a href='admin.php?fct=blocksadmin&amp;op=clone&amp;bid=$bid'>" . _CLONE . '</a>';
+            $clone_link = "<br>\n<a href='admin.php?fct=blocksadmin&amp;op=clone&amp;bid=$bid'>" . _CLONE . '</a>';
         } else {
             $clone_link = '';
         }
 
         // displaying part
         echo "
-        <tr valign='middle'>
-            <td class='$class'>
-                $name
-                <br />
-                <input type='text' name='title[$bid]' value='$title' size='20' />
-            </td>
-            <td class='$class' align='center' nowrap='nowrap'>
-                <input type='radio' name='side[$bid]' value='" . XOOPS_SIDEBLOCK_LEFT . "'$ssel0 />-<input type='radio' name='side[$bid]' value='" . XOOPS_CENTERBLOCK_LEFT
-             . "'$ssel2 /><input type='radio' name='side[$bid]' value='" . XOOPS_CENTERBLOCK_CENTER . "'$ssel3 /><input type='radio' name='side[$bid]' value='" . XOOPS_CENTERBLOCK_RIGHT
-             . "'$ssel4 />-<input type='radio' name='side[$bid]' value='" . XOOPS_SIDEBLOCK_RIGHT . "'$ssel1 />
-                <br />
-                <br />
-                <input type='radio' name='side[$bid]' value='-1'$sseln />
-                " . _NONE . "
-            </td>
-            <td class='$class' align='center'>
-                <input type='text' name=weight[$bid] value='$weight' size='5' maxlength='5' style='text-align:right;' />
-            </td>
-            <td class='$class' align='center'>
-                <select name='bmodule[$bid][]' size='5' multiple='multiple'>
-                    $module_options
-                </select>
-            </td>
-            <td class='$class' align='center'>
-                <select name='bcachetime[$bid]' size='1'>
-                    $cachetime_options
-                </select>
-            </td>
-            <td class='$class' align='right'>
-                <a href='admin.php?fct=blocksadmin&amp;op=edit&amp;bid=$bid'>" . _EDIT . "</a>
-                $delete_link
-                $clone_link
-                <input type='hidden' name='bid[$bid]' value='$bid' />
-            </td>
-        </tr>\n";
+		<tr valign='middle'>
+			<td class='$class'>
+				$name
+				<br>
+				<input type='text' name='title[$bid]' value='$title' size='20' />
+			</td>
+			<td class='$class' align='center' nowrap='nowrap'>
+				<input type='radio' name='side[$bid]' value='"
+             . XOOPS_SIDEBLOCK_LEFT
+             . "'$ssel0 />-<input type='radio' name='side[$bid]' value='"
+             . XOOPS_CENTERBLOCK_LEFT
+             . "'$ssel2 /><input type='radio' name='side[$bid]' value='"
+             . XOOPS_CENTERBLOCK_CENTER
+             . "'$ssel3 /><input type='radio' name='side[$bid]' value='"
+             . XOOPS_CENTERBLOCK_RIGHT
+             . "'$ssel4 />-<input type='radio' name='side[$bid]' value='"
+             . XOOPS_SIDEBLOCK_RIGHT
+             . "'$ssel1 />
+				<br>
+				<br>
+				<input type='radio' name='side[$bid]' value='-1'$sseln />
+				"
+             . _NONE
+             . "
+			</td>
+			<td class='$class' align='center'>
+				<input type='text' name=weight[$bid] value='$weight' size='5' maxlength='5' style='text-align:right;' />
+			</td>
+			<td class='$class' align='center'>
+				<select name='bmodule[$bid][]' size='5' multiple='multiple'>
+					$module_options
+				</select>
+			</td>
+			<td class='$class' align='center'>
+				<select name='bcachetime[$bid]' size='1'>
+					$cachetime_options
+				</select>
+			</td>
+			<td class='$class' align='right'>
+				<a href='admin.php?fct=blocksadmin&amp;op=edit&amp;bid=$bid'>"
+             . _EDIT
+             . "</a>
+				$delete_link
+				$clone_link
+				<input type='hidden' name='bid[$bid]' value='$bid' />
+			</td>
+		</tr>\n";
 
-        $class = ($class == 'even') ? 'odd' : 'even';
+        $class = ('even' == $class) ? 'odd' : 'even';
     }
 
     echo "
-        <tr>
-            <td class='foot' align='center' colspan='6'>
-                <input type='hidden' name='query4redirect' value='$query4redirect' />
-                <input type='hidden' name='fct' value='blocksadmin' />
-                <input type='hidden' name='op' value='order' />
-                " . $xoopsGTicket->getTicketHtml(__LINE__) . "
-                <input type='submit' name='submit' value='" . _SUBMIT . "' />
-            </td>
-        </tr>
-        </table>
-    </form>\n";
+		<tr>
+			<td class='foot' align='center' colspan='6'>
+				<input type='hidden' name='query4redirect' value='$query4redirect' />
+				<input type='hidden' name='fct' value='blocksadmin' />
+				<input type='hidden' name='op' value='order' />
+				" . $xoopsGTicket->getTicketHtml(__LINE__) . "
+				<input type='submit' name='submit' value='" . _SUBMIT . "' />
+			</td>
+		</tr>
+		</table>
+	</form>\n";
 }
 
+/**
+ * @return array|mixed
+ */
 function get_block_configs()
 {
     $error_reporting_level = error_reporting(0);
     include '../xoops_version.php';
     error_reporting($error_reporting_level);
     if (empty($modversion['blocks'])) {
-        return array();
-    } else {
-        return $modversion['blocks'];
+        return [];
     }
+
+    return $modversion['blocks'];
 }
 
 function list_groups()
 {
     global $target_mid, $target_mname, $block_arr;
 
-    $item_list = array();
+    $item_list = [];
     foreach (array_keys($block_arr) as $i) {
         $item_list[$block_arr[$i]->getVar('bid')] = $block_arr[$i]->getVar('title');
     }
@@ -303,7 +307,7 @@ if (!empty($_POST['submit'])) {
     }
 
     // ohwada
-    //  include( "mygroupperm.php" ) ;
+    //	include( "mygroupperm.php" ) ;
     include XOOPS_ROOT_PATH . '/modules/happy_linux/admin/mygroupperm.php';
 
     redirect_header(XOOPS_URL . '/modules/' . $xoopsModule->dirname() . "/admin/myblocksadmin.php$query4redirect", 1, _MD_AM_DBUPDATED);

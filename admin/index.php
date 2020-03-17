@@ -1,5 +1,6 @@
 <?php
-// $Id: index.php,v 1.1 2007/11/12 13:17:17 ohwada Exp $
+
+// $Id: index.php,v 1.1 2010/11/07 14:59:16 ohwada Exp $
 
 //=========================================================
 // WebLinks Module
@@ -57,5 +58,5 @@ echo $info->build_footer();
 echo $info->build_powerdby();
 
 xoops_cp_footer();
-exit();// --- main end ---
-;
+exit();
+// --- main end ---

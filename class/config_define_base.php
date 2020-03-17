@@ -1,5 +1,6 @@
 <?php
-// $Id: config_define_base.php,v 1.2 2008/01/10 11:32:57 ohwada Exp $
+
+// $Id: config_define_base.php,v 1.1 2010/11/07 14:59:19 ohwada Exp $
 
 // 2008-01-10 K.OHWADA
 // Notice [PHP]: Only variables should be assigned by reference
@@ -16,10 +17,14 @@
 //=========================================================
 // class happy_linux_config_define_base
 //=========================================================
+
+/**
+ * Class happy_linux_config_define_base
+ */
 class happy_linux_config_define_base
 {
     // cache
-    public $_cached = array();
+    public $_cached = [];
 
     public $_config_country_code = null;
 
@@ -35,29 +40,47 @@ class happy_linux_config_define_base
     // load
     //---------------------------------------------------------
     // Notice [PHP]: Only variables should be assigned by reference
+
+    /**
+     * @return mixed
+     */
     public function &load()
     {
         $this->_cached = $this->get_define();
+
         return $this->_cached;
     }
 
+    /**
+     * @param $id
+     * @param $key
+     * @return bool|mixed
+     */
     public function get_cache_by_confid_key($id, $key)
     {
         $ret = false;
         if (isset($this->_cached[$id][$key])) {
             $ret = $this->_cached[$id][$key];
         }
+
         return $ret;
     }
 
     //---------------------------------------------------------
     // country code
     //---------------------------------------------------------
+
+    /**
+     * @param $val
+     */
     public function set_config_country_code($val)
     {
         $this->_config_country_code = $val;
     }
 
+    /**
+     * @return null
+     */
     public function get_config_country_code()
     {
         return $this->_config_country_code;

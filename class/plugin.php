@@ -1,5 +1,6 @@
 <?php
-// $Id: plugin.php,v 1.1 2008/02/26 15:35:42 ohwada Exp $
+
+// $Id: plugin.php,v 1.1 2010/11/07 14:59:17 ohwada Exp $
 
 //=========================================================
 // Happy Linux Framework Module
@@ -9,17 +10,21 @@
 //=========================================================
 // class happy_linux_plugin
 //=========================================================
+
+/**
+ * Class happy_linux_plugin
+ */
 class happy_linux_plugin
 {
-    public $_DIRNAME          = '';
-    public $_DIR_PLUGINS      = '';
+    public $_DIRNAME = '';
+    public $_DIR_PLUGINS = '';
     public $_DIR_PLUGINS_DATA = '';
     public $_DIR_PLUGINS_LANG = '';
-    public $_PREFIX_CLASS     = '';
+    public $_PREFIX_CLASS = '';
     public $_PREFIX_FUNC_DATA = '';
 
-    public $_LANG_NAME        = 'Plugin Name';
-    public $_LANG_USAGE       = 'Usage';
+    public $_LANG_NAME = 'Plugin Name';
+    public $_LANG_USAGE = 'Usage';
     public $_LANG_DESCRIPTION = 'Description';
 
     public $_class_dir;
@@ -27,16 +32,16 @@ class happy_linux_plugin
     public $_system;
 
     public $_item_array = null;
-    public $_log_array  = array();
-    public $_flag_init  = false;
+    public $_log_array = [];
+    public $_flag_init = false;
     public $_line_count = 0;
 
-    public $_plugin_line_name  = null;
-    public $_plugin_line_array = array();
-    public $_class_name_array  = array();
-    public $_class_obj_array   = array();
-    public $_description_array = array();
-    public $_usage_array       = array();
+    public $_plugin_line_name = null;
+    public $_plugin_line_array = [];
+    public $_class_name_array = [];
+    public $_class_obj_array = [];
+    public $_description_array = [];
+    public $_usage_array = [];
 
     public $_FLAG_PRINT = false;
 
@@ -46,27 +51,40 @@ class happy_linux_plugin
     public function __construct()
     {
         $this->_class_dir = happy_linux_get_singleton('dir');
-        $this->_strings   = happy_linux_get_singleton('strings');
-        $this->_system    = happy_linux_get_singleton('system');
+        $this->_strings = happy_linux_get_singleton('strings');
+        $this->_system = happy_linux_get_singleton('system');
     }
 
+    /**
+     * @return static
+     */
     public static function getInstance()
     {
         static $instance;
-        if (!isset($instance)) {
-            $instance = new happy_linux_plugin();
+        if (null === $instance) {
+            $instance = new static();
         }
+
         return $instance;
     }
 
     //---------------------------------------------------------
     // set param
     //---------------------------------------------------------
+
+    /**
+     * @param $dirname
+     */
     public function set_dirname($dirname)
     {
         $this->_DIRNAME = $dirname;
     }
 
+    /**
+     * @param string $dir_plugins
+     * @param string $dir_data
+     * @param string $dir_lang
+     */
     public function set_dir_plugins($dir_plugins = 'plugins', $dir_data = 'data', $dir_lang = 'language')
     {
         $this->_DIR_PLUGINS = 'modules/' . $this->_DIRNAME . '/' . $dir_plugins;
@@ -74,77 +92,104 @@ class happy_linux_plugin
         $this->set_dir_plugins_lang($dir_lang);
     }
 
+    /**
+     * @param string $dir_data
+     */
     public function set_dir_plugins_data($dir_data = 'data')
     {
         $this->_DIR_PLUGINS_DATA = $this->_DIR_PLUGINS . '/' . $dir_data;
     }
 
+    /**
+     * @param string $dir_lang
+     */
     public function set_dir_plugins_lang($dir_lang = 'language')
     {
         $this->_DIR_PLUGINS_LANG = $this->_DIR_PLUGINS . '/' . $dir_lang . '/' . $this->_system->get_language();
     }
 
+    /**
+     * @param $val
+     */
     public function set_prefix_class($val)
     {
         $this->_PREFIX_CLASS = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_prefix_func_data($val)
     {
         $this->_PREFIX_FUNC_DATA = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_flag_print($val)
     {
         $this->_FLAG_PRINT = (bool)$val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_lang_name($val)
     {
         $this->_LANG_NAME = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_lang_usage($val)
     {
         $this->_LANG_USAGE = $val;
     }
 
+    /**
+     * @param $val
+     */
     public function set_lang_decription($val)
     {
         $this->_LANG_DESCRIPTION = $val;
     }
 
-
-
     //---------------------------------------------------------
     // execute
     //---------------------------------------------------------
+
+    /**
+     * @param $items
+     * @return bool
+     */
     public function _execute($items)
     {
         $this->_item_array = $items;
-        $temp              = $items;
+        $temp = $items;
         $this->clear_logs();
 
-        $plugin_array =& $this->get_cached_plugin_line_array_by_name($this->_plugin_line_name);
+        $plugin_array = &$this->get_cached_plugin_line_array_by_name($this->_plugin_line_name);
         if (!is_array($plugin_array) || !count($plugin_array)) {
             return true;
         }
 
         foreach ($plugin_array as $plugin) {
-            $name   = $plugin['name'];
+            $name = $plugin['name'];
             $params = $plugin['params'];
 
             $this->_print_msg_name_params($name, $params);
 
             // continue, if not
-            $class =& $this->get_cached_class_object_by_name($name);
+            $class = &$this->get_cached_class_object_by_name($name);
             if (!$class) {
                 continue;
             }
 
             $class->set_param_array($params);
 
-            $ret  = $class->execute($temp);
+            $ret = $class->execute($temp);
             $logs = $class->get_logs();
             if (is_array($logs) && count($logs)) {
                 $this->_print_msg_logs($logs);
@@ -154,6 +199,7 @@ class happy_linux_plugin
                 $msg = 'plugin failed: ' . $name;
                 $this->_print_msg($msg);
                 $this->set_logs($msg);
+
                 return false;
             }
 
@@ -161,9 +207,13 @@ class happy_linux_plugin
         }
 
         $this->_item_array = $temp;
+
         return true;
     }
 
+    /**
+     * @return null
+     */
     public function get_items()
     {
         return $this->_item_array;
@@ -172,28 +222,44 @@ class happy_linux_plugin
     //---------------------------------------------------------
     // plugin line
     //---------------------------------------------------------
+
+    /**
+     * @param $name
+     * @param $plugin_line
+     * @return bool
+     */
     public function add_plugin_line($name, $plugin_line)
     {
-        $arr =& $this->_parse_plugin_line($plugin_line);
+        $arr = &$this->_parse_plugin_line($plugin_line);
         if (is_array($arr) && count($arr)) {
-            $this->_plugin_line_array[$name] =& $arr;
+            $this->_plugin_line_array[$name] = &$arr;
             $this->set_plugin_line_name($name);
+
             return true;
         }
+
         return false;
     }
 
+    /**
+     * @param $name
+     */
     public function set_plugin_line_name($name)
     {
         $this->_plugin_line_name = $name;
     }
 
+    /**
+     * @param $name
+     * @return bool|mixed
+     */
     public function &get_cached_plugin_line_array_by_name($name)
     {
         $false = false;
         if (isset($this->_plugin_line_array[$name])) {
             return $this->_plugin_line_array[$name];
         }
+
         return $false;
     }
 
@@ -208,16 +274,26 @@ class happy_linux_plugin
         }
     }
 
+    /**
+     * @return int
+     */
     public function get_total_plugins()
     {
         return count($this->_class_name_array);
     }
 
+    /**
+     * @return array
+     */
     public function &get_name_list()
     {
         return $this->_class_name_array;
     }
 
+    /**
+     * @param $name
+     * @return bool|mixed|string
+     */
     public function get_cached_description_by_name($name)
     {
         if (isset($this->_description_array[$name])) {
@@ -228,10 +304,11 @@ class happy_linux_plugin
         $desc = $this->_get_lang_description_by_name($name);
         if ($desc) {
             $this->_description_array[$name] = $desc;
+
             return $desc;
         }
 
-        $class =& $this->get_cached_class_object_by_name($name);
+        $class = &$this->get_cached_class_object_by_name($name);
         if (!$class) {
             return false;
         }
@@ -240,16 +317,21 @@ class happy_linux_plugin
         $desc = $class->description();
 
         $this->_description_array[$name] = $desc;
+
         return $desc;
     }
 
+    /**
+     * @param $name
+     * @return bool|mixed
+     */
     public function get_cached_usage_by_name($name)
     {
         if (isset($this->_usage_array[$name])) {
             return $this->_usage_array[$name];
         }
 
-        $class =& $this->get_cached_class_object_by_name($name);
+        $class = &$this->get_cached_class_object_by_name($name);
         if (!$class) {
             return false;
         }
@@ -263,9 +345,14 @@ class happy_linux_plugin
         }
 
         $this->_usage_array[$name] = $usage;
+
         return $usage;
     }
 
+    /**
+     * @param $name
+     * @return bool|mixed
+     */
     public function &get_cached_class_object_by_name($name)
     {
         $false = false;
@@ -273,23 +360,30 @@ class happy_linux_plugin
             return $this->_class_obj_array[$name];
         }
 
-        $obj =& $this->_get_class_obj_by_name($name);
+        $obj = $this->_get_class_obj_by_name($name);
         if (is_object($obj)) {
-            $this->_class_name_array[]     = $name;
-            $this->_class_obj_array[$name] =& $obj;
+            $this->_class_name_array[] = $name;
+            $this->_class_obj_array[$name] = &$obj;
+
             return $obj;
         }
 
         $this->_print_msg('not exist plugin: ' . $name);
+
         return $false;
     }
 
+    /**
+     * @param string $name
+     * @return bool
+     */
     public function get_exsample_data($name = 'default')
     {
         $func = $this->_get_func_data_by_name($name);
         if ($func) {
             return $func();
         }
+
         return false;
     }
 
@@ -298,9 +392,12 @@ class happy_linux_plugin
     //---------------------------------------------------------
     public function clear_logs()
     {
-        $this->_log_array = array();
+        $this->_log_array = [];
     }
 
+    /**
+     * @param $arr
+     */
     public function set_logs($arr)
     {
         if (is_array($arr)) {
@@ -312,6 +409,9 @@ class happy_linux_plugin
         }
     }
 
+    /**
+     * @return array
+     */
     public function &get_logs()
     {
         return $this->_log_array;
@@ -322,24 +422,28 @@ class happy_linux_plugin
     //---------------------------------------------------------
     public function _init_class_array()
     {
-        $this->_class_name_array = array();
-        $this->_class_obj_array  = array();
+        $this->_class_name_array = [];
+        $this->_class_obj_array = [];
 
-        $files =& $this->_class_dir->get_files_in_dir($this->_DIR_PLUGINS, 'php');
+        $files = &$this->_class_dir->get_files_in_dir($this->_DIR_PLUGINS, 'php');
 
         foreach ($files as $file) {
             $name = str_replace('.php', '', $file);
-            $obj  =& $this->_get_class_obj_by_name($name);
+            $obj = &$this->_get_class_obj_by_name($name);
             if (is_object($obj)) {
-                $this->_class_name_array[]     = $name;
-                $this->_class_obj_array[$name] =& $obj;
+                $this->_class_name_array[] = $name;
+                $this->_class_obj_array[$name] = &$obj;
             }
         }
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     */
     public function &_get_class_obj_by_name($name)
     {
-        $file  = $this->_DIR_PLUGINS . '/' . $name . '.php';
+        $file = $this->_DIR_PLUGINS . '/' . $name . '.php';
         $class = $this->_PREFIX_CLASS . '_' . $name;
 
         $flase = false;
@@ -352,16 +456,21 @@ class happy_linux_plugin
 
         if (class_exists($class)) {
             $obj = new $class($this->_DIRNAME);
+
             return $obj;
         }
 
         return $false;
     }
 
+    /**
+     * @param $name
+     * @return bool|string
+     */
     public function _get_lang_description_by_name($name)
     {
         $PLUGIN_DESCRIPTION = '';
-        $file               = $this->_DIR_PLUGINS_LANG . '/' . $name . '.php';
+        $file = $this->_DIR_PLUGINS_LANG . '/' . $name . '.php';
 
         if (file_exists(XOOPS_ROOT_PATH . '/' . $file)) {
             include_once XOOPS_ROOT_PATH . '/' . $file;
@@ -373,6 +482,10 @@ class happy_linux_plugin
         return $PLUGIN_DESCRIPTION;
     }
 
+    /**
+     * @param $name
+     * @return bool|string
+     */
     public function _get_func_data_by_name($name)
     {
         $file = $this->_DIR_PLUGINS_DATA . '/' . $name . '.php';
@@ -391,6 +504,10 @@ class happy_linux_plugin
         return false;
     }
 
+    /**
+     * @param $name
+     * @param $params
+     */
     public function _print_msg_name_params($name, $params)
     {
         $msg = 'plugin: ' . $name;
@@ -400,6 +517,9 @@ class happy_linux_plugin
         $this->_print_msg($msg);
     }
 
+    /**
+     * @param $logs
+     */
     public function _print_msg_logs($logs)
     {
         if (is_array($logs) && count($logs)) {
@@ -409,10 +529,13 @@ class happy_linux_plugin
         }
     }
 
+    /**
+     * @param $msg
+     */
     public function _print_msg($msg)
     {
         if ($this->_FLAG_PRINT) {
-            echo htmlspecialchars($msg, ENT_QUOTES) . "<br />\n";
+            echo htmlspecialchars($msg, ENT_QUOTES) . "<br>\n";
         }
     }
 
@@ -438,12 +561,17 @@ class happy_linux_plugin
     //         )
     //     )
     //---------------------------------------------------------
+
+    /**
+     * @param $plugin_line
+     * @return array
+     */
     public function &_parse_plugin_line($plugin_line)
     {
-        $ret_arr = array();
+        $ret_arr = [];
 
         // foo | bar (a, b) ==> array( 'foo', 'bar (a, b)' )
-        $plugin_arr =& $this->_strings->convert_string_to_array($plugin_line, '|');
+        $plugin_arr = &$this->_strings->convert_string_to_array($plugin_line, '|');
 
         if (!is_array($plugin_arr) || !count($plugin_arr)) {
             return $ret_arr;
@@ -456,10 +584,14 @@ class happy_linux_plugin
         return $ret_arr;
     }
 
+    /**
+     * @param $plugin
+     * @return array
+     */
     public function &_parse_plugin_line_plugin($plugin)
     {
-        $name   = $plugin;
-        $params = array();
+        $name = $plugin;
+        $params = [];
 
         // bar (a, b) ==> array( 'bar ', 'a, b' )
         if (preg_match('/(.*)\((.*)\)/', $plugin, $matches)) {
@@ -474,20 +606,24 @@ class happy_linux_plugin
             }
         }
 
-        $ret = array(
-            'name'   => $name,
+        $ret = [
+            'name' => $name,
             'params' => $params,
-        );
+        ];
 
         return $ret;
     }
 
+    /**
+     * @param $param_list
+     * @return array
+     */
     public function &_parse_plugin_line_param($param_list)
     {
-        $arr = array();
+        $arr = [];
 
         // 'a, b' ==> array( 'a', "b" )
-        $param_arr =& $this->_strings->convert_string_to_array($param_list, ',');
+        $param_arr = &$this->_strings->convert_string_to_array($param_list, ',');
 
         foreach ($param_arr as $param) {
             $val = $param;
@@ -513,6 +649,10 @@ class happy_linux_plugin
     //---------------------------------------------------------
     // plugin table
     //---------------------------------------------------------
+
+    /**
+     * @return string
+     */
     public function build_table()
     {
         $text = '<table class="outer" width="100%" cellpadding="4" cellspacing="1">' . "\n";
@@ -522,12 +662,12 @@ class happy_linux_plugin
         $text .= '<th align="center">' . $this->_LANG_USAGE . '</th>';
         $text .= '</tr>' . "\n";
 
-        $name_list =& $this->get_name_list();
+        $name_list = &$this->get_name_list();
 
         foreach ($name_list as $name) {
             $description = $this->get_cached_description_by_name($name);
-            $usage       = $this->get_cached_usage_by_name($name);
-            $class       = $this->_get_alternate_class();
+            $usage = $this->get_cached_usage_by_name($name);
+            $class = $this->_get_alternate_class();
 
             $text .= '<tr class="' . $class . '">';
             $text .= '<td>' . $name . '</td>';
@@ -536,18 +676,23 @@ class happy_linux_plugin
             $text .= '</tr>' . "\n";
         }
 
-        $text .= '</table><br />' . "\n";
+        $text .= '</table><br>' . "\n";
+
         return $text;
     }
 
+    /**
+     * @return string
+     */
     public function _get_alternate_class()
     {
-        if ($this->_line_count % 2 != 0) {
+        if (0 != $this->_line_count % 2) {
             $class = 'odd';
         } else {
             $class = 'even';
         }
         $this->_line_count++;
+
         return $class;
     }
 

@@ -1,5 +1,6 @@
 <?php
-// $Id: admin.php,v 1.2 2008/01/18 10:31:08 ohwada Exp $
+
+// $Id: admin.php,v 1.1 2010/11/07 14:59:14 ohwada Exp $
 
 // =========================================================
 // Happy Linux Framework Module
@@ -25,6 +26,6 @@ define('_HAPPY_LINUX_AM_MODULE_DESC', 'Zeige Modulliste');
 define('_HAPPY_LINUX_AM_MODULE_UPDATE', 'Module Update');
 define('_HAPPY_LINUX_AM_DIR_NOT_WRITABLE', 'Das Verzeichnis ist nicht beschreibbar');
 define('_HAPPY_LINUX_AM_MEMORY_LIMIT_TOO_SMALL', 'memory_limit ist zu klein');
-define('_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'Das Modul Weblinks benötigt mehr als %s MB Speicher');
+define('_HAPPY_LINUX_AM_MEMORY_WEBLINKS_REQUIRE', 'Das Modul Weblinks benï¿½tigt mehr als %s MB Speicher');
 define('_HAPPY_LINUX_AM_SERVER_ENV', 'Server Environmnet Variables');
-define('_HAPPY_LINUX_AM_MEMORY_DESC', 'This value is one standard.<br />Depending on the server environment, it is sometimes more or less.');
+define('_HAPPY_LINUX_AM_MEMORY_DESC', 'This value is one standard.<br>Depending on the server environment, it is sometimes more or less.');
