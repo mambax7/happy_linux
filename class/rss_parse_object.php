@@ -331,7 +331,7 @@ class happy_linux_rss_parse_basic extends happy_linux_rss_base_basic
      * @param $site_link
      * @param $obj
      */
-    public function build($site_title, $site_link, &$obj)
+    public function build($site_title, $site_link, $obj)
     {
         // no action
     }
@@ -645,7 +645,7 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
      * @param $site_link
      * @param $control_obj
      */
-    public function build($site_title, $site_link, &$control_obj)
+    public function build($site_title, $site_link, $control_obj)
 
     {
         $this->set_control_obj($control_obj);

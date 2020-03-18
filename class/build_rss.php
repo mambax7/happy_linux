@@ -1209,7 +1209,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
     /**
      * @param $tpl
      */
-    public function _assign_rdf(&$tpl)
+    public function _assign_rdf($tpl)
     {
         $channel_list = [
             'title',
@@ -1294,7 +1294,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
     /**
      * @param $tpl
      */
-    public function _assign_rss(&$tpl)
+    public function _assign_rss($tpl)
     {
         $channel_list = [
             'title',
@@ -1437,7 +1437,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
     /**
      * @param $tpl
      */
-    public function _assign_atom(&$tpl)
+    public function _assign_atom($tpl)
     {
         $channel_list = [
             'title',
@@ -1746,7 +1746,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
      * @param        $items
      * @param string $tpl_key
      */
-    public function _assign_items(&$tpl, $list, $items, $tpl_key = 'items')
+    public function _assign_items($tpl, $list, $items, $tpl_key = 'items')
     {
         foreach ($items as $item) {
             $tpl->append($tpl_key, $this->_utf8_item($tpl, $list, $item));
@@ -1759,7 +1759,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
      * @param $item
      * @return array
      */
-    public function _utf8_item(&$tpl, $list, $item)
+    public function _utf8_item($tpl, $list, $item)
     {
         $arr = [];
         foreach ($list as $name) {
@@ -1825,7 +1825,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
     /**
      * @param $tpl
      */
-    public function _assign_cache(&$tpl)
+    public function _assign_cache($tpl)
     {
         $this->_init_rss();
         $this->_init_option();
@@ -1878,7 +1878,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
     /**
      * @param $tpl
      */
-    public function _assign_other(&$tpl)
+    public function _assign_other($tpl)
     {
         // dummy
     }

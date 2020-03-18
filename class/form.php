@@ -1166,7 +1166,7 @@ class happy_linux_form extends happy_linux_html
      * @param      $obj
      * @param null $extra
      */
-    public function _show_add(&$obj, $extra = null)
+    public function _show_add($obj, $extra = null)
     {
         $this->_show($obj, $extra, HAPPY_LINUX_MODE_ADD);
     }
@@ -1175,7 +1175,7 @@ class happy_linux_form extends happy_linux_html
      * @param      $obj
      * @param null $extra
      */
-    public function _show_mod(&$obj, $extra = null)
+    public function _show_mod($obj, $extra = null)
     {
         $this->_show($obj, $extra, HAPPY_LINUX_MODE_MOD);
     }
@@ -1184,7 +1184,7 @@ class happy_linux_form extends happy_linux_html
      * @param      $obj
      * @param null $extra
      */
-    public function _show_add_preview(&$obj, $extra = null)
+    public function _show_add_preview($obj, $extra = null)
     {
         $this->_show($obj, $extra, HAPPY_LINUX_MODE_ADD_PREVIEW);
     }
@@ -1193,7 +1193,7 @@ class happy_linux_form extends happy_linux_html
      * @param      $obj
      * @param null $extra
      */
-    public function _show_mod_preview(&$obj, $extra = null)
+    public function _show_mod_preview($obj, $extra = null)
     {
         $this->_show($obj, $extra, HAPPY_LINUX_MODE_MOD_PREVIEW);
     }
@@ -1202,7 +1202,7 @@ class happy_linux_form extends happy_linux_html
      * @param      $obj
      * @param null $extra
      */
-    public function _show_del_preview(&$obj, $extra = null)
+    public function _show_del_preview($obj, $extra = null)
     {
         $this->_show($obj, $extra, HAPPY_LINUX_MODE_DEL_PREVIEW);
     }
@@ -1212,7 +1212,7 @@ class happy_linux_form extends happy_linux_html
      * @param null $extra
      * @param int  $mode
      */
-    public function _show($obj, $extra = null, $mode = 0)
+    public function _show($obj=null, $extra = null, $mode = 0)
     {
         // dummy
     }

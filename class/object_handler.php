@@ -399,7 +399,7 @@ class happy_linux_object_handler extends happy_linux_error
      * @param bool $force
      * @return bool|mixed
      */
-    public function insert(&$obj, $force = false)
+    public function insert($obj, $force = false)
     {
         if ($this->_DEBUG_INSERT) {
             return $this->_insert($obj, $force);
@@ -413,7 +413,7 @@ class happy_linux_object_handler extends happy_linux_error
      * @param bool $force
      * @return bool|mixed
      */
-    public function _insert(&$obj, $force = false)
+    public function _insert($obj, $force = false)
     {
         if (!$this->_check_class($obj)) {
             $this->_set_errors($this->_table . ': not match class');
@@ -449,7 +449,7 @@ class happy_linux_object_handler extends happy_linux_error
      * @param bool $force
      * @return bool
      */
-    public function update(&$obj, $force = false)
+    public function update($obj, $force = false)
     {
         if ($this->_DEBUG_UPDATE) {
             return $this->_update($obj, $force);
@@ -463,7 +463,7 @@ class happy_linux_object_handler extends happy_linux_error
      * @param bool $force
      * @return bool
      */
-    public function _update(&$obj, $force = false)
+    public function _update($obj, $force = false)
     {
         if (!$this->_check_class($obj)) {
             $this->_set_errors($this->_table . ': not match class');
@@ -512,7 +512,7 @@ class happy_linux_object_handler extends happy_linux_error
      * @param bool $force
      * @return bool
      */
-    public function delete(&$obj, $force = false)
+    public function delete($obj, $force = false)
     {
         if ($this->_DEBUG_DELETE) {
             return $this->_delete($obj, $force);
@@ -637,7 +637,7 @@ class happy_linux_object_handler extends happy_linux_error
             return false;
         }
 
-        $scheme_arr = &$obj->get_scheme();
+        $scheme_arr = $obj->get_scheme();
 
         foreach ($scheme_arr as $scheme_name => $scheme) {
             $flag_match = false;

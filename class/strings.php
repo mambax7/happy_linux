@@ -827,7 +827,7 @@ class happy_linux_strings
      */
     public function strip_slashes_gpc($str)
     {
-        if (get_magic_quotes_gpc() && !is_array($str)) {
+        if (@get_magic_quotes_gpc() && !is_array($str)) {
             $str = stripslashes($str);
         }
 
@@ -840,7 +840,7 @@ class happy_linux_strings
      */
     public function &add_slashes_gpc($str)
     {
-        if (!get_magic_quotes_gpc()) {
+        if (!@get_magic_quotes_gpc()) {
             $str = addslashes($str);
         }
 
@@ -854,7 +854,7 @@ class happy_linux_strings
     public function &strip_slashes_array_gpc(&$arr_in)
     {
         $arr_out = &$arr_in;
-        if (get_magic_quotes_gpc()) {
+        if (@get_magic_quotes_gpc()) {
             $arr_out = &$this->strip_slashes_array($arr_in);
         }
 

@@ -267,7 +267,7 @@ class happy_linux_keyword
      */
     public function strip_slashes_gpc($str)
     {
-        if (get_magic_quotes_gpc() && !is_array($str)) {
+        if (@get_magic_quotes_gpc() && !is_array($str)) {
             $str = stripslashes($str);
         }
 

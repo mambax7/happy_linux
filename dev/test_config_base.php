@@ -16,7 +16,7 @@ include_once 'dev_header.php';
 dev_header();
 echo "<h3>test happy_linux_config_base</h3>\n";
 
-$gpc = get_magic_quotes_gpc();
+$gpc = @get_magic_quotes_gpc();
 echo 'get_magic_quotes_gpc = ' . $gpc . "<br><br>\n";
 
 test_common('bool', 0, 0);

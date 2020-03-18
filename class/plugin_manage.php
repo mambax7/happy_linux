@@ -318,7 +318,7 @@ class happy_linux_plugin_test_form extends happy_linux_form_lib
     /**
      * @param null $data
      */
-    public function _show($data = null)
+    public function _show($data = null, $extra = null, $mode = 0)
     {
         $plugins = $this->_post->get_post_text('plugins');
 

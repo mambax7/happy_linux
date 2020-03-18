@@ -130,7 +130,7 @@ class happy_linux_page_frame extends happy_linux_form
     //---------------------------------------------------------
     // main
     //---------------------------------------------------------
-    public function _show($obj, $extra = null, $mode = 0)
+    public function _show($obj=null, $extra = null, $mode = 0)
     {
         $total = $this->_pre_proc();
 
@@ -611,7 +611,7 @@ class happy_linux_page_frame extends happy_linux_form
      * @param $obj
      * @return array
      */
-    public function &_get_cols(&$obj)
+    public function &_get_cols($obj)
     {
         $id = $this->_build_page_label_by_obj($obj, $this->_id_name);
         $id = $this->_build_formated_id($id);
@@ -629,7 +629,7 @@ class happy_linux_page_frame extends happy_linux_form
      * @param $obj
      * @return string
      */
-    public function _get_col_class(&$obj)
+    public function _get_col_class($obj)
     {
         return '';
     }

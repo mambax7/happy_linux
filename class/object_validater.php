@@ -185,7 +185,7 @@ class happy_linux_object_validater extends happy_linux_object
      * @param bool $not_gpc
      * @return array
      */
-    public function &validate_values_from_post(&$post, $not_gpc = false)
+    public function &validate_values_from_post($post, $not_gpc = false)
     {
         $arr = [];
 

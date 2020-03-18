@@ -280,7 +280,7 @@ if (!class_exists('XoopsGTicket')) {
                 if ('XOOPS_G_TICKET' == $key) {
                     continue;
                 }
-                if (get_magic_quotes_gpc()) {
+                if (@get_magic_quotes_gpc()) {
                     $key = stripslashes($key);
                 }
                 if (is_array($val)) {
@@ -288,7 +288,7 @@ if (!class_exists('XoopsGTicket')) {
                     $table .= $tmp_table;
                     $form .= $tmp_form;
                 } else {
-                    if (get_magic_quotes_gpc()) {
+                    if (@get_magic_quotes_gpc()) {
                         $val = stripslashes($val);
                     }
                     $table .= '<tr><th>' . htmlspecialchars($key, ENT_QUOTES) . '</th><td>' . htmlspecialchars($val, ENT_QUOTES) . '</td></tr>' . "\n";
@@ -311,7 +311,7 @@ if (!class_exists('XoopsGTicket')) {
             $table = '';
             $form = '';
             foreach ($tmp_array as $key => $val) {
-                if (get_magic_quotes_gpc()) {
+                if (@get_magic_quotes_gpc()) {
                     $key = stripslashes($key);
                 }
                 if (is_array($val)) {
@@ -319,7 +319,7 @@ if (!class_exists('XoopsGTicket')) {
                     $table .= $tmp_table;
                     $form .= $tmp_form;
                 } else {
-                    if (get_magic_quotes_gpc()) {
+                    if (@get_magic_quotes_gpc()) {
                         $val = stripslashes($val);
                     }
                     $table .= '<tr><th>' . $key_name . '[' . htmlspecialchars($key, ENT_QUOTES) . ']</th><td>' . htmlspecialchars($val, ENT_QUOTES) . '</td></tr>' . "\n";

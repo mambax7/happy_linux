@@ -208,7 +208,7 @@ class happy_linux_build_cache
     /**
      * @param $tpl
      */
-    public function _assign_cache(&$tpl)
+    public function _assign_cache($tpl)
     {
         // dummy
     }
