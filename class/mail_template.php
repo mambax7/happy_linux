@@ -66,7 +66,7 @@ class happy_linux_mail_template
     {
         $DIR_LANG = $this->get_module_path() . 'language/';
         $dir_lang = $DIR_LANG . $this->get_xoops_language() . '/mail_template/';
-        $dir_eng = $DIR_LANG . 'english/mail_template/';
+        $dir_eng  = $DIR_LANG . 'english/mail_template/';
 
         if (file_exists($dir_lang . $file)) {
             return $dir_lang;
@@ -155,7 +155,7 @@ class happy_linux_mail_template
             }
         } else {
             if (!empty($tag) && isset($value)) {
-                $tag = mb_strtoupper(trim($tag));
+                $tag               = mb_strtoupper(trim($tag));
                 $this->_tags[$tag] = $value;
             }
         }
@@ -247,8 +247,9 @@ class happy_linux_mail_template
     public function get_xoops_module_name($format = 'n')
     {
         $name = false;
+        /** @var \XoopsModuleHandler $module_handler */
         $module_handler = xoops_getHandler('module');
-        $module = $module_handler->getByDirname($this->_DIRNAME);
+        $module         = $module_handler->getByDirname($this->_DIRNAME);
         if (is_object($module)) {
             $name = $module->getVar('name', $format);
         }

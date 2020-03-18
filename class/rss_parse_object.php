@@ -58,7 +58,7 @@ class happy_linux_rss_parse extends happy_linux_rss_base
 
     // encoding
     public $_local_encoding = _CHARSET;
-    public $_xml_encoding = 'utf-8';
+    public $_xml_encoding   = 'utf-8';
 
     //---------------------------------------------------------
     // constructor
@@ -78,10 +78,10 @@ class happy_linux_rss_parse extends happy_linux_rss_base
     public function set_vars_from_parse($obj)
     {
         $control = [
-            'feed_type' => $obj->feed_type,
-            'feed_version' => $obj->feed_version,
+            'feed_type'       => $obj->feed_type,
+            'feed_version'    => $obj->feed_version,
             'source_encoding' => $obj->source_encoding,
-            'encoding' => $obj->encoding,
+            'encoding'        => $obj->encoding,
         ];
 
         $this->set_control($control);
@@ -124,7 +124,7 @@ class happy_linux_rss_parse extends happy_linux_rss_base
     //---------------------------------------------------------
     public function convert_to_local()
     {
-        $to = $this->_local_encoding;
+        $to   = $this->_local_encoding;
         $from = $this->_xml_encoding;
 
         // BUG: sometime cannot parse
@@ -155,7 +155,7 @@ class happy_linux_rss_parse extends happy_linux_rss_base
         // BUG: sometime cannot parse
         if (isset($this->_items_obj) && is_object($this->_items_obj)) {
             $site_title = $this->get_channel_by_key('title');
-            $site_link = $this->get_channel_by_key('link');
+            $site_link  = $this->get_channel_by_key('link');
             $this->_items_obj->build($site_title, $site_link, $this->_control_obj);
         }
     }
@@ -230,12 +230,12 @@ class happy_linux_rss_parse extends happy_linux_rss_base
     }
 
     /**
-     * @return \happy_linux_rss_base_basic|\happy_linux_rss_parse_single_item
+     * @return \happy_linux_rss_base_basic|\happy_linux_rss_parse_item_single
      */
     public function &create_single_item()
     {
         // Assigning the return value of new by reference is deprecated
-        $obj = new happy_linux_rss_parse_single_item();
+        $obj = new happy_linux_rss_parse_item_single();
 
         return $obj;
     }
@@ -365,10 +365,10 @@ class happy_linux_rss_parse_basic extends happy_linux_rss_base_basic
     public function set_control_obj($obj)
     {
         if (is_object($obj)) {
-            $this->_feed_type = $obj->get('feed_type');
-            $this->_feed_version = $obj->get('feed_version');
+            $this->_feed_type       = $obj->get('feed_type');
+            $this->_feed_version    = $obj->get('feed_version');
             $this->_source_encoding = $obj->get('source_encoding');
-            $this->_encoding = $obj->get('encoding');
+            $this->_encoding        = $obj->get('encoding');
         }
     }
 
@@ -646,7 +646,6 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
      * @param $control_obj
      */
     public function build($site_title, $site_link, $control_obj)
-
     {
         $this->set_control_obj($control_obj);
 
@@ -656,48 +655,55 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
         [$geo_lat, $geo_long] = $this->_build_geo();
 
         [
-            $media_content_url, $media_content_type, $media_content_medium, $media_content_filesize, $media_content_width, $media_content_height
-            ] = $this->_build_media_content();
+            $media_content_url,
+            $media_content_type,
+            $media_content_medium,
+            $media_content_filesize,
+            $media_content_width,
+            $media_content_height,
+        ] = $this->_build_media_content();
 
         [
-            $media_thumbnail_url, $media_thumbnail_width, $media_thumbnail_height
-            ] = $this->_build_media_thumbnail();
+            $media_thumbnail_url,
+            $media_thumbnail_width,
+            $media_thumbnail_height,
+        ] = $this->_build_media_thumbnail();
 
         $arr = [
-            'site_title' => $site_title,
-            'site_link' => $site_link,
-            'title' => $this->get_rss_var('title'),
-            'link' => $this->_build_link(),
-            'entry_id' => $this->get_rss_var('id'),
-            'guid' => $this->get_rss_var('guid'),
-            'category' => $this->_build_category(),
-            'author_name' => $this->_build_author_name(),
-            'author_email' => $this->_build_author_email(),
-            'author_uri' => $this->_build_author_uri(),
-            'published_unix' => $this->_build_published_unix(),
-            'updated_unix' => $this->_build_updated_unix(),
-            'content' => $this->_build_content(),
-            'summary' => $this->_build_summary_for_format(),
-            'item_orig' => $item_orig,
+            'site_title'             => $site_title,
+            'site_link'              => $site_link,
+            'title'                  => $this->get_rss_var('title'),
+            'link'                   => $this->_build_link(),
+            'entry_id'               => $this->get_rss_var('id'),
+            'guid'                   => $this->get_rss_var('guid'),
+            'category'               => $this->_build_category(),
+            'author_name'            => $this->_build_author_name(),
+            'author_email'           => $this->_build_author_email(),
+            'author_uri'             => $this->_build_author_uri(),
+            'published_unix'         => $this->_build_published_unix(),
+            'updated_unix'           => $this->_build_updated_unix(),
+            'content'                => $this->_build_content(),
+            'summary'                => $this->_build_summary_for_format(),
+            'item_orig'              => $item_orig,
 
             // enclosure
-            'enclosure_url' => $enc_url,
-            'enclosure_type' => $enc_type,
-            'enclosure_length' => $enc_length,
+            'enclosure_url'          => $enc_url,
+            'enclosure_type'         => $enc_type,
+            'enclosure_length'       => $enc_length,
 
             // geo
-            'geo_lat' => $geo_lat,
-            'geo_long' => $geo_long,
+            'geo_lat'                => $geo_lat,
+            'geo_long'               => $geo_long,
 
             // media
-            'media_content_url' => $media_content_url,
-            'media_content_type' => $media_content_type,
-            'media_content_medium' => $media_content_medium,
+            'media_content_url'      => $media_content_url,
+            'media_content_type'     => $media_content_type,
+            'media_content_medium'   => $media_content_medium,
             'media_content_filesize' => $media_content_filesize,
-            'media_content_width' => $media_content_width,
-            'media_content_height' => $media_content_height,
-            'media_thumbnail_url' => $media_thumbnail_url,
-            'media_thumbnail_width' => $media_thumbnail_width,
+            'media_content_width'    => $media_content_width,
+            'media_content_height'   => $media_content_height,
+            'media_thumbnail_url'    => $media_thumbnail_url,
+            'media_thumbnail_width'  => $media_thumbnail_width,
             'media_thumbnail_height' => $media_thumbnail_height,
         ];
 
@@ -872,12 +878,12 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
     }
 
     /**
-     * @return null[]
+     * @return null|array
      */
     public function _build_enclosure()
     {
-        $url = null;
-        $type = null;
+        $url    = null;
+        $type   = null;
         $length = null;
 
         // RSS
@@ -905,27 +911,27 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
      */
     public function _build_geo()
     {
-        $lat = null;
+        $lat  = null;
         $long = null;
 
         // <geo:point>
         if ($this->is_set('geo', 'point_lat')
             || $this->is_set('geo', 'point_long')) {
-            $lat = $this->get_rss_var('geo', 'point_lat');
+            $lat  = $this->get_rss_var('geo', 'point_lat');
             $long = $this->get_rss_var('geo', 'point_long');
-        // <geo:lat>lat</geo:lat>
+            // <geo:lat>lat</geo:lat>
         } elseif ($this->is_set('geo', 'lat')
                   || $this->is_set('geo', 'long')) {
-            $lat = $this->get_rss_var('geo', 'lat');
+            $lat  = $this->get_rss_var('geo', 'lat');
             $long = $this->get_rss_var('geo', 'long');
-        // <georss:point>lat long</georss:point>
+            // <georss:point>lat long</georss:point>
         } elseif ($this->is_set('georss', 'point')) {
             $lat_long = $this->get_rss_var('georss', 'point');
 
             // BUG: NOT parse http://maps.google.co.jp/maps/
             $arr = $this->_str_to_array($lat_long, ' ');
             if (isset($arr[0]) && isset($arr[1])) {
-                $lat = $arr[0];
+                $lat  = $arr[0];
                 $long = $arr[1];
             }
         }
@@ -938,12 +944,12 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
      */
     public function _build_media_content()
     {
-        $url = null;
-        $type = null;
-        $medium = null;
+        $url      = null;
+        $type     = null;
+        $medium   = null;
         $filesize = null;
-        $width = null;
-        $height = null;
+        $width    = null;
+        $height   = null;
 
         $content = $this->get_rss_var('media', 'content');
         if (isset($content['url'])) {
@@ -973,8 +979,8 @@ class happy_linux_rss_parse_item_single extends happy_linux_rss_parse_basic
      */
     public function _build_media_thumbnail()
     {
-        $url = null;
-        $width = null;
+        $url    = null;
+        $width  = null;
         $height = null;
 
         $thumbnail = $this->get_rss_var('media', 'thumbnail');

@@ -102,7 +102,7 @@ class happy_linux_admin
 
     public function print_templates()
     {
-        $dirname = $this->_get_dirname();
+        $dirname      = $this->_get_dirname();
         $template_set = $this->_get_template_set();
 
         $url_20 = XOOPS_URL . '/modules/system/admin.php?fct=tplsets&op=listtpl&tplset=' . $template_set . '&moddir=' . $dirname;
@@ -176,10 +176,10 @@ class happy_linux_admin
      */
     public function print_modules($flag = false)
     {
-        $dirname = $this->_get_dirname();
-        $url_20 = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin';
+        $dirname  = $this->_get_dirname();
+        $url_20   = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin';
         $url_u_20 = XOOPS_URL . '/modules/system/admin.php?fct=modulesadmin&op=update&module=' . $dirname;
-        $url_21 = XOOPS_URL . '/modules/legacy/admin/index.php?action=ModuleList';
+        $url_21   = XOOPS_URL . '/modules/legacy/admin/index.php?action=ModuleList';
         $url_u_21 = XOOPS_URL . '/modules/legacy/admin/index.php?action=ModuleUpdate&dirname=' . $dirname;
 
         $this->_preload_file();
@@ -420,8 +420,9 @@ class happy_linux_admin
     public function _is_active_module_by_dirname($dirname)
     {
         $act = false;
+        /** @var \XoopsModuleHandler $module_handler */
         $module_handler = xoops_getHandler('module');
-        $module = $module_handler->getByDirname($dirname);
+        $module         = $module_handler->getByDirname($dirname);
         if (is_object($module)) {
             $act = $module->getVar('isactive');
         }

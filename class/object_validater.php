@@ -17,9 +17,9 @@ class happy_linux_object_validater extends happy_linux_object
     public $_post;
 
     // local
-    public $_validater_value_arr = [];
-    public $_validater_allow_arr = [];
-    public $_validater_conf_arr = null;
+    public $_validater_value_arr   = [];
+    public $_validater_allow_arr   = [];
+    public $_validater_conf_arr    = null;
     public $_validater_name_prefix = null;
 
     public $_xoops_uid;
@@ -33,10 +33,10 @@ class happy_linux_object_validater extends happy_linux_object
         parent::__construct();
 
         $this->_system = happy_linux_system::getInstance();
-        $this->_form = happy_linux_form::getInstance();
-        $this->_post = happy_linux_post::getInstance();
+        $this->_form   = happy_linux_form::getInstance();
+        $this->_post   = happy_linux_post::getInstance();
 
-        $this->_xoops_uid = $this->_system->get_uid();
+        $this->_xoops_uid             = $this->_system->get_uid();
         $this->_is_xoops_module_admin = $this->_system->is_module_admin();
     }
 
@@ -193,7 +193,7 @@ class happy_linux_object_validater extends happy_linux_object
 
         if (is_array($this->_validater_conf_arr) && count($this->_validater_conf_arr)) {
             $flag_conf_arr = true;
-            $merged_arr = array_merge($this->gets(), $post, $this->_validater_conf_arr);
+            $merged_arr    = array_merge($this->gets(), $post, $this->_validater_conf_arr);
         } else {
             $merged_arr = array_merge($this->gets(), $post);
         }
@@ -203,12 +203,12 @@ class happy_linux_object_validater extends happy_linux_object
         $pattern = '';
         if ($this->_validater_name_prefix) {
             // ex) xxx_description -> description
-            $pattern = '/^' . preg_quote($this->_validater_name_prefix, '/') . '_/';
+            $pattern     = '/^' . preg_quote($this->_validater_name_prefix, '/') . '_/';
             $replacement = '';
         }
 
         foreach ($key_arr as $key) {
-            $val = null;
+            $val             = null;
             $flag_conf_valid = false;
 
             // post value
@@ -224,8 +224,9 @@ class happy_linux_object_validater extends happy_linux_object
             // value filter
             if ($flag_conf_arr) {
                 [
-                    $val, $flag_conf_valid
-                    ] = $this->validate_conf_value($post, $key, $val, $not_gpc);
+                    $val,
+                    $flag_conf_valid,
+                ] = $this->validate_conf_value($post, $key, $val, $not_gpc);
             }
 
             if (!$flag_conf_valid) {
@@ -259,11 +260,11 @@ class happy_linux_object_validater extends happy_linux_object
 
         switch ($data_type) {
             case 'int_checkbox':
-                $val = $this->_post->get_int_from_post($post, $key, 0);
+                $val             = $this->_post->get_int_from_post($post, $key, 0);
                 $flag_conf_valid = true;
                 break;
             case 'int_time_select':
-                $val = $this->get_int_time_select_from_post($post, $key);
+                $val             = $this->get_int_time_select_from_post($post, $key);
                 $flag_conf_valid = true;
                 break;
         }
@@ -365,9 +366,9 @@ class happy_linux_object_validater extends happy_linux_object
      */
     public function get_value_allow_type_int_with_flag_update_from_post($post, $key)
     {
-        $value = null;
+        $value      = null;
         $key_update = $key . '_flag_update';
-        $allow = $this->get_allow_type_key_from_post($post, $key_update);
+        $allow      = $this->get_allow_type_key_from_post($post, $key_update);
 
         if (isset($post[$key])) {
             $value = (int)$post[$key];
@@ -384,7 +385,7 @@ class happy_linux_object_validater extends happy_linux_object
     public function get_value_allow_type_time_update_form_post($post, $key)
     {
         $key_update = $key . '_flag_update';
-        $allow = $this->get_allow_type_user_always_admin_with_key_form_post($post, $key_update);
+        $allow      = $this->get_allow_type_user_always_admin_with_key_form_post($post, $key_update);
 
         return [$key, time(), $allow];
     }

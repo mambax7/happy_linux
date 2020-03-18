@@ -71,7 +71,7 @@ if (!defined('XOBJ_DTYPE_URL_AREA')) {
  */
 class happy_linux_object extends happy_linux_strings
 {
-    public $_vars = [];
+    public $_vars  = [];
     public $_isnew = false;
 
     public $_ALLOW_TYPES = [
@@ -87,15 +87,15 @@ class happy_linux_object extends happy_linux_strings
     ];
 
     public $_DTYPE_NAMES = [
-        XOBJ_DTYPE_BOOL => 'bool',
-        XOBJ_DTYPE_INT => 'int',
-        XOBJ_DTYPE_FLOAT => 'float',
-        XOBJ_DTYPE_TXTBOX => 'txtbox',
-        XOBJ_DTYPE_TXTAREA => 'txtarea',
-        XOBJ_DTYPE_URL => 'url',
+        XOBJ_DTYPE_BOOL     => 'bool',
+        XOBJ_DTYPE_INT      => 'int',
+        XOBJ_DTYPE_FLOAT    => 'float',
+        XOBJ_DTYPE_TXTBOX   => 'txtbox',
+        XOBJ_DTYPE_TXTAREA  => 'txtarea',
+        XOBJ_DTYPE_URL      => 'url',
         XOBJ_DTYPE_URL_AREA => 'url_area',
-        XOBJ_DTYPE_ARRAY => 'array',
-        XOBJ_DTYPE_OTHER => 'other',
+        XOBJ_DTYPE_ARRAY    => 'array',
+        XOBJ_DTYPE_OTHER    => 'other',
     ];
 
     public $_DEBUG = false;
@@ -144,8 +144,8 @@ class happy_linux_object extends happy_linux_strings
 
         $this->_vars[$key] = [
             'data_type' => $dataType,
-            'value' => null,
-            'required' => $required ? true : false,
+            'value'     => null,
+            'required'  => $required ? true : false,
             'maxlength' => $size ? (int)$size : null,
         ];
 
@@ -464,7 +464,7 @@ class happy_linux_object extends happy_linux_strings
                 $this->setVar($key, $value, $not_gpc);
             }
         } else {
-            if ($this->_DEBUG()) {
+            if ($this->_DEBUG) {
                 echo "object.php setVars(): $values, $not_gpc <br>\n";
                 if ($this->exist_debug_print_backtrace()) {
                     debug_print_backtrace();
@@ -765,7 +765,7 @@ class happy_linux_object extends happy_linux_strings
      */
     public function get_var_url_null($key, $format = 's', $default = 'http://')
     {
-        $url = $this->get($key);
+        $url   = $this->get($key);
         $value = $this->substute_http($value, $default);
         $value = $this->sanitize_format_url($value, $format);
 
@@ -938,6 +938,20 @@ class happy_linux_object extends happy_linux_strings
         }
 
         return false;
+    }
+
+    /**
+     * @param        $value
+     * @param string $default
+     * @return string
+     */
+    public function substute_http($value = '', $default = 'http://')
+    {
+        if ('' == $value) {
+            $value = $default;
+        }
+
+        return $value;
     }
 }
 // --- class end ---

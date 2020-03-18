@@ -252,28 +252,28 @@ class happy_linux_system
     {
         global $xoopsUser;
 
-        $uid = 0;
-        $uname = '';
-        $email = '';
-        $url = '';
-        $groups = '';
+        $uid      = 0;
+        $uname    = '';
+        $email    = '';
+        $url      = '';
+        $groups   = '';
         $isactive = false;
 
         if (is_object($xoopsUser)) {
-            $uid = $xoopsUser->getVar('uid');
-            $uname = $xoopsUser->getVar('uname');
-            $email = $xoopsUser->getVar('email');
-            $url = $xoopsUser->getVar('url');
-            $groups = $xoopsUser->getGroups();
+            $uid      = $xoopsUser->getVar('uid');
+            $uname    = $xoopsUser->getVar('uname');
+            $email    = $xoopsUser->getVar('email');
+            $url      = $xoopsUser->getVar('url');
+            $groups   = $xoopsUser->getGroups();
             $isactive = $xoopsUser->isActive();
         }
 
         $arr = [
-            'uid' => $uid,
-            'uname' => $uname,
-            'email' => $email,
-            'url' => $url,
-            'groups' => $groups,
+            'uid'      => $uid,
+            'uname'    => $uname,
+            'email'    => $email,
+            'url'      => $url,
+            'groups'   => $groups,
             'isactive' => $isactive,
         ];
 
@@ -376,7 +376,7 @@ class happy_linux_system
      */
     public function get_mid_by_dirname($dirname)
     {
-        $mid = false;
+        $mid    = false;
         $module = &$this->get_module_by_dirname($dirname);
         if (is_object($module)) {
             $mid = $module->getVar('mid');
@@ -392,7 +392,7 @@ class happy_linux_system
      */
     public function get_module_name_by_dirname($dirname, $format = 's')
     {
-        $name = false;
+        $name   = false;
         $module = &$this->get_module_by_dirname($dirname);
         if (is_object($module)) {
             $name = $module->getVar('name', $format = 's');
@@ -407,7 +407,7 @@ class happy_linux_system
      */
     public function is_active_module_by_dirname($dirname)
     {
-        $act = false;
+        $act    = false;
         $module = &$this->get_module_by_dirname($dirname);
         if (is_object($module)) {
             $act = $module->getVar('isactive');
@@ -422,8 +422,9 @@ class happy_linux_system
      */
     public function &get_module_by_dirname($dirname)
     {
+        /** @var \XoopsModuleHandler $module_handler */
         $module_handler = xoops_getHandler('module');
-        $module = $module_handler->getByDirname($dirname);
+        $module         = $module_handler->getByDirname($dirname);
 
         return $module;
     }
@@ -435,8 +436,9 @@ class happy_linux_system
      */
     public function &get_module_objects($criteria = null, $id_as_key = false)
     {
+        /** @var \XoopsModuleHandler $module_handler */
         $module_handler = xoops_getHandler('module');
-        $objs = $module_handler->getObjects($criteria, $id_as_key);
+        $objs           = $module_handler->getObjects($criteria, $id_as_key);
 
         return $objs;
     }
@@ -447,8 +449,9 @@ class happy_linux_system
      */
     public function &get_module_by_mid($mid)
     {
+        /** @var \XoopsModuleHandler $module_handler */
         $module_handler = xoops_getHandler('module');
-        $obj = $module_handler->get($mid);
+        $obj            = $module_handler->get($mid);
 
         return $obj;
     }
@@ -469,10 +472,11 @@ class happy_linux_system
      */
     public function &get_module_list($param = null)
     {
-        $isactive = isset($param['isactive']) ? $param['isactive'] : true;
-        $file = isset($param['file']) ? $param['file'] : null;
+        $isactive       = isset($param['isactive']) ? $param['isactive'] : true;
+        $file           = isset($param['file']) ? $param['file'] : null;
         $dirname_except = isset($param['dirname_except']) ? $param['dirname_except'] : null;
 
+        /** @var \XoopsModuleHandler $module_handler */
         $module_handler = xoops_getHandler('module');
 
         $criteria = new CriteriaCompo();
@@ -486,7 +490,7 @@ class happy_linux_system
         $arr = [];
 
         foreach ($objs as $obj) {
-            $mod_id = $obj->getVar('mid');
+            $mod_id      = $obj->getVar('mid');
             $mod_dirname = $obj->getVar('dirname');
 
             if ($file) {
@@ -518,15 +522,15 @@ class happy_linux_system
         // none_key must be string, not integer 0
         // 0 match any stings
 
-        $none_flag = isset($param['none_flag']) ? $param['none_flag'] : false;
-        $none_key = isset($param['none_key']) ? $param['none_key'] : '-';
-        $none_value = isset($param['none_value']) ? $param['none_value'] : '---';
+        $none_flag       = isset($param['none_flag']) ? $param['none_flag'] : false;
+        $none_key        = isset($param['none_key']) ? $param['none_key'] : '-';
+        $none_value      = isset($param['none_value']) ? $param['none_value'] : '---';
         $dirname_default = isset($param['dirname_default']) ? $param['dirname_default'] : null;
-        $flag_dirname = isset($param['flag_dirname']) ? $param['flag_dirname'] : true;
-        $flag_name = isset($param['flag_name']) ? $param['flag_name'] : true;
-        $flag_sanitize = isset($param['flag_sanitize']) ? $param['flag_sanitize'] : true;
-        $sort_asort = isset($param['sort_asort']) ? $param['sort_asort'] : true;
-        $sort_flip = isset($param['sort_flip']) ? $param['sort_flip'] : true;
+        $flag_dirname    = isset($param['flag_dirname']) ? $param['flag_dirname'] : true;
+        $flag_name       = isset($param['flag_name']) ? $param['flag_name'] : true;
+        $flag_sanitize   = isset($param['flag_sanitize']) ? $param['flag_sanitize'] : true;
+        $sort_asort      = isset($param['sort_asort']) ? $param['sort_asort'] : true;
+        $sort_flip       = isset($param['sort_flip']) ? $param['sort_flip'] : true;
 
         $arr = [];
 
@@ -536,7 +540,7 @@ class happy_linux_system
 
         foreach ($mod_objs as $obj) {
             $mod_dirname = $obj->getVar('dirname');
-            $mod_name = $obj->getVar('name');
+            $mod_name    = $obj->getVar('name');
 
             $val = '';
             if ($flag_dirname) {
@@ -628,11 +632,11 @@ class happy_linux_system
     {
         $uid = (int)$uid;
         $ret = [
-            'uid' => $uid,
-            'uname' => '',
-            'name' => '',
-            'email' => '',
-            'groups' => '',
+            'uid'      => $uid,
+            'uname'    => '',
+            'name'     => '',
+            'email'    => '',
+            'groups'   => '',
             'isactive' => false,
         ];
 
@@ -641,19 +645,19 @@ class happy_linux_system
         }
 
         $user_handler = xoops_getHandler('user');
-        $obj = $user_handler->get($uid);
+        $obj          = $user_handler->get($uid);
 
         if (!is_object($obj)) {
             return $ret;
         }
 
         $ret = [
-            'uid' => $uid,
-            'uname' => $obj->getVar('uname'),
-            'name' => $obj->getVar('name'),
-            'email' => $obj->getVar('email'),
-            'url' => $obj->getVar('url'),
-            'groups' => $obj->getGroups(),
+            'uid'      => $uid,
+            'uname'    => $obj->getVar('uname'),
+            'name'     => $obj->getVar('name'),
+            'email'    => $obj->getVar('email'),
+            'url'      => $obj->getVar('url'),
+            'groups'   => $obj->getGroups(),
             'isactive' => $obj->isActive(),
         ];
 
@@ -670,41 +674,41 @@ class happy_linux_system
         $false = false;
 
         $this->_user_uid_list = [];
-        $this->_user_list = [];
+        $this->_user_list     = [];
 
-        $limit = (int)$limit;
-        $start = (int)$start;
+        $limit    = (int)$limit;
+        $start    = (int)$start;
         $criteria = new CriteriaCompo();
         $criteria->setStart($start);
         $criteria->setLimit($limit);
 
         $user_handler = xoops_getHandler('user');
-        $objs = $user_handler->getObjects($criteria);
+        $objs         = $user_handler->getObjects($criteria);
 
         if (0 == count($objs)) {
             return $false;
         }
 
         foreach ($objs as $obj) {
-            $uid = $obj->getVar('uid');
-            $uname = $obj->getVar('uname');
-            $name = $obj->getVar('name');
-            $email = $obj->getVar('email');
-            $groups = $obj->getGroups();
+            $uid      = $obj->getVar('uid');
+            $uname    = $obj->getVar('uname');
+            $name     = $obj->getVar('name');
+            $email    = $obj->getVar('email');
+            $groups   = $obj->getGroups();
             $isactive = $obj->isActive();
 
-            $this->_user_uid_list[] = $uid;
-            $this->_user_list[$uid]['uname'] = $uname;
-            $this->_user_list[$uid]['name'] = $name;
-            $this->_user_list[$uid]['email'] = $email;
-            $this->_user_list[$uid]['groups'] = $groups;
+            $this->_user_uid_list[]             = $uid;
+            $this->_user_list[$uid]['uname']    = $uname;
+            $this->_user_list[$uid]['name']     = $name;
+            $this->_user_list[$uid]['email']    = $email;
+            $this->_user_list[$uid]['groups']   = $groups;
             $this->_user_list[$uid]['isactive'] = $isactive;
         }
 
-        $this->_user_list[0]['uname'] = $this->get_anonymous();
-        $this->_user_list[0]['name'] = '';
-        $this->_user_list[0]['email'] = '';
-        $this->_user_list[0]['groups'] = '';
+        $this->_user_list[0]['uname']    = $this->get_anonymous();
+        $this->_user_list[0]['name']     = '';
+        $this->_user_list[0]['email']    = '';
+        $this->_user_list[0]['groups']   = '';
         $this->_user_list[0]['isactive'] = false;
 
         return $this->_user_list;
@@ -727,7 +731,7 @@ class happy_linux_system
         $criteria->add(new criteria('uname', $uname, '='));
 
         $user_handler = xoops_getHandler('user');
-        $objs = $user_handler->getObjects($criteria);
+        $objs         = $user_handler->getObjects($criteria);
 
         // system error if twe or more
         if (!is_array($objs) || (1 != count($objs))) {
@@ -735,11 +739,11 @@ class happy_linux_system
         }
 
         $arr = [
-            'uid' => $objs[0]->getVar('uid'),
-            'uname' => $objs[0]->getVar('uname'),
-            'name' => $objs[0]->getVar('name'),
-            'email' => $objs[0]->getVar('email'),
-            'groups' => $objs[0]->getGroups(),
+            'uid'      => $objs[0]->getVar('uid'),
+            'uname'    => $objs[0]->getVar('uname'),
+            'name'     => $objs[0]->getVar('name'),
+            'email'    => $objs[0]->getVar('email'),
+            'groups'   => $objs[0]->getGroups(),
             'isactive' => $objs[0]->isActive(),
         ];
 
@@ -755,8 +759,9 @@ class happy_linux_system
      */
     public function &get_group_list()
     {
+        /** @var \XoopsMemberHandler $member_handler */
         $member_handler = xoops_getHandler('member');
-        $list = &$member_handler->getGroupList();
+        $list           = &$member_handler->getGroupList();
 
         return $list;
     }
@@ -778,8 +783,9 @@ class happy_linux_system
             $gperm_groupid = &$this->get_user_groups();
         }
 
+        /** @var XoopsGroupPermHandler $groupperm_handler */
         $groupperm_handler = xoops_getHandler('groupperm');
-        $list = $groupperm_handler->getItemIds($gperm_name, $gperm_groupid, $gperm_modid);
+        $list              = $groupperm_handler->getItemIds($gperm_name, $gperm_groupid, $gperm_modid);
 
         return $list;
     }
@@ -810,7 +816,7 @@ class happy_linux_system
      */
     public function check_config_search_enable_search()
     {
-        $config_handler = xoops_getHandler('config');
+        $config_handler    = xoops_getHandler('config');
         $xoopsConfigSearch = &$config_handler->getConfigsByCat(XOOPS_CONF_SEARCH);
         if (1 == $xoopsConfigSearch['enable_search']) {
             return true;
@@ -824,9 +830,9 @@ class happy_linux_system
      */
     public function get_config_search_keyword_min()
     {
-        $config_handler = xoops_getHandler('config');
+        $config_handler    = xoops_getHandler('config');
         $xoopsConfigSearch = &$config_handler->getConfigsByCat(XOOPS_CONF_SEARCH);
-        $keyword_min = $xoopsConfigSearch['keyword_min'];
+        $keyword_min       = $xoopsConfigSearch['keyword_min'];
 
         return $keyword_min;
     }
@@ -838,7 +844,7 @@ class happy_linux_system
     public function &get_module_config_by_mid($mid)
     {
         $config_handler = xoops_getHandler('config');
-        $config = &$config_handler->getConfigsByCat(0, $mid);
+        $config         = &$config_handler->getConfigsByCat(0, $mid);
 
         return $config;
     }
@@ -890,18 +896,18 @@ class happy_linux_system
             // XC 2.1 legacy
             case 'xc_21':
                 $title = _HAPPY_LINUX_AM_BLOCK;
-                $url = XOOPS_URL . '/modules/legacy/admin/index.php?action=BlockList';
+                $url   = XOOPS_URL . '/modules/legacy/admin/index.php?action=BlockList';
                 break;
             // xoops 2.2
             case 'xoops_22':
                 $title = _HAPPY_LINUX_AM_BLOCK;
-                $url = XOOPS_URL . '/modules/system/admin.php?fct=blocksadmin';
+                $url   = XOOPS_URL . '/modules/system/admin.php?fct=blocksadmin';
                 break;
             // xoops 2.0
             case 'xoops_20':
             default:
                 $title = _HAPPY_LINUX_AM_GROUP_BLOCK;
-                $url = 'myblocksadmin.php';
+                $url   = 'myblocksadmin.php';
                 break;
         }
 
@@ -967,7 +973,7 @@ class happy_linux_system
      */
     public function get_meta_author()
     {
-        $config_handler = xoops_getHandler('config');
+        $config_handler        = xoops_getHandler('config');
         $xoopsConfigMetaFooter = &$config_handler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
 
         return $xoopsConfigMetaFooter['meta_author'];
@@ -978,7 +984,7 @@ class happy_linux_system
      */
     public function get_meta_description()
     {
-        $config_handler = xoops_getHandler('config');
+        $config_handler        = xoops_getHandler('config');
         $xoopsConfigMetaFooter = &$config_handler->getConfigsByCat(XOOPS_CONF_METAFOOTER);
 
         return $xoopsConfigMetaFooter['meta_description'];

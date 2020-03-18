@@ -40,29 +40,29 @@ class happy_linux_manage extends happy_linux_error
     public $_CHECK_RESULT_ADD_TABLE = false;
     public $_CHECK_RESULT_MOD_TABLE = false;
     public $_CHECK_RESULT_DEL_TABLE = false;
-    public $_CHECK_RESULT_MOD_ALL = false;
-    public $_CHECK_RESULT_DEL_ALL = false;
+    public $_CHECK_RESULT_MOD_ALL   = false;
+    public $_CHECK_RESULT_DEL_ALL   = false;
 
     public $_DEBUG_CHECK_TOKEN = true;
-    public $_DEBUG_INSERT = true;
-    public $_DEBUG_UPDATE = true;
-    public $_DEBUG_DELETE = true;
-    public $_DEBUG_NEWID = 9999;
+    public $_DEBUG_INSERT      = true;
+    public $_DEBUG_UPDATE      = true;
+    public $_DEBUG_DELETE      = true;
+    public $_DEBUG_NEWID       = 9999;
     public $_FLAG_EXECUTE_TIME = false;
 
     // laguage
-    public $_LANG_TITLE_ADD = _HAPPY_LINUX_ADD_RECORD;
-    public $_LANG_TITLE_MOD = _HAPPY_LINUX_MOD_RECORD;
-    public $_LANG_TITLE_DEL = _HAPPY_LINUX_DEL_RECORD;
-    public $_LANG_MSG_ADD = _HAPPY_LINUX_ADD_RECORD_SUCCEEED;
-    public $_LANG_MSG_MOD = _HAPPY_LINUX_MOD_RECORD_SUCCEEED;
-    public $_LANG_MSG_DEL = _HAPPY_LINUX_DEL_RECORD_SUCCEEED;
-    public $_LANG_FAIL_ADD = _HAPPY_LINUX_ADD_RECORD_FAILD;
-    public $_LANG_FAIL_MOD = _HAPPY_LINUX_MOD_RECORD_FAILD;
-    public $_LANG_FAIL_DEL = _HAPPY_LINUX_DEL_RECORD_FAILD;
+    public $_LANG_TITLE_ADD     = _HAPPY_LINUX_ADD_RECORD;
+    public $_LANG_TITLE_MOD     = _HAPPY_LINUX_MOD_RECORD;
+    public $_LANG_TITLE_DEL     = _HAPPY_LINUX_DEL_RECORD;
+    public $_LANG_MSG_ADD       = _HAPPY_LINUX_ADD_RECORD_SUCCEEED;
+    public $_LANG_MSG_MOD       = _HAPPY_LINUX_MOD_RECORD_SUCCEEED;
+    public $_LANG_MSG_DEL       = _HAPPY_LINUX_DEL_RECORD_SUCCEEED;
+    public $_LANG_FAIL_ADD      = _HAPPY_LINUX_ADD_RECORD_FAILD;
+    public $_LANG_FAIL_MOD      = _HAPPY_LINUX_MOD_RECORD_FAILD;
+    public $_LANG_FAIL_DEL      = _HAPPY_LINUX_DEL_RECORD_FAILD;
     public $_LANG_ERR_NO_RECORD = _HAPPY_LINUX_NO_RECORD;
-    public $_LANG_ERR_FILL = _HAPPY_LINUX_ERR_FILL;
-    public $_LANG_ERR_ILLEGAL = _HAPPY_LINUX_ERR_ILLEGAL;
+    public $_LANG_ERR_FILL      = _HAPPY_LINUX_ERR_FILL;
+    public $_LANG_ERR_ILLEGAL   = _HAPPY_LINUX_ERR_ILLEGAL;
 
     // class
     public $_post;
@@ -85,10 +85,10 @@ class happy_linux_manage extends happy_linux_error
     public $_flag_cp_header = false;
     public $_id;
     public $_list_id;
-    public $_newid = 0;
-    public $_modid = 0;
-    public $_error_title = null;
-    public $_error_extra = null;
+    public $_newid          = 0;
+    public $_modid          = 0;
+    public $_error_title    = null;
+    public $_error_extra    = null;
 
     // token
     public $_token_error = null;
@@ -108,7 +108,7 @@ class happy_linux_manage extends happy_linux_error
         $this->_DIRNAME = $dirname;
 
         // class
-        $this->_post = happy_linux_post::getInstance();
+        $this->_post   = happy_linux_post::getInstance();
         $this->_system = happy_linux_system::getInstance();
     }
 
@@ -462,7 +462,6 @@ class happy_linux_manage extends happy_linux_error
             $msg = $this->_LANG_MSG_ADD;
             $msg .= $this->_build_comment('add record');    // for test form
             redirect_header($this->_redirect_desc, 1, $msg);
-            exit();
         }
         $this->_print_add_db_error();
         exit();
@@ -538,7 +537,6 @@ class happy_linux_manage extends happy_linux_error
     {
         if (!$this->_get_obj()) {
             redirect_header($this->_redirect_asc, 3, $this->_LANG_ERR_NO_RECORD);
-            exit();
         }
 
         $this->_print_cp_header();
@@ -582,7 +580,6 @@ class happy_linux_manage extends happy_linux_error
 
         if (!$this->_get_obj()) {
             redirect_header($this->_redirect_asc, 3, $this->_LANG_ERR_NO_RECORD);
-            exit();
         }
 
         if (!$this->_check_token() || !$this->_check_mod_table()) {
@@ -594,7 +591,6 @@ class happy_linux_manage extends happy_linux_error
             $msg = $this->_LANG_MSG_MOD;
             $msg .= $this->_build_comment('mod record');    // for test form
             redirect_header($this->_redirect_asc, 1, $msg);
-            exit();
         }
         $this->_print_mod_db_error();
         exit();
@@ -676,24 +672,20 @@ class happy_linux_manage extends happy_linux_error
 
         if (!$this->_get_obj()) {
             redirect_header($this->_redirect_asc, 3, $this->_LANG_ERR_NO_RECORD);
-            exit();
         }
 
         if (!$this->_check_token()) {
             redirect_header($this->_build_script_mod_form(), 3, 'Token Error');
-            exit();
         }
 
         if (!$this->_check_del_table()) {
             redirect_header($this->_build_script_mod_form(), 3, $this->_get_del_error());
-            exit();
         }
 
         if ($this->_exec_del_table()) {
             $msg = $this->_LANG_MSG_DEL;
             $msg .= $this->_build_comment('del record');    // for test form
             redirect_header($this->_redirect_asc, 1, $msg);
-            exit();
         }
         $this->_print_del_db_error();
         exit();
@@ -759,17 +751,14 @@ class happy_linux_manage extends happy_linux_error
 
         if (!$this->_check_token()) {
             redirect_header($this->_redirect_mod_all, 3, 'Token Error');
-            exit();
         }
 
         if (!$this->_check_mod_all()) {
             redirect_header($this->_redirect_mod_all, 3, $this->_get_mod_all_error());
-            exit();
         }
 
         if ($this->_exec_mod_all()) {
             redirect_header($this->_redirect_mod_all, 1, $this->_LANG_MSG_MOD);
-            exit();
         }
         $this->_print_mod_all_db_error();
         exit();
@@ -786,7 +775,7 @@ class happy_linux_manage extends happy_linux_error
         }
 
         foreach ($id_arr as $id) {
-            $this->_id = $id;
+            $this->_id  = $id;
             $this->_obj = $this->_handler->get($id);
 
             if (!is_object($this->_obj)) {
@@ -867,17 +856,14 @@ class happy_linux_manage extends happy_linux_error
 
         if (!$this->_check_token()) {
             redirect_header($this->_redirect_del_all, 3, 'Token Error');
-            exit();
         }
 
         if (!$this->_check_del_all()) {
             redirect_header($this->_redirect_del_all, 3, $this->_get_del_all_error());
-            exit();
         }
 
         if ($this->_exec_del_all()) {
             redirect_header($this->_redirect_del_all, 1, $this->_LANG_MSG_DEL);
-            exit();
         }
         $this->_print_del_all_db_error();
         exit();
@@ -894,7 +880,7 @@ class happy_linux_manage extends happy_linux_error
         }
 
         foreach ($id_arr as $id) {
-            $this->_id = $id;
+            $this->_id  = $id;
             $this->_obj = $this->_handler->get($id);
 
             if (!is_object($this->_obj)) {
@@ -1006,14 +992,14 @@ class happy_linux_manage extends happy_linux_error
         $arr = [
             [
                 'name' => $this->_system->get_module_name(),
-                'url' => 'index.php',
+                'url'  => 'index.php',
             ],
         ];
 
         if ($name1) {
             $arr[] = [
                 'name' => $name1,
-                'url' => $this->_build_script_by_query($query1),
+                'url'  => $this->_build_script_by_query($query1),
             ];
         }
 
@@ -1047,7 +1033,7 @@ class happy_linux_manage extends happy_linux_error
     public function _build_script_by_op($op = '')
     {
         $query = $this->_build_script_query($op);
-        $url = $this->_build_script_by_query($query);
+        $url   = $this->_build_script_by_query($query);
 
         return $url;
     }
@@ -1075,7 +1061,7 @@ class happy_linux_manage extends happy_linux_error
         $query = '';
         if ($op) {
             $query = '?op=' . $op;
-            $id = $this->_post->get_post_get_int($this->_id_name);
+            $id    = $this->_post->get_post_get_int($this->_id_name);
 
             if ($this->_id_name && $id) {
                 $query .= '&amp;' . $this->_id_name . '=' . $id;
@@ -1239,7 +1225,7 @@ class happy_linux_manage extends happy_linux_error
      */
     public function _get_obj()
     {
-        $id = $this->_get_post_get_id();
+        $id  = $this->_get_post_get_id();
         $obj = $this->_handler->get($id);
         if (is_object($obj)) {
             $this->_obj = &$obj;
@@ -1260,7 +1246,7 @@ class happy_linux_manage extends happy_linux_error
         if ($this->_DEBUG_CHECK_TOKEN) {
             $this->_flag_token = false;
             if ($this->_form->check_token()) {
-                $this->_flag_token = true;
+                $this->_flag_token  = true;
                 $this->_token_error = $this->_form->get_token_error();
 
                 return true;

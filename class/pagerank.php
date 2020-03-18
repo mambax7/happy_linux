@@ -55,15 +55,15 @@ define('_HAPPY_LINUX_PAGERANK_C_NON', -10);    // not execute
  */
 class happy_linux_pagerank
 {
-    public $GOOGLE_MAGIC = 0xE6359A60;
+    public $GOOGLE_MAGIC    = 0xE6359A60;
     public $TIMEOUT_CONNECT = 60;
-    public $TIMEOUT_READ = 60;
-    public $DEBUG = false;
+    public $TIMEOUT_READ    = 60;
+    public $DEBUG           = false;
 
-    public $errno = 0;
-    public $errstr = '';
+    public $errno      = 0;
+    public $errstr     = '';
     public $google_url = '';
-    public $contents = '';
+    public $contents   = '';
 
     //---------------------------------------------------------
     // constructor
@@ -100,14 +100,14 @@ class happy_linux_pagerank
         // timeout
         $fsock = fsockopen('toolbarqueries.google.com', 80, $errno, $errstr, $this->TIMEOUT_CONNECT);
         if (!$fsock) {
-            $this->errno = $errno;
+            $this->errno  = $errno;
             $this->errstr = $errstr;
 
             return -2;
         }
 
-        $q = 'info:' . urlencode($url);
-        $ch = $this->get_checksum('info:' . $url);
+        $q        = 'info:' . urlencode($url);
+        $ch       = $this->get_checksum('info:' . $url);
         $base_get = '/search?client=navclient-auto&ch=' . $ch . '&ie=UTF-8&oe=UTF-8&features=Rank:FVN&q=' . $q;
 
         $this->google_url = 'http://toolbarqueries.google.com' . $base_get;
@@ -165,7 +165,7 @@ class happy_linux_pagerank
      */
     public function check_url($url)
     {
-        $patern = '/^http:/';
+        $patern  = '/^http:/';
         $patern2 = '/^http:\/\/.*google\..*\/(search|images|groups|news).*/';
         $patern3 = '/^http:\/\/localhost.*/';
         $patern4 = '/^http:\/\/(127\.|10\.|172\.16|192\.168).*/'; //local ip
@@ -294,24 +294,24 @@ class happy_linux_pagerank
         if (null === $init) {
             $init = $this->GOOGLE_MAGIC;
         }
-        $a = $b = 0x9E3779B9;
-        $c = $init;
-        $k = 0;
+        $a   = $b = 0x9E3779B9;
+        $c   = $init;
+        $k   = 0;
         $len = $length;
         while ($len >= 12) {
-            $a += ($url[$k + 0] + ($url[$k + 1] << 8) + ($url[$k + 2] << 16) + ($url[$k + 3] << 24));
-            $b += ($url[$k + 4] + ($url[$k + 5] << 8) + ($url[$k + 6] << 16) + ($url[$k + 7] << 24));
-            $c += ($url[$k + 8] + ($url[$k + 9] << 8) + ($url[$k + 10] << 16) + ($url[$k + 11] << 24));
+            $a   += ($url[$k + 0] + ($url[$k + 1] << 8) + ($url[$k + 2] << 16) + ($url[$k + 3] << 24));
+            $b   += ($url[$k + 4] + ($url[$k + 5] << 8) + ($url[$k + 6] << 16) + ($url[$k + 7] << 24));
+            $c   += ($url[$k + 8] + ($url[$k + 9] << 8) + ($url[$k + 10] << 16) + ($url[$k + 11] << 24));
             $mix = $this->mix($a, $b, $c);
-            $a = $mix[0];
-            $b = $mix[1];
-            $c = $mix[2];
-            $k += 12;
+            $a   = $mix[0];
+            $b   = $mix[1];
+            $c   = $mix[2];
+            $k   += 12;
             $len -= 12;
         }
         $c += $length;
         switch ($len) {
-/* all the case statements fall through */ case 11:
+            /* all the case statements fall through */ case 11:
             $c += ($url[$k + 10] << 24);
             // no break
             case 10:
@@ -319,8 +319,7 @@ class happy_linux_pagerank
             // no break
             case 9:
                 $c += ($url[$k + 8] << 8);
-            /* the first byte of c is reserved for the length */
-            // no break
+            /* the first byte of c is reserved for the length */ // no break
             case 8:
                 $b += ($url[$k + 7] << 24);
             // no break
@@ -378,7 +377,7 @@ class happy_linux_pagerank
         for ($i = 0, $iMax = count($arr32); $i < $iMax; $i++) {
             for ($bitOrder = $i * 4; $bitOrder <= $i * 4 + 3; $bitOrder++) {
                 $arr8[$bitOrder] = $arr32[$i] & 255;
-                $arr32[$i] = $this->zero_fill($arr32[$i], 8);
+                $arr32[$i]       = $this->zero_fill($arr32[$i], 8);
             }
         }
 
@@ -391,9 +390,9 @@ class happy_linux_pagerank
      */
     public function google_ch_new($ch)
     {
-        $ch = sprintf('%u', $ch);
-        $ch = ((($ch / 7) << 2) | (((int)fmod($ch, 13)) & 7));
-        $prbuf = [];
+        $ch       = sprintf('%u', $ch);
+        $ch       = ((($ch / 7) << 2) | (((int)fmod($ch, 13)) & 7));
+        $prbuf    = [];
         $prbuf[0] = $ch;
         for ($i = 1; $i < 20; $i++) {
             $prbuf[$i] = $prbuf[$i - 1] - 9;

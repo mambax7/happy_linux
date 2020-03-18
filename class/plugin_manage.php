@@ -24,6 +24,7 @@ class happy_linux_plugin_manage
     public $_post;
     public $_test;
     public $_form;
+    public $_strings;
 
     //---------------------------------------------------------
     // constructor
@@ -146,9 +147,9 @@ class happy_linux_plugin_test
     //---------------------------------------------------------
     public function __construct()
     {
-        $this->_post = happy_linux_post::getInstance();
+        $this->_post    = happy_linux_post::getInstance();
         $this->_strings = happy_linux_strings::getInstance();
-        $this->_form = happy_linux_plugin_test_form::getInstance();
+        $this->_form    = happy_linux_plugin_test_form::getInstance();
     }
 
     /**
@@ -189,7 +190,7 @@ class happy_linux_plugin_test
      */
     public function _execute()
     {
-        $plugins = $this->_post->get_post_text('plugins');
+        $plugins   = $this->_post->get_post_text('plugins');
         $post_data = $this->_post->get_post_text('data');
 
         if (empty($plugins)) {
@@ -203,7 +204,7 @@ class happy_linux_plugin_test
         $data = null;
 
         if ($post_data) {
-            $str = '$data = ' . $this->_strings->add_str_to_tail($post_data, ';');
+            $str  = '$data = ' . $this->_strings->add_str_to_tail($post_data, ';');
             $ret1 = eval($str);
             if (false === $ret1) {
                 xoops_error('cannot eval data');

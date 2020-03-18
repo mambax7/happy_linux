@@ -61,9 +61,9 @@ class happy_linux_rss_utility extends happy_linux_error
     public $_xml_encoding_detected;
     public $_result_code = 0;
 
-    public $_KNOWN_ENCODINGS = ['utf-8', 'us-ascii', 'iso-8859-1'];
+    public $_KNOWN_ENCODINGS   = ['utf-8', 'us-ascii', 'iso-8859-1'];
     public $_DEFAULT_ENCODINGS = 'utf-8';
-    public $_SOURCE_ENCODINGS = 'utf-8';
+    public $_SOURCE_ENCODINGS  = 'utf-8';
 
     // select mode
     public $_SEL_MODE = HAPPY_LINUX_RSS_SEL_RSS;
@@ -81,9 +81,9 @@ class happy_linux_rss_utility extends happy_linux_error
 
         // PHP 5.2: Non-static method
         // class instance
-        $this->_remote_file = happy_linux_get_singleton('remote_file');
+        $this->_remote_file      = happy_linux_get_singleton('remote_file');
         $this->_convert_encoding = happy_linux_get_singleton('convert_encoding');
-        $this->_strings = happy_linux_get_singleton('strings');
+        $this->_strings          = happy_linux_get_singleton('strings');
     }
 
     /**
@@ -158,8 +158,8 @@ class happy_linux_rss_utility extends happy_linux_error
         }
 
         $this->_xml_mode = $xml_mode;
-        $this->_rdf_url = $rdf_url;
-        $this->_rss_url = $rss_url;
+        $this->_rdf_url  = $rdf_url;
+        $this->_rss_url  = $rss_url;
         $this->_atom_url = $atom_url;
 
         return true;
@@ -187,10 +187,10 @@ class happy_linux_rss_utility extends happy_linux_error
         if (HAPPY_LINUX_RSS_MODE_AUTO == $mode) {
             $ret = $this->discover($url, $sel);
             if ($ret) {
-                $ret_code = HAPPY_LINUX_RSS_CODE_DISCOVER_SUCCEEDED;
-                $mode = $this->get_xml_mode();
-                $auto_rdf_url = $this->get_rdf_url();
-                $auto_rss_url = $this->get_rss_url();
+                $ret_code      = HAPPY_LINUX_RSS_CODE_DISCOVER_SUCCEEDED;
+                $mode          = $this->get_xml_mode();
+                $auto_rdf_url  = $this->get_rdf_url();
+                $auto_rss_url  = $this->get_rss_url();
                 $auto_atom_url = $this->get_atom_url();
 
                 if ($auto_rdf_url) {
@@ -213,8 +213,8 @@ class happy_linux_rss_utility extends happy_linux_error
         }
 
         $this->_xml_mode = $mode;
-        $this->_rdf_url = $rdf_url;
-        $this->_rss_url = $rss_url;
+        $this->_rdf_url  = $rdf_url;
+        $this->_rss_url  = $rss_url;
         $this->_atom_url = $atom_url;
 
         return $ret_code;
@@ -296,8 +296,10 @@ class happy_linux_rss_utility extends happy_linux_error
         $this->_set_log_func_name('find_link');
 
         [
-            $rdf_url, $rss_url, $atom_url
-            ] = $this->_find_xml_link($html_text, $html_url);
+            $rdf_url,
+            $rss_url,
+            $atom_url,
+        ] = $this->_find_xml_link($html_text, $html_url);
 
         if (empty($rdf_url) && empty($rss_url) && empty($atom_url)) {
             $this->_set_errors("cannot find xml link: url = $html_url");
@@ -323,7 +325,7 @@ class happy_linux_rss_utility extends happy_linux_error
             $this->_xml_encoding_detected = $encoding;
         } else {
             if ($this->_DEFAULT_ENCODINGS) {
-                $encoding = $this->_DEFAULT_ENCODINGS;
+                $encoding           = $this->_DEFAULT_ENCODINGS;
                 $this->_result_code = HAPPY_LINUX_RSS_CODE_XML_ENCODINGS_DEFAULT;
             } else {
                 $this->_set_errors('cannot find xml encoding');
@@ -529,8 +531,8 @@ class happy_linux_rss_utility extends happy_linux_error
     public function _find_xml_link($html, $url = '')
     {
         $href_base = '';
-        $href_rdf = '';
-        $href_rss = '';
+        $href_rdf  = '';
+        $href_rss  = '';
         $href_atom = '';
 
         // save all <link> tags
@@ -542,22 +544,22 @@ class happy_linux_rss_utility extends happy_linux_error
         preg_match_all('/<link\s+(.*?)\s*\/?>/si', $html, $match);
         $link_tag_arr = $match[1];
 
-        $link_arr = [];
+        $link_arr       = [];
         $link_tag_count = count($link_tag_arr);
 
         // store each <link> tags's attributes
         for ($i = 0; $i < $link_tag_count; $i++) {
-            $attr_wk_arr = [];
+            $attr_wk_arr   = [];
             $link_attr_arr = preg_split('/\s+/s', $link_tag_arr[$i]);
 
             foreach ($link_attr_arr as $link_attr) {
                 $link_attr_pair = preg_split('/\s*=\s*/s', $link_attr, 2);
 
                 if (isset($link_attr_pair[0]) && isset($link_attr_pair[1])) {
-                    $key = $link_attr_pair[0];
-                    $value = $link_attr_pair[1];
-                    $key = mb_strtolower($key);
-                    $value = preg_replace('/([\'"]?)(.*)\1/', '$2', $value);
+                    $key               = $link_attr_pair[0];
+                    $value             = $link_attr_pair[1];
+                    $key               = mb_strtolower($key);
+                    $value             = preg_replace('/([\'"]?)(.*)\1/', '$2', $value);
                     $attr_wk_arr[$key] = $value;
                 }
             }
@@ -577,7 +579,7 @@ class happy_linux_rss_utility extends happy_linux_error
                 continue;
             }
 
-            $rel = mb_strtolower($link_arr[$i]['rel']);
+            $rel  = mb_strtolower($link_arr[$i]['rel']);
             $type = mb_strtolower($link_arr[$i]['type']);
             $href = $link_arr[$i]['href'];
 
@@ -596,8 +598,8 @@ class happy_linux_rss_utility extends happy_linux_error
         }
 
         if ($url) {
-            $href_rdf = $this->_relative_to_full_url($href_rdf, $url, $href_base);
-            $href_rss = $this->_relative_to_full_url($href_rss, $url, $href_base);
+            $href_rdf  = $this->_relative_to_full_url($href_rdf, $url, $href_base);
+            $href_rss  = $this->_relative_to_full_url($href_rss, $url, $href_base);
             $href_atom = $this->_relative_to_full_url($href_atom, $url, $href_base);
         }
 
@@ -636,7 +638,7 @@ class happy_linux_rss_utility extends happy_linux_error
         if (preg_match("/^\//", $url_xml)) {
             $param = parse_url($url_html);
             if (isset($param['scheme']) && isset($param['host'])) {
-                $url = $param['scheme'] . '://' . $param['host'];
+                $url  = $param['scheme'] . '://' . $param['host'];
                 $full = $this->join_xml_url($url, $url_xml);
 
                 return $full;
@@ -664,7 +666,7 @@ class happy_linux_rss_utility extends happy_linux_error
     public function join_xml_url($url_html, $url_xml)
     {
         $html = $this->strip_slash_from_tail($url_html);
-        $xml = $this->strip_slash_from_head($url_xml);
+        $xml  = $this->strip_slash_from_head($url_xml);
         $full = $html . '/' . $xml;
 
         return $full;
@@ -802,8 +804,8 @@ class happy_linux_rss_utility extends happy_linux_error
         } // convert
         elseif ($encoding) {
             $encoding_converted = $this->_SOURCE_ENCODINGS;
-            $xml_converted = $this->convert($xml, $encoding_converted, $encoding);
-            $xml_cleaned = $this->_cleanup_xml($xml_converted);
+            $xml_converted      = $this->convert($xml, $encoding_converted, $encoding);
+            $xml_cleaned        = $this->_cleanup_xml($xml_converted);
 
             return [$xml_cleaned, $encoding_converted];
         }
@@ -951,8 +953,10 @@ class happy_linux_rss_utility extends happy_linux_error
         $url = '';
 
         [
-            $url_rdf, $url_rss, $url_atom
-            ] = $this->find_link($html_text, $html_url);
+            $url_rdf,
+            $url_rss,
+            $url_atom,
+        ] = $this->find_link($html_text, $html_url);
 
         switch ($this->_SEL_MODE) {
             case HAPPY_LINUX_RSS_SEL_RDF:
@@ -982,73 +986,73 @@ class happy_linux_rss_utility extends happy_linux_error
     public function &get_lang_items()
     {
         $arr = [
-            'lang_site_desc' => _HAPPY_LINUX_VIEW_SITE_DESCRIPTION,
-            'lang_site_updated' => _HAPPY_LINUX_VIEW_SITE_UPDATED,
-            'lang_site_date' => _HAPPY_LINUX_VIEW_SITE_DATE,
-            'lang_site_webmaster' => _HAPPY_LINUX_VIEW_SITE_WEBMASTER,
-            'lang_site_language' => _HAPPY_LINUX_VIEW_SITE_LANGUAGE,
-            'lang_site_generator' => _HAPPY_LINUX_VIEW_SITE_GENERATOR,
-            'lang_site_category' => _HAPPY_LINUX_VIEW_SITE_CATEGORY,
-            'lang_site_description' => _HAPPY_LINUX_VIEW_SITE_DESCRIPTION,
-            'lang_site_docs' => _HAPPY_LINUX_VIEW_RSS_SITE_DOCS,
-            'lang_site_copyright' => _HAPPY_LINUX_VIEW_RSS_SITE_COPYRIGHT,
-            'lang_site_cloud' => _HAPPY_LINUX_VIEW_RSS_SITE_CLOUD,
-            'lang_site_ttl' => _HAPPY_LINUX_VIEW_RSS_SITE_TTL,
-            'lang_site_rating' => _HAPPY_LINUX_VIEW_RSS_SITE_RATING,
-            'lang_site_textinput' => _HAPPY_LINUX_VIEW_RSS_SITE_TEXTINPUT,
-            'lang_site_skiphours' => _HAPPY_LINUX_VIEW_RSS_SITE_SKIPHOURS,
-            'lang_site_skipdays' => _HAPPY_LINUX_VIEW_RSS_SITE_SKIPDAYS,
-            'lang_site_rights' => _HAPPY_LINUX_VIEW_ATOM_SITE_RIGHTS,
-            'lang_site_source' => _HAPPY_LINUX_VIEW_ATOM_SITE_SOURCE,
-            'lang_site_subtitle' => _HAPPY_LINUX_VIEW_ATOM_SITE_SUBTITLE,
-            'lang_site_id' => _HAPPY_LINUX_VIEW_ATOM_SITE_ID,
-            'lang_site_icon' => _HAPPY_LINUX_VIEW_ATOM_SITE_ICON,
-            'lang_site_logo' => _HAPPY_LINUX_VIEW_ATOM_SITE_LOGO,
-            'lang_site_lastbuilddate' => _HAPPY_LINUX_VIEW_RSS_SITE_LASTBUILDDATE,
-            'lang_site_pubdate' => _HAPPY_LINUX_VIEW_RSS_SITE_PUBDATE,
-            'lang_site_managingeditor' => _HAPPY_LINUX_VIEW_RSS_SITE_MANAGINGEDITOR,
-            'lang_site_link_self' => _HAPPY_LINUX_VIEW_ATOM_SITE_LINK_SELF,
-            'lang_site_author_name' => _HAPPY_LINUX_VIEW_ATOM_SITE_AUTHOR_NAME,
-            'lang_site_author_email' => _HAPPY_LINUX_VIEW_ATOM_SITE_AUTHOR_EMAIL,
-            'lang_site_author_uri' => _HAPPY_LINUX_VIEW_ATOM_SITE_AUTHOR_URI,
-            'lang_site_contributor_name' => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_NAME,
+            'lang_site_desc'              => _HAPPY_LINUX_VIEW_SITE_DESCRIPTION,
+            'lang_site_updated'           => _HAPPY_LINUX_VIEW_SITE_UPDATED,
+            'lang_site_date'              => _HAPPY_LINUX_VIEW_SITE_DATE,
+            'lang_site_webmaster'         => _HAPPY_LINUX_VIEW_SITE_WEBMASTER,
+            'lang_site_language'          => _HAPPY_LINUX_VIEW_SITE_LANGUAGE,
+            'lang_site_generator'         => _HAPPY_LINUX_VIEW_SITE_GENERATOR,
+            'lang_site_category'          => _HAPPY_LINUX_VIEW_SITE_CATEGORY,
+            'lang_site_description'       => _HAPPY_LINUX_VIEW_SITE_DESCRIPTION,
+            'lang_site_docs'              => _HAPPY_LINUX_VIEW_RSS_SITE_DOCS,
+            'lang_site_copyright'         => _HAPPY_LINUX_VIEW_RSS_SITE_COPYRIGHT,
+            'lang_site_cloud'             => _HAPPY_LINUX_VIEW_RSS_SITE_CLOUD,
+            'lang_site_ttl'               => _HAPPY_LINUX_VIEW_RSS_SITE_TTL,
+            'lang_site_rating'            => _HAPPY_LINUX_VIEW_RSS_SITE_RATING,
+            'lang_site_textinput'         => _HAPPY_LINUX_VIEW_RSS_SITE_TEXTINPUT,
+            'lang_site_skiphours'         => _HAPPY_LINUX_VIEW_RSS_SITE_SKIPHOURS,
+            'lang_site_skipdays'          => _HAPPY_LINUX_VIEW_RSS_SITE_SKIPDAYS,
+            'lang_site_rights'            => _HAPPY_LINUX_VIEW_ATOM_SITE_RIGHTS,
+            'lang_site_source'            => _HAPPY_LINUX_VIEW_ATOM_SITE_SOURCE,
+            'lang_site_subtitle'          => _HAPPY_LINUX_VIEW_ATOM_SITE_SUBTITLE,
+            'lang_site_id'                => _HAPPY_LINUX_VIEW_ATOM_SITE_ID,
+            'lang_site_icon'              => _HAPPY_LINUX_VIEW_ATOM_SITE_ICON,
+            'lang_site_logo'              => _HAPPY_LINUX_VIEW_ATOM_SITE_LOGO,
+            'lang_site_lastbuilddate'     => _HAPPY_LINUX_VIEW_RSS_SITE_LASTBUILDDATE,
+            'lang_site_pubdate'           => _HAPPY_LINUX_VIEW_RSS_SITE_PUBDATE,
+            'lang_site_managingeditor'    => _HAPPY_LINUX_VIEW_RSS_SITE_MANAGINGEDITOR,
+            'lang_site_link_self'         => _HAPPY_LINUX_VIEW_ATOM_SITE_LINK_SELF,
+            'lang_site_author_name'       => _HAPPY_LINUX_VIEW_ATOM_SITE_AUTHOR_NAME,
+            'lang_site_author_email'      => _HAPPY_LINUX_VIEW_ATOM_SITE_AUTHOR_EMAIL,
+            'lang_site_author_uri'        => _HAPPY_LINUX_VIEW_ATOM_SITE_AUTHOR_URI,
+            'lang_site_contributor_name'  => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_NAME,
             'lang_site_contributor_email' => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_EMAIL,
-            'lang_site_contributor_uri' => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_URI,
-            'lang_site_creator' => _HAPPY_LINUX_VIEW_DC_CREATOR,
-            'lang_title' => _HAPPY_LINUX_VIEW_TITLE,
-            'lang_published' => _HAPPY_LINUX_VIEW_PUBLISHED,
-            'lang_updated' => _HAPPY_LINUX_VIEW_UPDATED,
-            'lang_created' => _HAPPY_LINUX_VIEW_CREATED,
-            'lang_summary' => _HAPPY_LINUX_VIEW_SUMMARY,
-            'lang_category' => _HAPPY_LINUX_VIEW_CATEGORY,
-            'lang_rights' => _HAPPY_LINUX_VIEW_RIGHTS,
-            'lang_source' => _HAPPY_LINUX_VIEW_SOURCE,
-            'lang_guid' => _HAPPY_LINUX_VIEW_RSS_GUID,
-            'lang_pubdate' => _HAPPY_LINUX_VIEW_RSS_PUBDATE,
-            'lang_author' => _HAPPY_LINUX_VIEW_RSS_AUTHOR,
-            'lang_comments' => _HAPPY_LINUX_VIEW_RSS_COMMENTS,
-            'lang_enclosure' => _HAPPY_LINUX_VIEW_RSS_ENCLOSURE,
-            'lang_enclosure_url' => _HAPPY_LINUX_VIEW_ENCLOSURE_URL,
-            'lang_enclosure_type' => _HAPPY_LINUX_VIEW_ENCLOSURE_TYPE,
-            'lang_enclosure_length' => _HAPPY_LINUX_VIEW_ENCLOSURE_LENGTH,
-            'lang_entry_id' => _HAPPY_LINUX_VIEW_ATOM_ID,
-            'lang_description' => _HAPPY_LINUX_VIEW_DESCRIPTION,
-            'lang_author_name' => _HAPPY_LINUX_VIEW_AUTHOR_NAME,
-            'lang_author_email' => _HAPPY_LINUX_VIEW_AUTHOR_EMAIL,
-            'lang_author_uri' => _HAPPY_LINUX_VIEW_AUTHOR_URI,
-            'lang_contributor_name' => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_NAME,
-            'lang_contributor_email' => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_EMAIL,
-            'lang_contributor_uri' => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_URI,
-            'lang_subject' => _HAPPY_LINUX_VIEW_DC_SUBJECT,
-            'lang_publisher' => _HAPPY_LINUX_VIEW_DC_PUBLISHER,
-            'lang_creator' => _HAPPY_LINUX_VIEW_DC_CREATOR,
-            'lang_date' => _HAPPY_LINUX_VIEW_DC_DATE,
-            'lang_format' => _HAPPY_LINUX_VIEW_DC_FORMAT,
-            'lang_relation' => _HAPPY_LINUX_VIEW_DC_RELATION,
-            'lang_identifier' => _HAPPY_LINUX_VIEW_DC_IDENTIFIER,
-            'lang_coverage' => _HAPPY_LINUX_VIEW_DC_COVERAGE,
-            'lang_audience' => _HAPPY_LINUX_VIEW_DC_AUDIENCE,
-            'lang_encoded' => _HAPPY_LINUX_VIEW_CONTENT_ENCODED,
+            'lang_site_contributor_uri'   => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_URI,
+            'lang_site_creator'           => _HAPPY_LINUX_VIEW_DC_CREATOR,
+            'lang_title'                  => _HAPPY_LINUX_VIEW_TITLE,
+            'lang_published'              => _HAPPY_LINUX_VIEW_PUBLISHED,
+            'lang_updated'                => _HAPPY_LINUX_VIEW_UPDATED,
+            'lang_created'                => _HAPPY_LINUX_VIEW_CREATED,
+            'lang_summary'                => _HAPPY_LINUX_VIEW_SUMMARY,
+            'lang_category'               => _HAPPY_LINUX_VIEW_CATEGORY,
+            'lang_rights'                 => _HAPPY_LINUX_VIEW_RIGHTS,
+            'lang_source'                 => _HAPPY_LINUX_VIEW_SOURCE,
+            'lang_guid'                   => _HAPPY_LINUX_VIEW_RSS_GUID,
+            'lang_pubdate'                => _HAPPY_LINUX_VIEW_RSS_PUBDATE,
+            'lang_author'                 => _HAPPY_LINUX_VIEW_RSS_AUTHOR,
+            'lang_comments'               => _HAPPY_LINUX_VIEW_RSS_COMMENTS,
+            'lang_enclosure'              => _HAPPY_LINUX_VIEW_RSS_ENCLOSURE,
+            'lang_enclosure_url'          => _HAPPY_LINUX_VIEW_ENCLOSURE_URL,
+            'lang_enclosure_type'         => _HAPPY_LINUX_VIEW_ENCLOSURE_TYPE,
+            'lang_enclosure_length'       => _HAPPY_LINUX_VIEW_ENCLOSURE_LENGTH,
+            'lang_entry_id'               => _HAPPY_LINUX_VIEW_ATOM_ID,
+            'lang_description'            => _HAPPY_LINUX_VIEW_DESCRIPTION,
+            'lang_author_name'            => _HAPPY_LINUX_VIEW_AUTHOR_NAME,
+            'lang_author_email'           => _HAPPY_LINUX_VIEW_AUTHOR_EMAIL,
+            'lang_author_uri'             => _HAPPY_LINUX_VIEW_AUTHOR_URI,
+            'lang_contributor_name'       => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_NAME,
+            'lang_contributor_email'      => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_EMAIL,
+            'lang_contributor_uri'        => _HAPPY_LINUX_VIEW_ATOM_CONTRIBUTOR_URI,
+            'lang_subject'                => _HAPPY_LINUX_VIEW_DC_SUBJECT,
+            'lang_publisher'              => _HAPPY_LINUX_VIEW_DC_PUBLISHER,
+            'lang_creator'                => _HAPPY_LINUX_VIEW_DC_CREATOR,
+            'lang_date'                   => _HAPPY_LINUX_VIEW_DC_DATE,
+            'lang_format'                 => _HAPPY_LINUX_VIEW_DC_FORMAT,
+            'lang_relation'               => _HAPPY_LINUX_VIEW_DC_RELATION,
+            'lang_identifier'             => _HAPPY_LINUX_VIEW_DC_IDENTIFIER,
+            'lang_coverage'               => _HAPPY_LINUX_VIEW_DC_COVERAGE,
+            'lang_audience'               => _HAPPY_LINUX_VIEW_DC_AUDIENCE,
+            'lang_encoded'                => _HAPPY_LINUX_VIEW_CONTENT_ENCODED,
         ];
 
         return $arr;

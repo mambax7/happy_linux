@@ -52,6 +52,7 @@ if (!is_object($xoopsModule)) {
 }
 
 // set target_module if specified by $_GET['dirname']
+/** @var \XoopsModuleHandler $module_handler */
 $module_handler = xoops_getHandler('module');
 if (!empty($_GET['dirname'])) {
     $target_module = $module_handler->getByDirname($_GET['dirname']);
@@ -61,20 +62,21 @@ if (!empty($_GET['dirname'])) {
 
 if (!empty($target_module) && is_object($target_module)) {
     // specified by dirname
-    $target_mid = $target_module->getVar('mid');
-    $target_mname = $target_module->getVar('name');
+    $target_mid     = $target_module->getVar('mid');
+    $target_mname   = $target_module->getVar('name');
     $query4redirect = '?dirname=' . urlencode(strip_tags($_GET['dirname']));
 } elseif (isset($_GET['mid']) && 0 == $_GET['mid'] || 'blocksadmin' == $xoopsModule->getVar('dirname')) {
-    $target_mid = 0;
-    $target_mname = '';
+    $target_mid     = 0;
+    $target_mname   = '';
     $query4redirect = '?mid=0';
 } else {
-    $target_mid = $xoopsModule->getVar('mid');
-    $target_mname = $xoopsModule->getVar('name');
+    $target_mid     = $xoopsModule->getVar('mid');
+    $target_mname   = $xoopsModule->getVar('name');
     $query4redirect = '';
 }
 
 // check access right (needs system_admin of BLOCK)
+/** @var XoopsGroupPermHandler $sysperm_handler */
 $sysperm_handler = xoops_getHandler('groupperm');
 if (!$sysperm_handler->checkRight('system_admin', XOOPS_SYSTEM_BLOCK, $xoopsUser->getGroups())) {
     redirect_header(XOOPS_URL . '/user.php', 1, _NOPERM);
@@ -104,16 +106,16 @@ function list_blocks()
 		</tr>\n";
 
     // blocks displaying loop
-    $class = 'even';
+    $class         = 'even';
     $block_configs = get_block_configs();
     foreach (array_keys($block_arr) as $i) {
         $sseln = $ssel0 = $ssel1 = $ssel2 = $ssel3 = $ssel4 = '';
 
-        $weight = $block_arr[$i]->getVar('weight');
-        $title = $block_arr[$i]->getVar('title');
-        $name = $block_arr[$i]->getVar('name');
+        $weight     = $block_arr[$i]->getVar('weight');
+        $title      = $block_arr[$i]->getVar('title');
+        $name       = $block_arr[$i]->getVar('name');
         $bcachetime = $block_arr[$i]->getVar('bcachetime');
-        $bid = $block_arr[$i]->getVar('bid');
+        $bid        = $block_arr[$i]->getVar('bid');
 
         // visible and side
         if (1 != $block_arr[$i]->getVar('visible')) {
@@ -150,18 +152,19 @@ function list_blocks()
         }
 
         // target modules
-        $db = XoopsDatabaseFactory::getDatabaseConnection();
-        $result = $db->query('SELECT module_id FROM ' . $db->prefix('block_module_link') . " WHERE block_id='$bid'");
+        $db            = XoopsDatabaseFactory::getDatabaseConnection();
+        $result        = $db->query('SELECT module_id FROM ' . $db->prefix('block_module_link') . " WHERE block_id='$bid'");
         $selected_mids = [];
         while ([$selected_mid] = $db->fetchRow($result)) {
             $selected_mids[] = (int)$selected_mid;
         }
+        /** @var \XoopsModuleHandler $module_handler */
         $module_handler = xoops_getHandler('module');
-        $criteria = new CriteriaCompo(new Criteria('hasmain', 1));
+        $criteria       = new CriteriaCompo(new Criteria('hasmain', 1));
         $criteria->add(new Criteria('isactive', 1));
-        $module_list = $module_handler->getList($criteria);
+        $module_list     = $module_handler->getList($criteria);
         $module_list[-1] = _AM_TOPPAGE;
-        $module_list[0] = _AM_ALLPAGES;
+        $module_list[0]  = _AM_ALLPAGES;
         ksort($module_list);
         $module_options = '';
         foreach ($module_list as $mid => $mname) {

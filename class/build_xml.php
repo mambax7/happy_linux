@@ -23,7 +23,7 @@ class happy_linux_xml_base
 {
     // replace control code
     public $_FLAG_REPLACE_CONTROL_CODE = true;
-    public $_REPLACE_CHAR = ' ';    // space
+    public $_REPLACE_CHAR              = ' ';    // space
 
     //---------------------------------------------------------
     // constructor
@@ -264,8 +264,9 @@ class happy_linux_xml_base
     public function get_xoops_module_name($dirname, $format = 'n')
     {
         $name = false;
+        /** @var \XoopsModuleHandler $module_handler */
         $module_handler = xoops_getHandler('module');
-        $obj = $module_handler->getByDirname($dirname);
+        $obj            = $module_handler->getByDirname($dirname);
         if (is_object($obj)) {
             $name = $obj->getVar('name', $format);
         }
@@ -285,7 +286,7 @@ class happy_linux_xml_base
  */
 class happy_linux_xml_single_object extends happy_linux_xml_base
 {
-    public $_vars = [];
+    public $_vars    = [];
     public $_TPL_KEY = 'single';
 
     //---------------------------------------------------------
@@ -366,7 +367,7 @@ class happy_linux_xml_single_object extends happy_linux_xml_base
     //---------------------------------------------------------
     public function build()
     {
-        $arr = [];
+        $arr  = [];
         $vars = $this->get_vars();
         if (is_array($vars) && count($vars)) {
             $this->set_vars($this->_build($vars));
@@ -403,7 +404,7 @@ class happy_linux_xml_single_object extends happy_linux_xml_base
     //---------------------------------------------------------
     public function to_utf8()
     {
-        $arr = [];
+        $arr  = [];
         $vars = $this->get_vars();
         if (is_array($vars) && count($vars)) {
             $this->set_vars($this->_to_utf8($vars));
@@ -528,7 +529,7 @@ class happy_linux_xml_iterate_object extends happy_linux_xml_single_object
     public function append_iterate($tpl)
     {
         $tpl_key = $this->get_tpl_key();
-        $vars = $this->get_vars();
+        $vars    = $this->get_vars();
 
         if (is_array($vars) && count($vars)) {
             foreach ($vars as $var) {
@@ -550,15 +551,15 @@ class happy_linux_xml_iterate_object extends happy_linux_xml_single_object
 class happy_linux_build_xml extends happy_linux_xml_base
 {
     public $_CONTENT_TYPE_HTML = 'Content-Type:text/html; charset=utf-8';
-    public $_CONTENT_TYPE_XML = 'Content-Type:text/xml;  charset=utf-8';
+    public $_CONTENT_TYPE_XML  = 'Content-Type:text/xml;  charset=utf-8';
 
     // override
     public $_TEMPLATE_XML = null;
 
     // set param
-    public $_view_title = 'View XML';
+    public $_view_title      = 'View XML';
     public $_view_goto_title = 'goto index';
-    public $_view_goto_url = null;
+    public $_view_goto_url   = null;
 
     //	object ( dummy )
     //	var $_obj_single  = null;
@@ -604,7 +605,7 @@ class happy_linux_build_xml extends happy_linux_xml_base
 
         $template = $this->_get_template();
         if ($template) {
-            $xml = $this->_build_template($template);
+            $xml  = $this->_build_template($template);
             $body = htmlspecialchars($xml, ENT_QUOTES);
         } else {
             $body = $this->build_highlight('No Template');

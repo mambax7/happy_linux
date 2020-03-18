@@ -65,18 +65,18 @@ class happy_linux_build_rss extends happy_linux_build_cache
 {
     // constant
     public $_CACHE_ID_GUEST = HAPPY_LINUX_RSS_CACHE_ID_GUEST;
-    public $_CACHE_ID_USER = HAPPY_LINUX_RSS_CACHE_ID_USER;
+    public $_CACHE_ID_USER  = HAPPY_LINUX_RSS_CACHE_ID_USER;
 
-    public $_MODULE_ID_DEFUALT = 1;
-    public $_HEADER_BUILD = 'Content-Type:text/xml;  charset=utf-8';
-    public $_HEADER_VIEW = 'Content-Type:text/html; charset=utf-8';
-    public $_RSS_DOCS = 'http://backend.userland.com/rss/';
-    public $_MAX_ITEMS = 20;
+    public $_MODULE_ID_DEFUALT   = 1;
+    public $_HEADER_BUILD        = 'Content-Type:text/xml;  charset=utf-8';
+    public $_HEADER_VIEW         = 'Content-Type:text/html; charset=utf-8';
+    public $_RSS_DOCS            = 'http://backend.userland.com/rss/';
+    public $_MAX_ITEMS           = 20;
     public $_CACHE_TIME_ONE_HOUR = 3600;    // one hour
 
     // replace control code
     public $_FLAG_REPLACE_CONTROL_CODE = true;
-    public $_REPLACE_CHAR = ' ';    // space
+    public $_REPLACE_CHAR              = ' ';    // space
 
     // class instance
     public $_default;
@@ -84,6 +84,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
     public $_strings;
     public $_convert;
     public $_image;
+    public $_date;
 
     // http://web.resource.org/rss/1.0/spec#s5.5.3
     // (Suggested) Maximum Length: 500
@@ -103,24 +104,24 @@ class happy_linux_build_rss extends happy_linux_build_cache
     public $_site_author_email;
     public $_site_author_uri;
 
-    public $_site_image_url = '';
-    public $_site_image_link = '';
-    public $_site_image_title = '';
-    public $_site_image_width = '';
+    public $_site_image_url    = '';
+    public $_site_image_link   = '';
+    public $_site_image_title  = '';
+    public $_site_image_width  = '';
     public $_site_image_height = '';
 
     // set param
-    public $_channel = [];
-    public $_items = [];
-    public $_view_title = 'view cache';
-    public $_view_goto_title = 'goto index';
-    public $_view_goto_url = null;
+    public $_channel               = [];
+    public $_items                 = [];
+    public $_view_title            = 'view cache';
+    public $_view_goto_title       = 'goto index';
+    public $_view_goto_url         = null;
     public $_flag_default_timezone = false;
 
     public $_cache_time_guest = 0;
-    public $_cache_time_user = 0;
+    public $_cache_time_user  = 0;
     public $_flag_force_guest = false;
-    public $_flag_force_user = false;
+    public $_flag_force_user  = false;
 
     public $_media_group_default = null;
 
@@ -128,18 +129,18 @@ class happy_linux_build_rss extends happy_linux_build_cache
     public $_count_line = 1;
 
     // override
-    public $_GENERATOR = 'XOOPS Happy Linux';
-    public $_GENERATOR_URI = 'http://linux2.ohwada.net/';
-    public $_CATEGORY = 'Happy Linux';
-    public $_TITLE_RDF = 'RDF Feeds';
-    public $_TITLE_RSS = 'RSS Feeds';
-    public $_TITLE_ATOM = 'ATOM Feeds';
-    public $_TITLE_OTHER = 'Feeds';
-    public $_TEMPLATE_RDF = null;
-    public $_TEMPLATE_RSS = null;
-    public $_TEMPLATE_ATOM = null;
+    public $_GENERATOR      = 'XOOPS Happy Linux';
+    public $_GENERATOR_URI  = 'http://linux2.ohwada.net/';
+    public $_CATEGORY       = 'Happy Linux';
+    public $_TITLE_RDF      = 'RDF Feeds';
+    public $_TITLE_RSS      = 'RSS Feeds';
+    public $_TITLE_ATOM     = 'ATOM Feeds';
+    public $_TITLE_OTHER    = 'Feeds';
+    public $_TEMPLATE_RDF   = null;
+    public $_TEMPLATE_RSS   = null;
+    public $_TEMPLATE_ATOM  = null;
     public $_TEMPLATE_OTHER = null;
-    public $_MODE_BUILD = 'other';
+    public $_MODE_BUILD     = 'other';
 
     //---------------------------------------------------------
     // constructor
@@ -150,11 +151,11 @@ class happy_linux_build_rss extends happy_linux_build_cache
 
         // class instance
         $this->_default = happy_linux_rss_default::getInstance();
-        $this->_system = happy_linux_system::getInstance();
+        $this->_system  = happy_linux_system::getInstance();
         $this->_strings = happy_linux_strings::getInstance();
         $this->_convert = happy_linux_convert_encoding::getInstance();
-        $this->_image = happy_linux_image_size::getInstance();
-        $this->_date = happy_linux_date::getInstance();
+        $this->_image   = happy_linux_image_size::getInstance();
+        $this->_date    = happy_linux_date::getInstance();
     }
 
     /**
@@ -179,12 +180,12 @@ class happy_linux_build_rss extends happy_linux_build_cache
         happy_linux_http_output('pass');
         header($this->_HEADER_BUILD);
 
-        $cache_id = $this->_CACHE_ID_GUEST;
+        $cache_id   = $this->_CACHE_ID_GUEST;
         $cache_time = $this->_cache_time_guest;
         $flag_force = $this->_flag_force_guest;
 
         if ($this->_system->is_user()) {
-            $cache_id = $this->_CACHE_ID_USER;
+            $cache_id   = $this->_CACHE_ID_USER;
             $cache_time = $this->_cache_time_user;
             $flag_force = $this->_flag_force_user;
         }
@@ -204,8 +205,8 @@ class happy_linux_build_rss extends happy_linux_build_cache
         // header
         header($this->_HEADER_VIEW);
 
-        $xml = $this->build_cache($this->_get_template(), 0, true);
-        $body = htmlspecialchars($xml, ENT_QUOTES);
+        $xml   = $this->build_cache($this->_get_template(), 0, true);
+        $body  = htmlspecialchars($xml, ENT_QUOTES);
         $title = $this->_get_title();
 
         $goto = '';
@@ -1230,7 +1231,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
         ];
 
         $channel = &$this->_build_rdf_channel();
-        $items = &$this->_build_rdf_items();
+        $items   = &$this->_build_rdf_items();
 
         $tpl->assign('xml_lang', $this->_utf8($channel['xml_lang']));
 
@@ -1253,9 +1254,9 @@ class happy_linux_build_rss extends happy_linux_build_cache
      */
     public function &_build_rdf_items()
     {
-        $arr = [];
+        $arr               = [];
         $this->_count_line = 1;
-        $items = &$this->_get_items();
+        $items             = &$this->_get_items();
 
         if (is_array($items) && count($items)) {
             foreach ($items as $item) {
@@ -1356,7 +1357,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
         ];
 
         $channel = &$this->_build_rss_channel();
-        $items = &$this->_build_rss_items();
+        $items   = &$this->_build_rss_items();
 
         $this->_assign_channel($tpl, $channel_list, $channel);
         $this->_assign_image($tpl, $image_list, $channel, 'channel');
@@ -1388,9 +1389,9 @@ class happy_linux_build_rss extends happy_linux_build_cache
      */
     public function &_build_rss_items()
     {
-        $arr = [];
+        $arr               = [];
         $this->_count_line = 1;
-        $items = &$this->_get_items();
+        $items             = &$this->_get_items();
 
         if (is_array($items) && count($items)) {
             foreach ($items as $item) {
@@ -1410,10 +1411,10 @@ class happy_linux_build_rss extends happy_linux_build_cache
     {
         $arr = &$this->_build_common_item($item);
 
-        $arr['guid'] = $this->_get_item_guid($arr);
-        $arr['pubdate'] = $this->_get_item_pubdate($arr);
+        $arr['guid']         = $this->_get_item_guid($arr);
+        $arr['pubdate']      = $this->_get_item_pubdate($arr);
         $arr['georss_point'] = $this->_get_item_georss_point($arr);
-        $arr['media_group'] = $this->_get_item_media_group($arr);
+        $arr['media_group']  = $this->_get_item_media_group($arr);
 
         return $arr;
     }
@@ -1468,7 +1469,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
         ];
 
         $channel = &$this->_build_atom_channel();
-        $entrys = &$this->_build_atom_entrys();
+        $entrys  = &$this->_build_atom_entrys();
 
         $tpl->assign('xml_lang', $this->_utf8($channel['xml_lang']));
 
@@ -1484,7 +1485,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
         $channel = &$this->_build_common_channel();
 
         // atom id
-        $site_id = 'tag:' . $this->_site_tag . ',' . $this->_site_year . '://1';
+        $site_id       = 'tag:' . $this->_site_tag . ',' . $this->_site_year . '://1';
         $channel['id'] = $this->_xml($site_id);
 
         // date
@@ -1498,9 +1499,9 @@ class happy_linux_build_rss extends happy_linux_build_cache
      */
     public function &_build_atom_entrys()
     {
-        $arr = [];
+        $arr               = [];
         $this->_count_line = 1;
-        $items = &$this->_get_items();
+        $items             = &$this->_get_items();
 
         if (is_array($items) && count($items)) {
             foreach ($items as $entry) {
@@ -1530,8 +1531,8 @@ class happy_linux_build_rss extends happy_linux_build_cache
 
         // must author_name
         if (empty($arr['author_name'])) {
-            $arr['author_name'] = $this->_xml($this->_site_author_name);
-            $arr['author_uri'] = '';
+            $arr['author_name']  = $this->_xml($this->_site_author_name);
+            $arr['author_uri']   = '';
             $arr['author_email'] = '';
         }
 
@@ -1543,7 +1544,7 @@ class happy_linux_build_rss extends happy_linux_build_cache
         }
 
         // date
-        $arr['updated'] = $arr['updated_iso8601'];
+        $arr['updated']   = $arr['updated_iso8601'];
         $arr['published'] = $arr['published_iso8601'];
 
         return $arr;
@@ -1559,55 +1560,55 @@ class happy_linux_build_rss extends happy_linux_build_cache
      */
     public function &_build_common_channel()
     {
-        $site_url_xml = $this->_xml_url($this->_site_url);
+        $site_url_xml          = $this->_xml_url($this->_site_url);
         $site_author_email_xml = $this->_xml($this->_site_author_email);
-        $site_copyright_xml = $this->_xml($this->_site_copyright);
-        $language_xml = $this->_xml(_LANGCODE);
+        $site_copyright_xml    = $this->_xml($this->_site_copyright);
+        $language_xml          = $this->_xml(_LANGCODE);
 
-        $time = time();
-        $date_rfc822_xml = $this->_xml($this->_date_rfc822($time));
+        $time             = time();
+        $date_rfc822_xml  = $this->_xml($this->_date_rfc822($time));
         $date_iso8601_xml = $this->_xml($this->_date_iso8601($time));
 
         $site_link_self_xml = $this->_xml_url($this->_site_link_self);
-        $site_email_xml = $this->_xml($this->_build_site_email());
+        $site_email_xml     = $this->_xml($this->_build_site_email());
 
         $ret = [
             //url
-            'link' => $site_url_xml,
-            'link_alt' => $site_url_xml,
-            'author_uri' => $site_url_xml,
-            'link_self' => $site_link_self_xml,
-            'atom_link' => $site_link_self_xml,
-            'image_url' => $this->_xml_url($this->_site_image_url),
-            'image_link' => $this->_xml_url($this->_site_image_link),
+            'link'           => $site_url_xml,
+            'link_alt'       => $site_url_xml,
+            'author_uri'     => $site_url_xml,
+            'link_self'      => $site_link_self_xml,
+            'atom_link'      => $site_link_self_xml,
+            'image_url'      => $this->_xml_url($this->_site_image_url),
+            'image_link'     => $this->_xml_url($this->_site_image_link),
 
             // text
-            'generator_uri' => $this->_xml_url($this->_GENERATOR_URI),
-            'language' => $language_xml,
-            'copyright' => $site_copyright_xml,
-            'rights' => $site_copyright_xml,
-            'author_email' => $site_author_email_xml,
-            'webmaster' => $site_email_xml,
+            'generator_uri'  => $this->_xml_url($this->_GENERATOR_URI),
+            'language'       => $language_xml,
+            'copyright'      => $site_copyright_xml,
+            'rights'         => $site_copyright_xml,
+            'author_email'   => $site_author_email_xml,
+            'webmaster'      => $site_email_xml,
             'managingeditor' => $site_email_xml,
-            'title' => $this->_xml($this->_site_name),
-            'description' => $this->_xml($this->_site_desc),
-            'generator' => $this->_xml($this->_GENERATOR),
-            'category' => $this->_xml($this->_CATEGORY),
-            'docs' => $this->_xml($this->_RSS_DOCS),
-            'author_name' => $this->_xml($this->_site_author_name),
-            'author_uri' => $this->_xml($this->_site_author_uri),
-            'image_width' => $this->_xml($this->_site_image_width),
-            'image_height' => $this->_xml($this->_site_image_height),
-            'image_title' => $this->_xml($this->_site_image_title),
+            'title'          => $this->_xml($this->_site_name),
+            'description'    => $this->_xml($this->_site_desc),
+            'generator'      => $this->_xml($this->_GENERATOR),
+            'category'       => $this->_xml($this->_CATEGORY),
+            'docs'           => $this->_xml($this->_RSS_DOCS),
+            'author_name'    => $this->_xml($this->_site_author_name),
+            'author_uri'     => $this->_xml($this->_site_author_uri),
+            'image_width'    => $this->_xml($this->_site_image_width),
+            'image_height'   => $this->_xml($this->_site_image_height),
+            'image_title'    => $this->_xml($this->_site_image_title),
 
             // time
-            'date_unix' => $time,
-            'date_rfc822' => $date_rfc822_xml,
-            'date_iso8601' => $date_iso8601_xml,
+            'date_unix'      => $time,
+            'date_rfc822'    => $date_rfc822_xml,
+            'date_iso8601'   => $date_iso8601_xml,
 
-            'xml_lang' => $language_xml,
+            'xml_lang'    => $language_xml,
             'dc_language' => $language_xml,
-            'dc_date' => $date_iso8601_xml,
+            'dc_date'     => $date_iso8601_xml,
         ];
 
         return $ret;

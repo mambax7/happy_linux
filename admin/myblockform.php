@@ -43,12 +43,13 @@ $form->addElement($side_select);
 $form->addElement(new XoopsFormText(_AM_WEIGHT, 'bweight', 2, 5, $block['weight']));
 $form->addElement(new XoopsFormRadioYN(_AM_VISIBLE, 'bvisible', $block['visible']));
 $mod_select = new XoopsFormSelect(_AM_VISIBLEIN, 'bmodule', $block['modules'], 5, true);
+/** @var \XoopsModuleHandler $module_handler */
 $module_handler = xoops_getHandler('module');
-$criteria = new CriteriaCompo(new Criteria('hasmain', 1));
+$criteria       = new CriteriaCompo(new Criteria('hasmain', 1));
 $criteria->add(new Criteria('isactive', 1));
-$module_list = $module_handler->getList($criteria);
+$module_list     = $module_handler->getList($criteria);
 $module_list[-1] = _AM_TOPPAGE;
-$module_list[0] = _AM_ALLPAGES;
+$module_list[0]  = _AM_ALLPAGES;
 ksort($module_list);
 $mod_select->addOptionArray($module_list);
 $form->addElement($mod_select);

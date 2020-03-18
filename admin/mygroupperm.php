@@ -42,16 +42,19 @@ if ($modid <= 0 || !is_object($xoopsUser) || !$xoopsUser->isAdmin($modid)) {
     redirect_header(XOOPS_URL . '/user.php', 1, _NOPERM);
     exit();
 }
+/** @var \XoopsModuleHandler $module_handler */
 $module_handler = xoops_getHandler('module');
-$module = $module_handler->get($modid);
+$module         = $module_handler->get($modid);
 if (!is_object($module) || !$module->getVar('isactive')) {
     redirect_header(XOOPS_URL . '/admin.php', 1, _MODULENOEXIST);
     exit();
 }
 
+/** @var \XoopsMemberHandler $member_handler */
 $member_handler = xoops_getHandler('member');
-$group_list = &$member_handler->getGroupList();
+$group_list     = &$member_handler->getGroupList();
 if (is_array($_POST['perms']) && !empty($_POST['perms'])) {
+    /** @var XoopsGroupPermHandler $gperm_handler */
     $gperm_handler = xoops_getHandler('groupperm');
     foreach ($_POST['perms'] as $perm_name => $perm_data) {
         foreach ($perm_data['itemname'] as $item_id => $item_name) {

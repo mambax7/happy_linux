@@ -67,9 +67,11 @@ if (is_object($xoopsUser)) {
     // ohwada
     //	$xoopsModule =& XoopsModule::getByDirname("system");
     //	if ( !$xoopsUser->isAdmin($xoopsModule->mid()) ) {
+    /** @var XoopsModuleHandler $module_handler */
+    /** @var \XoopsModuleHandler $module_handler */
     $module_handler = xoops_getHandler('module');
-    $module = $module_handler->getByDirname('system');
-    $mid = $module->mid();
+    $module         = $module_handler->getByDirname('system');
+    $mid            = $module->mid();
     if (!$xoopsUser->isAdmin($mid)) {
         redirect_header(XOOPS_URL . '/user.php', 3, _NOPERM);
         exit();
@@ -97,8 +99,9 @@ if (0 != $admintest) {
                 include XOOPS_ROOT_PATH . '/modules/system/language/english/admin/' . $fct . '.php';
             }
             include XOOPS_ROOT_PATH . '/modules/system/admin/' . $fct . '/xoops_version.php';
+            /** @var XoopsGroupPermHandler $sysperm_handler */
             $sysperm_handler = xoops_getHandler('groupperm');
-            $category = !empty($modversion['category']) ? (int)$modversion['category'] : 0;
+            $category        = !empty($modversion['category']) ? (int)$modversion['category'] : 0;
             unset($modversion);
             if ($category > 0) {
                 $groups = &$xoopsUser->getGroups();
@@ -149,9 +152,9 @@ if (false !== $error) {
         $all_ok = true;
     }
     $admin_dir = XOOPS_ROOT_PATH . '/modules/system/admin';
-    $handle = opendir($admin_dir);
-    $counter = 0;
-    $class = 'even';
+    $handle    = opendir($admin_dir);
+    $counter   = 0;
+    $class     = 'even';
     while ($file = readdir($handle)) {
         if ('cvs' != mb_strtolower($file) && !preg_match('/[.]/', $file) && is_dir($admin_dir . '/' . $file)) {
             include $admin_dir . '/' . $file . '/xoops_version.php';

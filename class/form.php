@@ -64,68 +64,68 @@ define('HAPPY_LINUX_MODE_DEL_PREVIEW', 4);
 class happy_linux_form extends happy_linux_html
 {
     // language
-    public $_LANG_YES = _YES;
-    public $_LANG_NO = _NO;
+    public $_LANG_YES        = _YES;
+    public $_LANG_NO         = _NO;
     public $_LANG_FORM_TITLE = _HAPPY_LINUX_FORM_TITLE;
-    public $_LANG_VISIT = _HAPPY_LINUX_FORM_VISIT;
+    public $_LANG_VISIT      = _HAPPY_LINUX_FORM_VISIT;
 
-    public $_LANG_BUTTON_SUBMIT_VALUE = _HAPPY_LINUX_FORM_SUBMIT;
-    public $_LANG_BUTTON_CANCEL_VALUE = _HAPPY_LINUX_FORM_CANCEL;
+    public $_LANG_BUTTON_SUBMIT_VALUE   = _HAPPY_LINUX_FORM_SUBMIT;
+    public $_LANG_BUTTON_CANCEL_VALUE   = _HAPPY_LINUX_FORM_CANCEL;
     public $_LANG_BUTTON_LOCATION_VALUE = _HAPPY_LINUX_FORM_LOCATION;
-    public $_LANG_BUTTON_CLOSE_VALUE = _CLOSE;
+    public $_LANG_BUTTON_CLOSE_VALUE    = _CLOSE;
 
     // color: red;  background-color: lightyellow;  border: gray
     public $_STYLE_ERROR = 'color: #ff0000; background-color: #ffffe0; border: #808080 1px dotted; padding: 3px 3px 3px 3px;';
 
     // rewritable contant
     public $_FORM_NAME_DEFAULT = 'form';
-    public $_TOKEN_NAME = 'form';
-    public $_FORM_METHOD = 'post';
+    public $_TOKEN_NAME        = 'form';
+    public $_FORM_METHOD       = 'post';
 
-    public $_BUTTON_SUBMIT_NAME = 'submit';
-    public $_BUTTON_CANCEL_NAME = 'cancel';
+    public $_BUTTON_SUBMIT_NAME   = 'submit';
+    public $_BUTTON_CANCEL_NAME   = 'cancel';
     public $_BUTTON_LOCATION_NAME = 'location';
-    public $_BUTTON_CLOSE_NAME = 'close';
+    public $_BUTTON_CLOSE_NAME    = 'close';
 
     public $_FORM_NAME = null;
-    public $_ACTION = null;
+    public $_ACTION    = null;
 
     // for childlen class, not use here
     public $_TEXT_SIZE = 50;
-    public $_TEXT_MAX = 255;
-    public $_URL_SIZE = 70;
-    public $_URL_MAX = 255;
+    public $_TEXT_MAX  = 255;
+    public $_URL_SIZE  = 70;
+    public $_URL_MAX   = 255;
 
     public $_SELECT_TIME_YEAR_BEFORE = 8;
-    public $_SELECT_TIME_YEAR_AFTER = 1;
+    public $_SELECT_TIME_YEAR_AFTER  = 1;
 
     // variable
-    public $_SIZE = 50;
+    public $_SIZE      = 50;
     public $_MAXLENGTH = 255;
-    public $_ROWS = 5;
-    public $_COLS = 50;
+    public $_ROWS      = 5;
+    public $_COLS      = 50;
 
     public $_table_title_class = 'head';
-    public $_table_ele_class = 'odd';
+    public $_table_ele_class   = 'odd';
 
     public $_obj;
     public $_datas = [];
 
-    public $_font_caption_title = "<span style='font-weight:bold;'>";
-    public $_font_caption_desc = "<span style='font-weight:normal;'>";
+    public $_font_caption_title     = "<span style='font-weight:bold;'>";
+    public $_font_caption_desc      = "<span style='font-weight:normal;'>";
     public $_font_caption_title_end = '</span>';
-    public $_font_caption_desc_end = '</span>';
+    public $_font_caption_desc_end  = '</span>';
 
     public $_line_count = 0;
 
     // token
     public $_DEBUG_CHECK_TOKEN = true;
-    public $_SEL_TOKEN_CLASS = 'gticket';
-    public $_token_error = null;
-    public $_cached_token = null;
+    public $_SEL_TOKEN_CLASS   = 'gticket';
+    public $_token_error       = null;
+    public $_cached_token      = null;
 
     // for form_lib page_form
-    public $_OP_NAME = 'op';
+    public $_OP_NAME  = 'op';
     public $_op_value = null;
 
     //---------------------------------------------------------
@@ -189,8 +189,8 @@ class happy_linux_form extends happy_linux_html
      */
     public function build_form_table_title($title = '', $th_colspan = 2, $th_class = '')
     {
-        $th_align = '';
-        $th_valign = '';
+        $th_align   = '';
+        $th_valign  = '';
         $th_rowspan = '';
 
         if (empty($title)) {
@@ -259,7 +259,7 @@ class happy_linux_form extends happy_linux_html
      */
     public function build_form_table_text($cap, $name, $value, $size = 50, $maxlength = 255)
     {
-        $ele = $this->build_html_input_text($name, $value, $size, $maxlength);
+        $ele  = $this->build_html_input_text($name, $value, $size, $maxlength);
         $text = $this->build_form_table_line($cap, $ele, $this->_table_title_class, $this->_table_ele_class);
 
         return $text;
@@ -275,7 +275,7 @@ class happy_linux_form extends happy_linux_html
      */
     public function build_form_table_textarea($cap, $name, $value, $rows = '10', $cols = '60')
     {
-        $ele = $this->build_html_textarea($name, $value, $rows, $cols);
+        $ele  = $this->build_html_textarea($name, $value, $rows, $cols);
         $text = $this->build_form_table_line($cap, $ele, $this->_table_title_class, $this->_table_ele_class);
 
         return $text;
@@ -291,7 +291,7 @@ class happy_linux_form extends happy_linux_html
      */
     public function build_form_table_radio_select($cap, $name, $value, $options, $del = '')
     {
-        $ele = $this->build_html_input_radio_select($name, $value, $options, $del = '');
+        $ele  = $this->build_html_input_radio_select($name, $value, $options, $del = '');
         $text = $this->build_form_table_line($cap, $ele, $this->_table_title_class, $this->_table_ele_class);
 
         return $text;
@@ -305,7 +305,7 @@ class happy_linux_form extends happy_linux_html
      */
     public function build_form_table_submit($cap, $name, $value)
     {
-        $ele = $this->build_html_input_submit($name, $value);
+        $ele  = $this->build_html_input_submit($name, $value);
         $text = $this->build_form_table_line($cap, $ele, $this->_table_title_class, $this->_table_title_class);
 
         return $text;
@@ -337,7 +337,7 @@ class happy_linux_form extends happy_linux_html
             }
         } else {
             $arr_s = $this->sanitize_text_by_flag($arr, $flag_sanitize);
-            $text .= $this->build_form_table_title($arr_s);
+            $text  .= $this->build_form_table_title($arr_s);
         }
 
         $text .= $this->build_form_table_end();
@@ -445,7 +445,7 @@ class happy_linux_form extends happy_linux_html
         }
 
         $options = $this->get_form_radio_yesno_options();
-        $text = $this->build_html_input_radio_select($name, $value, $options);
+        $text    = $this->build_html_input_radio_select($name, $value, $options);
 
         return $text;
     }
@@ -457,7 +457,7 @@ class happy_linux_form extends happy_linux_html
     {
         $arr = [
             $this->_LANG_YES => 1,
-            $this->_LANG_NO => 0,
+            $this->_LANG_NO  => 0,
         ];
 
         return $arr;
@@ -472,7 +472,7 @@ class happy_linux_form extends happy_linux_html
     {
         // check, if yes
         $checked = $this->build_html_checked($value, 1);
-        $text = $this->build_html_input_checkbox($name, 1, $checked);
+        $text    = $this->build_html_input_checkbox($name, 1, $checked);
 
         return $text;
     }
@@ -505,12 +505,17 @@ class happy_linux_form extends happy_linux_html
         }
 
         [
-            $year, $month, $day, $hour, $min, $sec
-            ] = $this->split_time_ymd($time);
+            $year,
+            $month,
+            $day,
+            $hour,
+            $min,
+            $sec,
+        ] = $this->split_time_ymd($time);
 
-        $this_year = date('Y');
+        $this_year  = date('Y');
         $year_start = $this_year - $this->_SELECT_TIME_YEAR_BEFORE;
-        $year_end = $this_year + $this->_SELECT_TIME_YEAR_AFTER;
+        $year_end   = $this_year + $this->_SELECT_TIME_YEAR_AFTER;
 
         $year_opt = [$year_start => $year_start];
         for ($i = ($year_start + 1); $i <= $year_end; $i++) {
@@ -537,12 +542,12 @@ class happy_linux_form extends happy_linux_html
             $sixty_opt[] = $i;
         }
 
-        $year_sel = $this->build_html_select($name . '_year', $year, $year_opt);
+        $year_sel  = $this->build_html_select($name . '_year', $year, $year_opt);
         $month_sel = $this->build_html_select($name . '_month', $month, $month_opt);
-        $day_sel = $this->build_html_select($name . '_day', $day, $day_opt);
-        $hour_sel = $this->build_html_select($name . '_hour', $hour, $hour_opt);
-        $min_sel = $this->build_html_select($name . '_min', $min, $sixty_opt);
-        $sec_sel = $this->build_html_select($name . '_sec', $sec, $sixty_opt);
+        $day_sel   = $this->build_html_select($name . '_day', $day, $day_opt);
+        $hour_sel  = $this->build_html_select($name . '_hour', $hour, $hour_opt);
+        $min_sel   = $this->build_html_select($name . '_min', $min, $sixty_opt);
+        $sec_sel   = $this->build_html_select($name . '_sec', $sec, $sixty_opt);
 
         $format = preg_replace('/%y/i', $year_sel, $format);
         $format = preg_replace('/%m/i', $month_sel, $format);
@@ -561,12 +566,12 @@ class happy_linux_form extends happy_linux_html
      */
     public function get_unixtime_form_select_time_from_post($post, $name)
     {
-        $year = 0;
+        $year  = 0;
         $month = 0;
-        $day = 0;
-        $hour = 0;
-        $min = 0;
-        $sec = 0;
+        $day   = 0;
+        $hour  = 0;
+        $min   = 0;
+        $sec   = 0;
 
         if (isset($post[$name . '_year'])) {
             $year = (int)$post[$name . '_year'];
@@ -812,7 +817,7 @@ class happy_linux_form extends happy_linux_html
     public function build_obj_table_label($caption, $key)
     {
         $value = $this->_obj->getVar($key, 's');
-        $text = $this->build_form_table_line($caption, $value);
+        $text  = $this->build_form_table_line($caption, $value);
 
         return $text;
     }
@@ -826,7 +831,7 @@ class happy_linux_form extends happy_linux_html
      */
     public function build_obj_table_text($caption, $key, $size = '', $maxlength = '')
     {
-        $ele = $this->build_obj_text($key, $size, $maxlength);
+        $ele  = $this->build_obj_text($key, $size, $maxlength);
         $text = $this->build_form_table_line($caption, $ele);
 
         return $text;
@@ -841,7 +846,7 @@ class happy_linux_form extends happy_linux_html
      */
     public function build_obj_table_textarea($caption, $key, $rows = '', $cols = '')
     {
-        $ele = $this->build_obj_textarea($key, $rows, $cols);
+        $ele  = $this->build_obj_textarea($key, $rows, $cols);
         $text = $this->build_form_table_line($caption, $ele);
 
         return $text;
@@ -854,7 +859,7 @@ class happy_linux_form extends happy_linux_html
      */
     public function build_obj_table_radio_yesno($caption, $key)
     {
-        $ele = $this->build_obj_radio_yesno($key);
+        $ele  = $this->build_obj_radio_yesno($key);
         $text = $this->build_form_table_line($caption, $ele);
 
         return $text;
@@ -875,7 +880,7 @@ class happy_linux_form extends happy_linux_html
             $maxlength = $this->_MAXLENGTH;
         }
         $value = $this->_obj->getVar($key, 's');
-        $text = $this->build_html_input_text($key, $value, $size, $maxlength);
+        $text  = $this->build_html_input_text($key, $value, $size, $maxlength);
 
         return $text;
     }
@@ -895,7 +900,7 @@ class happy_linux_form extends happy_linux_html
             $cols = $this->_COLS;
         }
         $value = $this->_obj->getVar($key, 's');
-        $text = $this->build_html_textarea($key, $value, $rows, $cols);
+        $text  = $this->build_html_textarea($key, $value, $rows, $cols);
 
         return $text;
     }
@@ -907,7 +912,7 @@ class happy_linux_form extends happy_linux_html
     public function build_obj_radio_yesno($key)
     {
         $value = $this->_obj->getVar($key, 's');
-        $text = $this->build_form_radio_yesno($key, $value);
+        $text  = $this->build_form_radio_yesno($key, $value);
 
         return $text;
     }
@@ -924,7 +929,7 @@ class happy_linux_form extends happy_linux_html
     public function build_edit_textarea_urllist($name, $urllist)
     {
         $url_s = $this->build_edit_url($urllist);
-        $text = $this->build_html_textarea($name, $url_s);
+        $text  = $this->build_html_textarea($name, $url_s);
 
         return $text;
     }
@@ -1012,9 +1017,9 @@ class happy_linux_form extends happy_linux_html
     public function build_data_table_label_hidden($caption, $key)
     {
         $value = $this->get_data_value($key);
-        $ele = $value . ' ';
-        $ele .= $this->build_html_input_hidden($key, $value);
-        $text = $this->build_form_table_line($caption, $ele);
+        $ele   = $value . ' ';
+        $ele   .= $this->build_html_input_hidden($key, $value);
+        $text  = $this->build_form_table_line($caption, $ele);
 
         return $text;
     }
@@ -1026,7 +1031,7 @@ class happy_linux_form extends happy_linux_html
      */
     public function build_data_table_label($caption, $key)
     {
-        $ele = $this->get_data_value($key);
+        $ele  = $this->get_data_value($key);
         $text = $this->build_form_table_line($caption, $ele);
 
         return $text;
@@ -1039,7 +1044,7 @@ class happy_linux_form extends happy_linux_html
      */
     public function build_data_table_text($caption, $key)
     {
-        $ele = $this->build_data_text($key);
+        $ele  = $this->build_data_text($key);
         $text = $this->build_form_table_line($caption, $ele);
 
         return $text;
@@ -1066,7 +1071,7 @@ class happy_linux_form extends happy_linux_html
      */
     public function build_data_table_radio_yesno($caption, $key)
     {
-        $ele = $this->build_data_radio_yesno($key);
+        $ele  = $this->build_data_radio_yesno($key);
         $text = $this->build_form_table_line($caption, $ele);
 
         return $text;
@@ -1079,7 +1084,7 @@ class happy_linux_form extends happy_linux_html
     public function build_data_text($key)
     {
         $value = $this->get_data_value($key);
-        $text = $this->build_html_input_text($key, $value, $this->_SIZE, $this->_MAXLENGTH);
+        $text  = $this->build_html_input_text($key, $value, $this->_SIZE, $this->_MAXLENGTH);
 
         return $text;
     }
@@ -1091,7 +1096,7 @@ class happy_linux_form extends happy_linux_html
     public function build_data_textarea($key)
     {
         $value = $this->get_data_value($key);
-        $text = $this->build_html_textarea($key, $value, $this->_ROWS, $this->_COLS);
+        $text  = $this->build_html_textarea($key, $value, $this->_ROWS, $this->_COLS);
 
         return $text;
     }
@@ -1103,7 +1108,7 @@ class happy_linux_form extends happy_linux_html
     public function build_data_radio_yesno($key)
     {
         $value = $this->get_data_value($key);
-        $text = $this->build_form_radio_yesno($key, $value, $this->_ROWS, $this->_COLS);
+        $text  = $this->build_form_radio_yesno($key, $value, $this->_ROWS, $this->_COLS);
 
         return $text;
     }
@@ -1212,7 +1217,7 @@ class happy_linux_form extends happy_linux_html
      * @param null $extra
      * @param int  $mode
      */
-    public function _show($obj=null, $extra = null, $mode = 0)
+    public function _show($obj = null, $extra = null, $mode = 0)
     {
         // dummy
     }
@@ -1266,13 +1271,13 @@ class happy_linux_form extends happy_linux_html
      */
     public function build_xoops_js_checkall($form_name)
     {
-        $value = '';
+        $value   = '';
         $checked = '';
 
-        $checkall = $form_name . '_checkall';
+        $checkall       = $form_name . '_checkall';
         $xoops_checkall = "xoopsCheckAll('" . $form_name . "', '" . $checkall . "')";
-        $extra = ' onclick="' . $xoops_checkall . '" ';
-        $text = $this->build_html_input_checkbox($checkall, $value, $checked, $extra);
+        $extra          = ' onclick="' . $xoops_checkall . '" ';
+        $text           = $this->build_html_input_checkbox($checkall, $value, $checked, $extra);
 
         return $text;
     }
@@ -1402,10 +1407,10 @@ class happy_linux_form extends happy_linux_html
     {
         if (class_exists('XoopsMultiTokenHandler')) {
             $token = &XoopsMultiTokenHandler::quickCreate($this->_TOKEN_NAME);
-            $name = $token->getTokenName();
+            $name  = $token->getTokenName();
             $value = $token->getTokenValue();
         } else {
-            $name = 'token';
+            $name  = 'token';
             $value = 0;
         }
         $arr = [$name, $value];
@@ -1445,8 +1450,8 @@ class happy_linux_form extends happy_linux_html
         global $xoopsGTicket;
         $text = '';
         if (is_object($xoopsGTicket)) {
-            $salt = $this->_FORM_NAME;
-            $text = $xoopsGTicket->getTicketHtml($salt) . "\n";
+            $salt                = $this->_FORM_NAME;
+            $text                = $xoopsGTicket->getTicketHtml($salt) . "\n";
             $this->_cached_token = $text;
         }
 
@@ -1464,7 +1469,7 @@ class happy_linux_form extends happy_linux_html
         $name = 'XOOPS_G_TICKET';
         if (is_object($xoopsGTicket)) {
             $salt = $this->_FORM_NAME;
-            $val = $xoopsGTicket->issue($salt);
+            $val  = $xoopsGTicket->issue($salt);
         } else {
             $val = 0;
         }
@@ -1652,7 +1657,7 @@ class happy_linux_form extends happy_linux_html
      */
     public function set_cols($value)
     {
-        $this->_text_COLS = (int)$value;
+        $this->_COLS = (int)$value;
     }
 
     /**

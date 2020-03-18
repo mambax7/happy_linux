@@ -34,13 +34,13 @@ class happy_linux_module_install
     public $_config_table;
 
     public $_count_insert = 0;
-    public $_flag_error = false;
-    public $_errors = [];
-    public $_msgs = [];
+    public $_flag_error   = false;
+    public $_errors       = [];
+    public $_msgs         = [];
 
-    public $_DEBUG_SQL = false;
+    public $_DEBUG_SQL   = false;
     public $_DEBUG_ERROR = false;
-    public $_DEBUG_TPL = false;
+    public $_DEBUG_TPL   = false;
 
     //---------------------------------------------------------
     // constructor
@@ -113,15 +113,15 @@ CREATE TABLE ' . $this->_config_table . " (
     {
         $this->clear_error();
         $this->_count_insert = 0;
-        $define_arr = &$this->_config_define->get_define();
+        $define_arr          = &$this->_config_define->get_define();
 
         // list from Define
         foreach ($define_arr as $id => $def) {
             $row = [
-                'conf_id' => $id,
-                'conf_name' => $def['name'],
+                'conf_id'        => $id,
+                'conf_name'      => $def['name'],
                 'conf_valuetype' => $def['valuetype'],
-                'conf_value' => $this->_get_conf_value_for_input($def['default'], $def['valuetype']),
+                'conf_value'     => $this->_get_conf_value_for_input($def['default'], $def['valuetype']),
             ];
 
             $this->_insert_config($row);
@@ -159,7 +159,7 @@ CREATE TABLE ' . $this->_config_table . " (
     {
         $this->clear_error();
         $this->_count_insert = 0;
-        $define_arr = &$this->_config_define->get_define();
+        $define_arr          = &$this->_config_define->get_define();
 
         // list from Define
         foreach ($define_arr as $id => $def) {
@@ -170,10 +170,10 @@ CREATE TABLE ' . $this->_config_table . " (
 
             // insert, when not in MySQL
             $row = [
-                'conf_id' => $id,
-                'conf_name' => $def['name'],
+                'conf_id'        => $id,
+                'conf_name'      => $def['name'],
                 'conf_valuetype' => $def['valuetype'],
-                'conf_value' => $this->_get_conf_value_for_input($def['default'], $def['valuetype']),
+                'conf_value'     => $this->_get_conf_value_for_input($def['default'], $def['valuetype']),
             ];
 
             $this->_insert_config($row);
@@ -189,9 +189,9 @@ CREATE TABLE ' . $this->_config_table . " (
      */
     public function check_and_update_table($table, $ver)
     {
-        $func_check = '_check_' . $table . '_' . $ver;
+        $func_check  = '_check_' . $table . '_' . $ver;
         $func_update = '_update_' . $table . '_' . $ver;
-        $table_name = '_' . $table . '_table';
+        $table_name  = '_' . $table . '_table';
 
         if (!$this->$func_check()) {
             $this->clear_error();
@@ -389,7 +389,7 @@ CREATE TABLE ' . $this->_config_table . " (
             return $res;
         }
 
-        $row = $this->_db->fetchRow($res);
+        $row   = $this->_db->fetchRow($res);
         $count = (int)$row[0];
         if (empty($count)) {
             $count = 0;
@@ -650,8 +650,9 @@ CREATE TABLE ' . $this->_config_table . " (
      */
     public function &get_xoops_module_objects_isactive()
     {
+        /** @var \XoopsModuleHandler $module_handler */
         $module_handler = xoops_getHandler('module');
-        $criteria = new CriteriaCompo();
+        $criteria       = new CriteriaCompo();
         $criteria->add(new Criteria('isactive', '1', '='));
         $ret = $module_handler->getObjects($criteria);
 
@@ -680,8 +681,8 @@ CREATE TABLE ' . $this->_config_table . " (
      */
     public function _build_insert_config_sql($row)
     {
-        $aux_int_1 = 0;
-        $aux_int_2 = 0;
+        $aux_int_1  = 0;
+        $aux_int_2  = 0;
         $aux_text_1 = '';
         $aux_text_2 = '';
 
@@ -753,7 +754,7 @@ CREATE TABLE ' . $this->_config_table . " (
     {
         $arr = [];
 
-        $sql = 'SELECT * FROM ' . $this->_config_table . ' ORDER BY conf_id ASC';
+        $sql  = 'SELECT * FROM ' . $this->_config_table . ' ORDER BY conf_id ASC';
         $rows = &$this->get_rows_by_sql($sql);
 
         if (is_array($rows) && (count($rows) > 0)) {
@@ -772,7 +773,7 @@ CREATE TABLE ' . $this->_config_table . " (
     {
         $arr = [];
 
-        $sql = 'SELECT * FROM ' . $this->_config_table . ' ORDER BY conf_id ASC';
+        $sql  = 'SELECT * FROM ' . $this->_config_table . ' ORDER BY conf_id ASC';
         $rows = &$this->get_rows_by_sql($sql);
 
         if (is_array($rows) && (count($rows) > 0)) {
@@ -833,7 +834,7 @@ CREATE TABLE ' . $this->_config_table . " (
      */
     public function &_get_files_in_dir($dir_in, $ext = 'html')
     {
-        $arr = [];
+        $arr   = [];
         $false = false;
 
         // No such file or directory
@@ -886,7 +887,7 @@ CREATE TABLE ' . $this->_config_table . " (
     public function _build_msg($table, $flag, $msg_finished)
     {
         $table = $this->_sanitize($table);
-        $msg = null;
+        $msg   = null;
         if (count($this->_errors)) {
             $msg = $this->_highlight('ERROR: <b>' . $table . "</b><br>\n");
             $msg .= $this->_get_errors();
@@ -903,7 +904,7 @@ CREATE TABLE ' . $this->_config_table . " (
     public function _set_error($msg)
     {
         $this->_flag_error = true;
-        $this->_errors[] = $msg;
+        $this->_errors[]   = $msg;
     }
 
     /**

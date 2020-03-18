@@ -20,8 +20,8 @@
 class happy_linux_build_cache
 {
     // for reserve, not use here
-    public $_DIRNAME = null;
-    public $_tepmlate = null;
+    public $_DIRNAME    = null;
+    public $_template   = null;
     public $_cache_time = 0;
 
     //---------------------------------------------------------
@@ -144,8 +144,8 @@ class happy_linux_build_cache
     public function clear_compiled_tpl_by_dir($dir)
     {
         $class_dir = happy_linux_dir::getInstance();
-        $dir = $class_dir->strip_slash_from_tail($dir);
-        $arr = &$class_dir->get_files_in_dir($dir, 'html');
+        $dir       = $class_dir->strip_slash_from_tail($dir);
+        $arr       = &$class_dir->get_files_in_dir($dir, 'html');
 
         foreach ($arr as $file) {
             if ('index.html' == $file) {
@@ -182,7 +182,7 @@ class happy_linux_build_cache
      */
     public function set_template($value)
     {
-        $this->_tepmlate = $value;
+        $this->_template = $value;
     }
 
     /**

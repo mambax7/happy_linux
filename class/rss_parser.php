@@ -42,14 +42,14 @@ class happy_linux_rss_parser extends happy_linux_error
     // local
     public $_xml_encoding_orig = null;
     public $_xml_encoding;
-    public $_xml_data = null;
-    public $_html_text = null;
+    public $_xml_data          = null;
+    public $_html_text         = null;
 
     // encoding
     public $_local_encoding = _CHARSET;
 
     public $_xml_error_code = 0;
-    public $_parse_result = '';
+    public $_parse_result   = '';
 
     // language
     public $_LANG_ASSUME_ENCODING = 'assume xml encoding %s ,<br>because cannot detect encoding automatically';
@@ -99,8 +99,8 @@ class happy_linux_rss_parser extends happy_linux_error
 
         $this->_html_text = $this->_rss_utility->get_html_text();
 
-        $xml_mode = $this->_rss_utility->get_xml_mode();
-        $xml_url = $this->_rss_utility->get_xmlurl_by_mode();
+        $xml_mode     = $this->_rss_utility->get_xml_mode();
+        $xml_url      = $this->_rss_utility->get_xmlurl_by_mode();
         $xml_encoding = '';
 
         $obj = $this->parse_by_url($xml_url, $xml_encoding, $xml_mode);
@@ -142,7 +142,7 @@ class happy_linux_rss_parser extends happy_linux_error
         }
 
         if ($xml_encoding) {
-            $encoding_orig = $xml_encoding;
+            $encoding_orig            = $xml_encoding;
             $this->_xml_encoding_orig = $xml_encoding;
         } // find encoding, if empty
         else {
@@ -165,8 +165,9 @@ class happy_linux_rss_parser extends happy_linux_error
         }
 
         [
-            $xml_converted, $encoding_converted
-            ] = $this->_rss_utility->convert_to_parse($xml_data, $encoding_orig);
+            $xml_converted,
+            $encoding_converted,
+        ] = $this->_rss_utility->convert_to_parse($xml_data, $encoding_orig);
 
         $obj = $this->parse($xml_converted, $encoding_converted, $xml_url);
 
@@ -185,8 +186,9 @@ class happy_linux_rss_parser extends happy_linux_error
     public function &parse_by_xml($xml_data, $xml_encoding)
     {
         [
-            $xml_converted, $encoding_converted
-            ] = $this->_rss_utility->convert_to_parse($xml_data, $xml_encoding);
+            $xml_converted,
+            $encoding_converted,
+        ] = $this->_rss_utility->convert_to_parse($xml_data, $xml_encoding);
 
         $obj = $this->parse($xml_converted, $encoding_converted);
 
@@ -205,7 +207,7 @@ class happy_linux_rss_parser extends happy_linux_error
      */
     public function &parse($xml_data, $xml_encoding, $xml_url = '')
     {
-        $this->_xml_data = $xml_data;
+        $this->_xml_data     = $xml_data;
         $this->_xml_encoding = $xml_encoding;
 
         $false = false;
@@ -276,13 +278,13 @@ class happy_linux_rss_parser extends happy_linux_error
      */
     public function convert_xml_header_by_phpversion($xml_data, $xml_encoding, $xml_encoding_orig)
     {
-        $xml_encoding = mb_strtoupper($xml_encoding);
+        $xml_encoding      = mb_strtoupper($xml_encoding);
         $xml_encoding_orig = mb_strtoupper($xml_encoding_orig);
 
         if ($this->is_php5() && $xml_encoding_orig && ($xml_encoding != $xml_encoding_orig)) {
-            $pattern = '/encoding=[\'"]' . $xml_encoding_orig . '[\'"]/i';
+            $pattern     = '/encoding=[\'"]' . $xml_encoding_orig . '[\'"]/i';
             $replacement = 'encoding="' . $xml_encoding . '"';
-            $xml_data = preg_replace($pattern, $replacement, $xml_data);
+            $xml_data    = preg_replace($pattern, $replacement, $xml_data);
         }
 
         return $xml_data;
